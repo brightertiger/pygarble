@@ -1,8 +1,10 @@
+from typing import List
+
 from .base import BaseStrategy
 
 
 class WordLengthStrategy(BaseStrategy):
-    def _get_words(self, text: str):
+    def _get_words(self, text: str) -> List[str]:
         return text.split()
 
     def _predict_impl(self, text: str) -> bool:
@@ -11,8 +13,7 @@ class WordLengthStrategy(BaseStrategy):
             return False
 
         avg_length = sum(len(word) for word in words) / len(words)
-        max_length = self.kwargs.get("max_word_length", 20)
-
+        max_length: int = self.kwargs.get("max_word_length", 20)
         return avg_length > max_length
 
     def _predict_proba_impl(self, text: str) -> float:
@@ -21,7 +22,7 @@ class WordLengthStrategy(BaseStrategy):
             return 0.0
 
         avg_length = sum(len(word) for word in words) / len(words)
-        max_length = self.kwargs.get("max_word_length", 20)
+        max_length: int = self.kwargs.get("max_word_length", 20)
 
         if avg_length <= max_length:
             return 0.0

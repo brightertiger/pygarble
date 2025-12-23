@@ -1,3 +1,5 @@
+from typing import Any
+
 from .base import BaseStrategy
 
 
@@ -13,8 +15,7 @@ class StatisticalAnalysisStrategy(BaseStrategy):
 
     def _predict_impl(self, text: str) -> bool:
         alpha_ratio = self._get_alpha_ratio(text)
-        threshold = self.kwargs.get("alpha_threshold", 0.5)
-
+        threshold: float = self.kwargs.get("alpha_threshold", 0.5)
         return alpha_ratio < threshold
 
     def _predict_proba_impl(self, text: str) -> float:

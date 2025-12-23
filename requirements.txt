@@ -1,4 +1,4 @@
 # Core dependencies
 fasttext-wheel>=0.9.2
-numpy>=1.21.0,<2.0
+numpy>=1.21.0
 pyspellchecker>=0.8.0

@@ -1,0 +1,242 @@
+{
+  "test_cases": [
+    {
+      "category": "normal_text",
+      "description": "Clean English sentences",
+      "cases": [
+        {"text": "The quick brown fox jumps over the lazy dog.", "expected_garbled": false},
+        {"text": "Hello, how are you doing today?", "expected_garbled": false},
+        {"text": "Machine learning is transforming the technology industry.", "expected_garbled": false},
+        {"text": "Please review the attached document and provide your feedback.", "expected_garbled": false},
+        {"text": "The weather forecast predicts rain tomorrow afternoon.", "expected_garbled": false},
+        {"text": "I'll meet you at the coffee shop around 3 PM.", "expected_garbled": false},
+        {"text": "The project deadline has been extended by two weeks.", "expected_garbled": false},
+        {"text": "Can you send me the report by end of day?", "expected_garbled": false},
+        {"text": "The restaurant serves excellent Italian cuisine.", "expected_garbled": false},
+        {"text": "We need to schedule a meeting to discuss the quarterly results.", "expected_garbled": false}
+      ]
+    },
+    {
+      "category": "normal_paragraphs",
+      "description": "Longer normal text passages",
+      "cases": [
+        {"text": "Artificial intelligence has made remarkable progress in recent years. From natural language processing to computer vision, AI systems are now capable of performing tasks that were once thought to be exclusively human domains.", "expected_garbled": false},
+        {"text": "The global economy faces numerous challenges in the coming decade. Climate change, demographic shifts, and technological disruption will require innovative solutions from policymakers and business leaders alike.", "expected_garbled": false},
+        {"text": "Regular exercise has been shown to have numerous health benefits. Studies indicate that even moderate physical activity can reduce the risk of heart disease, improve mental health, and increase overall longevity.", "expected_garbled": false}
+      ]
+    },
+    {
+      "category": "keyboard_mashing",
+      "description": "Random keyboard input",
+      "cases": [
+        {"text": "asdfghjkl", "expected_garbled": true},
+        {"text": "qwertyuiop", "expected_garbled": true},
+        {"text": "zxcvbnm", "expected_garbled": true},
+        {"text": "asdfjkl;", "expected_garbled": true},
+        {"text": "lkjhgfdsa", "expected_garbled": true},
+        {"text": "poiuytrewq", "expected_garbled": true},
+        {"text": "mnbvcxz asdfgh qwerty", "expected_garbled": true},
+        {"text": "hjkl;' qwer asdf zxcv", "expected_garbled": true},
+        {"text": "fghjfghj dfghdfgh sdfgsdfg", "expected_garbled": true},
+        {"text": "aaaaaaaaaaaaaa", "expected_garbled": true}
+      ]
+    },
+    {
+      "category": "random_characters",
+      "description": "Random character sequences",
+      "cases": [
+        {"text": "xkcd82nf93mzp1", "expected_garbled": true},
+        {"text": "7h3 qu1ck br0wn f0x", "expected_garbled": false},
+        {"text": "!!!@@@###$$$%%%", "expected_garbled": true},
+        {"text": "abc123def456ghi789", "expected_garbled": true},
+        {"text": "XYZABC123!@#", "expected_garbled": true},
+        {"text": "qqqqwwwweeeerrrr", "expected_garbled": true},
+        {"text": "abcabcabcabcabc", "expected_garbled": true},
+        {"text": "1a2b3c4d5e6f7g8h", "expected_garbled": true},
+        {"text": "##$$%%^^&&**(())", "expected_garbled": true},
+        {"text": "...---...---...", "expected_garbled": true}
+      ]
+    },
+    {
+      "category": "base64_encoded",
+      "description": "Base64 and encoded strings",
+      "cases": [
+        {"text": "SGVsbG8gV29ybGQh", "expected_garbled": true},
+        {"text": "VGhpcyBpcyBhIHRlc3Q=", "expected_garbled": true},
+        {"text": "YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXo=", "expected_garbled": true},
+        {"text": "dXNlcm5hbWU6cGFzc3dvcmQ=", "expected_garbled": true},
+        {"text": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9", "expected_garbled": true}
+      ]
+    },
+    {
+      "category": "urls_and_emails",
+      "description": "URLs and email addresses",
+      "cases": [
+        {"text": "https://www.example.com/path/to/page?query=value", "expected_garbled": true},
+        {"text": "user@example.com", "expected_garbled": false},
+        {"text": "Check out https://github.com/user/repo for more info.", "expected_garbled": false},
+        {"text": "Contact us at support@company.com for assistance.", "expected_garbled": false},
+        {"text": "ftp://files.server.com/downloads/file.zip", "expected_garbled": true}
+      ]
+    },
+    {
+      "category": "code_snippets",
+      "description": "Programming code fragments",
+      "cases": [
+        {"text": "def calculate_sum(a, b): return a + b", "expected_garbled": true},
+        {"text": "SELECT * FROM users WHERE id = 1;", "expected_garbled": true},
+        {"text": "console.log('Hello, World!');", "expected_garbled": true},
+        {"text": "import numpy as np; arr = np.array([1,2,3])", "expected_garbled": true},
+        {"text": "<div class=\"container\"><p>Hello</p></div>", "expected_garbled": true},
+        {"text": "{\"name\": \"John\", \"age\": 30}", "expected_garbled": true}
+      ]
+    },
+    {
+      "category": "mixed_content",
+      "description": "Mix of normal and garbled content",
+      "cases": [
+        {"text": "Hello asdfghjkl world", "expected_garbled": true},
+        {"text": "The meeting is at qwertyuiop location", "expected_garbled": true},
+        {"text": "Please send to abc123xyz@test.com", "expected_garbled": false},
+        {"text": "Error code: XJ7K9M2P", "expected_garbled": false},
+        {"text": "Reference number: ABCD-1234-EFGH", "expected_garbled": false}
+      ]
+    },
+    {
+      "category": "non_english",
+      "description": "Non-English text",
+      "cases": [
+        {"text": "Bonjour, comment allez-vous?", "expected_garbled": false},
+        {"text": "Guten Tag, wie geht es Ihnen?", "expected_garbled": false},
+        {"text": "Hola, como estas?", "expected_garbled": false},
+        {"text": "Ciao, come stai?", "expected_garbled": false},
+        {"text": "Ola, como voce esta?", "expected_garbled": false}
+      ]
+    },
+    {
+      "category": "ocr_errors",
+      "description": "Text with OCR-like errors",
+      "cases": [
+        {"text": "Th3 qu1ck br0wn f0x jumps 0ver th3 lazy d0g", "expected_garbled": false},
+        {"text": "HeIIo worId (with letter I instead of l)", "expected_garbled": false},
+        {"text": "Ple@se review the @ttached document", "expected_garbled": false},
+        {"text": "M33t m3 at th3 c0ff33 sh0p", "expected_garbled": false},
+        {"text": "1nv01ce numb3r: 12345", "expected_garbled": false}
+      ]
+    },
+    {
+      "category": "encoding_errors",
+      "description": "Text with encoding issues",
+      "cases": [
+        {"text": "Cafe with weird chars", "expected_garbled": false},
+        {"text": "naive approach misspelled", "expected_garbled": false},
+        {"text": "eleve student text", "expected_garbled": false},
+        {"text": "smart quotes test", "expected_garbled": false},
+        {"text": "mojibake dash text", "expected_garbled": false}
+      ]
+    },
+    {
+      "category": "repeated_patterns",
+      "description": "Repetitive text patterns",
+      "cases": [
+        {"text": "hahahahahaha", "expected_garbled": true},
+        {"text": "lololololol", "expected_garbled": true},
+        {"text": "blah blah blah blah", "expected_garbled": false},
+        {"text": "test test test test", "expected_garbled": false},
+        {"text": "AAAAAAAAAA", "expected_garbled": true},
+        {"text": "12121212121212", "expected_garbled": true},
+        {"text": "abababababab", "expected_garbled": true}
+      ]
+    },
+    {
+      "category": "numbers_only",
+      "description": "Numeric strings",
+      "cases": [
+        {"text": "1234567890", "expected_garbled": true},
+        {"text": "123-456-7890", "expected_garbled": false},
+        {"text": "2024-01-15", "expected_garbled": false},
+        {"text": "$1,234.56", "expected_garbled": false},
+        {"text": "3.14159265359", "expected_garbled": true},
+        {"text": "0x1A2B3C4D", "expected_garbled": true}
+      ]
+    },
+    {
+      "category": "short_text",
+      "description": "Very short text samples",
+      "cases": [
+        {"text": "Hi", "expected_garbled": false},
+        {"text": "OK", "expected_garbled": false},
+        {"text": "No", "expected_garbled": false},
+        {"text": "xy", "expected_garbled": true},
+        {"text": "!!", "expected_garbled": true},
+        {"text": "abc", "expected_garbled": false},
+        {"text": "xyz", "expected_garbled": true}
+      ]
+    },
+    {
+      "category": "special_characters",
+      "description": "Text with special characters",
+      "cases": [
+        {"text": "Hello! How are you?", "expected_garbled": false},
+        {"text": "Price: $49.99 (50% off!)", "expected_garbled": false},
+        {"text": "Email: user@domain.com | Phone: +1-555-1234", "expected_garbled": false},
+        {"text": "@#$%^&*()_+-=[]{}|;':\",./<>?", "expected_garbled": true},
+        {"text": "4/5 stars rating", "expected_garbled": false}
+      ]
+    },
+    {
+      "category": "product_ids",
+      "description": "Product codes and identifiers",
+      "cases": [
+        {"text": "SKU: ABC-123-XYZ", "expected_garbled": false},
+        {"text": "Model: XPS-15-9520", "expected_garbled": false},
+        {"text": "Part #: 7K9M2P4Q", "expected_garbled": false},
+        {"text": "ISBN: 978-0-13-468599-1", "expected_garbled": false},
+        {"text": "UUID: 550e8400-e29b-41d4-a716-446655440000", "expected_garbled": true}
+      ]
+    },
+    {
+      "category": "social_media",
+      "description": "Social media style text",
+      "cases": [
+        {"text": "OMG this is amazing!", "expected_garbled": false},
+        {"text": "#trending #viral #awesome", "expected_garbled": false},
+        {"text": "@username mentioned you in a post", "expected_garbled": false},
+        {"text": "RT if you agree!", "expected_garbled": false},
+        {"text": "lmao rofl brb ttyl", "expected_garbled": false}
+      ]
+    },
+    {
+      "category": "lorem_ipsum",
+      "description": "Placeholder Latin text",
+      "cases": [
+        {"text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", "expected_garbled": false},
+        {"text": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "expected_garbled": false},
+        {"text": "Ut enim ad minim veniam, quis nostrud exercitation ullamco.", "expected_garbled": false}
+      ]
+    },
+    {
+      "category": "password_like",
+      "description": "Password-like strings",
+      "cases": [
+        {"text": "P@ssw0rd123!", "expected_garbled": true},
+        {"text": "Xk9#mN2$pQ7@", "expected_garbled": true},
+        {"text": "correcthorsebatterystaple", "expected_garbled": true},
+        {"text": "admin123", "expected_garbled": true},
+        {"text": "qwerty12345", "expected_garbled": true}
+      ]
+    },
+    {
+      "category": "technical_jargon",
+      "description": "Technical terminology",
+      "cases": [
+        {"text": "The API returns a JSON response with HTTP status 200.", "expected_garbled": false},
+        {"text": "Configure the DNS settings for the subdomain.", "expected_garbled": false},
+        {"text": "The CPU utilization is at 85% with 16GB RAM.", "expected_garbled": false},
+        {"text": "SSH into the server using RSA key authentication.", "expected_garbled": false},
+        {"text": "The TCP/IP stack handles network communication.", "expected_garbled": false}
+      ]
+    }
+  ]
+}
+

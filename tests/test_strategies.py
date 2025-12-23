@@ -17,8 +17,9 @@ class TestStrategies:
         assert detector.predict("short words") is False
 
     def test_pattern_matching_detector(self):
-        detector = GarbleDetector(Strategy.PATTERN_MATCHING)
+        detector = GarbleDetector(Strategy.PATTERN_MATCHING, threshold=0.2)
         assert detector.predict("AAAAA") is True
+        assert detector.predict("asdfghjkl") is True
         assert detector.predict("normal text") is False
 
     def test_statistical_analysis_detector(self):
@@ -150,3 +151,4 @@ class TestStrategy:
         assert Strategy.ENTROPY_BASED.value == "entropy_based"
         assert Strategy.LANGUAGE_DETECTION.value == "language_detection"
         assert Strategy.ENGLISH_WORD_VALIDATION.value == "english_word_validation"
+        assert Strategy.VOWEL_RATIO.value == "vowel_ratio"

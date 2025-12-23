@@ -1,0 +1,85 @@
+================================================================================
+PYGARBLE BENCHMARK RESULTS
+Run Date: 2025-12-23 18:54:57
+================================================================================
+
+### OVERALL METRICS ###
+
+Strategy                    Accuracy  Precision     Recall   F1 Score   Time (s)
+--------------------------------------------------------------------------------
+keyboard_pattern              73.50%     70.59%     69.23%     69.90%     0.0014
+vowel_ratio                   72.65%     95.45%     40.38%     56.76%     0.0006
+ensemble                      71.79%     95.24%     38.46%     54.79%     0.0047
+english_word_validation       61.54%     60.61%     38.46%     47.06%     0.0015
+entropy_based                 64.96%     72.00%     34.62%     46.75%     0.0010
+statistical_analysis          63.25%     69.57%     30.77%     42.67%     0.0004
+character_frequency           57.26%     60.00%     11.54%     19.35%     0.0004
+word_length                   58.97%    100.00%      7.69%     14.29%     0.0001
+pattern_matching              55.56%      0.00%      0.00%      0.00%     0.0012
+
+### CONFUSION MATRIX SUMMARY ###
+
+Strategy                      TP     FP     TN     FN
+-------------------------------------------------------
+keyboard_pattern              36     15     50     16
+vowel_ratio                   21      1     64     31
+ensemble                      20      1     64     32
+english_word_validation       20     13     52     32
+entropy_based                 18      7     58     34
+statistical_analysis          16      7     58     36
+character_frequency            6      4     61     46
+word_length                    4      0     65     48
+pattern_matching               0      0     65     52
+
+### ACCURACY BY CATEGORY ###
+
+Strategy                   base64_encod  code_snippet  encoding_err  keyboard_mas   lorem_ipsum  mixed_conten   non_english  normal_parag   normal_text  numbers_only    ocr_errors  password_lik   product_ids  random_chara  repeated_pat    short_text  social_media  special_char  technical_ja  urls_and_ema
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+keyboard_pattern                  100%           33%           80%          100%           67%           80%          100%          100%           90%           67%           40%           80%           40%           60%           71%           57%           60%           60%          100%           80% 
+vowel_ratio                       100%            0%          100%           70%          100%           80%          100%          100%          100%           50%          100%           40%           80%           30%           43%           86%          100%           80%          100%           60% 
+ensemble                           60%            0%          100%           70%          100%           60%          100%          100%          100%           50%          100%           40%           60%           40%           71%           86%          100%           80%          100%           60% 
+english_word_validation             0%            0%          100%          100%            0%           40%           20%          100%          100%           50%          100%           20%           40%           30%           86%           71%           80%           80%          100%           60% 
+entropy_based                      60%           17%          100%           30%          100%           60%          100%          100%          100%           67%          100%           40%           60%           30%           57%           29%          100%           80%          100%           60% 
+statistical_analysis                0%           17%          100%            0%          100%           60%          100%          100%          100%           50%           80%           40%           60%           70%           43%           71%          100%           80%          100%           60% 
+character_frequency                 0%            0%          100%           10%          100%           60%          100%          100%          100%           50%          100%            0%           80%           10%           71%           29%          100%           80%          100%           60% 
+word_length                        40%            0%          100%            0%          100%           60%          100%          100%          100%           50%          100%            0%           80%           10%           29%           57%          100%           80%          100%          100% 
+pattern_matching                    0%            0%          100%            0%          100%           60%          100%          100%          100%           50%          100%            0%           80%           10%           29%           57%          100%           80%          100%           60% 
+
+### MISCLASSIFIED EXAMPLES (Top 5 per strategy) ###
+
+
+keyboard_pattern:
+  [normal_text] "I'll meet you at the coffee shop around 3 PM."
+    Expected: normal, Predicted: garbled
+  [random_characters] "7h3 qu1ck br0wn f0x"
+    Expected: normal, Predicted: garbled
+  [random_characters] "!!!@@@###$$$%%%"
+    Expected: garbled, Predicted: normal
+  [random_characters] "##$$%%^^&&**(())"
+    Expected: garbled, Predicted: normal
+  [random_characters] "...---...---..."
+    Expected: garbled, Predicted: normal
+
+vowel_ratio:
+  [keyboard_mashing] "qwertyuiop"
+    Expected: garbled, Predicted: normal
+  [keyboard_mashing] "poiuytrewq"
+    Expected: garbled, Predicted: normal
+  [keyboard_mashing] "hjkl;' qwer asdf zxcv"
+    Expected: garbled, Predicted: normal
+  [random_characters] "!!!@@@###$$$%%%"
+    Expected: garbled, Predicted: normal
+  [random_characters] "abc123def456ghi789"
+    Expected: garbled, Predicted: normal
+
+ensemble:
+  [keyboard_mashing] "qwertyuiop"
+    Expected: garbled, Predicted: normal
+  [keyboard_mashing] "poiuytrewq"
+    Expected: garbled, Predicted: normal
+  [keyboard_mashing] "hjkl;' qwer asdf zxcv"
+    Expected: garbled, Predicted: normal
+  [random_characters] "!!!@@@###$$$%%%"
+    Expected: garbled, Predicted: normal
+  [random_characters] "abc123def456ghi789"
+    Expected: garbled, Predicted: normal

@@ -40,7 +40,7 @@ class TestGarbleDetector:
 
     def test_predict_invalid_input(self):
         detector = GarbleDetector(Strategy.CHARACTER_FREQUENCY)
-        with pytest.raises(ValueError):
+        with pytest.raises(TypeError):
             detector.predict(123)
 
     def test_predict_proba_single_string(self):
@@ -59,7 +59,7 @@ class TestGarbleDetector:
 
     def test_predict_proba_invalid_input(self):
         detector = GarbleDetector(Strategy.CHARACTER_FREQUENCY)
-        with pytest.raises(ValueError):
+        with pytest.raises(TypeError):
             detector.predict_proba(123)
 
     def test_predict_with_threshold(self):

@@ -1,16 +1,17 @@
 import os
 import urllib.request
+from typing import Any, Optional
 
 from .base import BaseStrategy
 
 
 class LanguageDetectionStrategy(BaseStrategy):
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
-        self._model = None
-        self._model_path = self._get_model_path()
+        self._model: Optional[Any] = None
+        self._model_path: str = self._get_model_path()
 
-    def _get_model_path(self):
+    def _get_model_path(self) -> str:
         custom_path = self.kwargs.get("model_path")
         if custom_path:
             return custom_path
@@ -19,7 +20,7 @@ class LanguageDetectionStrategy(BaseStrategy):
         os.makedirs(model_dir, exist_ok=True)
         return os.path.join(model_dir, "lid.176.bin")
 
-    def _download_model(self):
+    def _download_model(self) -> None:
         if os.path.exists(self._model_path):
             return
 
@@ -40,7 +41,7 @@ class LanguageDetectionStrategy(BaseStrategy):
         urllib.request.urlretrieve(model_url, self._model_path)
         print("Model download completed.")
 
-    def _load_model(self):
+    def _load_model(self) -> None:
         if self._model is None:
             try:
                 import fasttext

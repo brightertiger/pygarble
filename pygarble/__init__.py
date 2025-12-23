@@ -1,7 +1,7 @@
 __version__ = "0.1.6"
-__author__ = "Your Name"
-__email__ = "your.email@example.com"
+__author__ = "Ujjwal Singh Rao"
+__email__ = "ujjwalsrao@gmail.com"
 
-from .core import GarbleDetector, Strategy
+from .core import GarbleDetector, Strategy, EnsembleDetector
 
-__all__ = ["GarbleDetector", "Strategy"]
+__all__ = ["GarbleDetector", "Strategy", "EnsembleDetector", "__version__"]
