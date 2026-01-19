@@ -33,9 +33,10 @@ dependencies = []
 
 [project.optional-dependencies]
 # Optional: FastText-based language detection (requires ~130MB model download)
+# Note: FastText is incompatible with NumPy 2.0
 language_detection = [
+    "numpy>=1.21.0,<2.0",
     "fasttext-wheel>=0.9.2",
-    "numpy>=1.21.0",
 ]
 # Optional: pyspellchecker for EnglishWordValidationStrategy (legacy)
 # Consider using WORD_LOOKUP strategy instead (no dependencies)
@@ -44,8 +45,8 @@ spellchecker = [
 ]
 # All optional features
 all = [
+    "numpy>=1.21.0,<2.0",
     "fasttext-wheel>=0.9.2",
-    "numpy>=1.21.0",
     "pyspellchecker>=0.7.0",
 ]
 dev = [

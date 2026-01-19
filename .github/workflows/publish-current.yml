@@ -21,10 +21,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        # Pin numpy<2.0 for FastText compatibility
+        # Install numpy<2.0 FIRST - FastText is incompatible with NumPy 2.0
         pip install "numpy>=1.21.0,<2.0"
-        pip install -r requirements.txt
-        pip install -r requirements-dev.txt
+        # Install fasttext and other deps (numpy already pinned)
+        pip install fasttext-wheel pyspellchecker
+        # Install dev dependencies
+        pip install pytest pytest-cov black flake8 isort mypy
 
     - name: Run tests
       run: |

@@ -58,49 +58,15 @@ class LanguageDetectionStrategy(BaseStrategy):
         if self._model is None:
             try:
                 import fasttext
-                import numpy as np
 
-                # Fix NumPy 2.0 compatibility issue with FastText
-                # FastText uses np.array(probs, copy=False) which fails in NumPy 2.0
-                # We patch numpy.array temporarily to handle this
-                _original_np_array = np.array
-
-                def _patched_np_array(*args, **kwargs):
-                    # Remove copy=False which causes issues in NumPy 2.0
-                    if kwargs.get("copy") is False:
-                        kwargs.pop("copy")
-                    return _original_np_array(*args, **kwargs)
-
-                np.array = _patched_np_array
-
-                try:
-                    self._download_model()
-                    self._model = fasttext.load_model(self._model_path)
-                finally:
-                    # Restore original np.array
-                    np.array = _original_np_array
-
-                # Also patch the model's predict method for safety
-                original_predict = self._model.predict
-
-                def patched_predict(text, k=1):
-                    # Temporarily patch np.array for the predict call
-                    np.array = _patched_np_array
-                    try:
-                        labels, probs = original_predict(text, k)
-                    finally:
-                        np.array = _original_np_array
-                    # Convert to list to avoid any remaining issues
-                    if hasattr(probs, "tolist"):
-                        probs = probs.tolist()
-                    return labels, probs
-
-                self._model.predict = patched_predict
+                self._download_model()
+                self._model = fasttext.load_model(self._model_path)
 
             except ImportError:
                 raise ImportError(
                     "fasttext is required for LanguageDetectionStrategy. "
-                    "Install it with: pip install fasttext-wheel"
+                    "Install it with: pip install 'pygarble[language_detection]'\n"
+                    "Note: FastText requires numpy<2.0"
                 )
 
     def _predict_impl(self, text: str) -> bool:
