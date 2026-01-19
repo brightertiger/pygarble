@@ -2,11 +2,11 @@
 
 **Detect gibberish, garbled text, and corrupted content with high accuracy using advanced machine learning techniques.**
 
-pygarble is a powerful Python library designed to identify nonsensical, garbled, or corrupted text content that often appears in data processing pipelines, user inputs, or automated systems. Whether you're dealing with random character sequences, encoding errors, keyboard mashing, or corrupted data streams, pygarble provides multiple detection strategies to filter out unwanted content and maintain data quality. The library uses statistical analysis, entropy calculations, pattern matching, n-gram analysis, and language detection to distinguish between meaningful text and gibberish with configurable sensitivity levels.
+pygarble is a powerful Python library designed to identify nonsensical, garbled, or corrupted text content that often appears in data processing pipelines, user inputs, or automated systems. Whether you're dealing with random character sequences, encoding errors, keyboard mashing, or corrupted data streams, pygarble provides multiple detection strategies to filter out unwanted content and maintain data quality. The library uses statistical analysis, entropy calculations, pattern matching, and n-gram analysis to distinguish between meaningful text and gibberish with configurable sensitivity levels.
 
 ## Features
 
-- **15 Detection Strategies**: Choose from multiple garble detection algorithms including Markov chains and n-gram analysis
+- **14 Detection Strategies**: Choose from multiple garble detection algorithms including Markov chains and n-gram analysis
 - **Zero Dependencies**: Core library works without any external dependencies
 - **Ensemble Detector**: Combine multiple strategies for higher accuracy with voting mechanisms
 - **Scikit-learn Interface**: Familiar `predict()` and `predict_proba()` methods
@@ -15,7 +15,6 @@ pygarble is a powerful Python library designed to identify nonsensical, garbled,
 - **Input Validation**: Built-in validation for thresholds and parameters
 - **Type Hints**: Full type annotation support throughout the codebase
 - **Modular Design**: Easy to extend with new detection strategies
-- **Enterprise Ready**: Support for offline model paths and restricted environments
 - **Smart Edge Cases**: Automatically detects extremely long strings without whitespace (like base64 data)
 
 ## Installation
@@ -26,14 +25,8 @@ You can install pygarble using pip:
 # Core library (zero dependencies)
 pip install pygarble
 
-# With FastText language detection (optional)
-pip install pygarble[language_detection]
-
 # With pyspellchecker for legacy word validation (optional)
 pip install pygarble[spellchecker]
-
-# All optional features
-pip install pygarble[all]
 ```
 
 ## Quick Start
@@ -381,23 +374,6 @@ detector.predict("supercalifragilistic")  # True - very long word
 detector.predict("short words here")       # False - normal lengths
 ```
 
-### 15. Language Detection (`LANGUAGE_DETECTION`)
-
-**Implementation Logic**: Uses FastText to detect if text is in the expected language.
-
-```python
-detector = GarbleDetector(
-    Strategy.LANGUAGE_DETECTION,
-    target_language='en',
-    threshold=0.5
-)
-
-# Examples
-detector.predict("Hello world")            # False - English
-detector.predict("asdfghjkl")              # True - not English
-detector.predict("Bonjour le monde")       # True - French, not English
-```
-
 ## Ensemble Detector
 
 Combine multiple strategies for better accuracy using voting:
@@ -480,16 +456,6 @@ detector = GarbleDetector(
 )
 ```
 
-### Language Detection (Offline)
-
-```python
-detector = GarbleDetector(
-    Strategy.LANGUAGE_DETECTION,
-    model_path='/path/to/lid.176.bin',
-    target_language='en'
-)
-```
-
 ## API Reference
 
 ### GarbleDetector
@@ -534,9 +500,9 @@ class Strategy(Enum):
     MARKOV_CHAIN = "markov_chain"              # Recommended - High precision
     NGRAM_FREQUENCY = "ngram_frequency"        # Trigram analysis
     WORD_LOOKUP = "word_lookup"                # Zero dependencies dictionary
-    SYMBOL_RATIO = "symbol_ratio"              # NEW - Symbol/number detection
-    REPETITION = "repetition"                  # NEW - Pattern repetition
-    HEX_STRING = "hex_string"                  # NEW - Hash/UUID detection
+    SYMBOL_RATIO = "symbol_ratio"              # Symbol/number detection
+    REPETITION = "repetition"                  # Pattern repetition
+    HEX_STRING = "hex_string"                  # Hash/UUID detection
     CHARACTER_FREQUENCY = "character_frequency"
     WORD_LENGTH = "word_length"
     PATTERN_MATCHING = "pattern_matching"
@@ -545,8 +511,7 @@ class Strategy(Enum):
     VOWEL_RATIO = "vowel_ratio"
     KEYBOARD_PATTERN = "keyboard_pattern"
 
-    # Strategies with optional dependencies
-    LANGUAGE_DETECTION = "language_detection"      # Requires: pygarble[language_detection]
+    # Strategy with optional dependency
     ENGLISH_WORD_VALIDATION = "english_word_validation"  # Requires: pygarble[spellchecker]
 ```
 
@@ -565,15 +530,14 @@ pygarble/
     ├── markov_chain.py          # Markov chain detection
     ├── ngram_frequency.py       # Trigram frequency analysis
     ├── word_lookup.py           # Dictionary lookup (zero deps)
-    ├── symbol_ratio.py          # NEW - Symbol/number detection
-    ├── repetition.py            # NEW - Pattern repetition
-    ├── hex_string.py            # NEW - Hash/UUID detection
+    ├── symbol_ratio.py          # Symbol/number detection
+    ├── repetition.py            # Pattern repetition
+    ├── hex_string.py            # Hash/UUID detection
     ├── character_frequency.py
     ├── word_length.py
     ├── pattern_matching.py      # Regex patterns + keyboard detection
     ├── statistical_analysis.py
     ├── entropy_based.py         # Shannon entropy + bigram analysis
-    ├── language_detection.py    # FastText integration (optional)
     ├── english_word_validation.py  # pyspellchecker (optional)
     ├── vowel_ratio.py           # Vowel analysis + consonant clusters
     └── keyboard_pattern.py      # N-gram + keyboard row detection
@@ -583,13 +547,9 @@ pygarble/
 
 **Core library**: Zero dependencies - works with Python 3.8+ only
 
-**Optional dependencies**:
-- `pygarble[language_detection]`: FastText-based language detection
-  - fasttext-wheel>=0.9.2
-  - numpy>=1.21.0
+**Optional dependency**:
 - `pygarble[spellchecker]`: pyspellchecker for English word validation
   - pyspellchecker>=0.7.0
-- `pygarble[all]`: All optional features
 
 ## Development
 
@@ -636,14 +596,13 @@ MIT License - see [LICENSE](LICENSE) for details.
 ### 0.3.1 (Current)
 - **New Strategies**: Added `SYMBOL_RATIO`, `REPETITION`, and `HEX_STRING` strategies for specialized detection
 - **New Voting Modes**: Added `any` (high recall) and `all` (high precision) voting modes for EnsembleDetector
+- **Removed**: `LANGUAGE_DETECTION` strategy (FastText dependency had NumPy 2.0 compatibility issues)
 - **Production-Grade Robustness**:
   - Thread safety with timeout and exception handling in batch processing
   - Division by zero protection across all strategy calculations
-  - Network error handling in language detection model download
   - Parameter validation for all strategy-specific parameters
   - Pre-compiled regex patterns for improved performance
 - **Comprehensive Edge Case Tests**: 77 new tests covering parameter validation, type errors, Unicode handling, and boundary conditions
-- **Logging**: Replaced print statements with proper logging in language detection
 
 ### 0.3.0
 - **Zero Dependencies**: Core library now works without any external dependencies

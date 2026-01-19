@@ -1,4 +1,5 @@
--r requirements.txt
+# Optional dependency for EnglishWordValidationStrategy
+pyspellchecker>=0.8.0
 
 # Development dependencies
 pytest>=6.0

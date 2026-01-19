@@ -6,7 +6,6 @@ from .strategies import (
     BaseStrategy,
     CharacterFrequencyStrategy,
     EntropyBasedStrategy,
-    LanguageDetectionStrategy,
     PatternMatchingStrategy,
     StatisticalAnalysisStrategy,
     WordLengthStrategy,
@@ -28,11 +27,9 @@ class Strategy(Enum):
     PATTERN_MATCHING = "pattern_matching"
     STATISTICAL_ANALYSIS = "statistical_analysis"
     ENTROPY_BASED = "entropy_based"
-    LANGUAGE_DETECTION = "language_detection"
     ENGLISH_WORD_VALIDATION = "english_word_validation"
     VOWEL_RATIO = "vowel_ratio"
     KEYBOARD_PATTERN = "keyboard_pattern"
-    # New strategies (v0.3.0)
     MARKOV_CHAIN = "markov_chain"
     NGRAM_FREQUENCY = "ngram_frequency"
     WORD_LOOKUP = "word_lookup"
@@ -47,11 +44,9 @@ STRATEGY_MAP: Dict[Strategy, Type[BaseStrategy]] = {
     Strategy.PATTERN_MATCHING: PatternMatchingStrategy,
     Strategy.STATISTICAL_ANALYSIS: StatisticalAnalysisStrategy,
     Strategy.ENTROPY_BASED: EntropyBasedStrategy,
-    Strategy.LANGUAGE_DETECTION: LanguageDetectionStrategy,
     Strategy.ENGLISH_WORD_VALIDATION: EnglishWordValidationStrategy,
     Strategy.VOWEL_RATIO: VowelRatioStrategy,
     Strategy.KEYBOARD_PATTERN: KeyboardPatternStrategy,
-    # New strategies (v0.3.0)
     Strategy.MARKOV_CHAIN: MarkovChainStrategy,
     Strategy.NGRAM_FREQUENCY: NGramFrequencyStrategy,
     Strategy.WORD_LOOKUP: WordLookupStrategy,

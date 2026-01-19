@@ -149,6 +149,5 @@ class TestStrategy:
         assert Strategy.PATTERN_MATCHING.value == "pattern_matching"
         assert Strategy.STATISTICAL_ANALYSIS.value == "statistical_analysis"
         assert Strategy.ENTROPY_BASED.value == "entropy_based"
-        assert Strategy.LANGUAGE_DETECTION.value == "language_detection"
         assert Strategy.ENGLISH_WORD_VALIDATION.value == "english_word_validation"
         assert Strategy.VOWEL_RATIO.value == "vowel_ratio"

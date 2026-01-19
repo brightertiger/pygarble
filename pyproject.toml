@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pygarble"
-version = "0.3.1"
+version = "0.3.2"
 description = "A Python package for detecting garbled text using multiple detection strategies with a scikit-learn-like interface"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -32,12 +32,6 @@ classifiers = [
 dependencies = []
 
 [project.optional-dependencies]
-# Optional: FastText-based language detection (requires ~130MB model download)
-# Note: FastText is incompatible with NumPy 2.0
-language_detection = [
-    "numpy>=1.21.0,<2.0",
-    "fasttext-wheel>=0.9.2",
-]
 # Optional: pyspellchecker for EnglishWordValidationStrategy (legacy)
 # Consider using WORD_LOOKUP strategy instead (no dependencies)
 spellchecker = [
@@ -45,8 +39,6 @@ spellchecker = [
 ]
 # All optional features
 all = [
-    "numpy>=1.21.0,<2.0",
-    "fasttext-wheel>=0.9.2",
     "pyspellchecker>=0.7.0",
 ]
 dev = [

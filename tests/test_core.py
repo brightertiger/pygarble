@@ -14,14 +14,12 @@ class TestCoreFunctionality:
         assert Strategy.PATTERN_MATCHING.value == "pattern_matching"
         assert Strategy.STATISTICAL_ANALYSIS.value == "statistical_analysis"
         assert Strategy.ENTROPY_BASED.value == "entropy_based"
-        assert Strategy.LANGUAGE_DETECTION.value == "language_detection"
         assert Strategy.VOWEL_RATIO.value == "vowel_ratio"
 
     def test_all_strategies_importable(self):
         from pygarble.strategies import (
             CharacterFrequencyStrategy,
             EntropyBasedStrategy,
-            LanguageDetectionStrategy,
             PatternMatchingStrategy,
             StatisticalAnalysisStrategy,
             WordLengthStrategy,
@@ -32,4 +30,3 @@ class TestCoreFunctionality:
         assert PatternMatchingStrategy is not None
         assert StatisticalAnalysisStrategy is not None
         assert EntropyBasedStrategy is not None
-        assert LanguageDetectionStrategy is not None
