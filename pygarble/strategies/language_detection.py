@@ -60,16 +60,38 @@ class LanguageDetectionStrategy(BaseStrategy):
                 import fasttext
                 import numpy as np
 
-                self._download_model()
-                self._model = fasttext.load_model(self._model_path)
+                # Fix NumPy 2.0 compatibility issue with FastText
+                # FastText uses np.array(probs, copy=False) which fails in NumPy 2.0
+                # We patch numpy.array temporarily to handle this
+                _original_np_array = np.array
 
-                # Monkey patch to fix NumPy 2.0 compatibility issue
+                def _patched_np_array(*args, **kwargs):
+                    # Remove copy=False which causes issues in NumPy 2.0
+                    if kwargs.get("copy") is False:
+                        kwargs.pop("copy")
+                    return _original_np_array(*args, **kwargs)
+
+                np.array = _patched_np_array
+
+                try:
+                    self._download_model()
+                    self._model = fasttext.load_model(self._model_path)
+                finally:
+                    # Restore original np.array
+                    np.array = _original_np_array
+
+                # Also patch the model's predict method for safety
                 original_predict = self._model.predict
 
                 def patched_predict(text, k=1):
-                    labels, probs = original_predict(text, k)
-                    # Convert to list to avoid NumPy 2.0 copy=False issue
-                    if isinstance(probs, np.ndarray):
+                    # Temporarily patch np.array for the predict call
+                    np.array = _patched_np_array
+                    try:
+                        labels, probs = original_predict(text, k)
+                    finally:
+                        np.array = _original_np_array
+                    # Convert to list to avoid any remaining issues
+                    if hasattr(probs, "tolist"):
                         probs = probs.tolist()
                     return labels, probs
 
