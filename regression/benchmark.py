@@ -12,14 +12,27 @@ from pygarble import GarbleDetector, Strategy, EnsembleDetector
 
 
 STRATEGIES = [
+    # New strategies (v0.3.0)
+    Strategy.MARKOV_CHAIN,
+    Strategy.NGRAM_FREQUENCY,
+    Strategy.WORD_LOOKUP,
+    Strategy.SYMBOL_RATIO,
+    Strategy.REPETITION,
+    Strategy.HEX_STRING,
+    # Existing strategies
     Strategy.CHARACTER_FREQUENCY,
     Strategy.WORD_LENGTH,
     Strategy.PATTERN_MATCHING,
     Strategy.STATISTICAL_ANALYSIS,
     Strategy.ENTROPY_BASED,
-    Strategy.ENGLISH_WORD_VALIDATION,
     Strategy.VOWEL_RATIO,
     Strategy.KEYBOARD_PATTERN,
+]
+
+# Strategies that require optional dependencies (excluded by default)
+OPTIONAL_STRATEGIES = [
+    Strategy.ENGLISH_WORD_VALIDATION,  # Requires pyspellchecker
+    Strategy.LANGUAGE_DETECTION,       # Requires fasttext
 ]
 
 
@@ -39,10 +52,14 @@ def load_test_cases(json_path: str) -> List[Dict[str, Any]]:
     return all_cases
 
 
-def run_benchmark(test_cases: List[Dict[str, Any]], threshold: float = 0.5) -> Dict[str, Any]:
+def run_benchmark(test_cases: List[Dict[str, Any]], threshold: float = 0.5, include_optional: bool = False) -> Dict[str, Any]:
     results = {}
-    
-    for strategy in STRATEGIES:
+
+    strategies_to_run = STRATEGIES.copy()
+    if include_optional:
+        strategies_to_run.extend(OPTIONAL_STRATEGIES)
+
+    for strategy in strategies_to_run:
         strategy_name = strategy.value
         detector = GarbleDetector(strategy, threshold=threshold)
         

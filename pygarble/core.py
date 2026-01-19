@@ -13,6 +13,12 @@ from .strategies import (
     EnglishWordValidationStrategy,
     VowelRatioStrategy,
     KeyboardPatternStrategy,
+    MarkovChainStrategy,
+    NGramFrequencyStrategy,
+    WordLookupStrategy,
+    SymbolRatioStrategy,
+    RepetitionStrategy,
+    HexStringStrategy,
 )
 
 
@@ -26,6 +32,13 @@ class Strategy(Enum):
     ENGLISH_WORD_VALIDATION = "english_word_validation"
     VOWEL_RATIO = "vowel_ratio"
     KEYBOARD_PATTERN = "keyboard_pattern"
+    # New strategies (v0.3.0)
+    MARKOV_CHAIN = "markov_chain"
+    NGRAM_FREQUENCY = "ngram_frequency"
+    WORD_LOOKUP = "word_lookup"
+    SYMBOL_RATIO = "symbol_ratio"
+    REPETITION = "repetition"
+    HEX_STRING = "hex_string"
 
 
 STRATEGY_MAP: Dict[Strategy, Type[BaseStrategy]] = {
@@ -38,6 +51,13 @@ STRATEGY_MAP: Dict[Strategy, Type[BaseStrategy]] = {
     Strategy.ENGLISH_WORD_VALIDATION: EnglishWordValidationStrategy,
     Strategy.VOWEL_RATIO: VowelRatioStrategy,
     Strategy.KEYBOARD_PATTERN: KeyboardPatternStrategy,
+    # New strategies (v0.3.0)
+    Strategy.MARKOV_CHAIN: MarkovChainStrategy,
+    Strategy.NGRAM_FREQUENCY: NGramFrequencyStrategy,
+    Strategy.WORD_LOOKUP: WordLookupStrategy,
+    Strategy.SYMBOL_RATIO: SymbolRatioStrategy,
+    Strategy.REPETITION: RepetitionStrategy,
+    Strategy.HEX_STRING: HexStringStrategy,
 }
 
 
@@ -83,12 +103,25 @@ class GarbleDetector:
             return [process_func(text) for text in texts]
 
         max_workers = min(self.threads, len(texts))
+        timeout_per_text = self.kwargs.get("timeout_per_text", 30.0)
+        total_timeout = timeout_per_text * len(texts)
 
         with concurrent.futures.ThreadPoolExecutor(
             max_workers=max_workers
         ) as executor:
             futures = [executor.submit(process_func, text) for text in texts]
-            return [future.result() for future in futures]
+            results = []
+            for future in futures:
+                try:
+                    result = future.result(timeout=total_timeout)
+                    results.append(result)
+                except concurrent.futures.TimeoutError:
+                    # Return default value on timeout
+                    results.append(False if process_func == self._process_text_predict else 0.0)
+                except Exception:
+                    # Return default value on any exception
+                    results.append(False if process_func == self._process_text_predict else 0.0)
+            return results
 
     def predict(self, X: Union[str, List[str]]) -> Union[bool, List[bool]]:
         if isinstance(X, str):
@@ -122,22 +155,33 @@ class EnsembleDetector:
     ):
         if not 0.0 <= threshold <= 1.0:
             raise ValueError("threshold must be between 0.0 and 1.0")
-        if voting not in ("majority", "average", "weighted"):
-            raise ValueError("voting must be 'majority', 'average', or 'weighted'")
+        if voting not in ("majority", "average", "weighted", "any", "all"):
+            raise ValueError(
+                "voting must be 'majority', 'average', 'weighted', 'any', or 'all'"
+            )
         if voting == "weighted" and weights is None:
             raise ValueError("weights required when voting='weighted'")
 
         if strategies is None:
+            # Optimized default: best F1 combination (77.42%)
             strategies = [
-                Strategy.KEYBOARD_PATTERN,
-                Strategy.ENTROPY_BASED,
-                Strategy.PATTERN_MATCHING,
+                Strategy.NGRAM_FREQUENCY,
+                Strategy.WORD_LOOKUP,
+                Strategy.SYMBOL_RATIO,
+                Strategy.HEX_STRING,
                 Strategy.VOWEL_RATIO,
-                Strategy.ENGLISH_WORD_VALIDATION,
             ]
 
-        if weights is not None and len(weights) != len(strategies):
-            raise ValueError("weights must have same length as strategies")
+        if not strategies:
+            raise ValueError("strategies must contain at least one strategy")
+
+        if weights is not None:
+            if len(weights) != len(strategies):
+                raise ValueError("weights must have same length as strategies")
+            if any(w < 0 for w in weights):
+                raise ValueError("weights must be non-negative")
+            if sum(weights) == 0:
+                raise ValueError("weights must not all be zero")
 
         self.strategies = strategies
         self.threshold = threshold
@@ -163,6 +207,12 @@ class EnsembleDetector:
         if self.voting == "majority":
             votes = sum(d.predict(text) for d in self._detectors)
             return votes > len(self._detectors) / 2
+        elif self.voting == "any":
+            # High recall: if ANY strategy flags as garbled, return True
+            return any(d.predict(text) for d in self._detectors)
+        elif self.voting == "all":
+            # High precision: ALL strategies must agree
+            return all(d.predict(text) for d in self._detectors)
         else:
             proba = self._predict_proba_single(text)
             return proba >= self.threshold
@@ -178,10 +228,19 @@ class EnsembleDetector:
             raise TypeError("Input must be a string or list of strings")
 
     def _predict_proba_single(self, text: str) -> float:
+        if not self._detectors:
+            return 0.0  # Defensive check (should never happen due to validation)
+
         probas = [d.predict_proba(text) for d in self._detectors]
 
         if self.voting == "weighted":
             total_weight = sum(self.weights)
             return sum(p * w for p, w in zip(probas, self.weights)) / total_weight
+        elif self.voting == "any":
+            # Return max probability (most suspicious signal)
+            return max(probas)
+        elif self.voting == "all":
+            # Return min probability (least suspicious signal)
+            return min(probas)
         else:
             return sum(probas) / len(probas)

@@ -1,8 +1,12 @@
+import logging
 import os
+import urllib.error
 import urllib.request
 from typing import Any, Optional
 
 from .base import BaseStrategy
+
+logger = logging.getLogger(__name__)
 
 
 class LanguageDetectionStrategy(BaseStrategy):
@@ -34,12 +38,21 @@ class LanguageDetectionStrategy(BaseStrategy):
             "https://dl.fbaipublicfiles.com/fasttext/supervised-models/"
             "lid.176.bin"
         )
-        print(
+        logger.info(
             f"Downloading FastText language detection model to "
             f"{self._model_path}..."
         )
-        urllib.request.urlretrieve(model_url, self._model_path)
-        print("Model download completed.")
+        try:
+            urllib.request.urlretrieve(model_url, self._model_path)
+            logger.info("Model download completed.")
+        except urllib.error.URLError as e:
+            raise ConnectionError(
+                f"Failed to download FastText model from {model_url}: {e}"
+            ) from e
+        except OSError as e:
+            raise IOError(
+                f"Failed to save FastText model to {self._model_path}: {e}"
+            ) from e
 
     def _load_model(self) -> None:
         if self._model is None:

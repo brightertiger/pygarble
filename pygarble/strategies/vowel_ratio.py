@@ -62,9 +62,16 @@ class VowelRatioStrategy(BaseStrategy):
 
         ratio_score = 0.0
         if ratio < min_ratio:
-            ratio_score = (min_ratio - ratio) / min_ratio
+            if min_ratio > 0:
+                ratio_score = (min_ratio - ratio) / min_ratio
+            else:
+                ratio_score = 0.0  # Can't be below 0
         elif ratio > max_ratio:
-            ratio_score = (ratio - max_ratio) / (1.0 - max_ratio)
+            denominator = 1.0 - max_ratio
+            if denominator > 0:
+                ratio_score = (ratio - max_ratio) / denominator
+            else:
+                ratio_score = 1.0  # max_ratio is 1.0, ratio > 1.0 is impossible
 
         max_consonant_run = self._get_max_consonant_run(text)
         cluster_threshold = self.kwargs.get("consonant_cluster_len", 4)

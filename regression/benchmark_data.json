@@ -236,6 +236,173 @@
         {"text": "SSH into the server using RSA key authentication.", "expected_garbled": false},
         {"text": "The TCP/IP stack handles network communication.", "expected_garbled": false}
       ]
+    },
+    {
+      "category": "hash_strings",
+      "description": "Cryptographic hash values",
+      "cases": [
+        {"text": "5d41402abc4b2a76b9719d911017c592", "expected_garbled": true},
+        {"text": "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824", "expected_garbled": true},
+        {"text": "MD5: 098f6bcd4621d373cade4e832627b4f6", "expected_garbled": false},
+        {"text": "SHA256: a591a6d40bf420404a011733cfb7b190d62c65bf0bcda32b57b277d9ad9f146e", "expected_garbled": false},
+        {"text": "Commit hash: 7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b", "expected_garbled": false}
+      ]
+    },
+    {
+      "category": "random_gibberish",
+      "description": "Pure random letter sequences (not keyboard patterns)",
+      "cases": [
+        {"text": "xqjzpvmk", "expected_garbled": true},
+        {"text": "bwfnrtlg", "expected_garbled": true},
+        {"text": "kzqxjvpw mrlntbgf", "expected_garbled": true},
+        {"text": "fjqwxzlp vnmkrtby", "expected_garbled": true},
+        {"text": "zlqjxpvw", "expected_garbled": true},
+        {"text": "mxpqzjkw vrtbnlfg", "expected_garbled": true},
+        {"text": "wqzxjpvk mlnrtfbg", "expected_garbled": true},
+        {"text": "pqxzjwvk", "expected_garbled": true}
+      ]
+    },
+    {
+      "category": "scientific_formulas",
+      "description": "Scientific notation and formulas",
+      "cases": [
+        {"text": "E = mc^2 is Einstein's famous equation", "expected_garbled": false},
+        {"text": "H2O is the chemical formula for water", "expected_garbled": false},
+        {"text": "The velocity is 3.0 x 10^8 m/s", "expected_garbled": false},
+        {"text": "NaCl + H2O -> Na+ + Cl- + H2O", "expected_garbled": true},
+        {"text": "C6H12O6 + 6O2 -> 6CO2 + 6H2O", "expected_garbled": true},
+        {"text": "f(x) = 2x^2 + 3x - 5", "expected_garbled": true}
+      ]
+    },
+    {
+      "category": "acronyms",
+      "description": "Acronyms and abbreviations",
+      "cases": [
+        {"text": "NASA launched a new satellite", "expected_garbled": false},
+        {"text": "The FBI and CIA are government agencies", "expected_garbled": false},
+        {"text": "ASAP we need the RSVP for the VIP event", "expected_garbled": false},
+        {"text": "CEO CFO CTO meeting at HQ", "expected_garbled": false},
+        {"text": "The USA GDP is measured in USD", "expected_garbled": false},
+        {"text": "HTML CSS JS for web development", "expected_garbled": false},
+        {"text": "IoT AI ML are trending technologies", "expected_garbled": false}
+      ]
+    },
+    {
+      "category": "proper_nouns",
+      "description": "Names of people, places, and brands",
+      "cases": [
+        {"text": "John Smith lives in New York City", "expected_garbled": false},
+        {"text": "Microsoft and Google are tech companies", "expected_garbled": false},
+        {"text": "The Eiffel Tower is in Paris, France", "expected_garbled": false},
+        {"text": "Dr. Elizabeth Johnson from Stanford University", "expected_garbled": false},
+        {"text": "Amazon, Apple, and Netflix are popular brands", "expected_garbled": false},
+        {"text": "Mount Everest is the tallest mountain", "expected_garbled": false}
+      ]
+    },
+    {
+      "category": "typos_misspellings",
+      "description": "Common typos and misspellings in real text",
+      "cases": [
+        {"text": "Teh quick brown fox jumsp over teh lazy dog", "expected_garbled": false},
+        {"text": "I recieved your mesage yesterday", "expected_garbled": false},
+        {"text": "Plese send me teh docuemnt", "expected_garbled": false},
+        {"text": "Definately intrested in this oppertunity", "expected_garbled": false},
+        {"text": "Accomodate the necesary changes", "expected_garbled": false},
+        {"text": "Seperate the occuring events", "expected_garbled": false}
+      ]
+    },
+    {
+      "category": "all_caps",
+      "description": "Legitimate all-caps text",
+      "cases": [
+        {"text": "IMPORTANT: READ THIS BEFORE PROCEEDING", "expected_garbled": false},
+        {"text": "WARNING: DO NOT DELETE THIS FILE", "expected_garbled": false},
+        {"text": "BREAKING NEWS: MAJOR ANNOUNCEMENT TODAY", "expected_garbled": false},
+        {"text": "SALE: 50% OFF ALL ITEMS THIS WEEKEND", "expected_garbled": false},
+        {"text": "NOTE: THIS IS A REMINDER", "expected_garbled": false}
+      ]
+    },
+    {
+      "category": "file_paths",
+      "description": "File system paths",
+      "cases": [
+        {"text": "/usr/local/bin/python3", "expected_garbled": true},
+        {"text": "C:\\Users\\John\\Documents\\report.docx", "expected_garbled": true},
+        {"text": "File located at /home/user/data/file.txt", "expected_garbled": false},
+        {"text": "Save to C:\\Program Files\\App\\config.ini", "expected_garbled": false},
+        {"text": "../relative/path/to/file.py", "expected_garbled": true}
+      ]
+    },
+    {
+      "category": "log_entries",
+      "description": "Server and application logs",
+      "cases": [
+        {"text": "[2024-01-15 10:30:45] INFO: Server started successfully", "expected_garbled": false},
+        {"text": "ERROR 500: Internal server error at /api/users", "expected_garbled": false},
+        {"text": "DEBUG: Processing request id=abc123 user=john", "expected_garbled": false},
+        {"text": "2024-01-15T10:30:45.123Z - Request completed in 250ms", "expected_garbled": false},
+        {"text": "WARN: Memory usage at 85% threshold", "expected_garbled": false}
+      ]
+    },
+    {
+      "category": "consonant_heavy",
+      "description": "Valid English words with unusual consonant patterns",
+      "cases": [
+        {"text": "The rhythm of the symphony was perfect", "expected_garbled": false},
+        {"text": "She has great strength and endurance", "expected_garbled": false},
+        {"text": "The script was written in shorthand", "expected_garbled": false},
+        {"text": "A glimpse through the mist", "expected_garbled": false},
+        {"text": "The sphinx guards the pyramid", "expected_garbled": false},
+        {"text": "Nymphs fly by my crypt", "expected_garbled": false}
+      ]
+    },
+    {
+      "category": "rare_valid_words",
+      "description": "Uncommon but valid English words",
+      "cases": [
+        {"text": "The quixotic knight embarked on his quest", "expected_garbled": false},
+        {"text": "Her perspicacious analysis impressed everyone", "expected_garbled": false},
+        {"text": "The ephemeral beauty of the sunset", "expected_garbled": false},
+        {"text": "A serendipitous encounter changed his life", "expected_garbled": false},
+        {"text": "The labyrinthine corridors confused visitors", "expected_garbled": false},
+        {"text": "An idiosyncratic approach to problem solving", "expected_garbled": false}
+      ]
+    },
+    {
+      "category": "mixed_languages",
+      "description": "Text mixing English with other languages",
+      "cases": [
+        {"text": "The cafe had a certain je ne sais quoi", "expected_garbled": false},
+        {"text": "It was a classic faux pas at the soiree", "expected_garbled": false},
+        {"text": "The zeitgeist of the era influenced art", "expected_garbled": false},
+        {"text": "She practiced her kung fu and tai chi", "expected_garbled": false},
+        {"text": "The entrepreneur had great chutzpah", "expected_garbled": false}
+      ]
+    },
+    {
+      "category": "onomatopoeia",
+      "description": "Sound words and exclamations",
+      "cases": [
+        {"text": "The cat went meow and the dog went woof", "expected_garbled": false},
+        {"text": "Buzz buzz went the bees", "expected_garbled": false},
+        {"text": "Splash! The water hit the rocks", "expected_garbled": false},
+        {"text": "Whoosh! The wind blew strongly", "expected_garbled": false},
+        {"text": "Click clack went the keyboard", "expected_garbled": false}
+      ]
+    },
+    {
+      "category": "edge_cases",
+      "description": "Tricky edge cases",
+      "cases": [
+        {"text": "a", "expected_garbled": false},
+        {"text": "I", "expected_garbled": false},
+        {"text": "   ", "expected_garbled": false},
+        {"text": "", "expected_garbled": false},
+        {"text": "k", "expected_garbled": true},
+        {"text": "q", "expected_garbled": true},
+        {"text": "www", "expected_garbled": true},
+        {"text": "xxx", "expected_garbled": true}
+      ]
     }
   ]
 }

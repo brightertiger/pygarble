@@ -1,49 +1,64 @@
 ================================================================================
 PYGARBLE BENCHMARK RESULTS
-Run Date: 2025-12-23 18:54:57
+Run Date: 2026-01-19 19:58:25
 ================================================================================
 
 ### OVERALL METRICS ###
 
 Strategy                    Accuracy  Precision     Recall   F1 Score   Time (s)
 --------------------------------------------------------------------------------
-keyboard_pattern              73.50%     70.59%     69.23%     69.90%     0.0014
-vowel_ratio                   72.65%     95.45%     40.38%     56.76%     0.0006
-ensemble                      71.79%     95.24%     38.46%     54.79%     0.0047
-english_word_validation       61.54%     60.61%     38.46%     47.06%     0.0015
-entropy_based                 64.96%     72.00%     34.62%     46.75%     0.0010
-statistical_analysis          63.25%     69.57%     30.77%     42.67%     0.0004
-character_frequency           57.26%     60.00%     11.54%     19.35%     0.0004
-word_length                   58.97%    100.00%      7.69%     14.29%     0.0001
-pattern_matching              55.56%      0.00%      0.00%      0.00%     0.0012
+keyboard_pattern              78.00%     70.00%     68.06%     69.01%     0.0026
+markov_chain                  80.00%     92.11%     48.61%     63.64%     0.0015
+ngram_frequency               78.00%     83.33%     48.61%     61.40%     0.0013
+word_lookup                   79.00%     91.67%     45.83%     61.11%     0.0005
+vowel_ratio                   78.00%     85.00%     47.22%     60.71%     0.0009
+entropy_based                 74.50%     74.42%     44.44%     55.65%     0.0016
+ensemble                      76.00%     92.86%     36.11%     52.00%     0.0039
+statistical_analysis          69.00%     66.67%     27.78%     39.22%     0.0005
+symbol_ratio                  65.50%     56.52%     18.06%     27.37%     0.0003
+character_frequency           67.00%     66.67%     16.67%     26.67%     0.0007
+hex_string                    67.00%     71.43%     13.89%     23.26%     0.0006
+word_length                   67.00%     87.50%      9.72%     17.50%     0.0002
+repetition                    66.00%     70.00%      9.72%     17.07%     0.0014
+pattern_matching              64.00%      0.00%      0.00%      0.00%     0.0021
 
 ### CONFUSION MATRIX SUMMARY ###
 
 Strategy                      TP     FP     TN     FN
 -------------------------------------------------------
-keyboard_pattern              36     15     50     16
-vowel_ratio                   21      1     64     31
-ensemble                      20      1     64     32
-english_word_validation       20     13     52     32
-entropy_based                 18      7     58     34
-statistical_analysis          16      7     58     36
-character_frequency            6      4     61     46
-word_length                    4      0     65     48
-pattern_matching               0      0     65     52
+keyboard_pattern              49     21    107     23
+markov_chain                  35      3    125     37
+ngram_frequency               35      7    121     37
+word_lookup                   33      3    125     39
+vowel_ratio                   34      6    122     38
+entropy_based                 32     11    117     40
+ensemble                      26      2    126     46
+statistical_analysis          20     10    118     52
+symbol_ratio                  13     10    118     59
+character_frequency           12      6    122     60
+hex_string                    10      4    124     62
+word_length                    7      1    127     65
+repetition                     7      3    125     65
+pattern_matching               0      0    128     72
 
 ### ACCURACY BY CATEGORY ###
 
-Strategy                   base64_encod  code_snippet  encoding_err  keyboard_mas   lorem_ipsum  mixed_conten   non_english  normal_parag   normal_text  numbers_only    ocr_errors  password_lik   product_ids  random_chara  repeated_pat    short_text  social_media  special_char  technical_ja  urls_and_ema
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-keyboard_pattern                  100%           33%           80%          100%           67%           80%          100%          100%           90%           67%           40%           80%           40%           60%           71%           57%           60%           60%          100%           80% 
-vowel_ratio                       100%            0%          100%           70%          100%           80%          100%          100%          100%           50%          100%           40%           80%           30%           43%           86%          100%           80%          100%           60% 
-ensemble                           60%            0%          100%           70%          100%           60%          100%          100%          100%           50%          100%           40%           60%           40%           71%           86%          100%           80%          100%           60% 
-english_word_validation             0%            0%          100%          100%            0%           40%           20%          100%          100%           50%          100%           20%           40%           30%           86%           71%           80%           80%          100%           60% 
-entropy_based                      60%           17%          100%           30%          100%           60%          100%          100%          100%           67%          100%           40%           60%           30%           57%           29%          100%           80%          100%           60% 
-statistical_analysis                0%           17%          100%            0%          100%           60%          100%          100%          100%           50%           80%           40%           60%           70%           43%           71%          100%           80%          100%           60% 
-character_frequency                 0%            0%          100%           10%          100%           60%          100%          100%          100%           50%          100%            0%           80%           10%           71%           29%          100%           80%          100%           60% 
-word_length                        40%            0%          100%            0%          100%           60%          100%          100%          100%           50%          100%            0%           80%           10%           29%           57%          100%           80%          100%          100% 
-pattern_matching                    0%            0%          100%            0%          100%           60%          100%          100%          100%           50%          100%            0%           80%           10%           29%           57%          100%           80%          100%           60% 
+Strategy                       acronyms      all_caps  base64_encod  code_snippet  consonant_he    edge_cases  encoding_err    file_paths  hash_strings  keyboard_mas   log_entries   lorem_ipsum  mixed_conten  mixed_langua   non_english  normal_parag   normal_text  numbers_only    ocr_errors  onomatopoeia  password_lik   product_ids  proper_nouns  random_chara  random_gibbe  rare_valid_w  repeated_pat  scientific_f    short_text  social_media  special_char  technical_ja  typos_misspe  urls_and_ema
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+keyboard_pattern                  100%          100%          100%           33%           83%           50%           80%           60%           60%          100%           80%           67%           80%          100%          100%          100%           90%           67%           40%          100%           80%           40%          100%           60%          100%          100%           71%           83%           57%           60%           60%          100%           67%           80% 
+markov_chain                      100%          100%          100%            0%          100%           75%          100%           40%           60%          100%          100%          100%           80%          100%          100%          100%          100%           50%          100%          100%           20%           40%          100%           50%          100%          100%           57%           67%           57%          100%           80%          100%          100%           60% 
+ngram_frequency                   100%          100%          100%            0%           83%           50%          100%           40%           80%           80%          100%          100%           60%          100%          100%          100%          100%           67%           80%          100%           40%           60%          100%           50%          100%          100%           57%           67%           57%           80%           80%          100%          100%           60% 
+word_lookup                       100%          100%          100%            0%          100%           50%          100%           40%           60%          100%          100%           67%           60%          100%           80%          100%          100%           50%          100%          100%           20%          100%          100%           50%          100%          100%           86%           50%           57%           80%           80%          100%          100%           60% 
+vowel_ratio                       100%          100%          100%            0%           67%           75%          100%           40%           60%           70%          100%          100%           80%          100%          100%          100%          100%           50%          100%          100%           40%           80%          100%           30%          100%           83%           43%           67%           86%          100%           80%          100%          100%           60% 
+entropy_based                     100%          100%           60%           17%           83%           75%          100%           40%           80%           30%          100%          100%           60%          100%          100%          100%          100%           67%          100%          100%           40%           60%          100%           30%           88%          100%           57%           67%           29%          100%           80%          100%          100%           60% 
+ensemble                          100%          100%          100%            0%          100%           50%          100%           40%           80%           70%          100%          100%           60%          100%          100%          100%          100%           50%          100%          100%            0%           80%          100%           30%          100%          100%           43%           50%           57%          100%           80%          100%          100%           60% 
+statistical_analysis              100%          100%            0%           17%          100%           50%          100%           40%           60%            0%           80%          100%           60%          100%          100%          100%          100%           50%           80%          100%           40%           60%          100%           70%            0%          100%           43%           83%           71%          100%           80%          100%          100%           60% 
+symbol_ratio                      100%          100%            0%           17%          100%           50%          100%           40%           60%            0%           80%          100%           60%          100%          100%          100%          100%           33%           80%          100%            0%           60%          100%           40%            0%          100%           43%           83%           57%          100%           80%          100%          100%           60% 
+character_frequency               100%          100%            0%            0%          100%           75%          100%           40%           60%           10%          100%          100%           60%          100%          100%          100%          100%           50%          100%          100%            0%           80%          100%           10%            0%          100%           71%           83%           29%          100%           80%          100%          100%           60% 
+hex_string                        100%          100%           60%            0%          100%           50%          100%           60%           40%            0%          100%          100%           60%          100%          100%          100%          100%           50%          100%          100%           20%           80%          100%           30%            0%          100%           29%           50%           57%          100%           80%          100%          100%           60% 
+word_length                       100%          100%           40%            0%          100%           50%          100%           60%           80%            0%          100%          100%           60%          100%          100%          100%          100%           50%          100%          100%            0%           80%          100%           10%            0%          100%           29%           50%           57%          100%           80%          100%          100%          100% 
+repetition                        100%          100%            0%            0%          100%           50%          100%           40%           60%           10%          100%          100%           60%          100%          100%            0%          100%           50%          100%          100%            0%           80%          100%           20%            0%          100%          100%           50%           57%          100%           80%          100%          100%           60% 
+pattern_matching                  100%          100%            0%            0%          100%           50%          100%           40%           60%            0%          100%          100%           60%          100%          100%          100%          100%           50%          100%          100%            0%           80%          100%           10%            0%          100%           29%           50%           57%          100%           80%          100%          100%           60% 
 
 ### MISCLASSIFIED EXAMPLES (Top 5 per strategy) ###
 
@@ -60,26 +75,26 @@ keyboard_pattern:
   [random_characters] "...---...---..."
     Expected: garbled, Predicted: normal
 
-vowel_ratio:
-  [keyboard_mashing] "qwertyuiop"
-    Expected: garbled, Predicted: normal
-  [keyboard_mashing] "poiuytrewq"
-    Expected: garbled, Predicted: normal
-  [keyboard_mashing] "hjkl;' qwer asdf zxcv"
-    Expected: garbled, Predicted: normal
+markov_chain:
   [random_characters] "!!!@@@###$$$%%%"
     Expected: garbled, Predicted: normal
   [random_characters] "abc123def456ghi789"
+    Expected: garbled, Predicted: normal
+  [random_characters] "1a2b3c4d5e6f7g8h"
+    Expected: garbled, Predicted: normal
+  [random_characters] "##$$%%^^&&**(())"
+    Expected: garbled, Predicted: normal
+  [random_characters] "...---...---..."
     Expected: garbled, Predicted: normal
 
-ensemble:
+ngram_frequency:
   [keyboard_mashing] "qwertyuiop"
     Expected: garbled, Predicted: normal
   [keyboard_mashing] "poiuytrewq"
     Expected: garbled, Predicted: normal
-  [keyboard_mashing] "hjkl;' qwer asdf zxcv"
-    Expected: garbled, Predicted: normal
+  [random_characters] "7h3 qu1ck br0wn f0x"
+    Expected: normal, Predicted: garbled
   [random_characters] "!!!@@@###$$$%%%"
     Expected: garbled, Predicted: normal
-  [random_characters] "abc123def456ghi789"
+  [random_characters] "abcabcabcabcabc"
     Expected: garbled, Predicted: normal

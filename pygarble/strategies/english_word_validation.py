@@ -1,15 +1,38 @@
 import re
-from typing import Any, List
-
-from spellchecker import SpellChecker
+from typing import Any, List, Optional
 
 from .base import BaseStrategy
 
 
 class EnglishWordValidationStrategy(BaseStrategy):
+    """
+    Validate text using pyspellchecker dictionary.
+
+    Note: This strategy requires the optional 'pyspellchecker' dependency.
+    Install with: pip install pygarble[spellchecker]
+
+    Consider using WORD_LOOKUP strategy instead, which has no external
+    dependencies and uses an embedded 50K word dictionary.
+    """
+
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
-        self.spell_checker = SpellChecker()
+        self._spell_checker: Optional[Any] = None
+
+    @property
+    def spell_checker(self) -> Any:
+        """Lazy load spellchecker to defer import error."""
+        if self._spell_checker is None:
+            try:
+                from spellchecker import SpellChecker
+                self._spell_checker = SpellChecker()
+            except ImportError:
+                raise ImportError(
+                    "pyspellchecker is required for EnglishWordValidationStrategy. "
+                    "Install with: pip install pygarble[spellchecker]\n"
+                    "Or use Strategy.WORD_LOOKUP which has no dependencies."
+                )
+        return self._spell_checker
 
     def _tokenize_text(self, text: str) -> List[str]:
         return re.findall(r'\b[a-zA-Z]+\b', text.lower())
