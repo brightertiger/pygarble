@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pygarble"
-version = "0.3.2"
+version = "0.4.0"
 description = "A Python package for detecting garbled text using multiple detection strategies with a scikit-learn-like interface"
 readme = "README.md"
 requires-python = ">=3.8"
