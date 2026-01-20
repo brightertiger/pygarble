@@ -17,6 +17,12 @@ from .compression_ratio import CompressionRatioStrategy
 from .mojibake import MojibakeStrategy
 from .pronounceability import PronouncabilityStrategy
 from .unicode_script import UnicodeScriptStrategy
+from .bigram_probability import BigramProbabilityStrategy
+from .letter_position import LetterPositionStrategy
+from .consonant_sequence import ConsonantSequenceStrategy
+from .vowel_pattern import VowelPatternStrategy
+from .letter_frequency import LetterFrequencyStrategy
+from .rare_trigram import RareTrigramStrategy
 
 __all__ = [
     "BaseStrategy",
@@ -38,4 +44,10 @@ __all__ = [
     "MojibakeStrategy",
     "PronouncabilityStrategy",
     "UnicodeScriptStrategy",
+    "BigramProbabilityStrategy",
+    "LetterPositionStrategy",
+    "ConsonantSequenceStrategy",
+    "VowelPatternStrategy",
+    "LetterFrequencyStrategy",
+    "RareTrigramStrategy",
 ]

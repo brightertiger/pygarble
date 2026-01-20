@@ -22,6 +22,12 @@ from .strategies import (
     MojibakeStrategy,
     PronouncabilityStrategy,
     UnicodeScriptStrategy,
+    BigramProbabilityStrategy,
+    LetterPositionStrategy,
+    ConsonantSequenceStrategy,
+    VowelPatternStrategy,
+    LetterFrequencyStrategy,
+    RareTrigramStrategy,
 )
 
 
@@ -44,6 +50,12 @@ class Strategy(Enum):
     MOJIBAKE = "mojibake"
     PRONOUNCEABILITY = "pronounceability"
     UNICODE_SCRIPT = "unicode_script"
+    BIGRAM_PROBABILITY = "bigram_probability"
+    LETTER_POSITION = "letter_position"
+    CONSONANT_SEQUENCE = "consonant_sequence"
+    VOWEL_PATTERN = "vowel_pattern"
+    LETTER_FREQUENCY = "letter_frequency"
+    RARE_TRIGRAM = "rare_trigram"
 
 
 STRATEGY_MAP: Dict[Strategy, Type[BaseStrategy]] = {
@@ -65,6 +77,12 @@ STRATEGY_MAP: Dict[Strategy, Type[BaseStrategy]] = {
     Strategy.MOJIBAKE: MojibakeStrategy,
     Strategy.PRONOUNCEABILITY: PronouncabilityStrategy,
     Strategy.UNICODE_SCRIPT: UnicodeScriptStrategy,
+    Strategy.BIGRAM_PROBABILITY: BigramProbabilityStrategy,
+    Strategy.LETTER_POSITION: LetterPositionStrategy,
+    Strategy.CONSONANT_SEQUENCE: ConsonantSequenceStrategy,
+    Strategy.VOWEL_PATTERN: VowelPatternStrategy,
+    Strategy.LETTER_FREQUENCY: LetterFrequencyStrategy,
+    Strategy.RARE_TRIGRAM: RareTrigramStrategy,
 }
 
 
@@ -170,13 +188,14 @@ class EnsembleDetector:
             raise ValueError("weights required when voting='weighted'")
 
         if strategies is None:
-            # Optimized default: best F1 combination (77.42%)
+            # High-precision default: uses strategies with 90%+ precision
+            # Combined with majority voting for reliable detection
             strategies = [
-                Strategy.NGRAM_FREQUENCY,
-                Strategy.WORD_LOOKUP,
-                Strategy.SYMBOL_RATIO,
-                Strategy.HEX_STRING,
-                Strategy.VOWEL_RATIO,
+                Strategy.MARKOV_CHAIN,       # 95% precision, 61% recall
+                Strategy.WORD_LOOKUP,        # 89% precision, 51% recall
+                Strategy.NGRAM_FREQUENCY,    # 88% precision, 47% recall
+                Strategy.BIGRAM_PROBABILITY, # 100% precision, 25% recall
+                Strategy.LETTER_POSITION,    # 93% precision, 35% recall
             ]
 
         if not strategies:

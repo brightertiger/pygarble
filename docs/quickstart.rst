@@ -1,157 +1,132 @@
 Quick Start Guide
 =================
 
-**Detect gibberish, garbled text, and corrupted content with high accuracy using advanced machine learning techniques.**
-
-This guide will get you up and running with pygarble in just a few minutes. pygarble is designed to identify nonsensical, garbled, or corrupted text content that often appears in data processing pipelines, user inputs, or automated systems. Whether you're dealing with random character sequences, encoding errors, keyboard mashing, or corrupted data streams, pygarble provides multiple detection strategies to filter out unwanted content and maintain data quality.
+This guide will get you up and running with pygarble in minutes.
 
 Basic Usage
 -----------
 
-The simplest way to use pygarble is to create a detector and call its methods:
+The recommended way to use pygarble is with the default ``EnsembleDetector``:
+
+.. code-block:: python
+
+   from pygarble import EnsembleDetector
+
+   detector = EnsembleDetector()
+
+   # Check single text
+   detector.predict("Hello world")    # False - valid text
+   detector.predict("asdfghjkl")      # True - gibberish
+
+   # Check multiple texts
+   texts = ["Hello world", "asdfghjkl", "Normal sentence"]
+   results = detector.predict(texts)  # [False, True, False]
+
+   # Get probability scores (0.0 = valid, 1.0 = gibberish)
+   detector.predict_proba("Hello world")  # ~0.1
+   detector.predict_proba("xkqzjwp")      # ~0.9
+
+Using Individual Strategies
+---------------------------
+
+For specific use cases, use individual strategies:
 
 .. code-block:: python
 
    from pygarble import GarbleDetector, Strategy
 
-   # Create a detector
-   detector = GarbleDetector(Strategy.CHARACTER_FREQUENCY)
+   # Best overall performance
+   detector = GarbleDetector(Strategy.MARKOV_CHAIN)
+   detector.predict("hello world")   # False
+   detector.predict("xkqzjwpmv")     # True
 
-   # Detect if text is garbled
-   is_garbled = detector.predict("aaaaaaa")
-   print(is_garbled)  # True
+   # Zero false positives
+   detector = GarbleDetector(Strategy.BIGRAM_PROBABILITY)
+   detector.predict("hello world")   # False
+   detector.predict("qxjjxz")        # True
 
-   # Get probability score
-   probability = detector.predict_proba("aaaaaaa")
-   print(probability)  # 1.0
+   # Detect encoding corruption
+   detector = GarbleDetector(Strategy.MOJIBAKE)
+   detector.predict("Café")          # False - valid UTF-8
+   detector.predict("CafÃ©")         # True - mojibake
 
-Batch Processing
------------------
+   # Detect homoglyph attacks
+   detector = GarbleDetector(Strategy.UNICODE_SCRIPT)
+   detector.predict("paypal")        # False - all Latin
+   detector.predict("pаypal")        # True - Cyrillic 'а'
 
-Process multiple texts at once:
+Custom Ensemble
+---------------
+
+Create custom ensembles with specific strategies:
 
 .. code-block:: python
 
-   texts = ["normal text", "aaaaaaa", "asdfghjkl", "Hello world"]
-   
-   # Get binary predictions
-   predictions = detector.predict(texts)
-   print(predictions)  # [False, True, True, False]
-   
-   # Get probability scores
-   probabilities = detector.predict_proba(texts)
-   print(probabilities)  # [0.2, 1.0, 0.8, 0.1]
+   from pygarble import EnsembleDetector, Strategy
 
-Choosing a Strategy
+   # Pick your strategies
+   detector = EnsembleDetector(
+       strategies=[
+           Strategy.MARKOV_CHAIN,
+           Strategy.BIGRAM_PROBABILITY,
+           Strategy.KEYBOARD_PATTERN,
+       ]
+   )
+
+   # Change voting mode
+   detector = EnsembleDetector(voting="any")       # High recall
+   detector = EnsembleDetector(voting="all")       # High precision
+   detector = EnsembleDetector(voting="majority")  # Balanced (default)
+
+Adjusting Threshold
 -------------------
 
-pygarble offers 6 different detection strategies. Here's a quick comparison:
+The threshold controls the cutoff for ``predict()``:
 
 .. code-block:: python
 
-   from pygarble import GarbleDetector, Strategy
+   # Lower threshold = more sensitive (more false positives)
+   detector = GarbleDetector(Strategy.MARKOV_CHAIN, threshold=0.3)
 
-   text = "suspicious text here"
+   # Higher threshold = less sensitive (more false negatives)
+   detector = GarbleDetector(Strategy.MARKOV_CHAIN, threshold=0.7)
 
-   # Character Frequency - detects repetitive characters
-   detector1 = GarbleDetector(Strategy.CHARACTER_FREQUENCY)
-   
-   # Word Length - detects unusually long words
-   detector2 = GarbleDetector(Strategy.WORD_LENGTH)
-   
-   # Pattern Matching - uses regex patterns (highly configurable)
-   detector3 = GarbleDetector(Strategy.PATTERN_MATCHING)
-   
-   # Statistical Analysis - analyzes character ratios
-   detector4 = GarbleDetector(Strategy.STATISTICAL_ANALYSIS)
-   
-   # Entropy Based - measures character diversity
-   detector5 = GarbleDetector(Strategy.ENTROPY_BASED)
-   
-   # Language Detection - checks if text is in expected language
-   detector6 = GarbleDetector(Strategy.LANGUAGE_DETECTION)
+   # predict_proba() is not affected by threshold
+   detector.predict_proba("text")  # Returns 0.0-1.0
 
-   # Test all strategies
-   for i, detector in enumerate([detector1, detector2, detector3, detector4, detector5, detector6], 1):
-       result = detector.predict(text)
-       print(f"Strategy {i}: {result}")
+Common Patterns
+---------------
 
-Adjusting Sensitivity
----------------------
-
-Control how sensitive the detector is by adjusting the threshold:
+**Filter user input:**
 
 .. code-block:: python
 
-   # More sensitive (detects more as garbled)
-   sensitive_detector = GarbleDetector(Strategy.CHARACTER_FREQUENCY, threshold=0.3)
-   
-   # Less sensitive (detects less as garbled)
-   conservative_detector = GarbleDetector(Strategy.CHARACTER_FREQUENCY, threshold=0.7)
+   detector = EnsembleDetector()
 
-   text = "borderline case"
-   print(f"Sensitive: {sensitive_detector.predict(text)}")      # True
-   print(f"Conservative: {conservative_detector.predict(text)}") # False
+   def validate_input(text):
+       if detector.predict(text):
+           return "Please enter valid text"
+       return None
 
-Strategy-Specific Parameters
-----------------------------
-
-Each strategy has its own parameters for fine-tuning:
+**Clean a dataset:**
 
 .. code-block:: python
 
-   # Character Frequency with custom threshold
-   detector = GarbleDetector(
-       Strategy.CHARACTER_FREQUENCY,
-       frequency_threshold=0.2  # Higher threshold = more sensitive
-   )
+   detector = GarbleDetector(Strategy.MARKOV_CHAIN)
+   clean_data = [t for t in raw_data if not detector.predict(t)]
 
-   # Word Length with custom max length
-   detector = GarbleDetector(
-       Strategy.WORD_LENGTH,
-       max_word_length=15  # Words longer than 15 chars are suspicious
-   )
-
-   # Pattern Matching with custom patterns
-   detector = GarbleDetector(
-       Strategy.PATTERN_MATCHING,
-       patterns={
-           'email_pattern': r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}',
-           'phone_pattern': r'\d{3}-\d{3}-\d{4}'
-       }
-   )
-
-   # Language Detection for specific language
-   detector = GarbleDetector(
-       Strategy.LANGUAGE_DETECTION,
-       target_language='en',  # Expect English text
-       threshold=0.3
-   )
-
-Multithreaded Processing
-------------------------
-
-For large datasets, you can enable multithreaded processing:
+**Detect encoding issues:**
 
 .. code-block:: python
 
-   # Enable multithreading for large datasets
-   detector = GarbleDetector(Strategy.LANGUAGE_DETECTION, threads=4)
-
-   # Process large batch with multiple threads
-   large_texts = ["text"] * 1000  # 1000 texts
-   predictions = detector.predict(large_texts)
-
-**Note**: Multithreading is most beneficial for:
-- Large datasets (100+ texts)
-- I/O-bound strategies (Language Detection with model loading)
-- Strategies with expensive computations
-
-For small datasets or CPU-bound strategies, single-threaded processing may be faster due to threading overhead.
+   detector = GarbleDetector(Strategy.MOJIBAKE)
+   for text in documents:
+       if detector.predict(text):
+           print(f"Encoding issue: {text[:50]}")
 
 Next Steps
 ----------
 
-- Learn about each strategy in detail: :doc:`strategies`
+- Learn about each strategy: :doc:`strategies`
 - See practical examples: :doc:`examples`
 - Explore the full API: :doc:`api`

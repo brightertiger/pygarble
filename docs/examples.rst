@@ -1,171 +1,98 @@
 Examples
 ========
 
-This section provides practical examples of using pygarble for various tasks.
+Practical examples for common use cases.
 
-Text Filtering
---------------
+Filter User Input
+-----------------
 
-Filter garbled text from a dataset:
-
-.. code-block:: python
-
-   from pygarble import GarbleDetector, Strategy
-
-   # Create a detector
-   detector = GarbleDetector(Strategy.ENTROPY_BASED, threshold=0.7)
-
-   # Sample dataset
-   texts = [
-       "This is normal English text",
-       "asdfghjkl",
-       "Hello world",
-       "AAAAA",
-       "Mixed content with numbers 123"
-   ]
-
-   # Filter out garbled text
-   clean_texts = []
-   for text in texts:
-       if not detector.predict(text):
-           clean_texts.append(text)
-
-   print("Clean texts:", clean_texts)
-
-Multi-Strategy Ensemble
------------------------
-
-Combine multiple strategies for better detection:
+Validate form input before processing:
 
 .. code-block:: python
 
-   from pygarble import GarbleDetector, Strategy
+   from pygarble import EnsembleDetector
 
-   strategies = [
-       Strategy.CHARACTER_FREQUENCY,
-       Strategy.PATTERN_MATCHING,
-       Strategy.ENTROPY_BASED
-   ]
+   detector = EnsembleDetector()
 
-   text = "suspicious text here"
-   votes = 0
-
-   for strategy in strategies:
-       detector = GarbleDetector(strategy, threshold=0.5)
+   def validate_input(text):
+       if not text or len(text.strip()) == 0:
+           return "Input cannot be empty"
        if detector.predict(text):
-           votes += 1
+           return "Please enter valid text"
+       return None
 
-   # Text is considered garbled if majority of strategies agree
-   is_garbled = votes > len(strategies) // 2
-   print(f"Text is garbled: {is_garbled}")
+   # Usage
+   error = validate_input("Hello world")    # None - valid
+   error = validate_input("asdfghjkl")      # "Please enter valid text"
 
-Language Validation
--------------------
+Clean a Dataset
+---------------
 
-Validate that text is in the expected language:
+Remove gibberish from a list of texts:
 
 .. code-block:: python
 
    from pygarble import GarbleDetector, Strategy
 
-   # Validate that text is in English
-   detector = GarbleDetector(
-       Strategy.LANGUAGE_DETECTION,
-       target_language='en',
-       threshold=0.3
-   )
+   detector = GarbleDetector(Strategy.MARKOV_CHAIN)
 
-   user_inputs = [
-       "Hello, how are you?",
-       "Bonjour, comment allez-vous?",
+   raw_data = [
+       "This is valid text",
        "asdfghjkl",
-       "123456789"
+       "Another good sentence",
+       "qxzjkwpmv",
+       "Final valid text"
    ]
 
-   for text in user_inputs:
-       proba = detector.predict_proba(text)
-       is_english = not detector.predict(text)
-       print(f"{text:25} -> English: {is_english:5} (confidence: {1-proba:.3f})")
+   clean_data = [t for t in raw_data if not detector.predict(t)]
+   print(clean_data)
+   # ['This is valid text', 'Another good sentence', 'Final valid text']
 
-Pattern Customization
----------------------
+Detect Encoding Issues
+----------------------
 
-Customize pattern matching for specific use cases:
+Find mojibake (encoding corruption) in documents:
 
 .. code-block:: python
 
    from pygarble import GarbleDetector, Strategy
 
-   # Create patterns for data validation
-   validation_patterns = {
-       'email_pattern': r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}',
-       'phone_pattern': r'\d{3}[-.]?\d{3}[-.]?\d{4}',
-       'ssn_pattern': r'\d{3}-\d{2}-\d{4}',
-       'credit_card': r'\d{4}[\s-]?\d{4}[\s-]?\d{4}[\s-]?\d{4}',
-   }
+   detector = GarbleDetector(Strategy.MOJIBAKE)
 
-   detector = GarbleDetector(
-       Strategy.PATTERN_MATCHING,
-       patterns=validation_patterns,
-       threshold=0.1
-   )
-
-   # Test various inputs
-   test_inputs = [
-       "john.doe@example.com",      # Valid email
-       "555-123-4567",             # Valid phone
-       "123-45-6789",              # Valid SSN
-       "4532 1234 5678 9012",      # Valid credit card
-       "normal text",               # Normal text
-       "asdfghjkl",                # Random characters
+   documents = [
+       "Café au lait",           # Valid UTF-8
+       "CafÃ© au lait",          # Mojibake
+       "naïve résumé",           # Valid UTF-8
+       "naÃ¯ve rÃ©sumÃ©",       # Mojibake
    ]
 
-   for text in test_inputs:
-       proba = detector.predict_proba(text)
-       is_suspicious = detector.predict(text)
-       status = "SUSPICIOUS" if is_suspicious else "VALID"
-       print(f"{text:25} -> {status:10} (confidence: {proba:.3f})")
+   for doc in documents:
+       if detector.predict(doc):
+           print(f"Encoding issue: {doc}")
 
-Domain-Specific Detection
--------------------------
+Detect Phishing/Homoglyphs
+--------------------------
 
-Detect code-like content:
+Identify lookalike characters in domain names:
 
 .. code-block:: python
 
    from pygarble import GarbleDetector, Strategy
 
-   # Create patterns for detecting code-like content
-   code_patterns = {
-       'function_call': r'\w+\s*\([^)]*\)',
-       'variable_assignment': r'\w+\s*=\s*\w+',
-       'json_pattern': r'\{[^}]*"[^"]*"[^}]*\}',
-       'sql_pattern': r'(SELECT|INSERT|UPDATE|DELETE)\s+.*FROM',
-       'html_pattern': r'<[^>]+>',
-   }
+   detector = GarbleDetector(Strategy.UNICODE_SCRIPT)
 
-   # Use only custom patterns (no defaults)
-   detector = GarbleDetector(
-       Strategy.PATTERN_MATCHING,
-       patterns=code_patterns,
-       override_defaults=True,
-       threshold=0.2
-   )
-
-   # Test mixed content
-   mixed_content = [
-       "This is normal text",
-       "def calculate_total(items):",
-       "SELECT * FROM users WHERE id = 1",
-       "<div class='container'>Hello</div>",
-       "user_data = {'name': 'John', 'age': 30}",
+   domains = [
+       "paypal.com",      # Legitimate
+       "pаypal.com",      # Cyrillic 'а'
+       "google.com",      # Legitimate
+       "gооgle.com",      # Cyrillic 'о'
+       "apple.com",       # Legitimate
+       "аpple.com",       # Cyrillic 'а'
    ]
 
-   for text in mixed_content:
-       proba = detector.predict_proba(text)
-       is_code_like = detector.predict(text)
-       status = "CODE-LIKE" if is_code_like else "NORMAL"
-       print(f"{text:50} -> {status:10} (confidence: {proba:.3f})")
+   for domain in domains:
+       if detector.predict(domain):
+           print(f"Warning: Possible phishing - {domain}")
 
 Batch Processing
 ----------------
@@ -174,53 +101,92 @@ Process large datasets efficiently:
 
 .. code-block:: python
 
-   from pygarble import GarbleDetector, Strategy
+   from pygarble import EnsembleDetector
 
-   detector = GarbleDetector(Strategy.PATTERN_MATCHING)
+   detector = EnsembleDetector()
 
-   # Large dataset
-   texts = ["normal text", "AAAAA", "123456789", "mixed text"] * 1000
+   # Process 10,000 texts at once
+   texts = ["sample text"] * 10000
+   results = detector.predict(texts)
 
-   # Process all at once
-   predictions = detector.predict(texts)
-   probabilities = detector.predict_proba(texts)
+   garbled_count = sum(results)
+   print(f"Found {garbled_count} gibberish texts")
 
-   # Count results
-   garbled_count = sum(predictions)
-   total_count = len(predictions)
-   
-   print(f"Found {garbled_count} garbled texts out of {total_count} total")
-   print(f"Garbled percentage: {garbled_count/total_count*100:.1f}%")
+Custom Strategy Selection
+-------------------------
+
+Choose strategies based on your use case:
+
+.. code-block:: python
+
+   from pygarble import EnsembleDetector, Strategy
+
+   # High precision (minimize false positives)
+   detector = EnsembleDetector(
+       strategies=[
+           Strategy.BIGRAM_PROBABILITY,
+           Strategy.LETTER_POSITION,
+           Strategy.RARE_TRIGRAM,
+       ],
+       voting="all"  # Only flag if ALL agree
+   )
+
+   # High recall (catch everything)
+   detector = EnsembleDetector(
+       strategies=[
+           Strategy.MARKOV_CHAIN,
+           Strategy.KEYBOARD_PATTERN,
+           Strategy.WORD_LOOKUP,
+       ],
+       voting="any"  # Flag if ANY detects
+   )
 
 Threshold Tuning
 ----------------
 
-Find the optimal threshold for your use case:
+Adjust sensitivity for your needs:
 
 .. code-block:: python
 
    from pygarble import GarbleDetector, Strategy
 
-   # Test data with known labels
-   test_data = [
-       ("normal text", False),
-       ("aaaaaaa", True),
-       ("Hello world", False),
-       ("asdfghjkl", True),
-       ("123456789", True),
+   # Get probability scores first
+   detector = GarbleDetector(Strategy.MARKOV_CHAIN)
+
+   test_texts = [
+       ("Hello world", False),      # Clearly valid
+       ("xkqzjwpmv", True),         # Clearly gibberish
+       ("asdfgh", True),            # Borderline
    ]
 
-   # Test different thresholds
-   thresholds = [0.1, 0.3, 0.5, 0.7, 0.9]
-   
-   for threshold in thresholds:
-       detector = GarbleDetector(Strategy.CHARACTER_FREQUENCY, threshold=threshold)
-       
-       correct = 0
-       for text, expected in test_data:
-           predicted = detector.predict(text)
-           if predicted == expected:
-               correct += 1
-       
-       accuracy = correct / len(test_data)
-       print(f"Threshold {threshold}: {accuracy:.1%} accuracy")
+   print("Probability scores:")
+   for text, _ in test_texts:
+       prob = detector.predict_proba(text)
+       print(f"  {text:20} -> {prob:.3f}")
+
+   # Then choose appropriate threshold
+   # Lower = more sensitive (more false positives)
+   # Higher = less sensitive (more false negatives)
+
+Streaming/Real-time Detection
+-----------------------------
+
+Process text as it arrives:
+
+.. code-block:: python
+
+   from pygarble import GarbleDetector, Strategy
+
+   # Use a fast strategy
+   detector = GarbleDetector(Strategy.BIGRAM_PROBABILITY)
+
+   def process_message(message):
+       if detector.predict(message):
+           return {"status": "rejected", "reason": "invalid text"}
+       return {"status": "accepted", "message": message}
+
+   # Process incoming messages
+   messages = ["Hello", "xqzjk", "World"]
+   for msg in messages:
+       result = process_message(msg)
+       print(f"{msg}: {result['status']}")

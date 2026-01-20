@@ -1,9 +1,10 @@
 pygarble Documentation
-========================
+======================
 
-**Detect gibberish, garbled text, and corrupted content with high accuracy using advanced machine learning techniques.**
+**Detect gibberish, garbled text, and nonsense with high precision.**
 
-pygarble is a powerful Python library designed to identify nonsensical, garbled, or corrupted text content that often appears in data processing pipelines, user inputs, or automated systems. Whether you're dealing with random character sequences, encoding errors, keyboard mashing, or corrupted data streams, pygarble provides multiple detection strategies to filter out unwanted content and maintain data quality. The library uses statistical analysis, entropy calculations, pattern matching, and language detection to distinguish between meaningful text and gibberish with configurable sensitivity levels.
+A zero-dependency Python library for identifying random character sequences, keyboard mashing,
+encoding errors, and other forms of text corruption.
 
 .. toctree::
    :maxdepth: 2
@@ -19,46 +20,42 @@ pygarble is a powerful Python library designed to identify nonsensical, garbled,
 Features
 --------
 
-- **Multiple Detection Strategies**: Choose from 6 different garble detection algorithms
-- **Scikit-learn Interface**: Familiar `predict()` and `predict_proba()` methods
-- **Configurable Thresholds**: Adjust sensitivity for each strategy
-- **Probability Scores**: Get confidence scores for garble detection
-- **Modular Design**: Easy to extend with new detection strategies
-- **Enterprise Ready**: Support for offline model paths and restricted environments
-- **Smart Edge Cases**: Automatically detects extremely long strings without any whitespace
+- **24 Detection Strategies**: From Markov chains to phonotactic rules
+- **99.5% Precision**: Default ensemble minimizes false positives
+- **Zero Dependencies**: Core library uses only Python stdlib
+- **Scikit-learn Interface**: Familiar ``predict()`` and ``predict_proba()`` methods
+- **Batch Processing**: Process lists of texts efficiently
 
 Quick Start
 -----------
 
 .. code-block:: python
 
-   from pygarble import GarbleDetector, Strategy
+   from pygarble import EnsembleDetector
 
-   # Create a detector with character frequency strategy
-   detector = GarbleDetector(Strategy.CHARACTER_FREQUENCY, threshold=0.5)
+   # Recommended: Use the default ensemble
+   detector = EnsembleDetector()
 
-   # Detect garbled text
-   texts = ["normal text", "aaaaaaa", "asdfghjkl"]
-   results = detector.predict(texts)
-   print(results)  # [False, True, True]
+   detector.predict("Hello world")    # False - valid text
+   detector.predict("asdfghjkl")      # True - keyboard mashing
+   detector.predict("qxzjkwp")        # True - impossible letters
 
-   # Get probability scores
-   probabilities = detector.predict_proba(texts)
-   print(probabilities)  # [0.2, 1.0, 0.8]
+   # Batch processing
+   texts = ["Hello world", "asdfghjkl", "Normal text"]
+   results = detector.predict(texts)  # [False, True, False]
 
-Detection Strategies
---------------------
+Performance
+-----------
 
-pygarble provides 6 different strategies for detecting garbled text:
+Tested on 1,644 samples:
 
-1. **Character Frequency**: Detects unusual character frequency patterns
-2. **Word Length**: Identifies text with unusually long words
-3. **Pattern Matching**: Uses configurable regex patterns (highly customizable)
-4. **Statistical Analysis**: Analyzes alphabetic character ratios
-5. **Entropy Based**: Uses Shannon entropy to measure character diversity
-6. **Language Detection**: Uses FastText for language identification
-
-For detailed information about each strategy, see :doc:`strategies`.
+============== ========= ====== ========
+Detector       Precision Recall F1 Score
+============== ========= ====== ========
+EnsembleDetector() **99.5%** 78.5%  87.8%
+MARKOV_CHAIN   98.8%     86.4%  92.2%
+BIGRAM_PROBABILITY 100%  33.6%  50.3%
+============== ========= ====== ========
 
 Installation
 ------------
@@ -67,28 +64,8 @@ Installation
 
    pip install pygarble
 
-For development installation, see :doc:`installation`.
-
-Examples
---------
-
-See the :doc:`examples` section for practical examples including:
-- Text filtering from datasets
-- Multi-strategy ensemble approaches
-- Language validation
-- Pattern customization
-
-API Reference
--------------
-
-See the :doc:`api` section for complete API documentation including:
-- Main GarbleDetector class
-- Strategy implementations
-- Strategy enumeration
-
 Indices and tables
 ==================
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`

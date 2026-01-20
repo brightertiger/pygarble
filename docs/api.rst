@@ -1,66 +1,134 @@
 API Reference
 =============
 
-This section provides detailed documentation for all public APIs in pygarble.
-
 GarbleDetector
 --------------
 
-.. autoclass:: pygarble.core.GarbleDetector
-   :members:
-   :special-members: __init__
+The main class for single-strategy detection.
 
-Strategy Enumeration
---------------------
+.. code-block:: python
 
-.. autoclass:: pygarble.core.Strategy
-   :members:
+   from pygarble import GarbleDetector, Strategy
 
-Base Strategy
+   GarbleDetector(
+       strategy: Strategy,
+       threshold: float = 0.5,
+       **kwargs
+   )
+
+**Parameters:**
+
+- ``strategy``: The detection strategy to use (see Strategy enum)
+- ``threshold``: Probability threshold for ``predict()`` (0.0-1.0)
+- ``**kwargs``: Strategy-specific parameters
+
+**Methods:**
+
+- ``predict(text)`` - Returns ``bool`` or ``List[bool]``
+- ``predict_proba(text)`` - Returns ``float`` or ``List[float]`` (0.0-1.0)
+
+**Example:**
+
+.. code-block:: python
+
+   detector = GarbleDetector(Strategy.MARKOV_CHAIN, threshold=0.5)
+
+   detector.predict("hello")           # False
+   detector.predict("xkqzj")           # True
+   detector.predict_proba("hello")     # 0.1
+   detector.predict(["a", "b", "c"])   # [False, False, False]
+
+EnsembleDetector
+----------------
+
+Combines multiple strategies with voting.
+
+.. code-block:: python
+
+   from pygarble import EnsembleDetector, Strategy
+
+   EnsembleDetector(
+       strategies: List[Strategy] = None,
+       threshold: float = 0.5,
+       voting: str = "majority",
+       weights: List[float] = None,
+   )
+
+**Parameters:**
+
+- ``strategies``: List of strategies (default: high-precision mix)
+- ``threshold``: Probability threshold for ``predict()``
+- ``voting``: Voting mode - "majority", "any", "all", "average", "weighted"
+- ``weights``: Weights for weighted voting (required if voting="weighted")
+
+**Default Strategies:**
+
+- MARKOV_CHAIN
+- WORD_LOOKUP
+- NGRAM_FREQUENCY
+- BIGRAM_PROBABILITY
+- LETTER_POSITION
+
+**Voting Modes:**
+
+- ``majority``: Flag if >50% of strategies agree (default)
+- ``any``: Flag if ANY strategy detects (high recall)
+- ``all``: Flag only if ALL strategies agree (high precision)
+- ``average``: Average probability across strategies
+- ``weighted``: Weighted average with custom weights
+
+**Example:**
+
+.. code-block:: python
+
+   # Default ensemble
+   detector = EnsembleDetector()
+
+   # Custom strategies
+   detector = EnsembleDetector(
+       strategies=[Strategy.MARKOV_CHAIN, Strategy.KEYBOARD_PATTERN]
+   )
+
+   # High recall mode
+   detector = EnsembleDetector(voting="any")
+
+Strategy Enum
 -------------
 
-.. autoclass:: pygarble.strategies.base.BaseStrategy
-   :members:
-   :special-members: __init__
+Available detection strategies:
 
-Character Frequency Strategy
-----------------------------
+**High Precision (v0.5.0)**
 
-.. autoclass:: pygarble.strategies.character_frequency.CharacterFrequencyStrategy
-   :members:
+- ``BIGRAM_PROBABILITY`` - Impossible letter pairs
+- ``LETTER_POSITION`` - Invalid letter positions
+- ``CONSONANT_SEQUENCE`` - Too many consonants
+- ``VOWEL_PATTERN`` - Invalid vowel sequences
+- ``LETTER_FREQUENCY`` - Abnormal letter distribution
+- ``RARE_TRIGRAM`` - Impossible trigrams
 
-Word Length Strategy
---------------------
+**Core Strategies**
 
-.. autoclass:: pygarble.strategies.word_length.WordLengthStrategy
-   :members:
+- ``MARKOV_CHAIN`` - Character Markov chain (recommended)
+- ``NGRAM_FREQUENCY`` - Trigram frequency
+- ``WORD_LOOKUP`` - 50K English dictionary
+- ``PRONOUNCEABILITY`` - Phonotactic rules
+- ``KEYBOARD_PATTERN`` - Keyboard sequences
+- ``ENTROPY_BASED`` - Shannon entropy
+- ``VOWEL_RATIO`` - Vowel/consonant ratio
 
-Pattern Matching Strategy
--------------------------
+**Specialized**
 
-.. autoclass:: pygarble.strategies.pattern_matching.PatternMatchingStrategy
-   :members:
+- ``MOJIBAKE`` - Encoding corruption
+- ``UNICODE_SCRIPT`` - Homoglyph attacks
+- ``HEX_STRING`` - Hash strings
+- ``SYMBOL_RATIO`` - Excessive symbols
+- ``REPETITION`` - Pattern repetition
+- ``COMPRESSION_RATIO`` - Compression analysis
 
-Statistical Analysis Strategy
------------------------------
+**Legacy**
 
-.. autoclass:: pygarble.strategies.statistical_analysis.StatisticalAnalysisStrategy
-   :members:
-
-Entropy Based Strategy
-----------------------
-
-.. autoclass:: pygarble.strategies.entropy_based.EntropyBasedStrategy
-   :members:
-
-Language Detection Strategy
----------------------------
-
-.. autoclass:: pygarble.strategies.language_detection.LanguageDetectionStrategy
-   :members:
-
-English Word Validation Strategy
---------------------------------
-
-.. autoclass:: pygarble.strategies.english_word_validation.EnglishWordValidationStrategy
-   :members:
+- ``CHARACTER_FREQUENCY``
+- ``WORD_LENGTH``
+- ``PATTERN_MATCHING``
+- ``STATISTICAL_ANALYSIS``
+- ``ENGLISH_WORD_VALIDATION`` (requires pyspellchecker)
