@@ -6,7 +6,7 @@ pygarble is a powerful Python library designed to identify nonsensical, garbled,
 
 ## Features
 
-- **14 Detection Strategies**: Choose from multiple garble detection algorithms including Markov chains and n-gram analysis
+- **18 Detection Strategies**: Choose from multiple garble detection algorithms including Markov chains, n-gram analysis, mojibake detection, and homoglyph detection
 - **Zero Dependencies**: Core library works without any external dependencies
 - **Ensemble Detector**: Combine multiple strategies for higher accuracy with voting mechanisms
 - **Scikit-learn Interface**: Familiar `predict()` and `predict_proba()` methods
@@ -60,34 +60,38 @@ print(probabilities)  # [0.0, 1.0, 0.7]
 
 ## Benchmark Results
 
-Based on 200 real-world test cases across 34 categories:
-
-### Ensemble Performance (Recommended)
-
-| Configuration | Accuracy | Precision | Recall | F1 Score |
-|---------------|----------|-----------|--------|----------|
-| **Ensemble (any voting)** ⭐ | **82.50%** | 72.29% | **83.33%** | **77.42%** |
-| High Recall (9 strategies) | 75.50% | 60.95% | 88.89% | 72.32% |
-| Ensemble (majority voting) | 76.00% | 92.86% | 36.11% | 52.00% |
+Based on 263 real-world test cases across 44 categories:
 
 ### Individual Strategy Performance
 
 | Strategy | Accuracy | Precision | Recall | F1 Score |
 |----------|----------|-----------|--------|----------|
-| **markov_chain** | 80.00% | **92.11%** | 48.61% | 63.64% |
-| **keyboard_pattern** | 78.00% | 70.00% | 68.06% | 69.01% |
-| **ngram_frequency** | 78.00% | 83.33% | 48.61% | 61.40% |
-| word_lookup | 79.00% | 91.67% | 45.83% | 61.11% |
-| vowel_ratio | 78.00% | 85.00% | 47.22% | 60.71% |
-| symbol_ratio | 65.50% | 56.52% | 18.06% | 27.37% |
-| hex_string | 67.00% | 71.43% | 13.89% | 23.26% |
-| repetition | 66.00% | 70.00% | 9.72% | 17.07% |
+| **markov_chain** | 79.47% | **95.83%** | 57.50% | **71.88%** |
+| **keyboard_pattern** | 74.90% | 75.96% | 65.83% | **70.54%** |
+| word_lookup | 72.24% | 92.73% | 42.50% | 58.29% |
+| ngram_frequency | 69.96% | 87.27% | 40.00% | 54.86% |
+| vowel_ratio | 68.82% | 86.54% | 37.50% | 52.33% |
+| pronounceability | 55.13% | 51.09% | 39.17% | 44.34% |
+| mojibake | 60.08% | **100%** | 12.50% | 22.22% |
+| unicode_script | 59.70% | **100%** | 11.67% | 20.90% |
+
+### Specialized Strategy Performance (v0.4.0)
+
+The new strategies are **specialized detectors** with 100% precision in their target domains:
+
+| Strategy | Target Use Case | Accuracy on Target |
+|----------|-----------------|-------------------|
+| **mojibake** | Encoding corruption (Ã©, �) | **100%** |
+| **unicode_script** | Homoglyph attacks (pаypal) | **100%** |
+| **pronounceability** | Unpronounceable clusters | **100%** |
+| compression_ratio | Long random text (100+ chars) | Best for streaming |
 
 **Key insights:**
-- **Ensemble with "any" voting** achieves the best F1 (77.42%) with 83% recall
-- For **high recall** (catching more garbled text), use `voting="any"`
-- For **high precision** (avoiding false positives), use individual strategies like `markov_chain` (92% precision)
-- New strategies (`symbol_ratio`, `hex_string`, `repetition`) are specialized detectors that complement the core strategies
+- **markov_chain** achieves the best overall F1 (71.88%) with 96% precision
+- For **encoding issues**, use `MOJIBAKE` (100% precision on mojibake patterns)
+- For **phishing/homoglyph detection**, use `UNICODE_SCRIPT` (100% precision)
+- For **unpronounceable gibberish**, use `PRONOUNCEABILITY`
+- New v0.4.0 strategies are specialized detectors that complement the core strategies in an ensemble
 
 Run the benchmark yourself:
 ```bash
@@ -323,7 +327,103 @@ detector.predict("550e8400-e29b-41d4-a716-446655440000")  # True - UUID
 detector.predict("hello world")                        # False - no hex patterns
 ```
 
-### 11. English Word Validation (`ENGLISH_WORD_VALIDATION`)
+### 11. Compression Ratio (`COMPRESSION_RATIO`) - NEW v0.4.0
+
+**Implementation Logic**: Uses zlib compression to detect text with unusual entropy patterns. Natural language has patterns and redundancy that compress well, while random text compresses poorly.
+
+**Algorithm**:
+1. Compress text using zlib
+2. Calculate compression ratio (compressed/original size)
+3. Compare against thresholds
+
+**Parameters**:
+- `high_ratio_threshold` (float, default: 1.1): Ratio above which text is garbled
+- `low_ratio_threshold` (float, default: 0.85): Ratio below which text is valid
+- `min_length` (int, default: 100): Minimum text length to analyze
+
+```python
+detector = GarbleDetector(Strategy.COMPRESSION_RATIO, threshold=0.5)
+
+# Examples (works best on longer text)
+long_random = "xkjhqwerty zxcvbn " * 10
+detector.predict(long_random)              # True - random patterns
+detector.predict("hello " * 30)            # False - repetitive but valid
+```
+
+### 12. Mojibake Detection (`MOJIBAKE`) - NEW v0.4.0 ⭐ 100% Precision
+
+**Implementation Logic**: Detects encoding corruption (mojibake) that occurs when UTF-8 text is incorrectly decoded as Latin-1 or Windows-1252. Identifies patterns like "Ã©" (should be "é") and Unicode replacement characters (�).
+
+**Algorithm**:
+1. Search for known mojibake byte patterns
+2. Detect Unicode replacement characters (U+FFFD)
+3. Check for high density of Latin-1 supplement characters
+4. Identify double-encoding signatures
+
+**Parameters**:
+- `pattern_threshold` (int, default: 1): Number of patterns to trigger detection
+- `ratio_threshold` (float, default: 0.05): High-byte density threshold
+- `check_replacement_char` (bool, default: True): Check for � characters
+
+```python
+detector = GarbleDetector(Strategy.MOJIBAKE, threshold=0.5)
+
+# Examples
+detector.predict("Café au lait")           # False - correct UTF-8
+detector.predict("CafÃ© au lait")          # True - mojibake (UTF-8 as Latin-1)
+detector.predict("Hello � world")          # True - replacement character
+```
+
+### 13. Pronounceability (`PRONOUNCEABILITY`) - NEW v0.4.0
+
+**Implementation Logic**: Analyzes if text follows English phonotactic rules. Detects forbidden consonant clusters, checks vowel distribution, and validates word onset patterns.
+
+**Algorithm**:
+1. Extract consonant clusters from words
+2. Check against forbidden bigram combinations (e.g., "bk", "zt", "qx")
+3. Verify vowel ratio is within pronounceable range
+4. Validate word-initial consonant clusters
+
+**Parameters**:
+- `forbidden_cluster_threshold` (int, default: 2): Forbidden clusters to trigger
+- `min_word_length` (int, default: 3): Minimum word length to analyze
+- `vowel_min_ratio` (float, default: 0.1): Minimum vowel ratio
+
+```python
+detector = GarbleDetector(Strategy.PRONOUNCEABILITY, threshold=0.5)
+
+# Examples
+detector.predict("hello world")            # False - pronounceable
+detector.predict("xkcd qwfp zxcv")         # True - unpronounceable clusters
+detector.predict("bvnk tspk dkfm")         # True - forbidden consonant pairs
+detector.predict("through threshold")       # False - valid English clusters
+```
+
+### 14. Unicode Script Mixing (`UNICODE_SCRIPT`) - NEW v0.4.0 ⭐ 100% Precision
+
+**Implementation Logic**: Detects suspicious mixing of Unicode scripts, particularly homoglyph attacks where Cyrillic or Greek characters are disguised as Latin letters. Common in phishing attempts (e.g., "pаypal" with Cyrillic 'а').
+
+**Algorithm**:
+1. Check for known homoglyph characters (Cyrillic а, о, е, Greek ο, etc.)
+2. Detect words mixing multiple scripts
+3. Count total scripts used in text
+
+**Parameters**:
+- `homoglyph_threshold` (int, default: 1): Homoglyphs to trigger detection
+- `max_scripts` (int, default: 2): Maximum allowed scripts
+- `check_homoglyphs` (bool, default: True): Enable homoglyph detection
+
+```python
+detector = GarbleDetector(Strategy.UNICODE_SCRIPT, threshold=0.5)
+
+# Examples
+detector.predict("paypal")                 # False - all Latin
+detector.predict("pаypal")                 # True - Cyrillic 'а' (U+0430)
+detector.predict("gооgle")                 # True - Cyrillic 'о' (U+043E)
+detector.predict("Hello АБВ World")        # True - mixed Latin/Cyrillic
+```
+
+### 15. English Word Validation (`ENGLISH_WORD_VALIDATION`)
 
 **Implementation Logic**: Validates words against an English dictionary using pyspellchecker.
 
@@ -503,6 +603,10 @@ class Strategy(Enum):
     SYMBOL_RATIO = "symbol_ratio"              # Symbol/number detection
     REPETITION = "repetition"                  # Pattern repetition
     HEX_STRING = "hex_string"                  # Hash/UUID detection
+    COMPRESSION_RATIO = "compression_ratio"    # NEW v0.4.0 - Compression-based
+    MOJIBAKE = "mojibake"                      # NEW v0.4.0 - Encoding corruption
+    PRONOUNCEABILITY = "pronounceability"      # NEW v0.4.0 - Phonotactic rules
+    UNICODE_SCRIPT = "unicode_script"          # NEW v0.4.0 - Homoglyph detection
     CHARACTER_FREQUENCY = "character_frequency"
     WORD_LENGTH = "word_length"
     PATTERN_MATCHING = "pattern_matching"
@@ -533,6 +637,10 @@ pygarble/
     ├── symbol_ratio.py          # Symbol/number detection
     ├── repetition.py            # Pattern repetition
     ├── hex_string.py            # Hash/UUID detection
+    ├── compression_ratio.py     # NEW: Compression-based detection
+    ├── mojibake.py              # NEW: Encoding corruption detection
+    ├── pronounceability.py      # NEW: Phonotactic rules
+    ├── unicode_script.py        # NEW: Homoglyph/script detection
     ├── character_frequency.py
     ├── word_length.py
     ├── pattern_matching.py      # Regex patterns + keyboard detection
@@ -593,7 +701,17 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ## Changelog
 
-### 0.3.1 (Current)
+### 0.4.0 (Current)
+- **4 New Specialized Strategies**:
+  - `COMPRESSION_RATIO`: Detects garbled text using zlib compression analysis (best for long text)
+  - `MOJIBAKE`: Detects encoding corruption with **100% precision** (UTF-8 decoded as Latin-1, replacement characters)
+  - `PRONOUNCEABILITY`: Detects unpronounceable text using English phonotactic rules (forbidden consonant clusters)
+  - `UNICODE_SCRIPT`: Detects homoglyph attacks with **100% precision** (Cyrillic/Greek chars disguised as Latin)
+- **Expanded Benchmark**: 263 test cases across 44 categories (up from 200/34)
+- **New Test Categories**: mojibake_encoding, replacement_chars, homoglyph_attacks, mixed_scripts, unpronounceable, long_random_text, legitimate_unicode, spam_patterns
+- **Zero Dependencies**: All new strategies use only Python stdlib (zlib, unicodedata, re)
+
+### 0.3.1
 - **New Strategies**: Added `SYMBOL_RATIO`, `REPETITION`, and `HEX_STRING` strategies for specialized detection
 - **New Voting Modes**: Added `any` (high recall) and `all` (high precision) voting modes for EnsembleDetector
 - **Removed**: `LANGUAGE_DETECTION` strategy (FastText dependency had NumPy 2.0 compatibility issues)

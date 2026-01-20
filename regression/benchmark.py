@@ -19,6 +19,11 @@ STRATEGIES = [
     Strategy.SYMBOL_RATIO,
     Strategy.REPETITION,
     Strategy.HEX_STRING,
+    # New strategies (v0.4.0)
+    Strategy.COMPRESSION_RATIO,
+    Strategy.MOJIBAKE,
+    Strategy.PRONOUNCEABILITY,
+    Strategy.UNICODE_SCRIPT,
     # Existing strategies
     Strategy.CHARACTER_FREQUENCY,
     Strategy.WORD_LENGTH,
@@ -32,7 +37,6 @@ STRATEGIES = [
 # Strategies that require optional dependencies (excluded by default)
 OPTIONAL_STRATEGIES = [
     Strategy.ENGLISH_WORD_VALIDATION,  # Requires pyspellchecker
-    Strategy.LANGUAGE_DETECTION,       # Requires fasttext
 ]
 
 

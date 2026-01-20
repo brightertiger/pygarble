@@ -13,6 +13,10 @@ from .word_lookup import WordLookupStrategy
 from .symbol_ratio import SymbolRatioStrategy
 from .repetition import RepetitionStrategy
 from .hex_string import HexStringStrategy
+from .compression_ratio import CompressionRatioStrategy
+from .mojibake import MojibakeStrategy
+from .pronounceability import PronouncabilityStrategy
+from .unicode_script import UnicodeScriptStrategy
 
 __all__ = [
     "BaseStrategy",
@@ -30,4 +34,8 @@ __all__ = [
     "SymbolRatioStrategy",
     "RepetitionStrategy",
     "HexStringStrategy",
+    "CompressionRatioStrategy",
+    "MojibakeStrategy",
+    "PronouncabilityStrategy",
+    "UnicodeScriptStrategy",
 ]

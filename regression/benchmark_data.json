@@ -22,7 +22,9 @@
       "cases": [
         {"text": "Artificial intelligence has made remarkable progress in recent years. From natural language processing to computer vision, AI systems are now capable of performing tasks that were once thought to be exclusively human domains.", "expected_garbled": false},
         {"text": "The global economy faces numerous challenges in the coming decade. Climate change, demographic shifts, and technological disruption will require innovative solutions from policymakers and business leaders alike.", "expected_garbled": false},
-        {"text": "Regular exercise has been shown to have numerous health benefits. Studies indicate that even moderate physical activity can reduce the risk of heart disease, improve mental health, and increase overall longevity.", "expected_garbled": false}
+        {"text": "Regular exercise has been shown to have numerous health benefits. Studies indicate that even moderate physical activity can reduce the risk of heart disease, improve mental health, and increase overall longevity.", "expected_garbled": false},
+        {"text": "The history of computing dates back to ancient civilizations who developed early calculating devices. From the abacus to modern supercomputers, humanity has continually sought ways to process information more efficiently.", "expected_garbled": false},
+        {"text": "Music has been an integral part of human culture for thousands of years. Whether it's classical symphonies, jazz improvisations, or modern electronic beats, music continues to evolve and inspire people around the world.", "expected_garbled": false}
       ]
     },
     {
@@ -125,8 +127,96 @@
       ]
     },
     {
+      "category": "mojibake_encoding",
+      "description": "Text with mojibake encoding corruption (UTF-8 decoded as Latin-1)",
+      "cases": [
+        {"text": "Caf\u00c3\u00a9 au lait", "expected_garbled": true},
+        {"text": "Na\u00c3\u00afve approach", "expected_garbled": true},
+        {"text": "R\u00c3\u00a9sum\u00c3\u00a9 template", "expected_garbled": true},
+        {"text": "Fa\u00c3\u00a7ade design", "expected_garbled": true},
+        {"text": "Pi\u00c3\u00b1ata party", "expected_garbled": true},
+        {"text": "Cura\u00c3\u00a7ao island", "expected_garbled": true},
+        {"text": "\u00c3\u0089l\u00c3\u00a8ve student", "expected_garbled": true},
+        {"text": "Sm\u00c3\u00b6rg\u00c3\u00a5sbord buffet", "expected_garbled": true},
+        {"text": "The file contained \u00ef\u00bf\u00bd\u00ef\u00bf\u00bd\u00ef\u00bf\u00bd characters", "expected_garbled": true},
+        {"text": "Text with \u00c2\u00a0 non-breaking spaces", "expected_garbled": true}
+      ]
+    },
+    {
+      "category": "replacement_chars",
+      "description": "Text with Unicode replacement characters",
+      "cases": [
+        {"text": "Hello \ufffd world", "expected_garbled": true},
+        {"text": "Data corrupted: \ufffd\ufffd\ufffd", "expected_garbled": true},
+        {"text": "Missing bytes \ufffd in stream", "expected_garbled": true},
+        {"text": "Invalid \ufffd\ufffd sequence found", "expected_garbled": true},
+        {"text": "Encoding error \ufffd detected", "expected_garbled": true}
+      ]
+    },
+    {
+      "category": "homoglyph_attacks",
+      "description": "Text with homoglyph characters (Cyrillic/Greek disguised as Latin)",
+      "cases": [
+        {"text": "p\u0430ypal", "expected_garbled": true},
+        {"text": "g\u043eoogle", "expected_garbled": true},
+        {"text": "fac\u0435book", "expected_garbled": true},
+        {"text": "amaz\u043en", "expected_garbled": true},
+        {"text": "micr\u043esoft", "expected_garbled": true},
+        {"text": "\u0430pple", "expected_garbled": true},
+        {"text": "b\u0430nk\u043efamerica", "expected_garbled": true},
+        {"text": "sec\u03c5re login", "expected_garbled": true},
+        {"text": "y\u043eur \u0430ccount", "expected_garbled": true},
+        {"text": "v\u0435rify id\u0435ntity", "expected_garbled": true}
+      ]
+    },
+    {
+      "category": "mixed_scripts",
+      "description": "Text mixing multiple Unicode scripts",
+      "cases": [
+        {"text": "Hello \u0410\u0411\u0412 World", "expected_garbled": true},
+        {"text": "Test \u03b1\u03b2\u03b3 data", "expected_garbled": true},
+        {"text": "Mix \u0430\u0435\u043e\u0440 letters", "expected_garbled": true},
+        {"text": "Script \u0391\u0392\u0393 mixing", "expected_garbled": true},
+        {"text": "Latin \u0421\u0443\u0440illic blend", "expected_garbled": true}
+      ]
+    },
+    {
+      "category": "unpronounceable",
+      "description": "Unpronounceable consonant clusters",
+      "cases": [
+        {"text": "xkcd qwfp zxcv bkpt", "expected_garbled": true},
+        {"text": "bvnk tspk dkfm ztqw", "expected_garbled": true},
+        {"text": "ptkbd gvznm fqwxj", "expected_garbled": true},
+        {"text": "bcdfg hjklm npqrs", "expected_garbled": true},
+        {"text": "zqxjk vwpft bnmrl", "expected_garbled": true},
+        {"text": "kkjjff gghhdd sspp", "expected_garbled": true},
+        {"text": "mxqzj pktvb nlrwf", "expected_garbled": true},
+        {"text": "zdkpt bvfnm qwxlr", "expected_garbled": true}
+      ]
+    },
+    {
+      "category": "long_random_text",
+      "description": "Long random text for compression testing",
+      "cases": [
+        {"text": "xkjhqwerty zxcvbn asdfgh poiuyt mnbvcx lkjhgf qazwsx edcrfv tgbyhn ujmik olp xkjhqwerty zxcvbn asdfgh poiuyt mnbvcx lkjhgf qazwsx edcrfv tgbyhn ujmik", "expected_garbled": true},
+        {"text": "qpwoeiruty alskdjfhg zxmcnvb qpwoeiruty alskdjfhg zxmcnvb qpwoeiruty alskdjfhg zxmcnvb qpwoeiruty alskdjfhg zxmcnvb qpwoeiruty alskdjfhg zxmcnvb", "expected_garbled": true},
+        {"text": "jfkdlsahg qpwoeirut yxcmvnbz jfkdlsahg qpwoeirut yxcmvnbz jfkdlsahg qpwoeirut yxcmvnbz jfkdlsahg qpwoeirut yxcmvnbz jfkdlsahg qpwoeirut yxcmvnbz", "expected_garbled": true},
+        {"text": "a b c d e f g h i j k l m n o p q r s t u v w x y z a b c d e f g h i j k l m n o p q r s t u v w x y z a b c d e f g h i j k l m n o p", "expected_garbled": true},
+        {"text": "z9y8x7w6v5u4t3s2r1q0p9o8n7m6l5k4j3i2h1g0f9e8d7c6b5a4z9y8x7w6v5u4t3s2r1q0p9o8n7m6l5k4j3i2h1g0f9e8d7c6b5a4z9y8x7w6v5u4t3s2r1q0p9o8n7m6l5k4", "expected_garbled": true}
+      ]
+    },
+    {
+      "category": "long_normal_text",
+      "description": "Long normal text passages for compression comparison",
+      "cases": [
+        {"text": "The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.", "expected_garbled": false},
+        {"text": "In a galaxy far far away there lived a wise old wizard who spent his days reading ancient scrolls and practicing mysterious spells that had been passed down through generations of magical practitioners.", "expected_garbled": false},
+        {"text": "The restaurant was known for its excellent cuisine featuring fresh ingredients sourced from local farms and prepared by talented chefs who had trained at the finest culinary schools around the world.", "expected_garbled": false}
+      ]
+    },
+    {
       "category": "encoding_errors",
-      "description": "Text with encoding issues",
+      "description": "Text with encoding issues (clean versions)",
       "cases": [
         {"text": "Cafe with weird chars", "expected_garbled": false},
         {"text": "naive approach misspelled", "expected_garbled": false},
@@ -403,7 +493,39 @@
         {"text": "www", "expected_garbled": true},
         {"text": "xxx", "expected_garbled": true}
       ]
+    },
+    {
+      "category": "legitimate_unicode",
+      "description": "Legitimate use of Unicode characters",
+      "cases": [
+        {"text": "The price is \u00a3100 or \u20ac120", "expected_garbled": false},
+        {"text": "Temperature is 25\u00b0C today", "expected_garbled": false},
+        {"text": "Copyright \u00a9 2024 Company Inc.", "expected_garbled": false},
+        {"text": "Trademark\u2122 and Registered\u00ae", "expected_garbled": false},
+        {"text": "Math symbols: \u00b1 \u00d7 \u00f7 \u221e", "expected_garbled": false}
+      ]
+    },
+    {
+      "category": "confusable_but_valid",
+      "description": "Text that looks suspicious but is valid",
+      "cases": [
+        {"text": "Papaya and banana are fruits", "expected_garbled": false},
+        {"text": "The kayak floated on the lake", "expected_garbled": false},
+        {"text": "Abracadabra said the magician", "expected_garbled": false},
+        {"text": "Mississippi is hard to spell", "expected_garbled": false},
+        {"text": "Pneumonoultramicroscopicsilicovolcanoconiosis", "expected_garbled": false}
+      ]
+    },
+    {
+      "category": "spam_patterns",
+      "description": "Common spam-like patterns",
+      "cases": [
+        {"text": "FREE!!! Click HERE now!!!", "expected_garbled": true},
+        {"text": "$$$ Make money fast $$$", "expected_garbled": true},
+        {"text": "YOU WON!!!! Claim prize NOW!!!!", "expected_garbled": true},
+        {"text": "B.U" ,"expected_garbled": true},
+        {"text": "V1AGRA C1ALIS cheap pills", "expected_garbled": true}
+      ]
     }
   ]
 }
-

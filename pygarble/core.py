@@ -18,6 +18,10 @@ from .strategies import (
     SymbolRatioStrategy,
     RepetitionStrategy,
     HexStringStrategy,
+    CompressionRatioStrategy,
+    MojibakeStrategy,
+    PronouncabilityStrategy,
+    UnicodeScriptStrategy,
 )
 
 
@@ -36,6 +40,10 @@ class Strategy(Enum):
     SYMBOL_RATIO = "symbol_ratio"
     REPETITION = "repetition"
     HEX_STRING = "hex_string"
+    COMPRESSION_RATIO = "compression_ratio"
+    MOJIBAKE = "mojibake"
+    PRONOUNCEABILITY = "pronounceability"
+    UNICODE_SCRIPT = "unicode_script"
 
 
 STRATEGY_MAP: Dict[Strategy, Type[BaseStrategy]] = {
@@ -53,6 +61,10 @@ STRATEGY_MAP: Dict[Strategy, Type[BaseStrategy]] = {
     Strategy.SYMBOL_RATIO: SymbolRatioStrategy,
     Strategy.REPETITION: RepetitionStrategy,
     Strategy.HEX_STRING: HexStringStrategy,
+    Strategy.COMPRESSION_RATIO: CompressionRatioStrategy,
+    Strategy.MOJIBAKE: MojibakeStrategy,
+    Strategy.PRONOUNCEABILITY: PronouncabilityStrategy,
+    Strategy.UNICODE_SCRIPT: UnicodeScriptStrategy,
 }
 
 
