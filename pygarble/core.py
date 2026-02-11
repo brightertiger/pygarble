@@ -28,6 +28,10 @@ from .strategies import (
     VowelPatternStrategy,
     LetterFrequencyStrategy,
     RareTrigramStrategy,
+    FunctionWordDensityStrategy,
+    AffixDetectionStrategy,
+    ZipfConformityStrategy,
+    WordCollocationStrategy,
 )
 
 
@@ -56,6 +60,10 @@ class Strategy(Enum):
     VOWEL_PATTERN = "vowel_pattern"
     LETTER_FREQUENCY = "letter_frequency"
     RARE_TRIGRAM = "rare_trigram"
+    FUNCTION_WORD_DENSITY = "function_word_density"
+    AFFIX_DETECTION = "affix_detection"
+    ZIPF_CONFORMITY = "zipf_conformity"
+    WORD_COLLOCATION = "word_collocation"
 
 
 STRATEGY_MAP: Dict[Strategy, Type[BaseStrategy]] = {
@@ -83,6 +91,10 @@ STRATEGY_MAP: Dict[Strategy, Type[BaseStrategy]] = {
     Strategy.VOWEL_PATTERN: VowelPatternStrategy,
     Strategy.LETTER_FREQUENCY: LetterFrequencyStrategy,
     Strategy.RARE_TRIGRAM: RareTrigramStrategy,
+    Strategy.FUNCTION_WORD_DENSITY: FunctionWordDensityStrategy,
+    Strategy.AFFIX_DETECTION: AffixDetectionStrategy,
+    Strategy.ZIPF_CONFORMITY: ZipfConformityStrategy,
+    Strategy.WORD_COLLOCATION: WordCollocationStrategy,
 }
 
 
@@ -129,7 +141,6 @@ class GarbleDetector:
 
         max_workers = min(self.threads, len(texts))
         timeout_per_text = self.kwargs.get("timeout_per_text", 30.0)
-        total_timeout = timeout_per_text * len(texts)
 
         with concurrent.futures.ThreadPoolExecutor(
             max_workers=max_workers
@@ -138,7 +149,7 @@ class GarbleDetector:
             results = []
             for future in futures:
                 try:
-                    result = future.result(timeout=total_timeout)
+                    result = future.result(timeout=timeout_per_text)
                     results.append(result)
                 except concurrent.futures.TimeoutError:
                     # Return default value on timeout
@@ -225,6 +236,12 @@ class EnsembleDetector:
         if isinstance(X, str):
             return self._predict_single(X)
         elif isinstance(X, list):
+            if self.threads and self.threads > 1 and len(X) >= 10:
+                max_workers = min(self.threads, len(X))
+                with concurrent.futures.ThreadPoolExecutor(
+                    max_workers=max_workers
+                ) as executor:
+                    return list(executor.map(self._predict_single, X))
             return [self._predict_single(text) for text in X]
         else:
             raise TypeError("Input must be a string or list of strings")
@@ -249,6 +266,14 @@ class EnsembleDetector:
         if isinstance(X, str):
             return self._predict_proba_single(X)
         elif isinstance(X, list):
+            if self.threads and self.threads > 1 and len(X) >= 10:
+                max_workers = min(self.threads, len(X))
+                with concurrent.futures.ThreadPoolExecutor(
+                    max_workers=max_workers
+                ) as executor:
+                    return list(
+                        executor.map(self._predict_proba_single, X)
+                    )
             return [self._predict_proba_single(text) for text in X]
         else:
             raise TypeError("Input must be a string or list of strings")

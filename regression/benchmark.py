@@ -31,6 +31,11 @@ STRATEGIES = [
     Strategy.VOWEL_PATTERN,
     Strategy.LETTER_FREQUENCY,
     Strategy.RARE_TRIGRAM,
+    # New word-level strategies (v0.6.0)
+    Strategy.FUNCTION_WORD_DENSITY,
+    Strategy.AFFIX_DETECTION,
+    Strategy.ZIPF_CONFORMITY,
+    Strategy.WORD_COLLOCATION,
     # Existing strategies
     Strategy.CHARACTER_FREQUENCY,
     Strategy.WORD_LENGTH,

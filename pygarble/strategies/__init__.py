@@ -23,6 +23,10 @@ from .consonant_sequence import ConsonantSequenceStrategy
 from .vowel_pattern import VowelPatternStrategy
 from .letter_frequency import LetterFrequencyStrategy
 from .rare_trigram import RareTrigramStrategy
+from .function_word_density import FunctionWordDensityStrategy
+from .affix_detection import AffixDetectionStrategy
+from .zipf_conformity import ZipfConformityStrategy
+from .word_collocation import WordCollocationStrategy
 
 __all__ = [
     "BaseStrategy",
@@ -50,4 +54,8 @@ __all__ = [
     "VowelPatternStrategy",
     "LetterFrequencyStrategy",
     "RareTrigramStrategy",
+    "FunctionWordDensityStrategy",
+    "AffixDetectionStrategy",
+    "ZipfConformityStrategy",
+    "WordCollocationStrategy",
 ]
