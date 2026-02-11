@@ -55,23 +55,7 @@ class KeyboardPatternStrategy(BaseStrategy):
         return bool(re.search(pattern, alpha_text))
 
     def _predict_impl(self, text: str) -> bool:
-        keyboard_ratio = self._get_keyboard_pattern_ratio(text)
-        keyboard_threshold = self.kwargs.get("keyboard_threshold", 0.3)
-
-        if keyboard_ratio >= keyboard_threshold:
-            return True
-
-        common_ratio = self._get_common_trigram_ratio(text)
-        common_threshold = self.kwargs.get("common_trigram_threshold", 0.1)
-
-        alpha_chars = [c for c in text if c.isalpha()]
-        if len(alpha_chars) >= 5 and common_ratio < common_threshold:
-            return True
-
-        if self._has_repeated_bigram_pattern(text):
-            return True
-
-        return False
+        return self._predict_proba_impl(text) >= 0.5
 
     def _predict_proba_impl(self, text: str) -> float:
         keyboard_ratio = self._get_keyboard_pattern_ratio(text)

@@ -38,23 +38,7 @@ class EntropyBasedStrategy(BaseStrategy):
         return common_count / len(bigrams)
 
     def _predict_impl(self, text: str) -> bool:
-        char_counts = self._get_alpha_char_counts(text)
-        if not char_counts:
-            return False
-
-        entropy = self._calculate_entropy(char_counts)
-        entropy_threshold = self.kwargs.get("entropy_threshold", 2.5)
-
-        if entropy < entropy_threshold:
-            return True
-
-        bigram_ratio = self._get_common_bigram_ratio(text)
-        bigram_threshold = self.kwargs.get("bigram_threshold", 0.15)
-
-        if bigram_ratio < bigram_threshold:
-            return True
-
-        return False
+        return self._predict_proba_impl(text) >= 0.5
 
     def _predict_proba_impl(self, text: str) -> float:
         char_counts = self._get_alpha_char_counts(text)

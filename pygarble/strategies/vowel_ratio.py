@@ -9,6 +9,15 @@ CONSONANTS = frozenset("bcdfghjklmnpqrstvwxyz")
 
 
 class VowelRatioStrategy(BaseStrategy):
+    def _filter_acronyms(self, text: str) -> str:
+        """Filter out all-uppercase words (likely acronyms)."""
+        words = text.split()
+        filtered = [
+            w for w in words
+            if not (len(w) > 1 and w.isalpha() and w.isupper())
+        ]
+        return " ".join(filtered)
+
     def _get_vowel_ratio(self, text: str) -> float:
         alpha_chars = [c for c in text.lower() if c.isalpha()]
         if not alpha_chars:
@@ -34,6 +43,7 @@ class VowelRatioStrategy(BaseStrategy):
         return max_run
 
     def _predict_impl(self, text: str) -> bool:
+        text = self._filter_acronyms(text)
         alpha_chars = [c for c in text.lower() if c.isalpha()]
         if not alpha_chars:
             return False
@@ -52,6 +62,7 @@ class VowelRatioStrategy(BaseStrategy):
         return False
 
     def _predict_proba_impl(self, text: str) -> float:
+        text = self._filter_acronyms(text)
         alpha_chars = [c for c in text.lower() if c.isalpha()]
         if not alpha_chars:
             return 0.0

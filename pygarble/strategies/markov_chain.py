@@ -6,7 +6,7 @@ Garbled text will have low probability under the English language model.
 """
 
 import math
-from typing import Any
+from typing import Any, Optional
 
 from .base import BaseStrategy
 from ..data import BIGRAM_LOG_PROBS, DEFAULT_LOG_PROB
@@ -56,11 +56,12 @@ class MarkovChainStrategy(BaseStrategy):
         if self.min_length < 1:
             raise ValueError("min_length must be at least 1")
 
-    def _compute_log_probability(self, text: str) -> float:
+    def _compute_log_probability(self, text: str) -> Optional[float]:
         """
         Compute average log probability per character transition.
 
-        Returns the average log probability of all bigrams in the text.
+        Returns the average log probability of all bigrams in the text,
+        or None if the text is too short to analyze.
         Higher (less negative) values indicate more English-like text.
         """
         # Normalize: lowercase and add word boundaries
@@ -72,7 +73,7 @@ class MarkovChainStrategy(BaseStrategy):
         cleaned = " ".join(cleaned.split())
 
         if len(cleaned) < self.min_length:
-            return 0.0
+            return None
 
         # Add start/end markers
         padded = " " + cleaned + " "
@@ -88,7 +89,7 @@ class MarkovChainStrategy(BaseStrategy):
             num_bigrams += 1
 
         if num_bigrams == 0:
-            return 0.0
+            return None
 
         # Return average log probability per bigram
         return total_log_prob / num_bigrams
@@ -107,7 +108,7 @@ class MarkovChainStrategy(BaseStrategy):
         """
         avg_log_prob = self._compute_log_probability(text)
 
-        if avg_log_prob == 0.0:
+        if avg_log_prob is None:
             return 0.0
 
         # Map log probability to garble score

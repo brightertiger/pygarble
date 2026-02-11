@@ -32,16 +32,16 @@ VALID_CODA_CLUSTERS: Set[str] = {
     "b", "c", "d", "f", "g", "k", "l", "m", "n", "p",
     "r", "s", "t", "v", "x", "z",
     # Two-consonant clusters
-    "ch", "ck", "ct", "ft", "lb", "lc", "ld", "lf", "lk",
+    "ch", "ck", "ct", "ft", "ht", "lb", "lc", "ld", "lf", "lk",
     "ll", "lm", "ln", "lp", "ls", "lt", "lv", "lz",
     "mb", "mp", "ms", "nd", "ng", "nk", "ns", "nt", "nz",
-    "pt", "rb", "rc", "rd", "rf", "rg", "rk", "rl", "rm",
+    "ks", "pt", "rb", "rc", "rd", "rf", "rg", "rk", "rl", "rm",
     "rn", "rp", "rs", "rt", "rv", "rz", "sh", "sk", "sm",
     "sp", "ss", "st", "th", "ts", "xt", "zz",
     # Three-consonant clusters
     "lls", "lts", "nds", "ngs", "nks", "nts", "rbs", "rds",
     "rks", "rms", "rns", "rps", "rts", "sks", "sts", "tch",
-    "dth", "fth", "nth", "pth", "xth",
+    "dth", "fth", "ght", "nth", "pth", "ths", "xth",
 }
 
 # Completely invalid consonant combinations (never occur in English)
@@ -178,23 +178,36 @@ class PronouncabilityStrategy(BaseStrategy):
         return coda
 
     def _count_forbidden_clusters(self, text: str) -> int:
-        """Count forbidden consonant clusters in text."""
+        """Count forbidden consonant clusters at word boundaries."""
         count = 0
         words = text.lower().split()
 
         for word in words:
-            # Only check alpha words
             alpha_word = "".join(c for c in word if c.isalpha())
             if len(alpha_word) < self.min_word_length:
                 continue
 
-            # Check all consonant clusters in the word
-            clusters = self._extract_consonant_clusters(alpha_word)
-            for cluster in clusters:
-                # Check all bigrams within the cluster
-                for i in range(len(cluster) - 1):
-                    bigram = cluster[i:i+2]
+            # Only check onset and coda positions.
+            # Internal clusters often have valid cross-syllable
+            # bigrams (e.g. "ht" in "night", "ks" in "books").
+            onset = self._get_word_onset(alpha_word)
+            coda = self._get_word_coda(alpha_word)
+
+            if len(onset) >= 2:
+                for i in range(len(onset) - 1):
+                    bigram = onset[i:i+2]
                     if bigram in FORBIDDEN_CLUSTERS:
+                        count += 1
+
+            # Skip coda check if it's the same as onset
+            # (all-consonant word) to avoid double-counting
+            if coda != onset and len(coda) >= 2:
+                for i in range(len(coda) - 1):
+                    bigram = coda[i:i+2]
+                    if (
+                        bigram in FORBIDDEN_CLUSTERS
+                        and bigram not in VALID_CODA_CLUSTERS
+                    ):
                         count += 1
 
         return count
@@ -227,12 +240,7 @@ class PronouncabilityStrategy(BaseStrategy):
             onset = self._get_word_onset(alpha_word)
             if len(onset) >= 2:
                 checked_count += 1
-                # Check if onset is valid or any prefix of it
-                is_valid = any(
-                    onset[:i+1] in VALID_ONSET_CLUSTERS
-                    for i in range(len(onset))
-                )
-                if not is_valid and onset not in VALID_ONSET_CLUSTERS:
+                if onset not in VALID_ONSET_CLUSTERS:
                     invalid_count += 1
 
         if checked_count == 0:

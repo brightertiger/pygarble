@@ -79,9 +79,12 @@ class VowelPatternStrategy(BaseStrategy):
 
     def _is_valid_vowel_sequence(self, seq: str) -> bool:
         """Check if a vowel sequence is valid in English."""
-        # Check against known valid patterns
+        # Exact match
+        if seq in self.VALID_LONG_VOWELS:
+            return True
+        # Check if the sequence contains a known valid pattern
         for valid in self.VALID_LONG_VOWELS:
-            if valid in seq or seq in valid:
+            if valid in seq:
                 return True
         return False
 

@@ -64,9 +64,11 @@ class ConsonantSequenceStrategy(BaseStrategy):
 
     def _get_max_consonant_run(self, text: str) -> int:
         """Find the longest consecutive consonant sequence."""
-        # Filter out acronyms first
         alpha_text = self._extract_words_for_analysis(text)
+        return self._max_run_from(alpha_text)
 
+    def _max_run_from(self, alpha_text: str) -> int:
+        """Find longest consonant run in preprocessed text."""
         max_run = 0
         current_run = 0
 
@@ -81,9 +83,11 @@ class ConsonantSequenceStrategy(BaseStrategy):
 
     def _count_violations(self, text: str) -> tuple:
         """Count consonant sequences exceeding threshold."""
-        # Filter out acronyms first
         alpha_text = self._extract_words_for_analysis(text)
+        return self._violations_from(alpha_text)
 
+    def _violations_from(self, alpha_text: str) -> tuple:
+        """Count violations in preprocessed text."""
         violations = 0
         total_sequences = 0
         current_run = 0
@@ -107,20 +111,19 @@ class ConsonantSequenceStrategy(BaseStrategy):
         return violations, total_sequences
 
     def _predict_proba_impl(self, text: str) -> float:
-        # Filter out acronyms first
         alpha_text = self._extract_words_for_analysis(text)
 
         if len(alpha_text) < self.min_length:
             return 0.0
 
-        max_run = self._get_max_consonant_run(text)
+        max_run = self._max_run_from(alpha_text)
 
         # Immediate flag for extremely long runs
         if max_run >= self.max_consonants + 3:  # 9+ consonants
             return 1.0
 
         if max_run > self.max_consonants:
-            violations, total_seq = self._count_violations(text)
+            violations, total_seq = self._violations_from(alpha_text)
             if total_seq == 0:
                 return 0.0
 

@@ -42,7 +42,7 @@ class LetterFrequencyStrategy(BaseStrategy):
 
     def __init__(
         self,
-        deviation_threshold: float = 3.0,
+        deviation_threshold: float = 1.0,
         min_length: int = 20,
         **kwargs
     ):
@@ -133,9 +133,9 @@ class LetterFrequencyStrategy(BaseStrategy):
         # Calculate chi-squared statistic
         chi_sq = self._calculate_chi_squared(text)
 
-        # Normalize by degrees of freedom (26-1 = 25 for letters)
-        # and text length factor
-        normalized = chi_sq / (25 * (1 + len(alpha_text) / 100))
+        # Normalize to per-character chi-squared for a
+        # sample-size-independent measure of deviation
+        normalized = chi_sq / len(alpha_text)
 
         # Very conservative threshold
         if normalized > self.deviation_threshold:

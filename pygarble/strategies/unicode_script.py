@@ -212,15 +212,24 @@ class UnicodeScriptStrategy(BaseStrategy):
 
         scores = []
 
-        # Check for homoglyphs
+        # Get scripts used in text
+        scripts = self._get_scripts_used(text)
+        # Remove Common and Inherited (they mix with everything)
+        meaningful_scripts = scripts - {"Common", "Inherited", "Unknown"}
+
+        # Check for homoglyphs (only in mixed-script context)
         if self.check_homoglyphs:
             homoglyph_counts = self._count_homoglyphs(text)
             total_homoglyphs = sum(homoglyph_counts.values())
 
             if total_homoglyphs >= self.homoglyph_threshold:
-                # Homoglyphs are a strong signal of spoofing
-                homoglyph_score = min(1.0, 0.8 + (total_homoglyphs * 0.05))
-                scores.append(homoglyph_score)
+                # Only flag if text mixes scripts. Homoglyphs in pure
+                # non-Latin text (e.g. Russian) are normal characters.
+                if len(meaningful_scripts) > 1:
+                    homoglyph_score = min(
+                        1.0, 0.8 + (total_homoglyphs * 0.05)
+                    )
+                    scores.append(homoglyph_score)
 
         # Check for mixed-script words (very suspicious)
         mixed_word_count = self._count_mixed_script_words(text)
@@ -228,11 +237,6 @@ class UnicodeScriptStrategy(BaseStrategy):
             # Mixed-script words are highly suspicious
             mixed_score = min(1.0, 0.7 + (mixed_word_count * 0.15))
             scores.append(mixed_score)
-
-        # Check total scripts used
-        scripts = self._get_scripts_used(text)
-        # Remove Common and Inherited (they mix with everything)
-        meaningful_scripts = scripts - {"Common", "Inherited", "Unknown"}
 
         if len(meaningful_scripts) > self.max_scripts:
             # Too many scripts is suspicious

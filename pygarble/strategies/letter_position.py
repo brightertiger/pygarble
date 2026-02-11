@@ -23,7 +23,6 @@ class LetterPositionStrategy(BaseStrategy):
     NEVER_END = frozenset({
         "j",  # No standard English words end in 'j'
         "q",  # No standard English words end in 'q'
-        "v",  # Extremely rare (spiv, rev are slang/abbreviations)
     })
 
     # Letter pairs that never START English words
