@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pygarble"
-version = "0.7.0"
+version = "0.8.0"
 description = "A Python package for detecting garbled text using multiple detection strategies with a scikit-learn-like interface"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -32,15 +32,6 @@ classifiers = [
 dependencies = []
 
 [project.optional-dependencies]
-# Optional: pyspellchecker for EnglishWordValidationStrategy (legacy)
-# Consider using WORD_LOOKUP strategy instead (no dependencies)
-spellchecker = [
-    "pyspellchecker>=0.7.0",
-]
-# All optional features
-all = [
-    "pyspellchecker>=0.7.0",
-]
 dev = [
     "pytest>=6.0",
     "pytest-cov>=2.0",

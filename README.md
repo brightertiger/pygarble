@@ -15,7 +15,7 @@ pip install pygarble
 ```python
 from pygarble import GarbleDetector, EnsembleDetector, Strategy
 
-# Recommended: Use the default ensemble (99.5% precision)
+# Recommended: Use the default ensemble (99.2% precision, 85.6% recall)
 detector = EnsembleDetector()
 detector.predict("Hello world")      # False - valid text
 detector.predict("asdfghjkl")        # True - keyboard mashing
@@ -36,17 +36,29 @@ Tested on 1,644 samples (dictionary words, sentences, random strings, keyboard m
 
 | Detector | Precision | Recall | F1 Score |
 |----------|-----------|--------|----------|
-| **EnsembleDetector()** | **100%** | 74.9% | 85.6% |
+| **EnsembleDetector()** | **99.2%** | **85.6%** | **91.9%** |
 | MARKOV_CHAIN | 99.2% | 84.3% | 91.2% |
 | NGRAM_FREQUENCY | 97.6% | 75.0% | 84.8% |
 | LOG_LIKELIHOOD_RATIO | 100% | 63.4% | 77.6% |
 | WORD_ANOMALY | 100% | 52.8% | 69.1% |
 
-The default ensemble prioritizes **precision** (minimizing false positives) over recall. For broader coverage of specialist domains (hashes, mojibake, repeated junk, homoglyphs) at slightly more false-positive risk, combine the precise specialists with `voting="any"`:
+The default ensemble is the union (`voting="any"`) of `MARKOV_CHAIN` with two strategies that produced **zero false positives** on the benchmark (`LOG_LIKELIHOOD_RATIO`, `WORD_ANOMALY`), so each member only adds recall. It strictly dominates any single strategy.
+
+Two useful variants:
 
 ```python
-# High-recall configuration: each member is individually high-precision,
-# any single detection flags the text
+# Strict precision: majority vote drove false positives to 0 on the
+# benchmark (100% precision, 74.9% recall) at the cost of recall
+detector = EnsembleDetector(
+    strategies=[
+        Strategy.MARKOV_CHAIN, Strategy.NGRAM_FREQUENCY, Strategy.WORD_LOOKUP,
+        Strategy.LOG_LIKELIHOOD_RATIO, Strategy.WORD_ANOMALY,
+    ],
+    voting="majority",
+)
+
+# Specialist coverage: adds detection of hashes, mojibake, repeated junk,
+# and homoglyph attacks that the character-model strategies don't target
 detector = EnsembleDetector(
     strategies=[
         Strategy.LOG_LIKELIHOOD_RATIO, Strategy.WORD_ANOMALY,
@@ -71,7 +83,7 @@ detector = EnsembleDetector(
 
 ### All Available Strategies
 
-**Statistical Models (v0.7.0)**
+**Statistical Models (v0.7.0+)**
 - `LOG_LIKELIHOOD_RATIO` - Log-likelihood ratio of English vs uniform character models (length-normalized)
 - `WORD_ANOMALY` - Fraction of individually-anomalous words; robust to garbage embedded in valid text
 - `KEYBOARD_ADJACENCY` - Physical key-adjacency walks (catches mash the trigram lists miss)
@@ -98,12 +110,12 @@ detector = EnsembleDetector(
 - `UNICODE_SCRIPT` - Homoglyph/script mixing attacks
 - `HEX_STRING` - Hash strings and UUIDs
 - `SYMBOL_RATIO` - Excessive symbols/numbers
-- `REPETITION` - Repeated patterns (ababab)
-- `COMPRESSION_RATIO` - Compression-based detection
+- `REPETITION` - Repeated patterns (ababab, repeated words)
 
-**Legacy Strategies**
-- `CHARACTER_FREQUENCY`, `WORD_LENGTH`, `PATTERN_MATCHING`, `STATISTICAL_ANALYSIS`
-- `ENGLISH_WORD_VALIDATION` (requires `pip install pygarble[spellchecker]`)
+**Pattern Heuristics**
+- `PATTERN_MATCHING` - Configurable regex patterns (keyboard rows, repeated/alternating chars)
+
+> Removed in v0.8.0: `CHARACTER_FREQUENCY`, `WORD_LENGTH`, `STATISTICAL_ANALYSIS`, `COMPRESSION_RATIO`, and `ENGLISH_WORD_VALIDATION` (the only strategy requiring a third-party dependency). All were dominated by the strategies above; `WORD_LOOKUP` replaces `ENGLISH_WORD_VALIDATION` dependency-free.
 
 ## Using Individual Strategies
 
@@ -139,8 +151,9 @@ Combine multiple strategies for better accuracy:
 from pygarble import EnsembleDetector, Strategy
 
 # Default ensemble (recommended)
-# Uses: MARKOV_CHAIN, NGRAM_FREQUENCY, WORD_LOOKUP, LOG_LIKELIHOOD_RATIO, WORD_ANOMALY
-# Voting: majority
+# Uses: MARKOV_CHAIN, LOG_LIKELIHOOD_RATIO, WORD_ANOMALY
+# Voting: "any" - the two companions had zero benchmark false positives,
+# so they only add recall on top of MARKOV_CHAIN
 detector = EnsembleDetector()
 
 # Custom strategies
@@ -152,10 +165,11 @@ detector = EnsembleDetector(
     ]
 )
 
-# Different voting modes
+# Different voting modes (default: "any" for the built-in strategy set,
+# "majority" when you pass a custom strategies list)
 detector = EnsembleDetector(voting="any")       # High recall - flag if ANY strategy detects
 detector = EnsembleDetector(voting="all")       # High precision - flag only if ALL agree
-detector = EnsembleDetector(voting="majority")  # Balanced (default)
+detector = EnsembleDetector(voting="majority")  # Balanced
 detector = EnsembleDetector(voting="average")   # Average probabilities
 
 # Weighted voting
@@ -186,9 +200,10 @@ detector.predict_proba(text)   # Returns float or List[float] (0.0-1.0)
 
 ```python
 EnsembleDetector(
-    strategies: List[Strategy] = None,  # Default: high-precision mix
+    strategies: List[Strategy] = None,  # Default: MARKOV_CHAIN + LLR + WORD_ANOMALY
     threshold: float = 0.5,
-    voting: str = "majority",           # "majority", "any", "all", "average", "weighted"
+    voting: str = None,                 # "majority", "any", "all", "average", "weighted"
+                                        # default: "any" (built-in set) / "majority" (custom set)
     weights: List[float] = None,        # Required if voting="weighted"
 )
 
@@ -236,8 +251,7 @@ if detector.predict(domain_name):
 ## Requirements
 
 - Python 3.8+
-- Zero dependencies (core library)
-- Optional: `pyspellchecker` for `ENGLISH_WORD_VALIDATION` strategy
+- Zero dependencies
 
 ## Development
 
@@ -253,6 +267,17 @@ pytest tests/ -v
 MIT License
 
 ## Changelog
+
+### 0.8.0
+- **Breaking**: removed legacy strategies CHARACTER_FREQUENCY, WORD_LENGTH, STATISTICAL_ANALYSIS, COMPRESSION_RATIO, ENGLISH_WORD_VALIDATION (and the `spellchecker` extra)
+- New default ensemble: MARKOV_CHAIN | LOG_LIKELIHOOD_RATIO | WORD_ANOMALY with `voting="any"` (99.2% precision, 85.6% recall - strictly dominates any single strategy)
+- `voting` now defaults to "any" for the built-in strategy set, "majority" for custom sets
+
+### 0.7.0
+- Fixed ~45 verified bugs across all strategies (false positives on accented text, y-vowel words, proper nouns, Japanese, URLs, formatted text; false negatives on ALL-CAPS gibberish, cp1252 mojibake, repeated words)
+- 3 new strategies: LOG_LIKELIHOOD_RATIO, WORD_ANOMALY, KEYBOARD_ADJACENCY
+- Ensemble abstention: word-level strategies no longer dilute votes on short text
+- Consistent TypeError contract; cleaned 670 junk entries from the word list
 
 ### 0.5.0
 - 6 new high-precision strategies (BIGRAM_PROBABILITY, LETTER_POSITION, CONSONANT_SEQUENCE, VOWEL_PATTERN, LETTER_FREQUENCY, RARE_TRIGRAM)

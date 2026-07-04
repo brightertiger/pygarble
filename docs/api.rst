@@ -50,7 +50,7 @@ Combines multiple strategies with voting.
    EnsembleDetector(
        strategies: List[Strategy] = None,
        threshold: float = 0.5,
-       voting: str = "majority",
+       voting: str = None,
        weights: List[float] = None,
    )
 
@@ -59,19 +59,19 @@ Combines multiple strategies with voting.
 - ``strategies``: List of strategies (default: high-precision mix)
 - ``threshold``: Probability threshold for ``predict()``
 - ``voting``: Voting mode - "majority", "any", "all", "average", "weighted"
+  (default: "any" for the built-in strategy set, "majority" for custom sets)
 - ``weights``: Weights for weighted voting (required if voting="weighted")
 
-**Default Strategies:**
+**Default Strategies** (union via ``voting="any"``; 99.2% precision,
+85.6% recall on the 1,644-sample benchmark):
 
 - MARKOV_CHAIN
-- WORD_LOOKUP
-- NGRAM_FREQUENCY
-- BIGRAM_PROBABILITY
-- LETTER_POSITION
+- LOG_LIKELIHOOD_RATIO
+- WORD_ANOMALY
 
 **Voting Modes:**
 
-- ``majority``: Flag if >50% of strategies agree (default)
+- ``majority``: Flag if >50% of strategies agree
 - ``any``: Flag if ANY strategy detects (high recall)
 - ``all``: Flag only if ALL strategies agree (high precision)
 - ``average``: Average probability across strategies
@@ -123,12 +123,7 @@ Available detection strategies:
 - ``HEX_STRING`` - Hash strings
 - ``SYMBOL_RATIO`` - Excessive symbols
 - ``REPETITION`` - Pattern repetition
-- ``COMPRESSION_RATIO`` - Compression analysis
 
-**Legacy**
+**Pattern Heuristics**
 
-- ``CHARACTER_FREQUENCY``
-- ``WORD_LENGTH``
-- ``PATTERN_MATCHING``
-- ``STATISTICAL_ANALYSIS``
-- ``ENGLISH_WORD_VALIDATION`` (requires pyspellchecker)
+- ``PATTERN_MATCHING`` - Configurable regex patterns

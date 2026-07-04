@@ -3,7 +3,6 @@ Tests for new strategies added in v0.3.0+:
 - MarkovChainStrategy
 - NGramFrequencyStrategy
 - WordLookupStrategy
-- CompressionRatioStrategy (v0.4.0)
 - MojibakeStrategy (v0.4.0)
 - PronouncabilityStrategy (v0.4.0)
 - UnicodeScriptStrategy (v0.4.0)
@@ -268,69 +267,6 @@ class TestNoDependencies:
 # ============================================================
 
 
-class TestCompressionRatioStrategy:
-    """Tests for compression-based detection."""
-
-    def test_valid_english_text(self):
-        detector = GarbleDetector(Strategy.COMPRESSION_RATIO)
-        # Short text below min_length returns 0.0 probability
-        assert detector.predict_proba("hello world") == 0.0
-
-    def test_highly_repetitive_text(self):
-        detector = GarbleDetector(Strategy.COMPRESSION_RATIO)
-        # Highly repetitive spam compresses very well -> flagged
-        repetitive = "the " * 50
-        proba = detector.predict_proba(repetitive)
-        assert proba >= 0.5  # Repetitive spam is degenerate text
-
-    def test_probability_range(self):
-        detector = GarbleDetector(Strategy.COMPRESSION_RATIO)
-        for text in ["a" * 150, "hello " * 30, "xyz " * 40]:
-            proba = detector.predict_proba(text)
-            assert 0.0 <= proba <= 1.0
-
-    def test_empty_string(self):
-        detector = GarbleDetector(Strategy.COMPRESSION_RATIO)
-        assert detector.predict("") is False
-        assert detector.predict_proba("") == 0.0
-
-    def test_short_text_returns_zero(self):
-        detector = GarbleDetector(Strategy.COMPRESSION_RATIO)
-        # Default min_length is 100
-        assert detector.predict_proba("short text") == 0.0
-
-    def test_custom_min_length(self):
-        detector = GarbleDetector(
-            Strategy.COMPRESSION_RATIO,
-            min_length=10
-        )
-        # Should now analyze shorter text
-        proba = detector.predict_proba("hello world test")
-        assert proba >= 0.0  # Should return a value
-
-    def test_custom_thresholds(self):
-        detector = GarbleDetector(
-            Strategy.COMPRESSION_RATIO,
-            high_ratio_threshold=1.2,
-            low_ratio_threshold=0.5
-        )
-        # A single repeated character is maximally repetitive -> flagged
-        assert detector.predict("a" * 150) is True
-
-    def test_parameter_validation(self):
-        with pytest.raises(ValueError):
-            GarbleDetector(Strategy.COMPRESSION_RATIO, high_ratio_threshold=-0.1)
-        with pytest.raises(ValueError):
-            GarbleDetector(Strategy.COMPRESSION_RATIO, low_ratio_threshold=1.6)
-        with pytest.raises(ValueError):
-            # low must be less than high
-            GarbleDetector(
-                Strategy.COMPRESSION_RATIO,
-                low_ratio_threshold=0.9,
-                high_ratio_threshold=0.5
-            )
-
-
 class TestMojibakeStrategy:
     """Tests for encoding corruption (mojibake) detection."""
 
@@ -532,14 +468,6 @@ class TestUnicodeScriptStrategy:
 class TestNewStrategiesNoDeps:
     """Test that v0.4.0 strategies work without external dependencies."""
 
-    def test_compression_ratio_no_deps(self):
-        detector = GarbleDetector(Strategy.COMPRESSION_RATIO)
-        normal = (
-            "The quick brown fox jumps over the lazy dog while the "
-            "birds sing in the morning near the old wooden fence."
-        )
-        assert detector.predict(normal) is False
-
     def test_mojibake_no_deps(self):
         detector = GarbleDetector(Strategy.MOJIBAKE)
         assert detector.predict("hello world") is False
@@ -555,13 +483,6 @@ class TestNewStrategiesNoDeps:
 
 class TestNewStrategiesBatch:
     """Test batch processing with v0.4.0 strategies."""
-
-    def test_compression_ratio_batch(self):
-        detector = GarbleDetector(Strategy.COMPRESSION_RATIO)
-        texts = ["a" * 150, "b" * 150, "hello " * 30]
-        results = detector.predict(texts)
-        assert isinstance(results, list)
-        assert len(results) == 3
 
     def test_mojibake_batch(self):
         detector = GarbleDetector(Strategy.MOJIBAKE)

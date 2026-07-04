@@ -20,7 +20,6 @@ STRATEGIES = [
     Strategy.REPETITION,
     Strategy.HEX_STRING,
     # New strategies (v0.4.0)
-    Strategy.COMPRESSION_RATIO,
     Strategy.MOJIBAKE,
     Strategy.PRONOUNCEABILITY,
     Strategy.UNICODE_SCRIPT,
@@ -41,19 +40,14 @@ STRATEGIES = [
     Strategy.WORD_ANOMALY,
     Strategy.KEYBOARD_ADJACENCY,
     # Existing strategies
-    Strategy.CHARACTER_FREQUENCY,
-    Strategy.WORD_LENGTH,
     Strategy.PATTERN_MATCHING,
-    Strategy.STATISTICAL_ANALYSIS,
     Strategy.ENTROPY_BASED,
     Strategy.VOWEL_RATIO,
     Strategy.KEYBOARD_PATTERN,
 ]
 
 # Strategies that require optional dependencies (excluded by default)
-OPTIONAL_STRATEGIES = [
-    Strategy.ENGLISH_WORD_VALIDATION,  # Requires pyspellchecker
-]
+OPTIONAL_STRATEGIES = []
 
 
 def load_test_cases(json_path: str) -> List[Dict[str, Any]]:

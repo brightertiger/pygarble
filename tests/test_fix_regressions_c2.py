@@ -1,56 +1,22 @@
 """
 Regression tests for verified bug fixes (batch C2):
 
-- CompressionRatioStrategy: repositioned as repetition/binary detector
 - FunctionWordDensityStrategy: expanded function words, graded scoring
 - RareTrigramStrategy: real-world tokens removed, within-word trigrams
 - ZipfConformityStrategy: flat distribution requires corroboration
 - WordLookupStrategy + data/words.py: junk entries removed, diacritic
   folding, proper-noun dampening
-- EnglishWordValidationStrategy: diacritic folding before tokenizing
 """
 
 import pytest
 
 from pygarble.data import ENGLISH_WORDS
-from pygarble.strategies.compression_ratio import CompressionRatioStrategy
-from pygarble.strategies.english_word_validation import (
-    EnglishWordValidationStrategy,
-)
 from pygarble.strategies.function_word_density import (
     FunctionWordDensityStrategy,
 )
 from pygarble.strategies.rare_trigram import RareTrigramStrategy
 from pygarble.strategies.word_lookup import WordLookupStrategy
 from pygarble.strategies.zipf_conformity import ZipfConformityStrategy
-
-
-class TestCompressionRatioFix:
-    """Compression detects repetition/binary data, not random letters."""
-
-    def test_repetitive_spam_flagged(self):
-        strategy = CompressionRatioStrategy()
-        assert strategy.predict_proba("abc " * 50) >= 0.5
-        assert strategy.predict("abc " * 50) is True
-
-    def test_normal_english_low_score(self):
-        strategy = CompressionRatioStrategy()
-        text = (
-            "The quick brown fox jumps over the lazy dog and runs "
-            "through the green field while birds sing in the morning "
-            "sunshine near the old wooden fence by the river bank."
-        )
-        assert len(text) >= 100
-        assert strategy.predict_proba(text) < 0.3
-
-    def test_docstring_example_consistent(self):
-        strategy = CompressionRatioStrategy()
-        assert strategy.predict("abc " * 50) is True
-
-    def test_abstains_below_min_length(self):
-        strategy = CompressionRatioStrategy()
-        assert strategy.applicable("short text") is False
-        assert strategy.applicable("x" * 150) is True
 
 
 class TestFunctionWordDensityFix:
@@ -185,22 +151,3 @@ class TestWordLookupAndDataFix:
         # café folds to cafe, which is a real dictionary word
         assert "cafe" in ENGLISH_WORDS
         assert strategy.predict_proba("café latte") == 0.0
-
-
-class TestEnglishWordValidationFix:
-    """Accented words are folded, not silently dropped."""
-
-    def test_tokenizer_keeps_accented_words(self):
-        strategy = EnglishWordValidationStrategy()
-        # Previously café tokenized as nothing (regex stopped at é),
-        # silently shrinking the denominator.
-        assert strategy._tokenize_text("café résumé naïve") == [
-            "cafe", "resume", "naive"
-        ]
-
-    def test_spellcheck_scores_accented_words(self):
-        pytest.importorskip("spellchecker")
-        strategy = EnglishWordValidationStrategy()
-        # All words are known once diacritics are folded; previously the
-        # accented words were dropped entirely from the calculation.
-        assert strategy.predict_proba("the café serves a great résumé") < 0.5

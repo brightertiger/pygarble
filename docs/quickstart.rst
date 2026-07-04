@@ -76,7 +76,7 @@ Create custom ensembles with specific strategies:
    # Change voting mode
    detector = EnsembleDetector(voting="any")       # High recall
    detector = EnsembleDetector(voting="all")       # High precision
-   detector = EnsembleDetector(voting="majority")  # Balanced (default)
+   detector = EnsembleDetector(voting="majority")  # Balanced
 
 Adjusting Threshold
 -------------------

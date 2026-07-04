@@ -17,11 +17,7 @@ Install from PyPI
 Optional Dependencies
 ---------------------
 
-For the ``ENGLISH_WORD_VALIDATION`` strategy:
-
-.. code-block:: bash
-
-   pip install pygarble[spellchecker]
+pygarble has no optional dependencies.
 
 Verify Installation
 -------------------

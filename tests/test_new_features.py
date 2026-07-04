@@ -51,7 +51,7 @@ class TestEnsembleDetector:
     def test_ensemble_custom_strategies(self):
         detector = EnsembleDetector(
             strategies=[
-                Strategy.CHARACTER_FREQUENCY,
+                Strategy.MARKOV_CHAIN,
                 Strategy.ENTROPY_BASED,
             ]
         )
@@ -60,7 +60,7 @@ class TestEnsembleDetector:
     def test_ensemble_majority_voting(self):
         detector = EnsembleDetector(
             strategies=[
-                Strategy.CHARACTER_FREQUENCY,
+                Strategy.MARKOV_CHAIN,
                 Strategy.ENTROPY_BASED,
                 Strategy.PATTERN_MATCHING,
             ],
@@ -71,7 +71,7 @@ class TestEnsembleDetector:
 
     def test_ensemble_average_voting(self):
         detector = EnsembleDetector(
-            strategies=[Strategy.CHARACTER_FREQUENCY, Strategy.ENTROPY_BASED],
+            strategies=[Strategy.MARKOV_CHAIN, Strategy.ENTROPY_BASED],
             voting="average"
         )
         proba = detector.predict_proba("hello world")
@@ -79,7 +79,7 @@ class TestEnsembleDetector:
 
     def test_ensemble_weighted_voting(self):
         detector = EnsembleDetector(
-            strategies=[Strategy.CHARACTER_FREQUENCY, Strategy.ENTROPY_BASED],
+            strategies=[Strategy.MARKOV_CHAIN, Strategy.ENTROPY_BASED],
             voting="weighted",
             weights=[0.7, 0.3]
         )
@@ -111,7 +111,7 @@ class TestEnsembleDetector:
     def test_ensemble_weights_length_mismatch(self):
         with pytest.raises(ValueError, match="weights must have same length"):
             EnsembleDetector(
-                strategies=[Strategy.CHARACTER_FREQUENCY, Strategy.ENTROPY_BASED],
+                strategies=[Strategy.MARKOV_CHAIN, Strategy.ENTROPY_BASED],
                 voting="weighted",
                 weights=[0.5]
             )
@@ -120,42 +120,42 @@ class TestEnsembleDetector:
 class TestValidation:
     def test_threshold_validation_low(self):
         with pytest.raises(ValueError, match="threshold must be"):
-            GarbleDetector(Strategy.CHARACTER_FREQUENCY, threshold=-0.1)
+            GarbleDetector(Strategy.WORD_LOOKUP, threshold=-0.1)
 
     def test_threshold_validation_high(self):
         with pytest.raises(ValueError, match="threshold must be"):
-            GarbleDetector(Strategy.CHARACTER_FREQUENCY, threshold=1.5)
+            GarbleDetector(Strategy.WORD_LOOKUP, threshold=1.5)
 
     def test_threshold_validation_edge_low(self):
-        detector = GarbleDetector(Strategy.CHARACTER_FREQUENCY, threshold=0.0)
+        detector = GarbleDetector(Strategy.WORD_LOOKUP, threshold=0.0)
         assert detector.threshold == 0.0
 
     def test_threshold_validation_edge_high(self):
-        detector = GarbleDetector(Strategy.CHARACTER_FREQUENCY, threshold=1.0)
+        detector = GarbleDetector(Strategy.WORD_LOOKUP, threshold=1.0)
         assert detector.threshold == 1.0
 
     def test_threads_validation(self):
         with pytest.raises(ValueError, match="threads must be"):
-            GarbleDetector(Strategy.CHARACTER_FREQUENCY, threads=0)
+            GarbleDetector(Strategy.WORD_LOOKUP, threads=0)
 
     def test_threads_validation_negative(self):
         with pytest.raises(ValueError, match="threads must be"):
-            GarbleDetector(Strategy.CHARACTER_FREQUENCY, threads=-1)
+            GarbleDetector(Strategy.WORD_LOOKUP, threads=-1)
 
 
 class TestInputTypeValidation:
     def test_predict_invalid_type_int(self):
-        detector = GarbleDetector(Strategy.CHARACTER_FREQUENCY)
+        detector = GarbleDetector(Strategy.WORD_LOOKUP)
         with pytest.raises(TypeError, match="must be a string"):
             detector.predict(123)
 
     def test_predict_invalid_type_dict(self):
-        detector = GarbleDetector(Strategy.CHARACTER_FREQUENCY)
+        detector = GarbleDetector(Strategy.WORD_LOOKUP)
         with pytest.raises(TypeError, match="must be a string"):
             detector.predict({"text": "hello"})
 
     def test_predict_proba_invalid_type(self):
-        detector = GarbleDetector(Strategy.CHARACTER_FREQUENCY)
+        detector = GarbleDetector(Strategy.WORD_LOOKUP)
         with pytest.raises(TypeError, match="must be a string"):
             detector.predict_proba(123)
 
@@ -184,7 +184,7 @@ class TestPatternMatchingCompilation:
 class TestBatchProcessing:
     def test_batch_with_threads(self):
         detector = GarbleDetector(
-            Strategy.CHARACTER_FREQUENCY,
+            Strategy.WORD_LOOKUP,
             threads=2
         )
         texts = ["hello world"] * 20

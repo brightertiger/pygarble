@@ -20,9 +20,6 @@ class WordLookupStrategy(BaseStrategy):
     of words appear in the embedded English word set (49,330 words
     derived from Peter Norvig's word frequency list).
 
-    This is a dependency-free alternative to EnglishWordValidationStrategy
-    which requires pyspellchecker.
-
     Parameters
     ----------
     unknown_threshold : float, optional

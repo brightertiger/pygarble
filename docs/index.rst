@@ -49,13 +49,13 @@ Performance
 
 Tested on 1,644 samples:
 
-============== ========= ====== ========
-Detector       Precision Recall F1 Score
-============== ========= ====== ========
-EnsembleDetector() **99.5%** 78.5%  87.8%
-MARKOV_CHAIN   98.8%     86.4%  92.2%
-BIGRAM_PROBABILITY 100%  33.6%  50.3%
-============== ========= ====== ========
+==================== ========= ====== ========
+Detector             Precision Recall F1 Score
+==================== ========= ====== ========
+EnsembleDetector()   **99.2%** 85.6%  91.9%
+MARKOV_CHAIN         99.2%     84.3%  91.2%
+LOG_LIKELIHOOD_RATIO 100%      63.4%  77.6%
+==================== ========= ====== ========
 
 Installation
 ------------

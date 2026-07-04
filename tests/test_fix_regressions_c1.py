@@ -1,4 +1,4 @@
-"""Regression tests for verified bug fixes in eight strategies.
+"""Regression tests for verified bug fixes in five strategies.
 
 Each test pins a repro that previously scored on the wrong side of 0.5,
 plus a true-gibberish sanity check to make sure the fix did not blunt
@@ -135,63 +135,3 @@ class TestPatternMatchingFix:
         one_ish = detector.predict_proba("AAAAAAA")
         many = detector.predict_proba("AAAAAAA qwerty !!!### 123456789")
         assert many > one_ish >= 0.6
-
-
-class TestCharacterFrequencyFix:
-    """Max-frequency ratios over a handful of characters are noise."""
-
-    @pytest.mark.parametrize("text", ["see", "noon", "mama mia"])
-    def test_short_normal_words_not_flagged(self, text):
-        detector = GarbleDetector(Strategy.CHARACTER_FREQUENCY)
-        assert detector.predict_proba(text) < 0.5
-        assert detector.predict(text) is False
-
-    def test_dominated_long_text_flagged(self):
-        detector = GarbleDetector(Strategy.CHARACTER_FREQUENCY)
-        assert detector.predict_proba("aaaaaaaaaaaaaaaaaa bbbb") >= 0.5
-        assert detector.predict("aaaaaaaaaaaaaaaaaa bbbb") is True
-
-    def test_single_repeated_char_still_flagged(self):
-        detector = GarbleDetector(Strategy.CHARACTER_FREQUENCY)
-        assert detector.predict("aaaaaaa") is True
-
-
-class TestStatisticalAnalysisFix:
-    """Digits are neutral content; mild punctuation must not score."""
-
-    @pytest.mark.parametrize(
-        "text", ["2 + 2 = 4", "$100.50", "Call 555-1234 now", "123456789"]
-    )
-    def test_numeric_text_not_flagged(self, text):
-        detector = GarbleDetector(Strategy.STATISTICAL_ANALYSIS)
-        assert detector.predict_proba(text) < 0.5
-        assert detector.predict(text) is False
-
-    def test_symbol_soup_still_flagged(self):
-        detector = GarbleDetector(Strategy.STATISTICAL_ANALYSIS)
-        assert detector.predict_proba("@#$%^&*!@#$%") >= 0.5
-        assert detector.predict("@#$%^&*!@#$%") is True
-
-
-class TestWordLengthFix:
-    """URL/email tokens are excluded and the median resists one long
-    token dominating the score."""
-
-    def test_url_in_sentence_not_flagged(self):
-        text = (
-            "Visit https://example.com/products/category/items?id=12345 today"
-        )
-        detector = GarbleDetector(Strategy.WORD_LENGTH)
-        assert detector.predict_proba(text) < 0.5
-        assert detector.predict(text) is False
-
-    def test_email_in_sentence_not_flagged(self):
-        detector = GarbleDetector(Strategy.WORD_LENGTH)
-        text = "Contact first.last+billing@some-company-domain.example please"
-        assert detector.predict(text) is False
-
-    def test_long_tokens_still_flagged(self):
-        text = "a" * 32 + " " + "b" * 28
-        detector = GarbleDetector(Strategy.WORD_LENGTH)
-        assert detector.predict_proba(text) >= 0.5
-        assert detector.predict(text) is True

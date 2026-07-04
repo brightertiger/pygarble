@@ -4,12 +4,8 @@ from typing import Any, Callable, Dict, List, Optional, Type, Union
 
 from .strategies import (
     BaseStrategy,
-    CharacterFrequencyStrategy,
     EntropyBasedStrategy,
     PatternMatchingStrategy,
-    StatisticalAnalysisStrategy,
-    WordLengthStrategy,
-    EnglishWordValidationStrategy,
     VowelRatioStrategy,
     KeyboardPatternStrategy,
     MarkovChainStrategy,
@@ -18,7 +14,6 @@ from .strategies import (
     SymbolRatioStrategy,
     RepetitionStrategy,
     HexStringStrategy,
-    CompressionRatioStrategy,
     MojibakeStrategy,
     PronouncabilityStrategy,
     UnicodeScriptStrategy,
@@ -39,12 +34,8 @@ from .strategies import (
 
 
 class Strategy(Enum):
-    CHARACTER_FREQUENCY = "character_frequency"
-    WORD_LENGTH = "word_length"
     PATTERN_MATCHING = "pattern_matching"
-    STATISTICAL_ANALYSIS = "statistical_analysis"
     ENTROPY_BASED = "entropy_based"
-    ENGLISH_WORD_VALIDATION = "english_word_validation"
     VOWEL_RATIO = "vowel_ratio"
     KEYBOARD_PATTERN = "keyboard_pattern"
     MARKOV_CHAIN = "markov_chain"
@@ -53,7 +44,6 @@ class Strategy(Enum):
     SYMBOL_RATIO = "symbol_ratio"
     REPETITION = "repetition"
     HEX_STRING = "hex_string"
-    COMPRESSION_RATIO = "compression_ratio"
     MOJIBAKE = "mojibake"
     PRONOUNCEABILITY = "pronounceability"
     UNICODE_SCRIPT = "unicode_script"
@@ -73,12 +63,8 @@ class Strategy(Enum):
 
 
 STRATEGY_MAP: Dict[Strategy, Type[BaseStrategy]] = {
-    Strategy.CHARACTER_FREQUENCY: CharacterFrequencyStrategy,
-    Strategy.WORD_LENGTH: WordLengthStrategy,
     Strategy.PATTERN_MATCHING: PatternMatchingStrategy,
-    Strategy.STATISTICAL_ANALYSIS: StatisticalAnalysisStrategy,
     Strategy.ENTROPY_BASED: EntropyBasedStrategy,
-    Strategy.ENGLISH_WORD_VALIDATION: EnglishWordValidationStrategy,
     Strategy.VOWEL_RATIO: VowelRatioStrategy,
     Strategy.KEYBOARD_PATTERN: KeyboardPatternStrategy,
     Strategy.MARKOV_CHAIN: MarkovChainStrategy,
@@ -87,7 +73,6 @@ STRATEGY_MAP: Dict[Strategy, Type[BaseStrategy]] = {
     Strategy.SYMBOL_RATIO: SymbolRatioStrategy,
     Strategy.REPETITION: RepetitionStrategy,
     Strategy.HEX_STRING: HexStringStrategy,
-    Strategy.COMPRESSION_RATIO: CompressionRatioStrategy,
     Strategy.MOJIBAKE: MojibakeStrategy,
     Strategy.PRONOUNCEABILITY: PronouncabilityStrategy,
     Strategy.UNICODE_SCRIPT: UnicodeScriptStrategy,
@@ -212,13 +197,17 @@ class EnsembleDetector:
         self,
         strategies: Optional[List[Strategy]] = None,
         threshold: float = 0.5,
-        voting: str = "majority",
+        voting: Optional[str] = None,
         weights: Optional[List[float]] = None,
         threads: Optional[int] = None,
         **kwargs: Any,
     ):
         if not 0.0 <= threshold <= 1.0:
             raise ValueError("threshold must be between 0.0 and 1.0")
+        if voting is None:
+            # The default strategy set is built for union voting; custom
+            # sets keep the historical majority default.
+            voting = "any" if strategies is None else "majority"
         if voting not in ("majority", "average", "weighted", "any", "all"):
             raise ValueError(
                 "voting must be 'majority', 'average', 'weighted', 'any', or 'all'"
@@ -227,15 +216,15 @@ class EnsembleDetector:
             raise ValueError("weights required when voting='weighted'")
 
         if strategies is None:
-            # High-precision default: majority vote over the five
-            # highest-F1 strategies (regression/benchmark.py, 1,644
-            # samples: 100% precision, ~75% recall). For coverage of
-            # specialist domains (hex/hashes, mojibake, repetition,
-            # homoglyphs) add those strategies with voting="any".
+            # Default: union of MARKOV_CHAIN (the strongest general
+            # detector) with two strategies that produced zero false
+            # positives on the 1,644-sample benchmark, so each member
+            # only adds recall (99.2% precision, 85.6% recall, F1 91.9 -
+            # regression/benchmark.py). For zero-FP strictness use
+            # voting="majority" with this same set plus NGRAM_FREQUENCY
+            # and WORD_LOOKUP.
             strategies = [
                 Strategy.MARKOV_CHAIN,          # 99% precision, 84% recall
-                Strategy.NGRAM_FREQUENCY,       # 98% precision, 75% recall
-                Strategy.WORD_LOOKUP,           # high recall, moderate precision
                 Strategy.LOG_LIKELIHOOD_RATIO,  # 100% precision, 63% recall
                 Strategy.WORD_ANOMALY,          # 100% precision, 53% recall
             ]

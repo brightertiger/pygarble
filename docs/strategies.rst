@@ -184,12 +184,7 @@ All Strategies
 - ``HEX_STRING`` - Hash strings
 - ``SYMBOL_RATIO`` - Symbol detection
 - ``REPETITION`` - Pattern repetition
-- ``COMPRESSION_RATIO`` - Compression analysis
 
-**Legacy**
+**Pattern Heuristics**
 
-- ``CHARACTER_FREQUENCY`` - Character distribution
-- ``WORD_LENGTH`` - Word length analysis
-- ``PATTERN_MATCHING`` - Regex patterns
-- ``STATISTICAL_ANALYSIS`` - Alphabetic ratio
-- ``ENGLISH_WORD_VALIDATION`` - Requires pyspellchecker
+- ``PATTERN_MATCHING`` - Configurable regex patterns
