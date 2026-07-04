@@ -115,13 +115,20 @@ class TestAffixDetectionStrategy:
         assert proba < 0.5
 
     def test_garbled_long_words(self):
-        """Long garbled words without affixes should be flagged."""
+        """Many long garbled words without affixes should be flagged.
+
+        Zero affixes is a weak signal on its own (legitimate name lists
+        also lack affixes), so it only reaches the decision threshold
+        with 20+ analyzable words.
+        """
         detector = GarbleDetector(Strategy.AFFIX_DETECTION)
         proba = detector.predict_proba(
             "xkrfm plmqn bvztk nwsdr jghcm"
             " trbnp mkplw wqzdl lpnrx fvxtb"
+            " qzvxm wplkt nbrfd gxzcq hjklv"
+            " mtpwz rqxvb dfzkn cvbxm lpzqt"
         )
-        assert proba > 0.5
+        assert proba >= 0.5
 
 
 class TestZipfConformityStrategy:

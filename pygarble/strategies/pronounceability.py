@@ -20,7 +20,7 @@ VALID_ONSET_CLUSTERS: Set[str] = {
     "bl", "br", "ch", "cl", "cr", "dr", "dw", "fl", "fr",
     "gl", "gr", "pl", "pr", "sc", "sh", "sk", "sl", "sm",
     "sn", "sp", "st", "sw", "th", "tr", "tw", "wh", "wr",
-    "kn", "gn", "pn", "ps", "ph", "qu",
+    "kn", "gn", "pn", "ps", "ph", "qu", "rh",
     # Three-consonant clusters
     "chr", "phr", "sch", "scr", "shr", "spl", "spr", "squ",
     "str", "thr", "thw",
@@ -63,8 +63,9 @@ FORBIDDEN_CLUSTERS: Set[str] = {
     "lj", "lq", "lx",
     "mf", "mg", "mj", "mk", "ml", "mq", "mr", "mt", "mv", "mw", "mx", "mz",
     "nf", "nj", "nl", "nm", "np", "nq", "nr", "nv", "nw", "nx",
-    "pb", "pc", "pd", "pf", "pg", "pj", "pk", "pm", "pn", "pp",
+    "pb", "pc", "pd", "pf", "pg", "pj", "pk", "pm", "pp",
     "pq", "pt", "pv", "pw", "px", "pz",
+    # Note: "pn" removed - valid onset (pneumonia, pneumatic)
     "qb", "qc", "qd", "qe", "qf", "qg", "qh", "qi", "qj", "qk",
     "ql", "qm", "qn", "qo", "qp", "qq", "qr", "qs", "qt", "qv",
     "qw", "qx", "qy", "qz",
@@ -78,8 +79,8 @@ FORBIDDEN_CLUSTERS: Set[str] = {
     "wn", "wp", "wq", "ws", "wt", "wv", "ww", "wx", "wz",
     "xb", "xc", "xd", "xf", "xg", "xh", "xj", "xk", "xl",
     "xm", "xn", "xp", "xq", "xr", "xs", "xv", "xw", "xx", "xz",
-    "yb", "yc", "yd", "yf", "yg", "yh", "yj", "yk", "yl",
-    "ym", "yn", "yp", "yq", "yr", "ys", "yt", "yv", "yw", "yx", "yz",
+    # Note: "y" bigrams removed - "y" acts as a vowel in non-initial
+    # positions (rhythm, sync, myth), so yn/ys/yt/ym etc. are valid
     "zb", "zc", "zd", "zf", "zg", "zh", "zj", "zk", "zl",
     "zm", "zn", "zp", "zq", "zr", "zs", "zt", "zv", "zw", "zx",
 }
@@ -134,13 +135,24 @@ class PronouncabilityStrategy(BaseStrategy):
         if not 0.0 <= self.vowel_min_ratio <= 1.0:
             raise ValueError("vowel_min_ratio must be between 0.0 and 1.0")
 
+    @staticmethod
+    def _is_vowel(char: str, position: int) -> bool:
+        """Check if a character acts as a vowel at a word position.
+
+        'y' acts as a vowel when not word-initial (rhythm, sync,
+        myth) - the standard heuristic.
+        """
+        if char in VOWELS:
+            return True
+        return char == "y" and position > 0
+
     def _extract_consonant_clusters(self, word: str) -> list:
         """Extract all consonant clusters from a word."""
         clusters = []
         current_cluster = ""
 
-        for char in word.lower():
-            if char in CONSONANTS:
+        for i, char in enumerate(word.lower()):
+            if char in CONSONANTS and not self._is_vowel(char, i):
                 current_cluster += char
             else:
                 if len(current_cluster) >= 2:
@@ -156,11 +168,9 @@ class PronouncabilityStrategy(BaseStrategy):
     def _get_word_onset(self, word: str) -> str:
         """Get consonant cluster at start of word."""
         onset = ""
-        for char in word.lower():
-            if char in CONSONANTS:
+        for i, char in enumerate(word.lower()):
+            if char in CONSONANTS and not self._is_vowel(char, i):
                 onset += char
-            elif char in VOWELS:
-                break
             else:
                 break
         return onset
@@ -168,11 +178,11 @@ class PronouncabilityStrategy(BaseStrategy):
     def _get_word_coda(self, word: str) -> str:
         """Get consonant cluster at end of word."""
         coda = ""
-        for char in reversed(word.lower()):
-            if char in CONSONANTS:
+        lowered = word.lower()
+        for i in range(len(lowered) - 1, -1, -1):
+            char = lowered[i]
+            if char in CONSONANTS and not self._is_vowel(char, i):
                 coda = char + coda
-            elif char in VOWELS:
-                break
             else:
                 break
         return coda
@@ -193,15 +203,24 @@ class PronouncabilityStrategy(BaseStrategy):
             onset = self._get_word_onset(alpha_word)
             coda = self._get_word_coda(alpha_word)
 
-            if len(onset) >= 2:
+            # Whole clusters that are valid onsets/codas (e.g. "pn"
+            # in pneumonia, "ths" in myths) are never violations.
+            if len(onset) >= 2 and onset not in VALID_ONSET_CLUSTERS:
                 for i in range(len(onset) - 1):
                     bigram = onset[i:i+2]
-                    if bigram in FORBIDDEN_CLUSTERS:
+                    if (
+                        bigram in FORBIDDEN_CLUSTERS
+                        and bigram not in VALID_ONSET_CLUSTERS
+                    ):
                         count += 1
 
             # Skip coda check if it's the same as onset
             # (all-consonant word) to avoid double-counting
-            if coda != onset and len(coda) >= 2:
+            if (
+                coda != onset
+                and len(coda) >= 2
+                and coda not in VALID_CODA_CLUSTERS
+            ):
                 for i in range(len(coda) - 1):
                     bigram = coda[i:i+2]
                     if (
@@ -214,12 +233,19 @@ class PronouncabilityStrategy(BaseStrategy):
 
     def _check_vowel_ratio(self, text: str) -> float:
         """Check if text has reasonable vowel distribution."""
-        alpha_chars = [c.lower() for c in text if c.isalpha()]
-        if not alpha_chars:
+        vowel_count = 0
+        total_count = 0
+        for word in text.lower().split():
+            alpha_word = [c for c in word if c.isalpha()]
+            for i, char in enumerate(alpha_word):
+                total_count += 1
+                if self._is_vowel(char, i):
+                    vowel_count += 1
+
+        if total_count == 0:
             return 0.0
 
-        vowel_count = sum(1 for c in alpha_chars if c in VOWELS)
-        ratio = vowel_count / len(alpha_chars)
+        ratio = vowel_count / total_count
 
         if ratio < self.vowel_min_ratio:
             # Very low vowel ratio = unpronounceable
@@ -248,10 +274,6 @@ class PronouncabilityStrategy(BaseStrategy):
 
         return invalid_count / checked_count
 
-    def _predict_impl(self, text: str) -> bool:
-        proba = self._predict_proba_impl(text)
-        return proba >= 0.5
-
     def _predict_proba_impl(self, text: str) -> float:
         """
         Compute garble probability based on pronounceability.
@@ -259,9 +281,21 @@ class PronouncabilityStrategy(BaseStrategy):
         if not text or len(text) < 3:
             return 0.0
 
+        # Phonotactic rules only apply to words the dictionary can't
+        # vouch for: loanwords ("fjord"), acronyms (HTTP), proper nouns
+        # (Nguyen, McDonald), and URLs all violate English phonotactics
+        # legitimately.
+        novel = self._novel_words(text, skip_titlecase=True)
+        # 2-3 letter unknowns are usually abbreviations ("sq", "ft"),
+        # not words phonotactics can judge
+        novel = [w for w in novel if len(w) >= 4]
+        if not novel:
+            return 0.0
+        text = " ".join(novel)
+
         # Only analyze if text has enough alphabetic content
         alpha_chars = [c for c in text if c.isalpha()]
-        if len(alpha_chars) < 5:
+        if len(alpha_chars) < 4:
             return 0.0
 
         scores = []

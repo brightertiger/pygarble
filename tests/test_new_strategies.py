@@ -223,7 +223,10 @@ class TestDataModule:
     def test_words_data_loaded(self):
         from pygarble.data import ENGLISH_WORDS
         assert isinstance(ENGLISH_WORDS, frozenset)
-        assert len(ENGLISH_WORDS) == 50000
+        # 50,000 raw entries minus 670 web-junk entries filtered out
+        # (two-letter noise like "qq", repeated chars like "aaaa",
+        # alphabet runs like "abcd", truncations like "caf")
+        assert len(ENGLISH_WORDS) == 49330
         assert "hello" in ENGLISH_WORDS
         assert "world" in ENGLISH_WORDS
         assert "the" in ENGLISH_WORDS
@@ -275,10 +278,10 @@ class TestCompressionRatioStrategy:
 
     def test_highly_repetitive_text(self):
         detector = GarbleDetector(Strategy.COMPRESSION_RATIO)
-        # Highly repetitive text compresses very well
+        # Highly repetitive spam compresses very well -> flagged
         repetitive = "the " * 50
         proba = detector.predict_proba(repetitive)
-        assert proba < 0.5  # Should be low (compresses well)
+        assert proba >= 0.5  # Repetitive spam is degenerate text
 
     def test_probability_range(self):
         detector = GarbleDetector(Strategy.COMPRESSION_RATIO)
@@ -311,7 +314,8 @@ class TestCompressionRatioStrategy:
             high_ratio_threshold=1.2,
             low_ratio_threshold=0.5
         )
-        assert detector.predict("a" * 150) is False
+        # A single repeated character is maximally repetitive -> flagged
+        assert detector.predict("a" * 150) is True
 
     def test_parameter_validation(self):
         with pytest.raises(ValueError):
@@ -475,9 +479,13 @@ class TestUnicodeScriptStrategy:
 
     def test_mixed_scripts(self):
         detector = GarbleDetector(Strategy.UNICODE_SCRIPT)
-        # Cyrillic letters АБВ in Latin text
-        mixed = "Hello \u0410\u0411\u0412 World"
+        # Cyrillic 'A' (U+0410) embedded inside a Latin word
+        mixed = "Hello W\u0410rld"
         assert detector.predict(mixed) is True
+        # Whole words in another script (e.g. Russian next to
+        # English) are legitimate and must NOT be flagged
+        legitimate = "\u041f\u0440\u0438\u0432\u0435\u0442 hello"
+        assert detector.predict(legitimate) is False
 
     def test_probability_range(self):
         detector = GarbleDetector(Strategy.UNICODE_SCRIPT)
@@ -526,7 +534,11 @@ class TestNewStrategiesNoDeps:
 
     def test_compression_ratio_no_deps(self):
         detector = GarbleDetector(Strategy.COMPRESSION_RATIO)
-        assert detector.predict("hello " * 30) is False
+        normal = (
+            "The quick brown fox jumps over the lazy dog while the "
+            "birds sing in the morning near the old wooden fence."
+        )
+        assert detector.predict(normal) is False
 
     def test_mojibake_no_deps(self):
         detector = GarbleDetector(Strategy.MOJIBAKE)

@@ -22,10 +22,10 @@ class WordCollocationStrategy(BaseStrategy):
     Parameters
     ----------
     min_words : int, optional
-        Minimum word count for analysis. Default is 5.
+        Minimum word count for analysis. Default is 8.
 
     zero_collocation_min_words : int, optional
-        Minimum words to trigger zero-collocation signal. Default is 8.
+        Minimum words to trigger zero-collocation signal. Default is 12.
 
     Examples
     --------
@@ -172,8 +172,35 @@ class WordCollocationStrategy(BaseStrategy):
             raise ValueError("min_words must be at least 2")
 
     def _tokenize(self, text: str) -> List[str]:
-        """Extract lowercase alphabetic words."""
-        return re.findall(r"[a-zA-Z]+", text.lower())
+        """Extract lowercase alphabetic words.
+
+        Apostrophes are kept inside tokens so contractions
+        ("don't", "it's") stay one word instead of splitting into
+        fragments that can never match a collocation.
+        """
+        tokens = re.findall(r"[a-zA-Z']+", text.lower())
+        return [t.strip("'") for t in tokens if t.strip("'")]
+
+    def _title_case_ratio(self, text: str) -> float:
+        """Ratio of tokens whose first letter is uppercase.
+
+        Name lists and headlines are mostly Title Case and
+        legitimately contain no function-word collocations.
+        """
+        tokens = [
+            t for t in text.split() if any(c.isalpha() for c in t)
+        ]
+        if not tokens:
+            return 0.0
+
+        titled = 0
+        for token in tokens:
+            for char in token:
+                if char.isalpha():
+                    if char.isupper():
+                        titled += 1
+                    break
+        return titled / len(tokens)
 
     def _get_bigrams(
         self, words: List[str]
@@ -207,10 +234,14 @@ class WordCollocationStrategy(BaseStrategy):
 
         # Zero collocations: scale with text length
         if hit_count == 0:
+            # Name lists and headlines (mostly Title Case tokens)
+            # legitimately contain zero collocations
+            if self._title_case_ratio(text) >= 0.6:
+                return 0.3
             if len(words) >= 20:
-                return 0.85
-            if len(words) >= self.zero_collocation_min_words:
                 return 0.7
+            if len(words) >= self.zero_collocation_min_words:
+                return 0.6
             # Below threshold: too short to be confident
             return 0.3
 
@@ -220,5 +251,6 @@ class WordCollocationStrategy(BaseStrategy):
 
         return 0.0
 
-    def _predict_impl(self, text: str) -> bool:
-        return self._predict_proba_impl(text) >= 0.5
+    def applicable(self, text: str) -> bool:
+        """Word-pair statistics need a minimum amount of text."""
+        return len(self._tokenize(text)) >= self.min_words

@@ -66,10 +66,11 @@ HOMOGLYPHS: Dict[str, tuple] = {
     "№": ("No", "Letterlike"),  # Numero sign
 }
 
-# Scripts that are commonly mixed legitimately (don't flag)
-COMPATIBLE_SCRIPTS: Set[frozenset] = {
-    frozenset({"Latin", "Common"}),
-    frozenset({"Latin", "Common", "Inherited"}),
+# Scripts that legitimately co-occur are collapsed to a single group
+# before mixing checks: Japanese text mixes kanji (CJK) with
+# hiragana/katakana, and Korean mixes Hangul with CJK ideographs.
+COMPATIBLE_SCRIPT_GROUPS: Dict[str, str] = {
+    "Japanese": "CJK",
 }
 
 
@@ -158,12 +159,21 @@ class UnicodeScriptStrategy(BaseStrategy):
             return "Unknown"
 
     def _count_homoglyphs(self, text: str) -> Dict[str, int]:
-        """Count homoglyph characters by script."""
+        """Count homoglyph characters by script.
+
+        Only counts homoglyphs inside words that mix scripts
+        internally (e.g. Cyrillic "а" inside a Latin word). Whole
+        words in another script (e.g. Russian next to English) are
+        normal characters, not spoofing.
+        """
         counts: Dict[str, int] = Counter()
-        for char in text:
-            if char in HOMOGLYPHS:
-                _, script = HOMOGLYPHS[char]
-                counts[script] += 1
+        for word in text.split():
+            if not self._is_mixed_script_word(word):
+                continue
+            for char in word:
+                if char in HOMOGLYPHS:
+                    _, script = HOMOGLYPHS[char]
+                    counts[script] += 1
         return dict(counts)
 
     def _get_scripts_used(self, text: str) -> Set[str]:
@@ -183,6 +193,7 @@ class UnicodeScriptStrategy(BaseStrategy):
         scripts = set()
         for char in alpha_chars:
             script = self._get_script(char)
+            script = COMPATIBLE_SCRIPT_GROUPS.get(script, script)
             if script not in {"Common", "Inherited", "Unknown"}:
                 scripts.add(script)
 
@@ -193,10 +204,6 @@ class UnicodeScriptStrategy(BaseStrategy):
         """Count words that mix different scripts."""
         words = text.split()
         return sum(1 for word in words if self._is_mixed_script_word(word))
-
-    def _predict_impl(self, text: str) -> bool:
-        proba = self._predict_proba_impl(text)
-        return proba >= 0.5
 
     def _predict_proba_impl(self, text: str) -> float:
         """
@@ -212,24 +219,25 @@ class UnicodeScriptStrategy(BaseStrategy):
 
         scores = []
 
-        # Get scripts used in text
-        scripts = self._get_scripts_used(text)
+        # Get scripts used in text, collapsing compatible groups
+        scripts = {
+            COMPATIBLE_SCRIPT_GROUPS.get(s, s)
+            for s in self._get_scripts_used(text)
+        }
         # Remove Common and Inherited (they mix with everything)
         meaningful_scripts = scripts - {"Common", "Inherited", "Unknown"}
 
-        # Check for homoglyphs (only in mixed-script context)
+        # Check for homoglyphs (only counted inside words that mix
+        # scripts internally - see _count_homoglyphs)
         if self.check_homoglyphs:
             homoglyph_counts = self._count_homoglyphs(text)
             total_homoglyphs = sum(homoglyph_counts.values())
 
             if total_homoglyphs >= self.homoglyph_threshold:
-                # Only flag if text mixes scripts. Homoglyphs in pure
-                # non-Latin text (e.g. Russian) are normal characters.
-                if len(meaningful_scripts) > 1:
-                    homoglyph_score = min(
-                        1.0, 0.8 + (total_homoglyphs * 0.05)
-                    )
-                    scores.append(homoglyph_score)
+                homoglyph_score = min(
+                    1.0, 0.8 + (total_homoglyphs * 0.05)
+                )
+                scores.append(homoglyph_score)
 
         # Check for mixed-script words (very suspicious)
         mixed_word_count = self._count_mixed_script_words(text)

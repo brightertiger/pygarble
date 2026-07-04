@@ -23,10 +23,10 @@ class TestStrategies:
         assert detector.predict("normal text") is False
 
     def test_statistical_analysis_detector(self):
-        detector = GarbleDetector(
-            Strategy.STATISTICAL_ANALYSIS, alpha_threshold=0.3
-        )
-        assert detector.predict("123456789") is True
+        detector = GarbleDetector(Strategy.STATISTICAL_ANALYSIS)
+        # Symbol-dominated text is garble; digits are neutral content.
+        assert detector.predict("!@#$%^&*!@#$") is True
+        assert detector.predict("123456789") is False
         assert detector.predict("normal text") is False
 
     def test_entropy_based_detector(self):
@@ -64,10 +64,10 @@ class TestStrategies:
 
     def test_statistical_analysis_proba(self):
         detector = GarbleDetector(Strategy.STATISTICAL_ANALYSIS)
-        proba_numbers = detector.predict_proba("123456789")
+        proba_symbols = detector.predict_proba("!@#$%^&*!@#$")
         proba_text = detector.predict_proba("normal text")
-        assert proba_numbers > proba_text
-        assert 0.0 <= proba_numbers <= 1.0
+        assert proba_symbols > proba_text
+        assert 0.0 <= proba_symbols <= 1.0
         assert 0.0 <= proba_text <= 1.0
 
     def test_entropy_based_proba(self):

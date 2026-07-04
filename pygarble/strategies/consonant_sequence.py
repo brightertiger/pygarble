@@ -42,8 +42,12 @@ class ConsonantSequenceStrategy(BaseStrategy):
         self.max_consonants = max_consonants
         self.min_length = min_length
 
+    # Real acronyms (NASA, HTTP, UNESCO) are short; longer all-caps runs
+    # are analyzed like any other word so shouted gibberish is not exempt.
+    MAX_ACRONYM_LENGTH = 6
+
     def _extract_words_for_analysis(self, text: str):
-        """Extract words, excluding likely acronyms (all caps)."""
+        """Extract words, excluding likely acronyms (short all-caps)."""
         words = []
         current_word = []
         for c in text:
@@ -51,16 +55,17 @@ class ConsonantSequenceStrategy(BaseStrategy):
                 current_word.append(c)
             else:
                 if current_word:
-                    word = "".join(current_word)
-                    # Skip all-uppercase words (likely acronyms)
-                    if not word.isupper():
-                        words.append(word.lower())
+                    self._append_word("".join(current_word), words)
                     current_word = []
         if current_word:
-            word = "".join(current_word)
-            if not word.isupper():
-                words.append(word.lower())
+            self._append_word("".join(current_word), words)
         return " ".join(words)
+
+    def _append_word(self, word: str, words: list) -> None:
+        """Add word unless it looks like an acronym (all caps, short)."""
+        if word.isupper() and len(word) <= self.MAX_ACRONYM_LENGTH:
+            return
+        words.append(word.lower())
 
     def _get_max_consonant_run(self, text: str) -> int:
         """Find the longest consecutive consonant sequence."""
@@ -138,6 +143,3 @@ class ConsonantSequenceStrategy(BaseStrategy):
             return min(1.0, base_score)
 
         return 0.0
-
-    def _predict_impl(self, text: str) -> bool:
-        return self._predict_proba_impl(text) >= 0.5

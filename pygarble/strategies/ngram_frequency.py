@@ -51,15 +51,11 @@ class NGramFrequencyStrategy(BaseStrategy):
             raise ValueError("min_length must be at least 1")
 
     def _extract_trigrams(self, text: str) -> list:
-        """Extract all alphabetic trigrams from text."""
-        text = text.lower()
+        """Extract alphabetic trigrams from words the dictionary can't
+        vouch for (rare-but-real words and acronyms would otherwise
+        produce uncommon trigrams and read as gibberish)."""
         trigrams = []
-
-        # Extract trigrams from each word
-        words = text.split()
-        for word in words:
-            # Keep only alphabetic characters
-            word = "".join(c for c in word if c.isalpha())
+        for word in self._novel_words(text):
             if len(word) >= 3:
                 for i in range(len(word) - 2):
                     trigrams.append(word[i:i + 3])
@@ -80,10 +76,6 @@ class NGramFrequencyStrategy(BaseStrategy):
 
         common_count = sum(1 for t in trigrams if t in COMMON_TRIGRAMS)
         return common_count / len(trigrams)
-
-    def _predict_impl(self, text: str) -> bool:
-        proba = self._predict_proba_impl(text)
-        return proba >= 0.5
 
     def _predict_proba_impl(self, text: str) -> float:
         """

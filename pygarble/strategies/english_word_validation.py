@@ -35,11 +35,10 @@ class EnglishWordValidationStrategy(BaseStrategy):
         return self._spell_checker
 
     def _tokenize_text(self, text: str) -> List[str]:
-        return re.findall(r'\b[a-zA-Z]+\b', text.lower())
-
-    def _predict_impl(self, text: str) -> bool:
-        proba = self._predict_proba_impl(text)
-        return proba >= 0.5
+        # Fold diacritics first so accented words (café -> cafe) are
+        # spell-checked instead of silently dropped by the ASCII regex
+        # (which would shrink the denominator).
+        return re.findall(r'\b[a-zA-Z]+\b', self._fold_diacritics(text).lower())
 
     def _predict_proba_impl(self, text: str) -> float:
         words = self._tokenize_text(text)

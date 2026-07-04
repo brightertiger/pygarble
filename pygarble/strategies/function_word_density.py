@@ -45,13 +45,18 @@ class FunctionWordDensityStrategy(BaseStrategy):
         # Prepositions
         "of", "in", "to", "for", "on", "at", "by", "from", "with",
         "up", "out", "about", "into", "over", "after", "as",
+        "before", "between", "through", "during", "against",
+        "under", "above", "below", "without", "within", "upon",
+        "off", "down", "near", "since", "until", "via", "per",
         # Conjunctions
         "and", "but", "or", "nor", "so", "yet", "if", "then",
         "than", "that", "when", "while", "because", "although",
+        "though", "whether", "either", "neither", "once", "unless",
         # Pronouns
         "i", "me", "my", "we", "us", "our", "you", "your",
         "he", "him", "his", "she", "her", "it", "its",
         "they", "them", "their", "this", "these", "those",
+        "who", "whom", "whose", "which", "what",
         # Auxiliary/common verbs
         "is", "am", "are", "was", "were", "be", "been", "being",
         "have", "has", "had", "do", "does", "did",
@@ -59,9 +64,12 @@ class FunctionWordDensityStrategy(BaseStrategy):
         "may", "might", "must",
         # Other high-frequency words
         "not", "no", "all", "each", "every", "both", "few",
-        "more", "most", "other", "some", "such",
-        "what", "which", "who", "how", "where",
-        "very", "just", "also", "too",
+        "more", "most", "other", "some", "such", "any", "only",
+        "there", "here", "now", "new", "using", "also", "own",
+        "same", "again", "still", "even", "ever", "never",
+        "always", "often", "much", "many",
+        "how", "where", "why",
+        "very", "just", "too",
     })
 
     def __init__(self, **kwargs: Any):
@@ -80,6 +88,10 @@ class FunctionWordDensityStrategy(BaseStrategy):
         words = re.findall(r"[a-zA-Z]+", text.lower())
         return [w for w in words if len(w) >= self.min_word_length]
 
+    def applicable(self, text: str) -> bool:
+        """Abstain on texts with too few analyzable words."""
+        return len(self._tokenize(text)) >= self.min_words
+
     def _predict_proba_impl(self, text: str) -> float:
         words = self._tokenize(text)
 
@@ -89,8 +101,15 @@ class FunctionWordDensityStrategy(BaseStrategy):
         function_count = sum(1 for w in words if w in self.FUNCTION_WORDS)
         ratio = function_count / len(words)
 
-        # Strong signal: many words and zero function words
+        # Only zero function words across >= 10 words is strong enough
+        # evidence to score above 0.5.
         if function_count == 0:
+            # Name lists and Title Case headlines legitimately contain
+            # zero function words
+            tokens = text.split()
+            title_case = sum(1 for t in tokens if t[:1].isupper())
+            if tokens and title_case / len(tokens) >= 0.6:
+                return 0.3
             if len(words) >= 15:
                 return 0.9
             if len(words) >= 10:
@@ -99,14 +118,11 @@ class FunctionWordDensityStrategy(BaseStrategy):
             # of names, technical terms, non-English text, etc.)
             return 0.3
 
-        # Below threshold: scale score based on word count
+        # At least one function word present: real prose regularly dips
+        # below min_ratio (e.g. dense technical sentences), so grade the
+        # deficit but never cross the 0.5 decision boundary.
         if ratio < self.min_ratio:
             deficit = (self.min_ratio - ratio) / self.min_ratio
-            if len(words) >= 10:
-                return min(0.8, 0.5 + deficit * 0.2)
-            return min(0.4, 0.2 + deficit * 0.2)
+            return min(0.45, 0.2 + deficit * 0.25)
 
         return 0.0
-
-    def _predict_impl(self, text: str) -> bool:
-        return self._predict_proba_impl(text) >= 0.5

@@ -27,6 +27,9 @@ from .function_word_density import FunctionWordDensityStrategy
 from .affix_detection import AffixDetectionStrategy
 from .zipf_conformity import ZipfConformityStrategy
 from .word_collocation import WordCollocationStrategy
+from .log_likelihood_ratio import LogLikelihoodRatioStrategy
+from .word_anomaly import WordAnomalyStrategy
+from .keyboard_adjacency import KeyboardAdjacencyStrategy
 
 __all__ = [
     "BaseStrategy",
@@ -58,4 +61,7 @@ __all__ = [
     "AffixDetectionStrategy",
     "ZipfConformityStrategy",
     "WordCollocationStrategy",
+    "LogLikelihoodRatioStrategy",
+    "WordAnomalyStrategy",
+    "KeyboardAdjacencyStrategy",
 ]

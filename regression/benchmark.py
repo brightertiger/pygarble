@@ -36,6 +36,10 @@ STRATEGIES = [
     Strategy.AFFIX_DETECTION,
     Strategy.ZIPF_CONFORMITY,
     Strategy.WORD_COLLOCATION,
+    # New strategies (v0.7.0)
+    Strategy.LOG_LIKELIHOOD_RATIO,
+    Strategy.WORD_ANOMALY,
+    Strategy.KEYBOARD_ADJACENCY,
     # Existing strategies
     Strategy.CHARACTER_FREQUENCY,
     Strategy.WORD_LENGTH,

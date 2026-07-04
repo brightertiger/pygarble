@@ -56,7 +56,9 @@ class HexStringStrategy(BaseStrategy):
         self._uuid_pattern = re.compile(
             r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
         )
-        self._long_hex_pattern = re.compile(r"[a-fA-F0-9]{16,}")
+        self._long_hex_pattern = re.compile(
+            r"[a-fA-F0-9]{%d,}" % max(1, self.min_hex_length)
+        )
         self._base64_pattern = re.compile(r"^[A-Za-z0-9+/]{20,}={0,2}$")
 
     def _is_pure_hash(self, text: str) -> bool:
@@ -76,8 +78,13 @@ class HexStringStrategy(BaseStrategy):
         Check for long hexadecimal sequences.
 
         Returns score based on length of hex sequences found.
+        Digit-only runs (phone numbers, card numbers, IDs) are not
+        hex evidence: require at least one a-f letter in the run.
         """
-        matches = self._long_hex_pattern.findall(text)
+        matches = [
+            m for m in self._long_hex_pattern.findall(text)
+            if any(c in "abcdefABCDEF" for c in m)
+        ]
         if not matches:
             return 0.0
 
@@ -89,27 +96,50 @@ class HexStringStrategy(BaseStrategy):
             return 0.9
         elif max_len >= 16:
             return 0.7
+        # Shorter runs only match when min_hex_length was lowered
         return 0.5
 
     def _is_base64_like(self, text: str) -> bool:
         """Check if text looks like base64."""
         text = text.strip()
-        return bool(self._base64_pattern.match(text))
+        if not self._base64_pattern.match(text):
+            return False
+        # Long plain words match the base64 alphabet too; require
+        # base64-typical evidence: padding/symbol chars, or digits
+        # mixed with both letter cases.
+        if any(c in "+/=" for c in text):
+            return True
+        has_digit = any(c.isdigit() for c in text)
+        has_lower = any(c.islower() for c in text)
+        has_upper = any(c.isupper() for c in text)
+        return has_digit and has_lower and has_upper
 
     def _compute_hex_ratio(self, text: str) -> float:
-        """Compute ratio of hex characters in text."""
+        """
+        Compute the highest hex-character ratio among individual tokens.
+
+        Pooling the ratio across all words lets many short common
+        words ("deed", "dad", "face") add up to a false positive, so
+        each contiguous token is scored on its own. Tokens must be
+        reasonably long and contain both digits and a-f letters to
+        count as hex-like.
+        """
         hex_chars = set("0123456789abcdefABCDEF")
-        alnum_chars = [c for c in text if c.isalnum()]
+        min_token_length = max(8, self.min_hex_length // 2)
+        best_ratio = 0.0
 
-        if len(alnum_chars) < self.min_hex_length:
-            return 0.0
+        for token in text.split():
+            alnum_chars = [c for c in token if c.isalnum()]
+            if len(alnum_chars) < min_token_length:
+                continue
+            if not any(c in "abcdefABCDEF" for c in alnum_chars):
+                continue
+            if not any(c.isdigit() for c in alnum_chars):
+                continue
+            hex_count = sum(1 for c in alnum_chars if c in hex_chars)
+            best_ratio = max(best_ratio, hex_count / len(alnum_chars))
 
-        hex_count = sum(1 for c in alnum_chars if c in hex_chars)
-        return hex_count / len(alnum_chars)
-
-    def _predict_impl(self, text: str) -> bool:
-        proba = self._predict_proba_impl(text)
-        return proba >= 0.5
+        return best_ratio
 
     def _predict_proba_impl(self, text: str) -> float:
         """

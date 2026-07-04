@@ -1,6 +1,6 @@
 ================================================================================
 PYGARBLE BENCHMARK RESULTS
-Run Date: 2026-02-11 23:45:28
+Run Date: 2026-07-04 21:38:34
 ================================================================================
 
 Dataset: 1644 total cases (420 internal, 1224 external)
@@ -9,67 +9,73 @@ Dataset: 1644 total cases (420 internal, 1224 external)
 
 Strategy                    Accuracy  Precision     Recall   F1 Score   Time (s)
 --------------------------------------------------------------------------------
-markov_chain                  93.19%     98.80%     86.39%     92.18%     0.0073
-ensemble                      89.78%     99.50%     78.40%     87.70%     0.0257
-ngram_frequency               87.41%     96.34%     75.79%     84.84%     0.0074
-pronounceability              80.90%     87.63%     68.59%     76.95%     0.0112
-keyboard_pattern              72.20%     65.30%     85.73%     74.14%     0.0137
-vowel_ratio                   78.95%     95.04%     57.72%     71.82%     0.0063
-entropy_based                 77.55%     89.74%     58.38%     70.74%     0.0104
-word_lookup                   61.01%     54.96%     89.27%     68.03%     0.0026
-letter_position               76.95%     98.98%     50.92%     67.24%     0.0030
-bigram_probability            69.16%    100.00%     33.64%     50.34%     0.0054
-consonant_sequence            63.20%     99.38%     20.94%     34.59%     0.0041
-rare_trigram                  55.35%    100.00%      3.93%      7.56%     0.0047
-statistical_analysis          53.65%     52.00%      3.40%      6.39%     0.0028
-hex_string                    54.44%     77.78%      2.75%      5.31%     0.0032
-symbol_ratio                  53.47%     48.65%      2.36%      4.49%     0.0016
-repetition                    54.08%     68.00%      2.23%      4.31%     0.0070
-mojibake                      54.44%    100.00%      1.96%      3.85%     0.0056
-unicode_script                54.38%    100.00%      1.83%      3.60%     0.0177
-character_frequency           54.08%     80.00%      1.57%      3.08%     0.0039
-vowel_pattern                 54.01%    100.00%      1.05%      2.07%     0.0053
-word_length                   53.89%     80.00%      1.05%      2.07%     0.0013
+markov_chain                  92.40%     99.23%     84.29%     91.15%     0.0109
+ngram_frequency               87.53%     97.61%     75.00%     84.83%     0.0111
+ensemble                      87.23%    100.00%     72.51%     84.07%     0.0384
+pronounceability              83.52%     98.62%     65.45%     78.68%     0.0154
+log_likelihood_ratio          82.97%    100.00%     63.35%     77.56%     0.0154
+word_anomaly                  78.04%    100.00%     52.75%     69.07%     0.0087
+word_lookup                   61.19%     54.95%     91.49%     68.66%     0.0038
+pattern_matching              77.19%    100.00%     50.92%     67.48%     0.0105
+vowel_ratio                   73.66%     97.97%     44.24%     60.96%     0.0092
+consonant_sequence            63.20%     99.38%     20.94%     34.59%     0.0044
+bigram_probability            60.52%    100.00%     15.05%     26.17%     0.0079
+keyboard_pattern              58.52%     85.96%     12.83%     22.32%     0.0312
+keyboard_adjacency            57.60%    100.00%      8.77%     16.13%     0.0064
+entropy_based                 57.36%    100.00%      8.25%     15.24%     0.0161
+letter_position               56.02%     95.56%      5.63%     10.63%     0.0032
+rare_trigram                  55.47%    100.00%      4.19%      8.04%     0.0058
+repetition                    54.38%     88.89%      2.09%      4.09%     0.0081
+mojibake                      54.38%    100.00%      1.83%      3.60%     0.0065
+statistical_analysis          54.14%     85.71%      1.57%      3.08%     0.0034
+unicode_script                54.20%    100.00%      1.44%      2.84%     0.0202
+hex_string                    53.71%     58.82%      1.31%      2.56%     0.0046
+vowel_pattern                 54.08%    100.00%      1.18%      2.33%     0.0040
+character_frequency           53.95%    100.00%      0.92%      1.82%     0.0039
+symbol_ratio                  53.83%     85.71%      0.79%      1.56%     0.0025
+word_length                   53.77%     75.00%      0.79%      1.55%     0.0025
 letter_frequency              53.83%    100.00%      0.65%      1.30%     0.0066
-function_word_density         53.71%    100.00%      0.39%      0.78%     0.0019
-affix_detection               53.71%    100.00%      0.39%      0.78%     0.0044
-word_collocation              53.71%    100.00%      0.39%      0.78%     0.0017
-compression_ratio             53.53%      0.00%      0.00%      0.00%     0.0008
-zipf_conformity               53.53%      0.00%      0.00%      0.00%     0.0016
-pattern_matching              53.53%      0.00%      0.00%      0.00%     0.0099
+function_word_density         53.71%    100.00%      0.39%      0.78%     0.0021
+word_collocation              53.71%    100.00%      0.39%      0.78%     0.0022
+compression_ratio             53.65%     75.00%      0.39%      0.78%     0.0010
+affix_detection               53.59%    100.00%      0.13%      0.26%     0.0047
+zipf_conformity               53.53%      0.00%      0.00%      0.00%     0.0018
 
 ### CONFUSION MATRIX SUMMARY ###
 
 Strategy                      TP     FP     TN     FN
 -------------------------------------------------------
-markov_chain                 660      8    872    104
-ensemble                     599      3    877    165
-ngram_frequency              579     22    858    185
-pronounceability             524     74    806    240
-keyboard_pattern             655    348    532    109
-vowel_ratio                  441     23    857    323
-entropy_based                446     51    829    318
-word_lookup                  682    559    321     82
-letter_position              389      4    876    375
-bigram_probability           257      0    880    507
+markov_chain                 644      5    875    120
+ngram_frequency              573     14    866    191
+ensemble                     554      0    880    210
+pronounceability             500      7    873    264
+log_likelihood_ratio         484      0    880    280
+word_anomaly                 403      0    880    361
+word_lookup                  699    573    307     65
+pattern_matching             389      0    880    375
+vowel_ratio                  338      7    873    426
 consonant_sequence           160      1    879    604
-rare_trigram                  30      0    880    734
-statistical_analysis          26     24    856    738
-hex_string                    21      6    874    743
-symbol_ratio                  18     19    861    746
-repetition                    17      8    872    747
-mojibake                      15      0    880    749
-unicode_script                14      0    880    750
-character_frequency           12      3    877    752
-vowel_pattern                  8      0    880    756
-word_length                    8      2    878    756
+bigram_probability           115      0    880    649
+keyboard_pattern              98     16    864    666
+keyboard_adjacency            67      0    880    697
+entropy_based                 63      0    880    701
+letter_position               43      2    878    721
+rare_trigram                  32      0    880    732
+repetition                    16      2    878    748
+mojibake                      14      0    880    750
+statistical_analysis          12      2    878    752
+unicode_script                11      0    880    753
+hex_string                    10      7    873    754
+vowel_pattern                  9      0    880    755
+character_frequency            7      0    880    757
+symbol_ratio                   6      1    879    758
+word_length                    6      2    878    758
 letter_frequency               5      0    880    759
 function_word_density          3      0    880    761
-affix_detection                3      0    880    761
 word_collocation               3      0    880    761
-compression_ratio              0      0    880    764
+compression_ratio              3      1    879    761
+affix_detection                1      0    880    763
 zipf_conformity                0      0    880    764
-pattern_matching               0      0    880    764
 
 ### METRICS BY DATA SOURCE ###
 
@@ -80,129 +86,141 @@ Comparing performance on internal (developed alongside strategies) vs external (
 Strategy                    Accuracy  Precision     Recall         F1     FP     FN
 -------------------------------------------------------------------------------------
 markov_chain                 100.00%      0.00%      0.00%      0.00%      0      0
-ensemble                     100.00%      0.00%      0.00%      0.00%      0      0
 ngram_frequency              100.00%      0.00%      0.00%      0.00%      0      0
+ensemble                     100.00%      0.00%      0.00%      0.00%      0      0
 pronounceability             100.00%      0.00%      0.00%      0.00%      0      0
-keyboard_pattern              96.00%      0.00%      0.00%      0.00%      1      0
-vowel_ratio                   96.00%      0.00%      0.00%      0.00%      1      0
-entropy_based                100.00%      0.00%      0.00%      0.00%      0      0
+log_likelihood_ratio         100.00%      0.00%      0.00%      0.00%      0      0
+word_anomaly                 100.00%      0.00%      0.00%      0.00%      0      0
 word_lookup                  100.00%      0.00%      0.00%      0.00%      0      0
-letter_position              100.00%      0.00%      0.00%      0.00%      0      0
-bigram_probability           100.00%      0.00%      0.00%      0.00%      0      0
+pattern_matching             100.00%      0.00%      0.00%      0.00%      0      0
+vowel_ratio                  100.00%      0.00%      0.00%      0.00%      0      0
 consonant_sequence           100.00%      0.00%      0.00%      0.00%      0      0
+bigram_probability           100.00%      0.00%      0.00%      0.00%      0      0
+keyboard_pattern             100.00%      0.00%      0.00%      0.00%      0      0
+keyboard_adjacency           100.00%      0.00%      0.00%      0.00%      0      0
+entropy_based                100.00%      0.00%      0.00%      0.00%      0      0
+letter_position              100.00%      0.00%      0.00%      0.00%      0      0
 rare_trigram                 100.00%      0.00%      0.00%      0.00%      0      0
-statistical_analysis         100.00%      0.00%      0.00%      0.00%      0      0
-hex_string                   100.00%      0.00%      0.00%      0.00%      0      0
-symbol_ratio                 100.00%      0.00%      0.00%      0.00%      0      0
 repetition                   100.00%      0.00%      0.00%      0.00%      0      0
 mojibake                     100.00%      0.00%      0.00%      0.00%      0      0
+statistical_analysis         100.00%      0.00%      0.00%      0.00%      0      0
 unicode_script               100.00%      0.00%      0.00%      0.00%      0      0
-character_frequency          100.00%      0.00%      0.00%      0.00%      0      0
+hex_string                   100.00%      0.00%      0.00%      0.00%      0      0
 vowel_pattern                100.00%      0.00%      0.00%      0.00%      0      0
+character_frequency          100.00%      0.00%      0.00%      0.00%      0      0
+symbol_ratio                 100.00%      0.00%      0.00%      0.00%      0      0
 word_length                  100.00%      0.00%      0.00%      0.00%      0      0
 letter_frequency             100.00%      0.00%      0.00%      0.00%      0      0
 function_word_density        100.00%      0.00%      0.00%      0.00%      0      0
-affix_detection              100.00%      0.00%      0.00%      0.00%      0      0
 word_collocation             100.00%      0.00%      0.00%      0.00%      0      0
 compression_ratio            100.00%      0.00%      0.00%      0.00%      0      0
+affix_detection              100.00%      0.00%      0.00%      0.00%      0      0
 zipf_conformity              100.00%      0.00%      0.00%      0.00%      0      0
-pattern_matching             100.00%      0.00%      0.00%      0.00%      0      0
 
 --- External Generated ---
 Strategy                    Accuracy  Precision     Recall         F1     FP     FN
 -------------------------------------------------------------------------------------
 markov_chain                  93.32%    100.00%     93.32%     96.55%      0     40
-ensemble                      88.48%    100.00%     88.48%     93.89%      0     69
 ngram_frequency               83.81%    100.00%     83.81%     91.19%      0     97
-pronounceability              75.13%    100.00%     75.13%     85.80%      0    149
-keyboard_pattern              90.98%    100.00%     90.98%     95.28%      0     54
-vowel_ratio                   61.10%    100.00%     61.10%     75.85%      0    233
-entropy_based                 62.10%    100.00%     62.10%     76.62%      0    227
-word_lookup                   99.83%    100.00%     99.83%     99.92%      0      1
-letter_position               55.76%    100.00%     55.76%     71.60%      0    265
-bigram_probability            35.89%    100.00%     35.89%     52.83%      0    384
+ensemble                      82.80%    100.00%     82.80%     90.59%      0    103
+pronounceability              73.96%    100.00%     73.96%     85.03%      0    156
+log_likelihood_ratio          70.28%    100.00%     70.28%     82.55%      0    178
+word_anomaly                  57.10%    100.00%     57.10%     72.69%      0    257
+word_lookup                  100.00%    100.00%    100.00%    100.00%      0      0
+pattern_matching              54.42%    100.00%     54.42%     70.49%      0    273
+vowel_ratio                   44.07%    100.00%     44.07%     61.18%      0    335
 consonant_sequence            22.54%    100.00%     22.54%     36.78%      0    464
+bigram_probability            15.03%    100.00%     15.03%     26.12%      0    509
+keyboard_pattern              11.02%    100.00%     11.02%     19.85%      0    533
+keyboard_adjacency             6.18%    100.00%      6.18%     11.64%      0    562
+entropy_based                  5.34%    100.00%      5.34%     10.14%      0    567
+letter_position                2.00%    100.00%      2.00%      3.93%      0    587
 rare_trigram                   1.34%    100.00%      1.34%      2.64%      0    591
-statistical_analysis           0.00%      0.00%      0.00%      0.00%      0    599
-hex_string                     1.67%    100.00%      1.67%      3.28%      0    589
-symbol_ratio                   0.00%      0.00%      0.00%      0.00%      0    599
 repetition                     0.00%      0.00%      0.00%      0.00%      0    599
 mojibake                       0.00%      0.00%      0.00%      0.00%      0    599
+statistical_analysis           0.00%      0.00%      0.00%      0.00%      0    599
 unicode_script                 0.00%      0.00%      0.00%      0.00%      0    599
-character_frequency            0.00%      0.00%      0.00%      0.00%      0    599
+hex_string                     0.00%      0.00%      0.00%      0.00%      0    599
 vowel_pattern                  0.17%    100.00%      0.17%      0.33%      0    598
+character_frequency            0.00%      0.00%      0.00%      0.00%      0    599
+symbol_ratio                   0.00%      0.00%      0.00%      0.00%      0    599
 word_length                    0.00%      0.00%      0.00%      0.00%      0    599
 letter_frequency               0.50%    100.00%      0.50%      1.00%      0    596
 function_word_density          0.00%      0.00%      0.00%      0.00%      0    599
-affix_detection                0.00%      0.00%      0.00%      0.00%      0    599
 word_collocation               0.00%      0.00%      0.00%      0.00%      0    599
 compression_ratio              0.00%      0.00%      0.00%      0.00%      0    599
+affix_detection                0.00%      0.00%      0.00%      0.00%      0    599
 zipf_conformity                0.00%      0.00%      0.00%      0.00%      0    599
-pattern_matching               0.00%      0.00%      0.00%      0.00%      0    599
 
 --- External System Dictionary ---
 Strategy                    Accuracy  Precision     Recall         F1     FP     FN
 -------------------------------------------------------------------------------------
-markov_chain                  99.50%      0.00%      0.00%      0.00%      3      0
+markov_chain                  99.67%      0.00%      0.00%      0.00%      2      0
+ngram_frequency               98.33%      0.00%      0.00%      0.00%     10      0
 ensemble                     100.00%      0.00%      0.00%      0.00%      0      0
-ngram_frequency               98.00%      0.00%      0.00%      0.00%     12      0
-pronounceability              95.50%      0.00%      0.00%      0.00%     27      0
-keyboard_pattern              52.00%      0.00%      0.00%      0.00%    288      0
-vowel_ratio                   98.33%      0.00%      0.00%      0.00%     10      0
-entropy_based                 94.83%      0.00%      0.00%      0.00%     31      0
+pronounceability              99.33%      0.00%      0.00%      0.00%      4      0
+log_likelihood_ratio         100.00%      0.00%      0.00%      0.00%      0      0
+word_anomaly                 100.00%      0.00%      0.00%      0.00%      0      0
 word_lookup                    8.50%      0.00%      0.00%      0.00%    549      0
-letter_position              100.00%      0.00%      0.00%      0.00%      0      0
-bigram_probability           100.00%      0.00%      0.00%      0.00%      0      0
+pattern_matching             100.00%      0.00%      0.00%      0.00%      0      0
+vowel_ratio                   99.83%      0.00%      0.00%      0.00%      1      0
 consonant_sequence           100.00%      0.00%      0.00%      0.00%      0      0
+bigram_probability           100.00%      0.00%      0.00%      0.00%      0      0
+keyboard_pattern              97.67%      0.00%      0.00%      0.00%     14      0
+keyboard_adjacency           100.00%      0.00%      0.00%      0.00%      0      0
+entropy_based                100.00%      0.00%      0.00%      0.00%      0      0
+letter_position              100.00%      0.00%      0.00%      0.00%      0      0
 rare_trigram                 100.00%      0.00%      0.00%      0.00%      0      0
-statistical_analysis         100.00%      0.00%      0.00%      0.00%      0      0
-hex_string                   100.00%      0.00%      0.00%      0.00%      0      0
-symbol_ratio                 100.00%      0.00%      0.00%      0.00%      0      0
 repetition                   100.00%      0.00%      0.00%      0.00%      0      0
 mojibake                     100.00%      0.00%      0.00%      0.00%      0      0
+statistical_analysis         100.00%      0.00%      0.00%      0.00%      0      0
 unicode_script               100.00%      0.00%      0.00%      0.00%      0      0
-character_frequency          100.00%      0.00%      0.00%      0.00%      0      0
+hex_string                   100.00%      0.00%      0.00%      0.00%      0      0
 vowel_pattern                100.00%      0.00%      0.00%      0.00%      0      0
+character_frequency          100.00%      0.00%      0.00%      0.00%      0      0
+symbol_ratio                 100.00%      0.00%      0.00%      0.00%      0      0
 word_length                  100.00%      0.00%      0.00%      0.00%      0      0
 letter_frequency             100.00%      0.00%      0.00%      0.00%      0      0
 function_word_density        100.00%      0.00%      0.00%      0.00%      0      0
-affix_detection              100.00%      0.00%      0.00%      0.00%      0      0
 word_collocation             100.00%      0.00%      0.00%      0.00%      0      0
 compression_ratio            100.00%      0.00%      0.00%      0.00%      0      0
+affix_detection              100.00%      0.00%      0.00%      0.00%      0      0
 zipf_conformity              100.00%      0.00%      0.00%      0.00%      0      0
-pattern_matching             100.00%      0.00%      0.00%      0.00%      0      0
 
 --- Internal ---
 Strategy                    Accuracy  Precision     Recall         F1     FP     FN
 -------------------------------------------------------------------------------------
-markov_chain                  83.57%     95.28%     61.21%     74.54%      5     64
-ensemble                      76.43%     95.83%     41.82%     58.23%      3     96
-ngram_frequency               76.67%     88.51%     46.67%     61.11%     10     88
-pronounceability              67.14%     61.16%     44.85%     51.75%     47     91
-keyboard_pattern              72.86%     65.09%     66.67%     65.87%     59     55
-vowel_ratio                   75.71%     86.21%     45.45%     59.52%     12     90
-entropy_based                 73.57%     78.72%     44.85%     57.14%     20     91
-word_lookup                   78.33%     89.36%     50.91%     64.86%     10     81
-letter_position               72.86%     93.22%     33.33%     49.11%      4    110
-bigram_probability            70.71%    100.00%     25.45%     40.58%      0    123
+markov_chain                  80.24%     96.59%     51.52%     67.19%      3     80
+ngram_frequency               76.67%     94.67%     43.03%     59.17%      4     94
+ensemble                      74.52%    100.00%     35.15%     52.02%      0    107
+pronounceability              73.57%     95.00%     34.55%     50.67%      3    108
+log_likelihood_ratio          75.71%    100.00%     38.18%     55.26%      0    102
+word_anomaly                  75.24%    100.00%     36.97%     53.98%      0    104
+word_lookup                   78.81%     80.65%     60.61%     69.20%     24     65
+pattern_matching              75.71%    100.00%     38.18%     55.26%      0    102
+vowel_ratio                   76.90%     92.50%     44.85%     60.41%      6     91
 consonant_sequence            66.43%     96.15%     15.15%     26.18%      1    140
-rare_trigram                  65.95%    100.00%     13.33%     23.53%      0    143
-statistical_analysis          61.19%     52.00%     15.76%     24.19%     24    139
-hex_string                    61.90%     64.71%      6.67%     12.09%      6    154
-symbol_ratio                  60.48%     48.65%     10.91%     17.82%     19    147
-repetition                    62.86%     68.00%     10.30%     17.89%      8    148
-mojibake                      64.29%    100.00%      9.09%     16.67%      0    150
-unicode_script                64.05%    100.00%      8.48%     15.64%      0    151
-character_frequency           62.86%     80.00%      7.27%     13.33%      3    153
-vowel_pattern                 62.38%    100.00%      4.24%      8.14%      0    158
-word_length                   62.14%     80.00%      4.85%      9.14%      2    157
+bigram_probability            66.67%    100.00%     15.15%     26.32%      0    140
+keyboard_pattern              67.86%     94.12%     19.39%     32.16%      2    133
+keyboard_adjacency            67.86%    100.00%     18.18%     30.77%      0    135
+entropy_based                 68.10%    100.00%     18.79%     31.63%      0    134
+letter_position               67.62%     93.94%     18.79%     31.31%      2    134
+rare_trigram                  66.43%    100.00%     14.55%     25.40%      0    141
+repetition                    64.05%     88.89%      9.70%     17.49%      2    149
+mojibake                      64.05%    100.00%      8.48%     15.64%      0    151
+statistical_analysis          63.10%     85.71%      7.27%     13.41%      2    153
+unicode_script                63.33%    100.00%      6.67%     12.50%      0    154
+hex_string                    61.43%     58.82%      6.06%     10.99%      7    155
+vowel_pattern                 62.62%    100.00%      4.85%      9.25%      0    157
+character_frequency           62.38%    100.00%      4.24%      8.14%      0    158
+symbol_ratio                  61.90%     85.71%      3.64%      6.98%      1    159
+word_length                   61.67%     75.00%      3.64%      6.94%      2    159
 letter_frequency              61.19%    100.00%      1.21%      2.40%      0    163
 function_word_density         61.43%    100.00%      1.82%      3.57%      0    162
-affix_detection               61.43%    100.00%      1.82%      3.57%      0    162
 word_collocation              61.43%    100.00%      1.82%      3.57%      0    162
-compression_ratio             60.71%      0.00%      0.00%      0.00%      0    165
+compression_ratio             61.19%     75.00%      1.82%      3.55%      1    162
+affix_detection               60.95%    100.00%      0.61%      1.20%      0    164
 zipf_conformity               60.71%      0.00%      0.00%      0.00%      0    165
-pattern_matching              60.71%      0.00%      0.00%      0.00%      0    165
 
 ### OVERFITTING ANALYSIS ###
 
@@ -210,75 +228,66 @@ Comparing internal vs external performance (large gaps suggest overfitting):
 
 Strategy                   Internal F1  External F1        Gap
 -----------------------------------------------------------------
-markov_chain                    74.54%       32.18%    +42.36% ⚠
-ensemble                        58.23%       31.30%    +26.93% ⚠
-ngram_frequency                 61.11%       30.40%    +30.71% ⚠
-pronounceability                51.75%       28.60%    +23.15% ⚠
-keyboard_pattern                65.87%       31.76%    +34.11% ⚠
-vowel_ratio                     59.52%       25.28%    +34.24% ⚠
-entropy_based                   57.14%       25.54%    +31.60% ⚠
-word_lookup                     64.86%       33.31%    +31.56% ⚠
-letter_position                 49.11%       23.87%    +25.24% ⚠
-bigram_probability              40.58%       17.61%    +22.97% ⚠
+markov_chain                    67.19%       32.18%    +35.01% ⚠
+ngram_frequency                 59.17%       30.40%    +28.77% ⚠
+ensemble                        52.02%       30.20%    +21.82% ⚠
+pronounceability                50.67%       28.34%    +22.32% ⚠
+log_likelihood_ratio            55.26%       27.52%    +27.75% ⚠
+word_anomaly                    53.98%       24.23%    +29.75% ⚠
+word_lookup                     69.20%       33.33%    +35.87% ⚠
+pattern_matching                55.26%       23.50%    +31.77% ⚠
+vowel_ratio                     60.41%       20.39%    +40.01% ⚠
+consonant_sequence              26.18%       12.26%    +13.92% 
 
 ### ACCURACY BY CATEGORY ###
 
 Strategy                       acronyms     addresses      all_caps  ascii_art_fr  base64_encod  chemical_for  code_snippet  confusable_b  consonant_he  contractions  cooking_inst  corrupted_en  currency_pri    edge_cases  email_header     emoticons  encoding_err  ext_common_s  ext_dictiona  ext_keyboard  ext_random_s  ext_word_phr  extreme_cons    file_paths   gaming_text  hash_strings  homoglyph_at  hyphenated_w  impossible_b  internet_spe  keyboard_mas    legal_text  legitimate_u   log_entries  long_normal_  long_random_   lorem_ipsum  measurements  medical_term  mixed_conten  mixed_langua  mixed_script  mojibake_enc  music_notati   non_english  normal_parag   normal_text  numbers_only    ocr_errors  onomatopoeia  password_lik  phone_number   possessives   product_ids  programming_  proper_nouns  random_chara  random_gibbe  rare_letter_  rare_valid_w  repeated_pat  replacement_  scientific_f  scientific_t    short_text  social_media  spam_pattern  special_char  sports_score  technical_ja  time_express  trigram_viol  typos_misspe  unpronouncea  urls_and_ema  valid_rare_l  version_numb  vowel_floods  word_ending_
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-markov_chain                      100%          100%          100%            0%          100%           80%            0%          100%          100%          100%          100%          100%          100%           75%          100%          100%          100%          100%           99%           88%           94%          100%           67%           40%           80%           60%          100%          100%          100%          100%          100%          100%          100%          100%          100%           60%          100%          100%          100%           80%          100%          100%           80%          100%          100%          100%          100%           50%          100%          100%           20%          100%          100%           40%           86%          100%           50%          100%          100%          100%           57%            0%           67%          100%           57%          100%            0%           80%          100%          100%          100%          100%          100%          100%           60%          100%          100%           67%            0% 
-ensemble                          100%          100%          100%            0%          100%           80%            0%          100%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%           87%           89%          100%           67%           40%           80%           60%           10%          100%          100%          100%          100%          100%          100%          100%          100%           60%          100%          100%          100%           60%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%           20%          100%          100%           80%           86%          100%           40%          100%          100%          100%           57%            0%           50%          100%           57%           80%            0%           80%          100%          100%          100%          100%          100%          100%           60%          100%          100%           67%           33% 
-ngram_frequency                   100%          100%          100%            0%          100%           80%            0%          100%           83%          100%          100%            0%          100%           50%          100%           80%          100%          100%           98%           81%           84%          100%           67%           40%           80%           80%           10%          100%          100%           83%           80%          100%          100%          100%          100%           80%          100%          100%          100%           60%          100%            0%            0%          100%          100%          100%          100%           67%           80%          100%           40%          100%          100%           60%          100%          100%           50%          100%          100%          100%           57%            0%           67%          100%           57%           80%            0%           80%          100%          100%          100%          100%          100%          100%           60%          100%          100%          100%            0% 
-pronounceability                   29%           80%          100%            0%          100%           80%           17%          100%           50%          100%           80%            0%          100%           50%           80%          100%          100%          100%           97%           85%           73%           90%          100%           20%           60%           60%            0%          100%          100%           50%           80%          100%           80%          100%           33%           80%          100%           60%           80%           80%          100%            0%            0%           60%          100%           60%          100%           50%           40%          100%           60%          100%          100%           40%           86%          100%           30%          100%          100%          100%           29%           20%           50%           80%           57%           80%            0%           80%          100%           20%          100%          100%          100%          100%           80%           80%           60%            0%           67% 
-keyboard_pattern                  100%           40%          100%            0%          100%           60%           33%           40%           83%           67%           60%            0%           40%           50%          100%           80%           80%           96%           47%          100%           89%           79%          100%           60%           60%           60%           90%          100%          100%           33%          100%          100%           80%           80%          100%          100%           67%           80%          100%           80%          100%           20%           40%            0%          100%          100%           90%           67%           40%          100%           80%           80%          100%           40%           71%          100%           60%          100%          100%          100%           71%           20%           83%          100%           57%           60%           40%           60%           60%          100%           80%          100%           67%          100%           80%          100%           20%          100%            0% 
-vowel_ratio                       100%           80%          100%            0%          100%           80%            0%          100%           67%          100%          100%            0%          100%           75%          100%           60%          100%           96%           99%           65%           60%           96%          100%           40%          100%           60%            0%          100%          100%          100%           70%          100%          100%          100%          100%           60%          100%          100%          100%           80%          100%            0%            0%          100%          100%           80%          100%           50%          100%          100%           40%          100%          100%           80%           86%          100%           30%          100%          100%           83%           29%            0%           67%           80%           86%          100%            0%           80%          100%          100%          100%          100%          100%          100%           60%          100%          100%          100%            0% 
-entropy_based                     100%           80%          100%            0%           60%           60%           17%          100%           83%          100%          100%            0%           80%           75%          100%           40%          100%          100%           94%           56%           63%          100%           67%           40%           80%           80%           10%          100%          100%          100%           30%          100%          100%          100%          100%           80%          100%           80%          100%           60%          100%            0%            0%          100%          100%          100%          100%           67%          100%          100%           40%          100%          100%           60%          100%          100%           30%           88%          100%          100%           57%            0%           67%          100%           29%          100%           20%           80%          100%          100%          100%          100%          100%          100%           60%          100%           80%           83%            0% 
-word_lookup                       100%          100%          100%            0%          100%           80%            0%           80%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%           10%           99%          100%            1%          100%           40%           80%           60%           70%          100%          100%           83%          100%          100%          100%          100%          100%           60%           67%          100%          100%           60%          100%            0%            0%          100%           80%          100%          100%           50%          100%          100%           20%          100%          100%          100%           29%          100%           50%          100%          100%          100%           86%            0%           50%          100%           57%           80%            0%           80%          100%          100%          100%          100%          100%          100%           60%          100%          100%          100%          100% 
-letter_position                   100%          100%          100%            0%           80%           80%            0%          100%          100%          100%          100%            0%          100%           75%          100%          100%          100%          100%          100%           65%           54%          100%            0%           40%          100%           80%            0%          100%          100%          100%           60%          100%          100%          100%          100%           40%          100%           80%          100%           60%          100%            0%           10%          100%          100%          100%          100%           50%          100%          100%           20%          100%          100%           60%           71%          100%           30%          100%          100%          100%           29%            0%           50%          100%           57%           80%            0%           80%          100%          100%          100%          100%          100%           88%           60%          100%          100%            0%          100% 
-bigram_probability                100%          100%          100%            0%            0%           80%            0%          100%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%           42%           35%          100%            0%           40%          100%           60%            0%          100%          100%          100%           40%          100%          100%          100%          100%            0%          100%          100%          100%           60%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%           20%          100%          100%           80%          100%          100%           30%           88%          100%          100%           29%            0%           67%          100%           57%          100%            0%           80%          100%          100%          100%          100%          100%           88%           60%          100%          100%            0%           33% 
+markov_chain                      100%          100%          100%            0%            0%           80%           17%          100%          100%          100%          100%          100%          100%           75%          100%          100%          100%          100%          100%           88%           94%          100%           67%           40%          100%           60%          100%          100%          100%          100%          100%          100%          100%           80%          100%           60%          100%          100%          100%          100%           80%           60%           30%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           80%           71%          100%           30%          100%          100%          100%           57%            0%           50%          100%           57%          100%            0%           80%          100%          100%          100%          100%          100%          100%           60%          100%          100%           67%            0% 
+ngram_frequency                    86%          100%          100%            0%            0%           80%            0%          100%          100%          100%          100%          100%          100%           50%          100%          100%           80%          100%           98%           81%           84%          100%           67%           40%          100%           60%           20%          100%          100%          100%           80%          100%          100%          100%          100%           60%          100%          100%          100%           80%           80%           40%           30%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           80%           86%          100%           20%          100%          100%          100%           57%            0%           50%          100%           57%          100%            0%           80%          100%          100%          100%          100%           83%          100%           60%          100%          100%          100%            0% 
+ensemble                          100%          100%          100%            0%            0%           80%            0%          100%          100%          100%          100%           20%          100%           50%          100%          100%          100%          100%          100%           78%           84%          100%           67%           40%          100%           60%           10%          100%          100%          100%           80%          100%          100%          100%          100%           60%          100%          100%          100%           60%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           80%           86%          100%           20%          100%          100%          100%           57%            0%           50%          100%           57%          100%            0%           80%          100%          100%          100%          100%          100%          100%           60%          100%          100%           67%            0% 
+pronounceability                  100%          100%          100%            0%            0%           80%            0%          100%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%           81%           73%           98%          100%           20%          100%           60%            0%          100%          100%          100%           80%          100%          100%          100%          100%           60%          100%          100%          100%          100%          100%           20%            0%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           80%           71%          100%           20%          100%          100%          100%           29%            0%           50%          100%           57%           80%            0%           80%          100%          100%          100%          100%          100%          100%           60%          100%          100%            0%           67% 
+log_likelihood_ratio              100%          100%          100%            0%          100%           80%            0%          100%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%           67%           71%          100%           67%           40%          100%           60%            0%          100%          100%          100%           80%          100%          100%          100%          100%           60%          100%          100%          100%           60%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%           20%          100%          100%           80%          100%          100%           40%          100%          100%          100%           43%            0%           50%          100%           71%          100%            0%           80%          100%          100%          100%          100%          100%           88%           60%          100%          100%           50%            0% 
+word_anomaly                      100%          100%          100%            0%          100%           80%            0%          100%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%           59%           57%          100%           50%           40%          100%           60%            0%          100%          100%          100%           80%          100%          100%          100%          100%           60%          100%          100%          100%           80%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           80%           86%          100%           40%          100%          100%          100%           43%            0%           50%          100%           57%          100%            0%           80%          100%          100%          100%          100%          100%          100%           60%          100%          100%           50%            0% 
+word_lookup                        86%          100%          100%            0%          100%          100%            0%           80%          100%          100%          100%           20%          100%           75%          100%           80%          100%          100%           10%          100%          100%            1%          100%           40%           40%           60%           70%          100%          100%           83%          100%          100%          100%          100%          100%           60%           33%          100%          100%           40%          100%            0%           50%           80%           80%          100%          100%           50%           40%          100%           80%          100%          100%          100%           43%          100%           40%          100%          100%          100%           86%            0%           67%          100%           71%           80%            0%           80%           80%          100%          100%          100%           83%          100%           60%          100%          100%          100%          100% 
+pattern_matching                  100%          100%          100%            0%            0%           80%            0%          100%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%           75%           50%          100%          100%           40%          100%           60%            0%          100%          100%          100%           90%          100%          100%          100%          100%           60%          100%          100%          100%          100%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%           20%          100%          100%          100%           86%          100%           20%          100%           60%          100%          100%            0%           50%          100%           57%          100%            0%           80%          100%          100%          100%          100%          100%           75%           60%          100%          100%           83%            0% 
+vowel_ratio                       100%           80%          100%            0%          100%           80%            0%          100%          100%          100%          100%            0%          100%           75%          100%           60%          100%          100%          100%           47%           43%          100%          100%           40%          100%           60%           10%          100%          100%          100%           70%          100%          100%          100%          100%           60%          100%          100%          100%           80%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%           40%          100%          100%           80%           86%          100%           30%          100%          100%          100%           43%            0%           67%          100%           57%          100%            0%           80%          100%          100%          100%          100%          100%          100%           60%          100%          100%          100%            0% 
 consonant_sequence                100%          100%          100%            0%           20%           80%            0%          100%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%           26%           22%          100%          100%           40%          100%           60%            0%          100%            0%          100%           50%          100%          100%          100%          100%           40%          100%          100%          100%           80%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           80%           71%          100%           20%          100%           20%          100%           29%            0%           50%          100%           57%          100%            0%           80%          100%          100%          100%            0%          100%            0%           60%          100%          100%            0%            0% 
-rare_trigram                      100%          100%          100%            0%            0%           80%            0%          100%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%            0%            2%          100%            0%           40%          100%           60%            0%          100%           62%          100%            0%          100%          100%          100%          100%            0%          100%          100%          100%           60%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           80%           86%          100%           20%           50%          100%          100%           29%            0%           50%          100%           57%          100%            0%           80%          100%          100%          100%          100%          100%           25%           60%          100%          100%            0%            0% 
-statistical_analysis              100%           80%          100%          100%            0%           80%           17%          100%          100%          100%          100%            0%           40%           50%          100%           80%          100%          100%          100%            0%            0%          100%            0%           40%           80%           60%            0%          100%            0%          100%            0%          100%          100%           80%          100%           20%          100%          100%          100%           60%          100%            0%            0%          100%          100%          100%          100%           50%           80%          100%           40%           40%          100%           60%           86%          100%           70%            0%            0%          100%           43%            0%           83%          100%           71%          100%            0%           80%          100%          100%           80%            0%          100%            0%           60%          100%           20%            0%            0% 
-hex_string                        100%          100%          100%            0%           60%           80%            0%           80%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%           10%            0%          100%            0%           60%           80%           40%            0%          100%            0%          100%            0%          100%          100%          100%          100%           20%          100%          100%          100%           60%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%           20%          100%          100%           80%           86%          100%           30%            0%            0%          100%           29%            0%           50%          100%           57%          100%            0%           80%          100%          100%          100%            0%          100%            0%           60%          100%          100%            0%            0% 
-symbol_ratio                      100%           80%          100%          100%            0%           80%           17%          100%          100%          100%          100%            0%           60%           50%          100%           80%          100%          100%          100%            0%            0%          100%            0%           40%           80%           60%            0%          100%            0%          100%            0%          100%          100%           80%          100%            0%          100%          100%          100%           60%          100%            0%            0%          100%          100%          100%          100%           33%           80%          100%            0%           60%          100%           60%           86%          100%           40%            0%            0%          100%           43%            0%           83%          100%           57%          100%            0%           80%          100%          100%          100%            0%          100%            0%           60%          100%           60%            0%            0% 
-repetition                        100%          100%          100%           60%            0%           80%            0%          100%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%            0%            0%          100%           17%           40%          100%           60%            0%          100%            0%          100%           10%          100%          100%          100%            0%            0%          100%          100%          100%           60%          100%            0%           10%          100%          100%            0%          100%           50%          100%          100%            0%          100%          100%           80%           86%          100%           20%            0%            0%          100%          100%            0%           50%          100%           57%          100%            0%           80%          100%          100%          100%            0%          100%            0%           60%          100%          100%           83%            0% 
-mojibake                          100%          100%          100%            0%            0%           80%            0%          100%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%            0%            0%          100%            0%           40%          100%           60%            0%          100%            0%          100%            0%          100%          100%          100%          100%            0%          100%          100%          100%           60%          100%            0%          100%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           80%           86%          100%           10%            0%            0%          100%           29%          100%           50%          100%           57%          100%            0%           80%          100%          100%          100%            0%          100%            0%           60%          100%          100%            0%            0% 
-unicode_script                    100%          100%          100%            0%            0%           80%            0%          100%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%            0%            0%          100%            0%           40%          100%           60%          100%          100%            0%          100%            0%          100%          100%          100%          100%            0%          100%          100%          100%           60%          100%           80%            0%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           80%           86%          100%           10%            0%            0%          100%           29%            0%           50%          100%           57%          100%            0%           80%          100%          100%          100%            0%          100%            0%           60%          100%          100%            0%            0% 
-character_frequency               100%          100%          100%            0%            0%           80%            0%          100%          100%          100%          100%            0%          100%           75%          100%           80%          100%          100%          100%            0%            0%          100%            0%           40%          100%           60%            0%          100%            0%          100%           10%          100%          100%          100%          100%            0%          100%          100%          100%           60%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           80%           86%          100%           10%            0%            0%          100%           43%            0%           67%          100%           57%          100%            0%           80%          100%          100%          100%            0%          100%            0%           60%          100%          100%           83%            0% 
-vowel_pattern                     100%          100%          100%            0%            0%           80%            0%          100%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%            0%            0%          100%            0%           40%          100%           60%            0%          100%            0%          100%           10%          100%          100%          100%          100%            0%          100%          100%          100%           60%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           80%           86%          100%           10%            0%            0%          100%           43%            0%           50%          100%           57%          100%            0%           80%          100%          100%          100%            0%          100%            0%           60%          100%          100%           83%            0% 
-word_length                       100%          100%          100%            0%           40%           80%            0%           80%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%            0%            0%          100%            0%           60%          100%           80%            0%          100%            0%          100%            0%          100%          100%          100%          100%           20%          100%          100%          100%           60%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           80%           86%          100%           10%            0%            0%          100%           29%            0%           50%          100%           57%          100%            0%           80%          100%          100%          100%            0%          100%            0%          100%          100%          100%            0%            0% 
+bigram_probability                100%          100%          100%            0%            0%           80%            0%          100%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%           14%           15%          100%            0%           40%          100%           60%            0%          100%          100%          100%            0%          100%          100%          100%          100%            0%          100%          100%          100%           60%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%           20%          100%          100%           80%          100%          100%           10%           62%           60%          100%           29%            0%           67%          100%           57%          100%            0%           80%          100%          100%          100%           60%          100%           38%           60%          100%          100%            0%            0% 
+keyboard_pattern                  100%          100%          100%            0%            0%           80%            0%           80%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%           63%            1%           86%           33%           40%          100%           60%            0%          100%           38%          100%          100%          100%          100%          100%          100%           60%           67%          100%          100%          100%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           80%           86%          100%           10%            0%           20%          100%           86%            0%           50%          100%           57%          100%            0%           80%          100%          100%          100%            0%          100%           25%           60%          100%          100%           83%            0% 
+keyboard_adjacency                100%          100%          100%            0%           20%           80%            0%          100%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%           33%            1%          100%           33%           40%          100%           60%            0%          100%            0%          100%           90%          100%          100%          100%          100%           60%          100%          100%          100%          100%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%           20%          100%          100%           80%           86%          100%           20%            0%           40%          100%           57%            0%           50%          100%           57%          100%            0%           80%          100%          100%          100%           20%          100%           12%           60%          100%          100%           83%            0% 
+entropy_based                     100%          100%          100%            0%           20%           80%            0%          100%          100%          100%          100%            0%          100%           62%          100%          100%          100%          100%          100%            5%            5%          100%            0%           40%          100%           60%            0%          100%          100%          100%           10%          100%          100%          100%          100%            0%          100%          100%          100%           60%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%           20%          100%          100%           80%          100%          100%           10%           50%           60%          100%           43%            0%           67%          100%           57%          100%            0%           80%          100%          100%          100%          100%          100%           12%           60%          100%          100%           50%            0% 
+letter_position                   100%          100%          100%            0%           60%           80%            0%          100%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%            1%            2%          100%            0%           40%          100%           60%            0%          100%            0%          100%           20%          100%          100%          100%          100%           40%          100%          100%          100%           60%          100%            0%           10%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           60%           86%          100%           20%           50%          100%          100%           29%            0%           50%          100%           57%           80%            0%           80%          100%          100%          100%          100%          100%           88%           60%          100%          100%            0%           33% 
+rare_trigram                      100%          100%          100%            0%            0%           80%            0%          100%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%            0%            2%          100%            0%           40%          100%           60%            0%          100%           62%          100%            0%          100%          100%          100%          100%            0%          100%          100%          100%           60%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           80%           86%          100%           20%           75%          100%          100%           29%            0%           50%          100%           57%          100%            0%           80%          100%          100%          100%          100%          100%           25%           60%          100%          100%            0%            0% 
+repetition                        100%          100%          100%            0%            0%           80%            0%          100%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%            0%            0%          100%           17%           40%          100%           60%            0%          100%            0%          100%           10%          100%          100%          100%          100%            0%          100%          100%          100%           60%          100%            0%           10%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           80%           86%          100%           20%            0%           40%          100%           71%            0%           50%          100%           57%          100%            0%           80%          100%          100%          100%            0%          100%            0%           60%          100%          100%           83%            0% 
+mojibake                          100%          100%          100%            0%            0%           80%            0%          100%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%            0%            0%          100%            0%           40%          100%           60%            0%          100%            0%          100%            0%          100%          100%          100%          100%            0%          100%          100%          100%           60%          100%            0%           90%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           80%           86%          100%           10%            0%            0%          100%           29%          100%           50%          100%           57%          100%            0%           80%          100%          100%          100%            0%          100%            0%           60%          100%          100%            0%            0% 
+statistical_analysis              100%          100%          100%          100%            0%           80%           17%          100%          100%          100%          100%            0%          100%           50%          100%           60%          100%          100%          100%            0%            0%          100%            0%           40%          100%           60%            0%          100%            0%          100%            0%          100%          100%          100%          100%            0%          100%          100%          100%           60%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           80%           86%          100%           40%            0%            0%          100%           29%            0%           67%          100%           71%          100%            0%          100%          100%          100%          100%            0%          100%            0%           60%          100%          100%            0%            0% 
+unicode_script                    100%          100%          100%            0%            0%           80%            0%          100%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%            0%            0%          100%            0%           40%          100%           60%          100%          100%            0%          100%            0%          100%          100%          100%          100%            0%          100%          100%          100%           60%          100%           20%            0%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           80%           86%          100%           10%            0%            0%          100%           29%            0%           50%          100%           57%          100%            0%           80%          100%          100%          100%            0%          100%            0%           60%          100%          100%            0%            0% 
+hex_string                        100%          100%          100%            0%           60%           60%            0%          100%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%            0%            0%          100%            0%           60%          100%           40%            0%          100%            0%          100%            0%          100%          100%           80%          100%            0%          100%          100%          100%           40%          100%            0%            0%          100%          100%          100%          100%           67%          100%          100%            0%          100%          100%          100%           86%          100%           30%            0%            0%          100%           29%            0%           50%          100%           57%          100%            0%           80%          100%          100%          100%            0%          100%            0%           60%          100%           80%            0%            0% 
+vowel_pattern                     100%          100%          100%            0%            0%           80%            0%          100%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%            0%            0%          100%            0%           40%          100%           60%            0%          100%            0%          100%           10%          100%          100%          100%          100%            0%          100%          100%          100%           60%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           80%           86%          100%           10%            0%            0%          100%           43%            0%           50%          100%           57%          100%            0%           80%          100%          100%          100%            0%          100%            0%           60%          100%          100%          100%            0% 
+character_frequency               100%          100%          100%            0%            0%           80%            0%          100%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%            0%            0%          100%            0%           40%          100%           60%            0%          100%            0%          100%           10%          100%          100%          100%          100%            0%          100%          100%          100%           60%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           80%           86%          100%           10%            0%            0%          100%           43%            0%           50%          100%           57%          100%            0%           80%          100%          100%          100%            0%          100%            0%           60%          100%          100%           83%            0% 
+symbol_ratio                      100%          100%          100%           40%            0%           80%            0%          100%          100%          100%          100%            0%          100%           50%          100%           80%          100%          100%          100%            0%            0%          100%            0%           40%          100%           60%            0%          100%            0%          100%            0%          100%          100%          100%          100%            0%          100%          100%          100%           60%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           80%           86%          100%           40%            0%            0%          100%           29%            0%           50%          100%           57%          100%            0%          100%          100%          100%          100%            0%          100%            0%           60%          100%          100%            0%            0% 
+word_length                       100%          100%          100%            0%           40%           80%            0%           80%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%            0%            0%          100%            0%           60%          100%           80%            0%          100%            0%          100%            0%          100%          100%          100%          100%           20%          100%          100%          100%           60%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           80%           86%          100%           10%            0%            0%          100%           29%            0%           50%          100%           57%          100%            0%           80%          100%          100%          100%            0%          100%            0%           60%          100%          100%            0%            0% 
 letter_frequency                  100%          100%          100%            0%           20%           80%            0%          100%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%            3%            0%          100%            0%           40%          100%           60%            0%          100%            0%          100%            0%          100%          100%          100%          100%           20%          100%          100%          100%           60%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           80%           86%          100%           10%            0%            0%          100%           29%            0%           50%          100%           57%          100%            0%           80%          100%          100%          100%            0%          100%            0%           60%          100%          100%            0%            0% 
 function_word_density             100%          100%          100%            0%            0%           80%            0%          100%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%            0%            0%          100%            0%           40%          100%           60%            0%          100%            0%          100%            0%          100%          100%          100%          100%           60%          100%          100%          100%           60%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           80%           86%          100%           10%            0%            0%          100%           29%            0%           50%          100%           57%          100%            0%           80%          100%          100%          100%            0%          100%            0%           60%          100%          100%            0%            0% 
-affix_detection                   100%          100%          100%            0%            0%           80%            0%          100%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%            0%            0%          100%            0%           40%          100%           60%            0%          100%            0%          100%            0%          100%          100%          100%          100%           60%          100%          100%          100%           60%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           80%           86%          100%           10%            0%            0%          100%           29%            0%           50%          100%           57%          100%            0%           80%          100%          100%          100%            0%          100%            0%           60%          100%          100%            0%            0% 
 word_collocation                  100%          100%          100%            0%            0%           80%            0%          100%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%            0%            0%          100%            0%           40%          100%           60%            0%          100%            0%          100%            0%          100%          100%          100%          100%           60%          100%          100%          100%           60%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           80%           86%          100%           10%            0%            0%          100%           29%            0%           50%          100%           57%          100%            0%           80%          100%          100%          100%            0%          100%            0%           60%          100%          100%            0%            0% 
-compression_ratio                 100%          100%          100%            0%            0%           80%            0%          100%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%            0%            0%          100%            0%           40%          100%           60%            0%          100%            0%          100%            0%          100%          100%          100%          100%            0%          100%          100%          100%           60%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           80%           86%          100%           10%            0%            0%          100%           29%            0%           50%          100%           57%          100%            0%           80%          100%          100%          100%            0%          100%            0%           60%          100%          100%            0%            0% 
+compression_ratio                 100%          100%          100%            0%            0%           80%            0%          100%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%            0%            0%          100%            0%           40%          100%           60%            0%          100%            0%          100%            0%          100%          100%          100%           67%           60%          100%          100%          100%           60%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           80%           86%          100%           10%            0%            0%          100%           29%            0%           50%          100%           57%          100%            0%           80%          100%          100%          100%            0%          100%            0%           60%          100%          100%            0%            0% 
+affix_detection                   100%          100%          100%            0%            0%           80%            0%          100%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%            0%            0%          100%            0%           40%          100%           60%            0%          100%            0%          100%            0%          100%          100%          100%          100%           20%          100%          100%          100%           60%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           80%           86%          100%           10%            0%            0%          100%           29%            0%           50%          100%           57%          100%            0%           80%          100%          100%          100%            0%          100%            0%           60%          100%          100%            0%            0% 
 zipf_conformity                   100%          100%          100%            0%            0%           80%            0%          100%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%            0%            0%          100%            0%           40%          100%           60%            0%          100%            0%          100%            0%          100%          100%          100%          100%            0%          100%          100%          100%           60%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           80%           86%          100%           10%            0%            0%          100%           29%            0%           50%          100%           57%          100%            0%           80%          100%          100%          100%            0%          100%            0%           60%          100%          100%            0%            0% 
-pattern_matching                  100%          100%          100%            0%            0%           80%            0%          100%          100%          100%          100%            0%          100%           50%          100%          100%          100%          100%          100%            0%            0%          100%            0%           40%          100%           60%            0%          100%            0%          100%            0%          100%          100%          100%          100%            0%          100%          100%          100%           60%          100%            0%            0%          100%          100%          100%          100%           50%          100%          100%            0%          100%          100%           80%           86%          100%           10%            0%            0%          100%           29%            0%           50%          100%           57%          100%            0%           80%          100%          100%          100%            0%          100%            0%           60%          100%          100%            0%            0% 
 
 ### MISCLASSIFIED EXAMPLES (Top 5 per strategy) ###
 
 
 markov_chain:
+  [random_characters] "xkcd82nf93mzp1"
+    Expected: garbled, Predicted: normal
   [random_characters] "!!!@@@###$$$%%%"
     Expected: garbled, Predicted: normal
   [random_characters] "abc123def456ghi789"
     Expected: garbled, Predicted: normal
-  [random_characters] "1a2b3c4d5e6f7g8h"
-    Expected: garbled, Predicted: normal
-  [random_characters] "##$$%%^^&&**(())"
-    Expected: garbled, Predicted: normal
-  [random_characters] "...---...---..."
-    Expected: garbled, Predicted: normal
-
-ensemble:
-  [random_characters] "!!!@@@###$$$%%%"
-    Expected: garbled, Predicted: normal
-  [random_characters] "abc123def456ghi789"
-    Expected: garbled, Predicted: normal
-  [random_characters] "abcabcabcabcabc"
+  [random_characters] "XYZABC123!@#"
     Expected: garbled, Predicted: normal
   [random_characters] "1a2b3c4d5e6f7g8h"
-    Expected: garbled, Predicted: normal
-  [random_characters] "##$$%%^^&&**(())"
     Expected: garbled, Predicted: normal
 
 ngram_frequency:
@@ -286,9 +295,21 @@ ngram_frequency:
     Expected: garbled, Predicted: normal
   [keyboard_mashing] "poiuytrewq"
     Expected: garbled, Predicted: normal
-  [random_characters] "7h3 qu1ck br0wn f0x"
-    Expected: normal, Predicted: garbled
+  [random_characters] "xkcd82nf93mzp1"
+    Expected: garbled, Predicted: normal
   [random_characters] "!!!@@@###$$$%%%"
     Expected: garbled, Predicted: normal
-  [random_characters] "abcabcabcabcabc"
+  [random_characters] "abc123def456ghi789"
+    Expected: garbled, Predicted: normal
+
+ensemble:
+  [keyboard_mashing] "qwertyuiop"
+    Expected: garbled, Predicted: normal
+  [keyboard_mashing] "poiuytrewq"
+    Expected: garbled, Predicted: normal
+  [random_characters] "xkcd82nf93mzp1"
+    Expected: garbled, Predicted: normal
+  [random_characters] "!!!@@@###$$$%%%"
+    Expected: garbled, Predicted: normal
+  [random_characters] "abc123def456ghi789"
     Expected: garbled, Predicted: normal

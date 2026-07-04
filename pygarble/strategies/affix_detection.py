@@ -26,7 +26,7 @@ class AffixDetectionStrategy(BaseStrategy):
     Parameters
     ----------
     min_affix_ratio : float, optional
-        Minimum ratio of words with affixes. Default is 0.05.
+        Minimum ratio of words with affixes. Default is 0.2.
 
     min_word_length : int, optional
         Minimum word length to analyze. Default is 4.
@@ -67,7 +67,7 @@ class AffixDetectionStrategy(BaseStrategy):
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
-        self.min_affix_ratio = kwargs.get("min_affix_ratio", 0.05)
+        self.min_affix_ratio = kwargs.get("min_affix_ratio", 0.2)
         self.min_word_length = kwargs.get("min_word_length", 4)
         self.min_analyzable_words = kwargs.get("min_analyzable_words", 5)
         self.min_stem_length = kwargs.get("min_stem_length", 2)
@@ -82,23 +82,35 @@ class AffixDetectionStrategy(BaseStrategy):
         words = re.findall(r"[a-zA-Z]+", text.lower())
         return [w for w in words if len(w) >= self.min_word_length]
 
+    @staticmethod
+    def _plausible_stem(stem: str) -> bool:
+        """A real English stem contains at least one vowel; random
+        consonant strings that happen to end in 'er'/'ed' do not."""
+        return any(c in "aeiouy" for c in stem)
+
     def _has_prefix(self, word: str) -> bool:
         """Check if word starts with a known prefix with sufficient stem."""
         for prefix in self.PREFIXES:
             if word.startswith(prefix) and len(word) - len(prefix) >= self.min_stem_length:
-                return True
+                if self._plausible_stem(word[len(prefix):]):
+                    return True
         return False
 
     def _has_suffix(self, word: str) -> bool:
         """Check if word ends with a known suffix with sufficient stem."""
         for suffix in self.SUFFIXES:
             if word.endswith(suffix) and len(word) - len(suffix) >= self.min_stem_length:
-                return True
+                if self._plausible_stem(word[:-len(suffix)]):
+                    return True
         return False
 
     def _has_affix(self, word: str) -> bool:
         """Check if word contains any recognizable affix."""
         return self._has_prefix(word) or self._has_suffix(word)
+
+    def applicable(self, text: str) -> bool:
+        """Affix statistics need a minimum number of analyzable words."""
+        return len(self._tokenize(text)) >= self.min_analyzable_words
 
     def _predict_proba_impl(self, text: str) -> float:
         words = self._tokenize(text)
@@ -109,21 +121,24 @@ class AffixDetectionStrategy(BaseStrategy):
         affix_count = sum(1 for w in words if self._has_affix(w))
         ratio = affix_count / len(words)
 
-        # Many words with zero affixes
+        if ratio >= self.min_affix_ratio:
+            return 0.0
+
+        # Zero affixes is a weak signal by itself: legitimate name lists
+        # and technical jargon may lack affixes entirely, so it must not
+        # cross the 0.5 decision threshold without volume behind it.
         if affix_count == 0:
             if len(words) >= 20:
-                return 0.75
+                return 0.5
             if len(words) >= 10:
-                return 0.65
+                return 0.45
             # 5-9 words, zero affixes: mild signal
-            return 0.45
+            return 0.35
 
-        # Below threshold
-        if ratio < self.min_affix_ratio:
-            deficit = (self.min_affix_ratio - ratio) / self.min_affix_ratio
-            return min(0.7, 0.3 + deficit * 0.25)
-
-        return 0.0
-
-    def _predict_impl(self, text: str) -> bool:
-        return self._predict_proba_impl(text) >= 0.5
+        # Some affixes but below the minimum ratio: graded score that
+        # grows with the deficit and with the amount of evidence
+        deficit = (self.min_affix_ratio - ratio) / self.min_affix_ratio
+        score = 0.3 + deficit * 0.25
+        if len(words) >= 20:
+            score += 0.15
+        return min(0.75, score)

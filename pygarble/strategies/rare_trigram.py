@@ -6,6 +6,8 @@ essentially never occur in English. Uses a curated list of impossible
 combinations for high precision.
 """
 
+import re
+
 from .base import BaseStrategy
 
 
@@ -32,7 +34,10 @@ class RareTrigramStrategy(BaseStrategy):
         "bxb", "bxc", "bxd", "bxf", "bxg", "bxh", "bxj", "bxk", "bxl",
         "bxm", "bxn", "bxp", "bxq", "bxr", "bxs", "bxt", "bxv", "bxw",
         "bxz",
-        "jjj", "kkk", "qqq", "vvv", "www", "xxx", "zzz",
+        # NOTE: "www", "xxx", "zzz", "kkk" are deliberately absent --
+        # they occur in real-world text (URLs, ratings, snoring, the
+        # acronym) and caused false positives.
+        "jjj", "qqq", "vvv",
         "jjk", "jjl", "jjm", "jjn", "jjp", "jjq", "jjr", "jjs", "jjt",
         "jjv", "jjw", "jjx", "jjy", "jjz",
         "xjx", "xkx", "xqx", "xvx", "xwx", "xzx",
@@ -78,25 +83,26 @@ class RareTrigramStrategy(BaseStrategy):
         self.min_length = min_length
 
     def _predict_proba_impl(self, text: str) -> float:
-        # Extract alphabetic characters only
-        alpha_text = "".join(c.lower() for c in text if c.isalpha())
+        # Tokenize into words: trigrams must not cross word boundaries,
+        # otherwise adjacent innocent words form phantom "impossible"
+        # trigrams (e.g. "visit www" -> "tww").
+        words = re.findall(r"[a-z]+", self._fold_diacritics(text).lower())
 
-        if len(alpha_text) < self.min_length:
+        alpha_length = sum(len(w) for w in words)
+        if alpha_length < self.min_length:
             return 0.0
 
-        # Count impossible trigrams
+        # Count impossible trigrams within each word
         impossible_count = 0
-        total_trigrams = len(alpha_text) - 2
+        total_trigrams = 0
 
-        if total_trigrams <= 0:
-            return 0.0
+        for word in words:
+            for i in range(len(word) - 2):
+                total_trigrams += 1
+                if word[i:i + 3] in self.IMPOSSIBLE_TRIGRAMS:
+                    impossible_count += 1
 
-        for i in range(total_trigrams):
-            trigram = alpha_text[i:i+3]
-            if trigram in self.IMPOSSIBLE_TRIGRAMS:
-                impossible_count += 1
-
-        if impossible_count == 0:
+        if total_trigrams <= 0 or impossible_count == 0:
             return 0.0
 
         ratio = impossible_count / total_trigrams
@@ -107,6 +113,3 @@ class RareTrigramStrategy(BaseStrategy):
 
         # Low score for occasional matches
         return ratio / self.threshold * 0.4
-
-    def _predict_impl(self, text: str) -> bool:
-        return self._predict_proba_impl(text) >= 0.5

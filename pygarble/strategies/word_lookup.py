@@ -17,7 +17,7 @@ class WordLookupStrategy(BaseStrategy):
     Detect garbled text by checking words against a dictionary.
 
     This strategy tokenizes input text and checks what proportion
-    of words appear in the embedded English word set (50,000 words
+    of words appear in the embedded English word set (49,330 words
     derived from Peter Norvig's word frequency list).
 
     This is a dependency-free alternative to EnglishWordValidationStrategy
@@ -54,15 +54,23 @@ class WordLookupStrategy(BaseStrategy):
             raise ValueError("min_word_length must be at least 1")
 
     def _tokenize(self, text: str) -> List[str]:
-        """Extract words from text."""
-        # Find all alphabetic word sequences
-        words = re.findall(r"[a-zA-Z]+", text.lower())
+        """Extract words from text, preserving case.
+
+        Diacritics are folded first so accented words (café) match
+        their ASCII dictionary entries (cafe) instead of being split
+        at the accent.
+        """
+        folded = self._fold_diacritics(text)
+        words = re.findall(r"[a-zA-Z]+", folded)
         # Filter by minimum length
         return [w for w in words if len(w) >= self.min_word_length]
 
     def _compute_unknown_ratio(self, text: str) -> float:
         """
-        Compute the ratio of words not found in the dictionary.
+        Compute the (weighted) ratio of words not found in the dictionary.
+
+        Unknown Titlecase words are likely proper nouns (names, brands,
+        places) rather than gibberish, so they count at half weight.
 
         Returns a value between 0 and 1 where higher means more
         unknown words (more likely garbled).
@@ -72,12 +80,13 @@ class WordLookupStrategy(BaseStrategy):
         if not words:
             return 0.0  # No words to check
 
-        unknown_count = sum(1 for w in words if w not in ENGLISH_WORDS)
-        return unknown_count / len(words)
+        unknown_weight = 0.0
+        for word in words:
+            if word.lower() in ENGLISH_WORDS:
+                continue
+            unknown_weight += 0.5 if word.istitle() else 1.0
 
-    def _predict_impl(self, text: str) -> bool:
-        proba = self._predict_proba_impl(text)
-        return proba >= 0.5
+        return unknown_weight / len(words)
 
     def _predict_proba_impl(self, text: str) -> float:
         """

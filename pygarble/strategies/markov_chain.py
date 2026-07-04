@@ -64,13 +64,11 @@ class MarkovChainStrategy(BaseStrategy):
         or None if the text is too short to analyze.
         Higher (less negative) values indicate more English-like text.
         """
-        # Normalize: lowercase and add word boundaries
-        text = text.lower()
-
-        # Extract only alphabetic characters and spaces
-        cleaned = "".join(c if c.isalpha() or c.isspace() else " " for c in text)
-        # Collapse multiple spaces
-        cleaned = " ".join(cleaned.split())
+        # Score only words the dictionary can't vouch for: real-but-rare
+        # words ("rhythms", "lynx"), acronyms, and URLs would otherwise
+        # register as unlikely character sequences. _novel_words also
+        # folds accents so the ASCII bigram model applies (café -> cafe).
+        cleaned = " ".join(self._novel_words(text))
 
         if len(cleaned) < self.min_length:
             return None
@@ -93,10 +91,6 @@ class MarkovChainStrategy(BaseStrategy):
 
         # Return average log probability per bigram
         return total_log_prob / num_bigrams
-
-    def _predict_impl(self, text: str) -> bool:
-        proba = self._predict_proba_impl(text)
-        return proba >= 0.5
 
     def _predict_proba_impl(self, text: str) -> float:
         """

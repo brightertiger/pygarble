@@ -1,16 +1,21 @@
 import math
 from collections import Counter
-from typing import Set
+from typing import List
 
 from .base import BaseStrategy
+from ..data import BIGRAM_LOG_PROBS, DEFAULT_LOG_PROB
 
+# Expected character-level entropy of English text (~4.1 bits). Observed
+# entropy is normalized against this (capped by the maximum entropy the
+# text length allows) rather than the text's own alphabet size, so that
+# any evenly-distributed text does not trivially score as "high entropy".
+ENGLISH_CHAR_ENTROPY = 4.1
 
-COMMON_BIGRAMS: Set[str] = {
-    "th", "he", "in", "en", "nt", "re", "er", "an", "ti", "es",
-    "on", "at", "se", "nd", "or", "ar", "al", "te", "co", "de",
-    "to", "ra", "et", "ed", "it", "sa", "em", "ro", "of", "is",
-    "ou", "le", "ve", "ng", "ha", "as", "ma", "ll", "io", "ea",
-}
+# Average per-bigram log-probabilities: typical English sits around -3;
+# random keyboard mash drifts toward DEFAULT_LOG_PROB. Map this range
+# onto [0, 1].
+_BIGRAM_SCORE_FLOOR = -4.5
+_BIGRAM_SCORE_RANGE = 3.0
 
 
 class EntropyBasedStrategy(BaseStrategy):
@@ -26,31 +31,40 @@ class EntropyBasedStrategy(BaseStrategy):
 
         return entropy
 
-    def _get_bigrams(self, text: str) -> list:
-        alpha_text = "".join(c.lower() for c in text if c.isalpha())
-        return [alpha_text[i:i+2] for i in range(len(alpha_text) - 1)]
+    def _get_bigrams(self, text: str) -> List[str]:
+        bigrams: List[str] = []
+        for word in self._fold_diacritics(text).lower().split():
+            alpha_word = "".join(c for c in word if c.isalpha())
+            bigrams.extend(
+                alpha_word[i:i+2] for i in range(len(alpha_word) - 1)
+            )
+        return bigrams
 
-    def _get_common_bigram_ratio(self, text: str) -> float:
+    def _get_bigram_score(self, text: str) -> float:
         bigrams = self._get_bigrams(text)
         if not bigrams:
             return 0.0
-        common_count = sum(1 for bg in bigrams if bg in COMMON_BIGRAMS)
-        return common_count / len(bigrams)
 
-    def _predict_impl(self, text: str) -> bool:
-        return self._predict_proba_impl(text) >= 0.5
+        avg_log_prob = sum(
+            BIGRAM_LOG_PROBS.get(bg, DEFAULT_LOG_PROB) for bg in bigrams
+        ) / len(bigrams)
+
+        score = (-avg_log_prob + _BIGRAM_SCORE_FLOOR) / _BIGRAM_SCORE_RANGE
+        return min(max(score, 0.0), 1.0)
 
     def _predict_proba_impl(self, text: str) -> float:
-        char_counts = self._get_alpha_char_counts(text)
+        char_counts = self._get_alpha_char_counts(self._fold_diacritics(text))
         if not char_counts:
             return 0.0
 
+        total_chars = sum(char_counts.values())
         entropy = self._calculate_entropy(char_counts)
-        max_entropy = math.log2(len(char_counts)) if char_counts else 1.0
-        normalized_entropy = entropy / max_entropy if max_entropy > 0 else 0.0
+        max_entropy = ENGLISH_CHAR_ENTROPY
+        if total_chars > 1:
+            max_entropy = min(ENGLISH_CHAR_ENTROPY, math.log2(total_chars))
+        normalized_entropy = min(entropy / max_entropy, 1.0)
         entropy_score = 1.0 - normalized_entropy
 
-        bigram_ratio = self._get_common_bigram_ratio(text)
-        bigram_score = 1.0 - min(bigram_ratio / 0.3, 1.0)
+        bigram_score = self._get_bigram_score(text)
 
-        return max(entropy_score * 0.4 + bigram_score * 0.6, min(entropy_score, bigram_score))
+        return entropy_score * 0.4 + bigram_score * 0.6

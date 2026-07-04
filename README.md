@@ -32,15 +32,30 @@ results = detector.predict(texts)      # [False, True, False]
 
 ## Performance
 
-Tested on 1,644 samples (dictionary words, sentences, random strings, keyboard mashing):
+Tested on 1,644 samples (dictionary words, sentences, random strings, keyboard mashing) via `regression/benchmark.py`:
 
 | Detector | Precision | Recall | F1 Score |
 |----------|-----------|--------|----------|
-| **EnsembleDetector()** | **99.5%** | 78.5% | 87.8% |
-| MARKOV_CHAIN | 98.8% | 86.4% | 92.2% |
-| BIGRAM_PROBABILITY | 100% | 33.6% | 50.3% |
+| **EnsembleDetector()** | **100%** | 74.9% | 85.6% |
+| MARKOV_CHAIN | 99.2% | 84.3% | 91.2% |
+| NGRAM_FREQUENCY | 97.6% | 75.0% | 84.8% |
+| LOG_LIKELIHOOD_RATIO | 100% | 63.4% | 77.6% |
+| WORD_ANOMALY | 100% | 52.8% | 69.1% |
 
-The default ensemble prioritizes **precision** (minimizing false positives) over recall.
+The default ensemble prioritizes **precision** (minimizing false positives) over recall. For broader coverage of specialist domains (hashes, mojibake, repeated junk, homoglyphs) at slightly more false-positive risk, combine the precise specialists with `voting="any"`:
+
+```python
+# High-recall configuration: each member is individually high-precision,
+# any single detection flags the text
+detector = EnsembleDetector(
+    strategies=[
+        Strategy.LOG_LIKELIHOOD_RATIO, Strategy.WORD_ANOMALY,
+        Strategy.KEYBOARD_ADJACENCY, Strategy.MOJIBAKE,
+        Strategy.HEX_STRING, Strategy.REPETITION, Strategy.UNICODE_SCRIPT,
+    ],
+    voting="any",
+)
+```
 
 ## Detection Strategies
 
@@ -48,13 +63,18 @@ The default ensemble prioritizes **precision** (minimizing false positives) over
 
 | Strategy | Description | Precision |
 |----------|-------------|-----------|
-| `MARKOV_CHAIN` | Character transition probabilities trained on English | 98.8% |
-| `NGRAM_FREQUENCY` | Common English trigram analysis | 96.3% |
-| `WORD_LOOKUP` | Dictionary of 50K English words | 92.7% |
-| `BIGRAM_PROBABILITY` | Impossible letter pairs (qx, jj, zx) | 100% |
-| `LETTER_POSITION` | Letters in impossible positions | 99.0% |
+| `MARKOV_CHAIN` | Character transition probabilities trained on English | 99.2% |
+| `NGRAM_FREQUENCY` | Common English trigram analysis | 97.6% |
+| `LOG_LIKELIHOOD_RATIO` | English-vs-random two-model bigram comparison | 100% |
+| `WORD_ANOMALY` | Per-word scoring; catches one garbage token in a valid sentence | 100% |
+| `WORD_LOOKUP` | Dictionary of 49K English words | high recall |
 
 ### All Available Strategies
+
+**Statistical Models (v0.7.0)**
+- `LOG_LIKELIHOOD_RATIO` - Log-likelihood ratio of English vs uniform character models (length-normalized)
+- `WORD_ANOMALY` - Fraction of individually-anomalous words; robust to garbage embedded in valid text
+- `KEYBOARD_ADJACENCY` - Physical key-adjacency walks (catches mash the trigram lists miss)
 
 **High Precision (v0.5.0)**
 - `BIGRAM_PROBABILITY` - Impossible letter pairs
@@ -119,7 +139,7 @@ Combine multiple strategies for better accuracy:
 from pygarble import EnsembleDetector, Strategy
 
 # Default ensemble (recommended)
-# Uses: MARKOV_CHAIN, WORD_LOOKUP, NGRAM_FREQUENCY, BIGRAM_PROBABILITY, LETTER_POSITION
+# Uses: MARKOV_CHAIN, NGRAM_FREQUENCY, WORD_LOOKUP, LOG_LIKELIHOOD_RATIO, WORD_ANOMALY
 # Voting: majority
 detector = EnsembleDetector()
 

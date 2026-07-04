@@ -32,6 +32,9 @@ from .strategies import (
     AffixDetectionStrategy,
     ZipfConformityStrategy,
     WordCollocationStrategy,
+    LogLikelihoodRatioStrategy,
+    WordAnomalyStrategy,
+    KeyboardAdjacencyStrategy,
 )
 
 
@@ -64,6 +67,9 @@ class Strategy(Enum):
     AFFIX_DETECTION = "affix_detection"
     ZIPF_CONFORMITY = "zipf_conformity"
     WORD_COLLOCATION = "word_collocation"
+    LOG_LIKELIHOOD_RATIO = "log_likelihood_ratio"
+    WORD_ANOMALY = "word_anomaly"
+    KEYBOARD_ADJACENCY = "keyboard_adjacency"
 
 
 STRATEGY_MAP: Dict[Strategy, Type[BaseStrategy]] = {
@@ -95,6 +101,9 @@ STRATEGY_MAP: Dict[Strategy, Type[BaseStrategy]] = {
     Strategy.AFFIX_DETECTION: AffixDetectionStrategy,
     Strategy.ZIPF_CONFORMITY: ZipfConformityStrategy,
     Strategy.WORD_COLLOCATION: WordCollocationStrategy,
+    Strategy.LOG_LIKELIHOOD_RATIO: LogLikelihoodRatioStrategy,
+    Strategy.WORD_ANOMALY: WordAnomalyStrategy,
+    Strategy.KEYBOARD_ADJACENCY: KeyboardAdjacencyStrategy,
 }
 
 
@@ -130,8 +139,23 @@ class GarbleDetector:
         return self._strategy_instance.predict_proba(text)
 
     def _process_text_predict(self, text: str) -> bool:
+        # Empty/whitespace text is never garbled, even at threshold=0.0.
+        if not text or not text.strip():
+            return False
         proba = self._strategy_instance.predict_proba(text)
         return proba >= self.threshold
+
+    def applicable(self, text: str) -> bool:
+        return self._strategy_instance.applicable(text)
+
+    @staticmethod
+    def _validate_batch(texts: List[str]) -> None:
+        for i, text in enumerate(texts):
+            if not isinstance(text, str):
+                raise TypeError(
+                    f"all elements must be strings; element {i} is "
+                    f"{type(text).__name__}"
+                )
 
     def _process_batch_threaded(
         self, texts: List[str], process_func: Callable[[str], Any]
@@ -152,18 +176,21 @@ class GarbleDetector:
                     result = future.result(timeout=timeout_per_text)
                     results.append(result)
                 except concurrent.futures.TimeoutError:
-                    # Return default value on timeout
-                    results.append(False if process_func == self._process_text_predict else 0.0)
-                except Exception:
-                    # Return default value on any exception
-                    results.append(False if process_func == self._process_text_predict else 0.0)
+                    # Note: this bounds result collection, not wall-clock
+                    # time — the worker thread cannot be cancelled and the
+                    # executor still waits for it on shutdown.
+                    results.append(
+                        False
+                        if process_func == self._process_text_predict
+                        else 0.0
+                    )
             return results
 
     def predict(self, X: Union[str, List[str]]) -> Union[bool, List[bool]]:
         if isinstance(X, str):
-            proba = self._strategy_instance.predict_proba(X)
-            return proba >= self.threshold
+            return self._process_text_predict(X)
         elif isinstance(X, list):
+            self._validate_batch(X)
             return self._process_batch_threaded(X, self._process_text_predict)
         else:
             raise TypeError("Input must be a string or list of strings")
@@ -174,6 +201,7 @@ class GarbleDetector:
         if isinstance(X, str):
             return self._strategy_instance.predict_proba(X)
         elif isinstance(X, list):
+            self._validate_batch(X)
             return self._process_batch_threaded(X, self._process_text_proba)
         else:
             raise TypeError("Input must be a string or list of strings")
@@ -199,14 +227,17 @@ class EnsembleDetector:
             raise ValueError("weights required when voting='weighted'")
 
         if strategies is None:
-            # High-precision default: uses strategies with 90%+ precision
-            # Combined with majority voting for reliable detection
+            # High-precision default: majority vote over the five
+            # highest-F1 strategies (regression/benchmark.py, 1,644
+            # samples: 100% precision, ~75% recall). For coverage of
+            # specialist domains (hex/hashes, mojibake, repetition,
+            # homoglyphs) add those strategies with voting="any".
             strategies = [
-                Strategy.MARKOV_CHAIN,       # 95% precision, 61% recall
-                Strategy.WORD_LOOKUP,        # 89% precision, 51% recall
-                Strategy.NGRAM_FREQUENCY,    # 88% precision, 47% recall
-                Strategy.BIGRAM_PROBABILITY, # 100% precision, 25% recall
-                Strategy.LETTER_POSITION,    # 93% precision, 35% recall
+                Strategy.MARKOV_CHAIN,          # 99% precision, 84% recall
+                Strategy.NGRAM_FREQUENCY,       # 98% precision, 75% recall
+                Strategy.WORD_LOOKUP,           # high recall, moderate precision
+                Strategy.LOG_LIKELIHOOD_RATIO,  # 100% precision, 63% recall
+                Strategy.WORD_ANOMALY,          # 100% precision, 53% recall
             ]
 
         if not strategies:
@@ -246,16 +277,35 @@ class EnsembleDetector:
         else:
             raise TypeError("Input must be a string or list of strings")
 
+    def _applicable_detectors(self, text: str) -> List[tuple]:
+        """(detector, weight) pairs for strategies able to judge this text.
+
+        Strategies abstain (via BaseStrategy.applicable) when the input is
+        too short for their statistics to mean anything; counting their 0.0
+        as a "clean" vote would dilute the ensemble.
+        """
+        pairs = [
+            (d, w)
+            for d, w in zip(self._detectors, self.weights)
+            if d.applicable(text)
+        ]
+        return pairs
+
     def _predict_single(self, text: str) -> bool:
+        if not text or not text.strip():
+            return False
+        detectors = [d for d, _ in self._applicable_detectors(text)]
+        if not detectors:
+            return False
         if self.voting == "majority":
-            votes = sum(d.predict(text) for d in self._detectors)
-            return votes > len(self._detectors) / 2
+            votes = sum(d.predict(text) for d in detectors)
+            return votes > len(detectors) / 2
         elif self.voting == "any":
             # High recall: if ANY strategy flags as garbled, return True
-            return any(d.predict(text) for d in self._detectors)
+            return any(d.predict(text) for d in detectors)
         elif self.voting == "all":
             # High precision: ALL strategies must agree
-            return all(d.predict(text) for d in self._detectors)
+            return all(d.predict(text) for d in detectors)
         else:
             proba = self._predict_proba_single(text)
             return proba >= self.threshold
@@ -279,19 +329,22 @@ class EnsembleDetector:
             raise TypeError("Input must be a string or list of strings")
 
     def _predict_proba_single(self, text: str) -> float:
-        if not self._detectors:
-            return 0.0  # Defensive check (should never happen due to validation)
+        pairs = self._applicable_detectors(text)
+        if not pairs:
+            return 0.0
 
-        probas = [d.predict_proba(text) for d in self._detectors]
+        scored = [(d.predict_proba(text), w) for d, w in pairs]
 
         if self.voting == "weighted":
-            total_weight = sum(self.weights)
-            return sum(p * w for p, w in zip(probas, self.weights)) / total_weight
+            total_weight = sum(w for _, w in scored)
+            if total_weight == 0:
+                return 0.0
+            return sum(p * w for p, w in scored) / total_weight
         elif self.voting == "any":
             # Return max probability (most suspicious signal)
-            return max(probas)
+            return max(p for p, _ in scored)
         elif self.voting == "all":
             # Return min probability (least suspicious signal)
-            return min(probas)
+            return min(p for p, _ in scored)
         else:
-            return sum(probas) / len(probas)
+            return sum(p for p, _ in scored) / len(scored)

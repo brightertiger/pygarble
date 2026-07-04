@@ -32,6 +32,7 @@ class VowelPatternStrategy(BaseStrategy):
         "oeia",  # onomatopoeia
         "oeio",  # part of onomatopoeia
         "ueue",  # queue
+        "ueuei", # queueing
         "uee",   # queen (not really 3 vowels but included for safety)
         "ooe",   # wooed
         "aie",   # gaiety
@@ -59,12 +60,15 @@ class VowelPatternStrategy(BaseStrategy):
         self.min_length = min_length
 
     def _get_vowel_sequences(self, text: str):
-        """Extract all vowel sequences from text."""
-        alpha_text = "".join(c.lower() for c in text if c.isalpha())
+        """Extract vowel sequences, detected per word.
+
+        Any non-vowel character (consonant, space, punctuation) ends the
+        current run, so vowel runs never merge across word boundaries.
+        """
         sequences = []
         current_seq = []
 
-        for c in alpha_text:
+        for c in text.lower():
             if c in self.VOWELS:
                 current_seq.append(c)
             else:
@@ -78,15 +82,13 @@ class VowelPatternStrategy(BaseStrategy):
         return sequences
 
     def _is_valid_vowel_sequence(self, seq: str) -> bool:
-        """Check if a vowel sequence is valid in English."""
-        # Exact match
-        if seq in self.VALID_LONG_VOWELS:
-            return True
-        # Check if the sequence contains a known valid pattern
-        for valid in self.VALID_LONG_VOWELS:
-            if valid in seq:
-                return True
-        return False
+        """Check if a vowel sequence is valid in English.
+
+        The whitelist entry must match the entire run: substring matching
+        would whitelist arbitrary garbage that merely contains a valid
+        pattern (e.g. 'aeiouaeiou' contains 'iou').
+        """
+        return seq in self.VALID_LONG_VOWELS
 
     def _predict_proba_impl(self, text: str) -> float:
         alpha_text = "".join(c.lower() for c in text if c.isalpha())
@@ -117,6 +119,3 @@ class VowelPatternStrategy(BaseStrategy):
         base_score += (invalid_count - 1) * 0.15
 
         return min(1.0, base_score)
-
-    def _predict_impl(self, text: str) -> bool:
-        return self._predict_proba_impl(text) >= 0.5

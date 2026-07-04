@@ -50,7 +50,7 @@ class LetterFrequencyStrategy(BaseStrategy):
         Initialize the letter frequency strategy.
 
         Args:
-            deviation_threshold: Standard deviations from norm (default 3.0)
+            deviation_threshold: Standard deviations from norm (default 1.0)
                                 Higher = more conservative (fewer false positives)
             min_length: Minimum text length to analyze (default 20)
         """
@@ -60,7 +60,7 @@ class LetterFrequencyStrategy(BaseStrategy):
 
     def _calculate_chi_squared(self, text: str) -> float:
         """Calculate chi-squared statistic for letter frequencies."""
-        alpha_text = "".join(c.lower() for c in text if c.isalpha())
+        alpha_text = "".join(self._novel_words(text))
 
         if len(alpha_text) < self.min_length:
             return 0.0
@@ -73,16 +73,18 @@ class LetterFrequencyStrategy(BaseStrategy):
             observed_count = observed.get(letter, 0)
             expected_count = (expected_pct / 100) * total
 
-            # Only include if expected count is meaningful
-            if expected_count >= 1:
-                diff = observed_count - expected_count
-                chi_squared += (diff ** 2) / expected_count
+            # Clamp tiny expected counts instead of skipping rare letters
+            # (j/x/q/z): an observed surplus of rare letters in short text
+            # must still register as deviation
+            expected_count = max(expected_count, 0.5)
+            diff = observed_count - expected_count
+            chi_squared += (diff ** 2) / expected_count
 
         return chi_squared
 
     def _check_extreme_patterns(self, text: str) -> float:
         """Check for extremely abnormal letter patterns."""
-        alpha_text = "".join(c.lower() for c in text if c.isalpha())
+        alpha_text = "".join(self._novel_words(text))
 
         if len(alpha_text) < self.min_length:
             return 0.0
@@ -120,7 +122,7 @@ class LetterFrequencyStrategy(BaseStrategy):
         return min(1.0, score)
 
     def _predict_proba_impl(self, text: str) -> float:
-        alpha_text = "".join(c.lower() for c in text if c.isalpha())
+        alpha_text = "".join(self._novel_words(text))
 
         if len(alpha_text) < self.min_length:
             return 0.0
@@ -142,6 +144,3 @@ class LetterFrequencyStrategy(BaseStrategy):
             return min(1.0, 0.4 + (normalized - self.deviation_threshold) * 0.1)
 
         return max(extreme_score, normalized / self.deviation_threshold * 0.3)
-
-    def _predict_impl(self, text: str) -> bool:
-        return self._predict_proba_impl(text) >= 0.5

@@ -20,9 +20,9 @@ class LetterPositionStrategy(BaseStrategy):
 
     # Letters that essentially NEVER end English words
     # Being very conservative - only including truly impossible endings
+    # Note: "q" excluded - proper nouns like Iraq, Compaq end in 'q'
     NEVER_END = frozenset({
         "j",  # No standard English words end in 'j'
-        "q",  # No standard English words end in 'q'
     })
 
     # Letter pairs that never START English words
@@ -33,28 +33,34 @@ class LetterPositionStrategy(BaseStrategy):
         "bw", "bx",
         "cb", "cd", "cf", "cg", "cj", "ck", "cm", "cn", "cp", "cq",
         "cv", "cw", "cx", "cz",
-        "db", "dc", "df", "dg", "dj", "dk", "dl", "dm", "dn", "dp",
-        "dq", "dt", "dv", "dx", "dz",
-        "fb", "fc", "fd", "fg", "fj", "fk", "fm", "fn", "fp", "fq",
+        "db", "dc", "df", "dg", "dk", "dl", "dm", "dn", "dp",
+        "dq", "dt", "dx", "dz",
+        # Skip "dj" - valid in djinn, Djibouti; "dv" - Dvorak
+        "fc", "fd", "fg", "fj", "fk", "fm", "fn", "fp", "fq",
         "fv", "fw", "fx", "fz",
+        # Skip "fb" - FBI and similar acronyms
         "gb", "gc", "gd", "gf", "gj", "gk", "gm", "gp", "gq",
         "gv", "gw", "gx", "gz",
         # Skip "gn" - valid in gnocchi, gnat, gnaw, gnome
-        "hb", "hc", "hd", "hf", "hg", "hj", "hk", "hl", "hm", "hn",
-        "hp", "hq", "hr", "hv", "hw", "hx", "hz",
+        "hb", "hc", "hd", "hf", "hg", "hj", "hk", "hl", "hn",
+        "hp", "hq", "hv", "hw", "hx", "hz",
         # Skip "hs", "ht" - valid in technical contexts
+        # Skip "hm" - hmm; "hr" - hryvnia, HR acronym
         "jb", "jc", "jd", "jf", "jg", "jh", "jj", "jk", "jl", "jm",
         "jn", "jp", "jq", "jr", "js", "jt", "jv", "jw", "jx", "jy", "jz",
         "kb", "kc", "kd", "kf", "kg", "kj", "kk", "km", "kp", "kq",
         "kt", "kv", "kx", "kz",
         # Skip "ks" - valid in some words
-        "lb", "lc", "ld", "lf", "lg", "lh", "lj", "lk", "lm", "ln",
+        "lc", "ld", "lf", "lg", "lh", "lj", "lk", "lm", "ln",
         "lp", "lq", "lr", "ls", "lt", "lv", "lw", "lx", "lz",
-        "mb", "mc", "md", "mf", "mg", "mh", "mj", "mk", "ml", "mm",
-        "mp", "mq", "mr", "mt", "mv", "mw", "mx", "mz",
+        # Skip "lb" - lbs
+        "md", "mf", "mg", "mh", "mj", "mk", "ml", "mm",
+        "mp", "mq", "mt", "mv", "mw", "mx", "mz",
         # Skip "ms" - valid in technical
-        "nb", "nc", "nd", "nf", "ng", "nh", "nj", "nk", "nl", "nm",
-        "nn", "np", "nq", "nr", "ns", "nt", "nv", "nw", "nx", "nz",
+        # Skip "mb" - mbira; "mc" - McDonald; "mr" - Mr, Mrs
+        "nc", "nd", "nf", "nh", "nj", "nl", "nm",
+        "nn", "np", "nq", "nr", "ns", "nv", "nw", "nx", "nz",
+        # Skip "ng" - Nguyen; "nb" - NBA/NBC; "nk" - NKVD; "nt" - nth
         "pb", "pc", "pd", "pf", "pg", "pj", "pk", "pm", "pp", "pq",
         "pv", "pw", "px", "pz",
         # Skip "pn" - valid in pneumonia, pneumatic
@@ -67,14 +73,15 @@ class LetterPositionStrategy(BaseStrategy):
         "rp", "rq", "rr", "rs", "rt", "rv", "rw", "rx", "rz",
         "sb", "sd", "sf", "sg", "sj", "sv", "sx", "sz",
         "tb", "td", "tf", "tg", "tj", "tk", "tl", "tm", "tn",
-        "tp", "tq", "tt", "tv", "tx", "tz",
-        # Skip "tc", "ts" - valid in technical, tsar
+        "tp", "tq", "tt", "tx", "tz",
+        # Skip "tc", "ts" - valid in technical, tsar; "tv" - TV
         "vc", "vd", "vf", "vg", "vh", "vj", "vk", "vl", "vm", "vn",
         "vp", "vq", "vr", "vs", "vt", "vv", "vw", "vx", "vz",
         "wb", "wc", "wd", "wf", "wg", "wj", "wk", "wl", "wm", "wn",
         "wp", "wq", "ws", "wt", "wv", "ww", "wx", "wz",
-        "xb", "xc", "xd", "xf", "xg", "xh", "xj", "xk", "xl", "xm",
+        "xc", "xd", "xf", "xg", "xh", "xj", "xk", "xl", "xm",
         "xn", "xp", "xq", "xr", "xs", "xt", "xv", "xw", "xx", "xz",
+        # Skip "xb" - Xbox
         "yb", "yc", "yd", "yf", "yg", "yh", "yj", "yk", "yl", "ym",
         "yn", "yp", "yq", "yr", "ys", "yt", "yv", "yw", "yx", "yz",
         "zb", "zc", "zd", "zf", "zg", "zj", "zk", "zl", "zm", "zn",
@@ -141,6 +148,14 @@ class LetterPositionStrategy(BaseStrategy):
 
         ratio = violation_count / total_checks
 
+        # A single violation in a single word is weak evidence: proper
+        # nouns and acronyms can break positional rules once. Require
+        # at least 2 violations or 2 words before scoring above 0.5.
+        if violation_count < 2 and len(words) < 2:
+            if ratio > 0:
+                return min(0.4, ratio / self.threshold * 0.4)
+            return 0.0
+
         # Scale to probability
         if ratio >= self.threshold:
             return min(1.0, 0.5 + ratio)
@@ -148,6 +163,3 @@ class LetterPositionStrategy(BaseStrategy):
             return ratio / self.threshold * 0.4
 
         return 0.0
-
-    def _predict_impl(self, text: str) -> bool:
-        return self._predict_proba_impl(text) >= 0.5

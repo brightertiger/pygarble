@@ -5,6 +5,7 @@ Detects text with high proportion of special characters, numbers,
 or non-alphabetic content.
 """
 
+import re
 from typing import Any
 
 from .base import BaseStrategy
@@ -20,21 +21,24 @@ class SymbolRatioStrategy(BaseStrategy):
 
     This is particularly effective for:
     - Symbol spam (!!!@@@###)
-    - Number sequences (1234567890)
     - Special character patterns (##$$%%^^)
-    - Mixed alphanumeric noise (abc123def456)
 
     Parameters
     ----------
     symbol_threshold : float, optional
-        Ratio of non-letter characters above which text is considered
-        garbled. Default is 0.5 (50% non-letters).
+        Ratio of symbol characters above which text is considered
+        garbled. Default is 0.5 (50% symbols).
 
     min_length : int, optional
         Minimum text length to analyze. Default is 3.
 
     allow_spaces : bool, optional
         If True, spaces are not counted as symbols. Default is True.
+
+    count_digits : bool, optional
+        If True, digits are counted as symbols, so numeric text
+        (phone numbers, prices) is treated as garble. Default is
+        False: digits count as normal characters.
 
     Examples
     --------
@@ -51,6 +55,7 @@ class SymbolRatioStrategy(BaseStrategy):
         self.symbol_threshold = kwargs.get("symbol_threshold", 0.5)
         self.min_length = kwargs.get("min_length", 3)
         self.allow_spaces = kwargs.get("allow_spaces", True)
+        self.count_digits = kwargs.get("count_digits", False)
 
         if not 0.0 <= self.symbol_threshold <= 1.0:
             raise ValueError("symbol_threshold must be between 0.0 and 1.0")
@@ -67,9 +72,13 @@ class SymbolRatioStrategy(BaseStrategy):
         if not text:
             return 0.0
 
+        # A run of one repeated symbol ("----", "====") is formatting,
+        # not garble; collapse it before measuring density
+        text = re.sub(r"([^\w\s])\1{2,}", r"\1", text)
+
         # Count characters
         total = 0
-        non_alpha = 0
+        symbols = 0
 
         for c in text:
             # Skip spaces if configured
@@ -77,25 +86,25 @@ class SymbolRatioStrategy(BaseStrategy):
                 continue
 
             total += 1
-            if not c.isalpha():
-                non_alpha += 1
+            if c.isalpha():
+                continue
+            if c.isdigit() and not self.count_digits:
+                # Digits are normal characters unless configured otherwise
+                continue
+            symbols += 1
 
         if total < self.min_length or total == 0:
             return 0.0
 
-        return non_alpha / total
-
-    def _predict_impl(self, text: str) -> bool:
-        proba = self._predict_proba_impl(text)
-        return proba >= 0.5
+        return symbols / total
 
     def _predict_proba_impl(self, text: str) -> float:
         """
         Compute garble probability based on symbol ratio.
 
         Returns a value between 0 and 1 where:
-        - 0.0 = mostly alphabetic (normal text)
-        - 1.0 = mostly symbols/numbers (garbled)
+        - 0.0 = mostly alphanumeric (normal text)
+        - 1.0 = mostly symbols (garbled)
         """
         symbol_ratio = self._compute_symbol_ratio(text)
 
