@@ -56,11 +56,9 @@ jobs:
     
     - name: Upload documentation artifact
       if: github.ref == 'refs/heads/main' || github.event_name == 'release'
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-pages-artifact@v3
       with:
-        name: github-pages
         path: ./docs/_build/html
-        retention-days: 1
     
     - name: Deploy to GitHub Pages
       if: github.ref == 'refs/heads/main' || github.event_name == 'release'
