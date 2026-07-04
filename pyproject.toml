@@ -46,6 +46,9 @@ Repository = "https://github.com/brightertiger/pygarble"
 Issues = "https://github.com/brightertiger/pygarble/issues"
 Documentation = "https://github.com/brightertiger/pygarble#readme"
 
+[tool.setuptools.packages.find]
+include = ["pygarble*"]
+
 [tool.black]
 line-length = 79
 target-version = ['py38']
