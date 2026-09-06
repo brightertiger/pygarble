@@ -9,8 +9,8 @@ import unicodedata
 from collections import Counter
 from typing import Any, Dict, Set
 
+from ..validation import parameter_value
 from .base import BaseStrategy
-
 
 # Common homoglyphs: characters that look like Latin but are from other scripts
 # Format: {lookalike_char: (latin_equivalent, script_name)}
@@ -109,9 +109,15 @@ class UnicodeScriptStrategy(BaseStrategy):
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
-        self.homoglyph_threshold = kwargs.get("homoglyph_threshold", 1)
-        self.max_scripts = kwargs.get("max_scripts", 2)
-        self.check_homoglyphs = kwargs.get("check_homoglyphs", True)
+        self.homoglyph_threshold: int = parameter_value(
+            "homoglyph_threshold", kwargs.get("homoglyph_threshold", 1), 1
+        )
+        self.max_scripts: int = parameter_value(
+            "max_scripts", kwargs.get("max_scripts", 2), 2
+        )
+        self.check_homoglyphs: bool = parameter_value(
+            "check_homoglyphs", kwargs.get("check_homoglyphs", True), True
+        )
 
         if self.homoglyph_threshold < 1:
             raise ValueError("homoglyph_threshold must be at least 1")
@@ -234,9 +240,7 @@ class UnicodeScriptStrategy(BaseStrategy):
             total_homoglyphs = sum(homoglyph_counts.values())
 
             if total_homoglyphs >= self.homoglyph_threshold:
-                homoglyph_score = min(
-                    1.0, 0.8 + (total_homoglyphs * 0.05)
-                )
+                homoglyph_score = min(1.0, 0.8 + (total_homoglyphs * 0.05))
                 scores.append(homoglyph_score)
 
         # Check for mixed-script words (very suspicious)
@@ -248,7 +252,9 @@ class UnicodeScriptStrategy(BaseStrategy):
 
         if len(meaningful_scripts) > self.max_scripts:
             # Too many scripts is suspicious
-            script_score = min(1.0, 0.5 + ((len(meaningful_scripts) - self.max_scripts) * 0.2))
+            script_score = min(
+                1.0, 0.5 + ((len(meaningful_scripts) - self.max_scripts) * 0.2)
+            )
             scores.append(script_score)
 
         # Return maximum score

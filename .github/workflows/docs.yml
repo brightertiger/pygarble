@@ -9,14 +9,10 @@ on:
     types: [ published ]
 
 jobs:
-  build-and-deploy:
+  docs-build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
     permissions:
       contents: read
-      pages: write
-      id-token: write
     
     steps:
     - name: Checkout repository
@@ -60,6 +56,17 @@ jobs:
       with:
         path: ./docs/_build/html
     
+  docs-deploy:
+    if: github.ref == 'refs/heads/main' || github.event_name == 'release'
+    needs: docs-build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
+    steps:
     - name: Deploy to GitHub Pages
-      if: github.ref == 'refs/heads/main' || github.event_name == 'release'
+      id: deployment
       uses: actions/deploy-pages@v4

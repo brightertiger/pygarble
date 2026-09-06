@@ -1,0 +1,29 @@
+{
+  "notes": "English scope supersedes audit multilingual abstention. Structured content is not character gibberish. Non-English Latin-script text may still pass; language identification is not promised.",
+  "clean_categories": [
+    "urls_and_emails",
+    "code_snippets",
+    "numbers_only",
+    "product_ids",
+    "scientific_formulas",
+    "file_paths",
+    "chemical_formulas",
+    "ascii_art_fragments",
+    "spam_patterns",
+    "password_like",
+    "base64_encoded",
+    "hash_strings"
+  ],
+  "garbled_categories": [
+    "non_english",
+    "lorem_ipsum"
+  ],
+  "text_overrides": {
+    "wishy": false,
+    "k": false,
+    "q": false,
+    "xy": false,
+    "!!": false,
+    "qwerty12345": true
+  }
+}

@@ -150,7 +150,7 @@ Adjust sensitivity for your needs:
 
    from pygarble import GarbleDetector, Strategy
 
-   # Get probability scores first
+   # Get heuristic scores first
    detector = GarbleDetector(Strategy.MARKOV_CHAIN)
 
    test_texts = [

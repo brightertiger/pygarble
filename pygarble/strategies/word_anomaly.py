@@ -1,9 +1,10 @@
-import re
+from typing import Any, List
 
-from ..data import BIGRAM_LOG_PROBS, DEFAULT_LOG_PROB
+from ..analysis import Evidence, Span
+from ..preprocessing import TextFeatures
+from ..scoring import word_log_probability
+from ..validation import finite_number, positive_int
 from .base import BaseStrategy
-
-_WORD_PATTERN = re.compile(r"[a-z]+")
 
 
 class WordAnomalyStrategy(BaseStrategy):
@@ -32,41 +33,57 @@ class WordAnomalyStrategy(BaseStrategy):
         False
     """
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
-        self.word_log_prob_threshold = kwargs.get(
-            "word_log_prob_threshold", -4.6
+        self.word_log_prob_threshold = finite_number(
+            "word_log_prob_threshold",
+            kwargs.get("word_log_prob_threshold", -4.6),
         )
-        self.min_word_length = kwargs.get("min_word_length", 4)
-        self.anomaly_weight = kwargs.get("anomaly_weight", 2.0)
+        self.min_word_length = positive_int(
+            "min_word_length", kwargs.get("min_word_length", 4)
+        )
+        self.anomaly_weight = finite_number(
+            "anomaly_weight", kwargs.get("anomaly_weight", 2.0)
+        )
+        if self.anomaly_weight <= 0:
+            raise ValueError("anomaly_weight must be positive")
 
     def applicable(self, text: str) -> bool:
-        return len(self._scoreable_words(text)) >= 1
+        self._validate_input(text)
+        return bool(self._scoreable_words(text))
 
-    def _scoreable_words(self, text):
-        folded = self._fold_diacritics(text).lower()
+    def _scoreable_words(self, text: str) -> List[str]:
         return [
             w
-            for w in _WORD_PATTERN.findall(folded)
+            for w in TextFeatures(text).ascii_words
             if len(w) >= self.min_word_length
         ]
 
     def _word_log_prob(self, word: str) -> float:
-        padded = f" {word} "
-        bigrams = [padded[i : i + 2] for i in range(len(padded) - 1)]
-        total = sum(
-            BIGRAM_LOG_PROBS.get(bg, DEFAULT_LOG_PROB) for bg in bigrams
+        return word_log_probability(word)
+
+    def _evaluate_features(self, features: TextFeatures) -> Evidence:
+        words = [
+            w for w in features.ascii_words if len(w) >= self.min_word_length
+        ]
+        if not words:
+            return Evidence(0.0, False, "insufficient_words")
+        bad = {
+            w
+            for w in words
+            if w not in features.allowlist
+            and self._word_log_prob(w) < self.word_log_prob_threshold
+        }
+        score = min(
+            1.0,
+            sum(w in bad for w in words) / len(words) * self.anomaly_weight,
         )
-        return total / len(bigrams)
+        spans = tuple(
+            Span(t.start, t.end, "anomalous_word")
+            for t in features.tokens
+            if t.folded in bad
+        )
+        return Evidence(score, True, "anomalous_word_fraction", spans)
 
     def _predict_proba_impl(self, text: str) -> float:
-        words = self._scoreable_words(text)
-        if not words:
-            return 0.0
-        anomalous = sum(
-            1
-            for w in words
-            if self._word_log_prob(w) < self.word_log_prob_threshold
-        )
-        fraction = anomalous / len(words)
-        return min(1.0, fraction * self.anomaly_weight)
+        return self._evaluate_features(TextFeatures(text)).score

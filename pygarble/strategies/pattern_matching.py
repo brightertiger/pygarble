@@ -1,5 +1,5 @@
 import re
-from typing import Dict, Pattern
+from typing import Any, Dict, Pattern
 
 from .base import BaseStrategy
 
@@ -10,8 +10,14 @@ class PatternMatchingStrategy(BaseStrategy):
         "repeated_chars": r"([a-zA-Z0-9])\1{3,}",
         "uppercase_sequence": r"[A-Z]{5,}",
         "long_numbers": r"[0-9]{8,}",
-        "keyboard_row_qwerty": r"(?i)(qwert|werty|ertyu|rtyui|tyuio|yuiop|asdfg|sdfgh|dfghj|fghjk|ghjkl|zxcvb|xcvbn|cvbnm)",
-        "keyboard_row_reverse": r"(?i)(poiuy|oiuyt|iuytr|uytre|ytrew|trewq|lkjhg|kjhgf|jhgfd|hgfds|gfdsa|mnbvc|nbvcx|bvcxz)",
+        "keyboard_row_qwerty": (
+            "(?i)(qwert|werty|ertyu|rtyui|tyuio|yuiop|asdfg|sdfgh|df"
+            "ghj|fghjk|ghjkl|zxcvb|xcvbn|cvbnm)"
+        ),
+        "keyboard_row_reverse": (
+            "(?i)(poiuy|oiuyt|iuytr|uytre|ytrew|trewq|lkjhg|kjhgf|jh"
+            "gfd|hgfds|gfdsa|mnbvc|nbvcx|bvcxz)"
+        ),
         "consonant_cluster": r"[bcdfghjklmnpqrstvwxz]{5,}",
         "alternating_pattern": r"(?i)([a-z0-9])([a-z0-9])(\1\2){2,}",
     }
@@ -22,7 +28,7 @@ class PatternMatchingStrategy(BaseStrategy):
     # lowercase-only so acronyms (HTTPS, JSON) don't trip it.
     WEAK_PATTERNS = {"special_chars", "uppercase_sequence", "long_numbers"}
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
         self._compiled_patterns: Dict[str, Pattern] = self._compile_patterns()
 
@@ -46,7 +52,8 @@ class PatternMatchingStrategy(BaseStrategy):
         text = " ".join(
             t
             for t in text.split()
-            if "://" not in t and "@" not in t
+            if "://" not in t
+            and "@" not in t
             and not t.lower().startswith("www.")
         )
 

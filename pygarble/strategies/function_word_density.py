@@ -8,6 +8,7 @@ Garbled text almost never contains these common short words.
 import re
 from typing import Any, List
 
+from ..validation import parameter_value
 from .base import BaseStrategy
 
 
@@ -39,44 +40,171 @@ class FunctionWordDensityStrategy(BaseStrategy):
     True
     """
 
-    FUNCTION_WORDS = frozenset({
-        # Articles
-        "the", "a", "an",
-        # Prepositions
-        "of", "in", "to", "for", "on", "at", "by", "from", "with",
-        "up", "out", "about", "into", "over", "after", "as",
-        "before", "between", "through", "during", "against",
-        "under", "above", "below", "without", "within", "upon",
-        "off", "down", "near", "since", "until", "via", "per",
-        # Conjunctions
-        "and", "but", "or", "nor", "so", "yet", "if", "then",
-        "than", "that", "when", "while", "because", "although",
-        "though", "whether", "either", "neither", "once", "unless",
-        # Pronouns
-        "i", "me", "my", "we", "us", "our", "you", "your",
-        "he", "him", "his", "she", "her", "it", "its",
-        "they", "them", "their", "this", "these", "those",
-        "who", "whom", "whose", "which", "what",
-        # Auxiliary/common verbs
-        "is", "am", "are", "was", "were", "be", "been", "being",
-        "have", "has", "had", "do", "does", "did",
-        "will", "would", "can", "could", "shall", "should",
-        "may", "might", "must",
-        # Other high-frequency words
-        "not", "no", "all", "each", "every", "both", "few",
-        "more", "most", "other", "some", "such", "any", "only",
-        "there", "here", "now", "new", "using", "also", "own",
-        "same", "again", "still", "even", "ever", "never",
-        "always", "often", "much", "many",
-        "how", "where", "why",
-        "very", "just", "too",
-    })
+    FUNCTION_WORDS = frozenset(
+        {
+            # Articles
+            "the",
+            "a",
+            "an",
+            # Prepositions
+            "of",
+            "in",
+            "to",
+            "for",
+            "on",
+            "at",
+            "by",
+            "from",
+            "with",
+            "up",
+            "out",
+            "about",
+            "into",
+            "over",
+            "after",
+            "as",
+            "before",
+            "between",
+            "through",
+            "during",
+            "against",
+            "under",
+            "above",
+            "below",
+            "without",
+            "within",
+            "upon",
+            "off",
+            "down",
+            "near",
+            "since",
+            "until",
+            "via",
+            "per",
+            # Conjunctions
+            "and",
+            "but",
+            "or",
+            "nor",
+            "so",
+            "yet",
+            "if",
+            "then",
+            "than",
+            "that",
+            "when",
+            "while",
+            "because",
+            "although",
+            "though",
+            "whether",
+            "either",
+            "neither",
+            "once",
+            "unless",
+            # Pronouns
+            "i",
+            "me",
+            "my",
+            "we",
+            "us",
+            "our",
+            "you",
+            "your",
+            "he",
+            "him",
+            "his",
+            "she",
+            "her",
+            "it",
+            "its",
+            "they",
+            "them",
+            "their",
+            "this",
+            "these",
+            "those",
+            "who",
+            "whom",
+            "whose",
+            "which",
+            "what",
+            # Auxiliary/common verbs
+            "is",
+            "am",
+            "are",
+            "was",
+            "were",
+            "be",
+            "been",
+            "being",
+            "have",
+            "has",
+            "had",
+            "do",
+            "does",
+            "did",
+            "will",
+            "would",
+            "can",
+            "could",
+            "shall",
+            "should",
+            "may",
+            "might",
+            "must",
+            # Other high-frequency words
+            "not",
+            "no",
+            "all",
+            "each",
+            "every",
+            "both",
+            "few",
+            "more",
+            "most",
+            "other",
+            "some",
+            "such",
+            "any",
+            "only",
+            "there",
+            "here",
+            "now",
+            "new",
+            "using",
+            "also",
+            "own",
+            "same",
+            "again",
+            "still",
+            "even",
+            "ever",
+            "never",
+            "always",
+            "often",
+            "much",
+            "many",
+            "how",
+            "where",
+            "why",
+            "very",
+            "just",
+            "too",
+        }
+    )
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
-        self.min_ratio = kwargs.get("min_ratio", 0.08)
-        self.min_words = kwargs.get("min_words", 5)
-        self.min_word_length = kwargs.get("min_word_length", 2)
+        self.min_ratio: float = parameter_value(
+            "min_ratio", kwargs.get("min_ratio", 0.08), 0.08
+        )
+        self.min_words: int = parameter_value(
+            "min_words", kwargs.get("min_words", 5), 5
+        )
+        self.min_word_length: int = parameter_value(
+            "min_word_length", kwargs.get("min_word_length", 2), 2
+        )
 
         if not 0.0 <= self.min_ratio <= 1.0:
             raise ValueError("min_ratio must be between 0.0 and 1.0")

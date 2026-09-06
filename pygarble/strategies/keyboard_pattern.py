@@ -3,7 +3,6 @@ from typing import List, Set
 
 from .base import BaseStrategy
 
-
 KEYBOARD_ROWS = [
     "qwertyuiop",
     "asdfghjkl",
@@ -13,15 +12,60 @@ KEYBOARD_ROWS = [
 KEYBOARD_SEQUENCES: Set[str] = set()
 for row in KEYBOARD_ROWS:
     for i in range(len(row) - 2):
-        KEYBOARD_SEQUENCES.add(row[i:i+3])
-        KEYBOARD_SEQUENCES.add(row[i:i+3][::-1])
+        KEYBOARD_SEQUENCES.add(row[i : i + 3])
+        KEYBOARD_SEQUENCES.add(row[i : i + 3][::-1])
 
 COMMON_TRIGRAMS: Set[str] = {
-    "the", "and", "ing", "ion", "tio", "ent", "ati", "for", "her", "ter",
-    "hat", "tha", "ere", "ate", "his", "con", "res", "ver", "all", "ons",
-    "nce", "men", "ith", "ted", "ers", "pro", "thi", "wit", "are", "ess",
-    "not", "ive", "was", "ect", "rea", "com", "eve", "per", "int", "est",
-    "sta", "cti", "ica", "ist", "ear", "ain", "one", "our", "iti", "rat",
+    "the",
+    "and",
+    "ing",
+    "ion",
+    "tio",
+    "ent",
+    "ati",
+    "for",
+    "her",
+    "ter",
+    "hat",
+    "tha",
+    "ere",
+    "ate",
+    "his",
+    "con",
+    "res",
+    "ver",
+    "all",
+    "ons",
+    "nce",
+    "men",
+    "ith",
+    "ted",
+    "ers",
+    "pro",
+    "thi",
+    "wit",
+    "are",
+    "ess",
+    "not",
+    "ive",
+    "was",
+    "ect",
+    "rea",
+    "com",
+    "eve",
+    "per",
+    "int",
+    "est",
+    "sta",
+    "cti",
+    "ica",
+    "ist",
+    "ear",
+    "ain",
+    "one",
+    "our",
+    "iti",
+    "rat",
 }
 
 
@@ -33,9 +77,7 @@ class KeyboardPatternStrategy(BaseStrategy):
         # trigram list and read as mash.
         trigrams: List[str] = []
         for word in self._novel_words(text):
-            trigrams.extend(
-                word[i:i + 3] for i in range(len(word) - 2)
-            )
+            trigrams.extend(word[i : i + 3] for i in range(len(word) - 2))
         return trigrams
 
     def _get_keyboard_pattern_ratio(self, text: str) -> float:
@@ -79,7 +121,10 @@ class KeyboardPatternStrategy(BaseStrategy):
             confidence = min(1.0, trigram_count / 28.0)
             common_score = max(0.0, 1.0 - (common_ratio / 0.15)) * confidence
 
-        repeated_score = 0.5 if self._has_repeated_bigram_pattern(text) else 0.0
+        repeated_score = (
+            0.5 if self._has_repeated_bigram_pattern(text) else 0.0
+        )
 
-        return min(max(keyboard_score, common_score * 0.7, repeated_score), 1.0)
-
+        return min(
+            max(keyboard_score, common_score * 0.7, repeated_score), 1.0
+        )

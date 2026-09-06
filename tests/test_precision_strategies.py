@@ -8,6 +8,7 @@ These tests verify that:
 """
 
 import pytest
+
 from pygarble import GarbleDetector, Strategy
 
 
@@ -167,15 +168,19 @@ class TestLetterFrequencyStrategy:
         """Should NOT flag normal English text."""
         detector = GarbleDetector(Strategy.LETTER_FREQUENCY)
 
-        assert detector.predict(
-            "The quick brown fox jumps over the lazy dog"
-        ) is False
-        assert detector.predict(
-            "Python is a great programming language"
-        ) is False
-        assert detector.predict(
-            "This is a normal sentence with typical letter distribution"
-        ) is False
+        assert (
+            detector.predict("The quick brown fox jumps over the lazy dog")
+            is False
+        )
+        assert (
+            detector.predict("Python is a great programming language") is False
+        )
+        assert (
+            detector.predict(
+                "This is a normal sentence with typical letter distribution"
+            )
+            is False
+        )
 
     def test_handles_short_text(self):
         """Short text should not be flagged."""
@@ -289,10 +294,10 @@ class TestRecallOnGarbledText:
 
     GARBLED_TEXTS = [
         "xjqzxjqzxjqz",  # Impossible bigrams and trigrams
-        "bxcxdxfxgx",    # Impossible bigrams
-        "jjjkkkqqq",     # Invalid doubles
+        "bxcxdxfxgx",  # Impossible bigrams
+        "jjjkkkqqq",  # Invalid doubles
         "aaaaaeeeeeiiiii",  # Invalid vowel runs
-        "qqqxxx",        # Invalid doubles and rare letters
+        "qqqxxx",  # Invalid doubles and rare letters
     ]
 
     def test_at_least_some_detection(self):
@@ -314,9 +319,7 @@ class TestRecallOnGarbledText:
 
             # At least 1 strategy should flag each garbled text
             # (being conservative to match high-precision design)
-            assert detections >= 1, (
-                f"No strategies flagged: {text}"
-            )
+            assert detections >= 1, f"No strategies flagged: {text}"
 
 
 class TestBatchProcessing:

@@ -2,6 +2,8 @@ include README.md
 include LICENSE
 include requirements.txt
 include requirements-dev.txt
-recursive-include pygarble *.py
+recursive-include pygarble *.py *.json
 global-exclude __pycache__
 global-exclude *.py[co]
+
+include pygarble/py.typed

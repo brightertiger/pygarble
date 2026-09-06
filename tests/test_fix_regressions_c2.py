@@ -8,8 +8,6 @@ Regression tests for verified bug fixes (batch C2):
   folding, proper-noun dampening
 """
 
-import pytest
-
 from pygarble.data import ENGLISH_WORDS
 from pygarble.strategies.function_word_density import (
     FunctionWordDensityStrategy,
@@ -118,15 +116,39 @@ class TestWordLookupAndDataFix:
     """Junk dictionary entries removed; proper nouns dampened."""
 
     def test_junk_entries_removed_from_dictionary(self):
-        for junk in ("qq", "zz", "xx", "jj", "aaaa", "abcd", "caf",
-                     "abcdefghijklmnopqrstuvwxyz"):
+        for junk in (
+            "qq",
+            "zz",
+            "xx",
+            "jj",
+            "aaaa",
+            "abcd",
+            "caf",
+            "abcdefghijklmnopqrstuvwxyz",
+        ):
             assert junk not in ENGLISH_WORDS, junk
 
     def test_real_short_words_kept(self):
         # Note: "a" and "i" are whitelisted but were never present in
         # the original 50K list, so only two-letter survivors are checked.
-        for word in ("am", "an", "as", "at", "be", "do", "go",
-                     "if", "in", "is", "it", "of", "on", "or", "to", "we"):
+        for word in (
+            "am",
+            "an",
+            "as",
+            "at",
+            "be",
+            "do",
+            "go",
+            "if",
+            "in",
+            "is",
+            "it",
+            "of",
+            "on",
+            "or",
+            "to",
+            "we",
+        ):
             assert word in ENGLISH_WORDS, word
 
     def test_junk_tokens_now_flagged(self):

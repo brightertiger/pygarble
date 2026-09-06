@@ -5,11 +5,13 @@ Uses character bigram transition probabilities trained on English text.
 Garbled text will have low probability under the English language model.
 """
 
-import math
 from typing import Any, Optional
 
+from ..analysis import Evidence
+from ..preprocessing import TextFeatures
+from ..scoring import bigram_stats, sigmoid
+from ..validation import finite_number, parameter_value
 from .base import BaseStrategy
-from ..data import BIGRAM_LOG_PROBS, DEFAULT_LOG_PROB
 
 
 class MarkovChainStrategy(BaseStrategy):
@@ -24,7 +26,7 @@ class MarkovChainStrategy(BaseStrategy):
     ----------
     threshold_per_char : float, optional
         Average log probability per character below which text is
-        considered garbled. Default is -5.0.
+        considered garbled. Default is -3.5.
         More negative = more permissive (accepts more text as valid)
         Less negative = more strict (flags more text as garbled)
 
@@ -48,11 +50,20 @@ class MarkovChainStrategy(BaseStrategy):
         # - Valid English text: typically -2.0 to -3.0
         # - Keyboard mashing: typically -4.0 to -5.0
         # - Random gibberish: typically -5.0 to -8.0
-        self.threshold_per_char = kwargs.get("threshold_per_char", -3.5)
-        self.min_length = kwargs.get("min_length", 3)
+        self.threshold_per_char = finite_number(
+            "threshold_per_char", kwargs.get("threshold_per_char", -3.5)
+        )
+        self.min_length: int = parameter_value(
+            "min_length", kwargs.get("min_length", 3), 3
+        )
 
         if self.threshold_per_char > 0:
-            raise ValueError("threshold_per_char must be non-positive (log probabilities are negative)")
+            raise ValueError(
+                (
+                    "threshold_per_char must be non-positive (log probabilit"
+                    "ies are negative)"
+                )
+            )
         if self.min_length < 1:
             raise ValueError("min_length must be at least 1")
 
@@ -64,62 +75,27 @@ class MarkovChainStrategy(BaseStrategy):
         or None if the text is too short to analyze.
         Higher (less negative) values indicate more English-like text.
         """
-        # Score only words the dictionary can't vouch for: real-but-rare
-        # words ("rhythms", "lynx"), acronyms, and URLs would otherwise
-        # register as unlikely character sequences. _novel_words also
-        # folds accents so the ASCII bigram model applies (café -> cafe).
-        cleaned = " ".join(self._novel_words(text))
+        return self._mean(TextFeatures(text))
 
+    def _mean(self, features: TextFeatures) -> Optional[float]:
+        cleaned = " ".join(token.folded for token in features.novel)
         if len(cleaned) < self.min_length:
             return None
+        # Preserve the historical single boundary between novel words.
+        total, count = bigram_stats((cleaned,))
+        return total / count
 
-        # Add start/end markers
-        padded = " " + cleaned + " "
-
-        # Sum log probabilities of all bigrams
-        total_log_prob = 0.0
-        num_bigrams = 0
-
-        for i in range(len(padded) - 1):
-            bigram = padded[i:i + 2]
-            log_prob = BIGRAM_LOG_PROBS.get(bigram, DEFAULT_LOG_PROB)
-            total_log_prob += log_prob
-            num_bigrams += 1
-
-        if num_bigrams == 0:
-            return None
-
-        # Return average log probability per bigram
-        return total_log_prob / num_bigrams
+    def _evaluate_features(self, features: TextFeatures) -> Evidence:
+        mean = self._mean(features)
+        if mean is None:
+            # Known words provide English evidence without novel-word scoring.
+            return Evidence(0.0, bool(features.tokens), "known_or_short_words")
+        reason = "unlikely_english_transitions"
+        if any(not token.folded.isascii() for token in features.novel):
+            reason = "outside_english_alphabet"
+        return Evidence(
+            sigmoid((self.threshold_per_char - mean) * 2.0), True, reason
+        )
 
     def _predict_proba_impl(self, text: str) -> float:
-        """
-        Compute garble probability based on Markov chain model.
-
-        Maps log probability to a [0, 1] garble score where:
-        - 0.0 = definitely valid English
-        - 1.0 = definitely garbled
-        """
-        avg_log_prob = self._compute_log_probability(text)
-
-        if avg_log_prob is None:
-            return 0.0
-
-        # Map log probability to garble score
-        # avg_log_prob typically ranges from about -2 (common text) to -8 (gibberish)
-        # We use a sigmoid-like mapping centered on the threshold
-
-        # Difference from threshold (positive = more garbled)
-        diff = self.threshold_per_char - avg_log_prob
-
-        # Scale to reasonable range and apply sigmoid
-        # Factor of 2 gives good separation between valid/invalid
-        scaled = diff * 2.0
-
-        # Sigmoid function: 1 / (1 + exp(-x))
-        try:
-            garble_score = 1.0 / (1.0 + math.exp(-scaled))
-        except OverflowError:
-            garble_score = 0.0 if scaled < 0 else 1.0
-
-        return min(1.0, max(0.0, garble_score))
+        return self._evaluate_features(TextFeatures(text)).score

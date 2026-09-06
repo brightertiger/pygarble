@@ -5,6 +5,9 @@ Detects impossible or extremely rare character pairs that almost never
 occur in English. Conservative thresholds to minimize false positives.
 """
 
+from typing import Any
+
+from ..validation import positive_int, unit_interval
 from .base import BaseStrategy
 
 
@@ -24,30 +27,90 @@ class BigramProbabilityStrategy(BaseStrategy):
     # fj (fjord), dj (adjust), hh (withhold), ww (www), gz (zigzag),
     # kg (units), vv (savvy), xx/jj/kk/qq and most j-/z-adjacent pairs
     # whose corpus probability shows they do occur.
-    IMPOSSIBLE_BIGRAMS = frozenset({
-        # Q rules - 'q' is almost always followed by 'u'
-        "qg", "qh", "qj", "qk", "qn", "qx", "qy", "qz",
-        # X preceded by a consonant that never precedes it
-        "bx", "cx", "dx", "fx", "gx", "hx", "jx", "kx", "lx", "mx",
-        "px", "rx", "sx", "tx", "vx", "wx", "zx",
-        "xj", "xk", "xq", "xz",
-        # Q preceded by consonants
-        "bq", "cq", "dq", "fq", "gq", "hq", "jq", "kq", "lq", "mq",
-        "nq", "pq", "rq", "tq", "vq", "wq", "yq", "zq",
-        # Z pairs
-        "fz", "hz", "jz", "kz", "pz", "vz", "wz", "zf",
-        # J pairs
-        "cj", "gj", "hj", "lj", "mj", "pj", "rj", "sj", "tj", "vj",
-        "yj", "jg", "jy",
-        # More impossible combinations
-        "vk", "kv", "gk",
-    })
+    IMPOSSIBLE_BIGRAMS = frozenset(
+        {
+            # Q rules - 'q' is almost always followed by 'u'
+            "qg",
+            "qh",
+            "qj",
+            "qk",
+            "qn",
+            "qx",
+            "qy",
+            "qz",
+            # X preceded by a consonant that never precedes it
+            "bx",
+            "cx",
+            "dx",
+            "fx",
+            "gx",
+            "hx",
+            "jx",
+            "kx",
+            "lx",
+            "mx",
+            "px",
+            "rx",
+            "sx",
+            "tx",
+            "vx",
+            "wx",
+            "zx",
+            "xj",
+            "xk",
+            "xq",
+            "xz",
+            # Q preceded by consonants
+            "bq",
+            "cq",
+            "dq",
+            "fq",
+            "gq",
+            "hq",
+            "jq",
+            "kq",
+            "lq",
+            "mq",
+            "nq",
+            "pq",
+            "rq",
+            "tq",
+            "vq",
+            "wq",
+            "yq",
+            "zq",
+            # Z pairs
+            "fz",
+            "hz",
+            "jz",
+            "kz",
+            "pz",
+            "vz",
+            "wz",
+            "zf",
+            # J pairs
+            "cj",
+            "gj",
+            "hj",
+            "lj",
+            "mj",
+            "pj",
+            "rj",
+            "sj",
+            "tj",
+            "vj",
+            "yj",
+            "jg",
+            "jy",
+            # More impossible combinations
+            "vk",
+            "kv",
+            "gk",
+        }
+    )
 
     def __init__(
-        self,
-        threshold: float = 0.3,
-        min_length: int = 4,
-        **kwargs
+        self, threshold: float = 0.3, min_length: int = 4, **kwargs: Any
     ):
         """
         Initialize the bigram probability strategy.
@@ -57,8 +120,8 @@ class BigramProbabilityStrategy(BaseStrategy):
             min_length: Minimum text length to analyze (default 4)
         """
         super().__init__(**kwargs)
-        self.threshold = threshold
-        self.min_length = min_length
+        self.threshold = unit_interval("threshold", threshold)
+        self.min_length = positive_int("min_length", min_length)
 
     def _predict_proba_impl(self, text: str) -> float:
         # Bigrams are only formed within words - never across word
@@ -77,7 +140,7 @@ class BigramProbabilityStrategy(BaseStrategy):
 
         for word in words:
             for i in range(len(word) - 1):
-                bigram = word[i:i+2]
+                bigram = word[i : i + 2]
                 total_bigrams += 1
                 if bigram in self.IMPOSSIBLE_BIGRAMS:
                     impossible_count += 1

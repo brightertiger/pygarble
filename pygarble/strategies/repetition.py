@@ -5,8 +5,10 @@ Detects text with excessive character or pattern repetition.
 """
 
 import re
+from collections import Counter
 from typing import Any
 
+from ..validation import parameter_value
 from .base import BaseStrategy
 
 
@@ -46,9 +48,15 @@ class RepetitionStrategy(BaseStrategy):
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
-        self.max_char_repeat = kwargs.get("max_char_repeat", 3)
-        self.max_pattern_repeat = kwargs.get("max_pattern_repeat", 3)
-        self.diversity_threshold = kwargs.get("diversity_threshold", 0.3)
+        self.max_char_repeat: int = parameter_value(
+            "max_char_repeat", kwargs.get("max_char_repeat", 3), 3
+        )
+        self.max_pattern_repeat: int = parameter_value(
+            "max_pattern_repeat", kwargs.get("max_pattern_repeat", 3), 3
+        )
+        self.diversity_threshold: float = parameter_value(
+            "diversity_threshold", kwargs.get("diversity_threshold", 0.3), 0.3
+        )
 
         if self.max_char_repeat < 1:
             raise ValueError("max_char_repeat must be at least 1")
@@ -61,9 +69,15 @@ class RepetitionStrategy(BaseStrategy):
         # Only alphanumeric characters count as character repetition:
         # whitespace runs and formatting characters (----, ====, ....) are
         # normal in real documents.
-        self._repeated_char_pattern = re.compile(r"([a-z0-9])\1{" + str(self.max_char_repeat) + r",}")
-        self._repeated_bigram_pattern = re.compile(r"(.{2})\1{" + str(self.max_pattern_repeat) + r",}")
-        self._repeated_trigram_pattern = re.compile(r"(.{3})\1{" + str(self.max_pattern_repeat - 1) + r",}")
+        self._repeated_char_pattern = re.compile(
+            r"([a-z0-9])\1{" + str(self.max_char_repeat) + r",}"
+        )
+        self._repeated_bigram_pattern = re.compile(
+            r"(.{2})\1{" + str(self.max_pattern_repeat) + r",}"
+        )
+        self._repeated_trigram_pattern = re.compile(
+            r"(.{3})\1{" + str(self.max_pattern_repeat - 1) + r",}"
+        )
         self._word_pattern = re.compile(r"[a-z0-9]+")
 
     def _check_char_repetition(self, text: str) -> float:
@@ -85,7 +99,8 @@ class RepetitionStrategy(BaseStrategy):
         # Check bigram repetition (repeating unit must contain something
         # alphanumeric; repeated whitespace/formatting is not garble)
         bigram_matches = [
-            m for m in self._repeated_bigram_pattern.finditer(text_lower)
+            m
+            for m in self._repeated_bigram_pattern.finditer(text_lower)
             if any(ch.isalnum() for ch in m.group(1))
         ]
         if bigram_matches:
@@ -94,7 +109,8 @@ class RepetitionStrategy(BaseStrategy):
 
         # Check trigram repetition
         trigram_matches = [
-            m for m in self._repeated_trigram_pattern.finditer(text_lower)
+            m
+            for m in self._repeated_trigram_pattern.finditer(text_lower)
             if any(ch.isalnum() for ch in m.group(1))
         ]
         if trigram_matches:
@@ -113,7 +129,7 @@ class RepetitionStrategy(BaseStrategy):
             return 0.0
 
         # Single repeated token dominating the text
-        top_count = max(words.count(w) for w in set(words))
+        top_count = max(Counter(words).values())
         top_ratio = top_count / len(words)
         if top_count >= 3 and top_ratio >= 0.6:
             return min(1.0, top_ratio)
@@ -123,6 +139,10 @@ class RepetitionStrategy(BaseStrategy):
             if all(w == words[i % 2] for i, w in enumerate(words)):
                 return 0.8
 
+        # A fixed period bound keeps incomplete-cycle detection linear.
+        for period in range(3, min(8, len(words) // 3) + 1):
+            if all(word == words[i % period] for i, word in enumerate(words)):
+                return 0.8
         return 0.0
 
     def _check_diversity(self, text: str) -> float:

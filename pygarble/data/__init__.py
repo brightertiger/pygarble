@@ -1,19 +1,31 @@
-"""
-Pre-computed data for pygarble detection strategies.
+"""Lazy public exports; resources load only when requested."""
 
-This module contains embedded lookup tables generated from
-Peter Norvig's word frequency data (https://norvig.com/ngrams/).
+from importlib import import_module
+from typing import TYPE_CHECKING, Any
 
-All data is MIT licensed and can be freely used.
-"""
+if TYPE_CHECKING:
+    from .bigrams import BIGRAM_LOG_PROBS as BIGRAM_LOG_PROBS
+    from .bigrams import DEFAULT_LOG_PROB as DEFAULT_LOG_PROB
+    from .trigrams import COMMON_TRIGRAMS as COMMON_TRIGRAMS
+    from .words import ENGLISH_WORDS as ENGLISH_WORDS
 
-from .words import ENGLISH_WORDS
-from .bigrams import BIGRAM_LOG_PROBS, DEFAULT_LOG_PROB
-from .trigrams import COMMON_TRIGRAMS
-
+_EXPORTS = {
+    "ENGLISH_WORDS": "words",
+    "BIGRAM_LOG_PROBS": "bigrams",
+    "DEFAULT_LOG_PROB": "bigrams",
+    "COMMON_TRIGRAMS": "trigrams",
+}
 __all__ = [
     "ENGLISH_WORDS",
     "BIGRAM_LOG_PROBS",
     "DEFAULT_LOG_PROB",
     "COMMON_TRIGRAMS",
 ]
+
+
+def __getattr__(name: str) -> Any:
+    if name not in _EXPORTS:
+        raise AttributeError(name)
+    value = getattr(import_module("." + _EXPORTS[name], __name__), name)
+    globals()[name] = value
+    return value

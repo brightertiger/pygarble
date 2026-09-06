@@ -4,10 +4,7 @@ KEYBOARD_ADJACENCY, and the ensemble abstention mechanism."""
 import pytest
 
 from pygarble import EnsembleDetector, GarbleDetector, Strategy
-from pygarble.strategies.keyboard_adjacency import KeyboardAdjacencyStrategy
-from pygarble.strategies.log_likelihood_ratio import (
-    LogLikelihoodRatioStrategy,
-)
+from pygarble.strategies.log_likelihood_ratio import LogLikelihoodRatioStrategy
 from pygarble.strategies.word_anomaly import WordAnomalyStrategy
 
 
@@ -61,9 +58,7 @@ class TestWordAnomalyStrategy:
 
     def test_single_garbage_token_in_valid_sentence(self):
         # The headline use case: text-level averages dilute this away
-        assert (
-            self.detector.predict("order confirmed asdkjfhq thanks") is True
-        )
+        assert self.detector.predict("order confirmed asdkjfhq thanks") is True
 
     def test_all_gibberish(self):
         assert self.detector.predict("xkqzv wpfjg mzxcv") is True

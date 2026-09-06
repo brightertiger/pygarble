@@ -9,6 +9,7 @@ Tests for new strategies added in v0.3.0+:
 """
 
 import pytest
+
 from pygarble import GarbleDetector, Strategy
 
 
@@ -60,8 +61,7 @@ class TestMarkovChainStrategy:
     def test_custom_threshold(self):
         # More permissive threshold
         detector = GarbleDetector(
-            Strategy.MARKOV_CHAIN,
-            threshold_per_char=-6.0
+            Strategy.MARKOV_CHAIN, threshold_per_char=-6.0
         )
         # Should be more lenient
         proba = detector.predict_proba("qwerty")
@@ -115,8 +115,7 @@ class TestNGramFrequencyStrategy:
     def test_custom_threshold(self):
         # Stricter threshold
         detector = GarbleDetector(
-            Strategy.NGRAM_FREQUENCY,
-            common_ratio_threshold=0.5
+            Strategy.NGRAM_FREQUENCY, common_ratio_threshold=0.5
         )
         # Should be stricter about what's considered valid
         proba = detector.predict_proba("hello world")
@@ -186,7 +185,7 @@ class TestBatchProcessing:
         assert isinstance(results, list)
         assert len(results) == 3
         assert results[0] is False  # hello world
-        assert results[1] is True   # asdfghjkl
+        assert results[1] is True  # asdfghjkl
         assert results[2] is False  # the cat
 
     def test_ngram_frequency_batch(self):
@@ -208,12 +207,14 @@ class TestDataModule:
 
     def test_bigram_data_loaded(self):
         from pygarble.data import BIGRAM_LOG_PROBS, DEFAULT_LOG_PROB
+
         assert isinstance(BIGRAM_LOG_PROBS, dict)
         assert len(BIGRAM_LOG_PROBS) == 729  # 27 * 27
         assert DEFAULT_LOG_PROB == -10.0
 
     def test_trigram_data_loaded(self):
         from pygarble.data import COMMON_TRIGRAMS
+
         assert isinstance(COMMON_TRIGRAMS, frozenset)
         assert len(COMMON_TRIGRAMS) == 2000
         assert "the" in COMMON_TRIGRAMS
@@ -221,6 +222,7 @@ class TestDataModule:
 
     def test_words_data_loaded(self):
         from pygarble.data import ENGLISH_WORDS
+
         assert isinstance(ENGLISH_WORDS, frozenset)
         # 50,000 raw entries minus 670 web-junk entries filtered out
         # (two-letter noise like "qq", repeated chars like "aaaa",
@@ -310,8 +312,7 @@ class TestMojibakeStrategy:
 
     def test_disable_replacement_char_check(self):
         detector = GarbleDetector(
-            Strategy.MOJIBAKE,
-            check_replacement_char=False
+            Strategy.MOJIBAKE, check_replacement_char=False
         )
         text = "Hello \ufffd world"
         # Should not flag just for replacement char
@@ -374,8 +375,7 @@ class TestPronouncabilityStrategy:
 
     def test_custom_threshold(self):
         detector = GarbleDetector(
-            Strategy.PRONOUNCEABILITY,
-            forbidden_cluster_threshold=5
+            Strategy.PRONOUNCEABILITY, forbidden_cluster_threshold=5
         )
         # "xkcd" has an impossible onset, so the onset check
         # correctly detects it regardless of forbidden_cluster_threshold
@@ -388,7 +388,9 @@ class TestPronouncabilityStrategy:
 
     def test_parameter_validation(self):
         with pytest.raises(ValueError):
-            GarbleDetector(Strategy.PRONOUNCEABILITY, forbidden_cluster_threshold=0)
+            GarbleDetector(
+                Strategy.PRONOUNCEABILITY, forbidden_cluster_threshold=0
+            )
         with pytest.raises(ValueError):
             GarbleDetector(Strategy.PRONOUNCEABILITY, vowel_min_ratio=1.5)
 
@@ -441,8 +443,7 @@ class TestUnicodeScriptStrategy:
 
     def test_disable_homoglyph_check(self):
         detector = GarbleDetector(
-            Strategy.UNICODE_SCRIPT,
-            check_homoglyphs=False
+            Strategy.UNICODE_SCRIPT, check_homoglyphs=False
         )
         # Should not flag single homoglyphs
         mixed = "p\u0430ypal"
@@ -451,10 +452,7 @@ class TestUnicodeScriptStrategy:
         assert isinstance(proba, float)
 
     def test_custom_max_scripts(self):
-        detector = GarbleDetector(
-            Strategy.UNICODE_SCRIPT,
-            max_scripts=3
-        )
+        detector = GarbleDetector(Strategy.UNICODE_SCRIPT, max_scripts=3)
         # Should be more lenient about script mixing
         assert detector.predict("hello") is False
 

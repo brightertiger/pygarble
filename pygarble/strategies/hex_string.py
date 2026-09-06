@@ -7,6 +7,7 @@ Detects hash strings, UUIDs, and other hexadecimal content.
 import re
 from typing import Any
 
+from ..validation import nonnegative_int, parameter_value
 from .base import BaseStrategy
 
 
@@ -42,8 +43,12 @@ class HexStringStrategy(BaseStrategy):
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
-        self.min_hex_length = kwargs.get("min_hex_length", 16)
-        self.hex_ratio_threshold = kwargs.get("hex_ratio_threshold", 0.7)
+        self.min_hex_length: int = nonnegative_int(
+            "min_hex_length", kwargs.get("min_hex_length", 16)
+        )
+        self.hex_ratio_threshold: float = parameter_value(
+            "hex_ratio_threshold", kwargs.get("hex_ratio_threshold", 0.7), 0.7
+        )
 
         if self.min_hex_length < 0:
             raise ValueError("min_hex_length must be non-negative")
@@ -54,7 +59,10 @@ class HexStringStrategy(BaseStrategy):
         self._md5_pattern = re.compile(r"^[a-fA-F0-9]{32}$")
         self._sha256_pattern = re.compile(r"^[a-fA-F0-9]{64}$")
         self._uuid_pattern = re.compile(
-            r"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+            (
+                "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9"
+                "]{4}-[a-fA-F0-9]{12}"
+            )
         )
         self._long_hex_pattern = re.compile(
             r"[a-fA-F0-9]{%d,}" % max(1, self.min_hex_length)
@@ -65,8 +73,7 @@ class HexStringStrategy(BaseStrategy):
         """Check if text is a pure hash string."""
         text = text.strip()
         return bool(
-            self._md5_pattern.match(text)
-            or self._sha256_pattern.match(text)
+            self._md5_pattern.match(text) or self._sha256_pattern.match(text)
         )
 
     def _contains_uuid(self, text: str) -> bool:
@@ -82,7 +89,8 @@ class HexStringStrategy(BaseStrategy):
         hex evidence: require at least one a-f letter in the run.
         """
         matches = [
-            m for m in self._long_hex_pattern.findall(text)
+            m
+            for m in self._long_hex_pattern.findall(text)
             if any(c in "abcdefABCDEF" for c in m)
         ]
         if not matches:
@@ -174,7 +182,9 @@ class HexStringStrategy(BaseStrategy):
         if hex_ratio >= self.hex_ratio_threshold:
             denominator = 1.0 - self.hex_ratio_threshold
             if denominator > 0:
-                return 0.6 + 0.4 * ((hex_ratio - self.hex_ratio_threshold) / denominator)
+                return 0.6 + 0.4 * (
+                    (hex_ratio - self.hex_ratio_threshold) / denominator
+                )
             else:
                 return 1.0  # threshold is 1.0, so any match is max score
 

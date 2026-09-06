@@ -1,0 +1,204 @@
+{
+  "datasets": {
+    "challenge_development": [
+      {
+        "additional_fp": 2,
+        "additional_tp": 0,
+        "standalone": {
+          "false_positive_rate": 0.0975609756097561,
+          "fn": 9,
+          "fp": 4,
+          "fpr_95_interval": [
+            0.03859708489808934,
+            0.22547681305523387
+          ],
+          "n": 68,
+          "precision": 0.8181818181818182,
+          "recall": 0.6666666666666666,
+          "tn": 37,
+          "tp": 18
+        },
+        "threshold": -3.0
+      },
+      {
+        "additional_fp": 1,
+        "additional_tp": 0,
+        "standalone": {
+          "false_positive_rate": 0.07317073170731707,
+          "fn": 11,
+          "fp": 3,
+          "fpr_95_interval": [
+            0.02519783063390993,
+            0.19427448537719041
+          ],
+          "n": 68,
+          "precision": 0.8421052631578947,
+          "recall": 0.5925925925925926,
+          "tn": 38,
+          "tp": 16
+        },
+        "threshold": -3.5
+      },
+      {
+        "additional_fp": 0,
+        "additional_tp": 0,
+        "standalone": {
+          "false_positive_rate": 0.024390243902439025,
+          "fn": 11,
+          "fp": 1,
+          "fpr_95_interval": [
+            0.004318531568912411,
+            0.1259506205577423
+          ],
+          "n": 68,
+          "precision": 0.9411764705882353,
+          "recall": 0.5925925925925926,
+          "tn": 40,
+          "tp": 16
+        },
+        "threshold": -4.0
+      },
+      {
+        "additional_fp": 0,
+        "additional_tp": 0,
+        "standalone": {
+          "false_positive_rate": 0.0,
+          "fn": 12,
+          "fp": 0,
+          "fpr_95_interval": [
+            0.0,
+            0.08566757018443186
+          ],
+          "n": 68,
+          "precision": 1.0,
+          "recall": 0.5555555555555556,
+          "tn": 41,
+          "tp": 15
+        },
+        "threshold": -4.5
+      },
+      {
+        "additional_fp": 0,
+        "additional_tp": 0,
+        "standalone": {
+          "false_positive_rate": 0.0,
+          "fn": 15,
+          "fp": 0,
+          "fpr_95_interval": [
+            0.0,
+            0.08566757018443186
+          ],
+          "n": 68,
+          "precision": 1.0,
+          "recall": 0.4444444444444444,
+          "tn": 41,
+          "tp": 12
+        },
+        "threshold": -5.0
+      }
+    ],
+    "legacy_reviewed": [
+      {
+        "additional_fp": 51,
+        "additional_tp": 30,
+        "standalone": {
+          "false_positive_rate": 0.05888767720828789,
+          "fn": 49,
+          "fp": 54,
+          "fpr_95_interval": [
+            0.04541183351712835,
+            0.07604388261008377
+          ],
+          "n": 1628,
+          "precision": 0.9245810055865922,
+          "recall": 0.9310829817158931,
+          "tn": 863,
+          "tp": 662
+        },
+        "threshold": -3.0
+      },
+      {
+        "additional_fp": 2,
+        "additional_tp": 19,
+        "standalone": {
+          "false_positive_rate": 0.003271537622682661,
+          "fn": 73,
+          "fp": 3,
+          "fpr_95_interval": [
+            0.001113228333938789,
+            0.009574234449609111
+          ],
+          "n": 1628,
+          "precision": 0.9953198127925117,
+          "recall": 0.8973277074542897,
+          "tn": 914,
+          "tp": 638
+        },
+        "threshold": -3.5
+      },
+      {
+        "additional_fp": 0,
+        "additional_tp": 4,
+        "standalone": {
+          "false_positive_rate": 0.0,
+          "fn": 132,
+          "fp": 0,
+          "fpr_95_interval": [
+            0.0,
+            0.004171683175097063
+          ],
+          "n": 1628,
+          "precision": 1.0,
+          "recall": 0.8143459915611815,
+          "tn": 917,
+          "tp": 579
+        },
+        "threshold": -4.0
+      },
+      {
+        "additional_fp": 0,
+        "additional_tp": 0,
+        "standalone": {
+          "false_positive_rate": 0.0,
+          "fn": 230,
+          "fp": 0,
+          "fpr_95_interval": [
+            0.0,
+            0.004171683175097063
+          ],
+          "n": 1628,
+          "precision": 1.0,
+          "recall": 0.6765119549929677,
+          "tn": 917,
+          "tp": 481
+        },
+        "threshold": -4.5
+      },
+      {
+        "additional_fp": 0,
+        "additional_tp": 0,
+        "standalone": {
+          "false_positive_rate": 0.0,
+          "fn": 389,
+          "fp": 0,
+          "fpr_95_interval": [
+            0.0,
+            0.004171683175097063
+          ],
+          "n": 1628,
+          "precision": 1.0,
+          "recall": 0.45288326300984527,
+          "tn": 917,
+          "tp": 322
+        },
+        "threshold": -5.0
+      }
+    ]
+  },
+  "decision": "Do not ship: no incremental detections over the English specialist ensemble at the selected threshold.",
+  "entries": 19683,
+  "raw_bytes": 78732,
+  "selected_threshold": -4.5,
+  "selection": "First threshold with zero standalone false positives on development challenge cases. No holdout tuning.",
+  "smoothing": "add-one; 80% conditional trigram, 20% bigram backoff"
+}

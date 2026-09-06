@@ -7,6 +7,7 @@ Tests for word-level strategies added in v0.6.0:
 """
 
 import pytest
+
 from pygarble import GarbleDetector, Strategy
 
 
@@ -17,13 +18,18 @@ class TestFunctionWordDensityStrategy:
         detector = GarbleDetector(Strategy.FUNCTION_WORD_DENSITY)
         assert detector.predict("The cat sat on the mat") is False
         assert detector.predict("I have been to the store") is False
-        assert detector.predict("She was reading a book in the library") is False
+        assert (
+            detector.predict("She was reading a book in the library") is False
+        )
 
     def test_garbled_text(self):
         detector = GarbleDetector(Strategy.FUNCTION_WORD_DENSITY)
-        assert detector.predict(
-            "xkrf plmq bvzt nwsd jghc trbn mkpl wqzd lpnr fvxt"
-        ) is True
+        assert (
+            detector.predict(
+                "xkrf plmq bvzt nwsd jghc trbn mkpl wqzd lpnr fvxt"
+            )
+            is True
+        )
 
     def test_short_text_exempt(self):
         detector = GarbleDetector(Strategy.FUNCTION_WORD_DENSITY)
@@ -79,9 +85,12 @@ class TestAffixDetectionStrategy:
 
     def test_valid_english_text(self):
         detector = GarbleDetector(Strategy.AFFIX_DETECTION)
-        assert detector.predict(
-            "The programming language is incredibly powerful and usable"
-        ) is False
+        assert (
+            detector.predict(
+                "The programming language is incredibly powerful and usable"
+            )
+            is False
+        )
 
     def test_short_text_exempt(self):
         detector = GarbleDetector(Strategy.AFFIX_DETECTION)
@@ -167,13 +176,41 @@ class TestZipfConformityStrategy:
         detector = GarbleDetector(Strategy.ZIPF_CONFORMITY)
         # 35 unique all-alpha garbled words
         words = [
-            "xkrf", "plmq", "bvzt", "nwsd", "jghc",
-            "trbn", "mkpl", "wqzd", "lpnr", "fvxt",
-            "qzml", "hkrp", "bntw", "xvfd", "cjmg",
-            "rlwp", "gthx", "znkm", "vbqf", "djsr",
-            "xtlw", "npfz", "mkcb", "ghvr", "wjqt",
-            "bfrk", "nlgz", "xpcm", "hvtq", "dwrj",
-            "ktsg", "fmqb", "zxwn", "pljr", "cvdh",
+            "xkrf",
+            "plmq",
+            "bvzt",
+            "nwsd",
+            "jghc",
+            "trbn",
+            "mkpl",
+            "wqzd",
+            "lpnr",
+            "fvxt",
+            "qzml",
+            "hkrp",
+            "bntw",
+            "xvfd",
+            "cjmg",
+            "rlwp",
+            "gthx",
+            "znkm",
+            "vbqf",
+            "djsr",
+            "xtlw",
+            "npfz",
+            "mkcb",
+            "ghvr",
+            "wjqt",
+            "bfrk",
+            "nlgz",
+            "xpcm",
+            "hvtq",
+            "dwrj",
+            "ktsg",
+            "fmqb",
+            "zxwn",
+            "pljr",
+            "cvdh",
         ]
         proba = detector.predict_proba(" ".join(words))
         assert proba > 0.5
@@ -194,9 +231,10 @@ class TestWordCollocationStrategy:
 
     def test_valid_english_text(self):
         detector = GarbleDetector(Strategy.WORD_COLLOCATION)
-        assert detector.predict(
-            "It is going to be a long day for the team"
-        ) is False
+        assert (
+            detector.predict("It is going to be a long day for the team")
+            is False
+        )
 
     def test_short_text_exempt(self):
         detector = GarbleDetector(Strategy.WORD_COLLOCATION)
@@ -205,9 +243,12 @@ class TestWordCollocationStrategy:
 
     def test_garbled_text(self):
         detector = GarbleDetector(Strategy.WORD_COLLOCATION)
-        assert detector.predict(
-            "xkrf plmq bvzt nwsd jghc trbn mkpl wqzd lpnr fvxt qzml hkrp"
-        ) is True
+        assert (
+            detector.predict(
+                "xkrf plmq bvzt nwsd jghc trbn mkpl wqzd lpnr fvxt qzml hkrp"
+            )
+            is True
+        )
 
     def test_probability_range(self):
         detector = GarbleDetector(Strategy.WORD_COLLOCATION)
@@ -220,9 +261,7 @@ class TestWordCollocationStrategy:
 
     def test_valid_text_low_probability(self):
         detector = GarbleDetector(Strategy.WORD_COLLOCATION)
-        proba = detector.predict_proba(
-            "The cat sat on the mat in the room"
-        )
+        proba = detector.predict_proba("The cat sat on the mat in the room")
         assert proba < 0.5
 
     def test_garbled_high_probability(self):
@@ -260,25 +299,31 @@ class TestHighPrecisionWordLevel:
         "The best way to learn is by doing it yourself",
     ]
 
-    @pytest.mark.parametrize("strategy", [
-        Strategy.FUNCTION_WORD_DENSITY,
-        Strategy.WORD_COLLOCATION,
-    ])
+    @pytest.mark.parametrize(
+        "strategy",
+        [
+            Strategy.FUNCTION_WORD_DENSITY,
+            Strategy.WORD_COLLOCATION,
+        ],
+    )
     def test_no_false_positives(self, strategy):
         detector = GarbleDetector(strategy)
         for text in self.VALID_TEXTS:
-            assert detector.predict(text) is False, (
-                f"{strategy.value} flagged valid text: {text!r}"
-            )
+            assert (
+                detector.predict(text) is False
+            ), f"{strategy.value} flagged valid text: {text!r}"
 
-    @pytest.mark.parametrize("strategy", [
-        Strategy.FUNCTION_WORD_DENSITY,
-        Strategy.WORD_COLLOCATION,
-    ])
+    @pytest.mark.parametrize(
+        "strategy",
+        [
+            Strategy.FUNCTION_WORD_DENSITY,
+            Strategy.WORD_COLLOCATION,
+        ],
+    )
     def test_low_probability_on_valid(self, strategy):
         detector = GarbleDetector(strategy)
         for text in self.VALID_TEXTS:
             proba = detector.predict_proba(text)
-            assert proba < 0.5, (
-                f"{strategy.value} gave {proba:.2f} for: {text!r}"
-            )
+            assert (
+                proba < 0.5
+            ), f"{strategy.value} gave {proba:.2f} for: {text!r}"

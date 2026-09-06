@@ -1,0 +1,232 @@
+"""Deterministic aggregation with explicit English profiles."""
+
+from typing import Any, Dict, Iterable, List, Mapping, Optional, Tuple, Union
+
+from .analysis import Analysis, Signal
+from .detector import GarbleDetector
+from .preprocessing import TextFeatures
+from .registry import Strategy
+from .validation import finite_number, process_input
+
+LEGACY_STRATEGIES = (
+    Strategy.MARKOV_CHAIN,
+    Strategy.LOG_LIKELIHOOD_RATIO,
+    Strategy.WORD_ANOMALY,
+)
+PROFILES = {
+    "english": LEGACY_STRATEGIES
+    + (
+        Strategy.MOJIBAKE,
+        Strategy.KEYBOARD_ADJACENCY,
+        Strategy.CONTROL_CHARACTERS,
+    ),
+    "english_extended": LEGACY_STRATEGIES
+    + (
+        Strategy.MOJIBAKE,
+        Strategy.KEYBOARD_ADJACENCY,
+        Strategy.CONTROL_CHARACTERS,
+        Strategy.PATTERN_MATCHING,
+        Strategy.LOCAL_ANOMALY,
+        Strategy.REPETITION,
+    ),
+    "legacy": LEGACY_STRATEGIES,
+    "corruption": (Strategy.MOJIBAKE, Strategy.CONTROL_CHARACTERS),
+    "spoofing": (Strategy.UNICODE_SCRIPT,),
+}
+
+
+class EnsembleDetector:
+    def __init__(
+        self,
+        strategies: Optional[List[Strategy]] = None,
+        threshold: float = 0.5,
+        voting: Optional[str] = None,
+        weights: Optional[List[float]] = None,
+        threads: Optional[int] = None,
+        *,
+        profile: Optional[str] = None,
+        strategy_kwargs: Optional[Mapping[Strategy, Mapping[str, Any]]] = None,
+        allowlist: Optional[Iterable[str]] = None,
+        max_input_length: Optional[int] = None,
+        timeout_per_text: Optional[float] = None,
+        **kwargs: Any,
+    ) -> None:
+        if profile is not None and strategies is not None:
+            raise ValueError("use either profile or strategies")
+        self.profile = profile or (
+            "english" if strategies is None else "custom"
+        )
+        if strategies is None:
+            if self.profile not in PROFILES:
+                raise ValueError(f"unknown profile: {self.profile}")
+            strategies = list(PROFILES[self.profile])
+        if not strategies:
+            raise ValueError("strategies must contain at least one strategy")
+        self.voting = (
+            voting
+            if voting is not None
+            else ("majority" if self.profile == "custom" else "any")
+        )
+        if self.voting not in (
+            "majority",
+            "any",
+            "all",
+            "average",
+            "weighted",
+        ):
+            raise ValueError(
+                "voting must be majority, any, all, average, or weighted"
+            )
+        if self.voting == "weighted" and weights is None:
+            raise ValueError("weights required when voting='weighted'")
+        self.strategies = list(strategies)
+        if weights is not None and len(weights) != len(strategies):
+            raise ValueError("weights must have same length as strategies")
+        self.weights = [
+            finite_number("weights", weight)
+            for weight in (
+                weights if weights is not None else [1.0] * len(strategies)
+            )
+        ]
+        if any(weight < 0 for weight in self.weights):
+            raise ValueError("weights must be non-negative")
+        if not any(self.weights):
+            raise ValueError("weights must not all be zero")
+        options: Dict[Strategy, Mapping[str, Any]] = dict(
+            strategy_kwargs or {}
+        )
+        if any(strategy not in strategies for strategy in options):
+            raise ValueError(
+                "strategy_kwargs contains a strategy not selected"
+            )
+        words = (
+            list(allowlist)
+            if allowlist is not None and not isinstance(allowlist, str)
+            else allowlist
+        )
+        self._detectors = [
+            GarbleDetector(
+                strategy,
+                threshold,
+                threads,
+                allowlist=words,
+                max_input_length=max_input_length,
+                timeout_per_text=timeout_per_text,
+                strategy_kwargs=options.get(strategy),
+                **kwargs,
+            )
+            for strategy in strategies
+        ]
+        first = self._detectors[0]
+        self.threshold = first.threshold
+        self.threads = first.threads
+        self.max_input_length = first.max_input_length
+        self.timeout_per_text = first.timeout_per_text
+        self.allowlist = first.allowlist
+        self.kwargs = dict(kwargs)
+
+    def _aggregate(
+        self, pairs: List[Tuple[Signal, float]]
+    ) -> Tuple[bool, float]:
+        if not pairs:
+            return False, 0.0
+        scores = [signal.score for signal, _ in pairs]
+        if self.voting == "weighted":
+            maximum = max(weight for _, weight in pairs)
+            if maximum == 0:
+                return False, 0.0
+            total = sum(weight / maximum for _, weight in pairs)
+            score = (
+                sum(
+                    signal.score * (weight / maximum)
+                    for signal, weight in pairs
+                )
+                / total
+            )
+        elif self.voting == "any":
+            score = max(scores)
+        elif self.voting == "all":
+            score = min(scores)
+        else:
+            score = sum(scores) / len(scores)
+        if self.voting == "majority":
+            return (
+                sum(value >= self.threshold for value in scores)
+                > len(scores) / 2,
+                score,
+            )
+        return score >= self.threshold, score
+
+    def _analyze_single(self, text: str) -> Analysis:
+        features = TextFeatures(text, self.allowlist)
+        signals = tuple(
+            detector._signal(features) for detector in self._detectors
+        )
+        pairs = [
+            (signal, weight)
+            for signal, weight in zip(signals, self.weights)
+            if signal.applicable and (self.voting != "weighted" or weight > 0)
+        ]
+        decision, score = self._aggregate(pairs)
+        return Analysis(
+            decision,
+            score,
+            (
+                "garbled"
+                if decision
+                else ("clean" if pairs else "insufficient_evidence")
+            ),
+            signals,
+            self.profile,
+        )
+
+    def analyze(
+        self, X: Union[str, List[str]]
+    ) -> Union[Analysis, List[Analysis]]:
+        return process_input(
+            X,
+            self._analyze_single,
+            self.threads,
+            self.timeout_per_text,
+            self.max_input_length,
+        )
+
+    def _predict_single(self, text: str) -> bool:
+        if self.voting not in ("any", "all"):
+            return self._analyze_single(text).garbled
+        features = TextFeatures(text, self.allowlist)
+        applicable = False
+        for detector in self._detectors:
+            evidence = detector._strategy_instance.evaluate(features)
+            if not evidence.applicable:
+                continue
+            applicable = True
+            vote = evidence.score >= self.threshold
+            if self.voting == "any" and vote:
+                return True
+            if self.voting == "all" and not vote:
+                return False
+        return applicable and self.voting == "all"
+
+    def predict(self, X: Union[str, List[str]]) -> Union[bool, List[bool]]:
+        return process_input(
+            X,
+            self._predict_single,
+            self.threads,
+            self.timeout_per_text,
+            self.max_input_length,
+        )
+
+    def predict_proba(
+        self, X: Union[str, List[str]]
+    ) -> Union[float, List[float]]:
+        """Heuristic aggregate; majority decisions use votes, not this mean."""
+        return process_input(
+            X,
+            lambda text: self._analyze_single(text).score,
+            self.threads,
+            self.timeout_per_text,
+            self.max_input_length,
+        )
+
+    score = predict_proba

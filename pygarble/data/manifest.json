@@ -1,0 +1,16 @@
+{
+  "counts": {
+    "bigrams": 729,
+    "trigrams": 2000,
+    "words": 49330
+  },
+  "curation_sha256": "0b2f10f8c195e230328b83eb2285a38777295fdf4bd8d810471434c8418bea27",
+  "files": {
+    "bigrams.py": "332e3353e1cc72051e844b42cfd3e22fc69331efb0ca22c4325e1350a3a89660",
+    "trigrams.py": "78d309dfa9b146b051dd780d6011767574c0cd953994b450e5971a4c85771b09",
+    "words.py": "7e2ef13b33e31ac41a134dfd923abcbf48ea15e71847d09313428892e3884e10"
+  },
+  "model_version": "english-v2",
+  "source_sha256": "51df159fd3de12b20e403c108f526e96dbd723d9cabdd5f17955cdc16059e690",
+  "source_url": "https://norvig.com/ngrams/count_1w.txt"
+}

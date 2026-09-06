@@ -8,8 +8,9 @@ No external dependencies required.
 import re
 from typing import Any, List
 
-from .base import BaseStrategy
 from ..data import ENGLISH_WORDS
+from ..validation import parameter_value
+from .base import BaseStrategy
 
 
 class WordLookupStrategy(BaseStrategy):
@@ -42,8 +43,12 @@ class WordLookupStrategy(BaseStrategy):
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
-        self.unknown_threshold = kwargs.get("unknown_threshold", 0.5)
-        self.min_word_length = kwargs.get("min_word_length", 2)
+        self.unknown_threshold: float = parameter_value(
+            "unknown_threshold", kwargs.get("unknown_threshold", 0.5), 0.5
+        )
+        self.min_word_length: int = parameter_value(
+            "min_word_length", kwargs.get("min_word_length", 2), 2
+        )
 
         if not 0.0 <= self.unknown_threshold <= 1.0:
             raise ValueError("unknown_threshold must be between 0.0 and 1.0")
@@ -93,7 +98,18 @@ class WordLookupStrategy(BaseStrategy):
         - 0.0 = all words found in dictionary
         - 1.0 = all words unknown
 
-        The raw unknown ratio is used directly as the garble score,
-        as it naturally maps to the probability of being garbled.
+        The default uses the raw unknown fraction. Custom thresholds map
+        their configured fraction to 0.5; this is not a probability.
         """
-        return self._compute_unknown_ratio(text)
+        ratio = self._compute_unknown_ratio(text)
+        # Map the configured unknown fraction to 0.5; preserve the old
+        # identity mapping when unknown_threshold is the default 0.5.
+        if ratio == 0.0:
+            return 0.0
+        if ratio >= self.unknown_threshold:
+            if self.unknown_threshold == 1.0:
+                return 0.5
+            return 0.5 + 0.5 * (ratio - self.unknown_threshold) / (
+                1.0 - self.unknown_threshold
+            )
+        return 0.5 * ratio / self.unknown_threshold

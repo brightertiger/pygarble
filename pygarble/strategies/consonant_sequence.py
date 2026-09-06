@@ -5,6 +5,9 @@ Detects impossibly long consonant sequences that cannot occur in English.
 Conservative threshold to allow valid clusters like 'str', 'scr', 'ngths'.
 """
 
+from typing import Any
+
+from ..validation import positive_int
 from .base import BaseStrategy
 
 
@@ -25,10 +28,7 @@ class ConsonantSequenceStrategy(BaseStrategy):
     CONSONANTS = frozenset("bcdfghjklmnpqrstvwxz")
 
     def __init__(
-        self,
-        max_consonants: int = 6,
-        min_length: int = 6,
-        **kwargs
+        self, max_consonants: int = 6, min_length: int = 6, **kwargs: Any
     ):
         """
         Initialize the consonant sequence strategy.
@@ -39,16 +39,16 @@ class ConsonantSequenceStrategy(BaseStrategy):
             min_length: Minimum text length to analyze (default 6)
         """
         super().__init__(**kwargs)
-        self.max_consonants = max_consonants
-        self.min_length = min_length
+        self.max_consonants = positive_int("max_consonants", max_consonants)
+        self.min_length = positive_int("min_length", min_length)
 
     # Real acronyms (NASA, HTTP, UNESCO) are short; longer all-caps runs
     # are analyzed like any other word so shouted gibberish is not exempt.
     MAX_ACRONYM_LENGTH = 6
 
-    def _extract_words_for_analysis(self, text: str):
+    def _extract_words_for_analysis(self, text: str) -> str:
         """Extract words, excluding likely acronyms (short all-caps)."""
-        words = []
+        words: list = []
         current_word = []
         for c in text:
             if c.isalpha():
