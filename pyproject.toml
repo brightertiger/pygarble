@@ -5,14 +5,14 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "pygarble"
 version = "0.9.0"
-description = "A Python package for detecting garbled text using multiple detection strategies with a scikit-learn-like interface"
+description = "Deterministic, zero-dependency gibberish detection for English text"
 readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "MIT"}
 authors = [
     {name = "Ujjwal", email = "ujjwal@example.com"},
 ]
-keywords = ["garble", "text", "detection", "nlp", "machine-learning", "scikit-learn"]
+keywords = ["garble", "text", "detection", "nlp", "english", "gibberish", "text-validation"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
@@ -46,7 +46,7 @@ dev = [
 Homepage = "https://github.com/brightertiger/pygarble"
 Repository = "https://github.com/brightertiger/pygarble"
 Issues = "https://github.com/brightertiger/pygarble/issues"
-Documentation = "https://github.com/brightertiger/pygarble#readme"
+Documentation = "https://brightertiger.github.io/pygarble/"
 
 [tool.setuptools.packages.find]
 include = ["pygarble*"]
