@@ -1,0 +1,9 @@
+[flake8]
+max-line-length = 79
+extend-ignore = E203,W503
+per-file-ignores =
+    pygarble/data/words.py:E501
+    pygarble/data/bigrams.py:E501
+    pygarble/data/trigrams.py:E501
+    scripts/*.py:E402
+    regression/*.py:E402

@@ -81,10 +81,10 @@ To add a new detection strategy:
 1. Create a new file in ``pygarble/strategies/``
 2. Inherit from ``BaseStrategy``
 3. Implement ``_predict_impl()`` and ``_predict_proba_impl()`` methods
-4. Add the strategy to the ``Strategy`` enum in ``core.py``
-5. Add the strategy to the strategy map in ``GarbleDetector._create_strategy_instance()``
+4. Add the strategy to the ``Strategy`` enum and lazy implementation map in ``registry.py``
+5. Register its supported settings in ``options.py``
 6. Add tests in ``tests/test_strategies.py``
-7. Update documentation
+7. Regenerate documentation with ``python scripts/update_strategy_docs.py``
 
 Example strategy implementation:
 
@@ -98,7 +98,7 @@ Example strategy implementation:
            return False
 
        def _predict_proba_impl(self, text: str) -> float:
-           # Return probability score (0.0 to 1.0)
+           # Return heuristic score (0.0 to 1.0)
            return 0.0
 
 Code Style

@@ -1,8 +1,12 @@
 import re
-import unicodedata
 from abc import ABC, abstractmethod
 from collections import Counter
 from typing import Any, Dict
+
+from ..analysis import Evidence
+from ..options import validate_options
+from ..preprocessing import TextFeatures, fold_diacritics
+from ..validation import finite_number, positive_int
 
 # Pre-compiled regex for performance
 _WHITESPACE_PATTERN = re.compile(r"\s")
@@ -15,6 +19,12 @@ _URL_PREFIXES = ("http://", "https://", "ftp://", "file://", "data:", "www.")
 class BaseStrategy(ABC):
     def __init__(self, **kwargs: Any):
         self.kwargs: Dict[str, Any] = kwargs
+        validate_options(type(self).__name__, kwargs)
+        for name, value in kwargs.items():
+            if isinstance(value, (int, float)) and not isinstance(value, bool):
+                finite_number(name, value)
+        if "max_string_length" in kwargs:
+            positive_int("max_string_length", kwargs["max_string_length"])
 
     def predict(self, text: str) -> bool:
         self._validate_input(text)
@@ -53,7 +63,10 @@ class BaseStrategy(ABC):
             )
 
     def _is_extremely_long_string(self, text: str) -> bool:
-        max_length = self.kwargs.get("max_string_length", 1000)
+        # Explicit compatibility option only. Length is not universal evidence.
+        max_length = self.kwargs.get("max_string_length")
+        if max_length is None:
+            return False
         if len(text) <= max_length or _WHITESPACE_PATTERN.search(text):
             return False
         return not text.lower().startswith(_URL_PREFIXES)
@@ -63,8 +76,7 @@ class BaseStrategy(ABC):
         """Strip combining marks so ASCII n-gram models can score accented
         text (café -> cafe) instead of treating every accented n-gram as
         unseen."""
-        normalized = unicodedata.normalize("NFKD", text)
-        return "".join(c for c in normalized if not unicodedata.combining(c))
+        return fold_diacritics(text)
 
     def _get_alpha_char_counts(self, text: str) -> Counter:
         return Counter(c for c in text.lower() if c.isalpha())
@@ -80,33 +92,28 @@ class BaseStrategy(ABC):
         drops likely proper nouns (Nguyen, McDonald) for strategies whose
         rules don't hold for names.
         """
-        from ..data import ENGLISH_WORDS
+        return [
+            token.folded
+            for token in TextFeatures(text).novel
+            if not (skip_titlecase and token.text.istitle())
+        ]
 
-        novel = []
-        for token in text.split():
-            if any(ch.isdigit() for ch in token):
-                continue
-            lower = token.lower()
-            if "://" in lower or "@" in lower or lower.startswith("www."):
-                continue
-            alpha = "".join(
-                c for c in self._fold_diacritics(token) if c.isalpha()
-            )
-            if not alpha:
-                continue
-            if token.isupper() and len(alpha) <= 6:
-                continue
-            if (
-                skip_titlecase
-                and token[:1].isupper()
-                and token[1:].lower() == token[1:]
-            ):
-                continue
-            alpha = alpha.lower()
-            if alpha in ENGLISH_WORDS:
-                continue
-            novel.append(alpha)
-        return novel
+    def evaluate(self, features: TextFeatures) -> Evidence:
+        self._validate_input(features.text)
+        if not features.text.strip():
+            return Evidence(0.0, False, "empty_input")
+        if self._is_extremely_long_string(features.text):
+            return Evidence(1.0, True, "explicit_length_policy")
+        result = self._evaluate_features(features)
+        score = finite_number("strategy score", result.score)
+        if not 0.0 <= score <= 1.0:
+            raise ValueError("strategy score must be between 0.0 and 1.0")
+        return result
+
+    def _evaluate_features(self, features: TextFeatures) -> Evidence:
+        if not self.applicable(features.text):
+            return Evidence(0.0, False, "insufficient_evidence")
+        return Evidence(self._predict_proba_impl(features.text))
 
     def _predict_impl(self, text: str) -> bool:
         # Single source of truth: predict agrees with predict_proba unless a

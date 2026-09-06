@@ -1,0 +1,1194 @@
+{
+  "scope": "English text plausibility; meaningful non-English text may be garbled. Structured text is accepted unless corrupt.",
+  "provenance": "Manually authored challenge cases; family-separated before candidate evaluation. This is a small engineering challenge set, not representative production data or an external precision estimate.",
+  "cases": [
+    {
+      "id": "f86f94884cd07fa7",
+      "text": "Please send the updated invoice before Friday.",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "support_prose",
+      "split": "development"
+    },
+    {
+      "id": "0914eb97a56cfb7b",
+      "text": "Your delivery should arrive tomorrow morning.",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "support_prose",
+      "split": "development"
+    },
+    {
+      "id": "68fef2789e2efb13",
+      "text": "The customer asked for a refund after the parcel was lost.",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "support_prose",
+      "split": "development"
+    },
+    {
+      "id": "cda8b0266ec4407e",
+      "text": "We have reviewed your application and will reply shortly.",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "support_prose",
+      "split": "development"
+    },
+    {
+      "id": "1eec38f389aad7c6",
+      "text": "Could you check whether the kitchen window is closed?",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "support_prose",
+      "split": "development"
+    },
+    {
+      "id": "e2f027d386c2e6ad",
+      "text": "The meeting has moved to the smaller conference room.",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "support_prose",
+      "split": "development"
+    },
+    {
+      "id": "5194b60ff156c642",
+      "text": "A quick brown fox wandered past our garden.",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "support_prose",
+      "split": "development"
+    },
+    {
+      "id": "267f995b4c249758",
+      "text": "Thank you for helping us resolve this issue.",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "support_prose",
+      "split": "development"
+    },
+    {
+      "id": "e110078d9290504d",
+      "text": "This document describes a deterministic English text detector.",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "support_prose",
+      "split": "development"
+    },
+    {
+      "id": "c69fa067fc8ceb22",
+      "text": "She enjoys reading books about astronomy and history.",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "support_prose",
+      "split": "development"
+    },
+    {
+      "id": "89928b9d597a8ac1",
+      "text": "Caf\u00e9 visitors ordered cr\u00e8me br\u00fbl\u00e9e and tea.",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "support_prose",
+      "split": "development"
+    },
+    {
+      "id": "6becb3138230f9c6",
+      "text": "The nurse explained the prescription to the patient.",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "support_prose",
+      "split": "development"
+    },
+    {
+      "id": "bc25f0786cbf7047",
+      "text": "HTTP API REST",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "technical_valid",
+      "split": "development"
+    },
+    {
+      "id": "27ec23febc09f3c9",
+      "text": "XMLHttpRequest",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "technical_valid",
+      "split": "development"
+    },
+    {
+      "id": "cc52d03280b7034c",
+      "text": "PostgreSQL",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "technical_valid",
+      "split": "development"
+    },
+    {
+      "id": "5be1ecc7935f1dd8",
+      "text": "nginx",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "technical_valid",
+      "split": "development"
+    },
+    {
+      "id": "ead3e38f42912090",
+      "text": "OAuth2",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "technical_valid",
+      "split": "development"
+    },
+    {
+      "id": "30059116c2552395",
+      "text": "https://example.org/path?q=qxzjkwp",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "technical_valid",
+      "split": "development"
+    },
+    {
+      "id": "708351d7f03ac137",
+      "text": "help@example.org",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "technical_valid",
+      "split": "development"
+    },
+    {
+      "id": "1df0dc2fd904aa80",
+      "text": "SKU-4928-Z",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "technical_valid",
+      "split": "development"
+    },
+    {
+      "id": "ed827267b7e2980b",
+      "text": "2026-09-06",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "technical_valid",
+      "split": "development"
+    },
+    {
+      "id": "e3c6cc9273ee75c2",
+      "text": "3.14159265359",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "technical_valid",
+      "split": "development"
+    },
+    {
+      "id": "eca12c081df0b78e",
+      "text": "SELECT * FROM users WHERE id = 1;",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "technical_valid",
+      "split": "development"
+    },
+    {
+      "id": "b23c15d342940674",
+      "text": "DEBUG: Processing request id=abc123 user=john",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "technical_valid",
+      "split": "development"
+    },
+    {
+      "id": "bc51cb565b06abc6",
+      "text": "C:\\Users\\John\\Documents\\report.docx",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "technical_valid",
+      "split": "development"
+    },
+    {
+      "id": "10d2a89cad9ada52",
+      "text": "List:\n- apples\n- oranges\n- pears",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "technical_valid",
+      "split": "development"
+    },
+    {
+      "id": "ca83bb3aa7a7d6a7",
+      "text": "----\nSection title\n====",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "technical_valid",
+      "split": "development"
+    },
+    {
+      "id": "797b1a73b260c639",
+      "text": "rhythms",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "english_borrowings",
+      "split": "development"
+    },
+    {
+      "id": "3454f8088d3cd493",
+      "text": "fjord",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "english_borrowings",
+      "split": "development"
+    },
+    {
+      "id": "df0c4dd19ae70dc6",
+      "text": "syzygy",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "english_borrowings",
+      "split": "development"
+    },
+    {
+      "id": "d63d9f2678047f08",
+      "text": "chutzpah",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "english_borrowings",
+      "split": "development"
+    },
+    {
+      "id": "213c4d2db026ed43",
+      "text": "Nguyen",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "english_borrowings",
+      "split": "development"
+    },
+    {
+      "id": "597d0dd6aa15b00d",
+      "text": "McDonald",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "english_borrowings",
+      "split": "development"
+    },
+    {
+      "id": "6250fef1f20df139",
+      "text": "O\u2019Connor",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "english_borrowings",
+      "split": "development"
+    },
+    {
+      "id": "ac226f1b3595fd78",
+      "text": "state-of-the-art",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "english_borrowings",
+      "split": "development"
+    },
+    {
+      "id": "df7682099c96e3f6",
+      "text": "don't",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "english_borrowings",
+      "split": "development"
+    },
+    {
+      "id": "fb8a358fd9e65435",
+      "text": "wishy",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "english_borrowings",
+      "split": "development"
+    },
+    {
+      "id": "ab6296e2fcab3804",
+      "text": "typewriter",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "english_borrowings",
+      "split": "development"
+    },
+    {
+      "id": "07d715edb696fb5f",
+      "text": "power",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "english_borrowings",
+      "split": "development"
+    },
+    {
+      "id": "473b3fb858a25787",
+      "text": "uncharacteristically",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "english_borrowings",
+      "split": "development"
+    },
+    {
+      "id": "877a819b49d0dde8",
+      "text": "pneumonoultramicroscopicsilicovolcanoconiosis",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "english_borrowings",
+      "split": "development"
+    },
+    {
+      "id": "5c80565db6f29da0",
+      "text": "asdfghjkl",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "keyboard_horizontal",
+      "split": "development"
+    },
+    {
+      "id": "65e84be33532fb78",
+      "text": "qwerty",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "keyboard_horizontal",
+      "split": "development"
+    },
+    {
+      "id": "9a900403ac313ba2",
+      "text": "qwertyuiop",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "keyboard_horizontal",
+      "split": "development"
+    },
+    {
+      "id": "1df1854015e31ca2",
+      "text": "zxcvbnm",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "keyboard_horizontal",
+      "split": "development"
+    },
+    {
+      "id": "091364025ac80949",
+      "text": "poiuytrewq",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "keyboard_horizontal",
+      "split": "development"
+    },
+    {
+      "id": "2e6887c8745b28fc",
+      "text": "mnbvcxz",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "keyboard_horizontal",
+      "split": "development"
+    },
+    {
+      "id": "17417ebfe065a26e",
+      "text": "asdfghjkl123",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "keyboard_horizontal",
+      "split": "development"
+    },
+    {
+      "id": "f6ee94ecb014f74f",
+      "text": "qwerty12345",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "keyboard_horizontal",
+      "split": "development"
+    },
+    {
+      "id": "afd25087b9a776c4",
+      "text": "ASDFGHJKL",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "keyboard_horizontal",
+      "split": "development"
+    },
+    {
+      "id": "4c549b97cc23e433",
+      "text": "Caf\u00c3\u00a9 au lait",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "encoding_accents",
+      "split": "development"
+    },
+    {
+      "id": "895f6422ad194a95",
+      "text": "Na\u00c3\u00afve approach",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "encoding_accents",
+      "split": "development"
+    },
+    {
+      "id": "83608bb896e19711",
+      "text": "R\u00c3\u00a9sum\u00c3\u00a9 template",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "encoding_accents",
+      "split": "development"
+    },
+    {
+      "id": "11b3fa057bf89c6c",
+      "text": "Fa\u00c3\u00a7ade design",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "encoding_accents",
+      "split": "development"
+    },
+    {
+      "id": "a74946c27dc6e254",
+      "text": "Hello \ufffd world",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "encoding_accents",
+      "split": "development"
+    },
+    {
+      "id": "b206899bc103669c",
+      "text": "hello\u0000world",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "encoding_accents",
+      "split": "development"
+    },
+    {
+      "id": "ddc5f43ce7912de0",
+      "text": "bad\u0007message",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "encoding_accents",
+      "split": "development"
+    },
+    {
+      "id": "bd6141fb31ac2573",
+      "text": "text\ud800here",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "encoding_accents",
+      "split": "development"
+    },
+    {
+      "id": "d7be5996fa562294",
+      "text": "\u0928\u092e\u0938\u094d\u0924\u0947 \u0926\u0941\u0928\u093f\u092f\u093e",
+      "expected_garbled": true,
+      "label": "outside_english",
+      "source": "authored_challenge_v1",
+      "family": "non_latin_english_scope",
+      "split": "development"
+    },
+    {
+      "id": "beca6335b20ff57c",
+      "text": "\u4f60\u597d\u4e16\u754c",
+      "expected_garbled": true,
+      "label": "outside_english",
+      "source": "authored_challenge_v1",
+      "family": "non_latin_english_scope",
+      "split": "development"
+    },
+    {
+      "id": "830d1964dc867318",
+      "text": "\u041f\u0440\u0438\u0432\u0435\u0442 \u043c\u0438\u0440",
+      "expected_garbled": true,
+      "label": "outside_english",
+      "source": "authored_challenge_v1",
+      "family": "non_latin_english_scope",
+      "split": "development"
+    },
+    {
+      "id": "9262a0a791605071",
+      "text": "\u0645\u0631\u062d\u0628\u0627 \u0628\u0627\u0644\u0639\u0627\u0644\u0645",
+      "expected_garbled": true,
+      "label": "outside_english",
+      "source": "authored_challenge_v1",
+      "family": "non_latin_english_scope",
+      "split": "development"
+    },
+    {
+      "id": "3a57bd94b9bcda80",
+      "text": "\u3053\u308c\u306f\u65e5\u672c\u8a9e\u3067\u3059",
+      "expected_garbled": true,
+      "label": "outside_english",
+      "source": "authored_challenge_v1",
+      "family": "non_latin_english_scope",
+      "split": "development"
+    },
+    {
+      "id": "79c838389cf6678e",
+      "text": "The order qxzjkwpv is confirmed and will arrive in the next few days.",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "local_garbage",
+      "split": "development"
+    },
+    {
+      "id": "df04e6ae8f234383",
+      "text": "Please review xkjqzvpm and let me know whether the rest is correct.",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "local_garbage",
+      "split": "development"
+    },
+    {
+      "id": "9c911ab1ba9b5553",
+      "text": "qxzjkwpv",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "local_garbage",
+      "split": "development"
+    },
+    {
+      "id": "83cb9a0bbb399d21",
+      "text": "mzqxvjkt",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "local_garbage",
+      "split": "development"
+    },
+    {
+      "id": "dc02355fdac08eca",
+      "text": "qzxv pzqk jxqz wvqx",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "local_garbage",
+      "split": "development"
+    },
+    {
+      "id": "939bd9f2730a5399",
+      "text": "Our train reached the coastal town just before sunset.",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "travel_prose",
+      "split": "holdout"
+    },
+    {
+      "id": "d27a6bec0da955e5",
+      "text": "The guide pointed out a narrow trail beside the waterfall.",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "travel_prose",
+      "split": "holdout"
+    },
+    {
+      "id": "e05ec7d4c7965537",
+      "text": "I packed a raincoat because the forecast mentioned afternoon showers.",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "travel_prose",
+      "split": "holdout"
+    },
+    {
+      "id": "3c4ce31a1efe9b4b",
+      "text": "We reserved a quiet room overlooking the harbour.",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "travel_prose",
+      "split": "holdout"
+    },
+    {
+      "id": "0243efa1e0f07653",
+      "text": "A handwritten map helped the visitors find the old library.",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "travel_prose",
+      "split": "holdout"
+    },
+    {
+      "id": "306b1cdba6697ec8",
+      "text": "The ticket includes a return journey and a light breakfast.",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "travel_prose",
+      "split": "holdout"
+    },
+    {
+      "id": "f73cbe46855e2522",
+      "text": "Travellers should keep their luggage away from the doors.",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "travel_prose",
+      "split": "holdout"
+    },
+    {
+      "id": "ccdeab55b6040717",
+      "text": "During the flight I read an interesting essay on urban planning.",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "travel_prose",
+      "split": "holdout"
+    },
+    {
+      "id": "0a87f1875ff1e75c",
+      "text": "Fresh bread and a warm drink made the early start easier.",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "travel_prose",
+      "split": "holdout"
+    },
+    {
+      "id": "c0365ac79afd153b",
+      "text": "The museum displays pottery recovered from nearby settlements.",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "travel_prose",
+      "split": "holdout"
+    },
+    {
+      "id": "0528972d98b911e7",
+      "text": "Guests may borrow bicycles from the reception desk.",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "travel_prose",
+      "split": "holdout"
+    },
+    {
+      "id": "a58b26be7221928a",
+      "text": "After several hours of walking we stopped beneath a shady tree.",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "travel_prose",
+      "split": "holdout"
+    },
+    {
+      "id": "1788cbf857c4cef3",
+      "text": "electroencephalography",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "science_and_names",
+      "split": "holdout"
+    },
+    {
+      "id": "97f64d5e88390efc",
+      "text": "photosynthesis",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "science_and_names",
+      "split": "holdout"
+    },
+    {
+      "id": "fea165b5229e2d76",
+      "text": "deoxyribonucleic acid",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "science_and_names",
+      "split": "holdout"
+    },
+    {
+      "id": "a44adeb25adaeb4f",
+      "text": "phenylalanine",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "science_and_names",
+      "split": "holdout"
+    },
+    {
+      "id": "03b896aa39acc8c6",
+      "text": "Worcestershire",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "science_and_names",
+      "split": "holdout"
+    },
+    {
+      "id": "20fbc6f55da84ad9",
+      "text": "Siobhan",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "science_and_names",
+      "split": "holdout"
+    },
+    {
+      "id": "17407120d83814df",
+      "text": "Srinivasan",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "science_and_names",
+      "split": "holdout"
+    },
+    {
+      "id": "acb208d3ac02ab6d",
+      "text": "Loughborough",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "science_and_names",
+      "split": "holdout"
+    },
+    {
+      "id": "58f552cd0e0849f3",
+      "text": "The physicist measured the wavelength of the reflected light.",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "science_and_names",
+      "split": "holdout"
+    },
+    {
+      "id": "b7d62ee0ead51489",
+      "text": "A careful comparison revealed a small change in the sample.",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "science_and_names",
+      "split": "holdout"
+    },
+    {
+      "id": "3263214a99e827dd",
+      "text": "Neural pathways carry information between different regions.",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "science_and_names",
+      "split": "holdout"
+    },
+    {
+      "id": "ac669b995d24f1a7",
+      "text": "The enzyme participates in cellular respiration.",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "science_and_names",
+      "split": "holdout"
+    },
+    {
+      "id": "38295eb7bef619ef",
+      "text": "https://docs.example.net/reference/v3#overview",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "structured_documents",
+      "split": "holdout"
+    },
+    {
+      "id": "3b6b8e9fe6c5a2bf",
+      "text": "reader@sample.net",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "structured_documents",
+      "split": "holdout"
+    },
+    {
+      "id": "1ce792b8d621b4c3",
+      "text": "/opt/service/config/settings.yaml",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "structured_documents",
+      "split": "holdout"
+    },
+    {
+      "id": "481c9d1c28aaa92e",
+      "text": "12:45 PM",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "structured_documents",
+      "split": "holdout"
+    },
+    {
+      "id": "0429b82ebc9e1cb9",
+      "text": "\u00a342.50",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "structured_documents",
+      "split": "holdout"
+    },
+    {
+      "id": "4441c82450c7514f",
+      "text": "v2.7.14",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "structured_documents",
+      "split": "holdout"
+    },
+    {
+      "id": "1d887eaeee721d82",
+      "text": "{\"status\": \"ready\", \"count\": 12}",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "structured_documents",
+      "split": "holdout"
+    },
+    {
+      "id": "a147c95014ce23d4",
+      "text": "git checkout feature/english-checks",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "structured_documents",
+      "split": "holdout"
+    },
+    {
+      "id": "84f8e4de0613bfa9",
+      "text": "First\tSecond\tThird\n10\t20\t30",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "structured_documents",
+      "split": "holdout"
+    },
+    {
+      "id": "eebdcabc9b4f5c9e",
+      "text": "She said, \u201cThat\u2019s perfectly fine.\u201d",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "structured_documents",
+      "split": "holdout"
+    },
+    {
+      "id": "79d29586c0d87c15",
+      "text": "R\u00e9sum\u00e9: software engineer with five years of experience.",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "structured_documents",
+      "split": "holdout"
+    },
+    {
+      "id": "54aa4c9853207679",
+      "text": "Please read the README.md file for setup instructions.",
+      "expected_garbled": false,
+      "label": "valid",
+      "source": "authored_challenge_v1",
+      "family": "structured_documents",
+      "split": "holdout"
+    },
+    {
+      "id": "80d41c54a8ce6d26",
+      "text": "qazwsxedc",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "keyboard_vertical",
+      "split": "holdout"
+    },
+    {
+      "id": "c470c4f648536ad7",
+      "text": "zaqwsxcde",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "keyboard_vertical",
+      "split": "holdout"
+    },
+    {
+      "id": "3f35b24ee2c9a074",
+      "text": "plokmijn",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "keyboard_vertical",
+      "split": "holdout"
+    },
+    {
+      "id": "281c1da06c46a8fb",
+      "text": "wsxedcrfv",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "keyboard_vertical",
+      "split": "holdout"
+    },
+    {
+      "id": "6265db0c8c5db161",
+      "text": "qazwsxedcrfvtgb",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "keyboard_vertical",
+      "split": "holdout"
+    },
+    {
+      "id": "7fd06f0e2a61fec4",
+      "text": "1qaz2wsx3edc",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "keyboard_vertical",
+      "split": "holdout"
+    },
+    {
+      "id": "166e8b931d9037c6",
+      "text": "QAZWSXEDC",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "keyboard_vertical",
+      "split": "holdout"
+    },
+    {
+      "id": "0cf545772da1c628",
+      "text": "It\u00e2\u20ac\u2122s ready for review.",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "encoding_punctuation",
+      "split": "holdout"
+    },
+    {
+      "id": "d5256ede17878d80",
+      "text": "The result \u00e2\u20ac\u201d unexpected \u00e2\u20ac\u201d was clear.",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "encoding_punctuation",
+      "split": "holdout"
+    },
+    {
+      "id": "c3772eb462f4f500",
+      "text": "Price: \u00c2\u00a320 today",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "encoding_punctuation",
+      "split": "holdout"
+    },
+    {
+      "id": "c9efffecda692616",
+      "text": "Fran\u00c3\u00a7ois sent the message.",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "encoding_punctuation",
+      "split": "holdout"
+    },
+    {
+      "id": "707fe96df490b9f4",
+      "text": "\u00e2\u20ac\u0153Welcome\u00e2\u20ac\u009d",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "encoding_punctuation",
+      "split": "holdout"
+    },
+    {
+      "id": "3b28d597a73e3993",
+      "text": "broken\u0001record",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "encoding_punctuation",
+      "split": "holdout"
+    },
+    {
+      "id": "00b0a63e0d2d3ac7",
+      "text": "value\u007fhere",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "encoding_punctuation",
+      "split": "holdout"
+    },
+    {
+      "id": "d57a878495ce5ea3",
+      "text": "missing \ufffd bytes",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "encoding_punctuation",
+      "split": "holdout"
+    },
+    {
+      "id": "cebbd4a3ba18c60d",
+      "text": "Our train reached the coastal town before sunset. The station was quiet, the air was cool, and the small shops were closing. qxjzvkwmp The hotel was only a short walk away, so we carried our bags along the waterfront.",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "paragraph_local_corruption",
+      "split": "holdout"
+    },
+    {
+      "id": "39768e57ad38fc1d",
+      "text": "Everything in the report looked reasonable until I reached the appendix. The unexplained entry zvqxjpkmn appeared between two ordinary paragraphs. I asked the author to check the original file and send a corrected copy.",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "paragraph_local_corruption",
+      "split": "holdout"
+    },
+    {
+      "id": "f4d5ce298bf8f5dd",
+      "text": "The package contains qzvxjkmn and a short instruction leaflet.",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "paragraph_local_corruption",
+      "split": "holdout"
+    },
+    {
+      "id": "30ebf9332ac17062",
+      "text": "Receipt number: kzqxjvmpn. Please contact the team if you need assistance.",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "paragraph_local_corruption",
+      "split": "holdout"
+    },
+    {
+      "id": "5d0f2a85936dbe74",
+      "text": "red blue green red blue green red blue green red blue green",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "periodic_phrases",
+      "split": "holdout"
+    },
+    {
+      "id": "bdf1ad5771cd8a71",
+      "text": "alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "periodic_phrases",
+      "split": "holdout"
+    },
+    {
+      "id": "8bc6f24e83493a23",
+      "text": "abcdeabcdeabcdeabcdeabcde",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "periodic_phrases",
+      "split": "holdout"
+    },
+    {
+      "id": "a0d139df7200d6d3",
+      "text": "zzzzzzzzzzzzzzzz",
+      "expected_garbled": true,
+      "label": "garbled",
+      "source": "authored_challenge_v1",
+      "family": "periodic_phrases",
+      "split": "holdout"
+    },
+    {
+      "id": "7a947aa9c610c003",
+      "text": "\u0938\u0941\u092a\u094d\u0930\u092d\u093e\u0924 \u0906\u092a\u0915\u093e \u0926\u093f\u0928 \u0936\u0941\u092d \u0939\u094b",
+      "expected_garbled": true,
+      "label": "outside_english",
+      "source": "authored_challenge_v1",
+      "family": "other_non_english",
+      "split": "holdout"
+    },
+    {
+      "id": "de9d2be77bf5c258",
+      "text": "\u4eca\u5929\u7684\u5929\u6c14\u5f88\u597d",
+      "expected_garbled": true,
+      "label": "outside_english",
+      "source": "authored_challenge_v1",
+      "family": "other_non_english",
+      "split": "holdout"
+    },
+    {
+      "id": "345ce287f82b5d3c",
+      "text": "\u0414\u043e\u0431\u0440\u043e\u0435 \u0443\u0442\u0440\u043e \u0432\u0441\u0435\u043c",
+      "expected_garbled": true,
+      "label": "outside_english",
+      "source": "authored_challenge_v1",
+      "family": "other_non_english",
+      "split": "holdout"
+    },
+    {
+      "id": "097b63721ae64cb9",
+      "text": "\u0647\u0630\u0627 \u0646\u0635 \u0639\u0631\u0628\u064a \u0645\u0641\u0647\u0648\u0645",
+      "expected_garbled": true,
+      "label": "outside_english",
+      "source": "authored_challenge_v1",
+      "family": "other_non_english",
+      "split": "holdout"
+    },
+    {
+      "id": "3d78192e44da7f38",
+      "text": "\uc548\ub155\ud558\uc138\uc694 \uc5ec\ub7ec\ubd84",
+      "expected_garbled": true,
+      "label": "outside_english",
+      "source": "authored_challenge_v1",
+      "family": "other_non_english",
+      "split": "holdout"
+    }
+  ]
+}

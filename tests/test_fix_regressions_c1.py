@@ -31,7 +31,9 @@ class TestEntropyBasedFix:
     was replaced with the real bigram model and entropy is normalized
     against expected English entropy."""
 
-    @pytest.mark.parametrize("text", ["dog", "sun", "run", "day", "big fluffy dog"])
+    @pytest.mark.parametrize(
+        "text", ["dog", "sun", "run", "day", "big fluffy dog"]
+    )
     def test_common_words_not_flagged(self, text):
         detector = GarbleDetector(Strategy.ENTROPY_BASED)
         assert detector.predict_proba(text) < 0.5
@@ -45,9 +47,9 @@ class TestEntropyBasedFix:
 
     def test_gibberish_scores_above_normal_text(self):
         detector = GarbleDetector(Strategy.ENTROPY_BASED)
-        assert detector.predict_proba("xkjq zvwp qmfg") > detector.predict_proba(
-            "big fluffy dog"
-        )
+        assert detector.predict_proba(
+            "xkjq zvwp qmfg"
+        ) > detector.predict_proba("big fluffy dog")
 
 
 class TestBigramProbabilityFix:
@@ -88,7 +90,8 @@ class TestVowelRatioFix:
     agree with predict_proba."""
 
     @pytest.mark.parametrize(
-        "text", ["my gym crypt", "sky fly try dry", "rhythm", "strengths", "sixths"]
+        "text",
+        ["my gym crypt", "sky fly try dry", "rhythm", "strengths", "sixths"],
     )
     def test_y_words_not_flagged(self, text):
         detector = GarbleDetector(Strategy.VOWEL_RATIO)

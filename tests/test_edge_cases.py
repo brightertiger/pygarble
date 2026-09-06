@@ -1,5 +1,6 @@
 import pytest
-from pygarble import GarbleDetector, EnsembleDetector, Strategy
+
+from pygarble import EnsembleDetector, GarbleDetector, Strategy
 
 
 class TestEdgeCases:
@@ -52,9 +53,7 @@ class TestEdgeCases:
         assert detector.predict_proba(long_string) < 1.0
 
     def test_extremely_long_string_custom_threshold(self):
-        detector = GarbleDetector(
-            Strategy.WORD_LOOKUP, max_string_length=500
-        )
+        detector = GarbleDetector(Strategy.WORD_LOOKUP, max_string_length=500)
         long_string = "a" * 501
         assert detector.predict(long_string) is True
         assert detector.predict_proba(long_string) == 1.0
@@ -73,7 +72,8 @@ class TestEdgeCases:
             "SGVsbG9Xb3JsZEhlbGxvV29ybGRIZWxsb1dvcmxk" * 50
         )  # Long base64-like string
         assert detector.predict(base64_like) is True
-        assert detector.predict_proba(base64_like) == 1.0
+        # Length alone no longer forces every specialist to score 1.0.
+        assert detector.predict_proba(base64_like) >= 0.5
 
 
 class TestParameterValidation:
@@ -206,7 +206,9 @@ class TestNewStrategyParameterValidation:
     """Parameter validation for new strategies."""
 
     def test_markov_chain_positive_threshold(self):
-        with pytest.raises(ValueError, match="threshold_per_char must be non-positive"):
+        with pytest.raises(
+            ValueError, match="threshold_per_char must be non-positive"
+        ):
             GarbleDetector(Strategy.MARKOV_CHAIN, threshold_per_char=1.0)
 
     def test_markov_chain_zero_min_length(self):
@@ -214,47 +216,69 @@ class TestNewStrategyParameterValidation:
             GarbleDetector(Strategy.MARKOV_CHAIN, min_length=0)
 
     def test_ngram_invalid_threshold(self):
-        with pytest.raises(ValueError, match="common_ratio_threshold must be between"):
-            GarbleDetector(Strategy.NGRAM_FREQUENCY, common_ratio_threshold=1.5)
+        with pytest.raises(
+            ValueError, match="common_ratio_threshold must be between"
+        ):
+            GarbleDetector(
+                Strategy.NGRAM_FREQUENCY, common_ratio_threshold=1.5
+            )
 
     def test_ngram_zero_min_length(self):
         with pytest.raises(ValueError, match="min_length must be at least 1"):
             GarbleDetector(Strategy.NGRAM_FREQUENCY, min_length=0)
 
     def test_word_lookup_invalid_threshold(self):
-        with pytest.raises(ValueError, match="unknown_threshold must be between"):
+        with pytest.raises(
+            ValueError, match="unknown_threshold must be between"
+        ):
             GarbleDetector(Strategy.WORD_LOOKUP, unknown_threshold=-0.1)
 
     def test_word_lookup_zero_word_length(self):
-        with pytest.raises(ValueError, match="min_word_length must be at least 1"):
+        with pytest.raises(
+            ValueError, match="min_word_length must be at least 1"
+        ):
             GarbleDetector(Strategy.WORD_LOOKUP, min_word_length=0)
 
     def test_symbol_ratio_invalid_threshold(self):
-        with pytest.raises(ValueError, match="symbol_threshold must be between"):
+        with pytest.raises(
+            ValueError, match="symbol_threshold must be between"
+        ):
             GarbleDetector(Strategy.SYMBOL_RATIO, symbol_threshold=2.0)
 
     def test_symbol_ratio_negative_min_length(self):
-        with pytest.raises(ValueError, match="min_length must be non-negative"):
+        with pytest.raises(
+            ValueError, match="min_length must be non-negative"
+        ):
             GarbleDetector(Strategy.SYMBOL_RATIO, min_length=-1)
 
     def test_repetition_zero_char_repeat(self):
-        with pytest.raises(ValueError, match="max_char_repeat must be at least 1"):
+        with pytest.raises(
+            ValueError, match="max_char_repeat must be at least 1"
+        ):
             GarbleDetector(Strategy.REPETITION, max_char_repeat=0)
 
     def test_repetition_zero_pattern_repeat(self):
-        with pytest.raises(ValueError, match="max_pattern_repeat must be at least 1"):
+        with pytest.raises(
+            ValueError, match="max_pattern_repeat must be at least 1"
+        ):
             GarbleDetector(Strategy.REPETITION, max_pattern_repeat=0)
 
     def test_repetition_invalid_diversity(self):
-        with pytest.raises(ValueError, match="diversity_threshold must be between"):
+        with pytest.raises(
+            ValueError, match="diversity_threshold must be between"
+        ):
             GarbleDetector(Strategy.REPETITION, diversity_threshold=1.5)
 
     def test_hex_string_negative_min_length(self):
-        with pytest.raises(ValueError, match="min_hex_length must be non-negative"):
+        with pytest.raises(
+            ValueError, match="min_hex_length must be non-negative"
+        ):
             GarbleDetector(Strategy.HEX_STRING, min_hex_length=-1)
 
     def test_hex_string_invalid_ratio(self):
-        with pytest.raises(ValueError, match="hex_ratio_threshold must be between"):
+        with pytest.raises(
+            ValueError, match="hex_ratio_threshold must be between"
+        ):
             GarbleDetector(Strategy.HEX_STRING, hex_ratio_threshold=1.5)
 
 

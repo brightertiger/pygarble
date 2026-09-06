@@ -1,10 +1,13 @@
 pygarble Documentation
 ======================
 
-**Detect gibberish, garbled text, and nonsense with high precision.**
+**Deterministic, lightweight gibberish detection for English text.**
 
-A zero-dependency Python library for identifying random character sequences, keyboard mashing,
-encoding errors, and other forms of text corruption.
+pygarble combines fixed character models, English word patterns, keyboard paths,
+and encoding checks. It has no runtime dependencies, training, or downloads.
+Meaningful Hindi and other non-English text may be flagged; this is expected
+for English-specific scoring. It is not a language identifier or a semantic
+nonsense detector. Scores are heuristics, not calibrated probabilities.
 
 .. toctree::
    :maxdepth: 2
@@ -17,15 +20,6 @@ encoding errors, and other forms of text corruption.
    examples
    contributing
 
-Features
---------
-
-- **24 Detection Strategies**: From Markov chains to phonotactic rules
-- **99.5% Precision**: Default ensemble minimizes false positives
-- **Zero Dependencies**: Core library uses only Python stdlib
-- **Scikit-learn Interface**: Familiar ``predict()`` and ``predict_proba()`` methods
-- **Batch Processing**: Process lists of texts efficiently
-
 Quick Start
 -----------
 
@@ -33,39 +27,21 @@ Quick Start
 
    from pygarble import EnsembleDetector
 
-   # Recommended: Use the default ensemble
    detector = EnsembleDetector()
+   detector.predict("Hello world")     # False
+   detector.predict("asdfghjkl")       # True
+   detector.predict("नमस्ते दुनिया")    # True: English-specific checks
+   detector.predict("hello\x00world")  # True: control artifact
 
-   detector.predict("Hello world")    # False - valid text
-   detector.predict("asdfghjkl")      # True - keyboard mashing
-   detector.predict("qxzjkwp")        # True - impossible letters
+Use ``profile="corruption"`` to check encoding/control artifacts independently
+of English plausibility, or ``profile="english_extended"`` for more aggressive
+localized and repetition detection. See :doc:`api` for explanations, batching,
+per-strategy configuration, and abstention behavior.
 
-   # Batch processing
-   texts = ["Hello world", "asdfghjkl", "Normal text"]
-   results = detector.predict(texts)  # [False, True, False]
+Evaluation
+----------
 
-Performance
------------
-
-Tested on 1,644 samples:
-
-==================== ========= ====== ========
-Detector             Precision Recall F1 Score
-==================== ========= ====== ========
-EnsembleDetector()   **99.2%** 85.6%  91.9%
-MARKOV_CHAIN         99.2%     84.3%  91.2%
-LOG_LIKELIHOOD_RATIO 100%      63.4%  77.6%
-==================== ========= ====== ========
-
-Installation
-------------
-
-.. code-block:: bash
-
-   pip install pygarble
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`search`
+The repository preserves its legacy benchmark separately from reviewed English
+labels and a small authored challenge set. Reported engineering results are not
+production precision estimates. Run ``python regression/evaluate.py --split all``
+to reproduce metrics, or add ``--details`` for per-category errors.

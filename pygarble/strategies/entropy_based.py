@@ -2,8 +2,8 @@ import math
 from collections import Counter
 from typing import List
 
-from .base import BaseStrategy
 from ..data import BIGRAM_LOG_PROBS, DEFAULT_LOG_PROB
+from .base import BaseStrategy
 
 # Expected character-level entropy of English text (~4.1 bits). Observed
 # entropy is normalized against this (capped by the maximum entropy the
@@ -36,7 +36,7 @@ class EntropyBasedStrategy(BaseStrategy):
         for word in self._fold_diacritics(text).lower().split():
             alpha_word = "".join(c for c in word if c.isalpha())
             bigrams.extend(
-                alpha_word[i:i+2] for i in range(len(alpha_word) - 1)
+                alpha_word[i : i + 2] for i in range(len(alpha_word) - 1)
             )
         return bigrams
 

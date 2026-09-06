@@ -22,7 +22,7 @@ The recommended way to use pygarble is with the default ``EnsembleDetector``:
    texts = ["Hello world", "asdfghjkl", "Normal sentence"]
    results = detector.predict(texts)  # [False, True, False]
 
-   # Get probability scores (0.0 = valid, 1.0 = gibberish)
+   # Get heuristic scores (0.0 = valid, 1.0 = gibberish)
    detector.predict_proba("Hello world")  # ~0.1
    detector.predict_proba("xkqzjwp")      # ~0.9
 

@@ -1,14 +1,15 @@
 **Repository audit and deterministic detection plan — 6 September 2026**
 
-Audited baseline: `a3db3a2`, version 0.8.0. This document proposes future
-implementation; it does not change detector behavior. Findings come from source
+Audited baseline: `a3db3a2`, version 0.8.0. This is the historical audit;
+implementation outcomes are recorded in [implementation.md](implementation.md).
+Findings come from source
 inspection, the existing tests, rerunning all benchmark strategies, targeted
 reproductions, and the primary sources linked below.
 
 **Recommendation**
 
 Keep the dependency-free character-model approach. First fix evaluation labels,
-language applicability, shared preprocessing, and API contracts. Then measure the
+English-specific scope, shared preprocessing, and API contracts. Then measure the
 incremental value of existing specialists before introducing a small conditional
 trigram model. A compact set of complementary signals should be the product's
 center; 26 public strategies need not mean 26 independent votes.
@@ -23,8 +24,9 @@ Whether a valid identifier belongs in a prose field is a separate decision.
 - Zero runtime dependencies, network calls, model downloads, or fitting.
 - Deterministic inference from versioned rules and embedded tables. Offline
   estimation of counts and thresholds is compatible with deterministic inference.
-- Precision first: names, uncommon vocabulary, spelling mistakes, multilingual
-  content, and technical text deserve conservative handling.
+- Precision first within English: names, uncommon vocabulary, spelling mistakes,
+  and technical text deserve conservative handling. Non-English text may be
+  classified as gibberish, as explicitly requested by the user.
 - Small, inspectable features: dictionary membership, character likelihood,
   phonotactics, keyboard paths, repetition, and encoding artifacts.
 - Simple scalar and batch APIs, with strategies usable independently.
@@ -77,7 +79,7 @@ print({k: v for k, v in results["ensemble"].items() if k != "predictions"})
 | Priority | Finding and evidence | Proposed improvement |
 |---|---|---|
 | P0 | Benchmark labels mix corruption with valid structured content. `SELECT * FROM users WHERE id = 1;`, `3.14159265359`, and ordinary URLs are labeled garbled. `wishy` is labeled garbage because it came from the random generator. See `regression/benchmark_data.json`. | Define categories and profile-specific expectations; manually adjudicate ambiguous generated samples. Preserve the original benchmark as a legacy comparison. |
-| P0 | Unsupported scripts become high-confidence gibberish. The default flags `नमस्ते दुनिया`, `你好世界`, `Привет мир`, and `مرحبا بالعالم`, each scoring approximately 1.0. `BaseStrategy._novel_words()` retains Unicode alphabetic characters, but Markov's table covers ASCII. | Restrict English scoring to supported spans; report unsupported language or insufficient evidence. A script gate cannot identify non-English text written in Latin script, so document that residual limitation. |
+| Scope correction | The default flags `नमस्ते दुनिया`, `你好世界`, `Привет мир`, and `مرحبا بالعالم` at high scores. The user explicitly confirmed that Hindi/non-English scoring as gibberish is expected for this English-specific library. | Preserve this behavior and document it prominently. Do not introduce multilingual abstention into English scoring. Encoding-only specialists remain independent. |
 | P0 | Ensemble batch validation is inconsistent. `predict([None])`, `predict([0])`, and `predict([False])` return `[False]`; `predict([123])` raises `AttributeError`. `predict_proba` raises `TypeError` on these inputs. See `core.py:255–321`. | Validate the entire batch before work begins, in both APIs and both execution modes. |
 | P1 | The base class forces every strategy to return 1.0 for a non-URL token over 1,000 characters. Even standalone mojibake and script checks flag `"你" * 1001`. See `strategies/base.py:24–59`. | Move length policy out of the base class. Resource limits should produce an explicit error or abstention; classify repetition with its own evidence. |
 | P1 | Nonfinite ensemble weights are accepted. A one-member weighted ensemble with `[float("nan")]` or `[float("inf")]` produces a NaN score and a false prediction on `qxzjkwp`. | Validate finite numeric weights and strategy parameters; reject invalid worker counts and unknown strategy values with stable errors. |
@@ -214,7 +216,7 @@ kwargs, including collisions such as `min_word_length`.
    generator seed is provenance, not a label guarantee. Gate: audited labels,
    reproducible split manifests, per-category confusion counts and coverage.
 2. **Correctness fixes in a separate PR.** Fix batch validation, finite parameters,
-   unused settings, long-token policy, and unsupported-script handling. Add
+   unused settings, long-token policy, and explicit English-only handling. Add
    targeted regressions for the reproductions above. Gate: 515 legacy tests plus
    justified updated policy expectations; scalar/batch/thread parity, finite
    bounded scores, and explicit abstention semantics.
@@ -261,6 +263,6 @@ normalization/property data can change between Python releases. If exact
 cross-version decisions are required, pin the relevant data/normalization
 contract and test threshold-boundary cases.
 
-Each implementation step should use its own feature/fix PR with the relevant
-validation evidence. This audit PR is ready for review; implementation and merging
-are separate subsequent actions.
+The implementation is collected on the existing feature branch and review PR,
+with validation evidence and experiment decisions in the implementation notes.
+Merging remains a separate user-authorized action.

@@ -1,10 +1,10 @@
 # Development dependencies
 pytest>=6.0
 pytest-cov>=2.0
-black>=21.0
+black==24.8.0
 flake8>=3.8
 isort>=5.0
-mypy>=0.800
+mypy==1.11.2
 pre-commit>=2.0
 
 # Documentation dependencies

@@ -7,7 +7,9 @@ combinations for high precision.
 """
 
 import re
+from typing import Any
 
+from ..validation import positive_int, unit_interval
 from .base import BaseStrategy
 
 
@@ -21,55 +23,221 @@ class RareTrigramStrategy(BaseStrategy):
 
     # Trigrams that are virtually impossible in English
     # These patterns simply don't occur in valid English words
-    IMPOSSIBLE_TRIGRAMS = frozenset({
-        # Q without u patterns
-        "qqa", "qqb", "qqc", "qqd", "qqe", "qqf", "qqg", "qqh", "qqi",
-        "qqj", "qqk", "qql", "qqm", "qqn", "qqo", "qqp", "qqr", "qqs",
-        "qqt", "qqu", "qqv", "qqw", "qqx", "qqy", "qqz",
-        "qbq", "qcq", "qdq", "qfq", "qgq", "qhq", "qjq", "qkq", "qlq",
-        "qmq", "qnq", "qpq", "qrq", "qsq", "qtq", "qvq", "qwq", "qxq",
-        "qyq", "qzq",
-
-        # Impossible consonant clusters
-        "bxb", "bxc", "bxd", "bxf", "bxg", "bxh", "bxj", "bxk", "bxl",
-        "bxm", "bxn", "bxp", "bxq", "bxr", "bxs", "bxt", "bxv", "bxw",
-        "bxz",
-        # NOTE: "www", "xxx", "zzz", "kkk" are deliberately absent --
-        # they occur in real-world text (URLs, ratings, snoring, the
-        # acronym) and caused false positives.
-        "jjj", "qqq", "vvv",
-        "jjk", "jjl", "jjm", "jjn", "jjp", "jjq", "jjr", "jjs", "jjt",
-        "jjv", "jjw", "jjx", "jjy", "jjz",
-        "xjx", "xkx", "xqx", "xvx", "xwx", "xzx",
-        "zjz", "zkz", "zqz", "zvz", "zwz", "zxz",
-
-        # Double rare letter + any
-        "jxj", "jqj", "jzj", "qjq", "qxq", "qzq", "xjx", "xqx", "xzx",
-        "zjx", "zqx", "zxj",
-
-        # Impossible starting clusters
-        "bwb", "bwc", "bwd", "bwf", "bwg", "bwh", "bwj", "bwk", "bwl",
-        "bwm", "bwn", "bwp", "bwq", "bwr", "bws", "bwt", "bwv", "bww",
-        "bwx", "bwz",
-        "cxc", "cxd", "cxf", "cxg", "cxh", "cxj", "cxk", "cxl", "cxm",
-        "cxn", "cxp", "cxq", "cxr", "cxs", "cxt", "cxv", "cxw", "cxz",
-        "dxd", "dxf", "dxg", "dxh", "dxj", "dxk", "dxl", "dxm", "dxn",
-        "dxp", "dxq", "dxr", "dxs", "dxt", "dxv", "dxw", "dxz",
-        "fxf", "fxg", "fxh", "fxj", "fxk", "fxl", "fxm", "fxn", "fxp",
-        "fxq", "fxr", "fxs", "fxt", "fxv", "fxw", "fxz",
-
-        # Consecutive rare letters
-        "jqx", "jqz", "jxq", "jxz", "jzq", "jzx",
-        "qjx", "qjz", "qxj", "qxz", "qzj", "qzx",
-        "xjq", "xjz", "xqj", "xqz", "xzj", "xzq",
-        "zjq", "zjx", "zqj", "zqx", "zxj", "zxq",
-    })
+    IMPOSSIBLE_TRIGRAMS = frozenset(
+        {
+            # Q without u patterns
+            "qqa",
+            "qqb",
+            "qqc",
+            "qqd",
+            "qqe",
+            "qqf",
+            "qqg",
+            "qqh",
+            "qqi",
+            "qqj",
+            "qqk",
+            "qql",
+            "qqm",
+            "qqn",
+            "qqo",
+            "qqp",
+            "qqr",
+            "qqs",
+            "qqt",
+            "qqu",
+            "qqv",
+            "qqw",
+            "qqx",
+            "qqy",
+            "qqz",
+            "qbq",
+            "qcq",
+            "qdq",
+            "qfq",
+            "qgq",
+            "qhq",
+            "qjq",
+            "qkq",
+            "qlq",
+            "qmq",
+            "qnq",
+            "qpq",
+            "qrq",
+            "qsq",
+            "qtq",
+            "qvq",
+            "qwq",
+            "qxq",
+            "qyq",
+            "qzq",
+            # Impossible consonant clusters
+            "bxb",
+            "bxc",
+            "bxd",
+            "bxf",
+            "bxg",
+            "bxh",
+            "bxj",
+            "bxk",
+            "bxl",
+            "bxm",
+            "bxn",
+            "bxp",
+            "bxq",
+            "bxr",
+            "bxs",
+            "bxt",
+            "bxv",
+            "bxw",
+            "bxz",
+            # NOTE: "www", "xxx", "zzz", "kkk" are deliberately absent --
+            # they occur in real-world text (URLs, ratings, snoring, the
+            # acronym) and caused false positives.
+            "jjj",
+            "qqq",
+            "vvv",
+            "jjk",
+            "jjl",
+            "jjm",
+            "jjn",
+            "jjp",
+            "jjq",
+            "jjr",
+            "jjs",
+            "jjt",
+            "jjv",
+            "jjw",
+            "jjx",
+            "jjy",
+            "jjz",
+            "xjx",
+            "xkx",
+            "xqx",
+            "xvx",
+            "xwx",
+            "xzx",
+            "zjz",
+            "zkz",
+            "zqz",
+            "zvz",
+            "zwz",
+            "zxz",
+            # Double rare letter + any
+            "jxj",
+            "jqj",
+            "jzj",
+            "qjq",
+            "qxq",
+            "qzq",
+            "xjx",
+            "xqx",
+            "xzx",
+            "zjx",
+            "zqx",
+            "zxj",
+            # Impossible starting clusters
+            "bwb",
+            "bwc",
+            "bwd",
+            "bwf",
+            "bwg",
+            "bwh",
+            "bwj",
+            "bwk",
+            "bwl",
+            "bwm",
+            "bwn",
+            "bwp",
+            "bwq",
+            "bwr",
+            "bws",
+            "bwt",
+            "bwv",
+            "bww",
+            "bwx",
+            "bwz",
+            "cxc",
+            "cxd",
+            "cxf",
+            "cxg",
+            "cxh",
+            "cxj",
+            "cxk",
+            "cxl",
+            "cxm",
+            "cxn",
+            "cxp",
+            "cxq",
+            "cxr",
+            "cxs",
+            "cxt",
+            "cxv",
+            "cxw",
+            "cxz",
+            "dxd",
+            "dxf",
+            "dxg",
+            "dxh",
+            "dxj",
+            "dxk",
+            "dxl",
+            "dxm",
+            "dxn",
+            "dxp",
+            "dxq",
+            "dxr",
+            "dxs",
+            "dxt",
+            "dxv",
+            "dxw",
+            "dxz",
+            "fxf",
+            "fxg",
+            "fxh",
+            "fxj",
+            "fxk",
+            "fxl",
+            "fxm",
+            "fxn",
+            "fxp",
+            "fxq",
+            "fxr",
+            "fxs",
+            "fxt",
+            "fxv",
+            "fxw",
+            "fxz",
+            # Consecutive rare letters
+            "jqx",
+            "jqz",
+            "jxq",
+            "jxz",
+            "jzq",
+            "jzx",
+            "qjx",
+            "qjz",
+            "qxj",
+            "qxz",
+            "qzj",
+            "qzx",
+            "xjq",
+            "xjz",
+            "xqj",
+            "xqz",
+            "xzj",
+            "xzq",
+            "zjq",
+            "zjx",
+            "zqj",
+            "zqx",
+            "zxj",
+            "zxq",
+        }
+    )
 
     def __init__(
-        self,
-        threshold: float = 0.15,
-        min_length: int = 6,
-        **kwargs
+        self, threshold: float = 0.15, min_length: int = 6, **kwargs: Any
     ):
         """
         Initialize the rare trigram strategy.
@@ -79,8 +247,8 @@ class RareTrigramStrategy(BaseStrategy):
             min_length: Minimum text length to analyze (default 6)
         """
         super().__init__(**kwargs)
-        self.threshold = threshold
-        self.min_length = min_length
+        self.threshold = unit_interval("threshold", threshold)
+        self.min_length = positive_int("min_length", min_length)
 
     def _predict_proba_impl(self, text: str) -> float:
         # Tokenize into words: trigrams must not cross word boundaries,
@@ -99,7 +267,7 @@ class RareTrigramStrategy(BaseStrategy):
         for word in words:
             for i in range(len(word) - 2):
                 total_trigrams += 1
-                if word[i:i + 3] in self.IMPOSSIBLE_TRIGRAMS:
+                if word[i : i + 3] in self.IMPOSSIBLE_TRIGRAMS:
                     impossible_count += 1
 
         if total_trigrams <= 0 or impossible_count == 0:

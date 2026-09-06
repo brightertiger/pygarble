@@ -65,9 +65,7 @@ class TestRepetitionWordLevel:
 
     def test_repeated_word_four_times(self):
         strategy = RepetitionStrategy()
-        assert strategy.predict_proba(
-            "buffalo buffalo buffalo buffalo"
-        ) >= 0.5
+        assert strategy.predict_proba("buffalo buffalo buffalo buffalo") >= 0.5
 
     def test_two_word_cycle(self):
         strategy = RepetitionStrategy()
@@ -183,9 +181,12 @@ class TestAffixDetectionWeakSignalCap:
 
     def test_normal_text_still_passes(self):
         strategy = AffixDetectionStrategy()
-        assert strategy.predict_proba(
-            "The programming language is incredibly powerful and usable"
-        ) < 0.5
+        assert (
+            strategy.predict_proba(
+                "The programming language is incredibly powerful and usable"
+            )
+            < 0.5
+        )
 
     def test_applicable_requires_min_words(self):
         strategy = AffixDetectionStrategy()
@@ -209,9 +210,12 @@ class TestLetterFrequencyRareLetters:
     def test_normal_sentences_stay_low(self):
         strategy = LetterFrequencyStrategy()
         assert strategy.predict_proba(NORMAL_PARAGRAPH) < 0.3
-        assert strategy.predict_proba(
-            "The quick brown fox jumps over the lazy dog every day"
-        ) < 0.3
+        assert (
+            strategy.predict_proba(
+                "The quick brown fox jumps over the lazy dog every day"
+            )
+            < 0.3
+        )
 
 
 class TestSymbolRatioDigits:

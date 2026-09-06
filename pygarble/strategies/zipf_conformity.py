@@ -10,9 +10,10 @@ import re
 from collections import Counter
 from typing import Any, List
 
+from ..data import ENGLISH_WORDS
+from ..validation import parameter_value
 from .base import BaseStrategy
 from .function_word_density import FunctionWordDensityStrategy
-from ..data import ENGLISH_WORDS
 
 
 class ZipfConformityStrategy(BaseStrategy):
@@ -54,9 +55,15 @@ class ZipfConformityStrategy(BaseStrategy):
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
-        self.min_words = kwargs.get("min_words", 30)
-        self.ttr_threshold = kwargs.get("ttr_threshold", 0.95)
-        self.hapax_threshold = kwargs.get("hapax_threshold", 0.95)
+        self.min_words: int = parameter_value(
+            "min_words", kwargs.get("min_words", 30), 30
+        )
+        self.ttr_threshold: float = parameter_value(
+            "ttr_threshold", kwargs.get("ttr_threshold", 0.95), 0.95
+        )
+        self.hapax_threshold: float = parameter_value(
+            "hapax_threshold", kwargs.get("hapax_threshold", 0.95), 0.95
+        )
 
         if self.min_words < 5:
             raise ValueError("min_words must be at least 5")
@@ -80,9 +87,7 @@ class ZipfConformityStrategy(BaseStrategy):
         actually gibberish rather than a legitimate list of distinct
         real words (names, ingredients, keywords, ...).
         """
-        if any(
-            w in FunctionWordDensityStrategy.FUNCTION_WORDS for w in words
-        ):
+        if any(w in FunctionWordDensityStrategy.FUNCTION_WORDS for w in words):
             return False
         unknown = sum(1 for w in words if w not in ENGLISH_WORDS)
         return unknown / len(words) >= 0.5
@@ -99,9 +104,7 @@ class ZipfConformityStrategy(BaseStrategy):
         ttr = unique_words / total_words
 
         # Hapax legomena: words appearing exactly once
-        hapax_count = sum(
-            1 for count in word_counts.values() if count == 1
-        )
+        hapax_count = sum(1 for count in word_counts.values() if count == 1)
         hapax_ratio = hapax_count / total_words
 
         # Perfect uniqueness: every word appears exactly once

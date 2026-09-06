@@ -7,8 +7,9 @@ common English text. Text with many uncommon trigrams is flagged.
 
 from typing import Any
 
-from .base import BaseStrategy
 from ..data import COMMON_TRIGRAMS
+from ..validation import parameter_value
+from .base import BaseStrategy
 
 
 class NGramFrequencyStrategy(BaseStrategy):
@@ -42,11 +43,19 @@ class NGramFrequencyStrategy(BaseStrategy):
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
-        self.common_ratio_threshold = kwargs.get("common_ratio_threshold", 0.3)
-        self.min_length = kwargs.get("min_length", 4)
+        self.common_ratio_threshold: float = parameter_value(
+            "common_ratio_threshold",
+            kwargs.get("common_ratio_threshold", 0.3),
+            0.3,
+        )
+        self.min_length: int = parameter_value(
+            "min_length", kwargs.get("min_length", 4), 4
+        )
 
         if not 0.0 <= self.common_ratio_threshold <= 1.0:
-            raise ValueError("common_ratio_threshold must be between 0.0 and 1.0")
+            raise ValueError(
+                "common_ratio_threshold must be between 0.0 and 1.0"
+            )
         if self.min_length < 1:
             raise ValueError("min_length must be at least 1")
 
@@ -58,7 +67,7 @@ class NGramFrequencyStrategy(BaseStrategy):
         for word in self._novel_words(text):
             if len(word) >= 3:
                 for i in range(len(word) - 2):
-                    trigrams.append(word[i:i + 3])
+                    trigrams.append(word[i : i + 3])
 
         return trigrams
 
@@ -101,7 +110,9 @@ class NGramFrequencyStrategy(BaseStrategy):
             # common_ratio 1.0 -> 0.0, common_ratio threshold -> 0.4
             range_above = 1.0 - self.common_ratio_threshold
             if range_above > 0:
-                normalized = (common_ratio - self.common_ratio_threshold) / range_above
+                normalized = (
+                    common_ratio - self.common_ratio_threshold
+                ) / range_above
                 garble_score = 0.4 * (1.0 - normalized)
             else:
                 garble_score = 0.0

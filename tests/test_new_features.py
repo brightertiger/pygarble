@@ -1,5 +1,6 @@
 import pytest
-from pygarble import GarbleDetector, Strategy, EnsembleDetector
+
+from pygarble import EnsembleDetector, GarbleDetector, Strategy
 
 
 class TestVowelRatioStrategy:
@@ -25,9 +26,7 @@ class TestVowelRatioStrategy:
 
     def test_vowel_ratio_custom_thresholds(self):
         detector = GarbleDetector(
-            Strategy.VOWEL_RATIO,
-            min_vowel_ratio=0.3,
-            max_vowel_ratio=0.5
+            Strategy.VOWEL_RATIO, min_vowel_ratio=0.3, max_vowel_ratio=0.5
         )
         assert detector.predict("aeiouaeiou") is True
 
@@ -64,7 +63,7 @@ class TestEnsembleDetector:
                 Strategy.ENTROPY_BASED,
                 Strategy.PATTERN_MATCHING,
             ],
-            voting="majority"
+            voting="majority",
         )
         result = detector.predict("AAAAA")
         assert isinstance(result, bool)
@@ -72,7 +71,7 @@ class TestEnsembleDetector:
     def test_ensemble_average_voting(self):
         detector = EnsembleDetector(
             strategies=[Strategy.MARKOV_CHAIN, Strategy.ENTROPY_BASED],
-            voting="average"
+            voting="average",
         )
         proba = detector.predict_proba("hello world")
         assert 0.0 <= proba <= 1.0
@@ -81,7 +80,7 @@ class TestEnsembleDetector:
         detector = EnsembleDetector(
             strategies=[Strategy.MARKOV_CHAIN, Strategy.ENTROPY_BASED],
             voting="weighted",
-            weights=[0.7, 0.3]
+            weights=[0.7, 0.3],
         )
         proba = detector.predict_proba("hello world")
         assert 0.0 <= proba <= 1.0
@@ -113,7 +112,7 @@ class TestEnsembleDetector:
             EnsembleDetector(
                 strategies=[Strategy.MARKOV_CHAIN, Strategy.ENTROPY_BASED],
                 voting="weighted",
-                weights=[0.5]
+                weights=[0.5],
             )
 
 
@@ -173,8 +172,7 @@ class TestPatternMatchingCompilation:
 
     def test_custom_patterns_compiled(self):
         detector = GarbleDetector(
-            Strategy.PATTERN_MATCHING,
-            patterns={"custom": r"\d{3}-\d{4}"}
+            Strategy.PATTERN_MATCHING, patterns={"custom": r"\d{3}-\d{4}"}
         )
         compiled = detector._strategy_instance._compiled_patterns
         assert "custom" in compiled
@@ -183,21 +181,14 @@ class TestPatternMatchingCompilation:
 
 class TestBatchProcessing:
     def test_batch_with_threads(self):
-        detector = GarbleDetector(
-            Strategy.WORD_LOOKUP,
-            threads=2
-        )
+        detector = GarbleDetector(Strategy.WORD_LOOKUP, threads=2)
         texts = ["hello world"] * 20
         results = detector.predict(texts)
         assert len(results) == 20
 
     def test_batch_proba_with_threads(self):
-        detector = GarbleDetector(
-            Strategy.ENTROPY_BASED,
-            threads=2
-        )
+        detector = GarbleDetector(Strategy.ENTROPY_BASED, threads=2)
         texts = ["hello world", "aaaaaaa"] * 10
         probas = detector.predict_proba(texts)
         assert len(probas) == 20
         assert all(0.0 <= p <= 1.0 for p in probas)
-

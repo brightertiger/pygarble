@@ -5,6 +5,9 @@ Detects invalid vowel sequences and patterns that don't occur in English.
 Conservative approach to handle legitimate words with unusual vowel patterns.
 """
 
+from typing import Any
+
+from ..validation import positive_int
 from .base import BaseStrategy
 
 
@@ -23,30 +26,29 @@ class VowelPatternStrategy(BaseStrategy):
     VOWELS = frozenset("aeiou")  # Not including 'y' for stricter vowel check
 
     # Valid long vowel sequences found in real English words
-    VALID_LONG_VOWELS = frozenset({
-        "eau",   # beautiful, bureau
-        "iou",   # precious, cautious
-        "uou",   # continuous, strenuous
-        "eou",   # gorgeous, courteous
-        "aeo",   # onomatopoeia
-        "oeia",  # onomatopoeia
-        "oeio",  # part of onomatopoeia
-        "ueue",  # queue
-        "ueuei", # queueing
-        "uee",   # queen (not really 3 vowels but included for safety)
-        "ooe",   # wooed
-        "aie",   # gaiety
-        "oui",   # Louis, Louisiana
-        "uai",   # quail-like patterns
-        "eai",   # reality (in some accents)
-        "eio",   # ratio, patio-like
-    })
+    VALID_LONG_VOWELS = frozenset(
+        {
+            "eau",  # beautiful, bureau
+            "iou",  # precious, cautious
+            "uou",  # continuous, strenuous
+            "eou",  # gorgeous, courteous
+            "aeo",  # onomatopoeia
+            "oeia",  # onomatopoeia
+            "oeio",  # part of onomatopoeia
+            "ueue",  # queue
+            "ueuei",  # queueing
+            "uee",  # queen (not really 3 vowels but included for safety)
+            "ooe",  # wooed
+            "aie",  # gaiety
+            "oui",  # Louis, Louisiana
+            "uai",  # quail-like patterns
+            "eai",  # reality (in some accents)
+            "eio",  # ratio, patio-like
+        }
+    )
 
     def __init__(
-        self,
-        max_vowel_run: int = 4,
-        min_length: int = 5,
-        **kwargs
+        self, max_vowel_run: int = 4, min_length: int = 5, **kwargs: Any
     ):
         """
         Initialize the vowel pattern strategy.
@@ -56,10 +58,10 @@ class VowelPatternStrategy(BaseStrategy):
             min_length: Minimum text length to analyze (default 5)
         """
         super().__init__(**kwargs)
-        self.max_vowel_run = max_vowel_run
-        self.min_length = min_length
+        self.max_vowel_run = positive_int("max_vowel_run", max_vowel_run)
+        self.min_length = positive_int("min_length", min_length)
 
-    def _get_vowel_sequences(self, text: str):
+    def _get_vowel_sequences(self, text: str) -> list:
         """Extract vowel sequences, detected per word.
 
         Any non-vowel character (consonant, space, punctuation) ends the

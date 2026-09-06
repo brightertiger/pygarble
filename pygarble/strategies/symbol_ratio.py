@@ -8,6 +8,7 @@ or non-alphabetic content.
 import re
 from typing import Any
 
+from ..validation import nonnegative_int, parameter_value
 from .base import BaseStrategy
 
 
@@ -52,10 +53,18 @@ class SymbolRatioStrategy(BaseStrategy):
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
-        self.symbol_threshold = kwargs.get("symbol_threshold", 0.5)
-        self.min_length = kwargs.get("min_length", 3)
-        self.allow_spaces = kwargs.get("allow_spaces", True)
-        self.count_digits = kwargs.get("count_digits", False)
+        self.symbol_threshold: float = parameter_value(
+            "symbol_threshold", kwargs.get("symbol_threshold", 0.5), 0.5
+        )
+        self.min_length: int = nonnegative_int(
+            "min_length", kwargs.get("min_length", 3)
+        )
+        self.allow_spaces: bool = parameter_value(
+            "allow_spaces", kwargs.get("allow_spaces", True), True
+        )
+        self.count_digits: bool = parameter_value(
+            "count_digits", kwargs.get("count_digits", False), False
+        )
 
         if not 0.0 <= self.symbol_threshold <= 1.0:
             raise ValueError("symbol_threshold must be between 0.0 and 1.0")
@@ -126,7 +135,9 @@ class SymbolRatioStrategy(BaseStrategy):
             # Above threshold - high garble score
             range_above = 1.0 - self.symbol_threshold
             if range_above > 0:
-                normalized = (symbol_ratio - self.symbol_threshold) / range_above
+                normalized = (
+                    symbol_ratio - self.symbol_threshold
+                ) / range_above
                 return 0.5 + 0.5 * normalized
             else:
                 return 1.0

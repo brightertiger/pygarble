@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Mojibake detection strategy for garble detection.
 
@@ -8,7 +7,10 @@ Detects encoding corruption patterns (UTF-8 decoded as Latin-1, etc.).
 import unicodedata
 from typing import Any, List, Tuple
 
+from ..validation import parameter_value
 from .base import BaseStrategy
+
+# -*- coding: utf-8 -*-
 
 
 # Common mojibake byte patterns: (corrupted bytes, description)
@@ -74,9 +76,17 @@ class MojibakeStrategy(BaseStrategy):
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
-        self.pattern_threshold = kwargs.get("pattern_threshold", 1)
-        self.ratio_threshold = kwargs.get("ratio_threshold", 0.05)
-        self.check_replacement_char = kwargs.get("check_replacement_char", True)
+        self.pattern_threshold: int = parameter_value(
+            "pattern_threshold", kwargs.get("pattern_threshold", 1), 1
+        )
+        self.ratio_threshold: float = parameter_value(
+            "ratio_threshold", kwargs.get("ratio_threshold", 0.05), 0.05
+        )
+        self.check_replacement_char: bool = parameter_value(
+            "check_replacement_char",
+            kwargs.get("check_replacement_char", True),
+            True,
+        )
 
         if self.pattern_threshold < 1:
             raise ValueError("pattern_threshold must be at least 1")
@@ -85,7 +95,7 @@ class MojibakeStrategy(BaseStrategy):
 
         # Convert byte patterns to string patterns for matching.
         # Real-world mojibake usually comes from misdecoding as cp1252
-        # (e.g. \xe2\x80\x99 -> "\u00e2\u20ac\u2122"), but keep the latin-1 variants
+        # Keep both cp1252 characters and Latin-1 variants
         # (C1 controls) too since both appear in the wild.
         self._mojibake_patterns: List[str] = []
         for pattern_bytes, _ in MOJIBAKE_BYTE_PATTERNS:
@@ -163,8 +173,8 @@ class MojibakeStrategy(BaseStrategy):
         """
         # Common double-encoding signatures (latin-1 and cp1252 forms)
         double_encode_sigs = [
-            "\xc3\x83\xc2",    # Double-encoded UTF-8 start (latin-1)
-            "\xc3\x82\xc2",    # Another double-encoding pattern (latin-1)
+            "\xc3\x83\xc2",  # Double-encoded UTF-8 start (latin-1)
+            "\xc3\x82\xc2",  # Another double-encoding pattern (latin-1)
             "\xc3ƒ\xc2",  # "ÃƒÂ" - cp1252 double-encoding
             "\xc3‚\xc2",  # "Ã‚Â" - cp1252 double-encoding
         ]

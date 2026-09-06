@@ -9,6 +9,7 @@ words with these patterns.
 import re
 from typing import Any, List
 
+from ..validation import parameter_value
 from .base import BaseStrategy
 
 
@@ -46,31 +47,85 @@ class AffixDetectionStrategy(BaseStrategy):
     """
 
     PREFIXES = (
-        "un", "re", "pre", "dis", "mis", "over", "under", "out",
-        "sub", "super", "inter", "trans", "non", "anti", "auto",
-        "semi", "multi", "counter", "extra", "ultra",
+        "un",
+        "re",
+        "pre",
+        "dis",
+        "mis",
+        "over",
+        "under",
+        "out",
+        "sub",
+        "super",
+        "inter",
+        "trans",
+        "non",
+        "anti",
+        "auto",
+        "semi",
+        "multi",
+        "counter",
+        "extra",
+        "ultra",
     )
 
     SUFFIXES = (
-        "tion", "sion", "ment", "ness", "able", "ible",
-        "ous", "ious", "ive", "ful", "less",
-        "ing", "ting", "ling",
-        "ized", "ised", "ize", "ise",
+        "tion",
+        "sion",
+        "ment",
+        "ness",
+        "able",
+        "ible",
+        "ous",
+        "ious",
+        "ive",
+        "ful",
+        "less",
+        "ing",
+        "ting",
+        "ling",
+        "ized",
+        "ised",
+        "ize",
+        "ise",
         "ify",
-        "ated", "ator",
-        "ally", "ially", "ably", "ibly",
-        "ence", "ance", "ency", "ancy",
-        "ical", "ular",
-        "ly", "er", "est", "ed", "en",
-        "al", "ial", "ary", "ory",
+        "ated",
+        "ator",
+        "ally",
+        "ially",
+        "ably",
+        "ibly",
+        "ence",
+        "ance",
+        "ency",
+        "ancy",
+        "ical",
+        "ular",
+        "ly",
+        "er",
+        "est",
+        "ed",
+        "en",
+        "al",
+        "ial",
+        "ary",
+        "ory",
     )
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
-        self.min_affix_ratio = kwargs.get("min_affix_ratio", 0.2)
-        self.min_word_length = kwargs.get("min_word_length", 4)
-        self.min_analyzable_words = kwargs.get("min_analyzable_words", 5)
-        self.min_stem_length = kwargs.get("min_stem_length", 2)
+        self.min_affix_ratio: float = parameter_value(
+            "min_affix_ratio", kwargs.get("min_affix_ratio", 0.2), 0.2
+        )
+        self.min_word_length: int = parameter_value(
+            "min_word_length", kwargs.get("min_word_length", 4), 4
+        )
+        self.min_analyzable_words: int = parameter_value(
+            "min_analyzable_words", kwargs.get("min_analyzable_words", 5), 5
+        )
+        self.min_stem_length: int = parameter_value(
+            "min_stem_length", kwargs.get("min_stem_length", 2), 2
+        )
 
         if not 0.0 <= self.min_affix_ratio <= 1.0:
             raise ValueError("min_affix_ratio must be between 0.0 and 1.0")
@@ -91,16 +146,22 @@ class AffixDetectionStrategy(BaseStrategy):
     def _has_prefix(self, word: str) -> bool:
         """Check if word starts with a known prefix with sufficient stem."""
         for prefix in self.PREFIXES:
-            if word.startswith(prefix) and len(word) - len(prefix) >= self.min_stem_length:
-                if self._plausible_stem(word[len(prefix):]):
+            if (
+                word.startswith(prefix)
+                and len(word) - len(prefix) >= self.min_stem_length
+            ):
+                if self._plausible_stem(word[len(prefix) :]):
                     return True
         return False
 
     def _has_suffix(self, word: str) -> bool:
         """Check if word ends with a known suffix with sufficient stem."""
         for suffix in self.SUFFIXES:
-            if word.endswith(suffix) and len(word) - len(suffix) >= self.min_stem_length:
-                if self._plausible_stem(word[:-len(suffix)]):
+            if (
+                word.endswith(suffix)
+                and len(word) - len(suffix) >= self.min_stem_length
+            ):
+                if self._plausible_stem(word[: -len(suffix)]):
                     return True
         return False
 

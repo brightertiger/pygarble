@@ -1,129 +1,71 @@
 API Reference
 =============
 
+Language strategies target English. Non-English text, including meaningful Hindi,
+may be classified as gibberish. Scores are heuristic values, not calibrated
+probabilities; the library does not establish semantic meaning or identify languages.
+
 GarbleDetector
 --------------
 
-The main class for single-strategy detection.
-
-.. code-block:: python
-
-   from pygarble import GarbleDetector, Strategy
-
-   GarbleDetector(
-       strategy: Strategy,
-       threshold: float = 0.5,
-       **kwargs
-   )
-
-**Parameters:**
-
-- ``strategy``: The detection strategy to use (see Strategy enum)
-- ``threshold``: Probability threshold for ``predict()`` (0.0-1.0)
-- ``**kwargs``: Strategy-specific parameters
-
-**Methods:**
-
-- ``predict(text)`` - Returns ``bool`` or ``List[bool]``
-- ``predict_proba(text)`` - Returns ``float`` or ``List[float]`` (0.0-1.0)
-
-**Example:**
-
-.. code-block:: python
-
-   detector = GarbleDetector(Strategy.MARKOV_CHAIN, threshold=0.5)
-
-   detector.predict("hello")           # False
-   detector.predict("xkqzj")           # True
-   detector.predict_proba("hello")     # 0.1
-   detector.predict(["a", "b", "c"])   # [False, False, False]
+.. autoclass:: pygarble.detector.GarbleDetector
+   :members: predict, predict_proba, score, analyze, applicable
 
 EnsembleDetector
 ----------------
 
-Combines multiple strategies with voting.
+.. autoclass:: pygarble.ensemble.EnsembleDetector
+   :members: predict, predict_proba, score, analyze
 
-.. code-block:: python
+Both classes accept a string or list of strings. ``predict`` returns bools,
+``score`` and ``predict_proba`` return floats, and ``analyze`` returns immutable
+analysis records. Batch inputs are validated before any member is evaluated.
 
-   from pygarble import EnsembleDetector, Strategy
+Profiles and aggregation
+------------------------
 
-   EnsembleDetector(
-       strategies: List[Strategy] = None,
-       threshold: float = 0.5,
-       voting: str = None,
-       weights: List[float] = None,
-   )
+``EnsembleDetector()`` selects the ``english`` profile. See :doc:`strategies` for
+its current members. Profiles use union voting by default; an explicit strategies
+list defaults to majority voting. Configure members independently through
+``strategy_kwargs={Strategy.MARKOV_CHAIN: {"min_length": 4}}``.
 
-**Parameters:**
+Only applicable members participate. ``any`` and ``all`` use maximum and minimum
+scores; ``average`` and ``weighted`` use applicable means. Majority decisions
+require strictly more than half the applicable members to cross the threshold,
+while the reported score is their mean. Thresholding that mean may therefore
+produce a different decision. Zero-weight members abstain from weighted decisions.
 
-- ``strategies``: List of strategies (default: high-precision mix)
-- ``threshold``: Probability threshold for ``predict()``
-- ``voting``: Voting mode - "majority", "any", "all", "average", "weighted"
-  (default: "any" for the built-in strategy set, "majority" for custom sets)
-- ``weights``: Weights for weighted voting (required if voting="weighted")
+An empty input or a set with no applicable members yields ``False`` and
+``insufficient_evidence``. This does not certify meaningful English.
 
-**Default Strategies** (union via ``voting="any"``; 99.2% precision,
-85.6% recall on the 1,644-sample benchmark):
+Limits and compatibility
+------------------------
 
-- MARKOV_CHAIN
-- LOG_LIKELIHOOD_RATIO
-- WORD_ANOMALY
+``max_input_length`` raises ``ValueError`` for oversized scalar or batch input.
+The legacy opt-in ``max_string_length`` still classifies long non-URL tokens as
+suspicious. There is no longer a universal implicit long-string decision.
 
-**Voting Modes:**
+``threads`` must be a positive integer. ``timeout_per_text`` affects waits for
+threaded results, not scalar/serial execution or a hard wall-clock deadline.
+Python workers cannot be killed; executor shutdown may wait. Errors and timeouts
+propagate rather than producing clean fallback predictions.
 
-- ``majority``: Flag if >50% of strategies agree
-- ``any``: Flag if ANY strategy detects (high recall)
-- ``all``: Flag only if ALL strategies agree (high precision)
-- ``average``: Average probability across strategies
-- ``weighted``: Weighted average with custom weights
+Unknown legacy strategy options emit ``DeprecationWarning``. Scores and decisions
+may change after the documented preprocessing and correctness fixes, including
+when the ``legacy`` strategy set is selected.
 
-**Example:**
+Result records
+--------------
 
-.. code-block:: python
+.. autoclass:: pygarble.analysis.Analysis
+   :members:
 
-   # Default ensemble
-   detector = EnsembleDetector()
+.. autoclass:: pygarble.analysis.Signal
+   :members:
 
-   # Custom strategies
-   detector = EnsembleDetector(
-       strategies=[Strategy.MARKOV_CHAIN, Strategy.KEYBOARD_PATTERN]
-   )
+.. autoclass:: pygarble.analysis.Span
+   :members:
 
-   # High recall mode
-   detector = EnsembleDetector(voting="any")
-
-Strategy Enum
--------------
-
-Available detection strategies:
-
-**High Precision (v0.5.0)**
-
-- ``BIGRAM_PROBABILITY`` - Impossible letter pairs
-- ``LETTER_POSITION`` - Invalid letter positions
-- ``CONSONANT_SEQUENCE`` - Too many consonants
-- ``VOWEL_PATTERN`` - Invalid vowel sequences
-- ``LETTER_FREQUENCY`` - Abnormal letter distribution
-- ``RARE_TRIGRAM`` - Impossible trigrams
-
-**Core Strategies**
-
-- ``MARKOV_CHAIN`` - Character Markov chain (recommended)
-- ``NGRAM_FREQUENCY`` - Trigram frequency
-- ``WORD_LOOKUP`` - 50K English dictionary
-- ``PRONOUNCEABILITY`` - Phonotactic rules
-- ``KEYBOARD_PATTERN`` - Keyboard sequences
-- ``ENTROPY_BASED`` - Shannon entropy
-- ``VOWEL_RATIO`` - Vowel/consonant ratio
-
-**Specialized**
-
-- ``MOJIBAKE`` - Encoding corruption
-- ``UNICODE_SCRIPT`` - Homoglyph attacks
-- ``HEX_STRING`` - Hash strings
-- ``SYMBOL_RATIO`` - Excessive symbols
-- ``REPETITION`` - Pattern repetition
-
-**Pattern Heuristics**
-
-- ``PATTERN_MATCHING`` - Configurable regex patterns
+Spans use offsets into the original Python string. Analysis can be converted with
+``dataclasses.asdict`` and serialized as JSON. The allowlist applies only to shared
+English character scoring; raw encoding/control evidence is retained.

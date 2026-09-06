@@ -1,292 +1,173 @@
 # pygarble
 
-**Detect gibberish, garbled text, and nonsense with high precision.**
+**Deterministic, lightweight gibberish detection for English text.**
 
-A zero-dependency Python library for identifying random character sequences, keyboard mashing, encoding errors, and other forms of text corruption. Uses statistical analysis, phonotactic rules, and pattern matching to distinguish meaningful text from gibberish.
+A zero-dependency Python library using fixed character models, English word patterns, keyboard paths, and encoding checks. Inference requires no network, training, or model downloads.
 
-## Installation
+**English-specific scope:** language strategies judge whether text resembles English. Hindi and other non-English text may receive high gibberish scores even when meaningful in their own language; this is expected behavior. This library is not a multilingual validator or a language identifier. Non-English text written with Latin letters may still pass. A passing result does not prove that a sentence makes semantic sense.
+
+This branch contains the upcoming 0.9.0 changes. Install the checkout with `pip install -e .` to use them before release.
+
+## Quick start
 
 ```bash
 pip install pygarble
 ```
 
-## Quick Start
-
 ```python
-from pygarble import GarbleDetector, EnsembleDetector, Strategy
+from pygarble import EnsembleDetector
 
-# Recommended: Use the default ensemble (99.2% precision, 85.6% recall)
 detector = EnsembleDetector()
-detector.predict("Hello world")      # False - valid text
-detector.predict("asdfghjkl")        # True - keyboard mashing
-detector.predict("qxzjkwp")          # True - impossible letter combinations
+detector.predict("Hello world")       # False
+detector.predict("asdfghjkl")         # True
+detector.predict("qwerty")            # True
+detector.predict("नमस्ते दुनिया")      # True: expected for English checks
+detector.predict("CafÃ© au lait")     # True: encoding corruption
+detector.predict("hello\x00world")    # True: control character
 
-# Get probability scores (0.0 = valid, 1.0 = gibberish)
-detector.predict_proba("Hello world")  # ~0.1
-detector.predict_proba("xkqzjwp")      # ~0.9
-
-# Batch processing
-texts = ["Hello world", "asdfghjkl", "Normal sentence here"]
-results = detector.predict(texts)      # [False, True, False]
+detector.predict(["Hello world", "qxzjkwpv"])  # [False, True]
+detector.score("qxzjkwpv")            # Heuristic score in [0, 1]
 ```
 
-## Performance
+`score()` and `predict_proba()` return the same **heuristic score, not a calibrated probability**. Names, uncommon English words, spelling mistakes, and technical identifiers can still be misclassified. Use domain vocabulary and choose a profile appropriate to the field.
 
-Tested on 1,644 samples (dictionary words, sentences, random strings, keyboard mashing) via `regression/benchmark.py`:
+## Profiles
 
-| Detector | Precision | Recall | F1 Score |
-|----------|-----------|--------|----------|
-| **EnsembleDetector()** | **99.2%** | **85.6%** | **91.9%** |
-| MARKOV_CHAIN | 99.2% | 84.3% | 91.2% |
-| NGRAM_FREQUENCY | 97.6% | 75.0% | 84.8% |
-| LOG_LIKELIHOOD_RATIO | 100% | 63.4% | 77.6% |
-| WORD_ANOMALY | 100% | 52.8% | 69.1% |
-
-The default ensemble is the union (`voting="any"`) of `MARKOV_CHAIN` with two strategies that produced **zero false positives** on the benchmark (`LOG_LIKELIHOOD_RATIO`, `WORD_ANOMALY`), so each member only adds recall. It strictly dominates any single strategy.
-
-Two useful variants:
+| Profile | Behavior |
+|---|---|
+| `english` (default) | Union of Markov, likelihood ratio, word anomaly, mojibake, keyboard adjacency, and control-character checks |
+| `english_extended` | Also uses pattern matching, localized anomaly detection, and repetition; more aggressive and more prone to false positives |
+| `legacy` | The former three-member strategy set: Markov, likelihood ratio, word anomaly; uses current preprocessing and correctness fixes |
+| `corruption` | Mojibake and control artifacts, independent of English plausibility |
+| `spoofing` | Unicode script/confusable heuristic; not a complete phishing detector or full Unicode UTS #39 implementation |
 
 ```python
-# Strict precision: majority vote drove false positives to 0 on the
-# benchmark (100% precision, 74.9% recall) at the cost of recall
-detector = EnsembleDetector(
-    strategies=[
-        Strategy.MARKOV_CHAIN, Strategy.NGRAM_FREQUENCY, Strategy.WORD_LOOKUP,
-        Strategy.LOG_LIKELIHOOD_RATIO, Strategy.WORD_ANOMALY,
-    ],
-    voting="majority",
-)
+from pygarble import EnsembleDetector, GarbleDetector, Strategy
 
-# Specialist coverage: adds detection of hashes, mojibake, repeated junk,
-# and homoglyph attacks that the character-model strategies don't target
-detector = EnsembleDetector(
-    strategies=[
-        Strategy.LOG_LIKELIHOOD_RATIO, Strategy.WORD_ANOMALY,
-        Strategy.KEYBOARD_ADJACENCY, Strategy.MOJIBAKE,
-        Strategy.HEX_STRING, Strategy.REPETITION, Strategy.UNICODE_SCRIPT,
-    ],
-    voting="any",
+# English scoring may flag Hindi; a corruption-only profile checks encoding.
+EnsembleDetector(profile="corruption").predict("नमस्ते दुनिया")  # False
+
+# Find severe garbage embedded in a longer paragraph.
+detector = EnsembleDetector(profile="english_extended")
+
+# Use any strategy independently.
+keyboard = GarbleDetector(
+    Strategy.KEYBOARD_ADJACENCY, keyboard_layout="azerty"
 )
+keyboard.predict("azerty")  # True
+
+# Caller-owned vocabulary for the shared English character models.
+detector = EnsembleDetector(allowlist=["syzygy", "myproductname"])
+detector.predict("syzygy")  # False
 ```
 
-## Detection Strategies
+The allowlist applies to Markov, likelihood ratio, word anomaly, and local anomaly scoring. It does not override keyboard, pattern, or raw encoding/control evidence. URLs, paths, digit-containing tokens, and camel-case identifiers are excluded from shared English word scoring; other strategies may still flag them. Structured data and passwords are not universally equivalent to gibberish.
 
-### Recommended Strategies
-
-| Strategy | Description | Precision |
-|----------|-------------|-----------|
-| `MARKOV_CHAIN` | Character transition probabilities trained on English | 99.2% |
-| `NGRAM_FREQUENCY` | Common English trigram analysis | 97.6% |
-| `LOG_LIKELIHOOD_RATIO` | English-vs-random two-model bigram comparison | 100% |
-| `WORD_ANOMALY` | Per-word scoring; catches one garbage token in a valid sentence | 100% |
-| `WORD_LOOKUP` | Dictionary of 49K English words | high recall |
-
-### All Available Strategies
-
-**Statistical Models (v0.7.0+)**
-- `LOG_LIKELIHOOD_RATIO` - Log-likelihood ratio of English vs uniform character models (length-normalized)
-- `WORD_ANOMALY` - Fraction of individually-anomalous words; robust to garbage embedded in valid text
-- `KEYBOARD_ADJACENCY` - Physical key-adjacency walks (catches mash the trigram lists miss)
-
-**High Precision (v0.5.0)**
-- `BIGRAM_PROBABILITY` - Impossible letter pairs
-- `LETTER_POSITION` - Invalid letter positions
-- `CONSONANT_SEQUENCE` - Too many consecutive consonants
-- `VOWEL_PATTERN` - Invalid vowel sequences
-- `LETTER_FREQUENCY` - Abnormal letter distribution
-- `RARE_TRIGRAM` - Impossible trigrams
-
-**Core Strategies**
-- `MARKOV_CHAIN` - Character-level Markov chain (best overall)
-- `NGRAM_FREQUENCY` - Trigram frequency analysis
-- `WORD_LOOKUP` - English dictionary lookup
-- `PRONOUNCEABILITY` - English phonotactic rules
-- `KEYBOARD_PATTERN` - Keyboard row sequences
-- `ENTROPY_BASED` - Shannon entropy analysis
-- `VOWEL_RATIO` - Vowel to consonant ratio
-
-**Specialized Detectors**
-- `MOJIBAKE` - Encoding corruption (UTF-8 as Latin-1)
-- `UNICODE_SCRIPT` - Homoglyph/script mixing attacks
-- `HEX_STRING` - Hash strings and UUIDs
-- `SYMBOL_RATIO` - Excessive symbols/numbers
-- `REPETITION` - Repeated patterns (ababab, repeated words)
-
-**Pattern Heuristics**
-- `PATTERN_MATCHING` - Configurable regex patterns (keyboard rows, repeated/alternating chars)
-
-> Removed in v0.8.0: `CHARACTER_FREQUENCY`, `WORD_LENGTH`, `STATISTICAL_ANALYSIS`, `COMPRESSION_RATIO`, and `ENGLISH_WORD_VALIDATION` (the only strategy requiring a third-party dependency). All were dominated by the strategies above; `WORD_LOOKUP` replaces `ENGLISH_WORD_VALIDATION` dependency-free.
-
-## Using Individual Strategies
+## Explanations
 
 ```python
+from dataclasses import asdict
 from pygarble import GarbleDetector, Strategy
 
-# Markov chain - best overall performance
-detector = GarbleDetector(Strategy.MARKOV_CHAIN)
-detector.predict("the quick brown fox")  # False
-detector.predict("xkqzjwpmv")            # True
+text = "Please review qxzjkwpvm before delivery."
+result = GarbleDetector(Strategy.LOCAL_ANOMALY).analyze(text)
 
-# High precision - zero false positives
-detector = GarbleDetector(Strategy.BIGRAM_PROBABILITY)
-detector.predict("hello world")          # False
-detector.predict("qxjjxz")               # True (impossible: qx, jj, xz)
+result.garbled       # Decision
+result.score         # Heuristic score
+result.status        # "clean", "garbled", or "insufficient_evidence"
+result.signals       # Per-strategy score, applicability, reason, and spans
+result.model_version # Version of the inference contract
 
-# Encoding corruption detection
-detector = GarbleDetector(Strategy.MOJIBAKE)
-detector.predict("Café")                 # False - valid UTF-8
-detector.predict("CafÃ©")                # True - mojibake
+for span in result.spans:
+    print(text[span.start:span.end], span.reason)
 
-# Homoglyph attack detection
-detector = GarbleDetector(Strategy.UNICODE_SCRIPT)
-detector.predict("paypal")               # False - all Latin
-detector.predict("pаypal")               # True - Cyrillic 'а'
+record = asdict(result)  # Can be serialized with json.dumps()
 ```
 
-## Ensemble Detector
+Offsets refer to the **original Python string**, even when accents or ligatures are folded for English scoring. `analyze()` evaluates every selected strategy; `predict()` can stop early for `any` and `all`. Empty or wholly inapplicable input returns `False` with `insufficient_evidence`; that does not certify meaningful English.
 
-Combine multiple strategies for better accuracy:
+## Configuration and voting
 
 ```python
 from pygarble import EnsembleDetector, Strategy
 
-# Default ensemble (recommended)
-# Uses: MARKOV_CHAIN, LOG_LIKELIHOOD_RATIO, WORD_ANOMALY
-# Voting: "any" - the two companions had zero benchmark false positives,
-# so they only add recall on top of MARKOV_CHAIN
-detector = EnsembleDetector()
-
-# Custom strategies
 detector = EnsembleDetector(
-    strategies=[
-        Strategy.MARKOV_CHAIN,
-        Strategy.BIGRAM_PROBABILITY,
-        Strategy.KEYBOARD_PATTERN,
-    ]
-)
-
-# Different voting modes (default: "any" for the built-in strategy set,
-# "majority" when you pass a custom strategies list)
-detector = EnsembleDetector(voting="any")       # High recall - flag if ANY strategy detects
-detector = EnsembleDetector(voting="all")       # High precision - flag only if ALL agree
-detector = EnsembleDetector(voting="majority")  # Balanced
-detector = EnsembleDetector(voting="average")   # Average probabilities
-
-# Weighted voting
-detector = EnsembleDetector(
-    strategies=[Strategy.MARKOV_CHAIN, Strategy.WORD_LOOKUP],
+    strategies=[Strategy.MARKOV_CHAIN, Strategy.WORD_ANOMALY],
     voting="weighted",
-    weights=[0.7, 0.3]
+    weights=[0.7, 0.3],
+    threshold=0.5,
+    strategy_kwargs={
+        Strategy.MARKOV_CHAIN: {"min_length": 4},
+        Strategy.WORD_ANOMALY: {"min_word_length": 6},
+    },
+    max_input_length=100_000,
 )
 ```
 
-## API Reference
+- Choose `profile` or `strategies`, not both. Profiles default to `any`; custom strategy lists default to `majority`.
+- `any` uses the maximum applicable score; `all` uses the minimum. `average` and `weighted` aggregate applicable scores. Zero-weight members do not participate in weighted decisions.
+- `majority` requires strictly more than half the applicable members to cross `threshold`. Its reported score is their arithmetic mean, so thresholding that mean need not reproduce the majority decision.
+- Abstaining members do not dilute votes. Weights must be finite, nonnegative, and not all zero.
+- `GarbleDetector(..., strategy_kwargs={...})` can configure a strategy's own `threshold` independently of the detector's decision threshold. Legacy `**kwargs` remain supported; unknown settings now emit a deprecation warning.
+- `WORD_LOOKUP.unknown_threshold` now controls the unknown-word fraction mapped to the decision boundary; its default 0.5 preserves the previous score mapping.
 
-### GarbleDetector
+Both detector classes provide `predict`, `score`, `predict_proba`, and `analyze` for a string or list of strings. A batch is fully type-validated before processing. Invalid batch entries raise `TypeError`; invalid numeric configuration raises `ValueError`.
 
-```python
-GarbleDetector(
-    strategy: Strategy,
-    threshold: float = 0.5,    # Probability threshold for predict()
-    **kwargs                   # Strategy-specific parameters
-)
+`threads` is an optional positive integer. Serial execution is recommended for short strings; threads are not a guaranteed speedup. `max_input_length` raises an error when a scalar or batch member exceeds the limit. `timeout_per_text` bounds waits for threaded results, **not total execution time**: Python worker threads cannot be killed, and executor shutdown may still wait. Timeouts and worker failures propagate rather than returning a clean classification.
 
-# Methods
-detector.predict(text)         # Returns bool or List[bool]
-detector.predict_proba(text)   # Returns float or List[float] (0.0-1.0)
-```
+Length alone no longer forces every strategy to score 1.0. The explicit legacy `max_string_length` option retains that policy when requested; use `max_input_length` for resource limits.
 
-### EnsembleDetector
+## Strategies
 
-```python
-EnsembleDetector(
-    strategies: List[Strategy] = None,  # Default: MARKOV_CHAIN + LLR + WORD_ANOMALY
-    threshold: float = 0.5,
-    voting: str = None,                 # "majority", "any", "all", "average", "weighted"
-                                        # default: "any" (built-in set) / "majority" (custom set)
-    weights: List[float] = None,        # Required if voting="weighted"
-)
+The [generated strategy reference](docs/strategies.rst) lists all 28 strategies and their accepted settings.
 
-# Methods (same as GarbleDetector)
-detector.predict(text)
-detector.predict_proba(text)
-```
+New in 0.9.0:
 
-## Common Use Cases
+- `CONTROL_CHARACTERS`: NUL and unexpected controls, replacement characters, lone surrogates, and excessive combining-mark runs. Normal tabs, newlines, accents, and emoji joiners are preserved.
+- `LOCAL_ANOMALY`: severe unknown tokens and bounded token windows, with original-text offsets. Useful when whole-document averages dilute localized corruption.
+- Keyboard adjacency now supports QWERTY, AZERTY, and QWERTZ, includes digit-row neighbors, and requires substantial path coverage.
+- Repetition counting is linear in token count, with additional phrase cycles up to eight words.
 
-### Filter User Input
-```python
-detector = EnsembleDetector()
+A conditional-trigram experiment is retained in `regression/trigram_experiment.py`. Its 78,732-byte candidate table did not add coverage beyond the specialist combination at the conservative development threshold, so it is **not shipped or loaded at runtime**. Global character entropy and character likelihood cannot reliably detect grammatical semantic nonsense.
 
-def validate_input(text):
-    if detector.predict(text):
-        return "Please enter valid text"
-    return None
-```
+## Evaluation
 
-### Clean Data Pipeline
-```python
-detector = GarbleDetector(Strategy.MARKOV_CHAIN)
-
-clean_data = [text for text in raw_data if not detector.predict(text)]
-```
-
-### Detect Encoding Issues
-```python
-detector = GarbleDetector(Strategy.MOJIBAKE)
-
-for text in documents:
-    if detector.predict(text):
-        print(f"Encoding issue detected: {text[:50]}...")
-```
-
-### Detect Phishing/Homoglyphs
-```python
-detector = GarbleDetector(Strategy.UNICODE_SCRIPT)
-
-if detector.predict(domain_name):
-    print("Warning: Possible homoglyph attack")
-```
-
-## Requirements
-
-- Python 3.8+
-- Zero dependencies
-
-## Development
+Run the legacy comparison and the reviewed English evaluation separately:
 
 ```bash
-git clone https://github.com/brightertiger/pygarble.git
-cd pygarble
-pip install -e ".[dev]"
-pytest tests/ -v
+python regression/benchmark.py
+python regression/evaluate.py --split all --output /tmp/english-results.json
+# Add --details for per-category metrics and individual errors.
 ```
+
+The original 1,644-row benchmark is retained for historical comparisons. It includes duplicates and labels some valid structured content as garbled. `label_overrides.json` documents the English policy corrections; the reviewed corpus deduplicates to 1,628 texts. The 132-case authored challenge set is separated by family into 68 development and 64 holdout cases, with a checksum to expose accidental edits.
+
+These are engineering datasets, **not representative production precision estimates**. Non-English Latin-script text is deliberately labeled against the English target, even though character models may accept it. A random generator can produce a real word, and zero observed false positives does not guarantee perfect precision. The evaluator reports confusion counts, applicability coverage, per-category results with `--details`, and a 95% interval for false-positive rate; metrics undefined for a single-class slice are `null`.
+
+See [the recorded evaluation](regression/english_results.json) and [implementation notes](docs/implementation.md) for measured results, limitations, and the trigram decision.
+
+## Development and reproducibility
+
+Requires Python 3.8+. Runtime dependencies: none.
+
+```bash
+pip install -e ".[dev]"
+pytest -q
+black --check pygarble tests scripts regression
+isort --check-only pygarble tests scripts regression
+flake8 pygarble tests scripts regression
+mypy pygarble
+
+# Downloads the pinned source and verifies its checksum and generated files.
+python scripts/generate_data.py --check
+# An offline rebuild can use a previously downloaded source file.
+python scripts/generate_data.py --source /path/to/count_1w.txt --check
+```
+
+The data manifest records source and artifact checksums. Curated word exclusions are versioned in `scripts/data_curation.json`. Runtime resources load lazily; using a control-character specialist does not load the English dictionary. Shared features are local to each request, without an unbounded cache of user text.
+
+Inference is deterministic for fixed package, settings, and Python/Unicode data versions. Unicode normalization/property tables may differ across Python releases. CI checks supported Python versions, hashes, formatting, typing, documentation builds, and installation of the wheel without runtime dependencies.
 
 ## License
 
-MIT License
-
-## Changelog
-
-### 0.8.0
-- **Breaking**: removed legacy strategies CHARACTER_FREQUENCY, WORD_LENGTH, STATISTICAL_ANALYSIS, COMPRESSION_RATIO, ENGLISH_WORD_VALIDATION (and the `spellchecker` extra)
-- New default ensemble: MARKOV_CHAIN | LOG_LIKELIHOOD_RATIO | WORD_ANOMALY with `voting="any"` (99.2% precision, 85.6% recall - strictly dominates any single strategy)
-- `voting` now defaults to "any" for the built-in strategy set, "majority" for custom sets
-
-### 0.7.0
-- Fixed ~45 verified bugs across all strategies (false positives on accented text, y-vowel words, proper nouns, Japanese, URLs, formatted text; false negatives on ALL-CAPS gibberish, cp1252 mojibake, repeated words)
-- 3 new strategies: LOG_LIKELIHOOD_RATIO, WORD_ANOMALY, KEYBOARD_ADJACENCY
-- Ensemble abstention: word-level strategies no longer dilute votes on short text
-- Consistent TypeError contract; cleaned 670 junk entries from the word list
-
-### 0.5.0
-- 6 new high-precision strategies (BIGRAM_PROBABILITY, LETTER_POSITION, CONSONANT_SEQUENCE, VOWEL_PATTERN, LETTER_FREQUENCY, RARE_TRIGRAM)
-- Redesigned default ensemble for 99.5% precision
-- External validation benchmark (1,644 test cases)
-
-### 0.4.0
-- Added COMPRESSION_RATIO, MOJIBAKE, PRONOUNCEABILITY, UNICODE_SCRIPT strategies
-
-### 0.3.0
-- Zero-dependency core with embedded training data
-- Added MARKOV_CHAIN, NGRAM_FREQUENCY, WORD_LOOKUP strategies
+Library code: MIT. Data source attribution and provenance are recorded separately in `scripts/data_curation.json`.

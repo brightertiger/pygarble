@@ -7,6 +7,9 @@ positives from short text or specialized vocabulary.
 """
 
 from collections import Counter
+from typing import Any
+
+from ..validation import finite_number, positive_int
 from .base import BaseStrategy
 
 
@@ -26,11 +29,31 @@ class LetterFrequencyStrategy(BaseStrategy):
     # Expected letter frequencies in English (approximate percentages)
     # From large corpus analysis
     ENGLISH_FREQ = {
-        "e": 12.7, "t": 9.1, "a": 8.2, "o": 7.5, "i": 7.0,
-        "n": 6.7, "s": 6.3, "h": 6.1, "r": 6.0, "d": 4.3,
-        "l": 4.0, "c": 2.8, "u": 2.8, "m": 2.4, "w": 2.4,
-        "f": 2.2, "g": 2.0, "y": 2.0, "p": 1.9, "b": 1.5,
-        "v": 1.0, "k": 0.8, "j": 0.15, "x": 0.15, "q": 0.10,
+        "e": 12.7,
+        "t": 9.1,
+        "a": 8.2,
+        "o": 7.5,
+        "i": 7.0,
+        "n": 6.7,
+        "s": 6.3,
+        "h": 6.1,
+        "r": 6.0,
+        "d": 4.3,
+        "l": 4.0,
+        "c": 2.8,
+        "u": 2.8,
+        "m": 2.4,
+        "w": 2.4,
+        "f": 2.2,
+        "g": 2.0,
+        "y": 2.0,
+        "p": 1.9,
+        "b": 1.5,
+        "v": 1.0,
+        "k": 0.8,
+        "j": 0.15,
+        "x": 0.15,
+        "q": 0.10,
         "z": 0.07,
     }
 
@@ -44,19 +67,23 @@ class LetterFrequencyStrategy(BaseStrategy):
         self,
         deviation_threshold: float = 1.0,
         min_length: int = 20,
-        **kwargs
+        **kwargs: Any,
     ):
         """
         Initialize the letter frequency strategy.
 
         Args:
             deviation_threshold: Standard deviations from norm (default 1.0)
-                                Higher = more conservative (fewer false positives)
+            Higher values are more conservative.
             min_length: Minimum text length to analyze (default 20)
         """
         super().__init__(**kwargs)
-        self.deviation_threshold = deviation_threshold
-        self.min_length = min_length
+        self.deviation_threshold = finite_number(
+            "deviation_threshold", deviation_threshold
+        )
+        if self.deviation_threshold <= 0:
+            raise ValueError("deviation_threshold must be positive")
+        self.min_length = positive_int("min_length", min_length)
 
     def _calculate_chi_squared(self, text: str) -> float:
         """Calculate chi-squared statistic for letter frequencies."""
@@ -78,7 +105,7 @@ class LetterFrequencyStrategy(BaseStrategy):
             # must still register as deviation
             expected_count = max(expected_count, 0.5)
             diff = observed_count - expected_count
-            chi_squared += (diff ** 2) / expected_count
+            chi_squared += (diff**2) / expected_count
 
         return chi_squared
 
@@ -141,6 +168,8 @@ class LetterFrequencyStrategy(BaseStrategy):
 
         # Very conservative threshold
         if normalized > self.deviation_threshold:
-            return min(1.0, 0.4 + (normalized - self.deviation_threshold) * 0.1)
+            return min(
+                1.0, 0.4 + (normalized - self.deviation_threshold) * 0.1
+            )
 
         return max(extreme_score, normalized / self.deviation_threshold * 0.3)

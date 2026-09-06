@@ -1,44 +1,39 @@
 import re
+from typing import Any
 
 from ..data import ENGLISH_WORDS
+from ..validation import parameter_value
 from .base import BaseStrategy
 
-_WORD_PATTERN = re.compile(r"[a-z]+")
+_WORD_PATTERN = re.compile(r"[a-z0-9]+")
 
-_QWERTY_ROWS = ("qwertyuiop", "asdfghjkl", "zxcvbnm")
+_LAYOUTS = {
+    "qwerty": ("1234567890", "qwertyuiop", "asdfghjkl", "zxcvbnm"),
+    "azerty": ("1234567890", "azertyuiop", "qsdfghjklm", "wxcvbn"),
+    "qwertz": ("1234567890", "qwertzuiop", "asdfghjkl", "yxcvbnm"),
+}
+_QWERTY_ROWS = _LAYOUTS["qwerty"]
 
 
-def _build_adjacency():
-    """Physical neighbor map for QWERTY, including diagonal neighbors
-    between staggered rows."""
-    adjacency = {}
-    for row_idx, row in enumerate(_QWERTY_ROWS):
-        for col, char in enumerate(row):
-            neighbors = set()
-            if col > 0:
-                neighbors.add(row[col - 1])
-            if col < len(row) - 1:
-                neighbors.add(row[col + 1])
-            # Staggered rows: key at col sits between cols (col) and
-            # (col + 1) of the row above, and (col - 1)/(col) below.
-            if row_idx > 0:
-                above = _QWERTY_ROWS[row_idx - 1]
-                for offset in (0, 1):
-                    if 0 <= col + offset < len(above):
-                        neighbors.add(above[col + offset])
-            if row_idx < len(_QWERTY_ROWS) - 1:
-                below = _QWERTY_ROWS[row_idx + 1]
-                for offset in (-1, 0):
-                    if 0 <= col + offset < len(below):
-                        neighbors.add(below[col + offset])
-            adjacency[char] = neighbors
-    return adjacency
+def _build_adjacency(rows: tuple = _QWERTY_ROWS) -> dict:
+    offsets = (0.0, 0.25, 0.5, 1.0)
+    coordinates = {
+        char: (column + offsets[row], row)
+        for row, keys in enumerate(rows)
+        for column, char in enumerate(keys)
+    }
+    return {
+        char: {
+            other
+            for other, (ox, oy) in coordinates.items()
+            if other != char and abs(x - ox) <= 1.1 and abs(y - oy) <= 1
+        }
+        for char, (x, y) in coordinates.items()
+    }
 
 
 _ADJACENT = _build_adjacency()
-_ROW_OF = {
-    char: idx for idx, row in enumerate(_QWERTY_ROWS) for char in row
-}
+_ROW_OF = {char: idx for idx, row in enumerate(_QWERTY_ROWS) for char in row}
 
 
 class KeyboardAdjacencyStrategy(BaseStrategy):
@@ -67,16 +62,32 @@ class KeyboardAdjacencyStrategy(BaseStrategy):
         False
     """
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
-        self.min_word_length = kwargs.get("min_word_length", 5)
-        self.chain_threshold = kwargs.get("chain_threshold", 6)
-        self.row_run_threshold = kwargs.get("row_run_threshold", 6)
+        layout = kwargs.get("keyboard_layout", "qwerty")
+        if layout not in _LAYOUTS:
+            raise ValueError(
+                "keyboard_layout must be qwerty, azerty, or qwertz"
+            )
+        self.rows = _LAYOUTS[layout]
+        self.adjacent = _build_adjacency(self.rows)
+        self.row_of = {
+            char: idx for idx, row in enumerate(self.rows) for char in row
+        }
+        self.min_word_length: int = parameter_value(
+            "min_word_length", kwargs.get("min_word_length", 5), 5
+        )
+        self.chain_threshold: int = parameter_value(
+            "chain_threshold", kwargs.get("chain_threshold", 6), 6
+        )
+        self.row_run_threshold: int = parameter_value(
+            "row_run_threshold", kwargs.get("row_run_threshold", 6), 6
+        )
 
     def _longest_adjacency_chain(self, word: str) -> int:
         longest = current = 1
         for prev, char in zip(word, word[1:]):
-            if char == prev or char in _ADJACENT.get(prev, ()):
+            if char == prev or char in self.adjacent.get(prev, ()):
                 current += 1
                 longest = max(longest, current)
             else:
@@ -86,9 +97,9 @@ class KeyboardAdjacencyStrategy(BaseStrategy):
     def _longest_row_run(self, word: str) -> int:
         longest = current = 1
         for prev, char in zip(word, word[1:]):
-            if _ROW_OF.get(char) is not None and _ROW_OF.get(
+            if self.row_of.get(char) is not None and self.row_of.get(
                 char
-            ) == _ROW_OF.get(prev):
+            ) == self.row_of.get(prev):
                 current += 1
                 longest = max(longest, current)
             else:
@@ -98,9 +109,18 @@ class KeyboardAdjacencyStrategy(BaseStrategy):
     def _is_mashed(self, word: str) -> bool:
         if len(word) < self.min_word_length:
             return False
+        if sum(char.isalpha() for char in word) < 3:
+            return False
+        # Whole straight row walks remain suspicious even if a web-frequency
+        # list contains them; ordinary row words such as typewriter are safe.
+        if len(word) >= 5 and any(
+            word in row or word in row[::-1] for row in self.rows
+        ):
+            return True
         if word in ENGLISH_WORDS:
             return False
-        if self._longest_adjacency_chain(word) >= self.chain_threshold:
+        chain = self._longest_adjacency_chain(word)
+        if chain >= self.chain_threshold and chain / len(word) >= 0.6:
             return True
         vowels = sum(1 for c in word if c in "aeiou")
         return (

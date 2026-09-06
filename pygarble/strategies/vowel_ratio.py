@@ -1,7 +1,7 @@
 from typing import FrozenSet
 
+from ..validation import parameter_value
 from .base import BaseStrategy
-
 
 VOWELS = frozenset("aeiou")
 CONSONANTS = frozenset("bcdfghjklmnpqrstvwxyz")
@@ -53,7 +53,11 @@ class VowelRatioStrategy(BaseStrategy):
         return vowel_count / total
 
     def _has_consonant_cluster(self, text: str) -> bool:
-        cluster_len = self.kwargs.get("consonant_cluster_len", 4)
+        cluster_len: int = parameter_value(
+            "consonant_cluster_len",
+            self.kwargs.get("consonant_cluster_len", 4),
+            4,
+        )
         return self._get_max_consonant_run(text) >= cluster_len
 
     def _get_max_consonant_run(self, text: str) -> int:
@@ -90,12 +94,16 @@ class VowelRatioStrategy(BaseStrategy):
             if denominator > 0:
                 ratio_score = (ratio - max_ratio) / denominator
             else:
-                ratio_score = 1.0  # max_ratio is 1.0, ratio > 1.0 is impossible
+                ratio_score = (
+                    1.0  # max_ratio is 1.0, ratio > 1.0 is impossible
+                )
 
         max_consonant_run = self._get_max_consonant_run(text)
         cluster_threshold = self.kwargs.get("consonant_cluster_len", 4)
         cluster_score = 0.0
         if max_consonant_run >= cluster_threshold:
-            cluster_score = min((max_consonant_run - cluster_threshold) / 4, 1.0)
+            cluster_score = min(
+                (max_consonant_run - cluster_threshold) / 4, 1.0
+            )
 
         return min(max(ratio_score, cluster_score), 1.0)
