@@ -1,5 +1,5 @@
-pygarble Documentation
-======================
+pygarble: English gibberish detection
+=====================================
 
 **Deterministic, lightweight gibberish detection for English text.**
 
@@ -9,15 +9,20 @@ Meaningful Hindi and other non-English text may be flagged; this is expected
 for English-specific scoring. It is not a language identifier or a semantic
 nonsense detector. Scores are heuristics, not calibrated probabilities.
 
+These docs cover the upcoming 0.9.0 API, not yet published to PyPI.
+See :doc:`installation` for published-package and source installation options.
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
    installation
    quickstart
+   strategy-guide
    strategies
    api
    examples
+   migration
    contributing
 
 Quick Start

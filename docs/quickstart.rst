@@ -1,132 +1,82 @@
-Quick Start Guide
-=================
+Quick start
+===========
 
-This guide will get you up and running with pygarble in minutes.
+Install the upcoming 0.9.0 API using :doc:`installation` before running these
+examples. Detectors operate on Python strings; decode bytes before calling them.
+No training or ``fit()`` step is needed.
 
-Basic Usage
------------
-
-The recommended way to use pygarble is with the default ``EnsembleDetector``:
+Screen English text
+-------------------
 
 .. code-block:: python
 
    from pygarble import EnsembleDetector
 
    detector = EnsembleDetector()
+   assert detector.predict("Hello world") is False
+   assert detector.predict("asdfghjkl") is True
+   assert detector.predict("नमस्ते दुनिया") is True
 
-   # Check single text
-   detector.predict("Hello world")    # False - valid text
-   detector.predict("asdfghjkl")      # True - gibberish
+Hindi being flagged is expected: the default checks target English. A negative
+result does not establish meaning, correct grammar, or language identity.
 
-   # Check multiple texts
-   texts = ["Hello world", "asdfghjkl", "Normal sentence"]
-   results = detector.predict(texts)  # [False, True, False]
-
-   # Get heuristic scores (0.0 = valid, 1.0 = gibberish)
-   detector.predict_proba("Hello world")  # ~0.1
-   detector.predict_proba("xkqzjwp")      # ~0.9
-
-Using Individual Strategies
----------------------------
-
-For specific use cases, use individual strategies:
-
-.. code-block:: python
-
-   from pygarble import GarbleDetector, Strategy
-
-   # Best overall performance
-   detector = GarbleDetector(Strategy.MARKOV_CHAIN)
-   detector.predict("hello world")   # False
-   detector.predict("xkqzjwpmv")     # True
-
-   # Zero false positives
-   detector = GarbleDetector(Strategy.BIGRAM_PROBABILITY)
-   detector.predict("hello world")   # False
-   detector.predict("qxjjxz")        # True
-
-   # Detect encoding corruption
-   detector = GarbleDetector(Strategy.MOJIBAKE)
-   detector.predict("Café")          # False - valid UTF-8
-   detector.predict("CafÃ©")         # True - mojibake
-
-   # Detect homoglyph attacks
-   detector = GarbleDetector(Strategy.UNICODE_SCRIPT)
-   detector.predict("paypal")        # False - all Latin
-   detector.predict("pаypal")        # True - Cyrillic 'а'
-
-Custom Ensemble
+Process a batch
 ---------------
 
-Create custom ensembles with specific strategies:
-
 .. code-block:: python
 
-   from pygarble import EnsembleDetector, Strategy
-
-   # Pick your strategies
-   detector = EnsembleDetector(
-       strategies=[
-           Strategy.MARKOV_CHAIN,
-           Strategy.BIGRAM_PROBABILITY,
-           Strategy.KEYBOARD_PATTERN,
-       ]
-   )
-
-   # Change voting mode
-   detector = EnsembleDetector(voting="any")       # High recall
-   detector = EnsembleDetector(voting="all")       # High precision
-   detector = EnsembleDetector(voting="majority")  # Balanced
-
-Adjusting Threshold
--------------------
-
-The threshold controls the cutoff for ``predict()``:
-
-.. code-block:: python
-
-   # Lower threshold = more sensitive (more false positives)
-   detector = GarbleDetector(Strategy.MARKOV_CHAIN, threshold=0.3)
-
-   # Higher threshold = less sensitive (more false negatives)
-   detector = GarbleDetector(Strategy.MARKOV_CHAIN, threshold=0.7)
-
-   # predict_proba() is not affected by threshold
-   detector.predict_proba("text")  # Returns 0.0-1.0
-
-Common Patterns
----------------
-
-**Filter user input:**
-
-.. code-block:: python
+   from pygarble import EnsembleDetector
 
    detector = EnsembleDetector()
+   texts = ["Hello world", "qxzjkwpv"]
+   assert detector.predict(texts) == [False, True]
+   scores = detector.score(texts)
+   assert scores == detector.predict_proba(texts)
+   assert all(0.0 <= score <= 1.0 for score in scores)
 
-   def validate_input(text):
-       if detector.predict(text):
-           return "Please enter valid text"
-       return None
+A list input returns a list in the same order; a string returns a single result.
+Scores are heuristics, not probabilities. Start with serial execution for short
+texts and measure before enabling threads.
 
-**Clean a dataset:**
-
-.. code-block:: python
-
-   detector = GarbleDetector(Strategy.MARKOV_CHAIN)
-   clean_data = [t for t in raw_data if not detector.predict(t)]
-
-**Detect encoding issues:**
+Choose what to detect
+---------------------
 
 .. code-block:: python
 
-   detector = GarbleDetector(Strategy.MOJIBAKE)
-   for text in documents:
-       if detector.predict(text):
-           print(f"Encoding issue: {text[:50]}")
+   from pygarble import EnsembleDetector, GarbleDetector, Strategy
 
-Next Steps
-----------
+   corruption = EnsembleDetector(profile="corruption")
+   assert corruption.predict("नमस्ते दुनिया") is False
+   assert corruption.predict("hello\x00world") is True
 
-- Learn about each strategy: :doc:`strategies`
-- See practical examples: :doc:`examples`
-- Explore the full API: :doc:`api`
+   local = GarbleDetector(Strategy.LOCAL_ANOMALY)
+   assert local.predict("Please review qxzjkwpvm before delivery.") is True
+
+   keyboard = GarbleDetector(
+       Strategy.KEYBOARD_ADJACENCY, keyboard_layout="azerty"
+   )
+   assert keyboard.predict("azerty") is True
+
+Use ``english_extended`` to add local anomalies, repetition, and pattern matching
+to the default profile. It can flag more valid text. See :doc:`strategy-guide`
+for choosing checks and :doc:`strategies` for the complete settings catalog.
+
+Inspect a decision
+------------------
+
+.. code-block:: python
+
+   from pygarble import EnsembleDetector
+
+   result = EnsembleDetector().analyze("hello\x00world")
+   assert result.garbled is True
+   assert result.status == "garbled"
+   for signal in result.signals:
+       print(signal.strategy, signal.score, signal.applicable, signal.reason)
+
+   empty = EnsembleDetector().analyze("")
+   assert empty.garbled is False
+   assert empty.status == "insufficient_evidence"
+
+Required fields need a separate empty-input check. For JSON output and spans,
+see :doc:`examples`. For thresholds, voting, limits, and errors, see :doc:`api`.

@@ -1,192 +1,107 @@
-Examples
-========
+Python examples
+===============
 
-Practical examples for common use cases.
+These examples use the upcoming 0.9.0 API; see :doc:`installation`. Each example
+includes its own imports and data. Reuse a configured detector across calls.
 
-Filter User Input
------------------
-
-Validate form input before processing:
+Validate a required English field
+---------------------------------
 
 .. code-block:: python
 
+   from typing import Optional
    from pygarble import EnsembleDetector
 
-   detector = EnsembleDetector()
+   detector = EnsembleDetector(max_input_length=10_000)
 
-   def validate_input(text):
-       if not text or len(text.strip()) == 0:
-           return "Input cannot be empty"
+   def validate_english_field(text: str) -> Optional[str]:
+       if not text.strip():
+           return "Enter some English text."
+       if len(text) > 10_000:
+           return "Use at most 10,000 characters."
        if detector.predict(text):
-           return "Please enter valid text"
+           return "Please review this text; it does not pass the English checks."
        return None
 
-   # Usage
-   error = validate_input("Hello world")    # None - valid
-   error = validate_input("asdfghjkl")      # "Please enter valid text"
+   assert validate_english_field("Hello world") is None
+   assert validate_english_field("") == "Enter some English text."
+   assert validate_english_field("asdfghjkl") is not None
 
-Clean a Dataset
----------------
+Use this policy for fields that expect English. Non-English text may be meaningful
+and still fail these checks. Rare words and names may also require review.
 
-Remove gibberish from a list of texts:
-
-.. code-block:: python
-
-   from pygarble import GarbleDetector, Strategy
-
-   detector = GarbleDetector(Strategy.MARKOV_CHAIN)
-
-   raw_data = [
-       "This is valid text",
-       "asdfghjkl",
-       "Another good sentence",
-       "qxzjkwpmv",
-       "Final valid text"
-   ]
-
-   clean_data = [t for t in raw_data if not detector.predict(t)]
-   print(clean_data)
-   # ['This is valid text', 'Another good sentence', 'Final valid text']
-
-Detect Encoding Issues
-----------------------
-
-Find mojibake (encoding corruption) in documents:
-
-.. code-block:: python
-
-   from pygarble import GarbleDetector, Strategy
-
-   detector = GarbleDetector(Strategy.MOJIBAKE)
-
-   documents = [
-       "Café au lait",           # Valid UTF-8
-       "CafÃ© au lait",          # Mojibake
-       "naïve résumé",           # Valid UTF-8
-       "naÃ¯ve rÃ©sumÃ©",       # Mojibake
-   ]
-
-   for doc in documents:
-       if detector.predict(doc):
-           print(f"Encoding issue: {doc}")
-
-Detect Phishing/Homoglyphs
---------------------------
-
-Identify lookalike characters in domain names:
-
-.. code-block:: python
-
-   from pygarble import GarbleDetector, Strategy
-
-   detector = GarbleDetector(Strategy.UNICODE_SCRIPT)
-
-   domains = [
-       "paypal.com",      # Legitimate
-       "pаypal.com",      # Cyrillic 'а'
-       "google.com",      # Legitimate
-       "gооgle.com",      # Cyrillic 'о'
-       "apple.com",       # Legitimate
-       "аpple.com",       # Cyrillic 'а'
-   ]
-
-   for domain in domains:
-       if detector.predict(domain):
-           print(f"Warning: Possible phishing - {domain}")
-
-Batch Processing
-----------------
-
-Process large datasets efficiently:
+Partition a dataset for review
+------------------------------
 
 .. code-block:: python
 
    from pygarble import EnsembleDetector
 
+   texts = ["Hello world", "asdfghjkl", "Please review this text"]
    detector = EnsembleDetector()
+   decisions = detector.predict(texts)
+   flagged = [text for text, bad in zip(texts, decisions) if bad]
+   remaining = [text for text, bad in zip(texts, decisions) if not bad]
+   assert flagged == ["asdfghjkl"]
+   assert len(remaining) == 2
 
-   # Process 10,000 texts at once
-   texts = ["sample text"] * 10000
-   results = detector.predict(texts)
+For larger sources, submit lists in caller-controlled chunks. The returned lists
+are materialized, and input validation covers each submitted batch.
 
-   garbled_count = sum(results)
-   print(f"Found {garbled_count} gibberish texts")
+Export explanations as JSON
+---------------------------
 
-Custom Strategy Selection
--------------------------
+.. code-block:: python
 
-Choose strategies based on your use case:
+   import json
+   from dataclasses import asdict
+   from pygarble import GarbleDetector, Strategy
+
+   text = "Please review qxzjkwpvm before delivery."
+   result = GarbleDetector(Strategy.LOCAL_ANOMALY).analyze(text)
+   assert result.garbled is True
+   assert any(text[s.start:s.end] == "qxzjkwpvm" for s in result.spans)
+   payload = json.dumps(asdict(result), ensure_ascii=False)
+   assert json.loads(payload)["status"] == "garbled"
+
+``asdict`` includes spans under each signal. ``result.spans`` is a convenience
+property combining those spans, not an additional serialized dataclass field.
+Offsets use Python string indices, not byte offsets; the end is exclusive.
+
+Check encoding independently of language
+----------------------------------------
+
+.. code-block:: python
+
+   from pygarble import EnsembleDetector
+
+   detector = EnsembleDetector(profile="corruption")
+   texts = ["नमस्ते दुनिया", "Café au lait", "CafÃ© au lait", "hello\x00world"]
+   assert detector.predict(texts) == [False, False, True, True]
+
+This detects selected artifacts; it does not repair encoding or certify that
+all possible encoding problems have been found.
+
+Configure members independently
+-------------------------------
 
 .. code-block:: python
 
    from pygarble import EnsembleDetector, Strategy
 
-   # High precision (minimize false positives)
    detector = EnsembleDetector(
-       strategies=[
-           Strategy.BIGRAM_PROBABILITY,
-           Strategy.LETTER_POSITION,
-           Strategy.RARE_TRIGRAM,
-       ],
-       voting="all"  # Only flag if ALL agree
+       strategies=[Strategy.MARKOV_CHAIN, Strategy.WORD_ANOMALY],
+       voting="weighted",
+       weights=[0.7, 0.3],
+       threshold=0.5,
+       strategy_kwargs={
+           Strategy.MARKOV_CHAIN: {"min_length": 4},
+           Strategy.WORD_ANOMALY: {"min_word_length": 6},
+       },
+       allowlist=["syzygy"],
    )
+   assert detector.predict("syzygy") is False
 
-   # High recall (catch everything)
-   detector = EnsembleDetector(
-       strategies=[
-           Strategy.MARKOV_CHAIN,
-           Strategy.KEYBOARD_PATTERN,
-           Strategy.WORD_LOOKUP,
-       ],
-       voting="any"  # Flag if ANY detects
-   )
-
-Threshold Tuning
-----------------
-
-Adjust sensitivity for your needs:
-
-.. code-block:: python
-
-   from pygarble import GarbleDetector, Strategy
-
-   # Get heuristic scores first
-   detector = GarbleDetector(Strategy.MARKOV_CHAIN)
-
-   test_texts = [
-       ("Hello world", False),      # Clearly valid
-       ("xkqzjwpmv", True),         # Clearly gibberish
-       ("asdfgh", True),            # Borderline
-   ]
-
-   print("Probability scores:")
-   for text, _ in test_texts:
-       prob = detector.predict_proba(text)
-       print(f"  {text:20} -> {prob:.3f}")
-
-   # Then choose appropriate threshold
-   # Lower = more sensitive (more false positives)
-   # Higher = less sensitive (more false negatives)
-
-Streaming/Real-time Detection
------------------------------
-
-Process text as it arrives:
-
-.. code-block:: python
-
-   from pygarble import GarbleDetector, Strategy
-
-   # Use a fast strategy
-   detector = GarbleDetector(Strategy.BIGRAM_PROBABILITY)
-
-   def process_message(message):
-       if detector.predict(message):
-           return {"status": "rejected", "reason": "invalid text"}
-       return {"status": "accepted", "message": message}
-
-   # Process incoming messages
-   messages = ["Hello", "xqzjk", "World"]
-   for msg in messages:
-       result = process_message(msg)
-       print(f"{msg}: {result['status']}")
+A custom strategy list defaults to majority voting unless overridden. Validate
+thresholds and weights against representative inputs; they are policy choices,
+not calibrated confidence levels.
