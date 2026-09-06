@@ -30,10 +30,7 @@ def nonnegative_int(name: str, value: object) -> int:
 
 
 def parameter_value(name: str, value: object, default: object) -> Any:
-    (
-        "Validate legacy numeric kwargs before strategies do the"
-        "ir range checks."
-    )
+    """Validate numeric kwargs before strategy-specific range checks."""
     if isinstance(default, bool):
         if not isinstance(value, bool):
             raise ValueError(f"{name} must be a boolean")
