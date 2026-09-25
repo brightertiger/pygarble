@@ -111,9 +111,12 @@ class BaseStrategy(ABC):
         return result
 
     def _evaluate_features(self, features: TextFeatures) -> Evidence:
-        if not self.applicable(features.text):
+        text = features.scrubbed
+        if not text.strip():
             return Evidence(0.0, False, "insufficient_evidence")
-        return Evidence(self._predict_proba_impl(features.text))
+        if not self.applicable(text):
+            return Evidence(0.0, False, "insufficient_evidence")
+        return Evidence(self._predict_proba_impl(text))
 
     def _predict_impl(self, text: str) -> bool:
         # Single source of truth: predict agrees with predict_proba unless a

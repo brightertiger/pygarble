@@ -24,7 +24,8 @@ All notable changes to pygarble are documented here. The format follows
   accept them.
 
 ### Fixed
-- (entries appended by later tasks)
+- allowlist is now honoured by every strategy, not only the four that
+  override feature evaluation.
 
 ### Removed
 - Five legacy strategies (see docs/migration.rst).

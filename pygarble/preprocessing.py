@@ -34,6 +34,23 @@ class TextFeatures:
         return fold_diacritics(self.text).lower()
 
     @cached_property
+    def scrubbed(self) -> str:
+        """Text with allowlisted words blanked out, offsets preserved.
+
+        Strategies that scan raw text (keyboard rows, phonotactics,
+        regex patterns) receive this instead of ``text`` so an allowlisted
+        token can never contribute evidence.
+        """
+        if not self.allowlist:
+            return self.text
+        chars = list(self.text)
+        for token in self.tokens:
+            if token.folded in self.allowlist:
+                for index in range(token.start, token.end):
+                    chars[index] = " "
+        return "".join(chars)
+
+    @cached_property
     def ascii_words(self) -> Tuple[str, ...]:
         return tuple(
             word
