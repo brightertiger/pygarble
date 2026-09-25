@@ -22,6 +22,8 @@ class LocalAnomalyStrategy(BaseStrategy):
         self.window_words = positive_int(
             "window_words", kwargs.get("window_words", 4)
         )
+        if self.window_words < 2:
+            raise ValueError("window_words must be at least 2")
         if self.window_words > 32:
             raise ValueError("window_words must be at most 32")
         if self.word_log_prob_threshold >= 0:

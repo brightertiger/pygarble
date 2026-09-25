@@ -38,6 +38,12 @@ All notable changes to pygarble are documented here. The format follows
 - PatternMatching (english_extended) no longer flags real words with
   five-consonant runs or round numbers like 10000; repeated-character and
   alternating patterns are letters-only.
+- Repetition ignores digit runs and 3-4 word emphasis ("very very very
+  good"). A text that is one repeated word ("No, no, no!") is still flagged
+  by design.
+- LocalAnomaly rejects window_words=1, which could never emit a span.
+- KeyboardPattern judges repeated bigrams per novel word, so "go go go" is
+  clean.
 
 ### Removed
 - Five legacy strategies (see docs/migration.rst).

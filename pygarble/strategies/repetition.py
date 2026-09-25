@@ -58,19 +58,16 @@ class RepetitionStrategy(BaseStrategy):
             "diversity_threshold", kwargs.get("diversity_threshold", 0.3), 0.3
         )
 
-        if self.max_char_repeat < 1:
-            raise ValueError("max_char_repeat must be at least 1")
-        if self.max_pattern_repeat < 1:
-            raise ValueError("max_pattern_repeat must be at least 1")
         if not 0.0 <= self.diversity_threshold <= 1.0:
             raise ValueError("diversity_threshold must be between 0.0 and 1.0")
 
         # Compile patterns for efficiency.
-        # Only alphanumeric characters count as character repetition:
-        # whitespace runs and formatting characters (----, ====, ....) are
-        # normal in real documents.
+        # Only letters count as character repetition: whitespace runs and
+        # formatting characters (----, ====, ....) are normal in real
+        # documents, and digit runs (order numbers, round amounts) are
+        # never repetition evidence.
         self._repeated_char_pattern = re.compile(
-            r"([a-z0-9])\1{" + str(self.max_char_repeat) + r",}"
+            r"([a-z])\1{" + str(self.max_char_repeat) + r",}"
         )
         self._repeated_bigram_pattern = re.compile(
             r"(.{2})\1{" + str(self.max_pattern_repeat) + r",}"
@@ -128,10 +125,15 @@ class RepetitionStrategy(BaseStrategy):
         if len(words) < 3:
             return 0.0
 
-        # Single repeated token dominating the text
+        # A single token dominating the text: either the whole text is one
+        # repeated word ("test test test") or, with five or more words, the
+        # top token holds at least 60% ("no no no no yes"). Three- and
+        # four-word emphasis ("very very very good") is ordinary English.
         top_count = max(Counter(words).values())
         top_ratio = top_count / len(words)
-        if top_count >= 3 and top_ratio >= 0.6:
+        if top_count >= 3 and (
+            top_count == len(words) or (len(words) >= 5 and top_ratio >= 0.6)
+        ):
             return min(1.0, top_ratio)
 
         # Repeated two-word cycle (needs at least 2 full cycles + 1 word)
