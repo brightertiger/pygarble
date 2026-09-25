@@ -54,6 +54,8 @@ All notable changes to pygarble are documented here. The format follows
 - HexString no longer classifies file paths or camelCase identifiers as base64.
 - VowelRatio validates its parameters, abstains below 4 letters (new
   min_length option), and ignores 1-2 letter abbreviations.
+- UnicodeScript no longer flags CJK text with embedded Latin words or
+  scientific units; only Latin/Cyrillic/Greek mixing inside a word counts.
 
 ### Removed
 - Five legacy strategies (see docs/migration.rst).

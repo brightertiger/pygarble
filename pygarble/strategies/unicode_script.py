@@ -5,9 +5,10 @@ Detects suspicious mixing of different Unicode scripts (e.g., Cyrillic
 characters mixed with Latin) which is common in spam and phishing.
 """
 
+import re
 import unicodedata
 from collections import Counter
-from typing import Any, Dict, Set
+from typing import Any, Dict, List, Set
 
 from ..validation import parameter_value
 from .base import BaseStrategy
@@ -73,6 +74,13 @@ COMPATIBLE_SCRIPT_GROUPS: Dict[str, str] = {
     "Japanese": "CJK",
 }
 
+# Only these scripts have look-alike letters that make one word visually
+# ambiguous. CJK, Arabic, Hebrew or Devanagari next to Latin inside one
+# whitespace-delimited chunk (Japanese with an English brand, units like
+# "μm") is ordinary writing, not spoofing.
+CONFUSABLE_SCRIPTS = frozenset({"Latin", "Cyrillic", "Greek"})
+_WORD_BOUNDARY = re.compile(r"[\W_]+")
+
 
 class UnicodeScriptStrategy(BaseStrategy):
     """
@@ -96,6 +104,12 @@ class UnicodeScriptStrategy(BaseStrategy):
     check_homoglyphs : bool, optional
         Whether to check for known homoglyphs.
         Default is True.
+
+    check_homoglyphs / homoglyph_threshold add a homoglyph-count signal
+    on top of the mixed-script-word signal; with the defaults both
+    signals produce the same score for a single spoofed word, so
+    disabling check_homoglyphs only matters when homoglyph_threshold is
+    raised above the number of look-alike letters present.
 
     Examples
     --------
@@ -164,16 +178,21 @@ class UnicodeScriptStrategy(BaseStrategy):
         except ValueError:
             return "Unknown"
 
+    def _words(self, text: str) -> List[str]:
+        """Split on whitespace, punctuation and digits so "α-helix" and
+        "E=mc²" are judged part by part."""
+        return [w for w in _WORD_BOUNDARY.split(text) if w]
+
     def _count_homoglyphs(self, text: str) -> Dict[str, int]:
         """Count homoglyph characters by script.
 
-        Only counts homoglyphs inside words that mix scripts
-        internally (e.g. Cyrillic "а" inside a Latin word). Whole
-        words in another script (e.g. Russian next to English) are
-        normal characters, not spoofing.
+        Only counts homoglyphs inside words that mix confusable
+        scripts internally (e.g. Cyrillic "а" inside a Latin word).
+        Whole words in another script (e.g. Russian next to English)
+        are normal characters, not spoofing.
         """
         counts: Dict[str, int] = Counter()
-        for word in text.split():
+        for word in self._words(text):
             if not self._is_mixed_script_word(word):
                 continue
             for char in word:
@@ -191,25 +210,23 @@ class UnicodeScriptStrategy(BaseStrategy):
         return scripts
 
     def _is_mixed_script_word(self, word: str) -> bool:
-        """Check if a single word mixes scripts (very suspicious)."""
+        """A word mixing confusable scripts (Latin/Cyrillic/Greek)."""
         alpha_chars = [c for c in word if c.isalpha()]
-        if len(alpha_chars) < 2:
+        if len(alpha_chars) < 3:
             return False
-
         scripts = set()
         for char in alpha_chars:
             script = self._get_script(char)
             script = COMPATIBLE_SCRIPT_GROUPS.get(script, script)
-            if script not in {"Common", "Inherited", "Unknown"}:
+            if script in CONFUSABLE_SCRIPTS:
                 scripts.add(script)
-
-        # A word mixing scripts is suspicious
         return len(scripts) > 1
 
     def _count_mixed_script_words(self, text: str) -> int:
-        """Count words that mix different scripts."""
-        words = text.split()
-        return sum(1 for word in words if self._is_mixed_script_word(word))
+        """Count words that mix confusable scripts."""
+        return sum(
+            1 for w in self._words(text) if self._is_mixed_script_word(w)
+        )
 
     def _predict_proba_impl(self, text: str) -> float:
         """
