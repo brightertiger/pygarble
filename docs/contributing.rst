@@ -54,10 +54,10 @@ Data and evaluation
 Data generation downloads a pinned source and verifies its checksum. For offline
 verification, supply ``--source /path/to/count_1w.txt``. Curated exclusions live in
 ``scripts/data_curation.json``; artifact hashes live in ``pygarble/data/manifest.json``.
-Do not edit generated tables directly. The generator also writes language-neutral
-JSON copies of the tables (``words.json``, ``bigrams.json``, ``trigrams.json``) for
-ports to other languages; they are hashed in ``manifest.json`` and verified by
-``--check``.
+Do not edit generated tables directly. The generator also writes
+language-neutral JSON copies of the tables (``words.json``, ``bigrams.json``,
+``trigrams.json``) for ports to other languages; they are hashed in
+``manifest.json`` and verified by ``--check``.
 
 Keep development and holdout families separate; do not tune thresholds on holdout
 errors. Report confusion counts and limitations rather than treating a small
@@ -65,11 +65,12 @@ benchmark as a production precision estimate. Hindi being flagged by English
 checks is expected; corruption-only checks have a separate contract.
 
 The golden corpus ``regression/golden.jsonl`` freezes the detector output
-(``garbled``, ``score``, ``status`` and spans) for every challenge case and a set
-of edge inputs under every profile. CI runs ``python regression/golden.py --check``; regenerate with
-``python regression/golden.py --write`` only when a behaviour change is intended,
-and review the diff. Any port must reproduce it exactly; span offsets are Unicode
-code points.
+(``garbled``, ``score``, ``status`` and spans) for every challenge case and a
+set of edge inputs under every profile. CI runs
+``python regression/golden.py --check``; regenerate with
+``python regression/golden.py --write`` only when a behaviour change is
+intended, and review the diff. Any port must reproduce it exactly; span offsets
+are Unicode code points.
 
 Package validation
 ------------------

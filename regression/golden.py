@@ -7,6 +7,7 @@ spans as [start, end, reason] with code-point offsets. Regenerate with
 
 import argparse
 import hashlib
+import itertools
 import json
 import sys
 from pathlib import Path
@@ -43,7 +44,7 @@ EDGE_INPUTS = [
     "NASA FBI NATO UNESCO",
     "Order 000123 shipped 2026-09-26 at 10:00",
     "pаypal login",
-    "café latté",
+    "café latté",
     "test test test",
     (
         "Sure. To rotate the logs, set the handler to RotatingFileHandler "
@@ -99,8 +100,18 @@ def check():
     if actual == expected:
         print(f"golden corpus reproduced ({actual.count(chr(10))} rows)")
         return 0
+    expected_lines = expected.splitlines()
+    actual_lines = actual.splitlines()
+    if len(expected_lines) != len(actual_lines):
+        print(
+            f"row count changed: {len(expected_lines)} committed, "
+            f"{len(actual_lines)} generated",
+            file=sys.stderr,
+        )
     shown = 0
-    for old, new in zip(expected.splitlines(), actual.splitlines()):
+    for old, new in itertools.zip_longest(
+        expected_lines, actual_lines, fillvalue="<missing>"
+    ):
         if old != new:
             print(f"- {old}\n+ {new}", file=sys.stderr)
             shown += 1

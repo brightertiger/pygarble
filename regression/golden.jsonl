@@ -892,12 +892,12 @@
 {"garbled": true, "profile": "legacy", "score": 0.918357805043, "spans": [], "status": "garbled", "text": "p\u0430ypal login"}
 {"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "p\u0430ypal login"}
 {"garbled": true, "profile": "spoofing", "score": 0.85, "spans": [], "status": "garbled", "text": "p\u0430ypal login"}
-{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "caf\u00e9 latt\u00e9"}
-{"garbled": false, "profile": "english", "score": 0.07200972818, "spans": [], "status": "clean", "text": "caf\u00e9 latt\u00e9"}
-{"garbled": false, "profile": "english_extended", "score": 0.07200972818, "spans": [], "status": "clean", "text": "caf\u00e9 latt\u00e9"}
-{"garbled": false, "profile": "legacy", "score": 0.07200972818, "spans": [], "status": "clean", "text": "caf\u00e9 latt\u00e9"}
-{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "caf\u00e9 latt\u00e9"}
-{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "caf\u00e9 latt\u00e9"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "cafe\u0301 latte\u0301"}
+{"garbled": false, "profile": "english", "score": 0.07200972818, "spans": [], "status": "clean", "text": "cafe\u0301 latte\u0301"}
+{"garbled": false, "profile": "english_extended", "score": 0.07200972818, "spans": [], "status": "clean", "text": "cafe\u0301 latte\u0301"}
+{"garbled": false, "profile": "legacy", "score": 0.07200972818, "spans": [], "status": "clean", "text": "cafe\u0301 latte\u0301"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "cafe\u0301 latte\u0301"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "cafe\u0301 latte\u0301"}
 {"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "test test test"}
 {"garbled": false, "profile": "english", "score": 0.031159784438, "spans": [], "status": "clean", "text": "test test test"}
 {"garbled": true, "profile": "english_extended", "score": 1.0, "spans": [], "status": "garbled", "text": "test test test"}
