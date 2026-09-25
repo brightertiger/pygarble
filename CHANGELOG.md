@@ -35,6 +35,9 @@ All notable changes to pygarble are documented here. The format follows
 - WordAnomaly (default profile) no longer flags dictionary acronyms such as
   DHCP, KPMG, HGTV.
 - Mojibake detects U+FFFD in inputs shorter than three characters.
+- PatternMatching (english_extended) no longer flags real words with
+  five-consonant runs or round numbers like 10000; repeated-character and
+  alternating patterns are letters-only.
 
 ### Removed
 - Five legacy strategies (see docs/migration.rst).
