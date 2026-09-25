@@ -127,8 +127,12 @@ threaded results, not scalar/serial execution or a hard wall-clock deadline.
 Python workers cannot be killed; executor shutdown may wait. Errors and timeouts
 propagate rather than producing clean fallback predictions.
 
-Unknown legacy strategy options emit ``DeprecationWarning``. Scores and decisions
-may change after the documented preprocessing and correctness fixes, including
+Unknown legacy strategy options emit ``FutureWarning``, attributed to the line
+in your code that constructed the detector; they will become errors in a future
+release. ``EnsembleDetector`` forwards its shared keyword arguments only to the
+member strategies that accept them, and warns once for any key that no selected
+member accepts. Unknown keys in ``strategy_kwargs`` warn once per member and are
+not passed on. Scores and decisions may change after the documented preprocessing and correctness fixes, including
 when the ``legacy`` strategy set is selected.
 
 Result records

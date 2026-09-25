@@ -31,8 +31,12 @@ Scores and settings
 * ``score`` aliases ``predict_proba``; neither is a calibrated probability.
 * ``WORD_LOOKUP.unknown_threshold`` now affects the score. Its default 0.5 retains
   the prior mapping; nondefault settings can change results.
-* Unknown legacy strategy options emit ``DeprecationWarning``. Check the accepted
-  names in :doc:`strategies` and use ``strategy_kwargs`` for per-member settings.
+* Unknown legacy strategy options emit ``FutureWarning`` attributed to your
+  calling code, and will become errors in a future release. Check the accepted
+  names in :doc:`strategies`.
+* ``EnsembleDetector`` forwards shared keyword arguments only to members that
+  accept them, with one warning for any key no selected member accepts. Use
+  ``strategy_kwargs`` for per-member settings.
 * Use ``strategy_kwargs`` to configure a strategy's own ``threshold`` independently
   of the detector's decision threshold.
 * Invalid numeric settings, including nonfinite weights, raise ``ValueError``.

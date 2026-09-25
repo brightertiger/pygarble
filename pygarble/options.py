@@ -166,7 +166,7 @@ def unknown_options(strategy: str, options: Mapping[str, Any]) -> List[str]:
 def _external_stacklevel() -> int:
     """Stack level of the first frame outside the pygarble package."""
     # sys._getframe is CPython/PyPy-specific; both are supported targets.
-    package = os.path.dirname(os.path.abspath(__file__))
+    package = os.path.dirname(os.path.abspath(__file__)) + os.sep
     frame: Optional[FrameType] = sys._getframe(1)
     level = 1
     while frame is not None and os.path.abspath(
