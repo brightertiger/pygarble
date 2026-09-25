@@ -32,6 +32,8 @@ All notable changes to pygarble are documented here. The format follows
   OverflowError.
 - calling a strategy's `predict`/`predict_proba` directly now goes through
   `evaluate()`, so text the strategy deems not applicable scores 0.0.
+- WordAnomaly (default profile) no longer flags dictionary acronyms such as
+  DHCP, KPMG, HGTV.
 
 ### Removed
 - Five legacy strategies (see docs/migration.rst).

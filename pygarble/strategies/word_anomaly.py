@@ -1,7 +1,7 @@
 from typing import Any, List
 
 from ..analysis import Evidence, Span
-from ..preprocessing import TextFeatures
+from ..preprocessing import TextFeatures, Token
 from ..scoring import word_log_probability
 from ..validation import finite_number, positive_int
 from .base import BaseStrategy
@@ -50,38 +50,40 @@ class WordAnomalyStrategy(BaseStrategy):
 
     def applicable(self, text: str) -> bool:
         self._validate_input(text)
-        return bool(self._scoreable_words(text))
+        return bool(self._scoreable_tokens(TextFeatures(text)))
 
-    def _scoreable_words(self, text: str) -> List[str]:
+    def _scoreable_tokens(self, features: TextFeatures) -> List[Token]:
         return [
-            w
-            for w in TextFeatures(text).ascii_words
-            if len(w) >= self.min_word_length
+            token
+            for token in features.tokens
+            if not token.structured
+            and token.folded.isascii()
+            and token.folded not in features.allowlist
+            and len(token.folded) >= self.min_word_length
         ]
 
     def _word_log_prob(self, word: str) -> float:
         return word_log_probability(word)
 
     def _evaluate_features(self, features: TextFeatures) -> Evidence:
-        words = [
-            w for w in features.ascii_words if len(w) >= self.min_word_length
-        ]
+        words = self._scoreable_tokens(features)
         if not words:
             return Evidence(0.0, False, "insufficient_words")
-        bad = {
-            w
-            for w in words
-            if w not in features.allowlist
-            and self._word_log_prob(w) < self.word_log_prob_threshold
-        }
-        score = min(
-            1.0,
-            sum(w in bad for w in words) / len(words) * self.anomaly_weight,
-        )
+        # Only words the dictionary cannot vouch for can be anomalous;
+        # the fraction is still taken over every scoreable word so one
+        # bad token in a short sentence registers without dictionary
+        # acronyms (DHCP, KPMG) ever counting against the text.
+        novel = {(token.start, token.end) for token in features.novel}
+        bad = [
+            token
+            for token in words
+            if (token.start, token.end) in novel
+            and self._word_log_prob(token.folded)
+            < self.word_log_prob_threshold
+        ]
+        score = min(1.0, len(bad) / len(words) * self.anomaly_weight)
         spans = tuple(
-            Span(t.start, t.end, "anomalous_word")
-            for t in features.tokens
-            if t.folded in bad
+            Span(token.start, token.end, "anomalous_word") for token in bad
         )
         return Evidence(score, True, "anomalous_word_fraction", spans)
 
