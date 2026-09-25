@@ -363,3 +363,24 @@ def test_broken_pipe_is_quiet(tmp_path):
     assert proc.wait(timeout=120) == 0
     assert first.startswith(b"0.")
     assert stderr == b""
+
+
+def test_bare_carriage_return_stays_on_one_line(capsys, tmp_path):
+    path = tmp_path / "in.txt"
+    path.write_bytes(b"hello\rworld\n")
+    code, out, _ = run(capsys, ["score", str(path)])
+    assert code == 0
+    assert out.count("\n") == 1
+    assert out.rstrip("\n").split("\t", 1)[1] == "hello\rworld"
+
+
+def test_field_line_numbers_ignore_bare_carriage_return(capsys, tmp_path):
+    path = tmp_path / "in.jsonl"
+    path.write_bytes(b'{"msg": "hi"} \r junk\n{}\n{"msg": "ok"}\n')
+    code, out, err = run(capsys, ["check", "--field", "msg", str(path)])
+    assert code == 2
+    assert len(out.splitlines()) == 1
+    errors = err.splitlines()
+    assert len(errors) == 2
+    assert errors[0].startswith("line 1: invalid JSON")
+    assert errors[1] == "line 2: missing field 'msg'"

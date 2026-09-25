@@ -23,7 +23,7 @@ def read_lines(handle: Iterable[str]) -> Iterator[str]:
     ``str.splitlines`` would also split on form feeds, information
     separators, NEL and the Unicode line and paragraph separators, hiding
     the very characters some strategies detect. Open handles with
-    ``newline=""`` so no translation happens before this split.
+    ``newline="\n"``; ``newline=""`` would still end lines at a bare "\r".
     """
     for chunk in handle:
         if chunk.endswith("\n"):
@@ -34,7 +34,7 @@ def read_lines(handle: Iterable[str]) -> Iterator[str]:
 
 
 def open_text(path: str) -> Any:
-    return open(path, encoding="utf-8", errors="replace", newline="")
+    return open(path, encoding="utf-8", errors="replace", newline="\n")
 
 
 def load_allowlist(path: str) -> List[str]:
@@ -159,7 +159,7 @@ def read_stdin() -> Iterator[str]:
         yield from read_lines(sys.stdin)
         return
     wrapper = io.TextIOWrapper(
-        buffer, encoding="utf-8", errors="replace", newline=""
+        buffer, encoding="utf-8", errors="replace", newline="\n"
     )
     try:
         yield from read_lines(wrapper)
