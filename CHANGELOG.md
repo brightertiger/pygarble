@@ -10,6 +10,9 @@ All notable changes to pygarble are documented here. The format follows
   stdin, supports --profile/--strategy/--threshold/--allowlist,
   text/TSV/JSONL output, JSON --field mode, and exit code 1 when any input
   is garbled.
+- `llm_output` profile (repetition, control characters, mojibake, local
+  anomaly): a deterministic pre-check for degenerate model output that
+  stays quiet on code and technical prose.
 
 ## [0.9.0] - 2026-09-26
 
