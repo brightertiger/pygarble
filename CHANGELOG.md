@@ -48,6 +48,9 @@ All notable changes to pygarble are documented here. The format follows
   ZeroDivisionError).
 - Pronounceability accepts sq-, sph-, chl-, scl-, phl-, schl-, gh- onsets and
   honours min_word_length (default now 4, the previous effective value).
+- FunctionWordDensity counts "a" and "I"; Title Case exemption no longer
+  covers ALL-CAPS; WordCollocation needs 20+ words with no collocation to
+  cross 0.5 and handles curly apostrophes.
 
 ### Removed
 - Five legacy strategies (see docs/migration.rst).

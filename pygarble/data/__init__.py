@@ -6,6 +6,7 @@ from typing import TYPE_CHECKING, Any
 if TYPE_CHECKING:
     from .bigrams import BIGRAM_LOG_PROBS as BIGRAM_LOG_PROBS
     from .bigrams import DEFAULT_LOG_PROB as DEFAULT_LOG_PROB
+    from .function_words import FUNCTION_WORDS as FUNCTION_WORDS
     from .trigrams import COMMON_TRIGRAMS as COMMON_TRIGRAMS
     from .words import ENGLISH_WORDS as ENGLISH_WORDS
 
@@ -14,12 +15,14 @@ _EXPORTS = {
     "BIGRAM_LOG_PROBS": "bigrams",
     "DEFAULT_LOG_PROB": "bigrams",
     "COMMON_TRIGRAMS": "trigrams",
+    "FUNCTION_WORDS": "function_words",
 }
 __all__ = [
     "ENGLISH_WORDS",
     "BIGRAM_LOG_PROBS",
     "DEFAULT_LOG_PROB",
     "COMMON_TRIGRAMS",
+    "FUNCTION_WORDS",
 ]
 
 

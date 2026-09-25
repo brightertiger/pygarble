@@ -10,10 +10,9 @@ import re
 from collections import Counter
 from typing import Any, List
 
-from ..data import ENGLISH_WORDS
+from ..data import ENGLISH_WORDS, FUNCTION_WORDS
 from ..validation import parameter_value
 from .base import BaseStrategy
-from .function_word_density import FunctionWordDensityStrategy
 
 
 class ZipfConformityStrategy(BaseStrategy):
@@ -87,7 +86,7 @@ class ZipfConformityStrategy(BaseStrategy):
         actually gibberish rather than a legitimate list of distinct
         real words (names, ingredients, keywords, ...).
         """
-        if any(w in FunctionWordDensityStrategy.FUNCTION_WORDS for w in words):
+        if any(w in FUNCTION_WORDS for w in words):
             return False
         unknown = sum(1 for w in words if w not in ENGLISH_WORDS)
         return unknown / len(words) >= 0.5

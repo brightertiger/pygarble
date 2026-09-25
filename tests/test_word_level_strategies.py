@@ -245,7 +245,8 @@ class TestWordCollocationStrategy:
         detector = GarbleDetector(Strategy.WORD_COLLOCATION)
         assert (
             detector.predict(
-                "xkrf plmq bvzt nwsd jghc trbn mkpl wqzd lpnr fvxt qzml hkrp"
+                "xkrf plmq bvzt nwsd jghc trbn mkpl wqzd lpnr fvxt qzml hkrp "
+                "vbnt dfrk zxqw ptlm grwn hcvb jkfd smtq"
             )
             is True
         )
@@ -267,7 +268,8 @@ class TestWordCollocationStrategy:
     def test_garbled_high_probability(self):
         detector = GarbleDetector(Strategy.WORD_COLLOCATION)
         proba = detector.predict_proba(
-            "xkrf plmq bvzt nwsd jghc trbn mkpl wqzd lpnr fvxt qzml hkrp"
+            "xkrf plmq bvzt nwsd jghc trbn mkpl wqzd lpnr fvxt qzml hkrp "
+            "vbnt dfrk zxqw ptlm grwn hcvb jkfd smtq"
         )
         assert proba > 0.5
 

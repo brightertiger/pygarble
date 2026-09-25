@@ -15,6 +15,25 @@ def fold_diacritics(text: str) -> str:
     )
 
 
+def title_case_ratio(text: str) -> float:
+    """Fraction of alphabetic tokens that are Capitalized but not ALL-CAPS.
+
+    Name lists and headlines are mostly Title Case; a shouted mash of
+    consonants is not.
+    """
+    tokens = [t for t in text.split() if any(c.isalpha() for c in t)]
+    if not tokens:
+        return 0.0
+    titled = 0
+    for token in tokens:
+        letters = [c for c in token if c.isalpha()]
+        if letters[0].isupper() and not (
+            len(letters) > 1 and all(c.isupper() for c in letters)
+        ):
+            titled += 1
+    return titled / len(tokens)
+
+
 @dataclass(frozen=True)
 class Token:
     text: str

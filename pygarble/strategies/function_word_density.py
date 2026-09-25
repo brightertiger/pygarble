@@ -8,6 +8,8 @@ Garbled text almost never contains these common short words.
 import re
 from typing import Any, List
 
+from ..data import FUNCTION_WORDS
+from ..preprocessing import title_case_ratio
 from ..validation import parameter_value
 from .base import BaseStrategy
 
@@ -40,159 +42,7 @@ class FunctionWordDensityStrategy(BaseStrategy):
     True
     """
 
-    FUNCTION_WORDS = frozenset(
-        {
-            # Articles
-            "the",
-            "a",
-            "an",
-            # Prepositions
-            "of",
-            "in",
-            "to",
-            "for",
-            "on",
-            "at",
-            "by",
-            "from",
-            "with",
-            "up",
-            "out",
-            "about",
-            "into",
-            "over",
-            "after",
-            "as",
-            "before",
-            "between",
-            "through",
-            "during",
-            "against",
-            "under",
-            "above",
-            "below",
-            "without",
-            "within",
-            "upon",
-            "off",
-            "down",
-            "near",
-            "since",
-            "until",
-            "via",
-            "per",
-            # Conjunctions
-            "and",
-            "but",
-            "or",
-            "nor",
-            "so",
-            "yet",
-            "if",
-            "then",
-            "than",
-            "that",
-            "when",
-            "while",
-            "because",
-            "although",
-            "though",
-            "whether",
-            "either",
-            "neither",
-            "once",
-            "unless",
-            # Pronouns
-            "i",
-            "me",
-            "my",
-            "we",
-            "us",
-            "our",
-            "you",
-            "your",
-            "he",
-            "him",
-            "his",
-            "she",
-            "her",
-            "it",
-            "its",
-            "they",
-            "them",
-            "their",
-            "this",
-            "these",
-            "those",
-            "who",
-            "whom",
-            "whose",
-            "which",
-            "what",
-            # Auxiliary/common verbs
-            "is",
-            "am",
-            "are",
-            "was",
-            "were",
-            "be",
-            "been",
-            "being",
-            "have",
-            "has",
-            "had",
-            "do",
-            "does",
-            "did",
-            "will",
-            "would",
-            "can",
-            "could",
-            "shall",
-            "should",
-            "may",
-            "might",
-            "must",
-            # Other high-frequency words
-            "not",
-            "no",
-            "all",
-            "each",
-            "every",
-            "both",
-            "few",
-            "more",
-            "most",
-            "other",
-            "some",
-            "such",
-            "any",
-            "only",
-            "there",
-            "here",
-            "now",
-            "new",
-            "using",
-            "also",
-            "own",
-            "same",
-            "again",
-            "still",
-            "even",
-            "ever",
-            "never",
-            "always",
-            "often",
-            "much",
-            "many",
-            "how",
-            "where",
-            "why",
-            "very",
-            "just",
-            "too",
-        }
-    )
+    FUNCTION_WORDS = FUNCTION_WORDS
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
@@ -212,9 +62,14 @@ class FunctionWordDensityStrategy(BaseStrategy):
             raise ValueError("min_words must be at least 1")
 
     def _tokenize(self, text: str) -> List[str]:
-        """Extract lowercase alphabetic words."""
+        """Lowercase alphabetic words; function words are kept at any
+        length so "a" and "I" count."""
         words = re.findall(r"[a-zA-Z]+", text.lower())
-        return [w for w in words if len(w) >= self.min_word_length]
+        return [
+            w
+            for w in words
+            if len(w) >= self.min_word_length or w in self.FUNCTION_WORDS
+        ]
 
     def applicable(self, text: str) -> bool:
         """Abstain on texts with too few analyzable words."""
@@ -234,9 +89,7 @@ class FunctionWordDensityStrategy(BaseStrategy):
         if function_count == 0:
             # Name lists and Title Case headlines legitimately contain
             # zero function words
-            tokens = text.split()
-            title_case = sum(1 for t in tokens if t[:1].isupper())
-            if tokens and title_case / len(tokens) >= 0.6:
+            if title_case_ratio(text) >= 0.6:
                 return 0.3
             if len(words) >= 15:
                 return 0.9
