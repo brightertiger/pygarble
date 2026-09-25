@@ -19,6 +19,9 @@ All notable changes to pygarble are documented here. The format follows
 - Language-neutral JSON copies of the word, bigram and trigram tables under
   `pygarble/data/` (repo and sdist only), hashed in the manifest, as the
   shared source for ports.
+- Golden corpus `regression/golden.jsonl` (challenge cases and edge inputs
+  x every profile) with a CI check; ports in other languages are held to
+  it.
 
 ## [0.9.0] - 2026-09-26
 

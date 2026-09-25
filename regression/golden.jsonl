@@ -1,0 +1,912 @@
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "Please send the updated invoice before Friday."}
+{"garbled": false, "profile": "english", "score": 0.057006296703, "spans": [], "status": "clean", "text": "Please send the updated invoice before Friday."}
+{"garbled": false, "profile": "english_extended", "score": 0.057006296703, "spans": [], "status": "clean", "text": "Please send the updated invoice before Friday."}
+{"garbled": false, "profile": "legacy", "score": 0.057006296703, "spans": [], "status": "clean", "text": "Please send the updated invoice before Friday."}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "Please send the updated invoice before Friday."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "Please send the updated invoice before Friday."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "Your delivery should arrive tomorrow morning."}
+{"garbled": false, "profile": "english", "score": 0.056725139097, "spans": [], "status": "clean", "text": "Your delivery should arrive tomorrow morning."}
+{"garbled": false, "profile": "english_extended", "score": 0.056725139097, "spans": [], "status": "clean", "text": "Your delivery should arrive tomorrow morning."}
+{"garbled": false, "profile": "legacy", "score": 0.056725139097, "spans": [], "status": "clean", "text": "Your delivery should arrive tomorrow morning."}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "Your delivery should arrive tomorrow morning."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "Your delivery should arrive tomorrow morning."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "The customer asked for a refund after the parcel was lost."}
+{"garbled": false, "profile": "english", "score": 0.049184736167, "spans": [], "status": "clean", "text": "The customer asked for a refund after the parcel was lost."}
+{"garbled": false, "profile": "english_extended", "score": 0.049184736167, "spans": [], "status": "clean", "text": "The customer asked for a refund after the parcel was lost."}
+{"garbled": false, "profile": "legacy", "score": 0.049184736167, "spans": [], "status": "clean", "text": "The customer asked for a refund after the parcel was lost."}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "The customer asked for a refund after the parcel was lost."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "The customer asked for a refund after the parcel was lost."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "We have reviewed your application and will reply shortly."}
+{"garbled": false, "profile": "english", "score": 0.052364776428, "spans": [], "status": "clean", "text": "We have reviewed your application and will reply shortly."}
+{"garbled": false, "profile": "english_extended", "score": 0.052364776428, "spans": [], "status": "clean", "text": "We have reviewed your application and will reply shortly."}
+{"garbled": false, "profile": "legacy", "score": 0.052364776428, "spans": [], "status": "clean", "text": "We have reviewed your application and will reply shortly."}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "We have reviewed your application and will reply shortly."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "We have reviewed your application and will reply shortly."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "Could you check whether the kitchen window is closed?"}
+{"garbled": false, "profile": "english", "score": 0.048443020388, "spans": [], "status": "clean", "text": "Could you check whether the kitchen window is closed?"}
+{"garbled": false, "profile": "english_extended", "score": 0.048443020388, "spans": [], "status": "clean", "text": "Could you check whether the kitchen window is closed?"}
+{"garbled": false, "profile": "legacy", "score": 0.048443020388, "spans": [], "status": "clean", "text": "Could you check whether the kitchen window is closed?"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "Could you check whether the kitchen window is closed?"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "Could you check whether the kitchen window is closed?"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "The meeting has moved to the smaller conference room."}
+{"garbled": false, "profile": "english", "score": 0.042975431226, "spans": [], "status": "clean", "text": "The meeting has moved to the smaller conference room."}
+{"garbled": false, "profile": "english_extended", "score": 0.042975431226, "spans": [], "status": "clean", "text": "The meeting has moved to the smaller conference room."}
+{"garbled": false, "profile": "legacy", "score": 0.042975431226, "spans": [], "status": "clean", "text": "The meeting has moved to the smaller conference room."}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "The meeting has moved to the smaller conference room."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "The meeting has moved to the smaller conference room."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "A quick brown fox wandered past our garden."}
+{"garbled": false, "profile": "english", "score": 0.05805386151, "spans": [], "status": "clean", "text": "A quick brown fox wandered past our garden."}
+{"garbled": false, "profile": "english_extended", "score": 0.05805386151, "spans": [], "status": "clean", "text": "A quick brown fox wandered past our garden."}
+{"garbled": false, "profile": "legacy", "score": 0.05805386151, "spans": [], "status": "clean", "text": "A quick brown fox wandered past our garden."}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "A quick brown fox wandered past our garden."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "A quick brown fox wandered past our garden."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "Thank you for helping us resolve this issue."}
+{"garbled": false, "profile": "english", "score": 0.055881480831, "spans": [], "status": "clean", "text": "Thank you for helping us resolve this issue."}
+{"garbled": false, "profile": "english_extended", "score": 0.055881480831, "spans": [], "status": "clean", "text": "Thank you for helping us resolve this issue."}
+{"garbled": false, "profile": "legacy", "score": 0.055881480831, "spans": [], "status": "clean", "text": "Thank you for helping us resolve this issue."}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "Thank you for helping us resolve this issue."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "Thank you for helping us resolve this issue."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "This document describes a deterministic English text detector."}
+{"garbled": false, "profile": "english", "score": 0.063652890386, "spans": [], "status": "clean", "text": "This document describes a deterministic English text detector."}
+{"garbled": false, "profile": "english_extended", "score": 0.063652890386, "spans": [], "status": "clean", "text": "This document describes a deterministic English text detector."}
+{"garbled": false, "profile": "legacy", "score": 0.063652890386, "spans": [], "status": "clean", "text": "This document describes a deterministic English text detector."}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "This document describes a deterministic English text detector."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "This document describes a deterministic English text detector."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "She enjoys reading books about astronomy and history."}
+{"garbled": false, "profile": "english", "score": 0.058947089623, "spans": [], "status": "clean", "text": "She enjoys reading books about astronomy and history."}
+{"garbled": false, "profile": "english_extended", "score": 0.058947089623, "spans": [], "status": "clean", "text": "She enjoys reading books about astronomy and history."}
+{"garbled": false, "profile": "legacy", "score": 0.058947089623, "spans": [], "status": "clean", "text": "She enjoys reading books about astronomy and history."}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "She enjoys reading books about astronomy and history."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "She enjoys reading books about astronomy and history."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "Caf\u00e9 visitors ordered cr\u00e8me br\u00fbl\u00e9e and tea."}
+{"garbled": false, "profile": "english", "score": 0.179790512196, "spans": [], "status": "clean", "text": "Caf\u00e9 visitors ordered cr\u00e8me br\u00fbl\u00e9e and tea."}
+{"garbled": false, "profile": "english_extended", "score": 0.179790512196, "spans": [], "status": "clean", "text": "Caf\u00e9 visitors ordered cr\u00e8me br\u00fbl\u00e9e and tea."}
+{"garbled": false, "profile": "legacy", "score": 0.179790512196, "spans": [], "status": "clean", "text": "Caf\u00e9 visitors ordered cr\u00e8me br\u00fbl\u00e9e and tea."}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "Caf\u00e9 visitors ordered cr\u00e8me br\u00fbl\u00e9e and tea."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "Caf\u00e9 visitors ordered cr\u00e8me br\u00fbl\u00e9e and tea."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "The nurse explained the prescription to the patient."}
+{"garbled": false, "profile": "english", "score": 0.044536155642, "spans": [], "status": "clean", "text": "The nurse explained the prescription to the patient."}
+{"garbled": false, "profile": "english_extended", "score": 0.044536155642, "spans": [], "status": "clean", "text": "The nurse explained the prescription to the patient."}
+{"garbled": false, "profile": "legacy", "score": 0.044536155642, "spans": [], "status": "clean", "text": "The nurse explained the prescription to the patient."}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "The nurse explained the prescription to the patient."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "The nurse explained the prescription to the patient."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "HTTP API REST"}
+{"garbled": false, "profile": "english", "score": 0.157048597381, "spans": [], "status": "clean", "text": "HTTP API REST"}
+{"garbled": false, "profile": "english_extended", "score": 0.157048597381, "spans": [], "status": "clean", "text": "HTTP API REST"}
+{"garbled": false, "profile": "legacy", "score": 0.157048597381, "spans": [], "status": "clean", "text": "HTTP API REST"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "HTTP API REST"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "HTTP API REST"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "XMLHttpRequest"}
+{"garbled": false, "profile": "english", "score": 0.0, "spans": [], "status": "clean", "text": "XMLHttpRequest"}
+{"garbled": false, "profile": "english_extended", "score": 0.0, "spans": [], "status": "clean", "text": "XMLHttpRequest"}
+{"garbled": false, "profile": "legacy", "score": 0.0, "spans": [], "status": "clean", "text": "XMLHttpRequest"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "XMLHttpRequest"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "XMLHttpRequest"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "PostgreSQL"}
+{"garbled": false, "profile": "english", "score": 0.0, "spans": [], "status": "clean", "text": "PostgreSQL"}
+{"garbled": false, "profile": "english_extended", "score": 0.0, "spans": [], "status": "clean", "text": "PostgreSQL"}
+{"garbled": false, "profile": "legacy", "score": 0.0, "spans": [], "status": "clean", "text": "PostgreSQL"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "PostgreSQL"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "PostgreSQL"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "nginx"}
+{"garbled": false, "profile": "english", "score": 0.368889769641, "spans": [], "status": "clean", "text": "nginx"}
+{"garbled": false, "profile": "english_extended", "score": 0.368889769641, "spans": [], "status": "clean", "text": "nginx"}
+{"garbled": false, "profile": "legacy", "score": 0.368889769641, "spans": [], "status": "clean", "text": "nginx"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "nginx"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "nginx"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "OAuth2"}
+{"garbled": false, "profile": "english", "score": 0.0, "spans": [], "status": "clean", "text": "OAuth2"}
+{"garbled": false, "profile": "english_extended", "score": 0.0, "spans": [], "status": "clean", "text": "OAuth2"}
+{"garbled": false, "profile": "legacy", "score": 0.0, "spans": [], "status": "clean", "text": "OAuth2"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "OAuth2"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "OAuth2"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "https://example.org/path?q=qxzjkwp"}
+{"garbled": false, "profile": "english", "score": 0.0, "spans": [], "status": "clean", "text": "https://example.org/path?q=qxzjkwp"}
+{"garbled": false, "profile": "english_extended", "score": 0.0, "spans": [], "status": "clean", "text": "https://example.org/path?q=qxzjkwp"}
+{"garbled": false, "profile": "legacy", "score": 0.0, "spans": [], "status": "clean", "text": "https://example.org/path?q=qxzjkwp"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "https://example.org/path?q=qxzjkwp"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "https://example.org/path?q=qxzjkwp"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "help@example.org"}
+{"garbled": false, "profile": "english", "score": 0.0, "spans": [], "status": "clean", "text": "help@example.org"}
+{"garbled": false, "profile": "english_extended", "score": 0.0, "spans": [], "status": "clean", "text": "help@example.org"}
+{"garbled": false, "profile": "legacy", "score": 0.0, "spans": [], "status": "clean", "text": "help@example.org"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "help@example.org"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "help@example.org"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "SKU-4928-Z"}
+{"garbled": false, "profile": "english", "score": 0.0, "spans": [], "status": "clean", "text": "SKU-4928-Z"}
+{"garbled": false, "profile": "english_extended", "score": 0.0, "spans": [], "status": "clean", "text": "SKU-4928-Z"}
+{"garbled": false, "profile": "legacy", "score": 0.0, "spans": [], "status": "clean", "text": "SKU-4928-Z"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "SKU-4928-Z"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "SKU-4928-Z"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "2026-09-06"}
+{"garbled": false, "profile": "english", "score": 0.0, "spans": [], "status": "clean", "text": "2026-09-06"}
+{"garbled": false, "profile": "english_extended", "score": 0.0, "spans": [], "status": "clean", "text": "2026-09-06"}
+{"garbled": false, "profile": "legacy", "score": 0.0, "spans": [], "status": "insufficient_evidence", "text": "2026-09-06"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "2026-09-06"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "2026-09-06"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "3.14159265359"}
+{"garbled": false, "profile": "english", "score": 0.0, "spans": [], "status": "clean", "text": "3.14159265359"}
+{"garbled": false, "profile": "english_extended", "score": 0.3, "spans": [], "status": "clean", "text": "3.14159265359"}
+{"garbled": false, "profile": "legacy", "score": 0.0, "spans": [], "status": "insufficient_evidence", "text": "3.14159265359"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "3.14159265359"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "3.14159265359"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "SELECT * FROM users WHERE id = 1;"}
+{"garbled": false, "profile": "english", "score": 0.04739561805, "spans": [], "status": "clean", "text": "SELECT * FROM users WHERE id = 1;"}
+{"garbled": false, "profile": "english_extended", "score": 0.3, "spans": [], "status": "clean", "text": "SELECT * FROM users WHERE id = 1;"}
+{"garbled": false, "profile": "legacy", "score": 0.04739561805, "spans": [], "status": "clean", "text": "SELECT * FROM users WHERE id = 1;"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "SELECT * FROM users WHERE id = 1;"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "SELECT * FROM users WHERE id = 1;"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "DEBUG: Processing request id=abc123 user=john"}
+{"garbled": false, "profile": "english", "score": 0.077525370642, "spans": [], "status": "clean", "text": "DEBUG: Processing request id=abc123 user=john"}
+{"garbled": false, "profile": "english_extended", "score": 0.3, "spans": [], "status": "clean", "text": "DEBUG: Processing request id=abc123 user=john"}
+{"garbled": false, "profile": "legacy", "score": 0.077525370642, "spans": [], "status": "clean", "text": "DEBUG: Processing request id=abc123 user=john"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "DEBUG: Processing request id=abc123 user=john"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "DEBUG: Processing request id=abc123 user=john"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "C:\\Users\\John\\Documents\\report.docx"}
+{"garbled": false, "profile": "english", "score": 0.0, "spans": [], "status": "clean", "text": "C:\\Users\\John\\Documents\\report.docx"}
+{"garbled": false, "profile": "english_extended", "score": 0.0, "spans": [], "status": "clean", "text": "C:\\Users\\John\\Documents\\report.docx"}
+{"garbled": false, "profile": "legacy", "score": 0.0, "spans": [], "status": "clean", "text": "C:\\Users\\John\\Documents\\report.docx"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "C:\\Users\\John\\Documents\\report.docx"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "C:\\Users\\John\\Documents\\report.docx"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "List:\n- apples\n- oranges\n- pears"}
+{"garbled": false, "profile": "english", "score": 0.042658327822, "spans": [], "status": "clean", "text": "List:\n- apples\n- oranges\n- pears"}
+{"garbled": false, "profile": "english_extended", "score": 0.042658327822, "spans": [], "status": "clean", "text": "List:\n- apples\n- oranges\n- pears"}
+{"garbled": false, "profile": "legacy", "score": 0.042658327822, "spans": [], "status": "clean", "text": "List:\n- apples\n- oranges\n- pears"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "List:\n- apples\n- oranges\n- pears"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "List:\n- apples\n- oranges\n- pears"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "----\nSection title\n===="}
+{"garbled": false, "profile": "english", "score": 0.048454494716, "spans": [], "status": "clean", "text": "----\nSection title\n===="}
+{"garbled": false, "profile": "english_extended", "score": 0.3, "spans": [], "status": "clean", "text": "----\nSection title\n===="}
+{"garbled": false, "profile": "legacy", "score": 0.048454494716, "spans": [], "status": "clean", "text": "----\nSection title\n===="}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "----\nSection title\n===="}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "----\nSection title\n===="}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "rhythms"}
+{"garbled": false, "profile": "english", "score": 0.357779592783, "spans": [], "status": "clean", "text": "rhythms"}
+{"garbled": false, "profile": "english_extended", "score": 0.357779592783, "spans": [], "status": "clean", "text": "rhythms"}
+{"garbled": false, "profile": "legacy", "score": 0.357779592783, "spans": [], "status": "clean", "text": "rhythms"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "rhythms"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "rhythms"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "fjord"}
+{"garbled": false, "profile": "english", "score": 0.198080089551, "spans": [], "status": "clean", "text": "fjord"}
+{"garbled": false, "profile": "english_extended", "score": 0.198080089551, "spans": [], "status": "clean", "text": "fjord"}
+{"garbled": false, "profile": "legacy", "score": 0.198080089551, "spans": [], "status": "clean", "text": "fjord"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "fjord"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "fjord"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "syzygy"}
+{"garbled": true, "profile": "english", "score": 0.81801774648, "spans": [], "status": "garbled", "text": "syzygy"}
+{"garbled": true, "profile": "english_extended", "score": 0.81801774648, "spans": [], "status": "garbled", "text": "syzygy"}
+{"garbled": true, "profile": "legacy", "score": 0.81801774648, "spans": [], "status": "garbled", "text": "syzygy"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "syzygy"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "syzygy"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "chutzpah"}
+{"garbled": true, "profile": "english", "score": 0.698919661282, "spans": [], "status": "garbled", "text": "chutzpah"}
+{"garbled": true, "profile": "english_extended", "score": 0.698919661282, "spans": [], "status": "garbled", "text": "chutzpah"}
+{"garbled": true, "profile": "legacy", "score": 0.698919661282, "spans": [], "status": "garbled", "text": "chutzpah"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "chutzpah"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "chutzpah"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "Nguyen"}
+{"garbled": false, "profile": "english", "score": 0.124390939377, "spans": [], "status": "clean", "text": "Nguyen"}
+{"garbled": false, "profile": "english_extended", "score": 0.124390939377, "spans": [], "status": "clean", "text": "Nguyen"}
+{"garbled": false, "profile": "legacy", "score": 0.124390939377, "spans": [], "status": "clean", "text": "Nguyen"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "Nguyen"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "Nguyen"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "McDonald"}
+{"garbled": false, "profile": "english", "score": 0.0, "spans": [], "status": "clean", "text": "McDonald"}
+{"garbled": false, "profile": "english_extended", "score": 0.0, "spans": [], "status": "clean", "text": "McDonald"}
+{"garbled": false, "profile": "legacy", "score": 0.0, "spans": [], "status": "clean", "text": "McDonald"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "McDonald"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "McDonald"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "O\u2019Connor"}
+{"garbled": false, "profile": "english", "score": 0.061035464346, "spans": [], "status": "clean", "text": "O\u2019Connor"}
+{"garbled": false, "profile": "english_extended", "score": 0.061035464346, "spans": [], "status": "clean", "text": "O\u2019Connor"}
+{"garbled": false, "profile": "legacy", "score": 0.061035464346, "spans": [], "status": "clean", "text": "O\u2019Connor"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "O\u2019Connor"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "O\u2019Connor"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "state-of-the-art"}
+{"garbled": false, "profile": "english", "score": 0.032015044185, "spans": [], "status": "clean", "text": "state-of-the-art"}
+{"garbled": false, "profile": "english_extended", "score": 0.032015044185, "spans": [], "status": "clean", "text": "state-of-the-art"}
+{"garbled": false, "profile": "legacy", "score": 0.032015044185, "spans": [], "status": "clean", "text": "state-of-the-art"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "state-of-the-art"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "state-of-the-art"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "don't"}
+{"garbled": false, "profile": "english", "score": 0.040382013504, "spans": [], "status": "clean", "text": "don't"}
+{"garbled": false, "profile": "english_extended", "score": 0.040382013504, "spans": [], "status": "clean", "text": "don't"}
+{"garbled": false, "profile": "legacy", "score": 0.040382013504, "spans": [], "status": "clean", "text": "don't"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "don't"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "don't"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "wishy"}
+{"garbled": false, "profile": "english", "score": 0.136132741991, "spans": [], "status": "clean", "text": "wishy"}
+{"garbled": false, "profile": "english_extended", "score": 0.136132741991, "spans": [], "status": "clean", "text": "wishy"}
+{"garbled": false, "profile": "legacy", "score": 0.136132741991, "spans": [], "status": "clean", "text": "wishy"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "wishy"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "wishy"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "typewriter"}
+{"garbled": false, "profile": "english", "score": 0.09484761162, "spans": [], "status": "clean", "text": "typewriter"}
+{"garbled": false, "profile": "english_extended", "score": 0.09484761162, "spans": [], "status": "clean", "text": "typewriter"}
+{"garbled": false, "profile": "legacy", "score": 0.09484761162, "spans": [], "status": "clean", "text": "typewriter"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "typewriter"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "typewriter"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "power"}
+{"garbled": false, "profile": "english", "score": 0.047055258292, "spans": [], "status": "clean", "text": "power"}
+{"garbled": false, "profile": "english_extended", "score": 0.047055258292, "spans": [], "status": "clean", "text": "power"}
+{"garbled": false, "profile": "legacy", "score": 0.047055258292, "spans": [], "status": "clean", "text": "power"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "power"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "power"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "uncharacteristically"}
+{"garbled": false, "profile": "english", "score": 0.084054986901, "spans": [], "status": "clean", "text": "uncharacteristically"}
+{"garbled": false, "profile": "english_extended", "score": 0.084054986901, "spans": [], "status": "clean", "text": "uncharacteristically"}
+{"garbled": false, "profile": "legacy", "score": 0.084054986901, "spans": [], "status": "clean", "text": "uncharacteristically"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "uncharacteristically"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "uncharacteristically"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "pneumonoultramicroscopicsilicovolcanoconiosis"}
+{"garbled": false, "profile": "english", "score": 0.247119195049, "spans": [], "status": "clean", "text": "pneumonoultramicroscopicsilicovolcanoconiosis"}
+{"garbled": false, "profile": "english_extended", "score": 0.247119195049, "spans": [], "status": "clean", "text": "pneumonoultramicroscopicsilicovolcanoconiosis"}
+{"garbled": false, "profile": "legacy", "score": 0.247119195049, "spans": [], "status": "clean", "text": "pneumonoultramicroscopicsilicovolcanoconiosis"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "pneumonoultramicroscopicsilicovolcanoconiosis"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "pneumonoultramicroscopicsilicovolcanoconiosis"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "asdfghjkl"}
+{"garbled": true, "profile": "english", "score": 1.0, "spans": [[0, 9, "anomalous_word"]], "status": "garbled", "text": "asdfghjkl"}
+{"garbled": true, "profile": "english_extended", "score": 1.0, "spans": [[0, 9, "anomalous_word"]], "status": "garbled", "text": "asdfghjkl"}
+{"garbled": true, "profile": "legacy", "score": 1.0, "spans": [[0, 9, "anomalous_word"]], "status": "garbled", "text": "asdfghjkl"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "asdfghjkl"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "asdfghjkl"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "qwerty"}
+{"garbled": true, "profile": "english", "score": 1.0, "spans": [], "status": "garbled", "text": "qwerty"}
+{"garbled": true, "profile": "english_extended", "score": 1.0, "spans": [], "status": "garbled", "text": "qwerty"}
+{"garbled": false, "profile": "legacy", "score": 0.433973148101, "spans": [], "status": "clean", "text": "qwerty"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "qwerty"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "qwerty"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "qwertyuiop"}
+{"garbled": true, "profile": "english", "score": 1.0, "spans": [], "status": "garbled", "text": "qwertyuiop"}
+{"garbled": true, "profile": "english_extended", "score": 1.0, "spans": [], "status": "garbled", "text": "qwertyuiop"}
+{"garbled": true, "profile": "legacy", "score": 0.626228895876, "spans": [], "status": "garbled", "text": "qwertyuiop"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "qwertyuiop"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "qwertyuiop"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "zxcvbnm"}
+{"garbled": true, "profile": "english", "score": 1.0, "spans": [[0, 7, "anomalous_word"]], "status": "garbled", "text": "zxcvbnm"}
+{"garbled": true, "profile": "english_extended", "score": 1.0, "spans": [[0, 7, "anomalous_word"]], "status": "garbled", "text": "zxcvbnm"}
+{"garbled": true, "profile": "legacy", "score": 1.0, "spans": [[0, 7, "anomalous_word"]], "status": "garbled", "text": "zxcvbnm"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "zxcvbnm"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "zxcvbnm"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "poiuytrewq"}
+{"garbled": true, "profile": "english", "score": 1.0, "spans": [], "status": "garbled", "text": "poiuytrewq"}
+{"garbled": true, "profile": "english_extended", "score": 1.0, "spans": [], "status": "garbled", "text": "poiuytrewq"}
+{"garbled": true, "profile": "legacy", "score": 0.825314782744, "spans": [], "status": "garbled", "text": "poiuytrewq"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "poiuytrewq"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "poiuytrewq"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "mnbvcxz"}
+{"garbled": true, "profile": "english", "score": 1.0, "spans": [[0, 7, "anomalous_word"]], "status": "garbled", "text": "mnbvcxz"}
+{"garbled": true, "profile": "english_extended", "score": 1.0, "spans": [[0, 7, "anomalous_word"]], "status": "garbled", "text": "mnbvcxz"}
+{"garbled": true, "profile": "legacy", "score": 1.0, "spans": [[0, 7, "anomalous_word"]], "status": "garbled", "text": "mnbvcxz"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "mnbvcxz"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "mnbvcxz"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "asdfghjkl123"}
+{"garbled": true, "profile": "english", "score": 1.0, "spans": [], "status": "garbled", "text": "asdfghjkl123"}
+{"garbled": true, "profile": "english_extended", "score": 1.0, "spans": [], "status": "garbled", "text": "asdfghjkl123"}
+{"garbled": false, "profile": "legacy", "score": 0.0, "spans": [], "status": "clean", "text": "asdfghjkl123"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "asdfghjkl123"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "asdfghjkl123"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "qwerty12345"}
+{"garbled": true, "profile": "english", "score": 1.0, "spans": [], "status": "garbled", "text": "qwerty12345"}
+{"garbled": true, "profile": "english_extended", "score": 1.0, "spans": [], "status": "garbled", "text": "qwerty12345"}
+{"garbled": false, "profile": "legacy", "score": 0.0, "spans": [], "status": "clean", "text": "qwerty12345"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "qwerty12345"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "qwerty12345"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "ASDFGHJKL"}
+{"garbled": true, "profile": "english", "score": 1.0, "spans": [[0, 9, "anomalous_word"]], "status": "garbled", "text": "ASDFGHJKL"}
+{"garbled": true, "profile": "english_extended", "score": 1.0, "spans": [[0, 9, "anomalous_word"]], "status": "garbled", "text": "ASDFGHJKL"}
+{"garbled": true, "profile": "legacy", "score": 1.0, "spans": [[0, 9, "anomalous_word"]], "status": "garbled", "text": "ASDFGHJKL"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "ASDFGHJKL"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "ASDFGHJKL"}
+{"garbled": true, "profile": "corruption", "score": 0.8, "spans": [], "status": "garbled", "text": "Caf\u00c3\u00a9 au lait"}
+{"garbled": true, "profile": "english", "score": 0.8, "spans": [], "status": "garbled", "text": "Caf\u00c3\u00a9 au lait"}
+{"garbled": true, "profile": "english_extended", "score": 0.8, "spans": [], "status": "garbled", "text": "Caf\u00c3\u00a9 au lait"}
+{"garbled": false, "profile": "legacy", "score": 0.245155156096, "spans": [], "status": "clean", "text": "Caf\u00c3\u00a9 au lait"}
+{"garbled": true, "profile": "llm_output", "score": 0.8, "spans": [], "status": "garbled", "text": "Caf\u00c3\u00a9 au lait"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "Caf\u00c3\u00a9 au lait"}
+{"garbled": true, "profile": "corruption", "score": 0.666666666667, "spans": [], "status": "garbled", "text": "Na\u00c3\u00afve approach"}
+{"garbled": true, "profile": "english", "score": 0.666666666667, "spans": [], "status": "garbled", "text": "Na\u00c3\u00afve approach"}
+{"garbled": true, "profile": "english_extended", "score": 0.666666666667, "spans": [], "status": "garbled", "text": "Na\u00c3\u00afve approach"}
+{"garbled": false, "profile": "legacy", "score": 0.126405446636, "spans": [], "status": "clean", "text": "Na\u00c3\u00afve approach"}
+{"garbled": true, "profile": "llm_output", "score": 0.666666666667, "spans": [], "status": "garbled", "text": "Na\u00c3\u00afve approach"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "Na\u00c3\u00afve approach"}
+{"garbled": true, "profile": "corruption", "score": 1.0, "spans": [], "status": "garbled", "text": "R\u00c3\u00a9sum\u00c3\u00a9 template"}
+{"garbled": true, "profile": "english", "score": 1.0, "spans": [], "status": "garbled", "text": "R\u00c3\u00a9sum\u00c3\u00a9 template"}
+{"garbled": true, "profile": "english_extended", "score": 1.0, "spans": [], "status": "garbled", "text": "R\u00c3\u00a9sum\u00c3\u00a9 template"}
+{"garbled": false, "profile": "legacy", "score": 0.183742042254, "spans": [], "status": "clean", "text": "R\u00c3\u00a9sum\u00c3\u00a9 template"}
+{"garbled": true, "profile": "llm_output", "score": 1.0, "spans": [], "status": "garbled", "text": "R\u00c3\u00a9sum\u00c3\u00a9 template"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "R\u00c3\u00a9sum\u00c3\u00a9 template"}
+{"garbled": true, "profile": "corruption", "score": 0.8, "spans": [], "status": "garbled", "text": "Fa\u00c3\u00a7ade design"}
+{"garbled": true, "profile": "english", "score": 0.8, "spans": [], "status": "garbled", "text": "Fa\u00c3\u00a7ade design"}
+{"garbled": true, "profile": "english_extended", "score": 0.8, "spans": [], "status": "garbled", "text": "Fa\u00c3\u00a7ade design"}
+{"garbled": false, "profile": "legacy", "score": 0.105689072879, "spans": [], "status": "clean", "text": "Fa\u00c3\u00a7ade design"}
+{"garbled": true, "profile": "llm_output", "score": 0.8, "spans": [], "status": "garbled", "text": "Fa\u00c3\u00a7ade design"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "Fa\u00c3\u00a7ade design"}
+{"garbled": true, "profile": "corruption", "score": 0.9, "spans": [[6, 7, "control_or_decoding_artifact"]], "status": "garbled", "text": "Hello \ufffd world"}
+{"garbled": true, "profile": "english", "score": 0.9, "spans": [[6, 7, "control_or_decoding_artifact"]], "status": "garbled", "text": "Hello \ufffd world"}
+{"garbled": true, "profile": "english_extended", "score": 0.9, "spans": [[6, 7, "control_or_decoding_artifact"]], "status": "garbled", "text": "Hello \ufffd world"}
+{"garbled": false, "profile": "legacy", "score": 0.067970413211, "spans": [], "status": "clean", "text": "Hello \ufffd world"}
+{"garbled": true, "profile": "llm_output", "score": 0.9, "spans": [[6, 7, "control_or_decoding_artifact"]], "status": "garbled", "text": "Hello \ufffd world"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "Hello \ufffd world"}
+{"garbled": true, "profile": "corruption", "score": 0.9, "spans": [[5, 6, "control_or_decoding_artifact"]], "status": "garbled", "text": "hello\u0000world"}
+{"garbled": true, "profile": "english", "score": 0.9, "spans": [[5, 6, "control_or_decoding_artifact"]], "status": "garbled", "text": "hello\u0000world"}
+{"garbled": true, "profile": "english_extended", "score": 0.9, "spans": [[5, 6, "control_or_decoding_artifact"]], "status": "garbled", "text": "hello\u0000world"}
+{"garbled": false, "profile": "legacy", "score": 0.067970413211, "spans": [], "status": "clean", "text": "hello\u0000world"}
+{"garbled": true, "profile": "llm_output", "score": 0.9, "spans": [[5, 6, "control_or_decoding_artifact"]], "status": "garbled", "text": "hello\u0000world"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "hello\u0000world"}
+{"garbled": true, "profile": "corruption", "score": 0.9, "spans": [[3, 4, "control_or_decoding_artifact"]], "status": "garbled", "text": "bad\u0007message"}
+{"garbled": true, "profile": "english", "score": 0.9, "spans": [[3, 4, "control_or_decoding_artifact"]], "status": "garbled", "text": "bad\u0007message"}
+{"garbled": true, "profile": "english_extended", "score": 0.9, "spans": [[3, 4, "control_or_decoding_artifact"]], "status": "garbled", "text": "bad\u0007message"}
+{"garbled": false, "profile": "legacy", "score": 0.056686254872, "spans": [], "status": "clean", "text": "bad\u0007message"}
+{"garbled": true, "profile": "llm_output", "score": 0.9, "spans": [[3, 4, "control_or_decoding_artifact"]], "status": "garbled", "text": "bad\u0007message"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "bad\u0007message"}
+{"garbled": true, "profile": "corruption", "score": 0.9, "spans": [[4, 5, "control_or_decoding_artifact"]], "status": "garbled", "text": "text\ud800here"}
+{"garbled": true, "profile": "english", "score": 0.9, "spans": [[4, 5, "control_or_decoding_artifact"]], "status": "garbled", "text": "text\ud800here"}
+{"garbled": true, "profile": "english_extended", "score": 0.9, "spans": [[4, 5, "control_or_decoding_artifact"]], "status": "garbled", "text": "text\ud800here"}
+{"garbled": false, "profile": "legacy", "score": 0.035004500488, "spans": [], "status": "clean", "text": "text\ud800here"}
+{"garbled": true, "profile": "llm_output", "score": 0.9, "spans": [[4, 5, "control_or_decoding_artifact"]], "status": "garbled", "text": "text\ud800here"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "text\ud800here"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "\u0928\u092e\u0938\u094d\u0924\u0947 \u0926\u0941\u0928\u093f\u092f\u093e"}
+{"garbled": true, "profile": "english", "score": 0.999997739676, "spans": [], "status": "garbled", "text": "\u0928\u092e\u0938\u094d\u0924\u0947 \u0926\u0941\u0928\u093f\u092f\u093e"}
+{"garbled": true, "profile": "english_extended", "score": 0.999997739676, "spans": [], "status": "garbled", "text": "\u0928\u092e\u0938\u094d\u0924\u0947 \u0926\u0941\u0928\u093f\u092f\u093e"}
+{"garbled": true, "profile": "legacy", "score": 0.999997739676, "spans": [], "status": "garbled", "text": "\u0928\u092e\u0938\u094d\u0924\u0947 \u0926\u0941\u0928\u093f\u092f\u093e"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "\u0928\u092e\u0938\u094d\u0924\u0947 \u0926\u0941\u0928\u093f\u092f\u093e"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "\u0928\u092e\u0938\u094d\u0924\u0947 \u0926\u0941\u0928\u093f\u092f\u093e"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "\u4f60\u597d\u4e16\u754c"}
+{"garbled": true, "profile": "english", "score": 0.999997739676, "spans": [], "status": "garbled", "text": "\u4f60\u597d\u4e16\u754c"}
+{"garbled": true, "profile": "english_extended", "score": 0.999997739676, "spans": [], "status": "garbled", "text": "\u4f60\u597d\u4e16\u754c"}
+{"garbled": true, "profile": "legacy", "score": 0.999997739676, "spans": [], "status": "garbled", "text": "\u4f60\u597d\u4e16\u754c"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "\u4f60\u597d\u4e16\u754c"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "\u4f60\u597d\u4e16\u754c"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "\u041f\u0440\u0438\u0432\u0435\u0442 \u043c\u0438\u0440"}
+{"garbled": true, "profile": "english", "score": 0.999997739676, "spans": [], "status": "garbled", "text": "\u041f\u0440\u0438\u0432\u0435\u0442 \u043c\u0438\u0440"}
+{"garbled": true, "profile": "english_extended", "score": 0.999997739676, "spans": [], "status": "garbled", "text": "\u041f\u0440\u0438\u0432\u0435\u0442 \u043c\u0438\u0440"}
+{"garbled": true, "profile": "legacy", "score": 0.999997739676, "spans": [], "status": "garbled", "text": "\u041f\u0440\u0438\u0432\u0435\u0442 \u043c\u0438\u0440"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "\u041f\u0440\u0438\u0432\u0435\u0442 \u043c\u0438\u0440"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "\u041f\u0440\u0438\u0432\u0435\u0442 \u043c\u0438\u0440"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "\u0645\u0631\u062d\u0628\u0627 \u0628\u0627\u0644\u0639\u0627\u0644\u0645"}
+{"garbled": true, "profile": "english", "score": 0.999997739676, "spans": [], "status": "garbled", "text": "\u0645\u0631\u062d\u0628\u0627 \u0628\u0627\u0644\u0639\u0627\u0644\u0645"}
+{"garbled": true, "profile": "english_extended", "score": 0.999997739676, "spans": [], "status": "garbled", "text": "\u0645\u0631\u062d\u0628\u0627 \u0628\u0627\u0644\u0639\u0627\u0644\u0645"}
+{"garbled": true, "profile": "legacy", "score": 0.999997739676, "spans": [], "status": "garbled", "text": "\u0645\u0631\u062d\u0628\u0627 \u0628\u0627\u0644\u0639\u0627\u0644\u0645"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "\u0645\u0631\u062d\u0628\u0627 \u0628\u0627\u0644\u0639\u0627\u0644\u0645"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "\u0645\u0631\u062d\u0628\u0627 \u0628\u0627\u0644\u0639\u0627\u0644\u0645"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "\u3053\u308c\u306f\u65e5\u672c\u8a9e\u3067\u3059"}
+{"garbled": true, "profile": "english", "score": 0.999997739676, "spans": [], "status": "garbled", "text": "\u3053\u308c\u306f\u65e5\u672c\u8a9e\u3067\u3059"}
+{"garbled": true, "profile": "english_extended", "score": 0.999997739676, "spans": [], "status": "garbled", "text": "\u3053\u308c\u306f\u65e5\u672c\u8a9e\u3067\u3059"}
+{"garbled": true, "profile": "legacy", "score": 0.999997739676, "spans": [], "status": "garbled", "text": "\u3053\u308c\u306f\u65e5\u672c\u8a9e\u3067\u3059"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "\u3053\u308c\u306f\u65e5\u672c\u8a9e\u3067\u3059"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "\u3053\u308c\u306f\u65e5\u672c\u8a9e\u3067\u3059"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "The order qxzjkwpv is confirmed and will arrive in the next few days."}
+{"garbled": true, "profile": "english", "score": 0.997874895401, "spans": [[10, 18, "anomalous_word"]], "status": "garbled", "text": "The order qxzjkwpv is confirmed and will arrive in the next few days."}
+{"garbled": true, "profile": "english_extended", "score": 0.997874895401, "spans": [[10, 18, "anomalous_word"], [10, 18, "severe_local_anomaly"]], "status": "garbled", "text": "The order qxzjkwpv is confirmed and will arrive in the next few days."}
+{"garbled": true, "profile": "legacy", "score": 0.997874895401, "spans": [[10, 18, "anomalous_word"]], "status": "garbled", "text": "The order qxzjkwpv is confirmed and will arrive in the next few days."}
+{"garbled": true, "profile": "llm_output", "score": 0.8, "spans": [[10, 18, "severe_local_anomaly"]], "status": "garbled", "text": "The order qxzjkwpv is confirmed and will arrive in the next few days."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "The order qxzjkwpv is confirmed and will arrive in the next few days."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "Please review xkjqzvpm and let me know whether the rest is correct."}
+{"garbled": true, "profile": "english", "score": 0.998025440306, "spans": [[14, 22, "anomalous_word"]], "status": "garbled", "text": "Please review xkjqzvpm and let me know whether the rest is correct."}
+{"garbled": true, "profile": "english_extended", "score": 0.998025440306, "spans": [[14, 22, "anomalous_word"], [14, 22, "severe_local_anomaly"]], "status": "garbled", "text": "Please review xkjqzvpm and let me know whether the rest is correct."}
+{"garbled": true, "profile": "legacy", "score": 0.998025440306, "spans": [[14, 22, "anomalous_word"]], "status": "garbled", "text": "Please review xkjqzvpm and let me know whether the rest is correct."}
+{"garbled": true, "profile": "llm_output", "score": 0.8, "spans": [[14, 22, "severe_local_anomaly"]], "status": "garbled", "text": "Please review xkjqzvpm and let me know whether the rest is correct."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "Please review xkjqzvpm and let me know whether the rest is correct."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "qxzjkwpv"}
+{"garbled": true, "profile": "english", "score": 1.0, "spans": [[0, 8, "anomalous_word"]], "status": "garbled", "text": "qxzjkwpv"}
+{"garbled": true, "profile": "english_extended", "score": 1.0, "spans": [[0, 8, "anomalous_word"], [0, 8, "severe_local_anomaly"]], "status": "garbled", "text": "qxzjkwpv"}
+{"garbled": true, "profile": "legacy", "score": 1.0, "spans": [[0, 8, "anomalous_word"]], "status": "garbled", "text": "qxzjkwpv"}
+{"garbled": true, "profile": "llm_output", "score": 0.8, "spans": [[0, 8, "severe_local_anomaly"]], "status": "garbled", "text": "qxzjkwpv"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "qxzjkwpv"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "mzqxvjkt"}
+{"garbled": true, "profile": "english", "score": 1.0, "spans": [[0, 8, "anomalous_word"]], "status": "garbled", "text": "mzqxvjkt"}
+{"garbled": true, "profile": "english_extended", "score": 1.0, "spans": [[0, 8, "anomalous_word"], [0, 8, "severe_local_anomaly"]], "status": "garbled", "text": "mzqxvjkt"}
+{"garbled": true, "profile": "legacy", "score": 1.0, "spans": [[0, 8, "anomalous_word"]], "status": "garbled", "text": "mzqxvjkt"}
+{"garbled": true, "profile": "llm_output", "score": 0.8, "spans": [[0, 8, "severe_local_anomaly"]], "status": "garbled", "text": "mzqxvjkt"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "mzqxvjkt"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "qzxv pzqk jxqz wvqx"}
+{"garbled": true, "profile": "english", "score": 1.0, "spans": [[0, 4, "anomalous_word"], [5, 9, "anomalous_word"], [10, 14, "anomalous_word"], [15, 19, "anomalous_word"]], "status": "garbled", "text": "qzxv pzqk jxqz wvqx"}
+{"garbled": true, "profile": "english_extended", "score": 1.0, "spans": [[0, 4, "anomalous_word"], [0, 19, "corrupt_token_window"], [5, 9, "anomalous_word"], [10, 14, "anomalous_word"], [15, 19, "anomalous_word"]], "status": "garbled", "text": "qzxv pzqk jxqz wvqx"}
+{"garbled": true, "profile": "legacy", "score": 1.0, "spans": [[0, 4, "anomalous_word"], [5, 9, "anomalous_word"], [10, 14, "anomalous_word"], [15, 19, "anomalous_word"]], "status": "garbled", "text": "qzxv pzqk jxqz wvqx"}
+{"garbled": true, "profile": "llm_output", "score": 0.8, "spans": [[0, 19, "corrupt_token_window"]], "status": "garbled", "text": "qzxv pzqk jxqz wvqx"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "qzxv pzqk jxqz wvqx"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "Our train reached the coastal town just before sunset."}
+{"garbled": false, "profile": "english", "score": 0.048115370534, "spans": [], "status": "clean", "text": "Our train reached the coastal town just before sunset."}
+{"garbled": false, "profile": "english_extended", "score": 0.048115370534, "spans": [], "status": "clean", "text": "Our train reached the coastal town just before sunset."}
+{"garbled": false, "profile": "legacy", "score": 0.048115370534, "spans": [], "status": "clean", "text": "Our train reached the coastal town just before sunset."}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "Our train reached the coastal town just before sunset."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "Our train reached the coastal town just before sunset."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "The guide pointed out a narrow trail beside the waterfall."}
+{"garbled": false, "profile": "english", "score": 0.056281025523, "spans": [], "status": "clean", "text": "The guide pointed out a narrow trail beside the waterfall."}
+{"garbled": false, "profile": "english_extended", "score": 0.056281025523, "spans": [], "status": "clean", "text": "The guide pointed out a narrow trail beside the waterfall."}
+{"garbled": false, "profile": "legacy", "score": 0.056281025523, "spans": [], "status": "clean", "text": "The guide pointed out a narrow trail beside the waterfall."}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "The guide pointed out a narrow trail beside the waterfall."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "The guide pointed out a narrow trail beside the waterfall."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "I packed a raincoat because the forecast mentioned afternoon showers."}
+{"garbled": false, "profile": "english", "score": 0.15302597309, "spans": [], "status": "clean", "text": "I packed a raincoat because the forecast mentioned afternoon showers."}
+{"garbled": false, "profile": "english_extended", "score": 0.15302597309, "spans": [], "status": "clean", "text": "I packed a raincoat because the forecast mentioned afternoon showers."}
+{"garbled": false, "profile": "legacy", "score": 0.15302597309, "spans": [], "status": "clean", "text": "I packed a raincoat because the forecast mentioned afternoon showers."}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "I packed a raincoat because the forecast mentioned afternoon showers."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "I packed a raincoat because the forecast mentioned afternoon showers."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "We reserved a quiet room overlooking the harbour."}
+{"garbled": false, "profile": "english", "score": 0.061341874891, "spans": [], "status": "clean", "text": "We reserved a quiet room overlooking the harbour."}
+{"garbled": false, "profile": "english_extended", "score": 0.061341874891, "spans": [], "status": "clean", "text": "We reserved a quiet room overlooking the harbour."}
+{"garbled": false, "profile": "legacy", "score": 0.061341874891, "spans": [], "status": "clean", "text": "We reserved a quiet room overlooking the harbour."}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "We reserved a quiet room overlooking the harbour."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "We reserved a quiet room overlooking the harbour."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "A handwritten map helped the visitors find the old library."}
+{"garbled": false, "profile": "english", "score": 0.055166342051, "spans": [], "status": "clean", "text": "A handwritten map helped the visitors find the old library."}
+{"garbled": false, "profile": "english_extended", "score": 0.055166342051, "spans": [], "status": "clean", "text": "A handwritten map helped the visitors find the old library."}
+{"garbled": false, "profile": "legacy", "score": 0.055166342051, "spans": [], "status": "clean", "text": "A handwritten map helped the visitors find the old library."}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "A handwritten map helped the visitors find the old library."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "A handwritten map helped the visitors find the old library."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "The ticket includes a return journey and a light breakfast."}
+{"garbled": false, "profile": "english", "score": 0.184037178166, "spans": [], "status": "clean", "text": "The ticket includes a return journey and a light breakfast."}
+{"garbled": false, "profile": "english_extended", "score": 0.184037178166, "spans": [], "status": "clean", "text": "The ticket includes a return journey and a light breakfast."}
+{"garbled": false, "profile": "legacy", "score": 0.184037178166, "spans": [], "status": "clean", "text": "The ticket includes a return journey and a light breakfast."}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "The ticket includes a return journey and a light breakfast."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "The ticket includes a return journey and a light breakfast."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "Travellers should keep their luggage away from the doors."}
+{"garbled": false, "profile": "english", "score": 0.06946664791, "spans": [], "status": "clean", "text": "Travellers should keep their luggage away from the doors."}
+{"garbled": false, "profile": "english_extended", "score": 0.06946664791, "spans": [], "status": "clean", "text": "Travellers should keep their luggage away from the doors."}
+{"garbled": false, "profile": "legacy", "score": 0.06946664791, "spans": [], "status": "clean", "text": "Travellers should keep their luggage away from the doors."}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "Travellers should keep their luggage away from the doors."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "Travellers should keep their luggage away from the doors."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "During the flight I read an interesting essay on urban planning."}
+{"garbled": false, "profile": "english", "score": 0.05075664853, "spans": [], "status": "clean", "text": "During the flight I read an interesting essay on urban planning."}
+{"garbled": false, "profile": "english_extended", "score": 0.05075664853, "spans": [], "status": "clean", "text": "During the flight I read an interesting essay on urban planning."}
+{"garbled": false, "profile": "legacy", "score": 0.05075664853, "spans": [], "status": "clean", "text": "During the flight I read an interesting essay on urban planning."}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "During the flight I read an interesting essay on urban planning."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "During the flight I read an interesting essay on urban planning."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "Fresh bread and a warm drink made the early start easier."}
+{"garbled": false, "profile": "english", "score": 0.055757667635, "spans": [], "status": "clean", "text": "Fresh bread and a warm drink made the early start easier."}
+{"garbled": false, "profile": "english_extended", "score": 0.055757667635, "spans": [], "status": "clean", "text": "Fresh bread and a warm drink made the early start easier."}
+{"garbled": false, "profile": "legacy", "score": 0.055757667635, "spans": [], "status": "clean", "text": "Fresh bread and a warm drink made the early start easier."}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "Fresh bread and a warm drink made the early start easier."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "Fresh bread and a warm drink made the early start easier."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "The museum displays pottery recovered from nearby settlements."}
+{"garbled": false, "profile": "english", "score": 0.067870447514, "spans": [], "status": "clean", "text": "The museum displays pottery recovered from nearby settlements."}
+{"garbled": false, "profile": "english_extended", "score": 0.067870447514, "spans": [], "status": "clean", "text": "The museum displays pottery recovered from nearby settlements."}
+{"garbled": false, "profile": "legacy", "score": 0.067870447514, "spans": [], "status": "clean", "text": "The museum displays pottery recovered from nearby settlements."}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "The museum displays pottery recovered from nearby settlements."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "The museum displays pottery recovered from nearby settlements."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "Guests may borrow bicycles from the reception desk."}
+{"garbled": false, "profile": "english", "score": 0.067514609336, "spans": [], "status": "clean", "text": "Guests may borrow bicycles from the reception desk."}
+{"garbled": false, "profile": "english_extended", "score": 0.067514609336, "spans": [], "status": "clean", "text": "Guests may borrow bicycles from the reception desk."}
+{"garbled": false, "profile": "legacy", "score": 0.067514609336, "spans": [], "status": "clean", "text": "Guests may borrow bicycles from the reception desk."}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "Guests may borrow bicycles from the reception desk."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "Guests may borrow bicycles from the reception desk."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "After several hours of walking we stopped beneath a shady tree."}
+{"garbled": false, "profile": "english", "score": 0.054185967733, "spans": [], "status": "clean", "text": "After several hours of walking we stopped beneath a shady tree."}
+{"garbled": false, "profile": "english_extended", "score": 0.054185967733, "spans": [], "status": "clean", "text": "After several hours of walking we stopped beneath a shady tree."}
+{"garbled": false, "profile": "legacy", "score": 0.054185967733, "spans": [], "status": "clean", "text": "After several hours of walking we stopped beneath a shady tree."}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "After several hours of walking we stopped beneath a shady tree."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "After several hours of walking we stopped beneath a shady tree."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "electroencephalography"}
+{"garbled": false, "profile": "english", "score": 0.260204186444, "spans": [], "status": "clean", "text": "electroencephalography"}
+{"garbled": false, "profile": "english_extended", "score": 0.260204186444, "spans": [], "status": "clean", "text": "electroencephalography"}
+{"garbled": false, "profile": "legacy", "score": 0.260204186444, "spans": [], "status": "clean", "text": "electroencephalography"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "electroencephalography"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "electroencephalography"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "photosynthesis"}
+{"garbled": false, "profile": "english", "score": 0.076350548747, "spans": [], "status": "clean", "text": "photosynthesis"}
+{"garbled": false, "profile": "english_extended", "score": 0.076350548747, "spans": [], "status": "clean", "text": "photosynthesis"}
+{"garbled": false, "profile": "legacy", "score": 0.076350548747, "spans": [], "status": "clean", "text": "photosynthesis"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "photosynthesis"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "photosynthesis"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "deoxyribonucleic acid"}
+{"garbled": false, "profile": "english", "score": 0.460449154923, "spans": [], "status": "clean", "text": "deoxyribonucleic acid"}
+{"garbled": false, "profile": "english_extended", "score": 0.460449154923, "spans": [], "status": "clean", "text": "deoxyribonucleic acid"}
+{"garbled": false, "profile": "legacy", "score": 0.460449154923, "spans": [], "status": "clean", "text": "deoxyribonucleic acid"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "deoxyribonucleic acid"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "deoxyribonucleic acid"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "phenylalanine"}
+{"garbled": false, "profile": "english", "score": 0.063744186091, "spans": [], "status": "clean", "text": "phenylalanine"}
+{"garbled": false, "profile": "english_extended", "score": 0.063744186091, "spans": [], "status": "clean", "text": "phenylalanine"}
+{"garbled": false, "profile": "legacy", "score": 0.063744186091, "spans": [], "status": "clean", "text": "phenylalanine"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "phenylalanine"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "phenylalanine"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "Worcestershire"}
+{"garbled": false, "profile": "english", "score": 0.055105992176, "spans": [], "status": "clean", "text": "Worcestershire"}
+{"garbled": false, "profile": "english_extended", "score": 0.055105992176, "spans": [], "status": "clean", "text": "Worcestershire"}
+{"garbled": false, "profile": "legacy", "score": 0.055105992176, "spans": [], "status": "clean", "text": "Worcestershire"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "Worcestershire"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "Worcestershire"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "Siobhan"}
+{"garbled": false, "profile": "english", "score": 0.273469175342, "spans": [], "status": "clean", "text": "Siobhan"}
+{"garbled": false, "profile": "english_extended", "score": 0.273469175342, "spans": [], "status": "clean", "text": "Siobhan"}
+{"garbled": false, "profile": "legacy", "score": 0.273469175342, "spans": [], "status": "clean", "text": "Siobhan"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "Siobhan"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "Siobhan"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "Srinivasan"}
+{"garbled": false, "profile": "english", "score": 0.09840000368, "spans": [], "status": "clean", "text": "Srinivasan"}
+{"garbled": false, "profile": "english_extended", "score": 0.09840000368, "spans": [], "status": "clean", "text": "Srinivasan"}
+{"garbled": false, "profile": "legacy", "score": 0.09840000368, "spans": [], "status": "clean", "text": "Srinivasan"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "Srinivasan"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "Srinivasan"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "Loughborough"}
+{"garbled": false, "profile": "english", "score": 0.118752523328, "spans": [], "status": "clean", "text": "Loughborough"}
+{"garbled": false, "profile": "english_extended", "score": 0.118752523328, "spans": [], "status": "clean", "text": "Loughborough"}
+{"garbled": false, "profile": "legacy", "score": 0.118752523328, "spans": [], "status": "clean", "text": "Loughborough"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "Loughborough"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "Loughborough"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "The physicist measured the wavelength of the reflected light."}
+{"garbled": false, "profile": "english", "score": 0.051604988112, "spans": [], "status": "clean", "text": "The physicist measured the wavelength of the reflected light."}
+{"garbled": false, "profile": "english_extended", "score": 0.051604988112, "spans": [], "status": "clean", "text": "The physicist measured the wavelength of the reflected light."}
+{"garbled": false, "profile": "legacy", "score": 0.051604988112, "spans": [], "status": "clean", "text": "The physicist measured the wavelength of the reflected light."}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "The physicist measured the wavelength of the reflected light."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "The physicist measured the wavelength of the reflected light."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "A careful comparison revealed a small change in the sample."}
+{"garbled": false, "profile": "english", "score": 0.047153467824, "spans": [], "status": "clean", "text": "A careful comparison revealed a small change in the sample."}
+{"garbled": false, "profile": "english_extended", "score": 0.047153467824, "spans": [], "status": "clean", "text": "A careful comparison revealed a small change in the sample."}
+{"garbled": false, "profile": "legacy", "score": 0.047153467824, "spans": [], "status": "clean", "text": "A careful comparison revealed a small change in the sample."}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "A careful comparison revealed a small change in the sample."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "A careful comparison revealed a small change in the sample."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "Neural pathways carry information between different regions."}
+{"garbled": false, "profile": "english", "score": 0.068833979577, "spans": [], "status": "clean", "text": "Neural pathways carry information between different regions."}
+{"garbled": false, "profile": "english_extended", "score": 0.068833979577, "spans": [], "status": "clean", "text": "Neural pathways carry information between different regions."}
+{"garbled": false, "profile": "legacy", "score": 0.068833979577, "spans": [], "status": "clean", "text": "Neural pathways carry information between different regions."}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "Neural pathways carry information between different regions."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "Neural pathways carry information between different regions."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "The enzyme participates in cellular respiration."}
+{"garbled": false, "profile": "english", "score": 0.060309523295, "spans": [], "status": "clean", "text": "The enzyme participates in cellular respiration."}
+{"garbled": false, "profile": "english_extended", "score": 0.060309523295, "spans": [], "status": "clean", "text": "The enzyme participates in cellular respiration."}
+{"garbled": false, "profile": "legacy", "score": 0.060309523295, "spans": [], "status": "clean", "text": "The enzyme participates in cellular respiration."}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "The enzyme participates in cellular respiration."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "The enzyme participates in cellular respiration."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "https://docs.example.net/reference/v3#overview"}
+{"garbled": false, "profile": "english", "score": 0.0, "spans": [], "status": "clean", "text": "https://docs.example.net/reference/v3#overview"}
+{"garbled": false, "profile": "english_extended", "score": 0.0, "spans": [], "status": "clean", "text": "https://docs.example.net/reference/v3#overview"}
+{"garbled": false, "profile": "legacy", "score": 0.0, "spans": [], "status": "clean", "text": "https://docs.example.net/reference/v3#overview"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "https://docs.example.net/reference/v3#overview"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "https://docs.example.net/reference/v3#overview"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "reader@sample.net"}
+{"garbled": false, "profile": "english", "score": 0.0, "spans": [], "status": "clean", "text": "reader@sample.net"}
+{"garbled": false, "profile": "english_extended", "score": 0.0, "spans": [], "status": "clean", "text": "reader@sample.net"}
+{"garbled": false, "profile": "legacy", "score": 0.0, "spans": [], "status": "clean", "text": "reader@sample.net"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "reader@sample.net"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "reader@sample.net"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "/opt/service/config/settings.yaml"}
+{"garbled": false, "profile": "english", "score": 0.0, "spans": [], "status": "clean", "text": "/opt/service/config/settings.yaml"}
+{"garbled": false, "profile": "english_extended", "score": 0.0, "spans": [], "status": "clean", "text": "/opt/service/config/settings.yaml"}
+{"garbled": false, "profile": "legacy", "score": 0.0, "spans": [], "status": "clean", "text": "/opt/service/config/settings.yaml"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "/opt/service/config/settings.yaml"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "/opt/service/config/settings.yaml"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "12:45 PM"}
+{"garbled": false, "profile": "english", "score": 0.126932015086, "spans": [], "status": "clean", "text": "12:45 PM"}
+{"garbled": false, "profile": "english_extended", "score": 0.126932015086, "spans": [], "status": "clean", "text": "12:45 PM"}
+{"garbled": false, "profile": "legacy", "score": 0.126932015086, "spans": [], "status": "clean", "text": "12:45 PM"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "12:45 PM"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "12:45 PM"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "\u00a342.50"}
+{"garbled": false, "profile": "english", "score": 0.0, "spans": [], "status": "clean", "text": "\u00a342.50"}
+{"garbled": false, "profile": "english_extended", "score": 0.0, "spans": [], "status": "clean", "text": "\u00a342.50"}
+{"garbled": false, "profile": "legacy", "score": 0.0, "spans": [], "status": "insufficient_evidence", "text": "\u00a342.50"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "\u00a342.50"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "\u00a342.50"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "v2.7.14"}
+{"garbled": false, "profile": "english", "score": 0.0, "spans": [], "status": "clean", "text": "v2.7.14"}
+{"garbled": false, "profile": "english_extended", "score": 0.0, "spans": [], "status": "clean", "text": "v2.7.14"}
+{"garbled": false, "profile": "legacy", "score": 0.0, "spans": [], "status": "clean", "text": "v2.7.14"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "v2.7.14"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "v2.7.14"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "{\"status\": \"ready\", \"count\": 12}"}
+{"garbled": false, "profile": "english", "score": 0.051764101059, "spans": [], "status": "clean", "text": "{\"status\": \"ready\", \"count\": 12}"}
+{"garbled": false, "profile": "english_extended", "score": 0.051764101059, "spans": [], "status": "clean", "text": "{\"status\": \"ready\", \"count\": 12}"}
+{"garbled": false, "profile": "legacy", "score": 0.051764101059, "spans": [], "status": "clean", "text": "{\"status\": \"ready\", \"count\": 12}"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "{\"status\": \"ready\", \"count\": 12}"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "{\"status\": \"ready\", \"count\": 12}"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "git checkout feature/english-checks"}
+{"garbled": false, "profile": "english", "score": 0.059253661283, "spans": [], "status": "clean", "text": "git checkout feature/english-checks"}
+{"garbled": false, "profile": "english_extended", "score": 0.059253661283, "spans": [], "status": "clean", "text": "git checkout feature/english-checks"}
+{"garbled": false, "profile": "legacy", "score": 0.059253661283, "spans": [], "status": "clean", "text": "git checkout feature/english-checks"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "git checkout feature/english-checks"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "git checkout feature/english-checks"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "First\tSecond\tThird\n10\t20\t30"}
+{"garbled": false, "profile": "english", "score": 0.046437650645, "spans": [], "status": "clean", "text": "First\tSecond\tThird\n10\t20\t30"}
+{"garbled": false, "profile": "english_extended", "score": 0.046437650645, "spans": [], "status": "clean", "text": "First\tSecond\tThird\n10\t20\t30"}
+{"garbled": false, "profile": "legacy", "score": 0.046437650645, "spans": [], "status": "clean", "text": "First\tSecond\tThird\n10\t20\t30"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "First\tSecond\tThird\n10\t20\t30"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "First\tSecond\tThird\n10\t20\t30"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "She said, \u201cThat\u2019s perfectly fine.\u201d"}
+{"garbled": false, "profile": "english", "score": 0.052029239539, "spans": [], "status": "clean", "text": "She said, \u201cThat\u2019s perfectly fine.\u201d"}
+{"garbled": false, "profile": "english_extended", "score": 0.052029239539, "spans": [], "status": "clean", "text": "She said, \u201cThat\u2019s perfectly fine.\u201d"}
+{"garbled": false, "profile": "legacy", "score": 0.052029239539, "spans": [], "status": "clean", "text": "She said, \u201cThat\u2019s perfectly fine.\u201d"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "She said, \u201cThat\u2019s perfectly fine.\u201d"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "She said, \u201cThat\u2019s perfectly fine.\u201d"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "R\u00e9sum\u00e9: software engineer with five years of experience."}
+{"garbled": false, "profile": "english", "score": 0.058119275629, "spans": [], "status": "clean", "text": "R\u00e9sum\u00e9: software engineer with five years of experience."}
+{"garbled": false, "profile": "english_extended", "score": 0.058119275629, "spans": [], "status": "clean", "text": "R\u00e9sum\u00e9: software engineer with five years of experience."}
+{"garbled": false, "profile": "legacy", "score": 0.058119275629, "spans": [], "status": "clean", "text": "R\u00e9sum\u00e9: software engineer with five years of experience."}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "R\u00e9sum\u00e9: software engineer with five years of experience."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "R\u00e9sum\u00e9: software engineer with five years of experience."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "Please read the README.md file for setup instructions."}
+{"garbled": false, "profile": "english", "score": 0.058462690808, "spans": [], "status": "clean", "text": "Please read the README.md file for setup instructions."}
+{"garbled": false, "profile": "english_extended", "score": 0.3, "spans": [], "status": "clean", "text": "Please read the README.md file for setup instructions."}
+{"garbled": false, "profile": "legacy", "score": 0.058462690808, "spans": [], "status": "clean", "text": "Please read the README.md file for setup instructions."}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "Please read the README.md file for setup instructions."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "Please read the README.md file for setup instructions."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "qazwsxedc"}
+{"garbled": true, "profile": "english", "score": 1.0, "spans": [[0, 9, "anomalous_word"]], "status": "garbled", "text": "qazwsxedc"}
+{"garbled": true, "profile": "english_extended", "score": 1.0, "spans": [[0, 9, "anomalous_word"]], "status": "garbled", "text": "qazwsxedc"}
+{"garbled": true, "profile": "legacy", "score": 1.0, "spans": [[0, 9, "anomalous_word"]], "status": "garbled", "text": "qazwsxedc"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "qazwsxedc"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "qazwsxedc"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "zaqwsxcde"}
+{"garbled": true, "profile": "english", "score": 1.0, "spans": [], "status": "garbled", "text": "zaqwsxcde"}
+{"garbled": true, "profile": "english_extended", "score": 1.0, "spans": [], "status": "garbled", "text": "zaqwsxcde"}
+{"garbled": true, "profile": "legacy", "score": 0.893706681848, "spans": [], "status": "garbled", "text": "zaqwsxcde"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "zaqwsxcde"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "zaqwsxcde"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "plokmijn"}
+{"garbled": true, "profile": "english", "score": 0.718940098384, "spans": [], "status": "garbled", "text": "plokmijn"}
+{"garbled": true, "profile": "english_extended", "score": 0.718940098384, "spans": [], "status": "garbled", "text": "plokmijn"}
+{"garbled": true, "profile": "legacy", "score": 0.718940098384, "spans": [], "status": "garbled", "text": "plokmijn"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "plokmijn"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "plokmijn"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "wsxedcrfv"}
+{"garbled": true, "profile": "english", "score": 1.0, "spans": [[0, 9, "anomalous_word"]], "status": "garbled", "text": "wsxedcrfv"}
+{"garbled": true, "profile": "english_extended", "score": 1.0, "spans": [[0, 9, "anomalous_word"]], "status": "garbled", "text": "wsxedcrfv"}
+{"garbled": true, "profile": "legacy", "score": 1.0, "spans": [[0, 9, "anomalous_word"]], "status": "garbled", "text": "wsxedcrfv"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "wsxedcrfv"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "wsxedcrfv"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "qazwsxedcrfvtgb"}
+{"garbled": true, "profile": "english", "score": 1.0, "spans": [[0, 15, "anomalous_word"]], "status": "garbled", "text": "qazwsxedcrfvtgb"}
+{"garbled": true, "profile": "english_extended", "score": 1.0, "spans": [[0, 15, "anomalous_word"]], "status": "garbled", "text": "qazwsxedcrfvtgb"}
+{"garbled": true, "profile": "legacy", "score": 1.0, "spans": [[0, 15, "anomalous_word"]], "status": "garbled", "text": "qazwsxedcrfvtgb"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "qazwsxedcrfvtgb"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "qazwsxedcrfvtgb"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "1qaz2wsx3edc"}
+{"garbled": false, "profile": "english", "score": 0.0, "spans": [], "status": "clean", "text": "1qaz2wsx3edc"}
+{"garbled": false, "profile": "english_extended", "score": 0.0, "spans": [], "status": "clean", "text": "1qaz2wsx3edc"}
+{"garbled": false, "profile": "legacy", "score": 0.0, "spans": [], "status": "clean", "text": "1qaz2wsx3edc"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "1qaz2wsx3edc"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "1qaz2wsx3edc"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "QAZWSXEDC"}
+{"garbled": true, "profile": "english", "score": 1.0, "spans": [[0, 9, "anomalous_word"]], "status": "garbled", "text": "QAZWSXEDC"}
+{"garbled": true, "profile": "english_extended", "score": 1.0, "spans": [[0, 9, "anomalous_word"]], "status": "garbled", "text": "QAZWSXEDC"}
+{"garbled": true, "profile": "legacy", "score": 1.0, "spans": [[0, 9, "anomalous_word"]], "status": "garbled", "text": "QAZWSXEDC"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "QAZWSXEDC"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "QAZWSXEDC"}
+{"garbled": true, "profile": "corruption", "score": 0.8, "spans": [], "status": "garbled", "text": "It\u00e2\u20ac\u2122s ready for review."}
+{"garbled": true, "profile": "english", "score": 0.8, "spans": [], "status": "garbled", "text": "It\u00e2\u20ac\u2122s ready for review."}
+{"garbled": true, "profile": "english_extended", "score": 0.8, "spans": [], "status": "garbled", "text": "It\u00e2\u20ac\u2122s ready for review."}
+{"garbled": false, "profile": "legacy", "score": 0.065795721116, "spans": [], "status": "clean", "text": "It\u00e2\u20ac\u2122s ready for review."}
+{"garbled": true, "profile": "llm_output", "score": 0.8, "spans": [], "status": "garbled", "text": "It\u00e2\u20ac\u2122s ready for review."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "It\u00e2\u20ac\u2122s ready for review."}
+{"garbled": true, "profile": "corruption", "score": 0.9, "spans": [], "status": "garbled", "text": "The result \u00e2\u20ac\u201d unexpected \u00e2\u20ac\u201d was clear."}
+{"garbled": true, "profile": "english", "score": 0.9, "spans": [], "status": "garbled", "text": "The result \u00e2\u20ac\u201d unexpected \u00e2\u20ac\u201d was clear."}
+{"garbled": true, "profile": "english_extended", "score": 0.9, "spans": [], "status": "garbled", "text": "The result \u00e2\u20ac\u201d unexpected \u00e2\u20ac\u201d was clear."}
+{"garbled": false, "profile": "legacy", "score": 0.184037178166, "spans": [], "status": "clean", "text": "The result \u00e2\u20ac\u201d unexpected \u00e2\u20ac\u201d was clear."}
+{"garbled": true, "profile": "llm_output", "score": 0.9, "spans": [], "status": "garbled", "text": "The result \u00e2\u20ac\u201d unexpected \u00e2\u20ac\u201d was clear."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "The result \u00e2\u20ac\u201d unexpected \u00e2\u20ac\u201d was clear."}
+{"garbled": true, "profile": "corruption", "score": 0.588235294118, "spans": [], "status": "garbled", "text": "Price: \u00c2\u00a320 today"}
+{"garbled": true, "profile": "english", "score": 0.588235294118, "spans": [], "status": "garbled", "text": "Price: \u00c2\u00a320 today"}
+{"garbled": true, "profile": "english_extended", "score": 0.588235294118, "spans": [], "status": "garbled", "text": "Price: \u00c2\u00a320 today"}
+{"garbled": false, "profile": "legacy", "score": 0.047787947129, "spans": [], "status": "clean", "text": "Price: \u00c2\u00a320 today"}
+{"garbled": true, "profile": "llm_output", "score": 0.588235294118, "spans": [], "status": "garbled", "text": "Price: \u00c2\u00a320 today"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "Price: \u00c2\u00a320 today"}
+{"garbled": true, "profile": "corruption", "score": 0.8, "spans": [], "status": "garbled", "text": "Fran\u00c3\u00a7ois sent the message."}
+{"garbled": true, "profile": "english", "score": 0.8, "spans": [], "status": "garbled", "text": "Fran\u00c3\u00a7ois sent the message."}
+{"garbled": true, "profile": "english_extended", "score": 0.8, "spans": [], "status": "garbled", "text": "Fran\u00c3\u00a7ois sent the message."}
+{"garbled": false, "profile": "legacy", "score": 0.157066869044, "spans": [], "status": "clean", "text": "Fran\u00c3\u00a7ois sent the message."}
+{"garbled": true, "profile": "llm_output", "score": 0.8, "spans": [], "status": "garbled", "text": "Fran\u00c3\u00a7ois sent the message."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "Fran\u00c3\u00a7ois sent the message."}
+{"garbled": true, "profile": "corruption", "score": 1.0, "spans": [[12, 13, "control_or_decoding_artifact"]], "status": "garbled", "text": "\u00e2\u20ac\u0153Welcome\u00e2\u20ac\u009d"}
+{"garbled": true, "profile": "english", "score": 1.0, "spans": [[12, 13, "control_or_decoding_artifact"]], "status": "garbled", "text": "\u00e2\u20ac\u0153Welcome\u00e2\u20ac\u009d"}
+{"garbled": true, "profile": "english_extended", "score": 1.0, "spans": [[12, 13, "control_or_decoding_artifact"]], "status": "garbled", "text": "\u00e2\u20ac\u0153Welcome\u00e2\u20ac\u009d"}
+{"garbled": true, "profile": "legacy", "score": 0.733147107767, "spans": [], "status": "garbled", "text": "\u00e2\u20ac\u0153Welcome\u00e2\u20ac\u009d"}
+{"garbled": true, "profile": "llm_output", "score": 1.0, "spans": [[12, 13, "control_or_decoding_artifact"]], "status": "garbled", "text": "\u00e2\u20ac\u0153Welcome\u00e2\u20ac\u009d"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "\u00e2\u20ac\u0153Welcome\u00e2\u20ac\u009d"}
+{"garbled": true, "profile": "corruption", "score": 0.9, "spans": [[6, 7, "control_or_decoding_artifact"]], "status": "garbled", "text": "broken\u0001record"}
+{"garbled": true, "profile": "english", "score": 0.9, "spans": [[6, 7, "control_or_decoding_artifact"]], "status": "garbled", "text": "broken\u0001record"}
+{"garbled": true, "profile": "english_extended", "score": 0.9, "spans": [[6, 7, "control_or_decoding_artifact"]], "status": "garbled", "text": "broken\u0001record"}
+{"garbled": false, "profile": "legacy", "score": 0.059362518092, "spans": [], "status": "clean", "text": "broken\u0001record"}
+{"garbled": true, "profile": "llm_output", "score": 0.9, "spans": [[6, 7, "control_or_decoding_artifact"]], "status": "garbled", "text": "broken\u0001record"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "broken\u0001record"}
+{"garbled": true, "profile": "corruption", "score": 0.9, "spans": [[5, 6, "control_or_decoding_artifact"]], "status": "garbled", "text": "value\u007fhere"}
+{"garbled": true, "profile": "english", "score": 0.9, "spans": [[5, 6, "control_or_decoding_artifact"]], "status": "garbled", "text": "value\u007fhere"}
+{"garbled": true, "profile": "english_extended", "score": 0.9, "spans": [[5, 6, "control_or_decoding_artifact"]], "status": "garbled", "text": "value\u007fhere"}
+{"garbled": false, "profile": "legacy", "score": 0.051901833283, "spans": [], "status": "clean", "text": "value\u007fhere"}
+{"garbled": true, "profile": "llm_output", "score": 0.9, "spans": [[5, 6, "control_or_decoding_artifact"]], "status": "garbled", "text": "value\u007fhere"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "value\u007fhere"}
+{"garbled": true, "profile": "corruption", "score": 0.9, "spans": [[8, 9, "control_or_decoding_artifact"]], "status": "garbled", "text": "missing \ufffd bytes"}
+{"garbled": true, "profile": "english", "score": 0.9, "spans": [[8, 9, "control_or_decoding_artifact"]], "status": "garbled", "text": "missing \ufffd bytes"}
+{"garbled": true, "profile": "english_extended", "score": 0.9, "spans": [[8, 9, "control_or_decoding_artifact"]], "status": "garbled", "text": "missing \ufffd bytes"}
+{"garbled": false, "profile": "legacy", "score": 0.056329565921, "spans": [], "status": "clean", "text": "missing \ufffd bytes"}
+{"garbled": true, "profile": "llm_output", "score": 0.9, "spans": [[8, 9, "control_or_decoding_artifact"]], "status": "garbled", "text": "missing \ufffd bytes"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "missing \ufffd bytes"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "Our train reached the coastal town before sunset. The station was quiet, the air was cool, and the small shops were closing. qxjzvkwmp The hotel was only a short walk away, so we carried our bags along the waterfront."}
+{"garbled": true, "profile": "english", "score": 0.990820645667, "spans": [[125, 134, "anomalous_word"]], "status": "garbled", "text": "Our train reached the coastal town before sunset. The station was quiet, the air was cool, and the small shops were closing. qxjzvkwmp The hotel was only a short walk away, so we carried our bags along the waterfront."}
+{"garbled": true, "profile": "english_extended", "score": 0.990820645667, "spans": [[125, 134, "anomalous_word"], [125, 134, "severe_local_anomaly"]], "status": "garbled", "text": "Our train reached the coastal town before sunset. The station was quiet, the air was cool, and the small shops were closing. qxjzvkwmp The hotel was only a short walk away, so we carried our bags along the waterfront."}
+{"garbled": true, "profile": "legacy", "score": 0.990820645667, "spans": [[125, 134, "anomalous_word"]], "status": "garbled", "text": "Our train reached the coastal town before sunset. The station was quiet, the air was cool, and the small shops were closing. qxjzvkwmp The hotel was only a short walk away, so we carried our bags along the waterfront."}
+{"garbled": true, "profile": "llm_output", "score": 0.8, "spans": [[125, 134, "severe_local_anomaly"]], "status": "garbled", "text": "Our train reached the coastal town before sunset. The station was quiet, the air was cool, and the small shops were closing. qxjzvkwmp The hotel was only a short walk away, so we carried our bags along the waterfront."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "Our train reached the coastal town before sunset. The station was quiet, the air was cool, and the small shops were closing. qxjzvkwmp The hotel was only a short walk away, so we carried our bags along the waterfront."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "Everything in the report looked reasonable until I reached the appendix. The unexplained entry zvqxjpkmn appeared between two ordinary paragraphs. I asked the author to check the original file and send a corrected copy."}
+{"garbled": true, "profile": "english", "score": 0.991445918241, "spans": [[95, 104, "anomalous_word"]], "status": "garbled", "text": "Everything in the report looked reasonable until I reached the appendix. The unexplained entry zvqxjpkmn appeared between two ordinary paragraphs. I asked the author to check the original file and send a corrected copy."}
+{"garbled": true, "profile": "english_extended", "score": 0.991445918241, "spans": [[95, 104, "anomalous_word"], [95, 104, "severe_local_anomaly"]], "status": "garbled", "text": "Everything in the report looked reasonable until I reached the appendix. The unexplained entry zvqxjpkmn appeared between two ordinary paragraphs. I asked the author to check the original file and send a corrected copy."}
+{"garbled": true, "profile": "legacy", "score": 0.991445918241, "spans": [[95, 104, "anomalous_word"]], "status": "garbled", "text": "Everything in the report looked reasonable until I reached the appendix. The unexplained entry zvqxjpkmn appeared between two ordinary paragraphs. I asked the author to check the original file and send a corrected copy."}
+{"garbled": true, "profile": "llm_output", "score": 0.8, "spans": [[95, 104, "severe_local_anomaly"]], "status": "garbled", "text": "Everything in the report looked reasonable until I reached the appendix. The unexplained entry zvqxjpkmn appeared between two ordinary paragraphs. I asked the author to check the original file and send a corrected copy."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "Everything in the report looked reasonable until I reached the appendix. The unexplained entry zvqxjpkmn appeared between two ordinary paragraphs. I asked the author to check the original file and send a corrected copy."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "The package contains qzvxjkmn and a short instruction leaflet."}
+{"garbled": true, "profile": "english", "score": 0.986542388742, "spans": [[21, 29, "anomalous_word"]], "status": "garbled", "text": "The package contains qzvxjkmn and a short instruction leaflet."}
+{"garbled": true, "profile": "english_extended", "score": 0.986542388742, "spans": [[21, 29, "anomalous_word"], [21, 29, "severe_local_anomaly"]], "status": "garbled", "text": "The package contains qzvxjkmn and a short instruction leaflet."}
+{"garbled": true, "profile": "legacy", "score": 0.986542388742, "spans": [[21, 29, "anomalous_word"]], "status": "garbled", "text": "The package contains qzvxjkmn and a short instruction leaflet."}
+{"garbled": true, "profile": "llm_output", "score": 0.8, "spans": [[21, 29, "severe_local_anomaly"]], "status": "garbled", "text": "The package contains qzvxjkmn and a short instruction leaflet."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "The package contains qzvxjkmn and a short instruction leaflet."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "Receipt number: kzqxjvmpn. Please contact the team if you need assistance."}
+{"garbled": true, "profile": "english", "score": 0.995930511615, "spans": [[16, 25, "anomalous_word"]], "status": "garbled", "text": "Receipt number: kzqxjvmpn. Please contact the team if you need assistance."}
+{"garbled": true, "profile": "english_extended", "score": 0.995930511615, "spans": [[16, 25, "anomalous_word"], [16, 25, "severe_local_anomaly"]], "status": "garbled", "text": "Receipt number: kzqxjvmpn. Please contact the team if you need assistance."}
+{"garbled": true, "profile": "legacy", "score": 0.995930511615, "spans": [[16, 25, "anomalous_word"]], "status": "garbled", "text": "Receipt number: kzqxjvmpn. Please contact the team if you need assistance."}
+{"garbled": true, "profile": "llm_output", "score": 0.8, "spans": [[16, 25, "severe_local_anomaly"]], "status": "garbled", "text": "Receipt number: kzqxjvmpn. Please contact the team if you need assistance."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "Receipt number: kzqxjvmpn. Please contact the team if you need assistance."}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "red blue green red blue green red blue green red blue green"}
+{"garbled": false, "profile": "english", "score": 0.061398805294, "spans": [], "status": "clean", "text": "red blue green red blue green red blue green red blue green"}
+{"garbled": true, "profile": "english_extended", "score": 0.8, "spans": [], "status": "garbled", "text": "red blue green red blue green red blue green red blue green"}
+{"garbled": false, "profile": "legacy", "score": 0.061398805294, "spans": [], "status": "clean", "text": "red blue green red blue green red blue green red blue green"}
+{"garbled": true, "profile": "llm_output", "score": 0.8, "spans": [], "status": "garbled", "text": "red blue green red blue green red blue green red blue green"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "red blue green red blue green red blue green red blue green"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta"}
+{"garbled": false, "profile": "english", "score": 0.114709917204, "spans": [], "status": "clean", "text": "alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta"}
+{"garbled": true, "profile": "english_extended", "score": 0.8, "spans": [], "status": "garbled", "text": "alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta"}
+{"garbled": false, "profile": "legacy", "score": 0.114709917204, "spans": [], "status": "clean", "text": "alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta"}
+{"garbled": true, "profile": "llm_output", "score": 0.8, "spans": [], "status": "garbled", "text": "alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "abcdeabcdeabcdeabcdeabcde"}
+{"garbled": true, "profile": "english", "score": 0.635563787476, "spans": [], "status": "garbled", "text": "abcdeabcdeabcdeabcdeabcde"}
+{"garbled": true, "profile": "english_extended", "score": 0.635563787476, "spans": [], "status": "garbled", "text": "abcdeabcdeabcdeabcdeabcde"}
+{"garbled": true, "profile": "legacy", "score": 0.635563787476, "spans": [], "status": "garbled", "text": "abcdeabcdeabcdeabcdeabcde"}
+{"garbled": false, "profile": "llm_output", "score": 0.333333333333, "spans": [], "status": "clean", "text": "abcdeabcdeabcdeabcdeabcde"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "abcdeabcdeabcdeabcdeabcde"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "zzzzzzzzzzzzzzzz"}
+{"garbled": true, "profile": "english", "score": 1.0, "spans": [], "status": "garbled", "text": "zzzzzzzzzzzzzzzz"}
+{"garbled": true, "profile": "english_extended", "score": 1.0, "spans": [], "status": "garbled", "text": "zzzzzzzzzzzzzzzz"}
+{"garbled": false, "profile": "legacy", "score": 0.399629452651, "spans": [], "status": "clean", "text": "zzzzzzzzzzzzzzzz"}
+{"garbled": true, "profile": "llm_output", "score": 1.0, "spans": [], "status": "garbled", "text": "zzzzzzzzzzzzzzzz"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "zzzzzzzzzzzzzzzz"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "\u0938\u0941\u092a\u094d\u0930\u092d\u093e\u0924 \u0906\u092a\u0915\u093e \u0926\u093f\u0928 \u0936\u0941\u092d \u0939\u094b"}
+{"garbled": true, "profile": "english", "score": 0.999997739676, "spans": [], "status": "garbled", "text": "\u0938\u0941\u092a\u094d\u0930\u092d\u093e\u0924 \u0906\u092a\u0915\u093e \u0926\u093f\u0928 \u0936\u0941\u092d \u0939\u094b"}
+{"garbled": true, "profile": "english_extended", "score": 0.999997739676, "spans": [], "status": "garbled", "text": "\u0938\u0941\u092a\u094d\u0930\u092d\u093e\u0924 \u0906\u092a\u0915\u093e \u0926\u093f\u0928 \u0936\u0941\u092d \u0939\u094b"}
+{"garbled": true, "profile": "legacy", "score": 0.999997739676, "spans": [], "status": "garbled", "text": "\u0938\u0941\u092a\u094d\u0930\u092d\u093e\u0924 \u0906\u092a\u0915\u093e \u0926\u093f\u0928 \u0936\u0941\u092d \u0939\u094b"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "\u0938\u0941\u092a\u094d\u0930\u092d\u093e\u0924 \u0906\u092a\u0915\u093e \u0926\u093f\u0928 \u0936\u0941\u092d \u0939\u094b"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "\u0938\u0941\u092a\u094d\u0930\u092d\u093e\u0924 \u0906\u092a\u0915\u093e \u0926\u093f\u0928 \u0936\u0941\u092d \u0939\u094b"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "\u4eca\u5929\u7684\u5929\u6c14\u5f88\u597d"}
+{"garbled": true, "profile": "english", "score": 0.999997739676, "spans": [], "status": "garbled", "text": "\u4eca\u5929\u7684\u5929\u6c14\u5f88\u597d"}
+{"garbled": true, "profile": "english_extended", "score": 0.999997739676, "spans": [], "status": "garbled", "text": "\u4eca\u5929\u7684\u5929\u6c14\u5f88\u597d"}
+{"garbled": true, "profile": "legacy", "score": 0.999997739676, "spans": [], "status": "garbled", "text": "\u4eca\u5929\u7684\u5929\u6c14\u5f88\u597d"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "\u4eca\u5929\u7684\u5929\u6c14\u5f88\u597d"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "\u4eca\u5929\u7684\u5929\u6c14\u5f88\u597d"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "\u0414\u043e\u0431\u0440\u043e\u0435 \u0443\u0442\u0440\u043e \u0432\u0441\u0435\u043c"}
+{"garbled": true, "profile": "english", "score": 0.999997739676, "spans": [], "status": "garbled", "text": "\u0414\u043e\u0431\u0440\u043e\u0435 \u0443\u0442\u0440\u043e \u0432\u0441\u0435\u043c"}
+{"garbled": true, "profile": "english_extended", "score": 0.999997739676, "spans": [], "status": "garbled", "text": "\u0414\u043e\u0431\u0440\u043e\u0435 \u0443\u0442\u0440\u043e \u0432\u0441\u0435\u043c"}
+{"garbled": true, "profile": "legacy", "score": 0.999997739676, "spans": [], "status": "garbled", "text": "\u0414\u043e\u0431\u0440\u043e\u0435 \u0443\u0442\u0440\u043e \u0432\u0441\u0435\u043c"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "\u0414\u043e\u0431\u0440\u043e\u0435 \u0443\u0442\u0440\u043e \u0432\u0441\u0435\u043c"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "\u0414\u043e\u0431\u0440\u043e\u0435 \u0443\u0442\u0440\u043e \u0432\u0441\u0435\u043c"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "\u0647\u0630\u0627 \u0646\u0635 \u0639\u0631\u0628\u064a \u0645\u0641\u0647\u0648\u0645"}
+{"garbled": true, "profile": "english", "score": 0.999997739676, "spans": [], "status": "garbled", "text": "\u0647\u0630\u0627 \u0646\u0635 \u0639\u0631\u0628\u064a \u0645\u0641\u0647\u0648\u0645"}
+{"garbled": true, "profile": "english_extended", "score": 0.999997739676, "spans": [], "status": "garbled", "text": "\u0647\u0630\u0627 \u0646\u0635 \u0639\u0631\u0628\u064a \u0645\u0641\u0647\u0648\u0645"}
+{"garbled": true, "profile": "legacy", "score": 0.999997739676, "spans": [], "status": "garbled", "text": "\u0647\u0630\u0627 \u0646\u0635 \u0639\u0631\u0628\u064a \u0645\u0641\u0647\u0648\u0645"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "\u0647\u0630\u0627 \u0646\u0635 \u0639\u0631\u0628\u064a \u0645\u0641\u0647\u0648\u0645"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "\u0647\u0630\u0627 \u0646\u0635 \u0639\u0631\u0628\u064a \u0645\u0641\u0647\u0648\u0645"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "\uc548\ub155\ud558\uc138\uc694 \uc5ec\ub7ec\ubd84"}
+{"garbled": true, "profile": "english", "score": 0.999997739676, "spans": [], "status": "garbled", "text": "\uc548\ub155\ud558\uc138\uc694 \uc5ec\ub7ec\ubd84"}
+{"garbled": true, "profile": "english_extended", "score": 0.999997739676, "spans": [], "status": "garbled", "text": "\uc548\ub155\ud558\uc138\uc694 \uc5ec\ub7ec\ubd84"}
+{"garbled": true, "profile": "legacy", "score": 0.999997739676, "spans": [], "status": "garbled", "text": "\uc548\ub155\ud558\uc138\uc694 \uc5ec\ub7ec\ubd84"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "\uc548\ub155\ud558\uc138\uc694 \uc5ec\ub7ec\ubd84"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "\uc548\ub155\ud558\uc138\uc694 \uc5ec\ub7ec\ubd84"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "insufficient_evidence", "text": ""}
+{"garbled": false, "profile": "english", "score": 0.0, "spans": [], "status": "insufficient_evidence", "text": ""}
+{"garbled": false, "profile": "english_extended", "score": 0.0, "spans": [], "status": "insufficient_evidence", "text": ""}
+{"garbled": false, "profile": "legacy", "score": 0.0, "spans": [], "status": "insufficient_evidence", "text": ""}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "insufficient_evidence", "text": ""}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "insufficient_evidence", "text": ""}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "insufficient_evidence", "text": "   "}
+{"garbled": false, "profile": "english", "score": 0.0, "spans": [], "status": "insufficient_evidence", "text": "   "}
+{"garbled": false, "profile": "english_extended", "score": 0.0, "spans": [], "status": "insufficient_evidence", "text": "   "}
+{"garbled": false, "profile": "legacy", "score": 0.0, "spans": [], "status": "insufficient_evidence", "text": "   "}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "insufficient_evidence", "text": "   "}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "insufficient_evidence", "text": "   "}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "a"}
+{"garbled": false, "profile": "english", "score": 0.0, "spans": [], "status": "clean", "text": "a"}
+{"garbled": false, "profile": "english_extended", "score": 0.0, "spans": [], "status": "clean", "text": "a"}
+{"garbled": false, "profile": "legacy", "score": 0.0, "spans": [], "status": "clean", "text": "a"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "a"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "a"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "\ud83d\udc4d\ud83d\udc4f\ud83d\ude4f"}
+{"garbled": false, "profile": "english", "score": 0.0, "spans": [], "status": "clean", "text": "\ud83d\udc4d\ud83d\udc4f\ud83d\ude4f"}
+{"garbled": false, "profile": "english_extended", "score": 0.3, "spans": [], "status": "clean", "text": "\ud83d\udc4d\ud83d\udc4f\ud83d\ude4f"}
+{"garbled": false, "profile": "legacy", "score": 0.0, "spans": [], "status": "insufficient_evidence", "text": "\ud83d\udc4d\ud83d\udc4f\ud83d\ude4f"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "\ud83d\udc4d\ud83d\udc4f\ud83d\ude4f"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "\ud83d\udc4d\ud83d\udc4f\ud83d\ude4f"}
+{"garbled": true, "profile": "corruption", "score": 1.0, "spans": [], "status": "garbled", "text": "Caf\u00c3\u00a9 cr\u00c3\u00a8me"}
+{"garbled": true, "profile": "english", "score": 1.0, "spans": [], "status": "garbled", "text": "Caf\u00c3\u00a9 cr\u00c3\u00a8me"}
+{"garbled": true, "profile": "english_extended", "score": 1.0, "spans": [], "status": "garbled", "text": "Caf\u00c3\u00a9 cr\u00c3\u00a8me"}
+{"garbled": false, "profile": "legacy", "score": 0.316962823132, "spans": [], "status": "clean", "text": "Caf\u00c3\u00a9 cr\u00c3\u00a8me"}
+{"garbled": true, "profile": "llm_output", "score": 1.0, "spans": [], "status": "garbled", "text": "Caf\u00c3\u00a9 cr\u00c3\u00a8me"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "Caf\u00c3\u00a9 cr\u00c3\u00a8me"}
+{"garbled": true, "profile": "corruption", "score": 0.9, "spans": [[7, 8, "control_or_decoding_artifact"], [8, 9, "control_or_decoding_artifact"]], "status": "garbled", "text": "result \ufffd\ufffd"}
+{"garbled": true, "profile": "english", "score": 0.9, "spans": [[7, 8, "control_or_decoding_artifact"], [8, 9, "control_or_decoding_artifact"]], "status": "garbled", "text": "result \ufffd\ufffd"}
+{"garbled": true, "profile": "english_extended", "score": 0.9, "spans": [[7, 8, "control_or_decoding_artifact"], [8, 9, "control_or_decoding_artifact"]], "status": "garbled", "text": "result \ufffd\ufffd"}
+{"garbled": false, "profile": "legacy", "score": 0.075161439209, "spans": [], "status": "clean", "text": "result \ufffd\ufffd"}
+{"garbled": true, "profile": "llm_output", "score": 0.9, "spans": [[7, 8, "control_or_decoding_artifact"], [8, 9, "control_or_decoding_artifact"]], "status": "garbled", "text": "result \ufffd\ufffd"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "result \ufffd\ufffd"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab"}
+{"garbled": false, "profile": "english", "score": 0.24766428641, "spans": [], "status": "clean", "text": "abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab"}
+{"garbled": true, "profile": "english_extended", "score": 1.0, "spans": [], "status": "garbled", "text": "abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab"}
+{"garbled": false, "profile": "legacy", "score": 0.24766428641, "spans": [], "status": "clean", "text": "abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab"}
+{"garbled": true, "profile": "llm_output", "score": 1.0, "spans": [], "status": "garbled", "text": "abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "https://example.com/path?q=1"}
+{"garbled": false, "profile": "english", "score": 0.0, "spans": [], "status": "clean", "text": "https://example.com/path?q=1"}
+{"garbled": false, "profile": "english_extended", "score": 0.0, "spans": [], "status": "clean", "text": "https://example.com/path?q=1"}
+{"garbled": false, "profile": "legacy", "score": 0.0, "spans": [], "status": "clean", "text": "https://example.com/path?q=1"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "https://example.com/path?q=1"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "https://example.com/path?q=1"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "/usr/local/bin/python3"}
+{"garbled": false, "profile": "english", "score": 0.0, "spans": [], "status": "clean", "text": "/usr/local/bin/python3"}
+{"garbled": false, "profile": "english_extended", "score": 0.0, "spans": [], "status": "clean", "text": "/usr/local/bin/python3"}
+{"garbled": false, "profile": "legacy", "score": 0.0, "spans": [], "status": "clean", "text": "/usr/local/bin/python3"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "/usr/local/bin/python3"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "/usr/local/bin/python3"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "4f8a9b2c1d3e5f6a7b8c9d0e"}
+{"garbled": false, "profile": "english", "score": 0.0, "spans": [], "status": "clean", "text": "4f8a9b2c1d3e5f6a7b8c9d0e"}
+{"garbled": false, "profile": "english_extended", "score": 0.0, "spans": [], "status": "clean", "text": "4f8a9b2c1d3e5f6a7b8c9d0e"}
+{"garbled": false, "profile": "legacy", "score": 0.0, "spans": [], "status": "clean", "text": "4f8a9b2c1d3e5f6a7b8c9d0e"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "4f8a9b2c1d3e5f6a7b8c9d0e"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "4f8a9b2c1d3e5f6a7b8c9d0e"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "aGVsbG8gd29ybGQgdGhpcyBpcw=="}
+{"garbled": false, "profile": "english", "score": 0.0, "spans": [], "status": "clean", "text": "aGVsbG8gd29ybGQgdGhpcyBpcw=="}
+{"garbled": false, "profile": "english_extended", "score": 0.0, "spans": [], "status": "clean", "text": "aGVsbG8gd29ybGQgdGhpcyBpcw=="}
+{"garbled": false, "profile": "legacy", "score": 0.0, "spans": [], "status": "clean", "text": "aGVsbG8gd29ybGQgdGhpcyBpcw=="}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "aGVsbG8gd29ybGQgdGhpcyBpcw=="}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "aGVsbG8gd29ybGQgdGhpcyBpcw=="}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "123e4567-e89b-12d3-a456-426614174000"}
+{"garbled": false, "profile": "english", "score": 0.0, "spans": [], "status": "clean", "text": "123e4567-e89b-12d3-a456-426614174000"}
+{"garbled": false, "profile": "english_extended", "score": 0.3, "spans": [], "status": "clean", "text": "123e4567-e89b-12d3-a456-426614174000"}
+{"garbled": false, "profile": "legacy", "score": 0.0, "spans": [], "status": "clean", "text": "123e4567-e89b-12d3-a456-426614174000"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "123e4567-e89b-12d3-a456-426614174000"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "123e4567-e89b-12d3-a456-426614174000"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "don\u2019t stop believin\u2019"}
+{"garbled": false, "profile": "english", "score": 0.076532996756, "spans": [], "status": "clean", "text": "don\u2019t stop believin\u2019"}
+{"garbled": false, "profile": "english_extended", "score": 0.076532996756, "spans": [], "status": "clean", "text": "don\u2019t stop believin\u2019"}
+{"garbled": false, "profile": "legacy", "score": 0.076532996756, "spans": [], "status": "clean", "text": "don\u2019t stop believin\u2019"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "don\u2019t stop believin\u2019"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "don\u2019t stop believin\u2019"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "Alice Nguyen and Priya Ramaswamy"}
+{"garbled": false, "profile": "english", "score": 0.365902314068, "spans": [], "status": "clean", "text": "Alice Nguyen and Priya Ramaswamy"}
+{"garbled": false, "profile": "english_extended", "score": 0.365902314068, "spans": [], "status": "clean", "text": "Alice Nguyen and Priya Ramaswamy"}
+{"garbled": false, "profile": "legacy", "score": 0.365902314068, "spans": [], "status": "clean", "text": "Alice Nguyen and Priya Ramaswamy"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "Alice Nguyen and Priya Ramaswamy"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "Alice Nguyen and Priya Ramaswamy"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "NASA FBI NATO UNESCO"}
+{"garbled": false, "profile": "english", "score": 0.148179662956, "spans": [], "status": "clean", "text": "NASA FBI NATO UNESCO"}
+{"garbled": false, "profile": "english_extended", "score": 0.3, "spans": [], "status": "clean", "text": "NASA FBI NATO UNESCO"}
+{"garbled": false, "profile": "legacy", "score": 0.148179662956, "spans": [], "status": "clean", "text": "NASA FBI NATO UNESCO"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "NASA FBI NATO UNESCO"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "NASA FBI NATO UNESCO"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "Order 000123 shipped 2026-09-26 at 10:00"}
+{"garbled": false, "profile": "english", "score": 0.05352565323, "spans": [], "status": "clean", "text": "Order 000123 shipped 2026-09-26 at 10:00"}
+{"garbled": false, "profile": "english_extended", "score": 0.05352565323, "spans": [], "status": "clean", "text": "Order 000123 shipped 2026-09-26 at 10:00"}
+{"garbled": false, "profile": "legacy", "score": 0.05352565323, "spans": [], "status": "clean", "text": "Order 000123 shipped 2026-09-26 at 10:00"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "Order 000123 shipped 2026-09-26 at 10:00"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "Order 000123 shipped 2026-09-26 at 10:00"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "p\u0430ypal login"}
+{"garbled": true, "profile": "english", "score": 0.918357805043, "spans": [], "status": "garbled", "text": "p\u0430ypal login"}
+{"garbled": true, "profile": "english_extended", "score": 0.918357805043, "spans": [], "status": "garbled", "text": "p\u0430ypal login"}
+{"garbled": true, "profile": "legacy", "score": 0.918357805043, "spans": [], "status": "garbled", "text": "p\u0430ypal login"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "p\u0430ypal login"}
+{"garbled": true, "profile": "spoofing", "score": 0.85, "spans": [], "status": "garbled", "text": "p\u0430ypal login"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "caf\u00e9 latt\u00e9"}
+{"garbled": false, "profile": "english", "score": 0.07200972818, "spans": [], "status": "clean", "text": "caf\u00e9 latt\u00e9"}
+{"garbled": false, "profile": "english_extended", "score": 0.07200972818, "spans": [], "status": "clean", "text": "caf\u00e9 latt\u00e9"}
+{"garbled": false, "profile": "legacy", "score": 0.07200972818, "spans": [], "status": "clean", "text": "caf\u00e9 latt\u00e9"}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "caf\u00e9 latt\u00e9"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "caf\u00e9 latt\u00e9"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "test test test"}
+{"garbled": false, "profile": "english", "score": 0.031159784438, "spans": [], "status": "clean", "text": "test test test"}
+{"garbled": true, "profile": "english_extended", "score": 1.0, "spans": [], "status": "garbled", "text": "test test test"}
+{"garbled": false, "profile": "legacy", "score": 0.031159784438, "spans": [], "status": "clean", "text": "test test test"}
+{"garbled": true, "profile": "llm_output", "score": 1.0, "spans": [], "status": "garbled", "text": "test test test"}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "test test test"}
+{"garbled": false, "profile": "corruption", "score": 0.0, "spans": [], "status": "clean", "text": "Sure. To rotate the logs, set the handler to RotatingFileHandler with a maximum size of ten megabytes and keep five backups. Restart the service afterwards and confirm that the new file is being written. If nothing appears, check the permissions first."}
+{"garbled": false, "profile": "english", "score": 0.055499045218, "spans": [], "status": "clean", "text": "Sure. To rotate the logs, set the handler to RotatingFileHandler with a maximum size of ten megabytes and keep five backups. Restart the service afterwards and confirm that the new file is being written. If nothing appears, check the permissions first."}
+{"garbled": false, "profile": "english_extended", "score": 0.055499045218, "spans": [], "status": "clean", "text": "Sure. To rotate the logs, set the handler to RotatingFileHandler with a maximum size of ten megabytes and keep five backups. Restart the service afterwards and confirm that the new file is being written. If nothing appears, check the permissions first."}
+{"garbled": false, "profile": "legacy", "score": 0.055499045218, "spans": [], "status": "clean", "text": "Sure. To rotate the logs, set the handler to RotatingFileHandler with a maximum size of ten megabytes and keep five backups. Restart the service afterwards and confirm that the new file is being written. If nothing appears, check the permissions first."}
+{"garbled": false, "profile": "llm_output", "score": 0.0, "spans": [], "status": "clean", "text": "Sure. To rotate the logs, set the handler to RotatingFileHandler with a maximum size of ten megabytes and keep five backups. Restart the service afterwards and confirm that the new file is being written. If nothing appears, check the permissions first."}
+{"garbled": false, "profile": "spoofing", "score": 0.0, "spans": [], "status": "clean", "text": "Sure. To rotate the logs, set the handler to RotatingFileHandler with a maximum size of ten megabytes and keep five backups. Restart the service afterwards and confirm that the new file is being written. If nothing appears, check the permissions first."}
