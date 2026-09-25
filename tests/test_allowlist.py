@@ -83,6 +83,6 @@ def test_scrubbed_blanks_composed_and_decomposed_forms():
 def test_allowlist_never_raises_symbol_ratio(text, word):
     plain = GarbleDetector(Strategy.SYMBOL_RATIO)
     allowed = GarbleDetector(Strategy.SYMBOL_RATIO, allowlist=[word])
-    if plain.predict(text) is False:
-        assert allowed.predict(text) is not True
+    assert plain.predict(text) is False
+    assert allowed.predict(text) is not True
     assert allowed.analyze(text).score <= plain.analyze(text).score

@@ -1,5 +1,6 @@
 """Deterministic aggregation with explicit English profiles."""
 
+import warnings
 from typing import Any, Dict, Iterable, List, Mapping, Optional, Tuple, Union
 
 from .analysis import Analysis, Signal
@@ -39,7 +40,7 @@ PROFILES = {
 class EnsembleDetector:
     def __init__(
         self,
-        strategies: Optional[List[Strategy]] = None,
+        strategies: Optional[List[Union[Strategy, str]]] = None,
         threshold: float = 0.5,
         voting: Optional[str] = None,
         weights: Optional[List[float]] = None,
@@ -63,6 +64,9 @@ class EnsembleDetector:
             strategies = list(PROFILES[self.profile])
         if not strategies:
             raise ValueError("strategies must contain at least one strategy")
+        members: List[Strategy] = [
+            Strategy(s) if isinstance(s, str) else s for s in strategies
+        ]
         self.voting = (
             voting
             if voting is not None
@@ -81,14 +85,19 @@ class EnsembleDetector:
         if self.voting == "weighted" and weights is None:
             raise ValueError("weights required when voting='weighted'")
         if self.voting != "weighted" and weights is not None:
-            raise ValueError("weights are only used when voting='weighted'")
-        self.strategies = list(strategies)
-        if weights is not None and len(weights) != len(strategies):
+            warnings.warn(
+                "weights are ignored unless voting='weighted'; this will "
+                "become an error in a future release",
+                FutureWarning,
+                stacklevel=2,
+            )
+        self.strategies = list(members)
+        if weights is not None and len(weights) != len(members):
             raise ValueError("weights must have same length as strategies")
         self.weights = [
             finite_number("weights", weight)
             for weight in (
-                weights if weights is not None else [1.0] * len(strategies)
+                weights if weights is not None else [1.0] * len(members)
             )
         ]
         if any(weight < 0 for weight in self.weights):
@@ -99,13 +108,12 @@ class EnsembleDetector:
             (Strategy(key) if isinstance(key, str) else key): dict(value)
             for key, value in (strategy_kwargs or {}).items()
         }
-        if any(strategy not in strategies for strategy in options):
+        if any(strategy not in members for strategy in options):
             raise ValueError(
                 "strategy_kwargs contains a strategy not selected"
             )
         class_names = {
-            strategy: STRATEGY_MAP[strategy].__name__
-            for strategy in strategies
+            strategy: STRATEGY_MAP[strategy].__name__ for strategy in members
         }
         accepted_by_any = set()
         for name in class_names.values():
@@ -128,7 +136,7 @@ class EnsembleDetector:
             else allowlist
         )
         self._detectors = []
-        for strategy in strategies:
+        for strategy in members:
             accepted = accepted_options(class_names[strategy])
             shared = {
                 key: value

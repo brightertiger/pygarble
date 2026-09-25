@@ -22,8 +22,6 @@ class LocalAnomalyStrategy(BaseStrategy):
         self.window_words = positive_int(
             "window_words", kwargs.get("window_words", 4)
         )
-        if self.window_words < 2:
-            raise ValueError("window_words must be at least 2")
         if self.window_words > 32:
             raise ValueError("window_words must be at most 32")
         if self.word_log_prob_threshold >= 0:
@@ -51,11 +49,15 @@ class LocalAnomalyStrategy(BaseStrategy):
         prefix = [0]
         for flag in flags:
             prefix.append(prefix[-1] + flag)
+        # A one-word window fires on any bad word; wider windows need two.
+        needed = (
+            1
+            if self.window_words == 1
+            else max(2, (self.window_words + 1) // 2)
+        )
         for end in range(self.window_words, len(flags) + 1):
             start = end - self.window_words
-            if prefix[end] - prefix[start] >= max(
-                2, (self.window_words + 1) // 2
-            ):
+            if prefix[end] - prefix[start] >= needed:
                 spans.append(
                     Span(
                         features.tokens[start].start,

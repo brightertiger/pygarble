@@ -40,6 +40,8 @@ class GarbleDetector:
         self.threads = (
             positive_int("threads", threads) if threads is not None else None
         )
+        if self.threads is not None and self.threads > 2**31 - 1:
+            raise ValueError("threads is too large")
         self.max_input_length = (
             positive_int("max_input_length", max_input_length)
             if max_input_length is not None

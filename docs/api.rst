@@ -66,9 +66,10 @@ such as ``"markov_chain"``; an unknown name raises ``ValueError``.
 ``EnsembleDetector`` accepts either a named ``profile`` or a nonempty list of
 ``strategies``. Select one mechanism. ``weights`` correspond to strategy-list
 order and are required for ``voting="weighted"``. Weights must be finite,
-nonnegative, correctly sized, and not all zero. ``weights`` are only valid with
-``voting="weighted"``; passing them with any other voting mode raises
-``ValueError``.
+nonnegative, correctly sized, and not all zero. ``weights`` are only used with
+``voting="weighted"``; passing them with any other voting mode emits a
+``FutureWarning`` and they are ignored. This will become an error in a future
+release.
 
 .. code-block:: python
 

@@ -1,5 +1,6 @@
 """EnsembleDetector construction contracts."""
 
+import sys
 import warnings
 
 import pytest
@@ -54,13 +55,25 @@ def test_strategy_kwargs_are_retained_for_introspection():
 
 @pytest.mark.parametrize("weights", [[1, 0], [2, 1]])
 @pytest.mark.parametrize("voting", ["majority", "any", "all", "average"])
-def test_weights_without_weighted_voting_is_an_error(voting, weights):
-    with pytest.raises(ValueError, match="weights"):
-        EnsembleDetector(
+def test_weights_without_weighted_voting_warn(voting, weights):
+    with pytest.warns(FutureWarning, match="weights"):
+        detector = EnsembleDetector(
             strategies=[Strategy.MARKOV_CHAIN, Strategy.WORD_ANOMALY],
             voting=voting,
             weights=weights,
         )
+    assert detector.voting == voting
+    assert isinstance(detector.predict("hello world"), bool)
+
+
+def test_ensemble_strategies_accepts_names():
+    detector = EnsembleDetector(strategies=["markov_chain", "word_anomaly"])
+    assert detector.strategies == [
+        Strategy.MARKOV_CHAIN,
+        Strategy.WORD_ANOMALY,
+    ]
+    with pytest.raises(ValueError):
+        EnsembleDetector(strategies=["nope"])
 
 
 def test_strategy_kwargs_accepts_string_keys():
@@ -83,6 +96,13 @@ def test_detector_accepts_strategy_name_string():
 def test_huge_ints_raise_value_error_not_overflow(kwargs):
     with pytest.raises(ValueError):
         GarbleDetector(Strategy.MARKOV_CHAIN, **kwargs)
+
+
+def test_max_input_length_accepts_sys_maxsize():
+    detector = GarbleDetector(
+        Strategy.MARKOV_CHAIN, max_input_length=sys.maxsize
+    )
+    assert detector.max_input_length == sys.maxsize
 
 
 def test_weighted_mean_matches_plain_formula():

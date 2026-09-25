@@ -124,7 +124,7 @@ The 0.9.0 default adds specialist checks and changes preprocessing. The `legacy`
 
 The repository contains reproducible benchmark tooling and a small authored challenge set. These engineering datasets are not production accuracy estimates; measure false positives and missed detections on your own English inputs before choosing thresholds. Inference is deterministic for a fixed package, configuration, and Python/Unicode data version.
 
-- [Changelog](CHANGELOG.md)
+- [Changelog](https://github.com/brightertiger/pygarble/blob/main/CHANGELOG.md)
 - [Evaluation and implementation report](https://github.com/brightertiger/pygarble/blob/main/docs/dev/2026-07-implementation.md)
 - [Recorded evaluation results](https://github.com/brightertiger/pygarble/blob/main/regression/english_results.json)
 - [Data provenance and curation](https://github.com/brightertiger/pygarble/blob/main/scripts/data_curation.json)
