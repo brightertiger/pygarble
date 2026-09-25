@@ -18,13 +18,13 @@ class Stub:
         return [self.table[t] for t in texts]
 
 
-def test_f1_picks_best_threshold_ties_to_highest():
+def test_f1_picks_best_threshold_recommends_gap_midpoint():
     stub = Stub({"g1": 0.9, "g2": 0.7, "c1": 0.6, "c2": 0.1})
     report = calibrate(stub, ["g1", "g2"], ["c1", "c2"])
     assert isinstance(report, CalibrationReport)
     assert report.objective == "f1"
     assert report.garbled == 2 and report.clean == 2
-    assert report.recommended.threshold == pytest.approx(0.7)
+    assert report.recommended.threshold == pytest.approx(0.65)
     assert report.recommended.f1 == pytest.approx(1.0)
     assert report.recommended.false_positive_rate == 0.0
     assert [p.threshold for p in report.points] == pytest.approx(
@@ -52,7 +52,7 @@ def test_max_fpr_objective_and_fallback():
         objective="max_fpr",
         max_false_positive_rate=0.0,
     )
-    assert report.recommended.threshold == pytest.approx(0.9)
+    assert report.recommended.threshold == pytest.approx((0.5 + 0.9) / 2)
     assert report.recommended.recall == pytest.approx(0.5)
     strict = calibrate(
         Stub({"g": 0.3, "c": 0.9}),
@@ -91,6 +91,7 @@ def test_real_detector_round_trip():
     report = calibrate(EnsembleDetector(), garbled, clean)
     assert report.recommended.recall == 1.0
     assert report.recommended.false_positive_rate == 0.0
+    assert report.recommended.threshold < 1.0
     detector = EnsembleDetector(threshold=report.recommended.threshold)
     assert detector.predict(garbled) == [True, True, True]
     assert detector.predict(clean) == [False, False, False]

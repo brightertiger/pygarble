@@ -1,6 +1,6 @@
 """Pick a decision threshold from labeled examples."""
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import Any, Iterable, List, Optional, Sequence, Tuple
 
 from .validation import unit_interval, validate_batch
@@ -57,6 +57,12 @@ def calibrate(
     voting="majority" the ensemble decision counts member votes, so the
     recommended threshold is applied per member; the report still measures
     the aggregate score.
+
+    The recommended threshold is the midpoint of the gap between the chosen
+    cut and the highest score below it, so it is not itself an observed
+    score; `points` still lists every observed candidate. The midpoint
+    applies only when the chosen cut is an observed score and candidates
+    were not passed explicitly, which keeps the reported metrics exact.
     """
     garbled_texts = list(garbled)
     clean_texts = list(clean)
@@ -97,6 +103,14 @@ def calibrate(
             best = max(eligible, key=lambda p: (p.recall, p.threshold))
         else:
             best = _point(1.0, garbled_scores, clean_scores)
+    observed = set(garbled_scores) | set(clean_scores)
+    if thresholds is None and best.threshold in observed:
+        below = [t for t in candidates if t < best.threshold]
+        if below:
+            # No observed score lies strictly inside the gap, so every
+            # metric of the chosen cut holds at the midpoint too.
+            midpoint = (max(below) + best.threshold) / 2
+            best = replace(best, threshold=midpoint)
     return CalibrationReport(
         best, objective, limit, len(garbled_texts), len(clean_texts), points
     )
