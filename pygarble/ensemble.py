@@ -80,6 +80,8 @@ class EnsembleDetector:
             )
         if self.voting == "weighted" and weights is None:
             raise ValueError("weights required when voting='weighted'")
+        if self.voting != "weighted" and weights is not None:
+            raise ValueError("weights are only used when voting='weighted'")
         self.strategies = list(strategies)
         if weights is not None and len(weights) != len(strategies):
             raise ValueError("weights must have same length as strategies")
@@ -166,15 +168,12 @@ class EnsembleDetector:
             return False, 0.0
         scores = [signal.score for signal, _ in pairs]
         if self.voting == "weighted":
-            maximum = max(weight for _, weight in pairs)
-            if maximum == 0:
-                return False, 0.0
-            total = sum(weight / maximum for _, weight in pairs)
+            # Scaling by the largest weight keeps huge finite weights from
+            # overflowing the sum; pairs only hold positive weights here.
+            scale = max(weight for _, weight in pairs)
+            total = sum(weight / scale for _, weight in pairs)
             score = (
-                sum(
-                    signal.score * (weight / maximum)
-                    for signal, weight in pairs
-                )
+                sum(signal.score * weight / scale for signal, weight in pairs)
                 / total
             )
         elif self.voting == "any":

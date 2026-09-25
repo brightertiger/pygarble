@@ -49,3 +49,47 @@ def test_strategy_kwargs_are_retained_for_introspection():
     assert detector.strategy_kwargs == {
         Strategy.MARKOV_CHAIN: {"min_length": 6}
     }
+
+
+@pytest.mark.parametrize("voting", ["majority", "any", "all", "average"])
+def test_weights_without_weighted_voting_is_an_error(voting):
+    with pytest.raises(ValueError, match="weights"):
+        EnsembleDetector(
+            strategies=[Strategy.MARKOV_CHAIN, Strategy.WORD_ANOMALY],
+            voting=voting,
+            weights=[1, 0],
+        )
+
+
+def test_strategy_kwargs_accepts_string_keys():
+    detector = EnsembleDetector(
+        strategies=[Strategy.MARKOV_CHAIN],
+        strategy_kwargs={"markov_chain": {"min_length": 6}},
+    )
+    assert detector._detectors[0]._strategy_instance.min_length == 6
+
+
+def test_detector_accepts_strategy_name_string():
+    assert GarbleDetector("markov_chain").strategy is Strategy.MARKOV_CHAIN
+    with pytest.raises(ValueError):
+        GarbleDetector("no_such_strategy")
+
+
+@pytest.mark.parametrize(
+    "kwargs", [{"threshold": 10**400}, {"threads": 10**400}]
+)
+def test_huge_ints_raise_value_error_not_overflow(kwargs):
+    with pytest.raises(ValueError):
+        GarbleDetector(Strategy.MARKOV_CHAIN, **kwargs)
+
+
+def test_weighted_mean_matches_plain_formula():
+    detector = EnsembleDetector(
+        strategies=[Strategy.MARKOV_CHAIN, Strategy.WORD_ANOMALY],
+        voting="weighted",
+        weights=[3, 1],
+    )
+    analysis = detector.analyze("hello qxzjkwpv")
+    scores = {s.strategy: s.score for s in analysis.signals if s.applicable}
+    expected = (3 * scores["markov_chain"] + 1 * scores["word_anomaly"]) / 4
+    assert analysis.score == pytest.approx(expected)

@@ -26,6 +26,10 @@ All notable changes to pygarble are documented here. The format follows
 ### Fixed
 - allowlist is now honoured by every strategy, not only the four that
   override feature evaluation.
+- weights passed with a non-weighted voting mode now raise ValueError instead
+  of being ignored.
+- huge integers for numeric options raise ValueError instead of
+  OverflowError.
 
 ### Removed
 - Five legacy strategies (see docs/migration.rst).
