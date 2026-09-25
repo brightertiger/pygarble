@@ -3,6 +3,8 @@
 import re
 from pathlib import Path
 
+import pytest
+
 import pygarble
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -16,7 +18,10 @@ def test_pyproject_has_no_static_version():
 
 
 def test_docs_conf_uses_package_version():
-    text = (ROOT / "docs" / "conf.py").read_text()
+    conf = ROOT / "docs" / "conf.py"
+    if not conf.exists():
+        pytest.skip("docs/ is not shipped in sdist")
+    text = conf.read_text()
     assert "pygarble.__version__" in text
     assert "version = '0." not in text
 

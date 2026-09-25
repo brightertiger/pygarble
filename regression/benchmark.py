@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+"""Benchmark every strategy and the ensemble on benchmark_data.json."""
+
 import json
 import sys
 import time
@@ -492,7 +494,7 @@ def format_results(
     return "\n".join(output)
 
 
-def main():
+def run_and_save(output_json_path: Path, output_txt_path: Path) -> None:
     script_dir = Path(__file__).parent
     json_path = script_dir / "benchmark_data.json"
 
@@ -527,7 +529,6 @@ def main():
     )
     print(formatted_output)
 
-    output_json_path = script_dir / "benchmark_results.json"
     with open(output_json_path, "w") as f:
         output_data = {
             "run_date": datetime.now().isoformat(),
@@ -546,10 +547,29 @@ def main():
         json.dump(output_data, f, indent=2)
     print(f"\nJSON results saved to: {output_json_path}")
 
-    output_txt_path = script_dir / "benchmark_results.txt"
     with open(output_txt_path, "w") as f:
         f.write(formatted_output)
     print(f"Text results saved to: {output_txt_path}")
+
+
+def main() -> None:
+    import argparse
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=Path(__file__).with_name("benchmark_results.json"),
+        help="where to write JSON results (default: tracked file)",
+    )
+    parser.add_argument(
+        "--text-output",
+        type=Path,
+        default=Path(__file__).with_name("benchmark_results.txt"),
+        help="where to write the text report (default: tracked file)",
+    )
+    args = parser.parse_args()
+    run_and_save(args.output, args.text_output)
 
 
 if __name__ == "__main__":
