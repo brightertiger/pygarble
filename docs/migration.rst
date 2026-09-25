@@ -1,3 +1,15 @@
+Upgrading to 0.10.0
+===================
+
+Version 0.10.0 has no breaking changes: every 0.9.0 name, profile, keyword
+argument and default is unchanged. It adds the ``pygarble`` console script
+(also ``python -m pygarble``), the ``llm_output`` profile, and
+``pygarble.calibrate`` for choosing a threshold from labeled samples. The new
+JSON data tables under ``pygarble/data/`` ship in the repository and source
+distribution only, not the wheel, and the detector does not read them at
+runtime. 0.9.0 was never published to PyPI, so upgrades from 0.8.0 should also
+read the 0.9.0 notes below.
+
 Upgrading to 0.9.0
 ==================
 

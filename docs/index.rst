@@ -17,6 +17,8 @@ See :doc:`installation` to install the package.
 
    installation
    quickstart
+   cli
+   calibration
    strategy-guide
    strategies
    api

@@ -18,6 +18,7 @@ Profiles
 * ``legacy``: ``MARKOV_CHAIN``, ``LOG_LIKELIHOOD_RATIO``, ``WORD_ANOMALY``
 * ``corruption``: ``MOJIBAKE``, ``CONTROL_CHARACTERS``
 * ``spoofing``: ``UNICODE_SCRIPT``
+* ``llm_output``: ``REPETITION``, ``CONTROL_CHARACTERS``, ``MOJIBAKE``, ``LOCAL_ANOMALY``
 
 Strategy settings
 -----------------

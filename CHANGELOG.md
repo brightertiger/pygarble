@@ -3,7 +3,7 @@
 All notable changes to pygarble are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
-## [Unreleased]
+## [0.10.0] - 2026-09-26
 
 ### Added
 - Command-line interface: `pygarble check|score|analyze` reads files or
@@ -22,6 +22,11 @@ All notable changes to pygarble are documented here. The format follows
 - Golden corpus `regression/golden.jsonl` (challenge cases and edge inputs
   x every profile) with a CI check; ports in other languages are held to
   it.
+- README rewritten around use cases, plus new documentation pages for the
+  command line and threshold calibration.
+
+### Notes
+- 0.9.0 was prepared but never published to PyPI; users upgrading from 0.8.0 should read both entries.
 
 ## [0.9.0] - 2026-09-26
 

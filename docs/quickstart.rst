@@ -61,6 +61,19 @@ Use ``english_extended`` to add local anomalies, repetition, and pattern matchin
 to the default profile. It can flag more valid text. See :doc:`strategy-guide`
 for choosing checks and :doc:`strategies` for the complete settings catalog.
 
+Use the command line
+--------------------
+
+The ``pygarble`` console script checks one text per line from files or stdin
+and exits with status 1 when any line is flagged, so it drops into shell
+pipelines. See :doc:`cli` for scores, JSON output and threshold calibration.
+
+.. code-block:: console
+
+   $ printf 'hello world\nasdfghjkl\n' | pygarble check
+   clean	hello world
+   garbled	asdfghjkl
+
 Inspect a decision
 ------------------
 
