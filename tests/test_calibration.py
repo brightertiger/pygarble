@@ -18,7 +18,7 @@ class Stub:
         return [self.table[t] for t in texts]
 
 
-def test_f1_picks_best_threshold_recommends_gap_midpoint():
+def test_f1_recommends_gap_midpoint():
     stub = Stub({"g1": 0.9, "g2": 0.7, "c1": 0.6, "c2": 0.1})
     report = calibrate(stub, ["g1", "g2"], ["c1", "c2"])
     assert isinstance(report, CalibrationReport)
@@ -52,7 +52,7 @@ def test_max_fpr_objective_and_fallback():
         objective="max_fpr",
         max_false_positive_rate=0.0,
     )
-    assert report.recommended.threshold == pytest.approx((0.5 + 0.9) / 2)
+    assert report.recommended.threshold == pytest.approx(0.7)
     assert report.recommended.recall == pytest.approx(0.5)
     strict = calibrate(
         Stub({"g": 0.3, "c": 0.9}),
