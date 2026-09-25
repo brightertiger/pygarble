@@ -5,7 +5,7 @@ All notable changes to pygarble are documented here. The format follows
 
 ## [Unreleased]
 
-## [0.9.0] - unreleased
+## [0.9.0] - 2026-09-26
 
 ### Added
 - `EnsembleDetector` profiles (`english`, `english_extended`, `legacy`,
@@ -22,6 +22,9 @@ All notable changes to pygarble are documented here. The format follows
   site instead of a hidden `DeprecationWarning`.
 - Ensemble-level `**kwargs` are forwarded only to member strategies that
   accept them.
+- Regression baseline regenerated; ensemble holdout F1 0.943 -> 0.943
+  (`english` profile, unchanged; `english_extended` 0.982 -> 0.982). Legacy
+  benchmark ensemble F1 0.919 -> 0.932.
 
 ### Fixed
 - allowlist is now honoured by every strategy, not only the four that

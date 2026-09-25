@@ -55,7 +55,7 @@ VOWEL_RATIO
 
 English text heuristic.
 
-Settings: ``consonant_cluster_len``, ``max_string_length``, ``max_vowel_ratio``, ``min_vowel_ratio``.
+Settings: ``consonant_cluster_len``, ``max_string_length``, ``max_vowel_ratio``, ``min_length``, ``min_vowel_ratio``.
 
 KEYBOARD_PATTERN
 ~~~~~~~~~~~~~~~~
