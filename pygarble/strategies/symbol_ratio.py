@@ -51,6 +51,8 @@ class SymbolRatioStrategy(BaseStrategy):
     False
     """
 
+    scrub_allowlist = False
+
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
         self.symbol_threshold: float = parameter_value(

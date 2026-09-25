@@ -39,7 +39,10 @@ class TextFeatures:
 
         Strategies that scan raw text (keyboard rows, phonotactics,
         regex patterns) receive this instead of ``text`` so an allowlisted
-        token can never contribute evidence.
+        token can never contribute evidence. Only the letter run of a
+        token is blanked, so "asdfgh's" leaves "'s" behind. Direct
+        ``BaseStrategy.predict``/``predict_proba`` calls carry no
+        allowlist and never see this.
         """
         if not self.allowlist:
             return self.text

@@ -17,6 +17,10 @@ _URL_PREFIXES = ("http://", "https://", "ftp://", "file://", "data:", "www.")
 
 
 class BaseStrategy(ABC):
+    # Strategies whose allowlisted letters can only lower their score read
+    # the raw text instead of the allowlist-scrubbed text.
+    scrub_allowlist: bool = True
+
     def __init__(self, **kwargs: Any):
         self.kwargs: Dict[str, Any] = kwargs
         validate_options(type(self).__name__, kwargs)
@@ -111,7 +115,7 @@ class BaseStrategy(ABC):
         return result
 
     def _evaluate_features(self, features: TextFeatures) -> Evidence:
-        text = features.scrubbed
+        text = features.scrubbed if self.scrub_allowlist else features.text
         if not text.strip():
             return Evidence(0.0, False, "insufficient_evidence")
         if not self.applicable(text):
