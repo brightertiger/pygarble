@@ -51,6 +51,7 @@ All notable changes to pygarble are documented here. The format follows
 - FunctionWordDensity counts "a" and "I"; Title Case exemption no longer
   covers ALL-CAPS; WordCollocation needs 20+ words with no collocation to
   cross 0.5 and handles curly apostrophes.
+- HexString no longer classifies file paths or camelCase identifiers as base64.
 
 ### Removed
 - Five legacy strategies (see docs/migration.rst).
