@@ -243,3 +243,123 @@ def test_calibrate_subcommand(capsys, tmp_path):
     row = json.loads(out)
     assert 0.0 <= row["recommended"]["threshold"] <= 1.0
     assert row["objective"] == "f1"
+
+
+def test_calibrate_max_fpr_implies_objective(capsys, tmp_path):
+    garbled = tmp_path / "g.txt"
+    clean = tmp_path / "c.txt"
+    garbled.write_text("qxzjkwpv bnmqwer\nasdfghjkl\n", encoding="utf-8")
+    clean.write_text("hello world\nthe quick brown fox\n", encoding="utf-8")
+    argv = ["calibrate", "--garbled", str(garbled), "--clean", str(clean)]
+    code, out, err = run(capsys, argv + ["--max-fpr", "0.0"])
+    assert code == 0 and err == ""
+    assert out.splitlines()[:2] == ["objective: max_fpr", "max fpr: 0.0"]
+    code, out, _ = run(capsys, argv)
+    assert code == 0
+    assert out.splitlines()[0] == "objective: f1"
+
+
+def test_calibrate_max_fpr_conflicts_with_explicit_f1(capsys, tmp_path):
+    garbled = tmp_path / "g.txt"
+    clean = tmp_path / "c.txt"
+    garbled.write_text("asdfghjkl\n", encoding="utf-8")
+    clean.write_text("hello world\n", encoding="utf-8")
+    code, out, err = run(
+        capsys,
+        [
+            "calibrate",
+            "--garbled",
+            str(garbled),
+            "--clean",
+            str(clean),
+            "--objective",
+            "f1",
+            "--max-fpr",
+            "0.1",
+        ],
+    )
+    assert code == 2 and out == ""
+    assert "--max-fpr requires --objective max_fpr" in err
+
+
+def test_file_lines_split_on_newline_only(capsys, tmp_path):
+    path = tmp_path / "in.txt"
+    path.write_bytes(b"hello\x1cworld\n")
+    code, out, _ = run(
+        capsys, ["check", "--strategy", "control_characters", str(path)]
+    )
+    assert code == 1
+    assert out == "garbled\thello\x1cworld\n"
+
+
+def test_nel_and_separators_stay_on_one_line(capsys, tmp_path):
+    path = tmp_path / "in.txt"
+    text = "caf\u0085e x y\x0b\x0cz"
+    path.write_text(text + "\n", encoding="utf-8")
+    code, out, _ = run(capsys, ["score", str(path)])
+    assert code == 0
+    assert out.count("\n") == 1
+    assert out.rstrip("\n").split("\t", 1)[1] == text
+
+
+def test_crlf_lines_drop_carriage_return(capsys, tmp_path):
+    path = tmp_path / "in.txt"
+    path.write_bytes(b"hello world\r\nqxzjkwpv bnmqwer\r\n")
+    code, out, _ = run(capsys, ["check", str(path)])
+    assert code == 1
+    assert out.splitlines() == [
+        "clean\thello world",
+        "garbled\tqxzjkwpv bnmqwer",
+    ]
+    assert "\r" not in out
+
+
+def test_crlf_allowlist(capsys, tmp_path):
+    allow = tmp_path / "allow.txt"
+    allow.write_bytes(b"qxzjkwpv\r\n")
+    code, out, _ = run(
+        capsys,
+        ["check", "--allowlist", str(allow), "-t", "qxzjkwpv"],
+    )
+    assert code == 0, out
+
+
+def test_field_line_numbers_ignore_form_feed(capsys, tmp_path):
+    path = tmp_path / "in.jsonl"
+    path.write_bytes(b'{"msg": "hi"} \x0c junk\n{}\n{"msg": "ok"}\n')
+    code, out, err = run(capsys, ["check", "--field", "msg", str(path)])
+    assert code == 2
+    assert len(out.splitlines()) == 1
+    errors = err.splitlines()
+    assert len(errors) == 2
+    assert errors[0].startswith("line 1: invalid JSON")
+    assert errors[1] == "line 2: missing field 'msg'"
+
+
+def test_stdin_splits_on_newline_only(capsys, monkeypatch):
+    code, out, _ = run(
+        capsys,
+        ["check", "--strategy", "control_characters"],
+        stdin="hello\x1cworld\n",
+        monkeypatch=monkeypatch,
+    )
+    assert code == 1
+    assert out == "garbled\thello\x1cworld\n"
+
+
+def test_broken_pipe_is_quiet(tmp_path):
+    path = tmp_path / "big.txt"
+    path.write_text("hello world\n" * 5000, encoding="utf-8")
+    proc = subprocess.Popen(
+        [sys.executable, "-m", "pygarble", "score", str(path)],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    assert proc.stdout is not None and proc.stderr is not None
+    first = proc.stdout.readline()
+    proc.stdout.close()
+    stderr = proc.stderr.read()
+    proc.stderr.close()
+    assert proc.wait(timeout=120) == 0
+    assert first.startswith(b"0.")
+    assert stderr == b""

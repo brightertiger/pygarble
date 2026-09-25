@@ -55,4 +55,4 @@ def test_golden_pins_spans_across_a_combining_mark():
         for line in golden.OUTPUT.read_text(encoding="utf-8").splitlines()
     ]
     assert len(rows) == 918
-    assert any("́" in r["text"] and r["spans"] for r in rows)
+    assert any("\u0301" in r["text"] and r["spans"] for r in rows)

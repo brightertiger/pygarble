@@ -3,6 +3,7 @@
 import argparse
 import io
 import json
+import os
 import sys
 from dataclasses import asdict
 from typing import Any, Dict, Iterable, Iterator, List, Optional, Tuple
@@ -16,10 +17,30 @@ class CliError(Exception):
     """User-facing error; message goes to stderr with exit code 2."""
 
 
+def read_lines(handle: Iterable[str]) -> Iterator[str]:
+    """Yield lines split on "\n" only, dropping one trailing "\r".
+
+    ``str.splitlines`` would also split on form feeds, information
+    separators, NEL and the Unicode line and paragraph separators, hiding
+    the very characters some strategies detect. Open handles with
+    ``newline=""`` so no translation happens before this split.
+    """
+    for chunk in handle:
+        if chunk.endswith("\n"):
+            chunk = chunk[:-1]
+        if chunk.endswith("\r"):
+            chunk = chunk[:-1]
+        yield chunk
+
+
+def open_text(path: str) -> Any:
+    return open(path, encoding="utf-8", errors="replace", newline="")
+
+
 def load_allowlist(path: str) -> List[str]:
     try:
-        with open(path, encoding="utf-8", errors="replace") as handle:
-            lines = handle.read().splitlines()
+        with open_text(path) as handle:
+            lines = list(read_lines(handle))
     except OSError as error:
         raise CliError(f"cannot read allowlist {path}: {error}")
     words = []
@@ -95,8 +116,18 @@ def build_parser() -> argparse.ArgumentParser:
     group.add_argument("--profile", default=None)
     group.add_argument("--strategy", default=None)
     cal.add_argument("--allowlist", default=None)
-    cal.add_argument("--objective", choices=["f1", "max_fpr"], default="f1")
-    cal.add_argument("--max-fpr", type=float, default=None)
+    cal.add_argument(
+        "--objective",
+        choices=["f1", "max_fpr"],
+        default=None,
+        help="f1 (default) or max_fpr (implied by --max-fpr)",
+    )
+    cal.add_argument(
+        "--max-fpr",
+        type=float,
+        default=None,
+        help="highest acceptable false-positive rate",
+    )
     cal.add_argument("--format", choices=["text", "jsonl"], default="text")
     cal.set_defaults(threshold=0.5)
     return parser
@@ -122,27 +153,37 @@ def make_detector(args: argparse.Namespace) -> Any:
         raise CliError(str(error))
 
 
-def read_stdin() -> str:
+def read_stdin() -> Iterator[str]:
     buffer = getattr(sys.stdin, "buffer", None)
     if buffer is None:
-        return sys.stdin.read()
-    data: bytes = buffer.read()
-    return data.decode("utf-8", errors="replace")
+        yield from read_lines(sys.stdin)
+        return
+    wrapper = io.TextIOWrapper(
+        buffer, encoding="utf-8", errors="replace", newline=""
+    )
+    try:
+        yield from read_lines(wrapper)
+    finally:
+        # Detach so collecting the wrapper never closes sys.stdin.
+        wrapper.detach()
 
 
 def iter_lines(inputs: List[str]) -> Iterator[str]:
     sources = inputs or ["-"]
     for source in sources:
         if source == "-":
-            for line in read_stdin().splitlines():
-                yield line
+            yield from read_stdin()
             continue
         try:
-            with open(source, encoding="utf-8", errors="replace") as handle:
-                for line in handle.read().splitlines():
-                    yield line
+            handle = open_text(source)
         except OSError as error:
             raise CliError(f"cannot read {source}: {error}")
+        with handle:
+            try:
+                for line in read_lines(handle):
+                    yield line
+            except OSError as error:
+                raise CliError(f"cannot read {source}: {error}")
 
 
 def analysis_row(text: str, analysis: Any) -> Dict[str, Any]:
@@ -244,6 +285,11 @@ def run_texts(args: argparse.Namespace, out: Any, err: Any) -> int:
 def run_calibrate(args: argparse.Namespace, out: Any) -> int:
     from .calibration import calibrate
 
+    objective = args.objective
+    if objective is None:
+        objective = "max_fpr" if args.max_fpr is not None else "f1"
+    elif objective == "f1" and args.max_fpr is not None:
+        raise CliError("--max-fpr requires --objective max_fpr")
     detector = make_detector(args)
     garbled = [line for line in iter_lines([args.garbled]) if line.strip()]
     clean = [line for line in iter_lines([args.clean]) if line.strip()]
@@ -252,7 +298,7 @@ def run_calibrate(args: argparse.Namespace, out: Any) -> int:
             detector,
             garbled,
             clean,
-            objective=args.objective,
+            objective=objective,
             max_false_positive_rate=args.max_fpr,
         )
     except ValueError as error:
@@ -260,6 +306,9 @@ def run_calibrate(args: argparse.Namespace, out: Any) -> int:
     if args.format == "jsonl":
         out.write(json.dumps(asdict(report)) + "\n")
         return EXIT_OK
+    out.write(f"objective: {report.objective}\n")
+    if report.max_false_positive_rate is not None:
+        out.write(f"max fpr: {report.max_false_positive_rate}\n")
     out.write("threshold\tprecision\trecall\tf1\tfpr\n")
     for p in report.points:
         out.write(
@@ -272,6 +321,15 @@ def run_calibrate(args: argparse.Namespace, out: Any) -> int:
         f"(f1={r.f1:.3f}, fpr={r.false_positive_rate:.3f})\n"
     )
     return EXIT_OK
+
+
+def silence_stdout() -> None:
+    try:
+        devnull = os.open(os.devnull, os.O_WRONLY)
+        os.dup2(devnull, sys.stdout.fileno())
+        os.close(devnull)
+    except (AttributeError, OSError, ValueError, io.UnsupportedOperation):
+        pass
 
 
 def main(argv: Optional[List[str]] = None) -> int:
@@ -298,8 +356,16 @@ def main(argv: Optional[List[str]] = None) -> int:
     except CliError as error:
         sys.stderr.write(f"pygarble: {error}\n")
         return EXIT_ERROR
+    except BrokenPipeError:
+        # The reader went away (e.g. `| head`). Point stdout at devnull so
+        # the interpreter's final flush cannot raise again.
+        silence_stdout()
+        return EXIT_OK
     finally:
-        out.flush()
+        try:
+            out.flush()
+        except BrokenPipeError:
+            silence_stdout()
         if wrapper is not None:
             # Detach so collecting the wrapper never closes sys.stdout.
             wrapper.detach()

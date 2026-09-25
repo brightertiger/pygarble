@@ -53,7 +53,10 @@ def calibrate(
 
     objective="f1" picks the highest F1; objective="max_fpr" picks the
     highest recall whose false-positive rate stays within
-    max_false_positive_rate. Ties resolve to the highest threshold. Under
+    max_false_positive_rate, which is required for and only accepted with
+    that objective. If no candidate satisfies the limit, the cut 1.0 is
+    recommended and recommended.false_positive_rate shows the unmet
+    constraint. Ties resolve to the highest threshold. Under
     voting="majority" the ensemble decision counts member votes, so the
     recommended threshold is applied per member; the report still measures
     the aggregate score.
@@ -62,7 +65,8 @@ def calibrate(
     cut and the highest score below it, so it is not itself an observed
     score; `points` still lists every observed candidate. The midpoint
     applies only when the chosen cut is an observed score and candidates
-    were not passed explicitly, which keeps the reported metrics exact.
+    were not passed explicitly, which keeps the reported metrics exact; it
+    never applies to the 1.0 fallback.
     """
     garbled_texts = list(garbled)
     clean_texts = list(clean)
@@ -74,6 +78,10 @@ def calibrate(
     validate_batch(clean_texts)
     if objective not in ("f1", "max_fpr"):
         raise ValueError("objective must be 'f1' or 'max_fpr'")
+    if objective == "f1" and max_false_positive_rate is not None:
+        raise ValueError(
+            "max_false_positive_rate requires objective='max_fpr'"
+        )
     limit: Optional[float] = None
     if objective == "max_fpr":
         if max_false_positive_rate is None:
@@ -94,6 +102,7 @@ def calibrate(
             {unit_interval("threshold", t) for t in thresholds}
         )
     points = tuple(_point(t, garbled_scores, clean_scores) for t in candidates)
+    fallback = False
     if objective == "f1":
         best = max(points, key=lambda p: (p.f1, p.threshold))
     else:
@@ -103,8 +112,9 @@ def calibrate(
             best = max(eligible, key=lambda p: (p.recall, p.threshold))
         else:
             best = _point(1.0, garbled_scores, clean_scores)
+            fallback = True
     observed = set(garbled_scores) | set(clean_scores)
-    if thresholds is None and best.threshold in observed:
+    if thresholds is None and not fallback and best.threshold in observed:
         below = [t for t in candidates if t < best.threshold]
         if below:
             # No observed score lies strictly inside the gap, so every

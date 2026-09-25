@@ -60,14 +60,16 @@ Calibrate a threshold
 ``calibrate`` reads one garbled sample per line from ``--garbled`` and one
 clean sample per line from ``--clean``, prints precision, recall, F1 and
 false-positive rate at every observed score, and recommends a threshold.
-``--objective max_fpr --max-fpr 0.01`` caps the false-positive rate instead
-of maximising F1.
+``--max-fpr 0.01`` caps the false-positive rate instead of maximising F1;
+it implies ``--objective max_fpr`` and is rejected with ``--objective f1``.
+Text output starts with the objective in use.
 
 .. code-block:: console
 
    $ printf 'qxzjkwpv bnmqwer\nasdfghjkl\nzzkqxv wqpt\n' > bad.txt
    $ printf 'hello world\nplease send the invoice\nthe meeting moved to friday\n' > good.txt
    $ pygarble calibrate --garbled bad.txt --clean good.txt
+   objective: f1
    threshold	precision	recall	f1	fpr
    0.0000	0.500	1.000	0.667	1.000
    0.0435	0.500	1.000	0.667	1.000

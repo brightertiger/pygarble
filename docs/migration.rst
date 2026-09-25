@@ -1,5 +1,8 @@
+Upgrading
+=========
+
 Upgrading to 0.10.0
-===================
+-------------------
 
 Version 0.10.0 has no breaking changes: every 0.9.0 name, profile, keyword
 argument and default is unchanged. It adds the ``pygarble`` console script
@@ -11,14 +14,14 @@ runtime. 0.9.0 was never published to PyPI, so upgrades from 0.8.0 should also
 read the 0.9.0 notes below.
 
 Upgrading to 0.9.0
-==================
+------------------
 
 Version 0.9.0 replaces the 0.8 strategy list with profiles and the analyze API.
 Existing imports from ``pygarble`` and ``pygarble.core`` remain available; no
 runtime dependencies were added.
 
 Review default decisions
-------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 The default ensemble adds mojibake, keyboard adjacency, and control-character
 checks to Markov, likelihood ratio, and word anomaly. Inputs such as ``qwerty``
@@ -38,7 +41,7 @@ exact output. Shared tokenization, structured-token exclusions, and correctness
 fixes apply to that profile too. Hindi scoring as gibberish remains expected.
 
 Scores and settings
--------------------
+~~~~~~~~~~~~~~~~~~~
 
 * ``score`` aliases ``predict_proba``; neither is a calibrated probability.
 * ``WORD_LOOKUP.unknown_threshold`` now affects the score. Its default 0.5 retains
@@ -56,7 +59,7 @@ Scores and settings
   score is their mean and need not cross the threshold with the same result.
 
 Input handling and limits
--------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Length alone no longer forces every strategy to score 1.0 through the old implicit
 1,000-character token rule. Explicitly supplying the legacy ``max_string_length``

@@ -181,7 +181,8 @@ Calibration
 max_false_positive_rate=None, thresholds=None)`` accepts any detector with a
 ``score`` method that takes a list of strings. ``garbled`` and ``clean`` must
 each contain at least one string. ``objective="max_fpr"`` requires
-``max_false_positive_rate`` in [0, 1].
+``max_false_positive_rate`` in [0, 1], and passing it with
+``objective="f1"`` raises ``ValueError``.
 
 ``CalibrationReport`` is a frozen dataclass with ``recommended`` (a
 ``ThresholdPoint``), ``objective``, ``max_false_positive_rate``, the

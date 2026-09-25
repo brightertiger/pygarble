@@ -91,6 +91,10 @@ def render():
 
 
 def check():
+    for path in (OUTPUT, CHECKSUM):
+        if not path.is_file():
+            print(f"missing {path.name}; run --write first", file=sys.stderr)
+            return 1
     expected = OUTPUT.read_text(encoding="utf-8")
     if hashlib.sha256(expected.encode("utf-8")).hexdigest() != (
         CHECKSUM.read_text().strip()

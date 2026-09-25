@@ -18,10 +18,13 @@ every observed score as a candidate threshold.
 
 ``objective="f1"`` (default) maximises F1. ``objective="max_fpr"`` with
 ``max_false_positive_rate=0.01`` picks the highest recall whose
-false-positive rate stays at or below one percent, or falls back to the
-``1.0`` cut if no threshold qualifies. Ties resolve to the higher observed
-cut, and the recommended threshold is the midpoint of the gap below that
-cut, so it keeps a margin on both sides.
+false-positive rate stays at or below one percent. If no candidate
+satisfies the limit, the cut ``1.0`` is recommended and
+``recommended.false_positive_rate`` shows the unmet constraint.
+``max_false_positive_rate`` is only accepted with ``objective="max_fpr"``.
+Ties resolve to the higher observed cut, and the recommended threshold is
+the midpoint of the gap below that cut, so it keeps a margin on both sides;
+the ``1.0`` fallback is never moved to a midpoint.
 
 .. code-block:: python
 

@@ -95,3 +95,27 @@ def test_real_detector_round_trip():
     detector = EnsembleDetector(threshold=report.recommended.threshold)
     assert detector.predict(garbled) == [True, True, True]
     assert detector.predict(clean) == [False, False, False]
+
+
+def test_max_fpr_fallback_is_not_moved_to_a_midpoint():
+    # A clean text scoring exactly 1.0 makes 1.0 an observed score; the
+    # unmet-constraint fallback must still recommend the 1.0 cut itself.
+    report = calibrate(
+        Stub({"g": 0.3, "c": 1.0}),
+        ["g"],
+        ["c"],
+        objective="max_fpr",
+        max_false_positive_rate=0.0,
+    )
+    assert report.recommended.threshold == 1.0
+    assert report.recommended.false_positive_rate == 1.0
+
+
+def test_max_false_positive_rate_rejected_under_f1():
+    with pytest.raises(ValueError, match="requires objective='max_fpr'"):
+        calibrate(
+            Stub({"g": 0.9, "c": 0.1}),
+            ["g"],
+            ["c"],
+            max_false_positive_rate=0.1,
+        )
