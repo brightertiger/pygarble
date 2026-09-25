@@ -253,7 +253,11 @@ class EnsembleDetector:
     def predict_proba(
         self, X: Union[str, List[str]]
     ) -> Union[float, List[float]]:
-        """Heuristic aggregate; majority decisions use votes, not this mean."""
+        """Heuristic aggregate.
+
+        Under voting='majority' the decision counts member votes, so
+        Analysis.garbled can be True while Analysis.score is below threshold.
+        """
         return process_input(
             X,
             lambda text: self._analyze_single(text).score,

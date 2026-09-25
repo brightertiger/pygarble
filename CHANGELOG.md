@@ -30,6 +30,8 @@ All notable changes to pygarble are documented here. The format follows
   of being ignored.
 - huge integers for numeric options raise ValueError instead of
   OverflowError.
+- calling a strategy's `predict`/`predict_proba` directly now goes through
+  `evaluate()`, so text the strategy deems not applicable scores 0.0.
 
 ### Removed
 - Five legacy strategies (see docs/migration.rst).

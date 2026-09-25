@@ -29,6 +29,13 @@ class GarbleDetector:
         strategy_kwargs: Optional[Mapping[str, Any]] = None,
         **kwargs: Any,
     ) -> None:
+        """Single-strategy detector.
+
+        timeout_per_text only bounds work submitted to the thread pool,
+        which is used for batches of 10 or more when ``threads`` is 2 or
+        more. Single strings and small batches run inline and cannot be
+        interrupted.
+        """
         self.threshold = unit_interval("threshold", threshold)
         self.threads = (
             positive_int("threads", threads) if threads is not None else None

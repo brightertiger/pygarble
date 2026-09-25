@@ -20,6 +20,10 @@ EnsembleDetector
 .. autoclass:: pygarble.ensemble.EnsembleDetector
    :members: predict, predict_proba, score, analyze
 
+Under ``voting='majority'`` the decision counts member votes, so
+``Analysis.garbled`` can be ``True`` while ``Analysis.score`` is below
+threshold.
+
 Both classes accept a string or list of strings. ``predict`` returns bools,
 ``score`` and ``predict_proba`` return floats, and ``analyze`` returns immutable
 analysis records. Batch inputs are validated before any member is evaluated.

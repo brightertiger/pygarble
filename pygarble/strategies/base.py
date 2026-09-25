@@ -31,24 +31,11 @@ class BaseStrategy(ABC):
             positive_int("max_string_length", kwargs["max_string_length"])
 
     def predict(self, text: str) -> bool:
-        self._validate_input(text)
-        if not text or not text.strip():
-            return False
-
-        if self._is_extremely_long_string(text):
-            return True
-
-        return self._predict_impl(text)
+        return self.predict_proba(text) >= 0.5
 
     def predict_proba(self, text: str) -> float:
         self._validate_input(text)
-        if not text or not text.strip():
-            return 0.0
-
-        if self._is_extremely_long_string(text):
-            return 1.0
-
-        return self._predict_proba_impl(text)
+        return self.evaluate(TextFeatures(text)).score
 
     def applicable(self, text: str) -> bool:
         """Whether this strategy can render a meaningful judgment on text.
@@ -121,11 +108,6 @@ class BaseStrategy(ABC):
         if not self.applicable(text):
             return Evidence(0.0, False, "insufficient_evidence")
         return Evidence(self._predict_proba_impl(text))
-
-    def _predict_impl(self, text: str) -> bool:
-        # Single source of truth: predict agrees with predict_proba unless a
-        # strategy has a documented reason to override.
-        return self._predict_proba_impl(text) >= 0.5
 
     @abstractmethod
     def _predict_proba_impl(self, text: str) -> float:

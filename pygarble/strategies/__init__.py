@@ -49,6 +49,9 @@ if TYPE_CHECKING:
     from .pronounceability import (
         PronouncabilityStrategy as PronouncabilityStrategy,
     )
+    from .pronounceability import (
+        PronounceabilityStrategy as PronounceabilityStrategy,
+    )
     from .rare_trigram import RareTrigramStrategy as RareTrigramStrategy
     from .repetition import RepetitionStrategy as RepetitionStrategy
     from .symbol_ratio import SymbolRatioStrategy as SymbolRatioStrategy
@@ -80,6 +83,7 @@ _EXPORTS = {
     "HexStringStrategy": "hex_string",
     "MojibakeStrategy": "mojibake",
     "PronouncabilityStrategy": "pronounceability",
+    "PronounceabilityStrategy": "pronounceability",
     "UnicodeScriptStrategy": "unicode_script",
     "BigramProbabilityStrategy": "bigram_probability",
     "LetterPositionStrategy": "letter_position",
@@ -111,6 +115,7 @@ __all__ = [
     "HexStringStrategy",
     "MojibakeStrategy",
     "PronouncabilityStrategy",
+    "PronounceabilityStrategy",
     "UnicodeScriptStrategy",
     "BigramProbabilityStrategy",
     "LetterPositionStrategy",

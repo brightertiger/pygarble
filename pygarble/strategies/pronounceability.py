@@ -718,3 +718,8 @@ class PronouncabilityStrategy(BaseStrategy):
 
         # Blend max and average (max has more weight)
         return 0.7 * max_score + 0.3 * avg_score
+
+
+# Correctly spelled name; the misspelled class name is kept for
+# backward compatibility.
+PronounceabilityStrategy = PronouncabilityStrategy
