@@ -52,6 +52,8 @@ All notable changes to pygarble are documented here. The format follows
   covers ALL-CAPS; WordCollocation needs 20+ words with no collocation to
   cross 0.5 and handles curly apostrophes.
 - HexString no longer classifies file paths or camelCase identifiers as base64.
+- VowelRatio validates its parameters, abstains below 4 letters (new
+  min_length option), and ignores 1-2 letter abbreviations.
 
 ### Removed
 - Five legacy strategies (see docs/migration.rst).

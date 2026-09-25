@@ -37,6 +37,7 @@ PARAMETERS = {
         "consonant_cluster_len",
         "max_string_length",
         "max_vowel_ratio",
+        "min_length",
         "min_vowel_ratio",
     ],
     "VowelPatternStrategy": [
