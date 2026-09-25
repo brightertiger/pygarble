@@ -67,11 +67,6 @@ class ConsonantSequenceStrategy(BaseStrategy):
             return
         words.append(word.lower())
 
-    def _get_max_consonant_run(self, text: str) -> int:
-        """Find the longest consecutive consonant sequence."""
-        alpha_text = self._extract_words_for_analysis(text)
-        return self._max_run_from(alpha_text)
-
     def _max_run_from(self, alpha_text: str) -> int:
         """Find longest consonant run in preprocessed text."""
         max_run = 0
@@ -85,11 +80,6 @@ class ConsonantSequenceStrategy(BaseStrategy):
                 current_run = 0
 
         return max_run
-
-    def _count_violations(self, text: str) -> tuple:
-        """Count consonant sequences exceeding threshold."""
-        alpha_text = self._extract_words_for_analysis(text)
-        return self._violations_from(alpha_text)
 
     def _violations_from(self, alpha_text: str) -> tuple:
         """Count violations in preprocessed text."""

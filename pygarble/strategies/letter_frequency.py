@@ -85,10 +85,8 @@ class LetterFrequencyStrategy(BaseStrategy):
             raise ValueError("deviation_threshold must be positive")
         self.min_length = positive_int("min_length", min_length)
 
-    def _calculate_chi_squared(self, text: str) -> float:
-        """Calculate chi-squared statistic for letter frequencies."""
-        alpha_text = "".join(self._novel_words(text))
-
+    def _calculate_chi_squared(self, alpha_text: str) -> float:
+        """Chi-squared statistic for the letters of the novel words."""
         if len(alpha_text) < self.min_length:
             return 0.0
 
@@ -109,10 +107,8 @@ class LetterFrequencyStrategy(BaseStrategy):
 
         return chi_squared
 
-    def _check_extreme_patterns(self, text: str) -> float:
-        """Check for extremely abnormal letter patterns."""
-        alpha_text = "".join(self._novel_words(text))
-
+    def _check_extreme_patterns(self, alpha_text: str) -> float:
+        """Check the novel words' letters for extremely abnormal patterns."""
         if len(alpha_text) < self.min_length:
             return 0.0
 
@@ -155,12 +151,12 @@ class LetterFrequencyStrategy(BaseStrategy):
             return 0.0
 
         # Check extreme patterns first (faster)
-        extreme_score = self._check_extreme_patterns(text)
+        extreme_score = self._check_extreme_patterns(alpha_text)
         if extreme_score >= 0.7:
             return extreme_score
 
         # Calculate chi-squared statistic
-        chi_sq = self._calculate_chi_squared(text)
+        chi_sq = self._calculate_chi_squared(alpha_text)
 
         # Normalize to per-character chi-squared for a
         # sample-size-independent measure of deviation

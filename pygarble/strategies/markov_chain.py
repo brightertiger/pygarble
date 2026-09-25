@@ -64,18 +64,6 @@ class MarkovChainStrategy(BaseStrategy):
                     "ies are negative)"
                 )
             )
-        if self.min_length < 1:
-            raise ValueError("min_length must be at least 1")
-
-    def _compute_log_probability(self, text: str) -> Optional[float]:
-        """
-        Compute average log probability per character transition.
-
-        Returns the average log probability of all bigrams in the text,
-        or None if the text is too short to analyze.
-        Higher (less negative) values indicate more English-like text.
-        """
-        return self._mean(TextFeatures(text))
 
     def _mean(self, features: TextFeatures) -> Optional[float]:
         cleaned = " ".join(token.folded for token in features.novel)

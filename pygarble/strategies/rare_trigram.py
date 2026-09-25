@@ -25,7 +25,7 @@ class RareTrigramStrategy(BaseStrategy):
     # These patterns simply don't occur in valid English words
     IMPOSSIBLE_TRIGRAMS = frozenset(
         {
-            # Q without u patterns
+            # Rare-letter sandwiches (q?q, x?x, z?z) and qq* runs
             "qqa",
             "qqb",
             "qqc",
@@ -127,15 +127,6 @@ class RareTrigramStrategy(BaseStrategy):
             "jxj",
             "jqj",
             "jzj",
-            "qjq",
-            "qxq",
-            "qzq",
-            "xjx",
-            "xqx",
-            "xzx",
-            "zjx",
-            "zqx",
-            "zxj",
             # Impossible starting clusters
             "bwb",
             "bwc",

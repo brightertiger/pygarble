@@ -15,6 +15,14 @@ def fold_diacritics(text: str) -> str:
     )
 
 
+_ASCII_ALPHA = re.compile(r"[a-zA-Z]+")
+
+
+def ascii_alpha_words(text: str) -> List[str]:
+    """Lowercase ASCII-letter runs, the tokenizer several strategies share."""
+    return _ASCII_ALPHA.findall(text.lower())
+
+
 def title_case_ratio(text: str) -> float:
     """Fraction of alphabetic tokens that are Capitalized but not ALL-CAPS.
 

@@ -1,7 +1,7 @@
 """English-versus-uniform bigram likelihood ratio (a heuristic score)."""
 
 import math
-from typing import Any, List
+from typing import Any
 
 from ..analysis import Evidence
 from ..preprocessing import TextFeatures
@@ -28,14 +28,6 @@ class LogLikelihoodRatioStrategy(BaseStrategy):
     def applicable(self, text: str) -> bool:
         self._validate_input(text)
         return TextFeatures(text).bigram_stats[1] >= self.min_bigrams
-
-    def _extract_bigrams(self, text: str) -> List[str]:
-        return [
-            padded[i : i + 2]
-            for word in TextFeatures(text).ascii_words
-            for padded in (" " + word + " ",)
-            for i in range(len(padded) - 1)
-        ]
 
     def _average_llr(self, text: str) -> float:
         total, count = TextFeatures(text).bigram_stats
