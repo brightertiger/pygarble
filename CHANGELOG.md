@@ -44,6 +44,8 @@ All notable changes to pygarble are documented here. The format follows
 - LocalAnomaly rejects window_words=1, which could never emit a span.
 - KeyboardPattern judges repeated bigrams per novel word, so "go go go" is
   clean.
+- LetterPosition scores only novel words and rejects threshold=0 (previously
+  ZeroDivisionError).
 
 ### Removed
 - Five legacy strategies (see docs/migration.rst).

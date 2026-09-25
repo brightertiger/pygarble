@@ -33,7 +33,8 @@ class LetterPositionStrategy(BaseStrategy):
     # Letter pairs that never START English words
     # NOTE: Being VERY conservative - only truly impossible starts
     # Valid but unusual: gn (gnocchi), pn (pneumonia), pt (pterodactyl),
-    #   ps (psychology), ts (tsar), ht (technical), etc.
+    #   ps (psychology), ts (tsar), ht (technical), cz (Czech),
+    #   sv (svelte), vl (Vlad, vlog), etc.
     NEVER_START = frozenset(
         {
             "bw",
@@ -51,7 +52,6 @@ class LetterPositionStrategy(BaseStrategy):
             "cv",
             "cw",
             "cx",
-            "cz",
             "db",
             "dc",
             "df",
@@ -265,7 +265,6 @@ class LetterPositionStrategy(BaseStrategy):
             "sf",
             "sg",
             "sj",
-            "sv",
             "sx",
             "sz",
             "tb",
@@ -290,7 +289,6 @@ class LetterPositionStrategy(BaseStrategy):
             "vh",
             "vj",
             "vk",
-            "vl",
             "vm",
             "vn",
             "vp",
@@ -395,22 +393,21 @@ class LetterPositionStrategy(BaseStrategy):
         """
         super().__init__(**kwargs)
         self.threshold = unit_interval("threshold", threshold)
+        if self.threshold <= 0.0:
+            raise ValueError("threshold must be greater than 0.0")
         self.min_word_length = positive_int("min_word_length", min_word_length)
 
     def _extract_words(self, text: str) -> list:
-        """Extract alphabetic words from text."""
-        words = []
-        current_word = []
-        for c in text:
-            if c.isalpha():
-                current_word.append(c.lower())
-            else:
-                if current_word:
-                    words.append("".join(current_word))
-                    current_word = []
-        if current_word:
-            words.append("".join(current_word))
-        return [w for w in words if len(w) >= self.min_word_length]
+        """Novel lowercase words long enough to judge.
+
+        Dictionary words, short acronyms (PDF, JPG), likely proper nouns
+        (Czech) and structured tokens are never positional violations.
+        """
+        return [
+            word
+            for word in self._novel_words(text, skip_titlecase=True)
+            if len(word) >= self.min_word_length
+        ]
 
     def _predict_proba_impl(self, text: str) -> float:
         words = self._extract_words(text)
