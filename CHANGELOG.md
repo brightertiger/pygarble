@@ -46,6 +46,8 @@ All notable changes to pygarble are documented here. The format follows
   clean.
 - LetterPosition scores only novel words and rejects threshold=0 (previously
   ZeroDivisionError).
+- Pronounceability accepts sq-, sph-, chl-, scl-, phl-, schl-, gh- onsets and
+  honours min_word_length (default now 4, the previous effective value).
 
 ### Removed
 - Five legacy strategies (see docs/migration.rst).

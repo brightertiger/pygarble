@@ -68,20 +68,26 @@ VALID_ONSET_CLUSTERS: Set[str] = {
     "pn",
     "ps",
     "ph",
-    "qu",
     "rh",
+    "sq",
+    "gh",
     # Three-consonant clusters
+    "chl",
     "chr",
+    "phl",
     "phr",
     "sch",
+    "scl",
     "scr",
     "shr",
+    "sph",
     "spl",
     "spr",
-    "squ",
     "str",
     "thr",
     "thw",
+    # Four-consonant clusters
+    "schl",
 }
 
 # Valid English consonant clusters at word END
@@ -489,8 +495,8 @@ class PronouncabilityStrategy(BaseStrategy):
         Default is 2.
 
     min_word_length : int, optional
-        Minimum word length to analyze for clusters.
-        Default is 3.
+        Shortest word judged (default 4; 2-3 letter unknowns are usually
+        abbreviations).
 
     vowel_min_ratio : float, optional
         Minimum vowel ratio for pronounceable text.
@@ -514,7 +520,7 @@ class PronouncabilityStrategy(BaseStrategy):
             2,
         )
         self.min_word_length: int = parameter_value(
-            "min_word_length", kwargs.get("min_word_length", 3), 3
+            "min_word_length", kwargs.get("min_word_length", 4), 4
         )
         self.vowel_min_ratio: float = parameter_value(
             "vowel_min_ratio", kwargs.get("vowel_min_ratio", 0.1), 0.1
@@ -537,25 +543,6 @@ class PronouncabilityStrategy(BaseStrategy):
         if char in VOWELS:
             return True
         return char == "y" and position > 0
-
-    def _extract_consonant_clusters(self, word: str) -> list:
-        """Extract all consonant clusters from a word."""
-        clusters = []
-        current_cluster = ""
-
-        for i, char in enumerate(word.lower()):
-            if char in CONSONANTS and not self._is_vowel(char, i):
-                current_cluster += char
-            else:
-                if len(current_cluster) >= 2:
-                    clusters.append(current_cluster)
-                current_cluster = ""
-
-        # Don't forget trailing cluster
-        if len(current_cluster) >= 2:
-            clusters.append(current_cluster)
-
-        return clusters
 
     def _get_word_onset(self, word: str) -> str:
         """Get consonant cluster at start of word."""
@@ -679,8 +666,8 @@ class PronouncabilityStrategy(BaseStrategy):
         # legitimately.
         novel = self._novel_words(text, skip_titlecase=True)
         # 2-3 letter unknowns are usually abbreviations ("sq", "ft"),
-        # not words phonotactics can judge
-        novel = [w for w in novel if len(w) >= 4]
+        # not words phonotactics can judge; hence the default of 4.
+        novel = [w for w in novel if len(w) >= self.min_word_length]
         if not novel:
             return 0.0
         text = " ".join(novel)
