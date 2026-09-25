@@ -61,11 +61,14 @@ Both constructors accept these settings:
      - Settings for one strategy in ``GarbleDetector``; mapping from selected
        ``Strategy`` members to their settings in ``EnsembleDetector``.
 
-``GarbleDetector`` requires a ``Strategy`` enum member, not its string value.
+``GarbleDetector`` accepts a ``Strategy`` enum member or its string value,
+such as ``"markov_chain"``; an unknown name raises ``ValueError``.
 ``EnsembleDetector`` accepts either a named ``profile`` or a nonempty list of
 ``strategies``. Select one mechanism. ``weights`` correspond to strategy-list
 order and are required for ``voting="weighted"``. Weights must be finite,
-nonnegative, correctly sized, and not all zero.
+nonnegative, correctly sized, and not all zero. ``weights`` are only valid with
+``voting="weighted"``; passing them with any other voting mode raises
+``ValueError``.
 
 .. code-block:: python
 

@@ -1,10 +1,13 @@
 """Direct BaseStrategy use goes through the same evaluate() contract."""
 
+import pytest
+
 from pygarble.strategies import (
     FunctionWordDensityStrategy,
     PronouncabilityStrategy,
     PronounceabilityStrategy,
 )
+from pygarble.strategies.base import BaseStrategy
 
 
 def test_legacy_predict_proba_respects_applicability():
@@ -27,3 +30,13 @@ def test_legacy_predict_agrees_with_evaluate():
 
 def test_pronounceability_alias_is_same_class():
     assert PronounceabilityStrategy is PronouncabilityStrategy
+
+
+class _OutOfRangeStrategy(BaseStrategy):
+    def _predict_proba_impl(self, text: str) -> float:
+        return 1.5
+
+
+def test_legacy_predict_proba_rejects_out_of_range_score():
+    with pytest.raises(ValueError, match="between 0.0 and 1.0"):
+        _OutOfRangeStrategy().predict_proba("hello")

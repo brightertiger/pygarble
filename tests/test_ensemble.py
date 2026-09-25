@@ -51,13 +51,14 @@ def test_strategy_kwargs_are_retained_for_introspection():
     }
 
 
+@pytest.mark.parametrize("weights", [[1, 0], [2, 1]])
 @pytest.mark.parametrize("voting", ["majority", "any", "all", "average"])
-def test_weights_without_weighted_voting_is_an_error(voting):
+def test_weights_without_weighted_voting_is_an_error(voting, weights):
     with pytest.raises(ValueError, match="weights"):
         EnsembleDetector(
             strategies=[Strategy.MARKOV_CHAIN, Strategy.WORD_ANOMALY],
             voting=voting,
-            weights=[1, 0],
+            weights=weights,
         )
 
 
