@@ -162,3 +162,57 @@ def test_help_does_not_import_data(capsys):
         "assert 'pygarble.data.words' not in sys.modules"
     )
     subprocess.run([sys.executable, "-c", program], check=True)
+
+
+def test_lone_surrogate_text_does_not_crash(capsys):
+    code = main(["check", "-t", "ab\ud800cd"])
+    out, _ = capsys.readouterr()
+    assert code in (0, 1)
+    assert "\\ud800" in out or "\ud800" in out
+
+
+def test_invalid_utf8_stdin_via_module():
+    result = subprocess.run(
+        [sys.executable, "-m", "pygarble", "check"],
+        input=b"ab\xffcd\n",
+        capture_output=True,
+    )
+    assert result.returncode in (0, 1)
+    assert result.stderr == b""
+    assert result.stdout.decode("utf-8").endswith("ab\ufffdcd\n")
+
+
+def test_invalid_utf8_file_is_replaced_not_crash(capsys, tmp_path):
+    path = tmp_path / "bad.txt"
+    path.write_bytes(b"caf\xe9\n")
+    code, out, err = run(capsys, ["check", str(path)])
+    # U+FFFD is itself corruption evidence, so the line is flagged (exit 1);
+    # the contract is "no traceback, no exit 2".
+    assert code == 1 and err == ""
+    assert out.splitlines() == ["garbled\tcaf\ufffd"]
+
+
+def test_bad_allowlist_path_is_exit_2(capsys, tmp_path):
+    missing = str(tmp_path / "nope.txt")
+    code, out, err = run(
+        capsys, ["check", "--allowlist", missing, "-t", "hello"]
+    )
+    assert code == 2
+    assert out == ""
+    assert "cannot read allowlist" in err and "nope.txt" in err
+
+
+def test_field_mode_error_messages(capsys, monkeypatch):
+    lines = "\n".join(["[1, 2]", "{}", json.dumps({"msg": 3})])
+    code, out, err = run(
+        capsys,
+        ["check", "--field", "msg"],
+        stdin=lines,
+        monkeypatch=monkeypatch,
+    )
+    assert code == 2 and out == ""
+    assert err.splitlines() == [
+        "line 1: not a JSON object",
+        "line 2: missing field 'msg'",
+        "line 3: field 'msg' is not a string",
+    ]

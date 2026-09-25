@@ -1,6 +1,7 @@
 """Command-line interface: check, score, analyze and calibrate texts."""
 
 import argparse
+import io
 import json
 import sys
 from dataclasses import asdict
@@ -17,7 +18,7 @@ class CliError(Exception):
 
 def load_allowlist(path: str) -> List[str]:
     try:
-        with open(path, encoding="utf-8") as handle:
+        with open(path, encoding="utf-8", errors="replace") as handle:
             lines = handle.read().splitlines()
     except OSError as error:
         raise CliError(f"cannot read allowlist {path}: {error}")
@@ -35,6 +36,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="pygarble",
         description="Deterministic gibberish detection for English text.",
+        epilog="Input is UTF-8; invalid UTF-8 is replaced with U+FFFD.",
     )
     parser.add_argument(
         "--version", action="version", version=f"pygarble {__version__}"
@@ -109,15 +111,23 @@ def make_detector(args: argparse.Namespace) -> Any:
         raise CliError(str(error))
 
 
+def read_stdin() -> str:
+    buffer = getattr(sys.stdin, "buffer", None)
+    if buffer is None:
+        return sys.stdin.read()
+    data: bytes = buffer.read()
+    return data.decode("utf-8", errors="replace")
+
+
 def iter_lines(inputs: List[str]) -> Iterator[str]:
     sources = inputs or ["-"]
     for source in sources:
         if source == "-":
-            for line in sys.stdin.read().splitlines():
+            for line in read_stdin().splitlines():
                 yield line
             continue
         try:
-            with open(source, encoding="utf-8") as handle:
+            with open(source, encoding="utf-8", errors="replace") as handle:
                 for line in handle.read().splitlines():
                     yield line
         except OSError as error:
@@ -170,6 +180,16 @@ def format_row(command: str, fmt: str, text: str, analysis: Any) -> str:
     return f"{label}\t{text}"
 
 
+def field_problem(obj: Any, field: str) -> Optional[str]:
+    if not isinstance(obj, dict):
+        return "not a JSON object"
+    if field not in obj:
+        return f"missing field '{field}'"
+    if not isinstance(obj[field], str):
+        return f"field '{field}' is not a string"
+    return None
+
+
 def run_texts(args: argparse.Namespace, out: Any, err: Any) -> int:
     detector = make_detector(args)
     any_garbled = False
@@ -186,15 +206,18 @@ def run_texts(args: argparse.Namespace, out: Any, err: Any) -> int:
                 format_row(args.command, args.format, line, analysis) + "\n"
             )
             continue
+        problem: Optional[str] = None
         try:
             obj = json.loads(line)
-            value = obj[args.field]
-            if not isinstance(obj, dict) or not isinstance(value, str):
-                raise TypeError("field is not a string")
-        except (ValueError, KeyError, TypeError) as error:
-            err.write(f"line {number}: {error}\n")
+        except ValueError as error:
+            problem = f"invalid JSON: {error}"
+        else:
+            problem = field_problem(obj, args.field)
+        if problem is not None:
+            err.write(f"line {number}: {problem}\n")
             had_error = True
             continue
+        value = obj[args.field]
         analysis = detector.analyze(value)
         any_garbled = any_garbled or analysis.garbled
         obj["pygarble"] = analysis_row(value, analysis)
@@ -210,8 +233,27 @@ def run_texts(args: argparse.Namespace, out: Any, err: Any) -> int:
 def main(argv: Optional[List[str]] = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
+    # Write UTF-8 regardless of locale; unencodable text such as lone
+    # surrogates is backslash-escaped instead of raising.
+    buffer = getattr(sys.stdout, "buffer", None)
+    wrapper: Optional[io.TextIOWrapper] = None
+    out: Any = sys.stdout
+    if buffer is not None:
+        sys.stdout.flush()
+        wrapper = io.TextIOWrapper(
+            buffer,
+            encoding="utf-8",
+            errors="backslashreplace",
+            line_buffering=True,
+        )
+        out = wrapper
     try:
-        return run_texts(args, sys.stdout, sys.stderr)
+        return run_texts(args, out, sys.stderr)
     except CliError as error:
         sys.stderr.write(f"pygarble: {error}\n")
         return EXIT_ERROR
+    finally:
+        out.flush()
+        if wrapper is not None:
+            # Detach so collecting the wrapper never closes sys.stdout.
+            wrapper.detach()
