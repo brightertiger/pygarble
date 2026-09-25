@@ -16,6 +16,9 @@ All notable changes to pygarble are documented here. The format follows
 - `pygarble.calibrate(detector, garbled, clean)` sweeps thresholds over
   labeled samples and recommends one by F1 or by a maximum
   false-positive rate; `pygarble calibrate` does the same from files.
+- Language-neutral JSON copies of the word, bigram and trigram tables under
+  `pygarble/data/` (repo and sdist only), hashed in the manifest, as the
+  shared source for ports.
 
 ## [0.9.0] - 2026-09-26
 
