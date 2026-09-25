@@ -1,0 +1,33 @@
+# Changelog
+
+All notable changes to pygarble are documented here. The format follows
+[Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
+
+## [Unreleased]
+
+## [0.9.0] - unreleased
+
+### Added
+- `EnsembleDetector` profiles (`english`, `english_extended`, `legacy`,
+  `corruption`, `spoofing`), `analyze()` with spans, `allowlist`,
+  `strategy_kwargs`, `max_input_length`, `timeout_per_text`.
+- Strategies: `CONTROL_CHARACTERS`, `LOCAL_ANOMALY`, `WORD_ANOMALY`,
+  `LOG_LIKELIHOOD_RATIO`, `KEYBOARD_ADJACENCY`.
+- Correctly spelled `PronounceabilityStrategy` alias.
+- `GarbleDetector` and `EnsembleDetector.strategy_kwargs` accept strategy
+  names as strings.
+
+### Changed
+- Unknown strategy settings now raise a visible `FutureWarning` at the call
+  site instead of a hidden `DeprecationWarning`.
+- Ensemble-level `**kwargs` are forwarded only to member strategies that
+  accept them.
+
+### Fixed
+- (entries appended by later tasks)
+
+### Removed
+- Five legacy strategies (see docs/migration.rst).
+
+## [0.8.0] - 2026-07-04
+- Previous release; see git history.

@@ -1,9 +1,9 @@
 Upgrading to 0.9.0
 ==================
 
-Version 0.9.0 is prepared in the repository but is not yet published to PyPI.
-See :doc:`installation` to try it from source. Existing imports from ``pygarble``
-and ``pygarble.core`` remain available; no runtime dependencies were added.
+Version 0.9.0 replaces the 0.8 strategy list with profiles and the analyze API.
+Existing imports from ``pygarble`` and ``pygarble.core`` remain available; no
+runtime dependencies were added.
 
 Review default decisions
 ------------------------

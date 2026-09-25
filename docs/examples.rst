@@ -1,7 +1,7 @@
 Python examples
 ===============
 
-These examples use the upcoming 0.9.0 API; see :doc:`installation`. Each example
+These examples use the 0.9.0 API; see :doc:`installation`. Each example
 includes its own imports and data. Reuse a configured detector across calls.
 
 Validate a required English field

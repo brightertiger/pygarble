@@ -1,3 +1,5 @@
+> Archived planning document from the 0.9.0 development cycle. Numbers and blockers here are historical.
+
 **English detection implementation — version 0.9.0**
 
 The user clarified the audit's scope: Hindi and other non-English text scoring

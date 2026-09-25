@@ -5,9 +5,8 @@ Language strategies target English. Non-English text, including meaningful Hindi
 may be classified as gibberish. Scores are heuristic values, not calibrated
 probabilities; the library does not establish semantic meaning or identify languages.
 
-This reference describes the upcoming 0.9.0 API. See :doc:`installation` for
-source installation and :doc:`migration` for changed behavior. Public imports
-are available from ``pygarble``.
+This reference describes the 0.9.0 API. See :doc:`migration` for changed
+behavior. Public imports are available from ``pygarble``.
 
 GarbleDetector
 --------------
