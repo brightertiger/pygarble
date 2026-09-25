@@ -1,0 +1,217 @@
+"""Command-line interface: check, score, analyze and calibrate texts."""
+
+import argparse
+import json
+import sys
+from dataclasses import asdict
+from typing import Any, Dict, Iterable, Iterator, List, Optional, Tuple
+
+EXIT_OK = 0
+EXIT_GARBLED = 1
+EXIT_ERROR = 2
+
+
+class CliError(Exception):
+    """User-facing error; message goes to stderr with exit code 2."""
+
+
+def load_allowlist(path: str) -> List[str]:
+    try:
+        with open(path, encoding="utf-8") as handle:
+            lines = handle.read().splitlines()
+    except OSError as error:
+        raise CliError(f"cannot read allowlist {path}: {error}")
+    words = []
+    for line in lines:
+        word = line.split("#", 1)[0].strip()
+        if word:
+            words.append(word)
+    return words
+
+
+def build_parser() -> argparse.ArgumentParser:
+    from . import __version__
+
+    parser = argparse.ArgumentParser(
+        prog="pygarble",
+        description="Deterministic gibberish detection for English text.",
+    )
+    parser.add_argument(
+        "--version", action="version", version=f"pygarble {__version__}"
+    )
+    subparsers = parser.add_subparsers(dest="command", metavar="COMMAND")
+    subparsers.required = True
+
+    def add_common(sub: argparse.ArgumentParser, default_format: str) -> None:
+        sub.add_argument(
+            "inputs",
+            nargs="*",
+            help="files to read, one text per line; '-' or none = stdin",
+        )
+        sub.add_argument(
+            "-t",
+            "--text",
+            action="append",
+            default=None,
+            help="evaluate this text instead of reading inputs (repeatable)",
+        )
+        group = sub.add_mutually_exclusive_group()
+        group.add_argument(
+            "--profile",
+            default=None,
+            help="ensemble profile (default english)",
+        )
+        group.add_argument(
+            "--strategy", default=None, help="single strategy name"
+        )
+        sub.add_argument("--threshold", type=float, default=0.5)
+        sub.add_argument(
+            "--allowlist", default=None, help="file of words never flagged"
+        )
+        sub.add_argument(
+            "--format",
+            choices=["text", "tsv", "jsonl"],
+            default=default_format,
+        )
+        sub.add_argument(
+            "--field",
+            default=None,
+            help="read JSON objects and evaluate this field; echo JSONL",
+        )
+
+    add_common(
+        subparsers.add_parser("check", help="flag garbled lines"), "text"
+    )
+    add_common(subparsers.add_parser("score", help="print scores"), "text")
+    add_common(
+        subparsers.add_parser("analyze", help="print full analyses"), "jsonl"
+    )
+    return parser
+
+
+def make_detector(args: argparse.Namespace) -> Any:
+    from . import EnsembleDetector, GarbleDetector, Strategy
+
+    allowlist = load_allowlist(args.allowlist) if args.allowlist else None
+    try:
+        if args.strategy:
+            return GarbleDetector(
+                Strategy(args.strategy),
+                threshold=args.threshold,
+                allowlist=allowlist,
+            )
+        return EnsembleDetector(
+            threshold=args.threshold,
+            profile=args.profile or "english",
+            allowlist=allowlist,
+        )
+    except ValueError as error:
+        raise CliError(str(error))
+
+
+def iter_lines(inputs: List[str]) -> Iterator[str]:
+    sources = inputs or ["-"]
+    for source in sources:
+        if source == "-":
+            for line in sys.stdin.read().splitlines():
+                yield line
+            continue
+        try:
+            with open(source, encoding="utf-8") as handle:
+                for line in handle.read().splitlines():
+                    yield line
+        except OSError as error:
+            raise CliError(f"cannot read {source}: {error}")
+
+
+def analysis_row(text: str, analysis: Any) -> Dict[str, Any]:
+    return {
+        "text": text,
+        "garbled": analysis.garbled,
+        "score": analysis.score,
+        "status": analysis.status,
+        "profile": analysis.profile,
+        "spans": [asdict(span) for span in analysis.spans],
+        "signals": [
+            {
+                "strategy": s.strategy,
+                "score": s.score,
+                "applicable": s.applicable,
+                "reason": s.reason,
+            }
+            for s in analysis.signals
+        ],
+    }
+
+
+def format_row(command: str, fmt: str, text: str, analysis: Any) -> str:
+    if fmt == "jsonl":
+        return json.dumps(analysis_row(text, analysis), ensure_ascii=False)
+    if fmt == "tsv":
+        return "\t".join(
+            [
+                "1" if analysis.garbled else "0",
+                f"{analysis.score:.4f}",
+                analysis.status,
+                text,
+            ]
+        )
+    if command == "score":
+        return f"{analysis.score:.4f}\t{text}"
+    label = (
+        "garbled"
+        if analysis.garbled
+        else (
+            "insufficient"
+            if analysis.status == "insufficient_evidence"
+            else "clean"
+        )
+    )
+    return f"{label}\t{text}"
+
+
+def run_texts(args: argparse.Namespace, out: Any, err: Any) -> int:
+    detector = make_detector(args)
+    any_garbled = False
+    had_error = False
+    if args.text is not None:
+        pairs: Iterable[Tuple[int, Any]] = enumerate(args.text, 1)
+    else:
+        pairs = enumerate(iter_lines(args.inputs), 1)
+    for number, line in pairs:
+        if args.field is None:
+            analysis = detector.analyze(line)
+            any_garbled = any_garbled or analysis.garbled
+            out.write(
+                format_row(args.command, args.format, line, analysis) + "\n"
+            )
+            continue
+        try:
+            obj = json.loads(line)
+            value = obj[args.field]
+            if not isinstance(obj, dict) or not isinstance(value, str):
+                raise TypeError("field is not a string")
+        except (ValueError, KeyError, TypeError) as error:
+            err.write(f"line {number}: {error}\n")
+            had_error = True
+            continue
+        analysis = detector.analyze(value)
+        any_garbled = any_garbled or analysis.garbled
+        obj["pygarble"] = analysis_row(value, analysis)
+        del obj["pygarble"]["text"]
+        out.write(json.dumps(obj, ensure_ascii=False) + "\n")
+    if had_error:
+        return EXIT_ERROR
+    if args.command == "check" and any_garbled:
+        return EXIT_GARBLED
+    return EXIT_OK
+
+
+def main(argv: Optional[List[str]] = None) -> int:
+    parser = build_parser()
+    args = parser.parse_args(argv)
+    try:
+        return run_texts(args, sys.stdout, sys.stderr)
+    except CliError as error:
+        sys.stderr.write(f"pygarble: {error}\n")
+        return EXIT_ERROR

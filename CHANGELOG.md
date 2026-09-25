@@ -5,6 +5,12 @@ All notable changes to pygarble are documented here. The format follows
 
 ## [Unreleased]
 
+### Added
+- Command-line interface: `pygarble check|score|analyze` reads files or
+  stdin, supports --profile/--strategy/--threshold/--allowlist,
+  text/TSV/JSONL output, JSON --field mode, and exit code 1 when any input
+  is garbled.
+
 ## [0.9.0] - 2026-09-26
 
 ### Added

@@ -55,6 +55,9 @@ Repository = "https://github.com/brightertiger/pygarble"
 Issues = "https://github.com/brightertiger/pygarble/issues"
 Documentation = "https://brightertiger.github.io/pygarble/"
 
+[project.scripts]
+pygarble = "pygarble.cli:main"
+
 [tool.setuptools.packages.find]
 include = ["pygarble*"]
 
