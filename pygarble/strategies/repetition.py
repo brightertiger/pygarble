@@ -70,10 +70,10 @@ class RepetitionStrategy(BaseStrategy):
             r"([a-z])\1{" + str(self.max_char_repeat) + r",}"
         )
         self._repeated_bigram_pattern = re.compile(
-            r"(.{2})\1{" + str(self.max_pattern_repeat) + r",}"
+            r"(?!\d{2})(.{2})\1{" + str(self.max_pattern_repeat) + r",}"
         )
         self._repeated_trigram_pattern = re.compile(
-            r"(.{3})\1{" + str(self.max_pattern_repeat - 1) + r",}"
+            r"(?!\d{3})(.{3})\1{" + str(self.max_pattern_repeat - 1) + r",}"
         )
         self._word_pattern = re.compile(r"[a-z0-9]+")
 

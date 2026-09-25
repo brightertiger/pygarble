@@ -24,8 +24,9 @@ class PatternMatchingStrategy(BaseStrategy):
 
     # Weak patterns match legitimate text too often (ALL-CAPS headlines,
     # order numbers, "----" rulers, "://" in URLs) to be decisive alone;
-    # they only corroborate a strong match. consonant_cluster is
-    # lowercase-only so acronyms (HTTPS, JSON) don't trip it.
+    # they only corroborate a strong match. consonant_cluster only sees
+    # novel words, which drops dictionary words and short ALL-CAPS
+    # acronyms (HTTPS, JSON).
     # repeated_chars is letters-only; digit runs ("10000") are covered by
     # long_numbers (weak) only.
     WEAK_PATTERNS = {"special_chars", "uppercase_sequence", "long_numbers"}

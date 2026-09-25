@@ -39,3 +39,13 @@ def test_alternating_pattern_is_letters_only():
     detector = GarbleDetector(Strategy.PATTERN_MATCHING)
     assert detector.score("abababab") >= 0.5
     assert detector.score("0000000123") < 0.5
+
+
+def test_custom_patterns_with_override_defaults():
+    detector = GarbleDetector(
+        Strategy.PATTERN_MATCHING,
+        patterns={"custom": r"\d{3}-\d{4}"},
+        override_defaults=True,
+    )
+    assert detector.score("123-4567") >= 0.5
+    assert detector.score("hello") == 0.0

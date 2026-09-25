@@ -23,3 +23,21 @@ def test_digit_runs_and_short_emphasis_are_clean(text):
 )
 def test_documented_repetition_still_fires(text):
     assert GarbleDetector(Strategy.REPETITION).predict(text) is True
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "One hundred million is 100000000",
+        "Account 0000000000 closed",
+        "Call 1212121212 now",
+    ],
+)
+def test_repeated_digit_units_are_not_repetition(text):
+    assert GarbleDetector(Strategy.REPETITION).score(text) < 0.5
+    assert EnsembleDetector(profile="english_extended").predict(text) is False
+
+
+@pytest.mark.parametrize("text", ["abababababab", "abcabcabcabc"])
+def test_repeated_letter_units_still_fire(text):
+    assert GarbleDetector(Strategy.REPETITION).score(text) >= 0.5
