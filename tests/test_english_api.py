@@ -95,7 +95,7 @@ def test_member_options_do_not_collide_with_detector_threshold():
 
 
 def test_unknown_settings_warn():
-    with pytest.warns(DeprecationWarning, match="min_lenght"):
+    with pytest.warns(FutureWarning, match="min_lenght"):
         GarbleDetector(Strategy.MARKOV_CHAIN, min_lenght=8)
 
 

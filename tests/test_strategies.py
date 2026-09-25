@@ -9,9 +9,7 @@ class TestStrategies:
         assert detector.predict("normal text") is False
 
     def test_entropy_based_detector(self):
-        detector = GarbleDetector(
-            Strategy.ENTROPY_BASED, entropy_threshold=2.0
-        )
+        detector = GarbleDetector(Strategy.ENTROPY_BASED)
         assert detector.predict("aaaaaaa") is True
         assert detector.predict("normal text") is False
 

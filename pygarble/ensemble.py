@@ -4,8 +4,9 @@ from typing import Any, Dict, Iterable, List, Mapping, Optional, Tuple, Union
 
 from .analysis import Analysis, Signal
 from .detector import GarbleDetector
+from .options import accepted_options, unknown_options, warn_unknown_options
 from .preprocessing import TextFeatures
-from .registry import Strategy
+from .registry import STRATEGY_MAP, Strategy
 from .validation import finite_number, process_input
 
 LEGACY_STRATEGIES = (
@@ -92,31 +93,63 @@ class EnsembleDetector:
             raise ValueError("weights must be non-negative")
         if not any(self.weights):
             raise ValueError("weights must not all be zero")
-        options: Dict[Strategy, Mapping[str, Any]] = dict(
-            strategy_kwargs or {}
-        )
+        options: Dict[Strategy, Dict[str, Any]] = {
+            (Strategy(key) if isinstance(key, str) else key): dict(value)
+            for key, value in (strategy_kwargs or {}).items()
+        }
         if any(strategy not in strategies for strategy in options):
             raise ValueError(
                 "strategy_kwargs contains a strategy not selected"
+            )
+        class_names = {
+            strategy: STRATEGY_MAP[strategy].__name__
+            for strategy in strategies
+        }
+        accepted_by_any = set()
+        for name in class_names.values():
+            accepted = accepted_options(name)
+            accepted_by_any |= (
+                set(kwargs) if accepted is None else set(accepted)
+            )
+        warn_unknown_options(
+            "EnsembleDetector (no selected strategy accepts them)",
+            sorted(set(kwargs) - accepted_by_any),
+        )
+        for strategy, member_options in options.items():
+            warn_unknown_options(
+                class_names[strategy],
+                unknown_options(class_names[strategy], member_options),
             )
         words = (
             list(allowlist)
             if allowlist is not None and not isinstance(allowlist, str)
             else allowlist
         )
-        self._detectors = [
-            GarbleDetector(
-                strategy,
-                threshold,
-                threads,
-                allowlist=words,
-                max_input_length=max_input_length,
-                timeout_per_text=timeout_per_text,
-                strategy_kwargs=options.get(strategy),
-                **kwargs,
+        self._detectors = []
+        for strategy in strategies:
+            accepted = accepted_options(class_names[strategy])
+            shared = {
+                key: value
+                for key, value in kwargs.items()
+                if accepted is None or key in accepted
+            }
+            member = dict(shared, **options.get(strategy, {}))
+            member = {
+                key: value
+                for key, value in member.items()
+                if accepted is None or key in accepted
+            }
+            self._detectors.append(
+                GarbleDetector(
+                    strategy,
+                    threshold,
+                    threads,
+                    allowlist=words,
+                    max_input_length=max_input_length,
+                    timeout_per_text=timeout_per_text,
+                    strategy_kwargs=member,
+                )
             )
-            for strategy in strategies
-        ]
         first = self._detectors[0]
         self.threshold = first.threshold
         self.threads = first.threads
@@ -124,6 +157,7 @@ class EnsembleDetector:
         self.timeout_per_text = first.timeout_per_text
         self.allowlist = first.allowlist
         self.kwargs = dict(kwargs)
+        self.strategy_kwargs = options
 
     def _aggregate(
         self, pairs: List[Tuple[Signal, float]]
