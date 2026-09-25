@@ -34,6 +34,7 @@ All notable changes to pygarble are documented here. The format follows
   `evaluate()`, so text the strategy deems not applicable scores 0.0.
 - WordAnomaly (default profile) no longer flags dictionary acronyms such as
   DHCP, KPMG, HGTV.
+- Mojibake detects U+FFFD in inputs shorter than three characters.
 
 ### Removed
 - Five legacy strategies (see docs/migration.rst).
