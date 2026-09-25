@@ -88,6 +88,17 @@ def build_parser() -> argparse.ArgumentParser:
     add_common(
         subparsers.add_parser("analyze", help="print full analyses"), "jsonl"
     )
+    cal = subparsers.add_parser("calibrate", help="recommend a threshold")
+    cal.add_argument("--garbled", required=True, help="file of garbled lines")
+    cal.add_argument("--clean", required=True, help="file of clean lines")
+    group = cal.add_mutually_exclusive_group()
+    group.add_argument("--profile", default=None)
+    group.add_argument("--strategy", default=None)
+    cal.add_argument("--allowlist", default=None)
+    cal.add_argument("--objective", choices=["f1", "max_fpr"], default="f1")
+    cal.add_argument("--max-fpr", type=float, default=None)
+    cal.add_argument("--format", choices=["text", "jsonl"], default="text")
+    cal.set_defaults(threshold=0.5)
     return parser
 
 
@@ -230,6 +241,39 @@ def run_texts(args: argparse.Namespace, out: Any, err: Any) -> int:
     return EXIT_OK
 
 
+def run_calibrate(args: argparse.Namespace, out: Any) -> int:
+    from .calibration import calibrate
+
+    detector = make_detector(args)
+    garbled = [line for line in iter_lines([args.garbled]) if line.strip()]
+    clean = [line for line in iter_lines([args.clean]) if line.strip()]
+    try:
+        report = calibrate(
+            detector,
+            garbled,
+            clean,
+            objective=args.objective,
+            max_false_positive_rate=args.max_fpr,
+        )
+    except ValueError as error:
+        raise CliError(str(error))
+    if args.format == "jsonl":
+        out.write(json.dumps(asdict(report)) + "\n")
+        return EXIT_OK
+    out.write("threshold\tprecision\trecall\tf1\tfpr\n")
+    for p in report.points:
+        out.write(
+            f"{p.threshold:.4f}\t{p.precision:.3f}\t{p.recall:.3f}\t"
+            f"{p.f1:.3f}\t{p.false_positive_rate:.3f}\n"
+        )
+    r = report.recommended
+    out.write(
+        f"recommended threshold: {r.threshold:.4f} "
+        f"(f1={r.f1:.3f}, fpr={r.false_positive_rate:.3f})\n"
+    )
+    return EXIT_OK
+
+
 def main(argv: Optional[List[str]] = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
@@ -248,6 +292,8 @@ def main(argv: Optional[List[str]] = None) -> int:
         )
         out = wrapper
     try:
+        if args.command == "calibrate":
+            return run_calibrate(args, out)
         return run_texts(args, out, sys.stderr)
     except CliError as error:
         sys.stderr.write(f"pygarble: {error}\n")

@@ -216,3 +216,30 @@ def test_field_mode_error_messages(capsys, monkeypatch):
         "line 2: missing field 'msg'",
         "line 3: field 'msg' is not a string",
     ]
+
+
+def test_calibrate_subcommand(capsys, tmp_path):
+    garbled = tmp_path / "g.txt"
+    clean = tmp_path / "c.txt"
+    garbled.write_text("qxzjkwpv bnmqwer\nasdfghjkl\n", encoding="utf-8")
+    clean.write_text("hello world\nthe quick brown fox\n", encoding="utf-8")
+    code, out, _ = run(
+        capsys, ["calibrate", "--garbled", str(garbled), "--clean", str(clean)]
+    )
+    assert code == 0
+    assert "recommended threshold:" in out.splitlines()[-1]
+    code, out, _ = run(
+        capsys,
+        [
+            "calibrate",
+            "--garbled",
+            str(garbled),
+            "--clean",
+            str(clean),
+            "--format",
+            "jsonl",
+        ],
+    )
+    row = json.loads(out)
+    assert 0.0 <= row["recommended"]["threshold"] <= 1.0
+    assert row["objective"] == "f1"

@@ -13,6 +13,9 @@ All notable changes to pygarble are documented here. The format follows
 - `llm_output` profile (repetition, control characters, mojibake, local
   anomaly): a deterministic pre-check for degenerate model output that
   stays quiet on code and technical prose.
+- `pygarble.calibrate(detector, garbled, clean)` sweeps thresholds over
+  labeled samples and recommends one by F1 or by a maximum
+  false-positive rate; `pygarble calibrate` does the same from files.
 
 ## [0.9.0] - 2026-09-26
 
