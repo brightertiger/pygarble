@@ -1,16 +1,16 @@
 [build-system]
-requires = ["setuptools>=45", "wheel"]
+requires = ["setuptools>=61", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "pygarble"
-version = "0.9.0"
+dynamic = ["version"]
 description = "Deterministic, zero-dependency gibberish detection for English text"
 readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "MIT"}
 authors = [
-    {name = "Ujjwal", email = "ujjwal@example.com"},
+    {name = "Ujjwal Singh Rao", email = "ujjwalsrao@gmail.com"},
 ]
 keywords = ["garble", "text", "detection", "nlp", "english", "gibberish", "text-validation"]
 classifiers = [
@@ -25,6 +25,7 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
     "Topic :: Text Processing :: Linguistic",
     "Topic :: Software Development :: Libraries :: Python Modules",
@@ -40,6 +41,12 @@ dev = [
     "isort>=5.0",
     "pre-commit>=2.0",
     "mypy==1.11.2",
+    "build>=1.0",
+    "twine>=4.0",
+]
+docs = [
+    "sphinx>=4.0",
+    "sphinx-rtd-theme>=1.0",
 ]
 
 [project.urls]
@@ -53,6 +60,9 @@ include = ["pygarble*"]
 
 [tool.setuptools.package-data]
 pygarble = ["data/manifest.json", "py.typed"]
+
+[tool.setuptools.dynamic]
+version = {attr = "pygarble.__version__"}
 
 [tool.black]
 line-length = 79

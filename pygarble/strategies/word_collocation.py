@@ -9,6 +9,7 @@ these common pairings.
 import re
 from typing import Any, List, Tuple
 
+from ..preprocessing import title_case_ratio
 from ..validation import parameter_value
 from .base import BaseStrategy
 
@@ -401,33 +402,16 @@ class WordCollocationStrategy(BaseStrategy):
             raise ValueError("min_words must be at least 2")
 
     def _tokenize(self, text: str) -> List[str]:
-        """Extract lowercase alphabetic words.
+        """Lowercase alphabetic words, contractions kept whole.
 
-        Apostrophes are kept inside tokens so contractions
-        ("don't", "it's") stay one word instead of splitting into
-        fragments that can never match a collocation.
+        Curly apostrophes are normalised so "don’t" and "don't" tokenize
+        the same way.
         """
-        tokens = re.findall(r"[a-zA-Z']+", text.lower())
+        tokens = re.findall(r"[a-zA-Z']+", text.replace("’", "'").lower())
         return [t.strip("'") for t in tokens if t.strip("'")]
 
     def _title_case_ratio(self, text: str) -> float:
-        """Ratio of tokens whose first letter is uppercase.
-
-        Name lists and headlines are mostly Title Case and
-        legitimately contain no function-word collocations.
-        """
-        tokens = [t for t in text.split() if any(c.isalpha() for c in t)]
-        if not tokens:
-            return 0.0
-
-        titled = 0
-        for token in tokens:
-            for char in token:
-                if char.isalpha():
-                    if char.isupper():
-                        titled += 1
-                    break
-        return titled / len(tokens)
+        return title_case_ratio(text)
 
     def _get_bigrams(self, words: List[str]) -> List[Tuple[str, str]]:
         """Generate adjacent word pairs."""
@@ -453,17 +437,18 @@ class WordCollocationStrategy(BaseStrategy):
         total_bigrams = len(bigrams)
         hit_ratio = hit_count / total_bigrams
 
-        # Zero collocations: scale with text length
         if hit_count == 0:
-            # Name lists and headlines (mostly Title Case tokens)
-            # legitimately contain zero collocations
+            # Name lists and headlines legitimately contain zero
+            # collocations.
             if self._title_case_ratio(text) >= 0.6:
                 return 0.3
+            # A missing collocation is weak evidence on its own: ordinary
+            # prose can run 12-19 words without hitting the table. Only
+            # 20+ words with no hit at all crosses the decision line.
             if len(words) >= 20:
-                return 0.7
-            if len(words) >= self.zero_collocation_min_words:
                 return 0.6
-            # Below threshold: too short to be confident
+            if len(words) >= self.zero_collocation_min_words:
+                return 0.45
             return 0.3
 
         # Very low collocation rate in long text

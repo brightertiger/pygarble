@@ -1,11 +1,13 @@
 """Deterministic aggregation with explicit English profiles."""
 
+import warnings
 from typing import Any, Dict, Iterable, List, Mapping, Optional, Tuple, Union
 
 from .analysis import Analysis, Signal
 from .detector import GarbleDetector
+from .options import accepted_options, unknown_options, warn_unknown_options
 from .preprocessing import TextFeatures
-from .registry import Strategy
+from .registry import STRATEGY_MAP, Strategy
 from .validation import finite_number, process_input
 
 LEGACY_STRATEGIES = (
@@ -38,7 +40,7 @@ PROFILES = {
 class EnsembleDetector:
     def __init__(
         self,
-        strategies: Optional[List[Strategy]] = None,
+        strategies: Optional[List[Union[Strategy, str]]] = None,
         threshold: float = 0.5,
         voting: Optional[str] = None,
         weights: Optional[List[float]] = None,
@@ -62,6 +64,9 @@ class EnsembleDetector:
             strategies = list(PROFILES[self.profile])
         if not strategies:
             raise ValueError("strategies must contain at least one strategy")
+        members: List[Strategy] = [
+            Strategy(s) if isinstance(s, str) else s for s in strategies
+        ]
         self.voting = (
             voting
             if voting is not None
@@ -79,44 +84,82 @@ class EnsembleDetector:
             )
         if self.voting == "weighted" and weights is None:
             raise ValueError("weights required when voting='weighted'")
-        self.strategies = list(strategies)
-        if weights is not None and len(weights) != len(strategies):
+        if self.voting != "weighted" and weights is not None:
+            warnings.warn(
+                "weights are ignored unless voting='weighted'; this will "
+                "become an error in a future release",
+                FutureWarning,
+                stacklevel=2,
+            )
+        self.strategies = list(members)
+        if weights is not None and len(weights) != len(members):
             raise ValueError("weights must have same length as strategies")
         self.weights = [
             finite_number("weights", weight)
             for weight in (
-                weights if weights is not None else [1.0] * len(strategies)
+                weights if weights is not None else [1.0] * len(members)
             )
         ]
         if any(weight < 0 for weight in self.weights):
             raise ValueError("weights must be non-negative")
         if not any(self.weights):
             raise ValueError("weights must not all be zero")
-        options: Dict[Strategy, Mapping[str, Any]] = dict(
-            strategy_kwargs or {}
-        )
-        if any(strategy not in strategies for strategy in options):
+        options: Dict[Strategy, Dict[str, Any]] = {
+            (Strategy(key) if isinstance(key, str) else key): dict(value)
+            for key, value in (strategy_kwargs or {}).items()
+        }
+        if any(strategy not in members for strategy in options):
             raise ValueError(
                 "strategy_kwargs contains a strategy not selected"
+            )
+        class_names = {
+            strategy: STRATEGY_MAP[strategy].__name__ for strategy in members
+        }
+        accepted_by_any = set()
+        for name in class_names.values():
+            accepted = accepted_options(name)
+            accepted_by_any |= (
+                set(kwargs) if accepted is None else set(accepted)
+            )
+        warn_unknown_options(
+            "EnsembleDetector (no selected strategy accepts them)",
+            sorted(set(kwargs) - accepted_by_any),
+        )
+        for strategy, member_options in options.items():
+            warn_unknown_options(
+                class_names[strategy],
+                unknown_options(class_names[strategy], member_options),
             )
         words = (
             list(allowlist)
             if allowlist is not None and not isinstance(allowlist, str)
             else allowlist
         )
-        self._detectors = [
-            GarbleDetector(
-                strategy,
-                threshold,
-                threads,
-                allowlist=words,
-                max_input_length=max_input_length,
-                timeout_per_text=timeout_per_text,
-                strategy_kwargs=options.get(strategy),
-                **kwargs,
+        self._detectors = []
+        for strategy in members:
+            accepted = accepted_options(class_names[strategy])
+            shared = {
+                key: value
+                for key, value in kwargs.items()
+                if accepted is None or key in accepted
+            }
+            member = dict(shared, **options.get(strategy, {}))
+            member = {
+                key: value
+                for key, value in member.items()
+                if accepted is None or key in accepted
+            }
+            self._detectors.append(
+                GarbleDetector(
+                    strategy,
+                    threshold,
+                    threads,
+                    allowlist=words,
+                    max_input_length=max_input_length,
+                    timeout_per_text=timeout_per_text,
+                    strategy_kwargs=member,
+                )
             )
-            for strategy in strategies
-        ]
         first = self._detectors[0]
         self.threshold = first.threshold
         self.threads = first.threads
@@ -124,6 +167,7 @@ class EnsembleDetector:
         self.timeout_per_text = first.timeout_per_text
         self.allowlist = first.allowlist
         self.kwargs = dict(kwargs)
+        self.strategy_kwargs = options
 
     def _aggregate(
         self, pairs: List[Tuple[Signal, float]]
@@ -132,15 +176,12 @@ class EnsembleDetector:
             return False, 0.0
         scores = [signal.score for signal, _ in pairs]
         if self.voting == "weighted":
-            maximum = max(weight for _, weight in pairs)
-            if maximum == 0:
-                return False, 0.0
-            total = sum(weight / maximum for _, weight in pairs)
+            # Scaling by the largest weight keeps huge finite weights from
+            # overflowing the sum; pairs only hold positive weights here.
+            scale = max(weight for _, weight in pairs)
+            total = sum(weight / scale for _, weight in pairs)
             score = (
-                sum(
-                    signal.score * (weight / maximum)
-                    for signal, weight in pairs
-                )
+                sum(signal.score * weight / scale for signal, weight in pairs)
                 / total
             )
         elif self.voting == "any":
@@ -220,7 +261,11 @@ class EnsembleDetector:
     def predict_proba(
         self, X: Union[str, List[str]]
     ) -> Union[float, List[float]]:
-        """Heuristic aggregate; majority decisions use votes, not this mean."""
+        """Heuristic aggregate.
+
+        Under voting='majority' the decision counts member votes, so
+        Analysis.garbled can be True while Analysis.score is below threshold.
+        """
         return process_input(
             X,
             lambda text: self._analyze_single(text).score,

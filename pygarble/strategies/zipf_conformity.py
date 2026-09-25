@@ -6,14 +6,13 @@ Garbled text produces flat distributions where every "word" appears once.
 Uses Type-Token Ratio and hapax legomena ratio as primary signals.
 """
 
-import re
 from collections import Counter
 from typing import Any, List
 
-from ..data import ENGLISH_WORDS
+from ..data import ENGLISH_WORDS, FUNCTION_WORDS
+from ..preprocessing import ascii_alpha_words
 from ..validation import parameter_value
 from .base import BaseStrategy
-from .function_word_density import FunctionWordDensityStrategy
 
 
 class ZipfConformityStrategy(BaseStrategy):
@@ -74,7 +73,7 @@ class ZipfConformityStrategy(BaseStrategy):
 
     def _tokenize(self, text: str) -> List[str]:
         """Extract lowercase alphabetic words."""
-        return re.findall(r"[a-zA-Z]+", text.lower())
+        return ascii_alpha_words(text)
 
     def applicable(self, text: str) -> bool:
         """Abstain on texts with too few words for distribution stats."""
@@ -87,7 +86,7 @@ class ZipfConformityStrategy(BaseStrategy):
         actually gibberish rather than a legitimate list of distinct
         real words (names, ingredients, keywords, ...).
         """
-        if any(w in FunctionWordDensityStrategy.FUNCTION_WORDS for w in words):
+        if any(w in FUNCTION_WORDS for w in words):
             return False
         unknown = sum(1 for w in words if w not in ENGLISH_WORDS)
         return unknown / len(words) >= 0.5

@@ -1,7 +1,9 @@
+> Archived planning document from the 0.9.0 development cycle. Numbers and blockers here are historical.
+
 **Repository audit and deterministic detection plan — 6 September 2026**
 
 Audited baseline: `a3db3a2`, version 0.8.0. This is the historical audit;
-implementation outcomes are recorded in [implementation.md](implementation.md).
+implementation outcomes are recorded in [2026-07-implementation.md](2026-07-implementation.md).
 Findings come from source
 inspection, the existing tests, rerunning all benchmark strategies, targeted
 reproductions, and the primary sources linked below.

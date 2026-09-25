@@ -50,8 +50,6 @@ class HexStringStrategy(BaseStrategy):
             "hex_ratio_threshold", kwargs.get("hex_ratio_threshold", 0.7), 0.7
         )
 
-        if self.min_hex_length < 0:
-            raise ValueError("min_hex_length must be non-negative")
         if not 0.0 <= self.hex_ratio_threshold <= 1.0:
             raise ValueError("hex_ratio_threshold must be between 0.0 and 1.0")
 
@@ -108,19 +106,29 @@ class HexStringStrategy(BaseStrategy):
         return 0.5
 
     def _is_base64_like(self, text: str) -> bool:
-        """Check if text looks like base64."""
+        """Base64-typical evidence, not merely the base64 alphabet.
+
+        Paths ("/usr/local/bin") and camelCase identifiers share the
+        alphabet; real base64 has a length that is never 1 mod 4, is
+        padded or symbol-bearing, and mixes cases roughly evenly.
+        """
         text = text.strip()
         if not self._base64_pattern.match(text):
             return False
-        # Long plain words match the base64 alphabet too; require
-        # base64-typical evidence: padding/symbol chars, or digits
-        # mixed with both letter cases.
-        if any(c in "+/=" for c in text):
+        if text.startswith(("/", "./", "../")):
+            return False
+        if len(text) % 4 == 1:
+            return False
+        if "=" in text:
+            return True
+        letters = [c for c in text if c.isalpha()]
+        upper = sum(1 for c in letters if c.isupper())
+        if letters and upper / len(letters) < 0.2:
+            return False
+        if any(c in "+/" for c in text):
             return True
         has_digit = any(c.isdigit() for c in text)
-        has_lower = any(c.islower() for c in text)
-        has_upper = any(c.isupper() for c in text)
-        return has_digit and has_lower and has_upper
+        return has_digit and 0 < upper < len(letters)
 
     def _compute_hex_ratio(self, text: str) -> float:
         """

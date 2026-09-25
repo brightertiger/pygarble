@@ -49,11 +49,15 @@ class LocalAnomalyStrategy(BaseStrategy):
         prefix = [0]
         for flag in flags:
             prefix.append(prefix[-1] + flag)
+        # A one-word window fires on any bad word; wider windows need two.
+        needed = (
+            1
+            if self.window_words == 1
+            else max(2, (self.window_words + 1) // 2)
+        )
         for end in range(self.window_words, len(flags) + 1):
             start = end - self.window_words
-            if prefix[end] - prefix[start] >= max(
-                2, (self.window_words + 1) // 2
-            ):
+            if prefix[end] - prefix[start] >= needed:
                 spans.append(
                     Span(
                         features.tokens[start].start,

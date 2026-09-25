@@ -19,7 +19,7 @@ from .validation import (
 class GarbleDetector:
     def __init__(
         self,
-        strategy: Strategy,
+        strategy: Union[Strategy, str],
         threshold: float = 0.5,
         threads: Optional[int] = None,
         *,
@@ -29,10 +29,19 @@ class GarbleDetector:
         strategy_kwargs: Optional[Mapping[str, Any]] = None,
         **kwargs: Any,
     ) -> None:
+        """Single-strategy detector.
+
+        timeout_per_text only bounds work submitted to the thread pool,
+        which is used for batches of 10 or more when ``threads`` is 2 or
+        more. Single strings and small batches run inline and cannot be
+        interrupted.
+        """
         self.threshold = unit_interval("threshold", threshold)
         self.threads = (
             positive_int("threads", threads) if threads is not None else None
         )
+        if self.threads is not None and self.threads > 2**31 - 1:
+            raise ValueError("threads is too large")
         self.max_input_length = (
             positive_int("max_input_length", max_input_length)
             if max_input_length is not None
@@ -42,12 +51,14 @@ class GarbleDetector:
         if timeout_per_text is not None:
             if finite_number("timeout_per_text", timeout_per_text) <= 0:
                 raise ValueError("timeout_per_text must be positive")
+        if isinstance(strategy, str):
+            strategy = Strategy(strategy)
         if not isinstance(strategy, Strategy):
             if isinstance(strategy, Enum):
                 raise NotImplementedError(
                     f"Strategy {strategy} is not implemented"
                 )
-            raise TypeError("strategy must be a Strategy enum member")
+            raise TypeError("strategy must be a Strategy enum member or name")
         if isinstance(allowlist, str):
             raise TypeError("allowlist must be an iterable of words")
         words = list(allowlist) if allowlist is not None else []
@@ -61,8 +72,6 @@ class GarbleDetector:
 
     def _create_strategy_instance(self) -> BaseStrategy:
         return STRATEGY_MAP[self.strategy](**self.kwargs)
-
-    _validate_batch = staticmethod(validate_batch)
 
     def applicable(self, text: str) -> bool:
         BaseStrategy._validate_input(text)

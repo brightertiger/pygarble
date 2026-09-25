@@ -1,7 +1,7 @@
 Quick start
 ===========
 
-Install the upcoming 0.9.0 API using :doc:`installation` before running these
+Install pygarble using :doc:`installation` before running these
 examples. Detectors operate on Python strings; decode bytes before calling them.
 No training or ``fit()`` step is needed.
 

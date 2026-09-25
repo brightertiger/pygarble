@@ -4,21 +4,16 @@ Installation
 pygarble requires Python 3.8 or later and has no runtime dependencies. Its
 bundled character models and dictionary require no inference-time downloads.
 
-Published package
------------------
+Install
+-------
 
 .. code-block:: bash
 
    python -m pip install pygarble
    python -m pip show pygarble
 
-These docs describe the upcoming **0.9.0 API**, which is not yet published to
-PyPI. The command above installs the latest published version; use the source
-installation below for the profiles, explanations, and new strategies shown
-in these docs.
-
-Install the upcoming API
-------------------------
+Install from source
+-------------------
 
 With Git installed:
 

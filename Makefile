@@ -26,11 +26,14 @@ test:
 	pytest
 
 lint:
-	flake8 pygarble tests
+	black --check pygarble tests scripts regression
+	isort --check-only pygarble tests scripts regression
+	flake8 pygarble tests scripts regression
 	mypy pygarble
 
 format:
-	black pygarble tests
+	isort pygarble tests scripts regression
+	black pygarble tests scripts regression
 
 clean:
 	rm -rf build/

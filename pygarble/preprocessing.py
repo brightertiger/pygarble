@@ -15,6 +15,33 @@ def fold_diacritics(text: str) -> str:
     )
 
 
+_ASCII_ALPHA = re.compile(r"[a-zA-Z]+")
+
+
+def ascii_alpha_words(text: str) -> List[str]:
+    """Lowercase ASCII-letter runs, the tokenizer several strategies share."""
+    return _ASCII_ALPHA.findall(text.lower())
+
+
+def title_case_ratio(text: str) -> float:
+    """Fraction of alphabetic tokens that are Capitalized but not ALL-CAPS.
+
+    Name lists and headlines are mostly Title Case; a shouted mash of
+    consonants is not.
+    """
+    tokens = [t for t in text.split() if any(c.isalpha() for c in t)]
+    if not tokens:
+        return 0.0
+    titled = 0
+    for token in tokens:
+        letters = [c for c in token if c.isalpha()]
+        if letters[0].isupper() and not (
+            len(letters) > 1 and all(c.isupper() for c in letters)
+        ):
+            titled += 1
+    return titled / len(tokens)
+
+
 @dataclass(frozen=True)
 class Token:
     text: str
@@ -32,6 +59,26 @@ class TextFeatures:
     @cached_property
     def folded(self) -> str:
         return fold_diacritics(self.text).lower()
+
+    @cached_property
+    def scrubbed(self) -> str:
+        """Text with allowlisted words blanked out, offsets preserved.
+
+        Strategies that scan raw text (keyboard rows, phonotactics,
+        regex patterns) receive this instead of ``text`` so an allowlisted
+        token can never contribute evidence. Only the letter run of a
+        token is blanked, so "asdfgh's" leaves "'s" behind. Direct
+        ``BaseStrategy.predict``/``predict_proba`` calls carry no
+        allowlist and never see this.
+        """
+        if not self.allowlist:
+            return self.text
+        chars = list(self.text)
+        for token in self.tokens:
+            if token.folded in self.allowlist:
+                for index in range(token.start, token.end):
+                    chars[index] = " "
+        return "".join(chars)
 
     @cached_property
     def ascii_words(self) -> Tuple[str, ...]:

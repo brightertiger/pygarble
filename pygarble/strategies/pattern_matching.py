@@ -7,7 +7,7 @@ from .base import BaseStrategy
 class PatternMatchingStrategy(BaseStrategy):
     DEFAULT_PATTERNS: Dict[str, str] = {
         "special_chars": r"[^a-zA-Z0-9\s]{3,}",
-        "repeated_chars": r"([a-zA-Z0-9])\1{3,}",
+        "repeated_chars": r"([a-zA-Z])\1{3,}",
         "uppercase_sequence": r"[A-Z]{5,}",
         "long_numbers": r"[0-9]{8,}",
         "keyboard_row_qwerty": (
@@ -19,13 +19,16 @@ class PatternMatchingStrategy(BaseStrategy):
             "gfd|hgfds|gfdsa|mnbvc|nbvcx|bvcxz)"
         ),
         "consonant_cluster": r"[bcdfghjklmnpqrstvwxz]{5,}",
-        "alternating_pattern": r"(?i)([a-z0-9])([a-z0-9])(\1\2){2,}",
+        "alternating_pattern": r"(?i)([a-z])(?!\1)([a-z])(\1\2){2,}",
     }
 
     # Weak patterns match legitimate text too often (ALL-CAPS headlines,
     # order numbers, "----" rulers, "://" in URLs) to be decisive alone;
-    # they only corroborate a strong match. consonant_cluster is
-    # lowercase-only so acronyms (HTTPS, JSON) don't trip it.
+    # they only corroborate a strong match. consonant_cluster only sees
+    # novel words, which drops dictionary words and short ALL-CAPS
+    # acronyms (HTTPS, JSON).
+    # repeated_chars is letters-only; digit runs ("10000") are covered by
+    # long_numbers (weak) only.
     WEAK_PATTERNS = {"special_chars", "uppercase_sequence", "long_numbers"}
 
     def __init__(self, **kwargs: Any) -> None:
@@ -43,6 +46,10 @@ class PatternMatchingStrategy(BaseStrategy):
 
         return {name: re.compile(regex) for name, regex in patterns.items()}
 
+    # consonant_cluster only judges words the dictionary cannot vouch for;
+    # "strengths", "catchphrase" and "worthwhile" are real English.
+    NOVEL_ONLY_PATTERNS = {"consonant_cluster"}
+
     def _predict_proba_impl(self, text: str) -> float:
         if not self._compiled_patterns:
             return 0.0
@@ -56,10 +63,16 @@ class PatternMatchingStrategy(BaseStrategy):
             and "@" not in t
             and not t.lower().startswith("www.")
         )
+        novel_text = None
 
         strong = weak = 0
         for name, pattern in self._compiled_patterns.items():
-            if pattern.search(text):
+            target = text
+            if name in self.NOVEL_ONLY_PATTERNS:
+                if novel_text is None:
+                    novel_text = " ".join(self._novel_words(text))
+                target = novel_text
+            if pattern.search(target):
                 if name in self.WEAK_PATTERNS:
                     weak += 1
                 else:

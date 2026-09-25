@@ -13,11 +13,13 @@ sys.path.insert(0, os.path.abspath('..'))
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'pygarble'
-copyright = '2025, pygarble contributors'
+copyright = '2026, pygarble contributors'
 author = 'pygarble contributors'
 
-version = '0.9.0'
-release = '0.9.0'
+import pygarble  # noqa: E402
+
+version = pygarble.__version__
+release = pygarble.__version__
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

@@ -10,9 +10,6 @@ from typing import Any, List, Tuple
 from ..validation import parameter_value
 from .base import BaseStrategy
 
-# -*- coding: utf-8 -*-
-
-
 # Common mojibake byte patterns: (corrupted bytes, description)
 # These occur when UTF-8 is incorrectly decoded as Latin-1 or Windows-1252
 MOJIBAKE_BYTE_PATTERNS: List[Tuple[bytes, str]] = [
@@ -58,8 +55,9 @@ class MojibakeStrategy(BaseStrategy):
         Default is 1 (any mojibake pattern triggers detection).
 
     ratio_threshold : float, optional
-        Ratio of suspicious characters to total length above
-        which text is considered garbled. Default is 0.05.
+        Density of mojibake lead/tail sequences (per character) at or
+        above which density evidence is reported; the score is
+        density * 5, so 0.1 maps to 0.5. Default is 0.05.
 
     check_replacement_char : bool, optional
         Whether to check for Unicode replacement character.
@@ -102,7 +100,7 @@ class MojibakeStrategy(BaseStrategy):
             for encoding in ("cp1252", "latin-1"):
                 try:
                     decoded = pattern_bytes.decode(encoding)
-                except Exception:
+                except UnicodeDecodeError:
                     continue
                 if decoded not in self._mojibake_patterns:
                     self._mojibake_patterns.append(decoded)
@@ -136,7 +134,7 @@ class MojibakeStrategy(BaseStrategy):
             return category.startswith("P") or category.startswith("S")
         return False
 
-    def _has_high_byte_density(self, text: str) -> float:
+    def _high_byte_density(self, text: str) -> float:
         """
         Check for high density of mojibake-shaped character sequences.
 
@@ -164,6 +162,8 @@ class MojibakeStrategy(BaseStrategy):
         suspicious_count = min(suspicious_count, len(text))
         return suspicious_count / len(text)
 
+    _has_high_byte_density = _high_byte_density
+
     def _check_double_encoding(self, text: str) -> bool:
         """
         Check for signs of double UTF-8 encoding.
@@ -184,39 +184,25 @@ class MojibakeStrategy(BaseStrategy):
         return False
 
     def _predict_proba_impl(self, text: str) -> float:
-        """
-        Compute garble probability based on mojibake detection.
-        """
-        if not text or len(text) < 3:
-            return 0.0
-
+        """Compute garble probability based on mojibake detection."""
         scores = []
 
-        # Check for known mojibake patterns
-        pattern_count = self._count_mojibake_patterns(text)
-        if pattern_count >= self.pattern_threshold:
-            # More patterns = higher confidence
-            pattern_score = min(1.0, 0.7 + (pattern_count * 0.1))
-            scores.append(pattern_score)
-
-        # Check for replacement characters
+        # U+FFFD is unambiguous at any length.
         if self.check_replacement_char:
             replacement_count = self._count_replacement_chars(text)
             if replacement_count > 0:
-                # Any replacement char is a strong signal
-                replacement_score = min(1.0, 0.8 + (replacement_count * 0.05))
-                scores.append(replacement_score)
+                scores.append(min(1.0, 0.8 + replacement_count * 0.05))
 
-        # Check high-byte density
-        byte_density = self._has_high_byte_density(text)
-        if byte_density >= self.ratio_threshold:
-            # Map density to score
-            density_score = min(1.0, byte_density * 5)
-            scores.append(density_score)
+        if len(text) >= 3:
+            pattern_count = self._count_mojibake_patterns(text)
+            if pattern_count >= self.pattern_threshold:
+                scores.append(min(1.0, 0.7 + pattern_count * 0.1))
 
-        # Check for double encoding (very strong signal)
-        if self._check_double_encoding(text):
-            scores.append(0.95)
+            byte_density = self._high_byte_density(text)
+            if byte_density >= self.ratio_threshold:
+                scores.append(min(1.0, byte_density * 5))
 
-        # Return maximum score (any strong signal is sufficient)
+            if self._check_double_encoding(text):
+                scores.append(0.95)
+
         return max(scores) if scores else 0.0

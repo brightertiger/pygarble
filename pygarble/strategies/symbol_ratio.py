@@ -51,6 +51,8 @@ class SymbolRatioStrategy(BaseStrategy):
     False
     """
 
+    scrub_allowlist = False
+
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
         self.symbol_threshold: float = parameter_value(
@@ -68,8 +70,6 @@ class SymbolRatioStrategy(BaseStrategy):
 
         if not 0.0 <= self.symbol_threshold <= 1.0:
             raise ValueError("symbol_threshold must be between 0.0 and 1.0")
-        if self.min_length < 0:
-            raise ValueError("min_length must be non-negative")
 
     def _compute_symbol_ratio(self, text: str) -> float:
         """

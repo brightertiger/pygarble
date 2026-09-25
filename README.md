@@ -6,19 +6,13 @@ Deterministic, lightweight gibberish detection for **English text**, for Python 
 
 ## Installation
 
-Install the latest published package:
+Install from PyPI:
 
 ```bash
 python -m pip install pygarble
 ```
 
-**The examples below describe the upcoming 0.9.0 API, which has not yet been released to PyPI.** To use this API now, install from the repository:
-
-```bash
-python -m pip install "pygarble @ git+https://github.com/brightertiger/pygarble.git@main"
-```
-
-Installing from Git requires Git. For reproducible deployments, replace `main` with a reviewed commit SHA. Check your installed version with `python -m pip show pygarble`.
+Check your installed version with `python -m pip show pygarble`.
 
 ## Quick start
 
@@ -130,7 +124,8 @@ The 0.9.0 default adds specialist checks and changes preprocessing. The `legacy`
 
 The repository contains reproducible benchmark tooling and a small authored challenge set. These engineering datasets are not production accuracy estimates; measure false positives and missed detections on your own English inputs before choosing thresholds. Inference is deterministic for a fixed package, configuration, and Python/Unicode data version.
 
-- [Evaluation and implementation report](https://github.com/brightertiger/pygarble/blob/main/docs/implementation.md)
+- [Changelog](https://github.com/brightertiger/pygarble/blob/main/CHANGELOG.md)
+- [Evaluation and implementation report](https://github.com/brightertiger/pygarble/blob/main/docs/dev/2026-07-implementation.md)
 - [Recorded evaluation results](https://github.com/brightertiger/pygarble/blob/main/regression/english_results.json)
 - [Data provenance and curation](https://github.com/brightertiger/pygarble/blob/main/scripts/data_curation.json)
 

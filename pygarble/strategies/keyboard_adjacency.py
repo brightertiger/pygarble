@@ -32,10 +32,6 @@ def _build_adjacency(rows: tuple = _QWERTY_ROWS) -> dict:
     }
 
 
-_ADJACENT = _build_adjacency()
-_ROW_OF = {char: idx for idx, row in enumerate(_QWERTY_ROWS) for char in row}
-
-
 class KeyboardAdjacencyStrategy(BaseStrategy):
     """Detect keyboard mashing via physical key-adjacency walks.
 

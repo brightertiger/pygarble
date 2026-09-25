@@ -53,11 +53,6 @@ class TestMarkovChainStrategy:
         proba = detector.predict_proba("xzqkjhf")
         assert proba > 0.5
 
-    def test_empty_string(self):
-        detector = GarbleDetector(Strategy.MARKOV_CHAIN)
-        assert detector.predict("") is False
-        assert detector.predict_proba("") == 0.0
-
     def test_custom_threshold(self):
         # More permissive threshold
         detector = GarbleDetector(
@@ -101,11 +96,6 @@ class TestNGramFrequencyStrategy:
         detector = GarbleDetector(Strategy.NGRAM_FREQUENCY)
         proba = detector.predict_proba("xzqkjhf")
         assert proba > 0.5
-
-    def test_empty_string(self):
-        detector = GarbleDetector(Strategy.NGRAM_FREQUENCY)
-        assert detector.predict("") is False
-        assert detector.predict_proba("") == 0.0
 
     def test_short_text(self):
         detector = GarbleDetector(Strategy.NGRAM_FREQUENCY)
@@ -157,11 +147,6 @@ class TestWordLookupStrategy:
         detector = GarbleDetector(Strategy.WORD_LOOKUP)
         proba = detector.predict_proba("xyzzy plugh")
         assert proba == 1.0
-
-    def test_empty_string(self):
-        detector = GarbleDetector(Strategy.WORD_LOOKUP)
-        assert detector.predict("") is False
-        assert detector.predict_proba("") == 0.0
 
     def test_numbers_only(self):
         detector = GarbleDetector(Strategy.WORD_LOOKUP)

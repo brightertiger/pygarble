@@ -9,8 +9,7 @@ Meaningful Hindi and other non-English text may be flagged; this is expected
 for English-specific scoring. It is not a language identifier or a semantic
 nonsense detector. Scores are heuristics, not calibrated probabilities.
 
-These docs cover the upcoming 0.9.0 API, not yet published to PyPI.
-See :doc:`installation` for published-package and source installation options.
+See :doc:`installation` to install the package.
 
 .. toctree::
    :maxdepth: 2

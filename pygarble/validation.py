@@ -11,7 +11,10 @@ T = TypeVar("T")
 def finite_number(name: str, value: object) -> float:
     if isinstance(value, bool) or not isinstance(value, Real):
         raise ValueError(f"{name} must be a finite number")
-    number = float(value)
+    try:
+        number = float(value)
+    except OverflowError:
+        raise ValueError(f"{name} must be a finite number") from None
     if not math.isfinite(number):
         raise ValueError(f"{name} must be a finite number")
     return number

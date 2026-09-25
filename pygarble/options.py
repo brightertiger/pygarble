@@ -1,7 +1,10 @@
 """Accepted legacy strategy settings. Unknown settings warn before removal."""
 
+import os
+import sys
 import warnings
-from typing import Any, Mapping
+from types import FrameType
+from typing import Any, FrozenSet, List, Mapping, Optional
 
 PARAMETERS = {
     "PatternMatchingStrategy": [
@@ -34,6 +37,7 @@ PARAMETERS = {
         "consonant_cluster_len",
         "max_string_length",
         "max_vowel_ratio",
+        "min_length",
         "min_vowel_ratio",
     ],
     "VowelPatternStrategy": [
@@ -147,16 +151,43 @@ PARAMETERS = {
 }
 
 
-def validate_options(strategy: str, options: Mapping[str, Any]) -> None:
+def accepted_options(strategy: str) -> Optional[FrozenSet[str]]:
+    """Settings a strategy class accepts, or None if unrestricted."""
     accepted = PARAMETERS.get(strategy)
+    return None if accepted is None else frozenset(accepted)
+
+
+def unknown_options(strategy: str, options: Mapping[str, Any]) -> List[str]:
+    accepted = accepted_options(strategy)
     if accepted is None:
+        return []
+    return sorted(set(options) - accepted)
+
+
+def _external_stacklevel() -> int:
+    """Stack level of the first frame outside the pygarble package."""
+    # sys._getframe is CPython/PyPy-specific; both are supported targets.
+    package = os.path.dirname(os.path.abspath(__file__)) + os.sep
+    frame: Optional[FrameType] = sys._getframe(1)
+    level = 1
+    while frame is not None and os.path.abspath(
+        frame.f_code.co_filename
+    ).startswith(package):
+        frame = frame.f_back
+        level += 1
+    return level
+
+
+def warn_unknown_options(strategy: str, unknown: List[str]) -> None:
+    if not unknown:
         return
-    unknown = sorted(set(options) - set(accepted))
-    if unknown:
-        warnings.warn(
-            f"Unknown settings for {strategy}: {', '.join(unknown)}; "
-            "use strategy_kwargs to configure ensemble members separately. "
-            "Unknown settings will become errors in a future release.",
-            DeprecationWarning,
-            stacklevel=3,
-        )
+    warnings.warn(
+        f"Unknown settings for {strategy}: {', '.join(unknown)}. "
+        "Unknown settings will become errors in a future release.",
+        FutureWarning,
+        stacklevel=_external_stacklevel(),
+    )
+
+
+def validate_options(strategy: str, options: Mapping[str, Any]) -> None:
+    warn_unknown_options(strategy, unknown_options(strategy, options))

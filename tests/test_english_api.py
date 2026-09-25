@@ -95,7 +95,7 @@ def test_member_options_do_not_collide_with_detector_threshold():
 
 
 def test_unknown_settings_warn():
-    with pytest.warns(DeprecationWarning, match="min_lenght"):
+    with pytest.warns(FutureWarning, match="min_lenght"):
         GarbleDetector(Strategy.MARKOV_CHAIN, min_lenght=8)
 
 
@@ -318,10 +318,11 @@ def test_decisions_are_deterministic_across_processes():
 
 
 def test_frozen_challenge_has_no_family_leakage():
-    from regression.evaluate import challenge
-
-    assert challenge("development")
-    assert challenge("holdout")
+    evaluate = pytest.importorskip(
+        "regression.evaluate", reason="regression/ is not shipped in sdist"
+    )
+    assert evaluate.challenge("development")
+    assert evaluate.challenge("holdout")
 
 
 def test_model_manifest_matches_packaged_data():

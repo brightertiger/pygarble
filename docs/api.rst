@@ -5,9 +5,8 @@ Language strategies target English. Non-English text, including meaningful Hindi
 may be classified as gibberish. Scores are heuristic values, not calibrated
 probabilities; the library does not establish semantic meaning or identify languages.
 
-This reference describes the upcoming 0.9.0 API. See :doc:`installation` for
-source installation and :doc:`migration` for changed behavior. Public imports
-are available from ``pygarble``.
+This reference describes the 0.9.0 API. See :doc:`migration` for changed
+behavior. Public imports are available from ``pygarble``.
 
 GarbleDetector
 --------------
@@ -20,6 +19,10 @@ EnsembleDetector
 
 .. autoclass:: pygarble.ensemble.EnsembleDetector
    :members: predict, predict_proba, score, analyze
+
+Under ``voting='majority'`` the decision counts member votes, so
+``Analysis.garbled`` can be ``True`` while ``Analysis.score`` is below
+threshold.
 
 Both classes accept a string or list of strings. ``predict`` returns bools,
 ``score`` and ``predict_proba`` return floats, and ``analyze`` returns immutable
@@ -58,11 +61,15 @@ Both constructors accept these settings:
      - Settings for one strategy in ``GarbleDetector``; mapping from selected
        ``Strategy`` members to their settings in ``EnsembleDetector``.
 
-``GarbleDetector`` requires a ``Strategy`` enum member, not its string value.
+``GarbleDetector`` accepts a ``Strategy`` enum member or its string value,
+such as ``"markov_chain"``; an unknown name raises ``ValueError``.
 ``EnsembleDetector`` accepts either a named ``profile`` or a nonempty list of
 ``strategies``. Select one mechanism. ``weights`` correspond to strategy-list
 order and are required for ``voting="weighted"``. Weights must be finite,
-nonnegative, correctly sized, and not all zero.
+nonnegative, correctly sized, and not all zero. ``weights`` are only used with
+``voting="weighted"``; passing them with any other voting mode emits a
+``FutureWarning`` and they are ignored. This will become an error in a future
+release.
 
 .. code-block:: python
 
@@ -128,8 +135,12 @@ threaded results, not scalar/serial execution or a hard wall-clock deadline.
 Python workers cannot be killed; executor shutdown may wait. Errors and timeouts
 propagate rather than producing clean fallback predictions.
 
-Unknown legacy strategy options emit ``DeprecationWarning``. Scores and decisions
-may change after the documented preprocessing and correctness fixes, including
+Unknown legacy strategy options emit ``FutureWarning``, attributed to the line
+in your code that constructed the detector; they will become errors in a future
+release. ``EnsembleDetector`` forwards its shared keyword arguments only to the
+member strategies that accept them, and warns once for any key that no selected
+member accepts. Unknown keys in ``strategy_kwargs`` warn once per member and are
+not passed on. Scores and decisions may change after the documented preprocessing and correctness fixes, including
 when the ``legacy`` strategy set is selected.
 
 Result records

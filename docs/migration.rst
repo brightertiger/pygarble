@@ -1,9 +1,9 @@
 Upgrading to 0.9.0
 ==================
 
-Version 0.9.0 is prepared in the repository but is not yet published to PyPI.
-See :doc:`installation` to try it from source. Existing imports from ``pygarble``
-and ``pygarble.core`` remain available; no runtime dependencies were added.
+Version 0.9.0 replaces the 0.8 strategy list with profiles and the analyze API.
+Existing imports from ``pygarble`` and ``pygarble.core`` remain available; no
+runtime dependencies were added.
 
 Review default decisions
 ------------------------
@@ -31,8 +31,12 @@ Scores and settings
 * ``score`` aliases ``predict_proba``; neither is a calibrated probability.
 * ``WORD_LOOKUP.unknown_threshold`` now affects the score. Its default 0.5 retains
   the prior mapping; nondefault settings can change results.
-* Unknown legacy strategy options emit ``DeprecationWarning``. Check the accepted
-  names in :doc:`strategies` and use ``strategy_kwargs`` for per-member settings.
+* Unknown legacy strategy options emit ``FutureWarning`` attributed to your
+  calling code, and will become errors in a future release. Check the accepted
+  names in :doc:`strategies`.
+* ``EnsembleDetector`` forwards shared keyword arguments only to members that
+  accept them, with one warning for any key no selected member accepts. Use
+  ``strategy_kwargs`` for per-member settings.
 * Use ``strategy_kwargs`` to configure a strategy's own ``threshold`` independently
   of the detector's decision threshold.
 * Invalid numeric settings, including nonfinite weights, raise ``ValueError``.

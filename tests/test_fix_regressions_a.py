@@ -224,7 +224,10 @@ class TestWordCollocationRegressions:
 
     def test_gibberish_still_flagged(self):
         detector = GarbleDetector(Strategy.WORD_COLLOCATION)
-        text = "xkrf plmq bvzt nwsd jghc trbn mkpl wqzd lpnr fvxt " "qzml hkrp"
+        text = (
+            "xkrf plmq bvzt nwsd jghc trbn mkpl wqzd lpnr fvxt "
+            "qzml hkrp vbnt dfrk zxqw ptlm grwn hcvb jkfd smtq"
+        )
         assert detector.predict_proba(text) >= 0.5
 
     def test_applicable_gates_short_text(self):

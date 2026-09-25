@@ -56,8 +56,6 @@ class NGramFrequencyStrategy(BaseStrategy):
             raise ValueError(
                 "common_ratio_threshold must be between 0.0 and 1.0"
             )
-        if self.min_length < 1:
-            raise ValueError("min_length must be at least 1")
 
     def _extract_trigrams(self, text: str) -> list:
         """Extract alphabetic trigrams from words the dictionary can't

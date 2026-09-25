@@ -6,9 +6,9 @@ and suffixes (-tion, -ing, -ly, -ness). Garbled text rarely produces
 words with these patterns.
 """
 
-import re
 from typing import Any, List
 
+from ..preprocessing import ascii_alpha_words
 from ..validation import parameter_value
 from .base import BaseStrategy
 
@@ -134,7 +134,7 @@ class AffixDetectionStrategy(BaseStrategy):
 
     def _tokenize(self, text: str) -> List[str]:
         """Extract lowercase alphabetic words meeting minimum length."""
-        words = re.findall(r"[a-zA-Z]+", text.lower())
+        words = ascii_alpha_words(text)
         return [w for w in words if len(w) >= self.min_word_length]
 
     @staticmethod
