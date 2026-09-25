@@ -46,6 +46,7 @@ EDGE_INPUTS = [
     "pаypal login",
     "café latté",
     "test test test",
+    "please review qxzkvbwqe\u0301 qzxkvjwp before delivery",
     (
         "Sure. To rotate the logs, set the handler to RotatingFileHandler "
         "with a maximum size of ten megabytes and keep five backups. "

@@ -44,3 +44,15 @@ def test_golden_texts_include_decomposed_combining_marks():
         for line in golden.OUTPUT.read_text(encoding="utf-8").splitlines()
     }
     assert any(has_decomposed_latin(t) for t in texts)
+
+
+def test_golden_pins_spans_across_a_combining_mark():
+    # A span ending after e + U+0301 fixes whether a port counts the mark
+    # as its own code point.
+    golden = pytest.importorskip("regression.golden")
+    rows = [
+        json.loads(line)
+        for line in golden.OUTPUT.read_text(encoding="utf-8").splitlines()
+    ]
+    assert len(rows) == 918
+    assert any("́" in r["text"] and r["spans"] for r in rows)
