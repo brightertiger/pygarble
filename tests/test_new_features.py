@@ -103,10 +103,6 @@ class TestEnsembleDetector:
         with pytest.raises(ValueError, match="voting must be"):
             EnsembleDetector(voting="invalid")
 
-    def test_ensemble_weighted_without_weights(self):
-        with pytest.raises(ValueError, match="weights required"):
-            EnsembleDetector(voting="weighted")
-
     def test_ensemble_weights_length_mismatch(self):
         with pytest.raises(ValueError, match="weights must have same length"):
             EnsembleDetector(

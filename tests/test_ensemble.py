@@ -5,6 +5,7 @@ import warnings
 import pytest
 
 from pygarble import EnsembleDetector, GarbleDetector, Strategy
+from pygarble.ensemble import PROFILES
 
 
 def test_unknown_setting_is_a_future_warning_at_the_call_site():
@@ -94,3 +95,41 @@ def test_weighted_mean_matches_plain_formula():
     scores = {s.strategy: s.score for s in analysis.signals if s.applicable}
     expected = (3 * scores["markov_chain"] + 1 * scores["word_anomaly"]) / 4
     assert analysis.score == pytest.approx(expected)
+
+
+@pytest.mark.parametrize("profile", sorted(PROFILES))
+def test_every_profile_constructs_and_votes_any(profile):
+    detector = EnsembleDetector(profile=profile)
+    assert detector.profile == profile
+    assert detector.voting == "any"
+    assert [d.strategy for d in detector._detectors] == list(PROFILES[profile])
+
+
+def test_custom_strategy_list_votes_majority():
+    detector = EnsembleDetector(strategies=list(PROFILES["english"]))
+    assert detector.profile == "custom"
+    assert detector.voting == "majority"
+
+
+def test_unknown_profile_and_profile_plus_strategies_are_errors():
+    with pytest.raises(ValueError, match="unknown profile"):
+        EnsembleDetector(profile="nope")
+    with pytest.raises(ValueError, match="either profile or strategies"):
+        EnsembleDetector(profile="english", strategies=[Strategy.MARKOV_CHAIN])
+
+
+@pytest.mark.parametrize(
+    "profile,text,expected",
+    [
+        ("english", "The quick brown fox jumps over the lazy dog", False),
+        ("english", "qxzjkwpv bnmqwer zxcvbnm", True),
+        ("english_extended", "The strengths of the plan are clear", False),
+        ("legacy", "hello world", False),
+        ("corruption", "CafÃ© crÃ¨me", True),
+        ("corruption", "Café crème", False),
+        ("spoofing", "pаypal login", True),
+        ("spoofing", "paypal login", False),
+    ],
+)
+def test_profile_decisions(profile, text, expected):
+    assert EnsembleDetector(profile=profile).predict(text) is expected
