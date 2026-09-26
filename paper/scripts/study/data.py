@@ -9,7 +9,8 @@ from collections import Counter
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
-ROOT = Path(__file__).resolve().parent
+from .paths import ROOT
+
 FAMILIES = ("bible", "secreta", "wiki")
 LENGTHS = (100, 400, 800)
 ENGLISH = {
@@ -178,7 +179,7 @@ def overlap_report(
 
     old_strings = []
     old_files = []
-    for path in sorted((ROOT.parents[1] / "regression").glob("*.json")):
+    for path in sorted((ROOT.parent / "regression").glob("*.json")):
         old_files.append(
             {"file": path.name, "sha256": digest(path.read_bytes())}
         )

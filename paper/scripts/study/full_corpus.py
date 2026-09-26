@@ -16,6 +16,7 @@ from pathlib import Path
 from .data import ROOT, digest, download, write_json
 from .detectors import make_model
 from .hf_backend import HFModel, verify_model
+from .paths import SCRIPTS
 
 PACKAGE_METHODS = (
     "english",
@@ -111,8 +112,9 @@ def chunks(doc: dict) -> list:
 
 def fingerprint() -> dict:
     paths = [
-        ROOT / name
+        (SCRIPTS if name.endswith(".py") else ROOT) / name
         for name in (
+            "paths.py",
             "full_corpus.py",
             "full_metrics.py",
             "hf_backend.py",

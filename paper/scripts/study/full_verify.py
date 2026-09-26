@@ -21,11 +21,18 @@ from .hf_backend import HFModel, policies, verify_model
 
 
 def verify(output: Path, replay: bool) -> dict:
+    if (
+        json.loads((output / "code-manifest.json").read_text())
+        != fingerprint()
+    ):
+        raise ValueError(
+            "Evaluation code differs from the saved manifest. Verify a new "
+            "run with --output paper/study/reproduction-full, or use the "
+            "historical checkout documented in paper/study/README.md to "
+            "verify the frozen paper results."
+        )
     download(ROOT / ".cache")
     verify_model(ROOT / ".cache/hf-model")
-    assert json.loads((output / "code-manifest.json").read_text()) == (
-        fingerprint()
-    )
     docs = load_documents(ROOT / ".cache")
     manifest = [{k: v for k, v in d.items() if k != "text"} for d in docs]
     assert json.loads((output / "documents.json").read_text()) == manifest

@@ -1,14 +1,14 @@
 """Render publication figures from saved results; no detector calls."""
 
 import json
-from pathlib import Path
 
 import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 
-ROOT = Path(__file__).resolve().parent
+from .paths import ROOT
+
 ORDER = [
     "english",
     "english_extended",

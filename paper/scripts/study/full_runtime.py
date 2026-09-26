@@ -102,7 +102,7 @@ def main() -> None:
                 [
                     sys.executable,
                     "-m",
-                    "paper.study.full_runtime",
+                    "paper.scripts.study.full_runtime",
                     "--method",
                     method,
                     "--mode",

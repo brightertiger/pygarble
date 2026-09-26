@@ -16,7 +16,12 @@ as independent research samples. See the [fixed extension protocol](full_corpus_
 
 ## Quick checks
 
-From the repository root, `make benchmark-check` runs the 25 standard-library
+Python tools and study tests live in [`../scripts/study/`](../scripts/study/).
+This directory holds the manuscript, protocols, provenance and measured results.
+The commands below run from the repository root; caches and outputs still
+live here, independently of where the scripts are located.
+
+From the repository root, `make benchmark-check` runs the 27 standard-library
 study tests, including saved confusion-count verification. CI runs this without
 model dependencies. `make benchmark-prepare` downloads pinned assets, and
 `make benchmark` runs a new comparison to ignored `reproduction-full/` after
@@ -33,9 +38,9 @@ Use a dedicated environment if desired:
 python3.12 -m venv paper/study/.cache/hf-venv
 source paper/study/.cache/hf-venv/bin/activate
 python -m pip install -r paper/study/requirements-hf.txt
-python -m unittest paper.study.test_study paper.study.test_full_corpus paper.study.test_chunk_metrics -v
-python -m paper.study.full_corpus --download-model
-python -m paper.study.full_corpus --output paper/study/reproduction-full
+python -m unittest paper.scripts.study.test_study paper.scripts.study.test_full_corpus paper.scripts.study.test_chunk_metrics -v
+python -m paper.scripts.study.full_corpus --download-model
+python -m paper.scripts.study.full_corpus --output paper/study/reproduction-full
 ```
 
 Preparation retrieves about 14 MB of corpus archives and 268 MB of model
@@ -51,11 +56,10 @@ runs the evaluation. Subsequent scoring uses local model files and no network
 inference. The source cache is also verified on reuse. An input exceeding the
 model's token limit would stop the run instead of truncating silently.
 
-To validate the checked-in results after preparing source/model assets:
+To validate a new run after preparing source/model assets:
 
 ```bash
-python -m paper.study.full_verify --replay
-python -m paper.study.full_diagnostics
+python -m paper.scripts.study.full_verify --output paper/study/reproduction-full --replay
 ```
 
 `full_verify` checks all saved input identities, probabilities, decisions,
@@ -65,12 +69,27 @@ This is a fixed subset replay, not a second complete neural run. Replay allows
 probability differences up to 1e-5 from batch padding but requires identical
 decisions and exact pygarble scores/public-API decisions.
 
-For a new output directory, pass `--output` to `full_verify`. Recompute saved
+The checked-in results retain their original script paths and hashes. For
+exact verification or replay of those frozen results, use the pre-relocation
+checkout and its original commands (install the optional requirements and
+prepare its cache first):
+
+```bash
+git worktree add --detach /tmp/pygarble-study-frozen b7f4aaf
+cd /tmp/pygarble-study-frozen
+python -m pip install -r paper/study/requirements-hf.txt
+python -m paper.study.full_corpus --download-model
+python -m paper.study.full_verify --replay
+```
+
+Run subsequent commands from the current checkout. The relocation does not
+rewrite historical manifests or claim new scripts are byte-identical to the
+frozen sources. Recompute saved
 summaries without model inference using `full_corpus --analyze-only --output ...`.
 Do not run CPU benchmarks concurrently with the exhaustive model evaluation:
 
 ```bash
-python -m paper.study.full_runtime
+python -m paper.scripts.study.full_runtime
 ```
 
 This re-measures five pygarble configurations and the shared HF model in
@@ -82,10 +101,10 @@ CPU time, memory and disk; no external inference/compute fee is incurred.
 
 ```bash
 python -m pip install -r paper/study/requirements-figures.txt
-python -m paper.study.chunk_metrics
-python -m paper.study.full_figures
+python -m paper.scripts.study.chunk_metrics
+python -m paper.scripts.study.full_figures
 # Requires Pandoc and Tectonic on PATH:
-python -m paper.study.build_paper
+python -m paper.scripts.study.build_paper
 ```
 
 Edit `manuscript.template.md`; `full_paper.py` inserts measured tables and
@@ -110,6 +129,9 @@ arXiv workflow awaits category endorsement; see the publication status.
 
 ## Artifact map
 
+Python filenames below refer to `../scripts/study/`; artifact paths refer to
+this directory.
+
 - `full_corpus_protocol.md`: fixed extension methods and limitations.
 - `sources.json`, `hf_model.json`, `LICENSES.md`: source/model provenance,
   immutable revisions, checksums and separate rights.
@@ -133,9 +155,9 @@ are required by this study.
 
 ## Retained preliminary experiment
 
-`results/`, `protocol.md`, `data.py`, `detectors.py`, `metrics.py`, `run.py`,
-`runtime.py` and `verify_results.py` retain the earlier capped experiment and
-its frozen code. That experiment used 38 positive prefixes and 400 English
+`results/` and `protocol.md` retain the earlier capped experiment. Its runners
+now live in `../scripts/study/`, while the frozen code remains available in
+the historical checkout below. That experiment used 38 positive prefixes and 400 English
 control blocks, additional length views and source-held-out calibration of
 character models and package thresholds. It is preliminary and overlaps the
 full evaluation. Its character-model calibration is not represented as a

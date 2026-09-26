@@ -12,7 +12,8 @@ The paper study is the reference for reported gibberish benchmark results;
 - `study/manuscript.template.md`, `references.bib`, `article.tex`, `tables.lua`
   and the two referenced figure PDFs: editable paper sources and layout.
 - `study/manuscript.pdf`: review copy, retained for easy access.
-- `study/`: pinned protocols, provenance, study code and tests.
+- `study/`: pinned protocols, provenance, manuscript and measured results.
+- `scripts/study/`: study runners, analysis, paper generation and study tests.
 - `regression/`: engineering evaluation scripts, fixtures and golden outputs.
 - `scripts/`: package data generation, strategy docs and discovery checks.
 - `study/full-results/`: frozen complete-corpus measurements and predictions.
