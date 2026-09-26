@@ -145,6 +145,57 @@ def _jwt_header_ok(token: str) -> bool:
         return False
 
 
+_NESTING = frozenset({"bearer_token", "url_credentials"})
+_KNOWN_KINDS = frozenset(entry["kind"] for entry in KNOWN_PATTERNS)
+
+
+def _located(match: "re.Match[str]") -> Tuple[Dict[str, Any], int, int]:
+    """The table entry of a known-alternation match and its value span."""
+    index = int(str(match.lastgroup)[1:])
+    group = f"v{index}"
+    if group in match.groupdict():
+        start, end = match.span(group)
+    else:
+        start, end = match.span()
+    return _TABLE[index], start, end
+
+
+def _finding(
+    entry: Dict[str, Any], start: int, end: int, text: str
+) -> Optional[Finding]:
+    value = text[start:end]
+    # Bearer values are not entropy-gated, only placeholder-gated.
+    if entry.get("filter") == "placeholder" and is_placeholder(value):
+        return None
+    confidence = entry["confidence"]
+    if entry.get("verify") == "jwt_header" and not _jwt_header_ok(value):
+        confidence = 0.8
+    return Finding(
+        CATEGORY, entry["kind"], start, end, confidence, entry["reason"]
+    )
+
+
+class _Coverage:
+    """Overlap test against fixed spans for queries in ascending start
+    order: one forward sweep over the merged spans, linear overall."""
+
+    def __init__(self, spans: Iterable[Tuple[int, int]]) -> None:
+        merged: List[List[int]] = []
+        for start, end in sorted(spans):
+            if merged and start <= merged[-1][1]:
+                merged[-1][1] = max(merged[-1][1], end)
+            else:
+                merged.append([start, end])
+        self.spans = merged
+        self.index = 0
+
+    def __call__(self, start: int, end: int) -> bool:
+        spans = self.spans
+        while self.index < len(spans) and spans[self.index][1] <= start:
+            self.index += 1
+        return self.index < len(spans) and spans[self.index][0] < end
+
+
 def _validate_kinds(
     kinds: Optional[Iterable[str]], exclude: Iterable[str]
 ) -> FrozenSet[str]:
@@ -176,39 +227,39 @@ class SecretsDetector:
         self.kinds = _validate_kinds(kinds, exclude_kinds)
         self.without_context = bool(without_context)
 
-    def _known(self, text: str, lowered: Optional[str]) -> List[Finding]:
+    def _known(
+        self, text: str, lowered: Optional[str], kinds: FrozenSet[str]
+    ) -> List[Finding]:
+        """Known-shape findings of the given kinds, in text order.
+
+        Only the selected kinds enter the alternation, so an unselected
+        kind never consumes text. A bearer or URL-credentials value is
+        searched again for vendor tokens and JWTs, which are reported as
+        additional findings nested inside it.
+        """
         found: List[Finding] = []
-        live = _live_patterns(text, lowered)
+        live = tuple(
+            i
+            for i in _live_patterns(text, lowered)
+            if _TABLE[i]["kind"] in kinds
+        )
         if not live:
             return found
+        inner = tuple(i for i in live if _TABLE[i]["kind"] not in _NESTING)
+        inner_pattern = _known_subset(inner) if inner else None
         for match in _known_subset(live).finditer(text):
-            index = int(str(match.lastgroup)[1:])
-            entry = _TABLE[index]
-            if entry["kind"] not in self.kinds:
+            entry, start, end = _located(match)
+            finding = _finding(entry, start, end, text)
+            if finding is not None:
+                found.append(finding)
+            if inner_pattern is None or entry["kind"] not in _NESTING:
                 continue
-            group = f"v{index}" if f"v{index}" in match.groupdict() else None
-            start, end = (
-                match.span(group) if group is not None else match.span()
-            )
-            value = text[start:end]
-            # Bearer values are not entropy-gated, only placeholder-gated.
-            if entry.get("filter") == "placeholder" and is_placeholder(value):
-                continue
-            confidence = entry["confidence"]
-            if entry.get("verify") == "jwt_header" and not _jwt_header_ok(
-                value
-            ):
-                confidence = 0.8
-            found.append(
-                Finding(
-                    CATEGORY,
-                    entry["kind"],
-                    start,
-                    end,
-                    confidence,
-                    entry["reason"],
-                )
-            )
+            # Nested search runs even when the outer value is rejected as
+            # a placeholder: the outer match consumed the text either way.
+            for sub in inner_pattern.finditer(text, start, end):
+                nested = _finding(*_located(sub), text)
+                if nested is not None:
+                    found.append(nested)
         return found
 
     def _keyword(self, text: str, lowered: Optional[str]) -> List[Finding]:
@@ -235,19 +286,17 @@ class SecretsDetector:
         self, text: str, taken: List[Tuple[int, int]]
     ) -> List[Finding]:
         found: List[Finding] = []
-
-        def covered(start: int, end: int) -> bool:
-            return any(s < end and start < e for s, e in taken)
-
         for pattern, limit in (
             (_HEX_TOKEN, HEX_LIMIT),
             (_BASE64_TOKEN, BASE64_LIMIT),
         ):
+            # Matches of one pattern never overlap each other, so checking
+            # them against the spans taken before this pattern suffices.
+            covered = _Coverage(taken)
             for match in pattern.finditer(text):
                 start, end = match.span()
                 if covered(start, end) or shannon(match.group()) < limit:
                     continue
-                taken.append((start, end))
                 found.append(
                     Finding(
                         CATEGORY,
@@ -258,24 +307,38 @@ class SecretsDetector:
                         "entropy",
                     )
                 )
+            taken = taken + [(f.start, f.end) for f in found]
         return found
 
     def detect(self, text: str) -> Tuple[Finding, ...]:
         if not isinstance(text, str):
             raise TypeError("text must be a string")
         lowered = _lowered(text)
-        findings = self._known(text, lowered)
+        known_kinds = self.kinds & _KNOWN_KINDS
+        findings = self._known(text, lowered, known_kinds)
+        standalone = self.without_context and (
+            "high_entropy_string" in self.kinds
+        )
+        if "generic_secret" not in self.kinds and not standalone:
+            return tuple(sorted(set(findings), key=sort_key))
+        # The context kinds defer to every known finding, selected or not,
+        # so selecting a kind only filters the default output.
+        if known_kinds == _KNOWN_KINDS:
+            every_known = findings
+        else:
+            every_known = self._known(text, lowered, _KNOWN_KINDS)
+        # A known-prefix finding already names the value; drop keyword
+        # findings that overlap one so a value is reported once.
+        covered = _Coverage([(f.start, f.end) for f in every_known])
+        keyword = [
+            f
+            for f in self._keyword(text, lowered)
+            if not covered(f.start, f.end)
+        ]
         if "generic_secret" in self.kinds:
-            # A known-prefix finding already names the value; drop keyword
-            # findings that overlap one so a value is reported once.
-            known = [(f.start, f.end) for f in findings]
-            findings.extend(
-                f
-                for f in self._keyword(text, lowered)
-                if not any(s < f.end and f.start < e for s, e in known)
-            )
-        if self.without_context and "high_entropy_string" in self.kinds:
-            taken = [(f.start, f.end) for f in findings]
+            findings.extend(keyword)
+        if standalone:
+            taken = [(f.start, f.end) for f in every_known + keyword]
             findings.extend(self._standalone(text, taken))
         return tuple(sorted(set(findings), key=sort_key))
 

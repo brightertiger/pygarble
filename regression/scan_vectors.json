@@ -2806,5 +2806,220 @@
   ],
   "note": "us phone bad exchange",
   "expected": []
+ },
+ {
+  "text": "Authorization: Bearer ghp_\u00611B2c3D4e5F6g7H8i9J0k1L2m3N4o5P6q7R8",
+  "categories": [
+   "secrets"
+  ],
+  "note": "bearer + github, nested",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "bearer_token",
+    "start": 22,
+    "end": 62,
+    "confidence": 0.8,
+    "reason": "bearer_prefix"
+   },
+   {
+    "category": "secrets",
+    "kind": "github_token",
+    "start": 22,
+    "end": 62,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "Authorization: Bearer ghp_\u00611B2c3D4e5F6g7H8i9J0k1L2m3N4o5P6q7R8",
+  "categories": [
+   "secrets"
+  ],
+  "note": "bearer + github, bearer excluded",
+  "options": {
+   "exclude_kinds": [
+    "bearer_token"
+   ]
+  },
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "github_token",
+    "start": 22,
+    "end": 62,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "Authorization: Bearer ghp_\u00611B2c3D4e5F6g7H8i9J0k1L2m3N4o5P6q7R8",
+  "categories": [
+   "secrets"
+  ],
+  "note": "bearer + github, github_token only",
+  "options": {
+   "kinds": [
+    "github_token"
+   ]
+  },
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "github_token",
+    "start": 22,
+    "end": 62,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+  "categories": [
+   "secrets"
+  ],
+  "note": "bearer + jwt, nested",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "bearer_token",
+    "start": 22,
+    "end": 130,
+    "confidence": 0.8,
+    "reason": "bearer_prefix"
+   },
+   {
+    "category": "secrets",
+    "kind": "jwt",
+    "start": 22,
+    "end": 130,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+  "categories": [
+   "secrets"
+  ],
+  "note": "bearer + jwt, bearer excluded",
+  "options": {
+   "exclude_kinds": [
+    "bearer_token"
+   ]
+  },
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "jwt",
+    "start": 22,
+    "end": 130,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+  "categories": [
+   "secrets"
+  ],
+  "note": "bearer + jwt, jwt only",
+  "options": {
+   "kinds": [
+    "jwt"
+   ]
+  },
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "jwt",
+    "start": 22,
+    "end": 130,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "git clone https://x:ghp_\u00611B2c3D4e5F6g7H8i9J0k1L2m3N4o5P6q7R8@github.com/o/r.git",
+  "categories": [
+   "secrets"
+  ],
+  "note": "url userinfo + github, nested",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "url_credentials",
+    "start": 18,
+    "end": 60,
+    "confidence": 0.9,
+    "reason": "url_userinfo"
+   },
+   {
+    "category": "secrets",
+    "kind": "github_token",
+    "start": 20,
+    "end": 60,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "git clone https://x:ghp_\u00611B2c3D4e5F6g7H8i9J0k1L2m3N4o5P6q7R8@github.com/o/r.git",
+  "categories": [
+   "secrets"
+  ],
+  "note": "url userinfo + github, bearer excluded",
+  "options": {
+   "exclude_kinds": [
+    "bearer_token"
+   ]
+  },
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "url_credentials",
+    "start": 18,
+    "end": 60,
+    "confidence": 0.9,
+    "reason": "url_userinfo"
+   },
+   {
+    "category": "secrets",
+    "kind": "github_token",
+    "start": 20,
+    "end": 60,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "git clone https://x:ghp_\u00611B2c3D4e5F6g7H8i9J0k1L2m3N4o5P6q7R8@github.com/o/r.git",
+  "categories": [
+   "secrets"
+  ],
+  "note": "url userinfo + github, github_token only",
+  "options": {
+   "kinds": [
+    "github_token"
+   ]
+  },
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "github_token",
+    "start": 20,
+    "end": 60,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
  }
 ]

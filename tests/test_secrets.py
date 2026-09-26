@@ -294,3 +294,80 @@ def test_keyword_finding_dropped_when_known_prefix_covers_value():
     assert [f.kind for f in detect("password = 'q8Zt3vP2xL9mK4nR'")] == [
         "generic_secret"
     ]
+
+
+NESTED_CASES = [
+    ("Authorization: Bearer " + GH, "bearer_token", "github_token"),
+    ("Authorization: Bearer " + JWT, "bearer_token", "jwt"),
+    (f"https://x:{GH}@github.com", "url_credentials", "github_token"),
+    (f"https://x:{JWT}@api.example.com/v1", "url_credentials", "jwt"),
+]
+
+
+@pytest.mark.parametrize("text,outer,inner", NESTED_CASES)
+def test_vendor_token_inside_bearer_or_url_is_a_nested_finding(
+    text, outer, inner
+):
+    findings = detect(text)
+    assert [f.kind for f in findings] == [outer, inner]
+    wrapper, nested = findings
+    assert wrapper.start <= nested.start and nested.end <= wrapper.end
+    token = GH if inner == "github_token" else JWT
+    assert text[nested.start : nested.end] == token
+    assert nested.confidence == 1.0
+
+
+@pytest.mark.parametrize("text,outer,inner", NESTED_CASES)
+def test_unselected_wrapper_kind_never_hides_the_token(text, outer, inner):
+    token = GH if inner == "github_token" else JWT
+    for detector in (
+        SecretsDetector(exclude_kinds=[outer]),
+        SecretsDetector(kinds=[inner]),
+    ):
+        (finding,) = [f for f in detector.detect(text) if f.kind == inner]
+        assert text[finding.start : finding.end] == token
+    assert [f.kind for f in SecretsDetector(kinds=[outer]).detect(text)] == [
+        outer
+    ]
+
+
+def test_high_min_confidence_still_redacts_token_behind_bearer():
+    from pygarble import Scanner
+
+    text = "Authorization: Bearer " + GH
+    scanner = Scanner(["secrets"], min_confidence=0.9)
+    assert scanner.redact(text).text == "Authorization: Bearer [GITHUB_TOKEN]"
+    assert GH not in scanner.redact(text, mode="mask").text
+
+
+def _secrets_vector_texts():
+    import json
+    from pathlib import Path
+
+    path = Path(__file__).resolve().parents[1] / "regression"
+    texts = [
+        v
+        for e in KNOWN_PATTERNS
+        for key in ("positive", "negative")
+        for v in e["vectors"][key]
+    ]
+    texts += [text for text, _, _ in NESTED_CASES]
+    vectors = path / "scan_vectors.json"
+    if vectors.is_file():
+        rows = json.loads(vectors.read_text(encoding="utf-8"))
+        texts += [r["text"] for r in rows if "secrets" in r["categories"]]
+    return texts
+
+
+@pytest.mark.parametrize("without_context", [False, True])
+def test_kind_selection_only_filters_the_default_output(without_context):
+    for text in _secrets_vector_texts():
+        full = detect(text, without_context=without_context)
+        for kind in sorted(ALL_KINDS):
+            selected = detect(
+                text, kinds={kind}, without_context=without_context
+            )
+            assert selected == tuple(f for f in full if f.kind == kind), (
+                kind,
+                text,
+            )

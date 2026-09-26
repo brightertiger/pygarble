@@ -53,3 +53,34 @@ def test_one_megabyte_line_scans_in_linear_time():
     large = _scan_seconds(scanner, 1_000_000)
     assert large / max(small, 1e-3) < 20
     assert large < 30
+
+
+def _many_findings(kind, lines):
+    import hashlib
+
+    if kind == "keyword":
+        token = "ghp_" + "a1B2c3D4e5F6g7H8i9J0k1L2m3N4o5P6q7R8"
+        return "\n".join(
+            f"token={token} other_secret=q8Zt3vP2xL9mK4nR{i}"
+            for i in range(lines)
+        )
+    return "\n".join(
+        hashlib.sha256(str(i).encode()).hexdigest() for i in range(lines)
+    )
+
+
+@pytest.mark.parametrize("kind", ["keyword", "hashes"])
+def test_many_secret_findings_scale_linearly(kind):
+    # Overlap filtering between finding lists must not be O(n * m).
+    scanner = Scanner(categories=["secrets"], secrets_without_context=True)
+    scanner.scan(_many_findings(kind, 200))  # untimed warm-up
+    timings = []
+    for lines in (2_000, 8_000):
+        text = _many_findings(kind, lines)
+        start = time.perf_counter()
+        report = scanner.scan(text)
+        timings.append(time.perf_counter() - start)
+        assert len(report.findings) >= lines
+    small, large = timings
+    assert large / max(small, 1e-3) < 8
+    assert large < 5
