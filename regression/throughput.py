@@ -1,5 +1,14 @@
-"""Throughput of Scanner per category on a synthetic corpus. Numbers are
-published in the README with the machine noted; nothing is promised."""
+"""Throughput of Scanner per category on a synthetic corpus.
+
+The corpus is synthetic: five short ASCII English paragraphs (prose, a log
+line and a line of code) chosen at random with a fixed seed, with a finding
+(email, card, AWS key, profanity or gibberish) planted in about 5% of lines.
+By default each line is scanned on its own (about 110 bytes per call, so
+per-call overhead dominates); with --chunk-bytes N the lines are joined
+with newlines into documents of about N bytes, so MB/s reflects per-byte
+cost. MB is 10^6 UTF-8 bytes of scanned text. Numbers are published in the
+README with the machine noted; nothing is promised.
+"""
 
 import argparse
 import json
@@ -7,7 +16,7 @@ import random
 import sys
 import time
 from pathlib import Path
-from typing import Dict, List
+from typing import Any, Dict, List
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
@@ -33,7 +42,26 @@ PLANTED = [
 ]
 
 
-def build_corpus(size_bytes: int, seed: int = 7) -> List[str]:
+def _chunk(lines: List[str], chunk_bytes: int) -> List[str]:
+    chunks: List[str] = []
+    current: List[str] = []
+    size = 0
+    for line in lines:
+        current.append(line)
+        size += len(line.encode("utf-8")) + 1
+        if size >= chunk_bytes:
+            chunks.append("\n".join(current))
+            current, size = [], 0
+    if current:
+        chunks.append("\n".join(current))
+    return chunks
+
+
+def build_corpus(
+    size_bytes: int, seed: int = 7, chunk_bytes: int = 0
+) -> List[str]:
+    """Seeded lines totalling about size_bytes; with chunk_bytes > 0 the
+    same lines joined by newlines into texts of about chunk_bytes."""
     rng = random.Random(seed)
     lines: List[str] = []
     total = 0
@@ -43,20 +71,21 @@ def build_corpus(size_bytes: int, seed: int = 7) -> List[str]:
             line = line + " " + rng.choice(PLANTED)
         lines.append(line)
         total += len(line.encode("utf-8")) + 1
-    return lines
+    return _chunk(lines, chunk_bytes) if chunk_bytes > 0 else lines
 
 
-def measure(categories: List[str], lines: List[str]) -> Dict[str, float]:
+def measure(categories: List[str], texts: List[str]) -> Dict[str, Any]:
+    """Scan each text once; MB is 10^6 UTF-8 bytes of scanned text."""
     scanner = Scanner(categories=categories)
-    size = sum(len(line.encode("utf-8")) + 1 for line in lines)
+    size = sum(len(text.encode("utf-8")) for text in texts)
     findings = 0
     start = time.perf_counter()
-    for line in lines:
-        findings += len(scanner.scan(line).findings)
+    for text in texts:
+        findings += len(scanner.scan(text).findings)
     elapsed = time.perf_counter() - start
     return {
-        "mb_per_s": (size / 1e6) / elapsed if elapsed else float("inf"),
-        "lines_per_s": len(lines) / elapsed if elapsed else float("inf"),
+        "mb_per_s": (size / 1e6) / elapsed if elapsed else 0.0,
+        "lines_per_s": len(texts) / elapsed if elapsed else 0.0,
         "findings": findings,
         "seconds": elapsed,
     }
@@ -65,18 +94,28 @@ def measure(categories: List[str], lines: List[str]) -> Dict[str, float]:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--size-mb", type=float, default=10.0)
+    parser.add_argument(
+        "--chunk-bytes",
+        type=int,
+        default=0,
+        help="join lines into texts of about N bytes (0: one line per text)",
+    )
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
-    lines = build_corpus(int(args.size_mb * 1e6))
-    results = {}
+    texts = build_corpus(
+        int(args.size_mb * 1e6), chunk_bytes=max(0, args.chunk_bytes)
+    )
+    results: Dict[str, Any] = {}
     for category in CATEGORIES:
-        results[category] = measure([category], lines)
-    results["all"] = measure(list(CATEGORIES), lines)
-    results["rules_only"] = measure(["secrets", "pii", "profanity"], lines)
+        results[category] = measure([category], texts)
+    results["all"] = measure(list(CATEGORIES), texts)
+    results["rules_only"] = measure(["secrets", "pii", "profanity"], texts)
     if args.json:
+        results["chunk_bytes"] = max(0, args.chunk_bytes)
         print(json.dumps(results, indent=2, sort_keys=True))
         return 0
-    print(f"{'category':<12}{'MB/s':>10}{'lines/s':>12}{'findings':>10}")
+    print(f"chunk_bytes={max(0, args.chunk_bytes)} texts={len(texts)}")
+    print(f"{'category':<12}{'MB/s':>10}{'texts/s':>12}{'findings':>10}")
     for name, row in results.items():
         print(
             f"{name:<12}{row['mb_per_s']:>10.1f}{row['lines_per_s']:>12.0f}"
