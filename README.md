@@ -12,10 +12,10 @@
 ## Why pygarble
 
 - **Zero dependencies, no model downloads.** `pip install pygarble` and go; nothing touches the network.
-- **Deterministic and explainable.** Every finding has a kind, span, confidence and reason. Findings never carry the matched text, so a logged report cannot leak a secret.
+- **Deterministic and explainable.** Every finding has a kind, span, confidence and reason. `Finding` and `ScanReport` objects never carry the matched text, so logging a report from Python cannot leak a secret. `pygarble scan` rows include the input line; use `pygarble redact` when output goes to logs.
 - **Four categories in one call.** Secrets, PII, profanity and gibberish, each rule with a fixed confidence tier so you choose how strict to be.
 - **Redaction in three modes.** Placeholders such as `[EMAIL]`, length-preserving masks, or partial masks that keep the last four digits of a card or phone number.
-- **A CLI for pipelines.** `pygarble scan` and `pygarble redact` read stdin or files, emit text, TSV or JSONL, and `scan` exits non-zero when something is flagged.
+- **A CLI for pipelines.** `pygarble scan` and `pygarble redact` read stdin or files. `scan` emits text, TSV or JSONL and exits non-zero when something is flagged; `redact` prints the redacted line, or the JSON object with `--field`.
 
 ## Ten-second start
 
@@ -47,12 +47,12 @@ assert redact("mail jane@example.com").text == "mail [EMAIL]"
 
 | Category | Kinds | How |
 | --- | --- | --- |
-| `secrets` | AWS, GitHub, GitLab, Slack, Stripe, Google, OpenAI, Anthropic, Hugging Face, npm, PyPI and SendGrid keys; JWTs; private key blocks; credentials in URLs; bearer tokens; generic secrets | Unique vendor prefixes, decodable JWT headers, and keyword plus entropy for generic secrets |
+| `secrets` | AWS, GitHub, GitLab, Slack, Stripe, Google, OpenAI, Anthropic, Hugging Face, npm, PyPI and SendGrid keys; JWTs; private key blocks; credentials in URLs; bearer tokens; generic secrets | Unique vendor prefixes; JWTs at 1.0 (0.8 when the header does not decode); PEM/PGP private key blocks; credentials in URLs; `Bearer` prefixes; keyword plus entropy for generic secrets |
 | `pii` | email, phone, credit card, IBAN, IPv4/IPv6; US SSN; UK National Insurance and NHS numbers; Indian Aadhaar and PAN | Structure plus checksums (Luhn, mod-97, mod-11, Verhoeff) and locale packs `us`, `uk`, `in` |
 | `profanity` | profanity (strong and mild tiers) | Attributed English word list with leetspeak, elongation, masking, spacing and phrase handling; token-level, so Scunthorpe stays clean |
 | `gibberish` | garbled | The existing English gibberish ensemble, whole text |
 
-Confidence is 1.0 for checksum-verified or vendor-prefixed matches, down to 0.6 for keyword-plus-entropy secrets and ambiguous masking; see the [screening guide](https://brightertiger.github.io/pygarble/screening.html).
+Confidence is 1.0 for checksum-verified or vendor-prefixed matches, down to 0.6 for keyword-plus-entropy secrets and ambiguous masking, and 0.5 for standalone high-entropy strings, which are opt-in (`secrets_without_context=True`); see the [screening guide](https://brightertiger.github.io/pygarble/screening.html).
 
 **What it doesn't catch:** names, postal addresses, free-text dates of birth, hate speech beyond the word list, secrets without a recognisable shape, and non-English profanity. Those need NLP or a model; run pygarble first and send the rest on.
 
@@ -69,7 +69,7 @@ assert scanner.redact(text, mode="partial").text == (
 )
 ```
 
-Overlapping findings merge into one region. `placeholder` templates accept `{KIND}`, `{kind}` and `{category}`; `mask` preserves length; `partial` keeps the last four characters of cards, phones, IBANs and national numbers. Gibberish is never redacted.
+Overlapping findings merge into one region. `placeholder` templates accept `{KIND}`, `{kind}` and `{category}`; `mask` preserves length; `partial` keeps the last four characters when a region ends with a `credit_card`, `phone`, `iban`, `ssn_us`, `nhs_number` or `aadhaar` finding. Gibberish is never redacted.
 
 ## Throughput
 

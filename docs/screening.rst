@@ -3,8 +3,9 @@ Screening and redaction
 
 :class:`pygarble.Scanner` runs every enabled category over a text and
 returns a :class:`pygarble.ScanReport`. Findings say what was found and
-where; they never contain the matched text, so a logged report cannot leak
-a secret.
+where; they never contain the matched text, so logging a report object
+cannot leak a secret. The ``pygarble scan`` command is different: its rows
+include the input line, so use ``pygarble redact`` when output goes to logs.
 
 .. code-block:: python
 

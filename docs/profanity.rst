@@ -61,7 +61,9 @@ word list.
 Word list attribution
 ---------------------
 
-The word list is seeded from the LDNOOBW English list (List of Dirty,
-Naughty, Obscene, and Otherwise Bad Words) published by Shutterstock under
-CC-BY-4.0, then filtered and extended by the pygarble maintainers. The
+The word list is seeded from the `LDNOOBW English list
+<https://github.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words>`_
+(List of Dirty, Naughty, Obscene, and Otherwise Bad Words) published by
+Shutterstock under `CC-BY-4.0 <https://creativecommons.org/licenses/by/4.0/>`_,
+then filtered and extended by the pygarble maintainers. The
 attribution text ships as ``pygarble.profanity.wordlist.ATTRIBUTION``.

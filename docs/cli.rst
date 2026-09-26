@@ -98,8 +98,9 @@ Options shared by both: ``--categories``, ``--kinds``, ``--exclude-kinds``,
 ``--locales`` (comma lists), ``--min-confidence``, ``--profile``,
 ``--threshold`` and ``--allowlist`` for the gibberish category, and
 ``--field NAME`` to read a JSON object per line. ``scan`` adds
-``--format text|tsv|jsonl`` and ``--show-matches`` (matched text is omitted
-by default so logs stay clean). ``redact`` adds ``--mode
+``--format text|tsv|jsonl`` and ``--show-matches``. Without it, matched
+substrings are omitted from the findings, but every row still carries the
+input line; use ``redact`` when output goes to logs. ``redact`` adds ``--mode
 placeholder|mask|partial``, ``--placeholder`` (fields ``{KIND}``, ``{kind}``,
 ``{category}``) and ``--mask-char``.
 

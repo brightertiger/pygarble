@@ -70,8 +70,8 @@ Kinds
      - ``SG.`` key
      - 1.0
    * - ``jwt``
-     - three base64url segments whose header decodes to JSON
-     - 1.0
+     - three base64url segments, the first two starting ``eyJ``
+     - 1.0 (0.8 when the header does not decode)
    * - ``private_key``
      - a PEM or PGP ``BEGIN ... PRIVATE KEY`` block (not certificates)
      - 1.0

@@ -11,11 +11,13 @@ All notable changes to pygarble are documented here. The format follows
   span, confidence and reason. Findings never carry the matched text.
 - Secrets detector: known vendor prefixes (AWS, GitHub, GitLab, Slack,
   Stripe, Google, OpenAI, Anthropic, Hugging Face, npm, PyPI, SendGrid),
-  JWTs, private key blocks, credentials in URLs, bearer tokens, and
-  keyword-plus-entropy generic secrets.
+  JWTs, private key blocks, credentials in URLs, bearer tokens,
+  keyword-plus-entropy generic secrets, and an opt-in
+  `high_entropy_string` rule (`secrets_without_context=True`).
 - PII detector: email, phone, credit card (Luhn), IBAN (mod-97), IPv4/IPv6,
   plus locale packs for the US (SSN), UK (National Insurance and NHS
-  numbers) and India (Aadhaar with Verhoeff, PAN).
+  numbers) and India (Aadhaar with Verhoeff, PAN), each with its national
+  phone formats.
 - Profanity detector: an attributed word list with leetspeak, elongation,
   embedded, masked and spaced obfuscation handling and an allowlist.
 - Redaction in placeholder, mask and partial modes.
