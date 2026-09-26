@@ -100,6 +100,13 @@ for hex, 4.5 for base64 and 3.5 otherwise. Placeholders such as
 ``changeme`` or ``<your-token>`` are ignored, and a generic secret that
 overlaps a known-prefix finding is dropped.
 
-Pass ``kinds`` or ``exclude_kinds`` to select rules. In a
+A vendor token or JWT inside a ``bearer_token`` or ``url_credentials``
+value is also reported on its own, as a second finding nested inside the
+first, so ``Authorization: Bearer ghp_...`` yields both ``bearer_token``
+and ``github_token``. Redaction merges the two into one region.
+
+Pass ``kinds`` or ``exclude_kinds`` to select rules. Selection only filters:
+the findings of a kind are the same whether or not other kinds are
+selected, and an unselected rule never hides a selected one. In a
 :class:`pygarble.Scanner`, ``secrets_without_context=True`` enables
 ``high_entropy_string``.

@@ -136,7 +136,7 @@ Validation: `text` must be `str` (`TypeError` otherwise, via the existing `proce
 - `mode="mask"`: region becomes `mask_char * (end - start)`, length preserved.
 - `mode="partial"`: like mask but keeps the last four characters for kinds in `REVEAL_LAST_FOUR = {credit_card, phone, iban, ssn_us, nhs_number, aadhaar}`; all other kinds are fully masked.
 
-`Redaction.text` for a text with no findings is the input unchanged. Redaction is deterministic and idempotent for placeholder mode (placeholders contain nothing the rules match).
+`Redaction.text` for a text with no findings is the input unchanged. Redaction is deterministic, and idempotent for placeholder mode with the default `[{KIND}]` template (its labels contain nothing the rules match); a custom template carries no such guarantee.
 
 ## Secrets
 

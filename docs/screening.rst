@@ -57,7 +57,13 @@ kinds across categories; ``locales`` selects PII locale packs (``us``,
 gibberish category exactly like :class:`pygarble.EnsembleDetector`.
 ``profanity_allowlist`` exempts words from the profanity check,
 ``secrets_without_context=True`` enables standalone high-entropy strings, and
-``max_input_length`` rejects oversized input with ``ValueError``.
+``max_input_length`` rejects oversized input with ``ValueError``. A
+selection that leaves no rule to run, such as ``kinds=[]`` or
+``categories=["secrets"], kinds=["email"]``, raises ``ValueError``; so do an
+unknown ``profile`` or an out-of-range ``threshold`` even when gibberish is
+not selected. With both secrets and PII selected, an email finding inside a
+``url_credentials`` span is dropped: in ``https://bob:pw@example.com`` the
+``pw@example.com`` part is a password and a host.
 
 .. code-block:: python
 
@@ -104,14 +110,17 @@ Redaction
 ---------
 
 ``redact`` replaces every finding at or above ``min_confidence`` in the
-chosen categories (all but gibberish by default) and returns a
+chosen categories (all but gibberish by default; it raises ``ValueError``
+when none of them is a rule category this scanner runs) and returns a
 :class:`pygarble.Redaction` with the new ``text``, the ``findings`` it
 replaced and a ``count``. Overlapping findings become one region, labelled
 with the highest-confidence kind. Modes:
 
 * ``placeholder`` (default): ``[EMAIL]``. The template may use only the bare
   fields ``{KIND}``, ``{kind}`` and ``{category}``; it is validated before
-  any output.
+  any output. With the default template, redacting the output again changes
+  nothing, because ``[EMAIL]`` and the other labels match no rule; a custom
+  template carries no such guarantee.
 * ``mask``: every character replaced by ``mask_char``, preserving length.
 * ``partial``: like ``mask``, but keeps the last four characters when the
   region ends with a ``credit_card``, ``phone``, ``iban``, ``ssn_us``,
@@ -131,8 +140,10 @@ with the highest-confidence kind. Modes:
        "mail <pii>"
    )
 
-The ``pygarble scan`` and ``pygarble redact`` commands expose the same
-options; see :doc:`cli`. Category details are in :doc:`secrets`, :doc:`pii`
+The ``pygarble scan`` and ``pygarble redact`` commands expose the category,
+kind, locale, confidence and gibberish options, but not
+``profanity_allowlist``, ``secrets_without_context`` or
+``max_input_length``; see :doc:`cli`. Category details are in :doc:`secrets`, :doc:`pii`
 and :doc:`profanity`.
 
 What it does not catch

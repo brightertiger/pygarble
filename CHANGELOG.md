@@ -29,6 +29,11 @@ All notable changes to pygarble are documented here. The format follows
   category, with `--chunk-bytes` for document-sized inputs.
 - Documentation pages for screening and redaction, secrets, PII and
   profanity; the README now leads with screening.
+- A vendor token or JWT inside a bearer token or URL credentials is also
+  reported as its own nested finding; selecting kinds only filters the
+  default output.
+- `Scanner` raises `ValueError` when a selection leaves nothing to scan or
+  redact; the CLI rejects empty `--categories`, `--kinds` and `--locales`.
 
 ### Notes
 - The gibberish API is unchanged. This release is additive.
