@@ -115,11 +115,23 @@ def test_gibberish_options_forwarded():
     strict = Scanner(categories=["gibberish"], threshold=0.01)
     lax = Scanner(categories=["gibberish"], threshold=0.99)
     text = "hello wrld frbl"
-    # score is ~0.31: above 0.01, below 0.99
-    assert [f.kind for f in strict.scan(text).findings] == ["garbled"]
-    assert lax.scan(text).findings == ()
+    assert strict.scan(text).flagged is True
+    assert lax.scan(text).flagged is False
     allow = Scanner(categories=["gibberish"], allowlist=["qxzjkwpv"])
     assert allow.scan("qxzjkwpv").flagged is False
+
+
+def test_gibberish_flagged_matches_ensemble_predict():
+    from pygarble import EnsembleDetector
+
+    scanner = Scanner(categories=["gibberish"], threshold=0.3)
+    ensemble = EnsembleDetector(threshold=0.3)
+    for text in [
+        "hello world again",
+        "hello wrld frbl",
+        "qxzjkwpv bnmqwer zzxqv",
+    ]:
+        assert scanner.scan(text).flagged is ensemble.predict(text)
 
 
 def test_public_exports_are_lazy():

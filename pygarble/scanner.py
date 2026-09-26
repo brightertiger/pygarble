@@ -103,6 +103,12 @@ class _Gibberish:
 
 
 class Scanner:
+    """Screen text for secrets, PII, profanity and gibberish.
+
+    min_confidence gates the rule categories; gibberish is gated by
+    threshold.
+    """
+
     def __init__(
         self,
         categories: Iterable[str] = DEFAULT_CATEGORIES,
@@ -186,7 +192,10 @@ class Scanner:
         for detector in self._detectors:
             findings.extend(detector.detect(text))
         ordered = tuple(sorted(findings, key=sort_key))
-        flagged = any(f.confidence >= self.min_confidence for f in ordered)
+        flagged = any(
+            f.confidence >= self.min_confidence or f.category == "gibberish"
+            for f in ordered
+        )
         return ScanReport(ordered, flagged, len(text))
 
     def scan(self, text: str) -> ScanReport:
