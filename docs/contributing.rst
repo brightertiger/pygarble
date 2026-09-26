@@ -77,6 +77,10 @@ For documentation changes, build with Sphinx warnings treated as errors,
 check local links, and execute the affected Python examples. Optional-backend
 examples need their dependencies installed. Mark unreleased features clearly
 and keep the standalone and combined scanner contracts distinct.
+The base suite executes every block labelled ``python`` via
+``tests/test_docs_snippets.py``. Follow the existing ``text`` block convention
+for examples requiring optional packages or external executables, and execute
+those examples separately with their dependencies installed.
 
 Data and evaluation
 -------------------

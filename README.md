@@ -64,7 +64,7 @@ executable. None requires LLM calls or model downloads.
 
 After installing the optional dependencies and Gitleaks:
 
-```python
+```text
 from pygarble.screening import Scanner
 
 scanner = Scanner(

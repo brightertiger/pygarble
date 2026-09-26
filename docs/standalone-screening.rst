@@ -44,7 +44,7 @@ The adapter does not download or install executables.
 
 The following example requires the optional packages and Gitleaks:
 
-.. code-block:: python
+.. code-block:: text
 
    from pygarble.screening import Scanner
 
