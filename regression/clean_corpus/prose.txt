@@ -1,0 +1,46 @@
+Welcome to the team handbook. This page explains how we plan, build and ship.
+Our quarterly assessment looks at reliability, cost and customer feedback.
+Each squad writes a short summary and a classic retrospective at the end of the cycle.
+Please pass the draft to your lead a week before the review meeting.
+Hello and thanks for reading this far; the rest of the page is reference material.
+
+Changelog
+
+Version 2.14.1
+- Fixed a crash when the export folder was empty.
+- Improved the assessment dashboard so filters persist between visits.
+- The class assignment screen now loads in under a second.
+Version 2.14.0
+- Added a dark theme and larger default fonts.
+- Password reset emails now expire after one hour.
+- Removed the legacy bulk upload page.
+Version 2.13.2
+- Corrected the time zone shown for teams in Essex and Sussex.
+- Smaller bundle size for the mobile web app.
+
+Frequently asked questions
+
+How do I reset my password?
+Use the "Forgot password" link on the sign-in page and follow the email.
+Can I change the name on my account?
+Yes. Open Settings, choose Profile, and edit your display name.
+Where can I see past invoices?
+Invoices are listed under Billing with the date and amount for each one.
+Is my data backed up?
+Backups run every night and are kept for thirty days.
+Who do I contact about access?
+Ask your workspace administrator, who can add or remove members.
+
+Team notes
+
+Last Friday we held the summer social at a small bar in Middlesex.
+The cocktail menu was short but everyone enjoyed the mocktails too.
+Sam recommended a novel by Dickens for the book club next month.
+The kitchen served a shiitake risotto that people are still talking about.
+Our assistant manager organised a quiz with questions about classic films.
+Scunthorpe and Penistone both came up in the geography round.
+Someone asked whether the grass on the hillside was cut by sheep.
+We will pass around a sign-up sheet for the next event.
+Remember that the analyst reviews all budget assessments before approval.
+If you have ideas for the handbook, leave a comment and we will add them.
+Thank you all for a productive quarter.

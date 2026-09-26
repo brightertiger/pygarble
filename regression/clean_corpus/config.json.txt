@@ -1,0 +1,62 @@
+{
+  "name": "orders-service",
+  "version": "1.2.3",
+  "environment": "staging",
+  "database": {
+    "host": "db.internal",
+    "port": 5432,
+    "user": "app",
+    "password": "${DB_PASSWORD}",
+    "pool": {
+      "min": 2,
+      "max": 20,
+      "idle_timeout_ms": 10000
+    }
+  },
+  "cache": {
+    "host": "redis.internal",
+    "port": 6379,
+    "ttl_seconds": 300
+  },
+  "http": {
+    "listen_port": 8080,
+    "base_url": "https://orders.example.com",
+    "cors_origins": ["https://app.example.com", "http://localhost:3000"],
+    "timeout": 30,
+    "retries": 3
+  },
+  "auth": {
+    "issuer": "https://auth.example.com",
+    "audience": "orders-api",
+    "token_ttl_seconds": 3600,
+    "client_secret": "${OAUTH_CLIENT_SECRET}",
+    "api_key": "<set-in-vault>"
+  },
+  "features": {
+    "new_checkout": true,
+    "legacy_export": false,
+    "beta_dashboard": false
+  },
+  "logging": {
+    "level": "info",
+    "format": "json",
+    "sample_rate": 0.25
+  },
+  "theme": {
+    "primary": "#0055aa",
+    "secondary": "#e0e0e0",
+    "font": "Inter"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "pg": "8.11.3",
+    "ioredis": "~5.3.2"
+  },
+  "build": {
+    "commit": "a1b2c3d",
+    "date": "2026-09-26",
+    "number": 1874
+  },
+  "retries": 3,
+  "timeout": 30
+}
