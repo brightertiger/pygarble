@@ -23,6 +23,7 @@ def test_iban_mod97():
 
 def test_verhoeff():
     assert verhoeff("236")
+    assert verhoeff("2363")  # published worked example
     assert verhoeff("123451")
     assert not verhoeff("12345")
     assert not verhoeff("235")
@@ -36,6 +37,9 @@ def test_nhs_mod11():
     assert not nhs_mod11("9434765918")
     assert not nhs_mod11("123456789")
     assert not nhs_mod11("943476591x")
+    # Weighted remainder 10 means no valid check digit exists.
+    for check in "0123456789":
+        assert not nhs_mod11("100000001" + check)
 
 
 def test_non_ascii_digits_return_false_without_raising():

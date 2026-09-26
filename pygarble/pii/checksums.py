@@ -29,6 +29,7 @@ def _is_ascii_digits(text: str) -> bool:
 
 
 def luhn(digits: str) -> bool:
+    """Luhn check on separator-free ASCII digits; never raises."""
     if not _is_ascii_digits(digits):
         return False
     total = 0
@@ -43,6 +44,7 @@ def luhn(digits: str) -> bool:
 
 
 def iban_mod97(compact: str) -> bool:
+    """ISO 13616 mod-97 on a separator-free uppercase IBAN; never raises."""
     if (
         len(compact) < 5
         or not compact.isascii()
@@ -58,6 +60,7 @@ def iban_mod97(compact: str) -> bool:
 
 
 def verhoeff(digits: str) -> bool:
+    """Verhoeff check on separator-free ASCII digits; never raises."""
     if not _is_ascii_digits(digits):
         return False
     check = 0
@@ -67,6 +70,7 @@ def verhoeff(digits: str) -> bool:
 
 
 def nhs_mod11(digits: str) -> bool:
+    """NHS mod-11 on ten separator-free ASCII digits; never raises."""
     if len(digits) != 10 or not _is_ascii_digits(digits):
         return False
     total = sum(
