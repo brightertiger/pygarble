@@ -49,11 +49,15 @@ KNOWN_PATTERNS: Tuple[Dict[str, Any], ...] = (
     ),
     _entry(
         "aws_secret_access_key",
-        r"(?i:aws)(?:.{0,20}?)(?i:secret|key)[^A-Za-z0-9/+\n]{0,5}"
+        r"(?<![A-Za-z0-9])(?i:aws)(?:.{0,20}?)(?i:secret|key)"
+        r"[^A-Za-z0-9/+\n]{0,5}"
         r"(?P<v>[A-Za-z0-9/+=]{40})(?![A-Za-z0-9/+=])",
         0.9,
         ["aws_secret_access_key = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"],
-        ["aws secret is stored in the vault, see the runbook for details"],
+        [
+            "aws secret is stored in the vault, see the runbook for details",
+            "laws key: 0123456789abcdef0123456789abcdef01234567",
+        ],
         raw=True,
         reason="keyword_prefix",
     ),
@@ -177,16 +181,25 @@ KNOWN_PATTERNS: Tuple[Dict[str, Any], ...] = (
     _entry(
         "private_key",
         r"-----BEGIN (?:RSA |EC |DSA |OPENSSH |PGP |ENCRYPTED )?PRIVATE KEY"
-        r"(?: BLOCK)?-----(?:[\s\S]*?-----END (?:RSA |EC |DSA |OPENSSH |PGP "
-        r"|ENCRYPTED )?PRIVATE KEY(?: BLOCK)?-----)?",
+        r"(?: BLOCK)?-----"
+        # With END: the span runs to END. Without END: the base64 body. A
+        # body "-" may not start a "-----" marker, which keeps the scan from
+        # running past the next BEGIN line (linear time).
+        r"(?:(?:[A-Za-z0-9+/=\s:,]|-(?!----))*?-----END (?:RSA |EC |DSA "
+        r"|OPENSSH |PGP |ENCRYPTED )?PRIVATE KEY(?: BLOCK)?-----"
+        r"|[A-Za-z0-9+/=\r\n]*)",
         1.0,
-        ["-----BEGIN PRIVATE KEY-----\nMIIE\n-----END PRIVATE KEY-----"],
+        [
+            "-----BEGIN PRIVATE KEY-----\nMIIE\n-----END PRIVATE KEY-----",
+            "-----BEGIN RSA PRIVATE KEY-----\nMIIEowIBAAKCAQEA\n",
+        ],
         ["-----BEGIN CERTIFICATE-----"],
         raw=True,
     ),
     _entry(
         "url_credentials",
-        r"(?<![A-Za-z0-9])[a-z][a-z0-9+.\-]*://(?P<v>[^\s/:@]+:[^\s/@]+)@",
+        r"(?<![A-Za-z0-9+.\-])[a-z][a-z0-9+.\-]{0,31}://"
+        r"(?P<v>[^\s/:@]+:[^\s/@]+)@",
         0.9,
         ["postgres://admin:s3cr3t-pw@db.internal:5432/app"],
         ["https://example.com:8080/path", "mailto:someone@example.com"],

@@ -34,9 +34,14 @@ def _assemble() -> Tuple["re.Pattern[str]", List[Dict[str, Any]]]:
 
 
 _KNOWN, _TABLE = _assemble()
+# The whole identifier (e.g. DB_PASSWORD, MY_API_KEY) must contain a keyword.
+# It is matched inside a lookahead, which Python treats as atomic, so each
+# identifier is scanned once and a failed separator never backtracks into it.
 _KEYWORD = re.compile(
-    r"(?<![A-Za-z0-9_])(?i:" + "|".join(KEYWORDS) + r")(?![A-Za-z0-9])"
-    r"[\"']?\s*(?:=>|[:=])\s*[\"']?(?P<v>[^\s\"',;]{8,})"
+    r"(?<![A-Za-z0-9_])(?=(?P<name>[A-Za-z0-9_]*?(?i:"
+    + "|".join(KEYWORDS)
+    + r")[A-Za-z0-9_]*))(?P=name)"
+    r"[\"']?\s*(?:=>|[:=])\s*[\"']?(?P<v>[^\s\"',;&()]{8,})"
 )
 _BASE64_TOKEN = re.compile(r"(?<![A-Za-z0-9+/=_\-])[A-Za-z0-9+/=_\-]{32,}")
 _HEX_TOKEN = re.compile(r"(?<![0-9A-Fa-f])[0-9A-Fa-f]{32,}(?![0-9A-Fa-f])")
@@ -46,10 +51,8 @@ def _jwt_header_ok(token: str) -> bool:
     head = token.split(".", 1)[0]
     padded = head + "=" * (-len(head) % 4)
     try:
-        decoded = base64.urlsafe_b64decode(padded).decode("utf-8")
-        return isinstance(json.loads(decoded), dict) and (
-            "alg" in json.loads(decoded)
-        )
+        header = json.loads(base64.urlsafe_b64decode(padded).decode("utf-8"))
+        return isinstance(header, dict) and "alg" in header
     except (binascii.Error, UnicodeDecodeError, ValueError):
         return False
 
@@ -57,6 +60,11 @@ def _jwt_header_ok(token: str) -> bool:
 def _validate_kinds(
     kinds: Optional[Iterable[str]], exclude: Iterable[str]
 ) -> FrozenSet[str]:
+    for value in (kinds, exclude):
+        if isinstance(value, str):
+            raise ValueError(
+                "kinds must be an iterable of kind names, not a string"
+            )
     chosen = frozenset(ALL_KINDS if kinds is None else kinds)
     excluded = frozenset(exclude)
     unknown = sorted((chosen | excluded) - ALL_KINDS)

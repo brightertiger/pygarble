@@ -1,6 +1,7 @@
 """Known-prefix and contextual-entropy secret detection."""
 
 import re
+import time
 
 import pytest
 
@@ -193,3 +194,60 @@ def test_export_carries_short_value_rule():
     assert limits["short_max_length"] == 22
     assert limits["short_entropy"] == 3.0
     assert limits["short_classes"] == 3
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "a." * 50000,
+        "a-" * 50000,
+        "a_" * 50000,
+        "com.example.service.module." * 4000,
+        "-----BEGIN PRIVATE KEY-----\n" * 3500,
+        "password=" * 12000,
+        "password" * 12000,
+    ],
+)
+def test_adversarial_inputs_scan_in_linear_time(text):
+    detector = SecretsDetector()
+    started = time.perf_counter()
+    detector.detect(text)
+    assert time.perf_counter() - started < 0.5
+
+
+def test_truncated_private_key_covers_its_body():
+    text = "-----BEGIN RSA PRIVATE KEY-----\nMIIEowIBAAKCAQEA\nAB==\n"
+    (finding,) = detect(text + "next: line")
+    assert finding.kind == "private_key"
+    assert text[finding.start : finding.end] == text
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "DB_PASSWORD=q8Zt3vP2xL9mK4nR",
+        "GITHUB_TOKEN=q8Zt3vP2xL9mK4nR",
+        "SECRET_KEY = 'q8Zt3vP2xL9mK4nR'",
+        "export MY_API_KEY=q8Zt3vP2xL9mK4nR",
+        "aws_secret = q8Zt3vP2xL9mK4nR",
+    ],
+)
+def test_env_style_keyword_names(text):
+    (finding,) = detect(text)
+    assert finding.kind == "generic_secret"
+    assert text[finding.start : finding.end] == "q8Zt3vP2xL9mK4nR"
+
+
+def test_generic_value_stops_at_query_and_call_syntax():
+    text = "password=q8Zt3vP2xL9mK4nR&user=bob"
+    (finding,) = detect(text)
+    assert text[finding.start : finding.end] == "q8Zt3vP2xL9mK4nR"
+    assert detect("token = generate_token(user_id)") == ()
+
+
+def test_kind_arguments_reject_bare_strings():
+    message = "kinds must be an iterable of kind names, not a string"
+    with pytest.raises(ValueError, match=message):
+        SecretsDetector(kinds="jwt")
+    with pytest.raises(ValueError, match=message):
+        SecretsDetector(exclude_kinds="jwt")
