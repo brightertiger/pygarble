@@ -80,3 +80,28 @@ Text output starts with the objective in use.
 
 Pass the recommended value back with ``--threshold``. See
 :doc:`calibration` for the Python API.
+
+Screening: ``scan`` and ``redact``
+----------------------------------
+
+``pygarble scan`` runs the :class:`~pygarble.Scanner` over each input line
+and prints one row per line. ``pygarble redact`` prints the redacted line.
+
+.. code-block:: bash
+
+   printf 'mail a@b.co\nhello\n' | pygarble scan
+   printf 'key AKIAIOSFODNN7EXAMPLE\n' | pygarble redact --mode mask
+   pygarble scan --categories secrets,pii --format jsonl records.jsonl
+   pygarble redact --field message --mode partial events.jsonl
+
+Options shared by both: ``--categories``, ``--kinds``, ``--exclude-kinds``,
+``--locales`` (comma lists), ``--min-confidence``, ``--profile``,
+``--threshold`` and ``--allowlist`` for the gibberish category, and
+``--field NAME`` to read a JSON object per line. ``scan`` adds
+``--format text|tsv|jsonl`` and ``--show-matches`` (matched text is omitted
+by default so logs stay clean). ``redact`` adds ``--mode
+placeholder|mask|partial``, ``--placeholder`` (fields ``{KIND}``, ``{kind}``,
+``{category}``) and ``--mask-char``.
+
+Exit codes: ``scan`` returns 1 when any line was flagged; ``redact`` returns
+0; both return 2 on bad input or options.
