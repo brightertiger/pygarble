@@ -24,13 +24,22 @@ def test_build_corpus_is_deterministic():
     assert throughput.build_corpus(20_000) == throughput.build_corpus(20_000)
 
 
-def test_one_megabyte_line_scans_in_linear_time():
+def _scan_seconds(scanner, size):
     sentence = (
         "The quarterly report covers revenue, churn and the hiring plan "
         "for the next two quarters. "
     )
-    text = sentence * (1_000_000 // len(sentence) + 1)
-    scanner = Scanner(categories=RULES)
+    text = sentence * (size // len(sentence) + 1)
     start = time.perf_counter()
     scanner.scan(text)
-    assert time.perf_counter() - start < 5
+    return time.perf_counter() - start
+
+
+def test_one_megabyte_line_scans_in_linear_time():
+    # Ratio, not an absolute bound, so slow CI runners and coverage do not
+    # flake; ten times the input must cost well under 20 times the time.
+    scanner = Scanner(categories=RULES)
+    small = _scan_seconds(scanner, 100_000)
+    large = _scan_seconds(scanner, 1_000_000)
+    assert large / max(small, 1e-3) < 20
+    assert large < 30
