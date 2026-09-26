@@ -9,9 +9,13 @@ BASE64 = re.compile(r"^[A-Za-z0-9+/=_\-]+$")
 HEX_LIMIT = 3.0
 BASE64_LIMIT = 4.5
 OTHER_LIMIT = 3.5
-# A string of n characters has at most log2(n) bits per character, so the
-# charset limit is capped at this fraction of that maximum for short values.
-LENGTH_FRACTION = 0.85
+# Values shorter than SHORT_MAX_LENGTH + 1 cannot reach the charset limits
+# (a string of n characters has at most log2(n) bits per character), so
+# they need SHORT_ENTROPY bits plus a character-class mix instead.
+SHORT_MIN_LENGTH = 8
+SHORT_MAX_LENGTH = 22
+SHORT_ENTROPY = 3.0
+SHORT_CLASSES = 3
 PLACEHOLDER_WORDS = frozenset(
     {
         "changeme",
@@ -56,8 +60,27 @@ def is_placeholder(value: str) -> bool:
     return any(hint in lowered for hint in PLACEHOLDER_HINTS)
 
 
+def _class_mix_ok(value: str) -> bool:
+    if HEX.match(value):
+        return any(c.isdigit() for c in value) and any(
+            c.isalpha() for c in value
+        )
+    classes = {
+        (
+            "lower"
+            if c.islower()
+            else (
+                "upper" if c.isupper() else "digit" if c.isdigit() else "other"
+            )
+        )
+        for c in value
+    }
+    return len(classes) >= SHORT_CLASSES
+
+
 def looks_secret(value: str) -> bool:
-    if not value or is_placeholder(value):
+    if len(value) < SHORT_MIN_LENGTH or is_placeholder(value):
         return False
-    limit = min(charset_limit(value), LENGTH_FRACTION * math.log2(len(value)))
-    return shannon(value) >= limit
+    if len(value) <= SHORT_MAX_LENGTH:
+        return shannon(value) >= SHORT_ENTROPY and _class_mix_ok(value)
+    return shannon(value) >= charset_limit(value)

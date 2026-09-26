@@ -165,3 +165,31 @@ def test_findings_are_sorted_and_deterministic():
     first = detect(text)
     assert first == detect(text)
     assert [f.start for f in first] == sorted(f.start for f in first)
+
+
+@pytest.mark.parametrize(
+    "value, expected",
+    [
+        ("q8Zt3vP2xL9mK4nR", True),
+        ("8f3a9c2e1b7d4f6a", True),
+        ("abcdefgh", False),
+        ("correcthorsebatterystaple", False),
+        ("xxxxxxxxxxxxxxxx", False),
+    ],
+)
+def test_looks_secret_short_and_long_regimes(value, expected):
+    assert looks_secret(value) is expected
+
+
+def test_short_values_flag_only_with_keyword_and_class_mix():
+    assert [f.kind for f in detect("api_key = 8f3a9c2e1b7d4f6a")] == [
+        "generic_secret"
+    ]
+    assert detect("password = abcdefgh") == ()
+
+
+def test_export_carries_short_value_rule():
+    limits = export()["limits"]
+    assert limits["short_max_length"] == 22
+    assert limits["short_entropy"] == 3.0
+    assert limits["short_classes"] == 3

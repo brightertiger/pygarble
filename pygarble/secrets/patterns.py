@@ -215,10 +215,12 @@ def export() -> Dict[str, Any]:
     from .entropy import (
         BASE64_LIMIT,
         HEX_LIMIT,
-        LENGTH_FRACTION,
         OTHER_LIMIT,
         PLACEHOLDER_HINTS,
         PLACEHOLDER_WORDS,
+        SHORT_CLASSES,
+        SHORT_ENTROPY,
+        SHORT_MAX_LENGTH,
     )
 
     return {
@@ -239,7 +241,9 @@ def export() -> Dict[str, Any]:
             "hex": HEX_LIMIT,
             "base64": BASE64_LIMIT,
             "other": OTHER_LIMIT,
-            "length_fraction": LENGTH_FRACTION,
+            "short_max_length": SHORT_MAX_LENGTH,
+            "short_entropy": SHORT_ENTROPY,
+            "short_classes": SHORT_CLASSES,
         },
         "placeholders": {
             "words": sorted(PLACEHOLDER_WORDS),
