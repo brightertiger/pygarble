@@ -6,7 +6,7 @@ Downloads pinned word frequency data from Peter Norvig's collection
 and generates embedded lookup tables for the library.
 
 Data source: https://norvig.com/ngrams/
-See scripts/data_curation.json for source attribution and provenance.
+See paper/scripts/data_curation.json for source attribution and provenance.
 
 This script should be run at development time, not at runtime.
 The generated files are committed to the repository.
@@ -26,9 +26,10 @@ from typing import Dict, Set, Tuple
 # URLs for data sources
 NORVIG_WORD_FREQ_URL = "https://norvig.com/ngrams/count_1w.txt"
 
+# Generated header paths are historical; retain them for byte reproducibility.
 # Output paths
-SCRIPT_DIR = Path(__file__).parent
-PROJECT_ROOT = SCRIPT_DIR.parent
+SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = SCRIPT_DIR.parents[1]
 DATA_DIR = PROJECT_ROOT / "pygarble" / "data"
 
 # Log probability for unseen bigrams, shared by the .py and .json tables

@@ -12,11 +12,11 @@ import json
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
+from paper.regression.evaluate import challenge  # noqa: E402
 from pygarble import EnsembleDetector  # noqa: E402
 from pygarble.ensemble import PROFILES  # noqa: E402
-from regression.evaluate import challenge  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent
 OUTPUT = ROOT / "golden.jsonl"

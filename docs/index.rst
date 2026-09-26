@@ -32,6 +32,22 @@ nonsense detector. Scores are heuristics, not calibrated probabilities.
 
 See :doc:`installation` to install the package.
 
+Research and measured results
+-----------------------------
+
+The pygarble paper describes the modular scoring strategy and compares five
+configurations with a local DistilBERT classifier on a complete published corpus.
+On 5,373 English-comparison chunks, word lookup made no errors and the strict
+neural policy made seven; the default English profile recalled only 28.32% of
+gibberish. These are collection-specific findings, with significant language
+and source-diversity limitations. PII, secret and profanity performance was
+not evaluated by this study.
+
+Read :doc:`benchmarks` for every configuration's accuracy and confusion counts,
+CPU measurements, reproduction commands and sources, or
+:download:`download the paper <../paper/study/manuscript.pdf>`.
+The manuscript is not yet published on arXiv or peer reviewed.
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:

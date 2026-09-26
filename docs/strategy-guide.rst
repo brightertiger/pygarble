@@ -1,7 +1,7 @@
 Choosing strategies
 ===================
 
-Start with ``EnsembleDetector()`` for English screening. It combines three English
+``EnsembleDetector()`` selects the default English screening profile. It combines three English
 language heuristics with mojibake, keyboard adjacency, and control-character
 checks. Meaningful Hindi may be flagged; this is expected behavior.
 
@@ -10,6 +10,46 @@ matching. Measure its false positives before using it for automatic rejection.
 Use ``corruption`` for encoding/control artifacts without English plausibility
 scoring. ``spoofing`` is a Unicode script/confusable heuristic, not a full phishing
 or Unicode security implementation. Profile membership is listed in :doc:`strategies`.
+
+What the paper tells us about strategy choice
+---------------------------------------------
+
+The published-corpus evaluation in :doc:`benchmarks` compares the three English
+profiles, word lookup and entropy with two fixed DistilBERT label policies.
+Word lookup made no errors on the 173 gibberish and 5,200 English-control chunks,
+while the default English profile caught only 49 gibberish chunks. This is
+specific to the invented-text collection; it does not justify replacing all
+other strategies or claiming universal 100% accuracy. The profiles also target
+encoding, keyboard and structural defects that this collection does not
+comprehensively represent.
+
+Lexical and statistical strategies
+----------------------------------
+
+* ``word_lookup`` folds diacritics and checks Latin-letter words of at least
+  two letters against the embedded dictionary. Unknown title-cased words
+  contribute half weight. The default score is the weighted unknown fraction;
+  a score of at least 0.5 flags the input. No eligible tokens yields zero,
+  which is not evidence of linguistic understanding. Word lookup is not a
+  member of the named English profiles.
+* ``markov_chain`` measures English character-transition likelihood over
+  novel tokens. Dictionary-supported and recognized structured tokens do
+  not contribute novelty evidence. Unlikely transitions increase the score.
+* ``log_likelihood_ratio`` compares English bigram likelihood with a uniform
+  reference. Its sigmoid maps that statistic to a heuristic score, not a
+  calibrated probability.
+* ``word_anomaly`` scores suspicious eligible tokens individually and reports
+  their fraction, limiting dilution by surrounding ordinary prose.
+* ``entropy_based`` combines character entropy and bigram improbability.
+  It detected no positive chunks at its default threshold in this study.
+
+Scores are strategy-specific evidence. Named English ensembles use ``any``
+voting across applicable strategies; an inapplicable strategy does not vote.
+When all strategies are inapplicable, ``analyze()`` reports
+``insufficient_evidence`` and an unflagged decision. That differs from a
+positive assertion that the text is meaningful. See :doc:`api` for other
+voting policies and score semantics, and :doc:`calibration` for threshold
+selection on your own labelled data.
 
 Control characters: new in 0.9.0
 --------------------------------

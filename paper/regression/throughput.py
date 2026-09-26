@@ -18,7 +18,7 @@ import time
 from pathlib import Path
 from typing import Any, Dict, List
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from pygarble import Scanner  # noqa: E402
 from pygarble.findings import CATEGORIES  # noqa: E402

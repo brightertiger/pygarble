@@ -141,7 +141,13 @@ character models and package thresholds. It is preliminary and overlaps the
 full evaluation. Its character-model calibration is not represented as a
 new full-corpus run.
 
+The preliminary overlap report also fingerprints the historical development
+reports and their original paths. To reproduce it byte for byte after this
+cleanup, use the complete pre-cleanup snapshot (the scoring code is unchanged):
+
 ```bash
+git worktree add --detach /tmp/pygarble-study-original 34d97ff
+cd /tmp/pygarble-study-original
 python -m paper.study.run --output paper/study/reproduction --skip-timing
 python -m paper.study.verify_results
 ```

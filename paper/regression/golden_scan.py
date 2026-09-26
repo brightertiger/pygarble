@@ -17,10 +17,10 @@ import json
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
+from paper.regression.golden import texts as gibberish_texts  # noqa: E402
 from pygarble import Scanner  # noqa: E402
-from regression.golden import texts as gibberish_texts  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent
 OUTPUT = ROOT / "golden_scan.jsonl"

@@ -1,6 +1,6 @@
 # Engineering regression checks
 
-The canonical research benchmark is [the paper's published-corpus study](../paper/study/README.md).
+The canonical research benchmark is [the paper's published-corpus study](../study/README.md).
 This directory keeps fast development fixtures and behavior checks; its authored
 examples do not measure general-world accuracy.
 
@@ -14,10 +14,10 @@ examples do not measure general-world accuracy.
 - `throughput.py`: synthetic scanner throughput, separate from the paper.
 
 ```bash
-python regression/evaluate.py --split development
-python regression/golden.py --check
-python regression/golden_scan.py --check
-python regression/throughput.py --size-mb 2
+python paper/regression/evaluate.py --split development
+python paper/regression/golden.py --check
+python paper/regression/golden_scan.py --check
+python paper/regression/throughput.py --size-mb 2
 ```
 
 Regenerate golden outputs only for intended behavior changes and review the

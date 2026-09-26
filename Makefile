@@ -3,11 +3,11 @@ PYTHON ?= python
 .PHONY: benchmark benchmark-check benchmark-prepare paper help install install-dev test lint format clean build upload-test upload docs docs-clean docs-serve docs-deploy
 
 help:
+	@echo "Available commands:"
 	@echo "  benchmark-check   Verify study analysis and saved predictions (offline)"
 	@echo "  benchmark-prepare Download pinned research corpus/model assets"
 	@echo "  benchmark         Run the full paper comparison to reproduction-full/"
 	@echo "  paper             Build the paper PDF and ignored upload bundle"
-	@echo "Available commands:"
 	@echo "  install      Install the package"
 	@echo "  install-dev  Install development dependencies"
 	@echo "  test         Run tests"
@@ -32,14 +32,14 @@ test:
 	pytest
 
 lint:
-	black --check pygarble tests scripts regression
-	isort --check-only pygarble tests scripts regression
-	flake8 pygarble tests scripts regression
+	black --check pygarble tests paper/scripts paper/regression
+	isort --check-only pygarble tests paper/scripts paper/regression
+	flake8 pygarble tests paper/scripts paper/regression
 	mypy pygarble
 
 format:
-	isort pygarble tests scripts regression
-	black pygarble tests scripts regression
+	isort pygarble tests paper/scripts paper/regression
+	black pygarble tests paper/scripts paper/regression
 
 clean:
 	rm -rf build/

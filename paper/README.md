@@ -5,7 +5,7 @@ strategies, then evaluates gibberish detection against local DistilBERT.
 [Study instructions](study/README.md), [full results](study/full-results/report.md)
 and [validation](study/validation.md) explain the data, reproduction and limits.
 The paper study is the reference for reported gibberish benchmark results;
-`regression/` retains fast engineering checks for the broader library.
+`paper/regression/` retains fast engineering checks for the broader library.
 
 ## Contents
 
@@ -13,6 +13,8 @@ The paper study is the reference for reported gibberish benchmark results;
   and the two referenced figure PDFs: editable paper sources and layout.
 - `study/manuscript.pdf`: review copy, retained for easy access.
 - `study/`: pinned protocols, provenance, study code and tests.
+- `regression/`: engineering evaluation scripts, fixtures and golden outputs.
+- `scripts/`: package data generation, strategy docs and discovery checks.
 - `study/full-results/`: frozen complete-corpus measurements and predictions.
 - `study/results/`: preliminary results referenced by the paper; these overlap
   the full corpus and are not independent replication.

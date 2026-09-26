@@ -14,7 +14,10 @@ from pygarble.profanity import ProfanityDetector
 from pygarble.profanity.normalize import LEET_MAP, normalize_token
 
 VECTORS = (
-    Path(__file__).resolve().parent.parent / "regression" / "scan_vectors.json"
+    Path(__file__).resolve().parent.parent
+    / "paper"
+    / "regression"
+    / "scan_vectors.json"
 )
 PIECES = (
     "aA sS kK ſ K 0 1 2 3 4 5 6 7 8 9 ١ ３ - . : @ + _ / ="

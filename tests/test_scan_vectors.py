@@ -9,12 +9,16 @@ from pygarble import Scanner
 from pygarble.scanner import _all_kinds
 
 VECTORS = (
-    Path(__file__).resolve().parent.parent / "regression" / "scan_vectors.json"
+    Path(__file__).resolve().parent.parent
+    / "paper"
+    / "regression"
+    / "scan_vectors.json"
 )
 
 if not VECTORS.is_file():
     pytest.skip(
-        "regression/scan_vectors.json not present", allow_module_level=True
+        "paper/regression/scan_vectors.json not present",
+        allow_module_level=True,
     )
 
 ROWS = json.loads(VECTORS.read_text(encoding="utf-8"))

@@ -6,10 +6,17 @@ import pytest
 
 from pygarble import Scanner
 
-CORPUS = Path(__file__).resolve().parent.parent / "regression" / "clean_corpus"
+CORPUS = (
+    Path(__file__).resolve().parent.parent
+    / "paper"
+    / "regression"
+    / "clean_corpus"
+)
 
 if not CORPUS.is_dir():
-    pytest.skip("regression/clean_corpus not present", allow_module_level=True)
+    pytest.skip(
+        "paper/regression/clean_corpus not present", allow_module_level=True
+    )
 
 FILES = sorted(CORPUS.glob("*.txt"))
 BAR = 0.8

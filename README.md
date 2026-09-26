@@ -141,7 +141,7 @@ Overlapping findings merge into one region. `placeholder` templates accept `{KIN
 
 ## Throughput
 
-Measured on an Apple M2 (macOS arm64, Python 3.12.2) with `python regression/throughput.py --size-mb 2`, on a synthetic corpus of five ASCII English paragraphs with 5% planted findings. MB is 10^6 UTF-8 bytes of scanned text; your numbers will differ.
+Measured on an Apple M2 (macOS arm64, Python 3.12.2) with `python paper/regression/throughput.py --size-mb 2`, on a synthetic corpus of five ASCII English paragraphs with 5% planted findings. MB is 10^6 UTF-8 bytes of scanned text; your numbers will differ.
 
 | Categories | Short lines (~110 bytes), MB/s | 4 KB documents (`--chunk-bytes 4096`), MB/s |
 | --- | --- | --- |
@@ -277,11 +277,16 @@ Small authored challenge sets remain engineering regression fixtures.
 
 - [Changelog](https://github.com/brightertiger/pygarble/blob/main/CHANGELOG.md)
 - [Paper, results and reproduction](paper/README.md)
-- [Engineering regression checks](regression/README.md)
-- [Golden corpus](https://github.com/brightertiger/pygarble/blob/main/regression/golden.jsonl) of frozen detector outputs for every profile, and a [golden scan corpus](https://github.com/brightertiger/pygarble/blob/main/regression/golden_scan.jsonl) for the scanner, both checked in CI
-- [Data provenance and curation](https://github.com/brightertiger/pygarble/blob/main/scripts/data_curation.json)
+- [Engineering regression checks](paper/regression/README.md)
+- [Golden corpus](https://github.com/brightertiger/pygarble/blob/main/paper/regression/golden.jsonl) of frozen detector outputs for every profile, and a [golden scan corpus](https://github.com/brightertiger/pygarble/blob/main/paper/regression/golden_scan.jsonl) for the scanner, both checked in CI
+- [Data provenance and curation](https://github.com/brightertiger/pygarble/blob/main/paper/scripts/data_curation.json)
 
 ## Repository layout and compatibility
+
+Library code is in `pygarble/`, unit tests in `tests/`, and the website in
+`docs/`. Research and tooling are grouped under `paper/`: `study/` contains
+the paper evaluation, `regression/` contains engineering checks, and `scripts/`
+contains package/data/documentation maintenance tools.
 
 ```text
 pygarble/

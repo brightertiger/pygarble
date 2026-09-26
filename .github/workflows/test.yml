@@ -93,20 +93,20 @@ jobs:
       with:
         python-version: '3.12'
     - run: pip install -e ".[dev]"
-    - run: black --check pygarble tests scripts regression docs/_ext
-    - run: isort --check-only pygarble tests scripts regression docs/_ext
-    - run: flake8 pygarble tests scripts regression docs/_ext
+    - run: black --check pygarble tests paper/scripts paper/regression docs/_ext
+    - run: isort --check-only pygarble tests paper/scripts paper/regression docs/_ext
+    - run: flake8 pygarble tests paper/scripts paper/regression docs/_ext
     - run: black --check paper/study/*.py
     - run: isort --check-only paper/study/*.py
     - run: flake8 paper/study/*.py
     - run: mypy pygarble
-    - run: python scripts/update_strategy_docs.py --check
+    - run: python paper/scripts/update_strategy_docs.py --check
     - name: Verify generated data
-      run: python scripts/generate_data.py --check
+      run: python paper/scripts/generate_data.py --check
     - name: Golden corpus reproduces
-      run: python regression/golden.py --check
+      run: python paper/regression/golden.py --check
     - name: Golden scan corpus
-      run: python regression/golden_scan.py --check
+      run: python paper/regression/golden_scan.py --check
 
   build:
     runs-on: ubuntu-latest

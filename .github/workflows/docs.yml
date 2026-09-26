@@ -41,7 +41,7 @@ jobs:
         make html SPHINXOPTS="-n -W --keep-going"
 
     - name: Validate search discovery files
-      run: python scripts/check_discovery.py docs/_build/html
+      run: python paper/scripts/check_discovery.py docs/_build/html
     
     - name: Check documentation build
       run: |
