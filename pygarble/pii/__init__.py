@@ -84,6 +84,14 @@ def _outranks(finding: Finding, current: Finding) -> bool:
     )
 
 
+def _strictly_inside(inner: Finding, outer: Finding) -> bool:
+    return (
+        outer.start <= inner.start
+        and inner.end <= outer.end
+        and (inner.start, inner.end) != (outer.start, outer.end)
+    )
+
+
 class PIIDetector:
     category = CATEGORY
 
@@ -150,7 +158,14 @@ class PIIDetector:
             current = best.get(key)
             if current is None or _outranks(finding, current):
                 best[key] = finding
-        return tuple(sorted(best.values(), key=sort_key))
+        phones = [f for f in best.values() if f.kind == "phone"]
+        kept = [
+            f
+            for f in best.values()
+            if not (f.kind == "nhs_number" and f.reason == "mod11")
+            or not any(_strictly_inside(f, phone) for phone in phones)
+        ]
+        return tuple(sorted(kept, key=sort_key))
 
 
 def detect(text: str, **kwargs: Any) -> Tuple[Finding, ...]:

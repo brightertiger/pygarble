@@ -243,3 +243,13 @@ def test_us_phone_requires_nanp_area_and_exchange():
     ]
     assert detect("012 345 6789", locales=["us"]) == ()
     assert detect("415 055 2671", locales=["us"]) == ()
+
+
+def test_keywordless_nhs_nested_in_phone_is_dropped():
+    # 4155552604 passes NHS mod-11; the +1 phone span strictly contains it.
+    text = "+1 415 555 2604"
+    assert spans(text, detect(text)) == [("phone", text, 0.8)]
+    (keyword,) = [
+        f for f in detect("NHS number 415 555 2604") if f.kind == "nhs_number"
+    ]
+    assert keyword.reason == "mod11_keyword"
