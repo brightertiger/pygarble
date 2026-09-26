@@ -34,6 +34,15 @@ PROFILES = {
     "legacy": LEGACY_STRATEGIES,
     "corruption": (Strategy.MOJIBAKE, Strategy.CONTROL_CHARACTERS),
     "spoofing": (Strategy.UNICODE_SCRIPT,),
+    # Degenerate model output: loops, encoding damage, dense token salad.
+    # Deliberately excludes the Markov/word-anomaly members so technical
+    # prose, code and product names stay quiet.
+    "llm_output": (
+        Strategy.REPETITION,
+        Strategy.CONTROL_CHARACTERS,
+        Strategy.MOJIBAKE,
+        Strategy.LOCAL_ANOMALY,
+    ),
 }
 
 

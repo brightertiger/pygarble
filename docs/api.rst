@@ -5,7 +5,7 @@ Language strategies target English. Non-English text, including meaningful Hindi
 may be classified as gibberish. Scores are heuristic values, not calibrated
 probabilities; the library does not establish semantic meaning or identify languages.
 
-This reference describes the 0.9.0 API. See :doc:`migration` for changed
+This reference describes the 0.10.0 API. See :doc:`migration` for changed
 behavior. Public imports are available from ``pygarble``.
 
 GarbleDetector
@@ -109,7 +109,32 @@ strategy supplies evidence; applicability does not mean the input is garbled.
 Profiles and aggregation
 ------------------------
 
-``EnsembleDetector()`` selects the ``english`` profile. See :doc:`strategy-guide` to choose checks and :doc:`strategies` for
+``EnsembleDetector()`` selects the ``english`` profile.
+
+.. list-table:: Named profiles
+   :header-rows: 1
+   :widths: 25 75
+
+   * - Profile
+     - Intended use
+   * - ``english``
+     - Default. General English screening: Markov, likelihood ratio, word
+       anomaly, mojibake, keyboard adjacency and control characters.
+   * - ``english_extended``
+     - Adds pattern matching, localized anomalies and repetition; more
+       aggressive, with more potential false positives.
+   * - ``legacy``
+     - The former three-member set: Markov, likelihood ratio and word anomaly.
+   * - ``corruption``
+     - Mojibake and control artifacts, independent of English plausibility.
+   * - ``spoofing``
+     - Unicode script and confusable heuristic.
+   * - ``llm_output``
+     - Repetition, control characters, mojibake and local anomaly; a
+       deterministic pre-check for degenerate model output that stays quiet
+       on code and technical prose.
+
+See :doc:`strategy-guide` to choose checks and :doc:`strategies` for
 its current members. Profiles use union voting by default; an explicit strategies
 list defaults to majority voting. Configure members independently through
 ``strategy_kwargs={Strategy.MARKOV_CHAIN: {"min_length": 4}}``.
@@ -143,6 +168,29 @@ member accepts. Unknown keys in ``strategy_kwargs`` warn once per member and are
 not passed on. Scores and decisions may change after the documented preprocessing and correctness fixes, including
 when the ``legacy`` strategy set is selected.
 
+Calibration
+-----------
+
+.. autofunction:: pygarble.calibrate
+
+.. autoclass:: pygarble.CalibrationReport
+
+.. autoclass:: pygarble.ThresholdPoint
+
+``calibrate(detector, garbled, clean, *, objective="f1",
+max_false_positive_rate=None, thresholds=None)`` accepts any detector with a
+``score`` method that takes a list of strings. ``garbled`` and ``clean`` must
+each contain at least one string. ``objective="max_fpr"`` requires
+``max_false_positive_rate`` in [0, 1], and passing it with
+``objective="f1"`` raises ``ValueError``.
+
+``CalibrationReport`` is a frozen dataclass with ``recommended`` (a
+``ThresholdPoint``), ``objective``, ``max_false_positive_rate``, the
+``garbled`` and ``clean`` sample counts, and ``points``, a tuple of
+``ThresholdPoint`` for every candidate in ascending order. ``ThresholdPoint``
+holds ``threshold``, ``precision``, ``recall``, ``f1`` and
+``false_positive_rate``. See :doc:`calibration` for a walkthrough.
+
 Result records
 --------------
 
@@ -156,8 +204,11 @@ Result records
    :members:
 
 Spans use offsets into the original Python string. Analysis can be converted with
-``dataclasses.asdict`` and serialized as JSON. The allowlist applies only to shared
-English character scoring; raw encoding/control evidence is retained.
+``dataclasses.asdict`` and serialized as JSON. The allowlist applies to every
+strategy: allowlisted words are excluded from English scoring and blanked out of
+the text that raw-text checks scan. ``SYMBOL_RATIO`` reads the raw text, because
+allowlisted letters can only lower its score. Control characters and encoding
+damage outside allowlisted words are still reported.
 
 ``Analysis.status`` is ``garbled`` when the decision is positive, ``clean`` when
 applicable evidence does not flag the input, or ``insufficient_evidence`` when

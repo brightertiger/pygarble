@@ -55,11 +55,18 @@ Repository = "https://github.com/brightertiger/pygarble"
 Issues = "https://github.com/brightertiger/pygarble/issues"
 Documentation = "https://brightertiger.github.io/pygarble/"
 
+[project.scripts]
+pygarble = "pygarble.cli:main"
+
 [tool.setuptools.packages.find]
 include = ["pygarble*"]
 
 [tool.setuptools.package-data]
 pygarble = ["data/manifest.json", "py.typed"]
+
+# JSON table copies are for ports; the sdist carries them, wheels do not.
+[tool.setuptools.exclude-package-data]
+"pygarble.data" = ["words.json", "bigrams.json", "trigrams.json"]
 
 [tool.setuptools.dynamic]
 version = {attr = "pygarble.__version__"}

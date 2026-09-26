@@ -63,6 +63,8 @@ jobs:
     - run: python scripts/update_strategy_docs.py --check
     - name: Verify generated data
       run: python scripts/generate_data.py --check
+    - name: Golden corpus reproduces
+      run: python regression/golden.py --check
 
   build:
     runs-on: ubuntu-latest

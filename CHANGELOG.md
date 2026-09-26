@@ -3,7 +3,30 @@
 All notable changes to pygarble are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
-## [Unreleased]
+## [0.10.0] - 2026-09-26
+
+### Added
+- Command-line interface: `pygarble check|score|analyze` reads files or
+  stdin, supports --profile/--strategy/--threshold/--allowlist,
+  text/TSV/JSONL output, JSON --field mode, and exit code 1 when any input
+  is garbled.
+- `llm_output` profile (repetition, control characters, mojibake, local
+  anomaly): a deterministic pre-check for degenerate model output that
+  stays quiet on code and technical prose.
+- `pygarble.calibrate(detector, garbled, clean)` sweeps thresholds over
+  labeled samples and recommends one by F1 or by a maximum
+  false-positive rate; `pygarble calibrate` does the same from files.
+- Language-neutral JSON copies of the word, bigram and trigram tables under
+  `pygarble/data/` (repo and sdist only), hashed in the manifest, as the
+  shared source for ports.
+- Golden corpus `regression/golden.jsonl` (challenge cases and edge inputs
+  x every profile) with a CI check; ports in other languages are held to
+  it.
+- README rewritten around use cases, plus new documentation pages for the
+  command line and threshold calibration.
+
+### Notes
+- 0.9.0 was prepared but never published to PyPI; users upgrading from 0.8.0 should read both entries.
 
 ## [0.9.0] - 2026-09-26
 

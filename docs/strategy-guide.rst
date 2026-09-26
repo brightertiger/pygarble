@@ -18,8 +18,8 @@ Control characters: new in 0.9.0
 normalization. It detects unexpected control characters, U+FFFD replacement
 characters, lone surrogates, and combining-mark runs exceeding a configurable
 limit. Ordinary tabs, line breaks, accents, and emoji joiners are not themselves
-flagged. This strategy belongs to ``english``, ``english_extended``, and
-``corruption``.
+flagged. This strategy belongs to ``english``, ``english_extended``,
+``corruption``, and ``llm_output``.
 
 .. code-block:: python
 
@@ -43,7 +43,7 @@ Localized anomalies: new in 0.9.0
 ``Strategy.LOCAL_ANOMALY`` finds severe unfamiliar tokens or clusters of suspicious
 tokens in otherwise readable English. It uses the bundled English dictionary,
 shared bigram likelihood, and bounded token windows. It belongs to
-``english_extended`` and can also be selected independently.
+``english_extended`` and ``llm_output`` and can also be selected independently.
 
 .. code-block:: python
 
@@ -94,6 +94,30 @@ bounded phrase repetition; intentional repetition can also be flagged.
    repetition = GarbleDetector(Strategy.REPETITION)
    assert repetition.predict("hello " * 10) is True
 
+LLM output: new in 0.10.0
+-------------------------
+
+The ``llm_output`` profile is a cheap deterministic pre-check for degenerate
+model output, not a hallucination detector. It combines repetition, control
+characters, mojibake and local anomaly, so it catches repetition loops,
+encoding damage from bad decoding, stray control characters and dense token
+salad. It deliberately leaves out the Markov and word-anomaly members, so code,
+identifiers, product names and technical prose stay quiet. Use it as a guard
+that retries or rejects a response before it reaches a user.
+
+.. code-block:: python
+
+   from pygarble import EnsembleDetector
+
+   guard = EnsembleDetector(profile="llm_output")
+   assert guard.predict("and so on and so on and so on and so on") is True
+   assert guard.predict("The answer is CafÃ© au lait.") is True
+   assert guard.predict('def parse(row): return row.split(",")') is False
+
+   response = "Restart the service, then confirm the new log file appears."
+   if guard.predict(response):
+       raise RuntimeError("degenerate response; retry the request")
+
 Tune on your own data
 ---------------------
 
@@ -102,4 +126,4 @@ and expected corruption, including domain terms, identifiers, and short strings.
 Scores are not calibrated probabilities, and no strategy guarantees zero false
 positives. See :doc:`api` for voting and abstention, and :doc:`migration` for changes
 from the previous default. A conditional-trigram experiment remains in repository
-evaluation tooling; no additional trigram model is shipped by 0.9.0.
+evaluation tooling; no additional trigram model is shipped by 0.10.0.
