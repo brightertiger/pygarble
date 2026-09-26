@@ -63,6 +63,9 @@ Homepage = "https://github.com/brightertiger/pygarble"
 Repository = "https://github.com/brightertiger/pygarble"
 Issues = "https://github.com/brightertiger/pygarble/issues"
 Documentation = "https://brightertiger.github.io/pygarble/"
+Changelog = "https://github.com/brightertiger/pygarble/blob/main/CHANGELOG.md"
+Contributing = "https://github.com/brightertiger/pygarble/blob/main/CONTRIBUTING.md"
+Security = "https://github.com/brightertiger/pygarble/blob/main/SECURITY.md"
 
 [project.scripts]
 pygarble = "pygarble.cli:main"

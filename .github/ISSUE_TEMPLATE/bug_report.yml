@@ -1,0 +1,27 @@
+name: Bug report
+description: Report unexpected behavior using synthetic input.
+body:
+  - type: markdown
+    attributes:
+      value: "Do not include real secrets or personal data. For vulnerabilities, follow SECURITY.md."
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment and configuration
+      description: Package/Python versions, operating system, imports, categories, backends and options.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: A small runnable example with synthetic text.
+      render: python
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Expected and actual results
+    validations:
+      required: true

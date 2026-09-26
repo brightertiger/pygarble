@@ -6,6 +6,10 @@ All notable changes to pygarble are documented here. The format follows
 ## [Unreleased]
 
 ### Added
+- Documentation discovery metadata, a generated sitemap and `llms.txt`,
+  optional Search Console verification, and a publishing/discoverability guide.
+- Root contributor and security guides, issue templates, and package metadata
+  links for open-source contributors.
 - `pygarble.screening`: a dedicated secrets, PII and profanity API, with
   explicit optional backends for phonenumberslite, python-stdnum,
   detect-secrets and a separately installed Gitleaks executable.
@@ -24,6 +28,9 @@ All notable changes to pygarble are documented here. The format follows
   search, keeping dense PII documents from causing quadratic work.
 
 ### Changed
+- Release uploads use PyPI Trusted Publishing with the `pypi` GitHub
+  environment; the project owner must configure that publisher before tagging
+  the next release. Existing distribution files are no longer silently skipped.
 - Updated the README, quick start, API reference, CLI and installation
   guides for the separate modules and optional backends. Added architecture
   and migration guidance covering compatibility pointers and unreleased APIs.

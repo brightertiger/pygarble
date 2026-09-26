@@ -52,6 +52,7 @@ See :doc:`installation` to install the package.
    migration
    architecture
    contributing
+   publishing
 
 Gibberish quick start
 ---------------------

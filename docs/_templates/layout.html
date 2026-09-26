@@ -1,0 +1,21 @@
+{% extends "!layout.html" %}
+{% block extrahead %}
+  {{ super() }}
+  {% if discovery_indexable %}
+  <meta name="description" content="{{ discovery_description|e }}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="{{ title|striptags|e }} — pygarble" />
+  <meta property="og:description" content="{{ discovery_description|e }}" />
+  <meta property="og:url" content="{{ pageurl|e }}" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="describedby" href="{{ discovery_index|e }}" type="text/plain" />
+  {% else %}
+  <meta name="robots" content="noindex, follow" />
+  {% endif %}
+  {% if pagename == 'index' and google_site_verification %}
+  <meta name="google-site-verification" content="{{ google_site_verification|e }}" />
+  {% endif %}
+  {% if discovery_schema %}
+  <script type="application/ld+json">{{ discovery_schema|safe }}</script>
+  {% endif %}
+{% endblock %}
