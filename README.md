@@ -285,8 +285,9 @@ Small authored challenge sets remain engineering regression fixtures.
 
 Library code is in `pygarble/`, unit tests in `tests/`, and the website in
 `docs/`. Research and tooling are grouped under `paper/`: `study/` contains
-the paper evaluation, `regression/` contains engineering checks, and `scripts/`
-contains package/data/documentation maintenance tools.
+the manuscript, protocols and results, `scripts/study/` contains the evaluation
+and paper-building code, `regression/` contains engineering checks, and the
+other files in `scripts/` maintain package data and documentation.
 
 ```text
 pygarble/

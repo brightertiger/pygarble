@@ -144,9 +144,10 @@ The repository follows that division:
    tests/              # package unit and integration tests
    docs/               # maintained website and user guides
    paper/
-     study/            # research protocol, code, predictions and manuscript
+     study/            # research protocols, predictions and manuscript
      regression/       # engineering fixtures, golden checks and throughput
      scripts/          # data/docs generation and documentation checks
+       study/          # evaluation, analysis, paper builds and study tests
 
 Only ``pygarble`` is installed as library code. The optional neural environment
 belongs to ``paper/study/`` and does not add dependencies to the base package.

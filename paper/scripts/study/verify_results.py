@@ -26,7 +26,12 @@ def main() -> None:
     output = ROOT / "results"
     frozen = json.loads((output / "code-manifest.json").read_text())
     for name, expected in frozen.items():
-        assert digest((ROOT.parents[1] / name).read_bytes()) == expected, name
+        source = ROOT.parents[1] / name
+        if not source.is_file() or digest(source.read_bytes()) != expected:
+            raise ValueError(
+                "Frozen source differs: {}. Use the historical checkout "
+                "documented in paper/study/README.md.".format(name)
+            )
     predictions = load_predictions(output / "predictions.csv.gz")
     expected_summary = json.loads((output / "summary.json").read_text())
     assert summarize(predictions) == expected_summary

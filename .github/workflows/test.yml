@@ -96,9 +96,6 @@ jobs:
     - run: black --check pygarble tests paper/scripts paper/regression docs/_ext
     - run: isort --check-only pygarble tests paper/scripts paper/regression docs/_ext
     - run: flake8 pygarble tests paper/scripts paper/regression docs/_ext
-    - run: black --check paper/study/*.py
-    - run: isort --check-only paper/study/*.py
-    - run: flake8 paper/study/*.py
     - run: mypy pygarble
     - run: python paper/scripts/update_strategy_docs.py --check
     - name: Verify generated data

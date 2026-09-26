@@ -6,9 +6,9 @@ import io
 import shutil
 import subprocess
 import tarfile
-from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+from .paths import ROOT
+
 BUILD = ROOT / ".cache" / "publication"
 
 

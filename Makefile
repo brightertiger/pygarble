@@ -76,13 +76,13 @@ docs-deploy: docs
 
 # Use a Python 3.12 research environment; the full run is optional and local.
 benchmark-check:
-	$(PYTHON) -m unittest paper.study.test_study paper.study.test_full_corpus paper.study.test_chunk_metrics
+	$(PYTHON) -m unittest paper.scripts.study.test_study paper.scripts.study.test_full_corpus paper.scripts.study.test_chunk_metrics
 
 benchmark-prepare:
-	$(PYTHON) -m paper.study.full_corpus --download-model
+	$(PYTHON) -m paper.scripts.study.full_corpus --download-model
 
 benchmark:
-	$(PYTHON) -m paper.study.full_corpus --output paper/study/reproduction-full
+	$(PYTHON) -m paper.scripts.study.full_corpus --output paper/study/reproduction-full
 
 paper:
-	$(PYTHON) -m paper.study.build_paper
+	$(PYTHON) -m paper.scripts.study.build_paper

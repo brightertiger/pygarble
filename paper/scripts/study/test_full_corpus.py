@@ -1,13 +1,46 @@
 """Tests for full coverage, aggregation and the neural label policies."""
 
 import unittest
+from unittest.mock import patch
 
-from .full_corpus import METHODS, chunks
+from .data import digest
+from .full_corpus import METHODS, chunks, fingerprint
 from .full_metrics import document_summary, majority, summarize_documents
+from .full_verify import verify
 from .hf_backend import policies
+from .paths import REPOSITORY, ROOT, SCRIPTS
+from .run import code_manifest
 
 
 class FullCorpusTests(unittest.TestCase):
+    def test_manifests_cover_relocated_code_and_original_assets(self) -> None:
+        full = fingerprint()
+        preliminary = code_manifest()
+        for manifest in (full, preliminary):
+            for name in ("data.py", "paths.py", "detectors.py"):
+                self.assertEqual(
+                    manifest["paper/scripts/study/" + name],
+                    digest((SCRIPTS / name).read_bytes()),
+                )
+            self.assertEqual(
+                manifest["paper/study/sources.json"],
+                digest((ROOT / "sources.json").read_bytes()),
+            )
+            self.assertIn("pygarble/__init__.py", manifest)
+            self.assertTrue(all((REPOSITORY / p).is_file() for p in manifest))
+            self.assertFalse(
+                any(
+                    p.startswith("paper/study/") and p.endswith(".py")
+                    for p in manifest
+                )
+            )
+
+    def test_frozen_manifest_mismatch_fails_before_downloading(self) -> None:
+        with patch("paper.scripts.study.full_verify.download") as download:
+            with self.assertRaisesRegex(ValueError, "historical checkout"):
+                verify(ROOT / "full-results", replay=False)
+            download.assert_not_called()
+
     def test_tail_and_complete_reconstruction(self) -> None:
         text = "abc " * 203
         rows = chunks({"doc_id": "x", "text": text})
