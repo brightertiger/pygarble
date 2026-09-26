@@ -95,7 +95,7 @@ LOCALE_RULES: Dict[str, Tuple[Rule, ...]] = {
         ),
         (
             "ssn_us",
-            r"\b(?i:ssn|social security)[^\d\n]{0,30}(?<![\w+\-])"
+            r"\b(?i:ssn|social security)[^\d\n]{0,30}"
             r"(?P<v>(?!000|666|9)\d{3}(?!00)\d{2}(?!0000)\d{4})(?![\w\-])",
             0.6,
             "keyword_context",
@@ -128,8 +128,7 @@ LOCALE_RULES: Dict[str, Tuple[Rule, ...]] = {
         ),
         (
             "nhs_number",
-            r"\b(?i:nhs)[^\d\n]{0,30}(?<![\w+\-])"
-            r"(?P<v>\d{3} ?\d{3} ?\d{4})(?![\w\-])",
+            r"\b(?i:nhs)[^\d\n]{0,30}" r"(?P<v>\d{3} ?\d{3} ?\d{4})(?![\w\-])",
             0.9,
             "mod11_keyword",
             "nhs",
@@ -152,7 +151,7 @@ LOCALE_RULES: Dict[str, Tuple[Rule, ...]] = {
         ),
         (
             "aadhaar",
-            r"\b(?i:aadhaar|aadhar|uidai)[^\d\n]{0,30}(?<![\w+\-])"
+            r"\b(?i:aadhaar|aadhar|uidai)[^\d\n]{0,30}"
             r"(?P<v>[2-9]\d{11})(?![\w\-])",
             1.0,
             "verhoeff",

@@ -253,3 +253,26 @@ def test_keywordless_nhs_nested_in_phone_is_dropped():
         f for f in detect("NHS number 415 555 2604") if f.kind == "nhs_number"
     ]
     assert keyword.reason == "mod11_keyword"
+
+
+@pytest.mark.parametrize(
+    "text,kind,value",
+    [
+        ("NHS-9434765919", "nhs_number", "9434765919"),
+        ("nhs-943 476 5919", "nhs_number", "943 476 5919"),
+        ("SSN-123456789", "ssn_us", "123456789"),
+        ("SSN123456789", "ssn_us", "123456789"),
+        ("aadhaar-234123412346", "aadhaar", "234123412346"),
+    ],
+)
+def test_keyword_rules_accept_a_hyphen_after_the_keyword(text, kind, value):
+    (finding,) = detect(text)
+    assert finding.kind == kind
+    assert text[finding.start : finding.end] == value
+
+
+@pytest.mark.parametrize(
+    "text", ["ssn 1234567890", "nhs 94347659190", "aadhaar-2341234123467"]
+)
+def test_keyword_values_still_need_whole_digit_runs(text):
+    assert detect(text) == ()

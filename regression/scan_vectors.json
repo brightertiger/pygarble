@@ -3057,5 +3057,56 @@
     "reason": "structure"
    }
   ]
+ },
+ {
+  "text": "NHS-9434765919",
+  "categories": [
+   "pii"
+  ],
+  "note": "nhs keyword then hyphen",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "nhs_number",
+    "start": 4,
+    "end": 14,
+    "confidence": 0.9,
+    "reason": "mod11_keyword"
+   }
+  ]
+ },
+ {
+  "text": "SSN-123456789",
+  "categories": [
+   "pii"
+  ],
+  "note": "ssn keyword then hyphen",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "ssn_us",
+    "start": 4,
+    "end": 13,
+    "confidence": 0.6,
+    "reason": "keyword_context"
+   }
+  ]
+ },
+ {
+  "text": "aadhaar-234123412346",
+  "categories": [
+   "pii"
+  ],
+  "note": "aadhaar keyword then hyphen",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "aadhaar",
+    "start": 8,
+    "end": 20,
+    "confidence": 1.0,
+    "reason": "verhoeff"
+   }
+  ]
  }
 ]
