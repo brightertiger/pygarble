@@ -2,6 +2,7 @@ __version__ = "0.10.0"
 __author__ = "Ujjwal Singh Rao"
 __email__ = "ujjwalsrao@gmail.com"
 
+from importlib.util import find_spec
 from typing import TYPE_CHECKING, Any
 
 from .analysis import Analysis, Signal, Span
@@ -48,6 +49,13 @@ __all__ = [
     "ProfanityDetector",
 ]
 
+# Leave out lazy names whose subpackage is not installed yet, so
+# `from pygarble import *` never trips over them. find_spec does not import.
+for _name in ("PIIDetector", "ProfanityDetector"):
+    if find_spec("." + _LAZY[_name][0], __name__) is None:
+        __all__.remove(_name)
+del _name
+
 
 def __getattr__(name: str) -> Any:
     if name not in _LAZY:
@@ -55,6 +63,10 @@ def __getattr__(name: str) -> Any:
     from importlib import import_module
 
     module, attr = _LAZY[name]
-    value = getattr(import_module("." + module, __name__), attr)
+    try:
+        imported = import_module("." + module, __name__)
+    except ImportError as exc:
+        raise AttributeError(name) from exc
+    value = getattr(imported, attr)
     globals()[name] = value
     return value

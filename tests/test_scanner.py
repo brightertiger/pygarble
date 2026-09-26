@@ -1,5 +1,6 @@
 """Scanner composition, gibberish category, caching and validation."""
 
+import os
 import sys
 
 import pytest
@@ -9,6 +10,7 @@ from pygarble import Finding, Redaction, Scanner, ScanReport, redact, scan
 from pygarble.scanner import DEFAULT_CATEGORIES
 
 AWS = "AKIAIOSFODNN7EXAMPLE"
+REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 def test_default_categories():
@@ -139,7 +141,8 @@ def test_public_exports_are_lazy():
         assert name in pygarble.__all__
     code = (
         "import sys, pygarble; "
-        "print(any(m.startswith('pygarble.secrets') for m in sys.modules))"
+        "print(sorted(m for m in sys.modules "
+        "if m in ('pygarble.scanner', 'pygarble.secrets')))"
     )
     import subprocess
 
@@ -148,7 +151,54 @@ def test_public_exports_are_lazy():
         capture_output=True,
         text=True,
         check=True,
-        env={"PYTHONPATH": "."},
+        env={**os.environ, "PYTHONPATH": "."},
+        cwd=REPO_ROOT,
     )
-    assert out.stdout.strip() == "False"
+    assert out.stdout.strip() == "[]"
     assert isinstance(Finding("pii", "email", 0, 1, 0.9, "x"), Finding)
+
+
+def test_star_import_and_hasattr_do_not_raise():
+    namespace: dict = {}
+    exec("from pygarble import *", namespace)
+    assert namespace["Scanner"] is Scanner
+    for name in ("PIIDetector", "ProfanityDetector"):
+        assert isinstance(hasattr(pygarble, name), bool)
+    with pytest.raises(AttributeError):
+        pygarble.no_such_name  # type: ignore[attr-defined]
+
+
+def test_bare_string_arguments_rejected():
+    for kwargs in (
+        {"categories": "secrets"},
+        {"kinds": "garbled"},
+        {"exclude_kinds": "garbled"},
+    ):
+        with pytest.raises(ValueError, match="not a string"):
+            Scanner(**kwargs)  # type: ignore[arg-type]
+    with pytest.raises(TypeError):
+        list(Scanner().iter_scan("abc"))  # type: ignore[arg-type]
+
+
+def test_secrets_without_context_forwarded():
+    blob = "blob " + "9f86d081884c7d659a2feaa0c55ad015" * 2
+    plain = Scanner(categories=["secrets"]).scan(blob)
+    assert "high_entropy_string" not in [f.kind for f in plain.findings]
+    loose = Scanner(categories=["secrets"], secrets_without_context=True)
+    kinds = [f.kind for f in loose.scan(blob).findings]
+    assert "high_entropy_string" in kinds
+
+
+def test_exclude_kinds_removes_kind():
+    report = Scanner(
+        categories=["secrets"], exclude_kinds=["aws_access_key_id"]
+    ).scan(f"key {AWS}")
+    assert "aws_access_key_id" not in [f.kind for f in report.findings]
+
+
+def test_redact_rejects_unknown_category_before_scanning():
+    scanner = Scanner(categories=["secrets"])
+    with pytest.raises(ValueError, match="unknown category"):
+        scanner.redact(f"key {AWS}", categories=["nope"])
+    with pytest.raises(ValueError, match="unknown category"):
+        scanner.redact(None, categories=["nope"])  # type: ignore[arg-type]

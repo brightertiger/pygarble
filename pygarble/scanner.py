@@ -65,6 +65,12 @@ def _all_kinds() -> Dict[str, FrozenSet[str]]:
     return kinds
 
 
+def _names(label: str, value: Iterable[str]) -> Iterable[str]:
+    if isinstance(value, str):
+        raise ValueError(f"{label} must be an iterable of names, not a string")
+    return value
+
+
 class _Gibberish:
     category = "gibberish"
 
@@ -124,7 +130,7 @@ class Scanner:
         secrets_without_context: bool = False,
         max_input_length: Optional[int] = None,
     ) -> None:
-        chosen = tuple(dict.fromkeys(categories))
+        chosen = tuple(dict.fromkeys(_names("categories", categories)))
         unknown = [c for c in chosen if c not in CATEGORIES]
         if unknown:
             raise ValueError(
@@ -142,8 +148,8 @@ class Scanner:
         )
         known = _all_kinds()
         universe = frozenset().union(*known.values())
-        wanted = None if kinds is None else frozenset(kinds)
-        excluded = frozenset(exclude_kinds)
+        wanted = None if kinds is None else frozenset(_names("kinds", kinds))
+        excluded = frozenset(_names("exclude_kinds", exclude_kinds))
         bad = sorted(((wanted or frozenset()) | excluded) - universe)
         if bad:
             raise ValueError(
@@ -160,7 +166,7 @@ class Scanner:
             ) - excluded
             if category == "secrets":
                 self._detectors.append(
-                    _secrets(selected, excluded, secrets_without_context)
+                    _secrets(selected, secrets_without_context)
                 )
             elif category == "pii":
                 detector = _pii_detector(
@@ -207,8 +213,9 @@ class Scanner:
         return [self._scan_one(text) for text in texts]
 
     def iter_scan(self, texts: Iterable[str]) -> Iterator[ScanReport]:
-        for text in texts:
-            yield self._scan_one(text)
+        if isinstance(texts, str):
+            raise TypeError("texts must be an iterable of strings")
+        return (self._scan_one(text) for text in texts)
 
     def redact(
         self,
@@ -219,15 +226,15 @@ class Scanner:
         mask_char: str = "*",
         categories: Optional[Iterable[str]] = None,
     ) -> Redaction:
-        report = self._scan_one(text)
         allowed = (
             frozenset(c for c in self.categories if c != "gibberish")
             if categories is None
-            else frozenset(categories)
+            else frozenset(_names("categories", categories))
         )
         unknown = sorted(allowed - frozenset(CATEGORIES))
         if unknown:
             raise ValueError(f"unknown category: {', '.join(unknown)}")
+        report = self._scan_one(text)
         chosen = [
             f
             for f in report.findings
@@ -238,9 +245,7 @@ class Scanner:
         return render(text, chosen, mode, placeholder, mask_char)
 
 
-def _secrets(
-    selected: FrozenSet[str], excluded: FrozenSet[str], without_context: bool
-) -> Detector:
+def _secrets(selected: FrozenSet[str], without_context: bool) -> Detector:
     from .secrets import SecretsDetector
 
     return SecretsDetector(
