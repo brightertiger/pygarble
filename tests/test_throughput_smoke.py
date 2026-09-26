@@ -9,6 +9,20 @@ from pygarble import Scanner
 RULES = ["secrets", "pii", "profanity"]
 
 
+def test_dense_nhs_phone_overlap_filter_scales_linearly():
+    scanner = Scanner(categories=["pii"], locales=["uk"])
+    line = "943 476 5919; +14155550123\n"
+    scanner.scan(line * 100)
+    timings = []
+    for count in (1000, 4000):
+        text = line * count
+        start = time.perf_counter()
+        report = scanner.scan(text)
+        timings.append(time.perf_counter() - start)
+        assert len(report.findings) == 2 * count
+    assert timings[1] / max(timings[0], 1e-3) < 8
+
+
 def test_rules_only_throughput_smoke():
     throughput = pytest.importorskip(
         "regression.throughput", reason="regression/ is not shipped in sdist"

@@ -32,6 +32,7 @@ See :doc:`installation` to install the package.
    cli
    calibration
    screening
+   standalone-screening
    secrets
    pii
    profanity
