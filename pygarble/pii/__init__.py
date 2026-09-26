@@ -25,12 +25,120 @@ _SEPARATORS = re.compile(r"[ \-]")
 _IIN = [(brand, re.compile(prefix), lengths) for brand, prefix, lengths in IIN]
 _COMPILED: Dict[str, List[Tuple[Rule, "re.Pattern[str]"]]] = {}
 
+# Prechecks: cheap tests that every match of a rule implies, so a text
+# that fails one cannot match and the rule's regex is skipped. A rule's
+# tests run in order and stop at the first failure. Each test is one of:
+#   ("in", s): the literal s occurs in the text;
+#   ("run", k): k consecutive \d characters occur;
+#   ("count", k): at least k \d characters occur;
+#   ("re", r): regex r (compiled without flags) is found.
+# Every test is implied by the rule: its literal, digit run or regex is a
+# contiguous piece of the rule's regex with lookarounds dropped (or a
+# wider form of it). \d and \s are the same Unicode classes the rules use,
+# [A-Z] is ASCII as in the rules, (?i:...) folds case exactly as the rule's
+# own (?i:...) does, and no rule sets a flag.
+Check = Tuple[str, Any]
+
+
+def _re(pattern: str) -> Check:
+    return ("re", re.compile(pattern))
+
+
+# One tuple per rule, in the order of GENERIC and LOCALE_RULES; each
+# comment quotes the part of the rule the tests are taken from.
+_PRECHECKS: Dict[str, Tuple[Tuple[Check, ...], ...]] = {
+    "generic": (
+        (("in", "@"),),  # email: "@"
+        (("in", "+"), ("run", 7)),  # phone: \+[1-9]\d{6,14}
+        (("count", 13),),  # card: (?:\d[ \-]?){12,18}\d
+        (("run", 2), _re(r"[A-Z]{2}\d{2}")),  # iban: [A-Z]{2}\d{2}
+        # ipv4: four octets of one to three digits joined by "."
+        (("in", "."), _re(r"\d\.\d{1,3}\.\d{1,3}\.\d")),
+        # ipv6: every branch starts with a hex digit and ":", or "::"
+        (("in", ":"), _re(r"[0-9A-Fa-f]:|::")),
+    ),
+    "us": (
+        # phone: [2-9]\d{2}[\s.\-]\d{4}
+        (("run", 4), _re(r"\d{3}[\s.\-]\d{4}")),
+        # ssn: \d{2}\1\d{4}, where \1 is [\-\s]
+        (("run", 4), _re(r"\d{2}[\-\s]\d{4}")),
+        # ssn keyword: (?i:ssn|social security), then \d{3}\d{2}\d{4}
+        (("run", 9), _re(r"(?i:ssn|social security)")),
+    ),
+    "uk": (
+        (("run", 4),),  # phone: every branch holds \d{4}
+        (("run", 2), _re(r"[A-Z] ?\d{2}")),  # nino: [A-...] ?\d{2}
+        # nhs: \d{3} \d{3} \d{4}
+        (("in", " "), ("run", 4), _re(r"\d{3} \d{4}")),
+        # nhs keyword: (?i:nhs), then \d{3} ?\d{3} ?\d{4}
+        (("run", 4), _re(r"(?i:nhs)")),
+    ),
+    "in": (
+        (("run", 5),),  # phone: [6-9]\d{4}[\s\-]?\d{5}
+        # aadhaar: [2-9]\d{3} \d{4} \d{4}
+        (("in", " "), ("run", 4), _re(r"\d{4} \d{4}")),
+        # aadhaar keyword: (?i:aadhaar|aadhar|uidai), then [2-9]\d{11}
+        (("run", 12), _re(r"(?i:aadhaar|aadhar|uidai)")),
+        (("run", 4), _re(r"[A-Z]\d{4}[A-Z]")),  # pan: [A-Z]\d{4}[A-Z]
+    ),
+}
+assert len(_PRECHECKS["generic"]) == len(GENERIC)
+assert all(
+    len(_PRECHECKS[name]) == len(rules) for name, rules in LOCALE_RULES.items()
+)
+_ANY_DIGIT = re.compile(r"\d")
+# ASCII bytes: each digit becomes "0", every other byte "x".
+_DIGIT_MAP = bytes(
+    ord("0") if chr(i) in "0123456789" else ord("x") for i in range(256)
+)
+
+
+class _Facts:
+    r"""Precheck results for one text, each computed at most once. For
+    ASCII text \d matches exactly 0-9, so digit tests run on a byte copy
+    with every digit mapped to "0"; other text uses the \d regex."""
+
+    def __init__(self, text: str) -> None:
+        self.text = text
+        self.memo: Dict[Check, bool] = {}
+        self.digits: Optional[bytes] = None
+        if text.isascii():
+            self.digits = text.encode("ascii").translate(_DIGIT_MAP)
+
+    def _test(self, check: Check) -> bool:
+        op, arg = check
+        if op == "in":
+            return bool(arg in self.text)
+        if op == "re":
+            return arg.search(self.text) is not None
+        if op == "run":
+            if self.digits is not None:
+                return bool(b"0" * arg in self.digits)
+            return re.search(r"\d{%d}" % arg, self.text) is not None
+        if op == "count":
+            if self.digits is not None:
+                return bool(self.digits.count(b"0") >= arg)
+            return bool(len(_ANY_DIGIT.findall(self.text)) >= arg)
+        raise ValueError(f"unknown precheck {op!r}")
+
+    def passes(self, checks: Tuple[Check, ...]) -> bool:
+        for check in checks:
+            result = self.memo.get(check)
+            if result is None:
+                result = self.memo[check] = self._test(check)
+            if not result:
+                return False
+        return True
+
 
 def _compiled(scope: str) -> List[Tuple[Rule, "re.Pattern[str]"]]:
     if scope not in _COMPILED:
         rules = GENERIC if scope == "generic" else LOCALE_RULES[scope]
         _COMPILED[scope] = [(rule, re.compile(rule[1])) for rule in rules]
     return _COMPILED[scope]
+
+
+_Active = Tuple[Rule, "re.Pattern[str]", Tuple[Check, ...]]
 
 
 def _card_reason(value: str) -> Optional[str]:
@@ -120,12 +228,29 @@ class PIIDetector:
                 f"valid locales: {', '.join(LOCALES)}"
             )
         self.locales = wanted
+        self._active: List[_Active] = []
+        self._active_key: Optional[Tuple[Any, ...]] = None
 
-    def _run(self, text: str, scope: str, found: List[Finding]) -> None:
-        for rule, pattern in _compiled(scope):
-            kind, _, confidence, reason, validator = rule
-            if kind not in self.kinds:
+    def _rules(self) -> List[_Active]:
+        """The selected rules in the order the detector runs them."""
+        key = (self.kinds, self.locales)
+        if self._active_key != key:
+            active: List[_Active] = []
+            for scope in ("generic",) + tuple(self.locales):
+                checks = _PRECHECKS[scope]
+                for (rule, pattern), check in zip(_compiled(scope), checks):
+                    if rule[0] in self.kinds:
+                        active.append((rule, pattern, check))
+            self._active = active
+            self._active_key = key
+        return self._active
+
+    def _run(self, text: str, found: List[Finding]) -> None:
+        facts = _Facts(text)
+        for rule, pattern, checks in self._rules():
+            if not facts.passes(checks):
                 continue
+            kind, _, confidence, reason, validator = rule
             for match in pattern.finditer(text):
                 if "v" in match.groupdict() and match.group("v") is not None:
                     start, end = match.span("v")
@@ -149,9 +274,7 @@ class PIIDetector:
         if not isinstance(text, str):
             raise TypeError("text must be a string")
         found: List[Finding] = []
-        self._run(text, "generic", found)
-        for locale in self.locales:
-            self._run(text, locale, found)
+        self._run(text, found)
         best: Dict[Tuple[int, int], Finding] = {}
         for finding in sorted(found, key=sort_key):
             key = (finding.start, finding.end)

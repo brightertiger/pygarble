@@ -193,6 +193,8 @@ class Scanner:
         findings: List[Finding] = []
         for detector in self._detectors:
             findings.extend(detector.detect(text))
+        if not findings:
+            return ScanReport((), False, len(text))
         ordered = tuple(sorted(findings, key=sort_key))
         flagged = any(
             f.confidence >= self.min_confidence or f.category == "gibberish"

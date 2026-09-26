@@ -30,6 +30,17 @@ _GAP = re.compile(r"^[ .\-]{1,3}$")
 _POSSESSIVE = re.compile(r"['’][sS]$")
 _SPACED_FILLERS = frozenset({"a", "i"})  # one-letter words before a run
 _PHRASE_MAX = max(len(p) for p in PHRASES)
+_PHRASE_SET = frozenset(PHRASES)
+# First words of the phrases of each length: a window can be a phrase only
+# if its first word is one of these.
+_PHRASE_FIRSTS: Dict[int, FrozenSet[str]] = {
+    size: frozenset(p[0] for p in PHRASES if len(p) == size)
+    for size in {len(p) for p in PHRASES}
+}
+_PHRASE_FIRST_WORDS = frozenset(p[0] for p in PHRASES)
+_FORMS_MAX_LENGTH = 64
+_VERDICTS_MAX = 65536
+Verdict = Optional[Tuple[float, str]]
 _BY_LENGTH: Dict[int, Tuple[str, ...]] = {}
 for _word in PROFANITY_STRONG:
     _BY_LENGTH[len(_word)] = _BY_LENGTH.get(len(_word), ()) + (_word,)
@@ -73,6 +84,21 @@ def _masked_candidates(masked: str) -> Tuple[Tuple[str, ...], bool]:
     return (strong, clean)
 
 
+def _forms(group: str) -> Tuple[int, str, str]:
+    """For a TOKEN_RE match: the length of the token without trailing "!",
+    the raw lookup form and the normalised form."""
+    # Strip "!" off the end ("Shit!") but keep it inside ("sh!t"); the
+    # span ends where the stripped token ends.
+    bare = group.rstrip("!")
+    raw = _POSSESSIVE.sub("", bare)
+    # A digits-only token ("455") never matches: no "ass".
+    norm = "" if raw.isdigit() else normalize_token(raw)
+    return (len(bare), raw, norm)
+
+
+_forms_cached = lru_cache(maxsize=65536)(_forms)
+
+
 class ProfanityDetector:
     category = CATEGORY
 
@@ -95,6 +121,24 @@ class ProfanityDetector:
             for entry in (allowlist or ())
         )
         self.obfuscation = bool(obfuscation)
+        self._verdict_state: Optional[Tuple[Any, ...]] = None
+        self._verdict_cache: Dict[str, Verdict] = {}
+
+    def _verdicts(self) -> Optional[Dict[str, Verdict]]:
+        """Cache of _single verdicts by raw token form, valid for the
+        current word sets and flags. A token's normalised form is a
+        function of its raw form (see _forms), so the raw form is the key.
+        None (no caching) if a word set is not a frozenset, since a mutable
+        set could change without the state changing."""
+        state = (self.strong, self.mild, self.allowlist, self.obfuscation)
+        if not all(isinstance(words, frozenset) for words in state[:3]):
+            return None
+        if state != self._verdict_state or (
+            len(self._verdict_cache) >= _VERDICTS_MAX
+        ):
+            self._verdict_cache = {}
+            self._verdict_state = state
+        return self._verdict_cache
 
     def _tier(self, word: str) -> Optional[Tuple[float, str]]:
         if word in self.strong:
@@ -141,12 +185,22 @@ class ProfanityDetector:
         if not self.strong:
             return
         norms = [t[3] for t in tokens]
+        # Only a token that opens some phrase can start a window that is a
+        # phrase; the windows are still visited in the original order.
+        starts = [i for i, n in enumerate(norms) if n in _PHRASE_FIRST_WORDS]
+        if not starts:
+            return
         for size in range(_PHRASE_MAX, 1, -1):
-            for i in range(0, len(tokens) - size + 1):
+            firsts = _PHRASE_FIRSTS.get(size, frozenset())
+            for i in starts:
+                if i > len(tokens) - size:
+                    break
+                if norms[i] not in firsts:
+                    continue
                 if any(j in used for j in range(i, i + size)):
                     continue
                 window = tuple(norms[i : i + size])
-                if window not in PHRASES:
+                if window not in _PHRASE_SET:
                     continue
                 joined = "".join(window)
                 if " ".join(window) in self.allowlist or (
@@ -173,6 +227,15 @@ class ProfanityDetector:
         used: Set[int],
         out: List[Finding],
     ) -> None:
+        # A run needs three single-letter tokens; with fewer there is none.
+        singles = 0
+        for token in tokens:
+            if len(token[2]) == 1 and token[2].isalpha():
+                singles += 1
+                if singles >= 3:
+                    break
+        if singles < 3:
+            return
         i = 0
         while i < len(tokens):
             j = i
@@ -230,23 +293,29 @@ class ProfanityDetector:
             raise TypeError("text must be a string")
         tokens: List[Token] = []
         for match in TOKEN_RE.finditer(text):
-            # Strip "!" off the end ("Shit!") but keep it inside ("sh!t");
-            # the span ends where the stripped token ends.
-            bare = match.group().rstrip("!")
-            raw = _POSSESSIVE.sub("", bare)
-            # A digits-only token ("455") never matches: no "ass".
-            norm = "" if raw.isdigit() else normalize_token(raw)
-            end = match.start() + len(bare)
-            tokens.append((match.start(), end, raw, norm))
+            group = match.group()
+            length, raw, norm = (
+                _forms_cached(group)
+                if len(group) <= _FORMS_MAX_LENGTH
+                else _forms(group)
+            )
+            start = match.start()
+            tokens.append((start, start + length, raw, norm))
         out: List[Finding] = []
         used: Set[int] = set()
         self._phrases(tokens, used, out)
         if self.obfuscation:
             self._spaced(text, tokens, used, out)
+        cache = self._verdicts()
         for index, token in enumerate(tokens):
             if index in used:
                 continue
-            verdict = self._single(token)
+            if cache is None:
+                verdict = self._single(token)
+            elif token[2] in cache:
+                verdict = cache[token[2]]
+            else:
+                verdict = cache[token[2]] = self._single(token)
             if verdict is not None:
                 out.append(
                     Finding(
