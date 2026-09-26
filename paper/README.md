@@ -4,7 +4,7 @@ Status: research results and drafts ready for author review, not submitted.
 The study was run without a new human label audit, as requested. A journal
 acceptance or Scholar indexing outcome is not guaranteed.
 
-Start with the [study report](study/results/report.md),
+Start with the [full study report](study/full-results/report.md),
 [review manuscript PDF](study/manuscript.pdf) and
 [study reproduction instructions](study/README.md). All new research code,
 provenance, results, figures and the empirical manuscript are in `study/`.
@@ -19,12 +19,17 @@ services have been procured for the study. Package publication remains deferred.
 ## What is complete
 
 - Frozen published-corpus protocol and pinned, checksum-verified retrieval.
-- Evaluation of 38 released gibberish transcripts and four English controls.
-- Default profiles, single-signal references, locally trained character models,
-  source-held-out calibration, length sensitivity and CPU/RSS measurements.
+- Exhaustive evaluation of 109 labelled documents: 38 gibberish transcripts,
+  four English controls and 67 other-language meaningful documents.
+- Identical 400-character chunks for pygarble and a pinned local HF DistilBERT
+  benchmark: 79,969 chunks, without a sampling cap or silent truncation.
+- Fixed package profiles, two explicit transformer label policies, document
+  aggregation sensitivity and comparative CPU/RSS measurements.
+- Retained preliminary character-model calibration and length experiments.
 - Inherited source labels; no new human annotation, audit or invented labels.
 - Prediction-level results, figures, empirical draft and local PDF build.
-- Automated reproduction in a fresh standard-library-only virtual environment.
+- Exhaustive saved-output checks and a fixed offline neural subset replay.
+- Separate preliminary reproduction in a standard-library-only environment.
 
 See [validation](study/validation.md) for exact checks and limitations. The
 existing PR CI does not automatically execute the new study-specific tests;

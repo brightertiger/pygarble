@@ -10,3 +10,27 @@ After scoring, only reporting and review tooling was added: plots, manuscript
 rendering, source packaging and saved-output verification. No evaluation code,
 threshold, source membership or result was changed. PDF pagination was adjusted
 to keep a table within the page; this changes presentation only.
+
+## Full-corpus extension
+
+On 27 September 2026 the author requested every released labelled GitHub
+text and a Hugging Face benchmark. `full_corpus_protocol.md` and new core
+scoring modules were frozen in commit `717ceee` before the new predictions.
+The original capped outcomes were already known. This is an exploratory
+extension, not an independent confirmation or a retroactive change to the
+original protocol. Original evaluation source files and results are retained.
+
+The extension includes all 109 released labelled documents and all normalized
+characters through 79,969 chunks, with both HF policies fixed in advance.
+No model, package default, source membership or threshold was tuned after
+viewing results. Reporting, figures, runtime measurement and artifact/replay
+verification were added during the long full-corpus inference run. Supplementary
+applicability and pairwise disagreement tables summarize saved predictions;
+they add no trained model or selected operating point.
+
+Final reporting checks clarified that word lookup is not a member of the
+three tested ensemble profiles and that zero scores on text without eligible
+Latin-letter words do not establish linguistic coverage. The paper describes
+these implementation details explicitly. The installed tokenizer version was
+added to the optional requirements for reproduction; no installed version or
+inference setting changed. PDF-only pagination changes resolved overfull boxes.

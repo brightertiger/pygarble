@@ -50,7 +50,8 @@ without requiring a remote inference service.
 The accompanying research workflow evaluates published human-produced
 gibberish and English comparison texts [@gaskell2022]. It records source
 classifications, detector scores, applicability and false flags, and compares
-fixed profiles with local character models. This provides a concrete use of
+fixed profiles with a pinned local DistilBERT classifier and retains an
+earlier character-model calibration experiment. This provides a concrete use of
 pygarble for investigating the limits of inexpensive text filters. The shared
 analysis interface makes configuration differences inspectable without
 requiring remote inference. It does not supply contextual semantic judgments.
@@ -82,9 +83,10 @@ secret scanners remain relevant alternatives. A narrow rule set also trades
 contextual coverage for simplicity: word matching does not assess toxicity,
 and structured-identifier checks do not recognize every personal reference.
 
-The accompanying comparison includes single-strategy references and locally
-trained character bigram/trigram baselines. Word lookup outperformed the
-default ensembles on the small published collection. This finding argues
+The accompanying comparison includes single-strategy references and an
+external pretrained DistilBERT classifier [@jindal]. The preliminary study
+also used locally trained character bigram/trigram baselines. Word lookup
+detected more positive documents than the default ensembles in this corpus. This finding argues
 for explicit configuration and evaluation, not a claim of ensemble superiority.
 The software's significance beyond this workflow remains for author and
 editorial assessment; combining existing tools alone does not establish it.
@@ -131,17 +133,23 @@ An author-requested, AI-assisted external evaluation has now been executed
 using the published corpus [@gaskell2022]. Its frozen protocol, source hashes,
 code, predictions and report are available in
 [paper/study](https://github.com/brightertiger/pygarble/tree/docs/joss-submission/paper/study).
-At 400 characters, the default English profile detected 16 of 38 released
-gibberish transcripts; word lookup detected all 38 with no false flags in
-400 selected blocks from four English control documents. Separate
+The full experiment processes every released labelled document: 38 gibberish
+transcripts and 71 meaningful texts, comprising 79,969 consecutive chunks.
+English controls are primary; the other 67 meaningful documents are reported
+separately. Under a fixed majority-chunk rule, English detects 13 positive
+documents, while word lookup and both transformer label policies detect all
+38. Word lookup flags none of the 5,200 English control chunks; the two
+transformer policies differ sharply in false flags. Separate preliminary
 source-held-out calibration exposed substantial false-positive shifts.
 These are collection-specific measurements, not population accuracy claims.
 
 The workflow retains supplied classifications without a new human label
 audit. Limited source diversity, historical spelling, source/class confounding
-and unknown participant dependencies constrain interpretation. An automated
-rerun in a fresh virtual environment reproduced deterministic results byte
-for byte; this is not an independent human reproduction or manuscript review.
+and unknown participant dependencies constrain interpretation. Automated
+checks verify full-corpus artifacts and replay a fixed neural subset offline.
+A separate fresh-environment rerun reproduced the preliminary deterministic
+results byte for byte. Neither constitutes independent human reproduction
+or manuscript review.
 The study establishes an executed research workflow for author review,
 without claiming external adoption, downstream improvement or automatic JOSS
 eligibility. The broader repository supplies tests, CI, example workflows

@@ -1,0 +1,764 @@
+doc_id,member,label,scope,language,era,genre,method,chunks,flagged,flagged_fraction,majority_decision,any_decision,full_width_chunks,tail_chunks,full_width_fraction,full_width_majority
+gib-DA_01,Gibberish - DA_01.txt,1,positive,invented,experiment,invented,english,4,0,0.0,0,0,3,1,0.0,0
+gib-DA_01,Gibberish - DA_01.txt,1,positive,invented,experiment,invented,english_extended,4,0,0.0,0,0,3,1,0.0,0
+gib-DA_01,Gibberish - DA_01.txt,1,positive,invented,experiment,invented,legacy,4,0,0.0,0,0,3,1,0.0,0
+gib-DA_01,Gibberish - DA_01.txt,1,positive,invented,experiment,invented,word_lookup,4,4,1.0,1,1,3,1,1.0,1
+gib-DA_01,Gibberish - DA_01.txt,1,positive,invented,experiment,invented,entropy_based,4,0,0.0,0,0,3,1,0.0,0
+gib-DA_01,Gibberish - DA_01.txt,1,positive,invented,experiment,invented,hf_all,4,4,1.0,1,1,3,1,1.0,1
+gib-DA_01,Gibberish - DA_01.txt,1,positive,invented,experiment,invented,hf_strict,4,4,1.0,1,1,3,1,1.0,1
+gib-DA_02,Gibberish - DA_02.txt,1,positive,invented,experiment,invented,english,6,0,0.0,0,0,5,1,0.0,0
+gib-DA_02,Gibberish - DA_02.txt,1,positive,invented,experiment,invented,english_extended,6,0,0.0,0,0,5,1,0.0,0
+gib-DA_02,Gibberish - DA_02.txt,1,positive,invented,experiment,invented,legacy,6,0,0.0,0,0,5,1,0.0,0
+gib-DA_02,Gibberish - DA_02.txt,1,positive,invented,experiment,invented,word_lookup,6,6,1.0,1,1,5,1,1.0,1
+gib-DA_02,Gibberish - DA_02.txt,1,positive,invented,experiment,invented,entropy_based,6,0,0.0,0,0,5,1,0.0,0
+gib-DA_02,Gibberish - DA_02.txt,1,positive,invented,experiment,invented,hf_all,6,6,1.0,1,1,5,1,1.0,1
+gib-DA_02,Gibberish - DA_02.txt,1,positive,invented,experiment,invented,hf_strict,6,6,1.0,1,1,5,1,1.0,1
+gib-DC_01,Gibberish - DC_01.txt,1,positive,invented,experiment,invented,english,6,0,0.0,0,0,5,1,0.0,0
+gib-DC_01,Gibberish - DC_01.txt,1,positive,invented,experiment,invented,english_extended,6,0,0.0,0,0,5,1,0.0,0
+gib-DC_01,Gibberish - DC_01.txt,1,positive,invented,experiment,invented,legacy,6,0,0.0,0,0,5,1,0.0,0
+gib-DC_01,Gibberish - DC_01.txt,1,positive,invented,experiment,invented,word_lookup,6,6,1.0,1,1,5,1,1.0,1
+gib-DC_01,Gibberish - DC_01.txt,1,positive,invented,experiment,invented,entropy_based,6,0,0.0,0,0,5,1,0.0,0
+gib-DC_01,Gibberish - DC_01.txt,1,positive,invented,experiment,invented,hf_all,6,6,1.0,1,1,5,1,1.0,1
+gib-DC_01,Gibberish - DC_01.txt,1,positive,invented,experiment,invented,hf_strict,6,6,1.0,1,1,5,1,1.0,1
+gib-DC_03,Gibberish - DC_03.txt,1,positive,invented,experiment,invented,english,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_03,Gibberish - DC_03.txt,1,positive,invented,experiment,invented,english_extended,4,1,0.25,0,1,3,1,0.3333333333333333,0
+gib-DC_03,Gibberish - DC_03.txt,1,positive,invented,experiment,invented,legacy,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_03,Gibberish - DC_03.txt,1,positive,invented,experiment,invented,word_lookup,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_03,Gibberish - DC_03.txt,1,positive,invented,experiment,invented,entropy_based,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_03,Gibberish - DC_03.txt,1,positive,invented,experiment,invented,hf_all,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_03,Gibberish - DC_03.txt,1,positive,invented,experiment,invented,hf_strict,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_04,Gibberish - DC_04.txt,1,positive,invented,experiment,invented,english,4,1,0.25,0,1,3,1,0.3333333333333333,0
+gib-DC_04,Gibberish - DC_04.txt,1,positive,invented,experiment,invented,english_extended,4,2,0.5,1,1,3,1,0.6666666666666666,1
+gib-DC_04,Gibberish - DC_04.txt,1,positive,invented,experiment,invented,legacy,4,1,0.25,0,1,3,1,0.3333333333333333,0
+gib-DC_04,Gibberish - DC_04.txt,1,positive,invented,experiment,invented,word_lookup,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_04,Gibberish - DC_04.txt,1,positive,invented,experiment,invented,entropy_based,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_04,Gibberish - DC_04.txt,1,positive,invented,experiment,invented,hf_all,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_04,Gibberish - DC_04.txt,1,positive,invented,experiment,invented,hf_strict,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_05,Gibberish - DC_05.txt,1,positive,invented,experiment,invented,english,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_05,Gibberish - DC_05.txt,1,positive,invented,experiment,invented,english_extended,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_05,Gibberish - DC_05.txt,1,positive,invented,experiment,invented,legacy,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_05,Gibberish - DC_05.txt,1,positive,invented,experiment,invented,word_lookup,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_05,Gibberish - DC_05.txt,1,positive,invented,experiment,invented,entropy_based,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_05,Gibberish - DC_05.txt,1,positive,invented,experiment,invented,hf_all,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_05,Gibberish - DC_05.txt,1,positive,invented,experiment,invented,hf_strict,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_06,Gibberish - DC_06.txt,1,positive,invented,experiment,invented,english,7,0,0.0,0,0,6,1,0.0,0
+gib-DC_06,Gibberish - DC_06.txt,1,positive,invented,experiment,invented,english_extended,7,0,0.0,0,0,6,1,0.0,0
+gib-DC_06,Gibberish - DC_06.txt,1,positive,invented,experiment,invented,legacy,7,0,0.0,0,0,6,1,0.0,0
+gib-DC_06,Gibberish - DC_06.txt,1,positive,invented,experiment,invented,word_lookup,7,7,1.0,1,1,6,1,1.0,1
+gib-DC_06,Gibberish - DC_06.txt,1,positive,invented,experiment,invented,entropy_based,7,0,0.0,0,0,6,1,0.0,0
+gib-DC_06,Gibberish - DC_06.txt,1,positive,invented,experiment,invented,hf_all,7,7,1.0,1,1,6,1,1.0,1
+gib-DC_06,Gibberish - DC_06.txt,1,positive,invented,experiment,invented,hf_strict,7,7,1.0,1,1,6,1,1.0,1
+gib-DC_08,Gibberish - DC_08.txt,1,positive,invented,experiment,invented,english,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_08,Gibberish - DC_08.txt,1,positive,invented,experiment,invented,english_extended,4,2,0.5,1,1,3,1,0.6666666666666666,1
+gib-DC_08,Gibberish - DC_08.txt,1,positive,invented,experiment,invented,legacy,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_08,Gibberish - DC_08.txt,1,positive,invented,experiment,invented,word_lookup,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_08,Gibberish - DC_08.txt,1,positive,invented,experiment,invented,entropy_based,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_08,Gibberish - DC_08.txt,1,positive,invented,experiment,invented,hf_all,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_08,Gibberish - DC_08.txt,1,positive,invented,experiment,invented,hf_strict,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_09,Gibberish - DC_09.txt,1,positive,invented,experiment,invented,english,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_09,Gibberish - DC_09.txt,1,positive,invented,experiment,invented,english_extended,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_09,Gibberish - DC_09.txt,1,positive,invented,experiment,invented,legacy,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_09,Gibberish - DC_09.txt,1,positive,invented,experiment,invented,word_lookup,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_09,Gibberish - DC_09.txt,1,positive,invented,experiment,invented,entropy_based,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_09,Gibberish - DC_09.txt,1,positive,invented,experiment,invented,hf_all,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_09,Gibberish - DC_09.txt,1,positive,invented,experiment,invented,hf_strict,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_10,Gibberish - DC_10.txt,1,positive,invented,experiment,invented,english,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_10,Gibberish - DC_10.txt,1,positive,invented,experiment,invented,english_extended,4,2,0.5,1,1,3,1,0.6666666666666666,1
+gib-DC_10,Gibberish - DC_10.txt,1,positive,invented,experiment,invented,legacy,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_10,Gibberish - DC_10.txt,1,positive,invented,experiment,invented,word_lookup,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_10,Gibberish - DC_10.txt,1,positive,invented,experiment,invented,entropy_based,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_10,Gibberish - DC_10.txt,1,positive,invented,experiment,invented,hf_all,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_10,Gibberish - DC_10.txt,1,positive,invented,experiment,invented,hf_strict,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_11,Gibberish - DC_11.txt,1,positive,invented,experiment,invented,english,4,3,0.75,1,1,3,1,1.0,1
+gib-DC_11,Gibberish - DC_11.txt,1,positive,invented,experiment,invented,english_extended,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_11,Gibberish - DC_11.txt,1,positive,invented,experiment,invented,legacy,4,3,0.75,1,1,3,1,1.0,1
+gib-DC_11,Gibberish - DC_11.txt,1,positive,invented,experiment,invented,word_lookup,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_11,Gibberish - DC_11.txt,1,positive,invented,experiment,invented,entropy_based,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_11,Gibberish - DC_11.txt,1,positive,invented,experiment,invented,hf_all,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_11,Gibberish - DC_11.txt,1,positive,invented,experiment,invented,hf_strict,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_12,Gibberish - DC_12.txt,1,positive,invented,experiment,invented,english,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_12,Gibberish - DC_12.txt,1,positive,invented,experiment,invented,english_extended,4,3,0.75,1,1,3,1,0.6666666666666666,1
+gib-DC_12,Gibberish - DC_12.txt,1,positive,invented,experiment,invented,legacy,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_12,Gibberish - DC_12.txt,1,positive,invented,experiment,invented,word_lookup,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_12,Gibberish - DC_12.txt,1,positive,invented,experiment,invented,entropy_based,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_12,Gibberish - DC_12.txt,1,positive,invented,experiment,invented,hf_all,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_12,Gibberish - DC_12.txt,1,positive,invented,experiment,invented,hf_strict,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_15,Gibberish - DC_15.txt,1,positive,invented,experiment,invented,english,7,0,0.0,0,0,6,1,0.0,0
+gib-DC_15,Gibberish - DC_15.txt,1,positive,invented,experiment,invented,english_extended,7,1,0.14285714285714285,0,1,6,1,0.16666666666666666,0
+gib-DC_15,Gibberish - DC_15.txt,1,positive,invented,experiment,invented,legacy,7,0,0.0,0,0,6,1,0.0,0
+gib-DC_15,Gibberish - DC_15.txt,1,positive,invented,experiment,invented,word_lookup,7,7,1.0,1,1,6,1,1.0,1
+gib-DC_15,Gibberish - DC_15.txt,1,positive,invented,experiment,invented,entropy_based,7,0,0.0,0,0,6,1,0.0,0
+gib-DC_15,Gibberish - DC_15.txt,1,positive,invented,experiment,invented,hf_all,7,7,1.0,1,1,6,1,1.0,1
+gib-DC_15,Gibberish - DC_15.txt,1,positive,invented,experiment,invented,hf_strict,7,7,1.0,1,1,6,1,1.0,1
+gib-DC_16,Gibberish - DC_16.txt,1,positive,invented,experiment,invented,english,5,2,0.4,0,1,4,1,0.5,1
+gib-DC_16,Gibberish - DC_16.txt,1,positive,invented,experiment,invented,english_extended,5,5,1.0,1,1,4,1,1.0,1
+gib-DC_16,Gibberish - DC_16.txt,1,positive,invented,experiment,invented,legacy,5,2,0.4,0,1,4,1,0.5,1
+gib-DC_16,Gibberish - DC_16.txt,1,positive,invented,experiment,invented,word_lookup,5,5,1.0,1,1,4,1,1.0,1
+gib-DC_16,Gibberish - DC_16.txt,1,positive,invented,experiment,invented,entropy_based,5,0,0.0,0,0,4,1,0.0,0
+gib-DC_16,Gibberish - DC_16.txt,1,positive,invented,experiment,invented,hf_all,5,5,1.0,1,1,4,1,1.0,1
+gib-DC_16,Gibberish - DC_16.txt,1,positive,invented,experiment,invented,hf_strict,5,5,1.0,1,1,4,1,1.0,1
+gib-DC_18,Gibberish - DC_18.txt,1,positive,invented,experiment,invented,english,6,0,0.0,0,0,5,1,0.0,0
+gib-DC_18,Gibberish - DC_18.txt,1,positive,invented,experiment,invented,english_extended,6,0,0.0,0,0,5,1,0.0,0
+gib-DC_18,Gibberish - DC_18.txt,1,positive,invented,experiment,invented,legacy,6,0,0.0,0,0,5,1,0.0,0
+gib-DC_18,Gibberish - DC_18.txt,1,positive,invented,experiment,invented,word_lookup,6,6,1.0,1,1,5,1,1.0,1
+gib-DC_18,Gibberish - DC_18.txt,1,positive,invented,experiment,invented,entropy_based,6,0,0.0,0,0,5,1,0.0,0
+gib-DC_18,Gibberish - DC_18.txt,1,positive,invented,experiment,invented,hf_all,6,6,1.0,1,1,5,1,1.0,1
+gib-DC_18,Gibberish - DC_18.txt,1,positive,invented,experiment,invented,hf_strict,6,6,1.0,1,1,5,1,1.0,1
+gib-DC_20,Gibberish - DC_20.txt,1,positive,invented,experiment,invented,english,5,1,0.2,0,1,4,1,0.25,0
+gib-DC_20,Gibberish - DC_20.txt,1,positive,invented,experiment,invented,english_extended,5,4,0.8,1,1,4,1,0.75,1
+gib-DC_20,Gibberish - DC_20.txt,1,positive,invented,experiment,invented,legacy,5,0,0.0,0,0,4,1,0.0,0
+gib-DC_20,Gibberish - DC_20.txt,1,positive,invented,experiment,invented,word_lookup,5,5,1.0,1,1,4,1,1.0,1
+gib-DC_20,Gibberish - DC_20.txt,1,positive,invented,experiment,invented,entropy_based,5,0,0.0,0,0,4,1,0.0,0
+gib-DC_20,Gibberish - DC_20.txt,1,positive,invented,experiment,invented,hf_all,5,5,1.0,1,1,4,1,1.0,1
+gib-DC_20,Gibberish - DC_20.txt,1,positive,invented,experiment,invented,hf_strict,5,5,1.0,1,1,4,1,1.0,1
+gib-DC_21,Gibberish - DC_21.txt,1,positive,invented,experiment,invented,english,6,0,0.0,0,0,5,1,0.0,0
+gib-DC_21,Gibberish - DC_21.txt,1,positive,invented,experiment,invented,english_extended,6,1,0.16666666666666666,0,1,5,1,0.0,0
+gib-DC_21,Gibberish - DC_21.txt,1,positive,invented,experiment,invented,legacy,6,0,0.0,0,0,5,1,0.0,0
+gib-DC_21,Gibberish - DC_21.txt,1,positive,invented,experiment,invented,word_lookup,6,6,1.0,1,1,5,1,1.0,1
+gib-DC_21,Gibberish - DC_21.txt,1,positive,invented,experiment,invented,entropy_based,6,0,0.0,0,0,5,1,0.0,0
+gib-DC_21,Gibberish - DC_21.txt,1,positive,invented,experiment,invented,hf_all,6,6,1.0,1,1,5,1,1.0,1
+gib-DC_21,Gibberish - DC_21.txt,1,positive,invented,experiment,invented,hf_strict,6,6,1.0,1,1,5,1,1.0,1
+gib-DC_22,Gibberish - DC_22.txt,1,positive,invented,experiment,invented,english,3,3,1.0,1,1,2,1,1.0,1
+gib-DC_22,Gibberish - DC_22.txt,1,positive,invented,experiment,invented,english_extended,3,3,1.0,1,1,2,1,1.0,1
+gib-DC_22,Gibberish - DC_22.txt,1,positive,invented,experiment,invented,legacy,3,3,1.0,1,1,2,1,1.0,1
+gib-DC_22,Gibberish - DC_22.txt,1,positive,invented,experiment,invented,word_lookup,3,3,1.0,1,1,2,1,1.0,1
+gib-DC_22,Gibberish - DC_22.txt,1,positive,invented,experiment,invented,entropy_based,3,0,0.0,0,0,2,1,0.0,0
+gib-DC_22,Gibberish - DC_22.txt,1,positive,invented,experiment,invented,hf_all,3,3,1.0,1,1,2,1,1.0,1
+gib-DC_22,Gibberish - DC_22.txt,1,positive,invented,experiment,invented,hf_strict,3,3,1.0,1,1,2,1,1.0,1
+gib-DC_23,Gibberish - DC_23.txt,1,positive,invented,experiment,invented,english,2,2,1.0,1,1,1,1,1.0,1
+gib-DC_23,Gibberish - DC_23.txt,1,positive,invented,experiment,invented,english_extended,2,2,1.0,1,1,1,1,1.0,1
+gib-DC_23,Gibberish - DC_23.txt,1,positive,invented,experiment,invented,legacy,2,2,1.0,1,1,1,1,1.0,1
+gib-DC_23,Gibberish - DC_23.txt,1,positive,invented,experiment,invented,word_lookup,2,2,1.0,1,1,1,1,1.0,1
+gib-DC_23,Gibberish - DC_23.txt,1,positive,invented,experiment,invented,entropy_based,2,0,0.0,0,0,1,1,0.0,0
+gib-DC_23,Gibberish - DC_23.txt,1,positive,invented,experiment,invented,hf_all,2,2,1.0,1,1,1,1,1.0,1
+gib-DC_23,Gibberish - DC_23.txt,1,positive,invented,experiment,invented,hf_strict,2,2,1.0,1,1,1,1,1.0,1
+gib-DC_24,Gibberish - DC_24.txt,1,positive,invented,experiment,invented,english,2,2,1.0,1,1,1,1,1.0,1
+gib-DC_24,Gibberish - DC_24.txt,1,positive,invented,experiment,invented,english_extended,2,2,1.0,1,1,1,1,1.0,1
+gib-DC_24,Gibberish - DC_24.txt,1,positive,invented,experiment,invented,legacy,2,2,1.0,1,1,1,1,1.0,1
+gib-DC_24,Gibberish - DC_24.txt,1,positive,invented,experiment,invented,word_lookup,2,2,1.0,1,1,1,1,1.0,1
+gib-DC_24,Gibberish - DC_24.txt,1,positive,invented,experiment,invented,entropy_based,2,0,0.0,0,0,1,1,0.0,0
+gib-DC_24,Gibberish - DC_24.txt,1,positive,invented,experiment,invented,hf_all,2,2,1.0,1,1,1,1,1.0,1
+gib-DC_24,Gibberish - DC_24.txt,1,positive,invented,experiment,invented,hf_strict,2,2,1.0,1,1,1,1,1.0,1
+gib-DC_25,Gibberish - DC_25.txt,1,positive,invented,experiment,invented,english,3,3,1.0,1,1,2,1,1.0,1
+gib-DC_25,Gibberish - DC_25.txt,1,positive,invented,experiment,invented,english_extended,3,3,1.0,1,1,2,1,1.0,1
+gib-DC_25,Gibberish - DC_25.txt,1,positive,invented,experiment,invented,legacy,3,3,1.0,1,1,2,1,1.0,1
+gib-DC_25,Gibberish - DC_25.txt,1,positive,invented,experiment,invented,word_lookup,3,3,1.0,1,1,2,1,1.0,1
+gib-DC_25,Gibberish - DC_25.txt,1,positive,invented,experiment,invented,entropy_based,3,0,0.0,0,0,2,1,0.0,0
+gib-DC_25,Gibberish - DC_25.txt,1,positive,invented,experiment,invented,hf_all,3,3,1.0,1,1,2,1,1.0,1
+gib-DC_25,Gibberish - DC_25.txt,1,positive,invented,experiment,invented,hf_strict,3,3,1.0,1,1,2,1,1.0,1
+gib-DC_26,Gibberish - DC_26.txt,1,positive,invented,experiment,invented,english,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_26,Gibberish - DC_26.txt,1,positive,invented,experiment,invented,english_extended,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_26,Gibberish - DC_26.txt,1,positive,invented,experiment,invented,legacy,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_26,Gibberish - DC_26.txt,1,positive,invented,experiment,invented,word_lookup,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_26,Gibberish - DC_26.txt,1,positive,invented,experiment,invented,entropy_based,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_26,Gibberish - DC_26.txt,1,positive,invented,experiment,invented,hf_all,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_26,Gibberish - DC_26.txt,1,positive,invented,experiment,invented,hf_strict,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_27,Gibberish - DC_27.txt,1,positive,invented,experiment,invented,english,5,4,0.8,1,1,4,1,0.75,1
+gib-DC_27,Gibberish - DC_27.txt,1,positive,invented,experiment,invented,english_extended,5,5,1.0,1,1,4,1,1.0,1
+gib-DC_27,Gibberish - DC_27.txt,1,positive,invented,experiment,invented,legacy,5,4,0.8,1,1,4,1,0.75,1
+gib-DC_27,Gibberish - DC_27.txt,1,positive,invented,experiment,invented,word_lookup,5,5,1.0,1,1,4,1,1.0,1
+gib-DC_27,Gibberish - DC_27.txt,1,positive,invented,experiment,invented,entropy_based,5,0,0.0,0,0,4,1,0.0,0
+gib-DC_27,Gibberish - DC_27.txt,1,positive,invented,experiment,invented,hf_all,5,5,1.0,1,1,4,1,1.0,1
+gib-DC_27,Gibberish - DC_27.txt,1,positive,invented,experiment,invented,hf_strict,5,5,1.0,1,1,4,1,1.0,1
+gib-DC_28,Gibberish - DC_28.txt,1,positive,invented,experiment,invented,english,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_28,Gibberish - DC_28.txt,1,positive,invented,experiment,invented,english_extended,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_28,Gibberish - DC_28.txt,1,positive,invented,experiment,invented,legacy,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_28,Gibberish - DC_28.txt,1,positive,invented,experiment,invented,word_lookup,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_28,Gibberish - DC_28.txt,1,positive,invented,experiment,invented,entropy_based,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_28,Gibberish - DC_28.txt,1,positive,invented,experiment,invented,hf_all,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_28,Gibberish - DC_28.txt,1,positive,invented,experiment,invented,hf_strict,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_29,Gibberish - DC_29.txt,1,positive,invented,experiment,invented,english,3,3,1.0,1,1,2,1,1.0,1
+gib-DC_29,Gibberish - DC_29.txt,1,positive,invented,experiment,invented,english_extended,3,3,1.0,1,1,2,1,1.0,1
+gib-DC_29,Gibberish - DC_29.txt,1,positive,invented,experiment,invented,legacy,3,3,1.0,1,1,2,1,1.0,1
+gib-DC_29,Gibberish - DC_29.txt,1,positive,invented,experiment,invented,word_lookup,3,3,1.0,1,1,2,1,1.0,1
+gib-DC_29,Gibberish - DC_29.txt,1,positive,invented,experiment,invented,entropy_based,3,0,0.0,0,0,2,1,0.0,0
+gib-DC_29,Gibberish - DC_29.txt,1,positive,invented,experiment,invented,hf_all,3,3,1.0,1,1,2,1,1.0,1
+gib-DC_29,Gibberish - DC_29.txt,1,positive,invented,experiment,invented,hf_strict,3,3,1.0,1,1,2,1,1.0,1
+gib-DC_30,Gibberish - DC_30.txt,1,positive,invented,experiment,invented,english,6,0,0.0,0,0,5,1,0.0,0
+gib-DC_30,Gibberish - DC_30.txt,1,positive,invented,experiment,invented,english_extended,6,0,0.0,0,0,5,1,0.0,0
+gib-DC_30,Gibberish - DC_30.txt,1,positive,invented,experiment,invented,legacy,6,0,0.0,0,0,5,1,0.0,0
+gib-DC_30,Gibberish - DC_30.txt,1,positive,invented,experiment,invented,word_lookup,6,6,1.0,1,1,5,1,1.0,1
+gib-DC_30,Gibberish - DC_30.txt,1,positive,invented,experiment,invented,entropy_based,6,0,0.0,0,0,5,1,0.0,0
+gib-DC_30,Gibberish - DC_30.txt,1,positive,invented,experiment,invented,hf_all,6,6,1.0,1,1,5,1,1.0,1
+gib-DC_30,Gibberish - DC_30.txt,1,positive,invented,experiment,invented,hf_strict,6,6,1.0,1,1,5,1,1.0,1
+gib-DC_31,Gibberish - DC_31.txt,1,positive,invented,experiment,invented,english,6,0,0.0,0,0,5,1,0.0,0
+gib-DC_31,Gibberish - DC_31.txt,1,positive,invented,experiment,invented,english_extended,6,3,0.5,1,1,5,1,0.4,0
+gib-DC_31,Gibberish - DC_31.txt,1,positive,invented,experiment,invented,legacy,6,0,0.0,0,0,5,1,0.0,0
+gib-DC_31,Gibberish - DC_31.txt,1,positive,invented,experiment,invented,word_lookup,6,6,1.0,1,1,5,1,1.0,1
+gib-DC_31,Gibberish - DC_31.txt,1,positive,invented,experiment,invented,entropy_based,6,0,0.0,0,0,5,1,0.0,0
+gib-DC_31,Gibberish - DC_31.txt,1,positive,invented,experiment,invented,hf_all,6,6,1.0,1,1,5,1,1.0,1
+gib-DC_31,Gibberish - DC_31.txt,1,positive,invented,experiment,invented,hf_strict,6,6,1.0,1,1,5,1,1.0,1
+gib-DC_32,Gibberish - DC_32.txt,1,positive,invented,experiment,invented,english,4,2,0.5,1,1,3,1,0.6666666666666666,1
+gib-DC_32,Gibberish - DC_32.txt,1,positive,invented,experiment,invented,english_extended,4,3,0.75,1,1,3,1,1.0,1
+gib-DC_32,Gibberish - DC_32.txt,1,positive,invented,experiment,invented,legacy,4,2,0.5,1,1,3,1,0.6666666666666666,1
+gib-DC_32,Gibberish - DC_32.txt,1,positive,invented,experiment,invented,word_lookup,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_32,Gibberish - DC_32.txt,1,positive,invented,experiment,invented,entropy_based,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_32,Gibberish - DC_32.txt,1,positive,invented,experiment,invented,hf_all,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_32,Gibberish - DC_32.txt,1,positive,invented,experiment,invented,hf_strict,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_33,Gibberish - DC_33.txt,1,positive,invented,experiment,invented,english,4,1,0.25,0,1,3,1,0.3333333333333333,0
+gib-DC_33,Gibberish - DC_33.txt,1,positive,invented,experiment,invented,english_extended,4,1,0.25,0,1,3,1,0.3333333333333333,0
+gib-DC_33,Gibberish - DC_33.txt,1,positive,invented,experiment,invented,legacy,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_33,Gibberish - DC_33.txt,1,positive,invented,experiment,invented,word_lookup,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_33,Gibberish - DC_33.txt,1,positive,invented,experiment,invented,entropy_based,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_33,Gibberish - DC_33.txt,1,positive,invented,experiment,invented,hf_all,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_33,Gibberish - DC_33.txt,1,positive,invented,experiment,invented,hf_strict,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_34,Gibberish - DC_34.txt,1,positive,invented,experiment,invented,english,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_34,Gibberish - DC_34.txt,1,positive,invented,experiment,invented,english_extended,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_34,Gibberish - DC_34.txt,1,positive,invented,experiment,invented,legacy,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_34,Gibberish - DC_34.txt,1,positive,invented,experiment,invented,word_lookup,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_34,Gibberish - DC_34.txt,1,positive,invented,experiment,invented,entropy_based,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_34,Gibberish - DC_34.txt,1,positive,invented,experiment,invented,hf_all,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_34,Gibberish - DC_34.txt,1,positive,invented,experiment,invented,hf_strict,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_35,Gibberish - DC_35.txt,1,positive,invented,experiment,invented,english,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_35,Gibberish - DC_35.txt,1,positive,invented,experiment,invented,english_extended,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_35,Gibberish - DC_35.txt,1,positive,invented,experiment,invented,legacy,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_35,Gibberish - DC_35.txt,1,positive,invented,experiment,invented,word_lookup,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_35,Gibberish - DC_35.txt,1,positive,invented,experiment,invented,entropy_based,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_35,Gibberish - DC_35.txt,1,positive,invented,experiment,invented,hf_all,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_35,Gibberish - DC_35.txt,1,positive,invented,experiment,invented,hf_strict,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_36,Gibberish - DC_36.txt,1,positive,invented,experiment,invented,english,5,5,1.0,1,1,4,1,1.0,1
+gib-DC_36,Gibberish - DC_36.txt,1,positive,invented,experiment,invented,english_extended,5,5,1.0,1,1,4,1,1.0,1
+gib-DC_36,Gibberish - DC_36.txt,1,positive,invented,experiment,invented,legacy,5,5,1.0,1,1,4,1,1.0,1
+gib-DC_36,Gibberish - DC_36.txt,1,positive,invented,experiment,invented,word_lookup,5,5,1.0,1,1,4,1,1.0,1
+gib-DC_36,Gibberish - DC_36.txt,1,positive,invented,experiment,invented,entropy_based,5,0,0.0,0,0,4,1,0.0,0
+gib-DC_36,Gibberish - DC_36.txt,1,positive,invented,experiment,invented,hf_all,5,5,1.0,1,1,4,1,1.0,1
+gib-DC_36,Gibberish - DC_36.txt,1,positive,invented,experiment,invented,hf_strict,5,5,1.0,1,1,4,1,1.0,1
+gib-DC_37,Gibberish - DC_37.txt,1,positive,invented,experiment,invented,english,6,3,0.5,1,1,5,1,0.4,0
+gib-DC_37,Gibberish - DC_37.txt,1,positive,invented,experiment,invented,english_extended,6,3,0.5,1,1,5,1,0.4,0
+gib-DC_37,Gibberish - DC_37.txt,1,positive,invented,experiment,invented,legacy,6,3,0.5,1,1,5,1,0.4,0
+gib-DC_37,Gibberish - DC_37.txt,1,positive,invented,experiment,invented,word_lookup,6,6,1.0,1,1,5,1,1.0,1
+gib-DC_37,Gibberish - DC_37.txt,1,positive,invented,experiment,invented,entropy_based,6,0,0.0,0,0,5,1,0.0,0
+gib-DC_37,Gibberish - DC_37.txt,1,positive,invented,experiment,invented,hf_all,6,6,1.0,1,1,5,1,1.0,1
+gib-DC_37,Gibberish - DC_37.txt,1,positive,invented,experiment,invented,hf_strict,6,6,1.0,1,1,5,1,1.0,1
+gib-DC_38,Gibberish - DC_38.txt,1,positive,invented,experiment,invented,english,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_38,Gibberish - DC_38.txt,1,positive,invented,experiment,invented,english_extended,4,1,0.25,0,1,3,1,0.0,0
+gib-DC_38,Gibberish - DC_38.txt,1,positive,invented,experiment,invented,legacy,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_38,Gibberish - DC_38.txt,1,positive,invented,experiment,invented,word_lookup,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_38,Gibberish - DC_38.txt,1,positive,invented,experiment,invented,entropy_based,4,0,0.0,0,0,3,1,0.0,0
+gib-DC_38,Gibberish - DC_38.txt,1,positive,invented,experiment,invented,hf_all,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_38,Gibberish - DC_38.txt,1,positive,invented,experiment,invented,hf_strict,4,4,1.0,1,1,3,1,1.0,1
+gib-DC_39,Gibberish - DC_39.txt,1,positive,invented,experiment,invented,english,5,0,0.0,0,0,4,1,0.0,0
+gib-DC_39,Gibberish - DC_39.txt,1,positive,invented,experiment,invented,english_extended,5,0,0.0,0,0,4,1,0.0,0
+gib-DC_39,Gibberish - DC_39.txt,1,positive,invented,experiment,invented,legacy,5,0,0.0,0,0,4,1,0.0,0
+gib-DC_39,Gibberish - DC_39.txt,1,positive,invented,experiment,invented,word_lookup,5,5,1.0,1,1,4,1,1.0,1
+gib-DC_39,Gibberish - DC_39.txt,1,positive,invented,experiment,invented,entropy_based,5,0,0.0,0,0,4,1,0.0,0
+gib-DC_39,Gibberish - DC_39.txt,1,positive,invented,experiment,invented,hf_all,5,5,1.0,1,1,4,1,1.0,1
+gib-DC_39,Gibberish - DC_39.txt,1,positive,invented,experiment,invented,hf_strict,5,5,1.0,1,1,4,1,1.0,1
+gib-DC_40,Gibberish - DC_40.txt,1,positive,invented,experiment,invented,english,6,2,0.3333333333333333,0,1,5,1,0.4,0
+gib-DC_40,Gibberish - DC_40.txt,1,positive,invented,experiment,invented,english_extended,6,2,0.3333333333333333,0,1,5,1,0.4,0
+gib-DC_40,Gibberish - DC_40.txt,1,positive,invented,experiment,invented,legacy,6,0,0.0,0,0,5,1,0.0,0
+gib-DC_40,Gibberish - DC_40.txt,1,positive,invented,experiment,invented,word_lookup,6,6,1.0,1,1,5,1,1.0,1
+gib-DC_40,Gibberish - DC_40.txt,1,positive,invented,experiment,invented,entropy_based,6,0,0.0,0,0,5,1,0.0,0
+gib-DC_40,Gibberish - DC_40.txt,1,positive,invented,experiment,invented,hf_all,6,6,1.0,1,1,5,1,1.0,1
+gib-DC_40,Gibberish - DC_40.txt,1,positive,invented,experiment,invented,hf_strict,6,5,0.8333333333333334,1,1,5,1,1.0,1
+gib-DC_41,Gibberish - DC_41.txt,1,positive,invented,experiment,invented,english,3,0,0.0,0,0,2,1,0.0,0
+gib-DC_41,Gibberish - DC_41.txt,1,positive,invented,experiment,invented,english_extended,3,0,0.0,0,0,2,1,0.0,0
+gib-DC_41,Gibberish - DC_41.txt,1,positive,invented,experiment,invented,legacy,3,0,0.0,0,0,2,1,0.0,0
+gib-DC_41,Gibberish - DC_41.txt,1,positive,invented,experiment,invented,word_lookup,3,3,1.0,1,1,2,1,1.0,1
+gib-DC_41,Gibberish - DC_41.txt,1,positive,invented,experiment,invented,entropy_based,3,0,0.0,0,0,2,1,0.0,0
+gib-DC_41,Gibberish - DC_41.txt,1,positive,invented,experiment,invented,hf_all,3,3,1.0,1,1,2,1,1.0,1
+gib-DC_41,Gibberish - DC_41.txt,1,positive,invented,experiment,invented,hf_strict,3,3,1.0,1,1,2,1,1.0,1
+gib-DC_42,Gibberish - DC_42.txt,1,positive,invented,experiment,invented,english,6,0,0.0,0,0,5,1,0.0,0
+gib-DC_42,Gibberish - DC_42.txt,1,positive,invented,experiment,invented,english_extended,6,0,0.0,0,0,5,1,0.0,0
+gib-DC_42,Gibberish - DC_42.txt,1,positive,invented,experiment,invented,legacy,6,0,0.0,0,0,5,1,0.0,0
+gib-DC_42,Gibberish - DC_42.txt,1,positive,invented,experiment,invented,word_lookup,6,6,1.0,1,1,5,1,1.0,1
+gib-DC_42,Gibberish - DC_42.txt,1,positive,invented,experiment,invented,entropy_based,6,0,0.0,0,0,5,1,0.0,0
+gib-DC_42,Gibberish - DC_42.txt,1,positive,invented,experiment,invented,hf_all,6,6,1.0,1,1,5,1,1.0,1
+gib-DC_42,Gibberish - DC_42.txt,1,positive,invented,experiment,invented,hf_strict,6,6,1.0,1,1,5,1,1.0,1
+text-97ecfb87c236,texts/Historical - English - Literary - NT (KJV).txt,0,english,English,Historical,Literary,english,2379,15,0.006305170239596469,0,1,2378,1,0.006307821698906644,0
+text-97ecfb87c236,texts/Historical - English - Literary - NT (KJV).txt,0,english,English,Historical,Literary,english_extended,2379,22,0.009247583018074821,0,1,2378,1,0.009251471825063078,0
+text-97ecfb87c236,texts/Historical - English - Literary - NT (KJV).txt,0,english,English,Historical,Literary,legacy,2379,4,0.0016813787305590584,0,1,2378,1,0.001682085786375105,0
+text-97ecfb87c236,texts/Historical - English - Literary - NT (KJV).txt,0,english,English,Historical,Literary,word_lookup,2379,0,0.0,0,0,2378,1,0.0,0
+text-97ecfb87c236,texts/Historical - English - Literary - NT (KJV).txt,0,english,English,Historical,Literary,entropy_based,2379,0,0.0,0,0,2378,1,0.0,0
+text-97ecfb87c236,texts/Historical - English - Literary - NT (KJV).txt,0,english,English,Historical,Literary,hf_all,2379,579,0.24337957124842372,0,1,2378,1,0.24348191757779647,0
+text-97ecfb87c236,texts/Historical - English - Literary - NT (KJV).txt,0,english,English,Historical,Literary,hf_strict,2379,5,0.002101723413198823,0,1,2378,1,0.0021026072329688814,0
+text-dcff9610338d,texts/Modern - English - Literary - NT.txt,0,english,English,Modern,Literary,english,2419,19,0.007854485324514262,0,1,2418,1,0.007857733664185277,0
+text-dcff9610338d,texts/Modern - English - Literary - NT.txt,0,english,English,Modern,Literary,english_extended,2419,24,0.009921455146754857,0,1,2418,1,0.009925558312655087,0
+text-dcff9610338d,texts/Modern - English - Literary - NT.txt,0,english,English,Modern,Literary,legacy,2419,1,0.00041339396444811904,0,1,2418,1,0.00041356492969396195,0
+text-dcff9610338d,texts/Modern - English - Literary - NT.txt,0,english,English,Modern,Literary,word_lookup,2419,0,0.0,0,0,2418,1,0.0,0
+text-dcff9610338d,texts/Modern - English - Literary - NT.txt,0,english,English,Modern,Literary,entropy_based,2419,0,0.0,0,0,2418,1,0.0,0
+text-dcff9610338d,texts/Modern - English - Literary - NT.txt,0,english,English,Modern,Literary,hf_all,2419,584,0.24142207523770154,0,1,2418,1,0.24152191894127378,0
+text-dcff9610338d,texts/Modern - English - Literary - NT.txt,0,english,English,Modern,Literary,hf_strict,2419,0,0.0,0,0,2418,1,0.0,0
+text-e19506215b74,texts/Modern - English - Technical - Voynich Wiki.txt,0,english,English,Modern,Technical,english,125,2,0.016,0,1,124,1,0.016129032258064516,0
+text-e19506215b74,texts/Modern - English - Technical - Voynich Wiki.txt,0,english,English,Modern,Technical,english_extended,125,3,0.024,0,1,124,1,0.024193548387096774,0
+text-e19506215b74,texts/Modern - English - Technical - Voynich Wiki.txt,0,english,English,Modern,Technical,legacy,125,1,0.008,0,1,124,1,0.008064516129032258,0
+text-e19506215b74,texts/Modern - English - Technical - Voynich Wiki.txt,0,english,English,Modern,Technical,word_lookup,125,0,0.0,0,0,124,1,0.0,0
+text-e19506215b74,texts/Modern - English - Technical - Voynich Wiki.txt,0,english,English,Modern,Technical,entropy_based,125,0,0.0,0,0,124,1,0.0,0
+text-e19506215b74,texts/Modern - English - Technical - Voynich Wiki.txt,0,english,English,Modern,Technical,hf_all,125,59,0.472,0,1,124,1,0.46774193548387094,0
+text-e19506215b74,texts/Modern - English - Technical - Voynich Wiki.txt,0,english,English,Modern,Technical,hf_strict,125,0,0.0,0,0,124,1,0.0,0
+text-feb3d92da8f4,texts/Historical - English - Technical - Secreta Alberti.txt,0,english,English,Historical,Technical,english,277,5,0.018050541516245487,0,1,276,1,0.018115942028985508,0
+text-feb3d92da8f4,texts/Historical - English - Technical - Secreta Alberti.txt,0,english,English,Historical,Technical,english_extended,277,9,0.032490974729241874,0,1,276,1,0.03260869565217391,0
+text-feb3d92da8f4,texts/Historical - English - Technical - Secreta Alberti.txt,0,english,English,Historical,Technical,legacy,277,0,0.0,0,0,276,1,0.0,0
+text-feb3d92da8f4,texts/Historical - English - Technical - Secreta Alberti.txt,0,english,English,Historical,Technical,word_lookup,277,0,0.0,0,0,276,1,0.0,0
+text-feb3d92da8f4,texts/Historical - English - Technical - Secreta Alberti.txt,0,english,English,Historical,Technical,entropy_based,277,0,0.0,0,0,276,1,0.0,0
+text-feb3d92da8f4,texts/Historical - English - Technical - Secreta Alberti.txt,0,english,English,Historical,Technical,hf_all,277,272,0.9819494584837545,1,1,276,1,0.9818840579710145,1
+text-feb3d92da8f4,texts/Historical - English - Technical - Secreta Alberti.txt,0,english,English,Historical,Technical,hf_strict,277,1,0.0036101083032490976,0,1,276,1,0.0036231884057971015,0
+text-02babe8d8d6b,texts/Historical - Spanish - Technical - De Materia Medica.txt,0,other_language,Spanish,Historical,Technical,english,18,0,0.0,0,0,17,1,0.0,0
+text-02babe8d8d6b,texts/Historical - Spanish - Technical - De Materia Medica.txt,0,other_language,Spanish,Historical,Technical,english_extended,18,1,0.05555555555555555,0,1,17,1,0.058823529411764705,0
+text-02babe8d8d6b,texts/Historical - Spanish - Technical - De Materia Medica.txt,0,other_language,Spanish,Historical,Technical,legacy,18,0,0.0,0,0,17,1,0.0,0
+text-02babe8d8d6b,texts/Historical - Spanish - Technical - De Materia Medica.txt,0,other_language,Spanish,Historical,Technical,word_lookup,18,18,1.0,1,1,17,1,1.0,1
+text-02babe8d8d6b,texts/Historical - Spanish - Technical - De Materia Medica.txt,0,other_language,Spanish,Historical,Technical,entropy_based,18,0,0.0,0,0,17,1,0.0,0
+text-02babe8d8d6b,texts/Historical - Spanish - Technical - De Materia Medica.txt,0,other_language,Spanish,Historical,Technical,hf_all,18,18,1.0,1,1,17,1,1.0,1
+text-02babe8d8d6b,texts/Historical - Spanish - Technical - De Materia Medica.txt,0,other_language,Spanish,Historical,Technical,hf_strict,18,18,1.0,1,1,17,1,1.0,1
+text-058bd6eec0da,texts/Historical - Greek - Technical - De odoribus.txt,0,other_language,Greek,Historical,Technical,english,81,81,1.0,1,1,80,1,1.0,1
+text-058bd6eec0da,texts/Historical - Greek - Technical - De odoribus.txt,0,other_language,Greek,Historical,Technical,english_extended,81,81,1.0,1,1,80,1,1.0,1
+text-058bd6eec0da,texts/Historical - Greek - Technical - De odoribus.txt,0,other_language,Greek,Historical,Technical,legacy,81,81,1.0,1,1,80,1,1.0,1
+text-058bd6eec0da,texts/Historical - Greek - Technical - De odoribus.txt,0,other_language,Greek,Historical,Technical,word_lookup,81,0,0.0,0,0,80,1,0.0,0
+text-058bd6eec0da,texts/Historical - Greek - Technical - De odoribus.txt,0,other_language,Greek,Historical,Technical,entropy_based,81,81,1.0,1,1,80,1,1.0,1
+text-058bd6eec0da,texts/Historical - Greek - Technical - De odoribus.txt,0,other_language,Greek,Historical,Technical,hf_all,81,81,1.0,1,1,80,1,1.0,1
+text-058bd6eec0da,texts/Historical - Greek - Technical - De odoribus.txt,0,other_language,Greek,Historical,Technical,hf_strict,81,81,1.0,1,1,80,1,1.0,1
+text-0cfbc98650d2,texts/Modern - Portuguese - Technical - Voynich Wiki.txt,0,other_language,Portuguese,Modern,Technical,english,44,0,0.0,0,0,43,1,0.0,0
+text-0cfbc98650d2,texts/Modern - Portuguese - Technical - Voynich Wiki.txt,0,other_language,Portuguese,Modern,Technical,english_extended,44,0,0.0,0,0,43,1,0.0,0
+text-0cfbc98650d2,texts/Modern - Portuguese - Technical - Voynich Wiki.txt,0,other_language,Portuguese,Modern,Technical,legacy,44,0,0.0,0,0,43,1,0.0,0
+text-0cfbc98650d2,texts/Modern - Portuguese - Technical - Voynich Wiki.txt,0,other_language,Portuguese,Modern,Technical,word_lookup,44,39,0.8863636363636364,1,1,43,1,0.9069767441860465,1
+text-0cfbc98650d2,texts/Modern - Portuguese - Technical - Voynich Wiki.txt,0,other_language,Portuguese,Modern,Technical,entropy_based,44,0,0.0,0,0,43,1,0.0,0
+text-0cfbc98650d2,texts/Modern - Portuguese - Technical - Voynich Wiki.txt,0,other_language,Portuguese,Modern,Technical,hf_all,44,41,0.9318181818181818,1,1,43,1,0.9302325581395349,1
+text-0cfbc98650d2,texts/Modern - Portuguese - Technical - Voynich Wiki.txt,0,other_language,Portuguese,Modern,Technical,hf_strict,44,30,0.6818181818181818,1,1,43,1,0.6976744186046512,1
+text-11f61dce3bff,texts/Modern - Swahili - Technical - Lung Cancer Wiki.txt,0,other_language,Swahili,Modern,Technical,english,75,0,0.0,0,0,74,1,0.0,0
+text-11f61dce3bff,texts/Modern - Swahili - Technical - Lung Cancer Wiki.txt,0,other_language,Swahili,Modern,Technical,english_extended,75,0,0.0,0,0,74,1,0.0,0
+text-11f61dce3bff,texts/Modern - Swahili - Technical - Lung Cancer Wiki.txt,0,other_language,Swahili,Modern,Technical,legacy,75,0,0.0,0,0,74,1,0.0,0
+text-11f61dce3bff,texts/Modern - Swahili - Technical - Lung Cancer Wiki.txt,0,other_language,Swahili,Modern,Technical,word_lookup,75,75,1.0,1,1,74,1,1.0,1
+text-11f61dce3bff,texts/Modern - Swahili - Technical - Lung Cancer Wiki.txt,0,other_language,Swahili,Modern,Technical,entropy_based,75,0,0.0,0,0,74,1,0.0,0
+text-11f61dce3bff,texts/Modern - Swahili - Technical - Lung Cancer Wiki.txt,0,other_language,Swahili,Modern,Technical,hf_all,75,75,1.0,1,1,74,1,1.0,1
+text-11f61dce3bff,texts/Modern - Swahili - Technical - Lung Cancer Wiki.txt,0,other_language,Swahili,Modern,Technical,hf_strict,75,75,1.0,1,1,74,1,1.0,1
+text-12d6ae63e173,texts/Modern - Yoruba - Technical - Jupiter Wiki.txt,0,other_language,Yoruba,Modern,Technical,english,45,2,0.044444444444444446,0,1,44,1,0.045454545454545456,0
+text-12d6ae63e173,texts/Modern - Yoruba - Technical - Jupiter Wiki.txt,0,other_language,Yoruba,Modern,Technical,english_extended,45,3,0.06666666666666667,0,1,44,1,0.06818181818181818,0
+text-12d6ae63e173,texts/Modern - Yoruba - Technical - Jupiter Wiki.txt,0,other_language,Yoruba,Modern,Technical,legacy,45,0,0.0,0,0,44,1,0.0,0
+text-12d6ae63e173,texts/Modern - Yoruba - Technical - Jupiter Wiki.txt,0,other_language,Yoruba,Modern,Technical,word_lookup,45,43,0.9555555555555556,1,1,44,1,0.9545454545454546,1
+text-12d6ae63e173,texts/Modern - Yoruba - Technical - Jupiter Wiki.txt,0,other_language,Yoruba,Modern,Technical,entropy_based,45,0,0.0,0,0,44,1,0.0,0
+text-12d6ae63e173,texts/Modern - Yoruba - Technical - Jupiter Wiki.txt,0,other_language,Yoruba,Modern,Technical,hf_all,45,45,1.0,1,1,44,1,1.0,1
+text-12d6ae63e173,texts/Modern - Yoruba - Technical - Jupiter Wiki.txt,0,other_language,Yoruba,Modern,Technical,hf_strict,45,44,0.9777777777777777,1,1,44,1,0.9772727272727273,1
+text-215ed0fbe07d,texts/Conlangs - Interlingua - Technical - EU Wiki.txt,0,other_language,Interlingua,Conlangs,Technical,english,177,2,0.011299435028248588,0,1,176,1,0.011363636363636364,0
+text-215ed0fbe07d,texts/Conlangs - Interlingua - Technical - EU Wiki.txt,0,other_language,Interlingua,Conlangs,Technical,english_extended,177,2,0.011299435028248588,0,1,176,1,0.011363636363636364,0
+text-215ed0fbe07d,texts/Conlangs - Interlingua - Technical - EU Wiki.txt,0,other_language,Interlingua,Conlangs,Technical,legacy,177,0,0.0,0,0,176,1,0.0,0
+text-215ed0fbe07d,texts/Conlangs - Interlingua - Technical - EU Wiki.txt,0,other_language,Interlingua,Conlangs,Technical,word_lookup,177,150,0.847457627118644,1,1,176,1,0.8465909090909091,1
+text-215ed0fbe07d,texts/Conlangs - Interlingua - Technical - EU Wiki.txt,0,other_language,Interlingua,Conlangs,Technical,entropy_based,177,0,0.0,0,0,176,1,0.0,0
+text-215ed0fbe07d,texts/Conlangs - Interlingua - Technical - EU Wiki.txt,0,other_language,Interlingua,Conlangs,Technical,hf_all,177,174,0.9830508474576272,1,1,176,1,0.9829545454545454,1
+text-215ed0fbe07d,texts/Conlangs - Interlingua - Technical - EU Wiki.txt,0,other_language,Interlingua,Conlangs,Technical,hf_strict,177,13,0.07344632768361582,0,1,176,1,0.07386363636363637,0
+text-2f65653c6e7d,texts/Modern - Maori - Literary - NT.txt,0,other_language,Maori,Modern,Literary,english,2646,182,0.06878306878306878,0,1,2645,1,0.06880907372400756,0
+text-2f65653c6e7d,texts/Modern - Maori - Literary - NT.txt,0,other_language,Maori,Modern,Literary,english_extended,2646,220,0.08314436885865457,0,1,2645,1,0.0831758034026465,0
+text-2f65653c6e7d,texts/Modern - Maori - Literary - NT.txt,0,other_language,Maori,Modern,Literary,legacy,2646,0,0.0,0,0,2645,1,0.0,0
+text-2f65653c6e7d,texts/Modern - Maori - Literary - NT.txt,0,other_language,Maori,Modern,Literary,word_lookup,2646,2641,0.9981103552532123,1,1,2645,1,0.998109640831758,1
+text-2f65653c6e7d,texts/Modern - Maori - Literary - NT.txt,0,other_language,Maori,Modern,Literary,entropy_based,2646,0,0.0,0,0,2645,1,0.0,0
+text-2f65653c6e7d,texts/Modern - Maori - Literary - NT.txt,0,other_language,Maori,Modern,Literary,hf_all,2646,2646,1.0,1,1,2645,1,1.0,1
+text-2f65653c6e7d,texts/Modern - Maori - Literary - NT.txt,0,other_language,Maori,Modern,Literary,hf_strict,2646,2645,0.9996220710506425,1,1,2645,1,0.9996219281663516,1
+text-30943a428146,texts/Modern - Spanish - Technical - Voynich Wiki.txt,0,other_language,Spanish,Modern,Technical,english,112,0,0.0,0,0,111,1,0.0,0
+text-30943a428146,texts/Modern - Spanish - Technical - Voynich Wiki.txt,0,other_language,Spanish,Modern,Technical,english_extended,112,0,0.0,0,0,111,1,0.0,0
+text-30943a428146,texts/Modern - Spanish - Technical - Voynich Wiki.txt,0,other_language,Spanish,Modern,Technical,legacy,112,0,0.0,0,0,111,1,0.0,0
+text-30943a428146,texts/Modern - Spanish - Technical - Voynich Wiki.txt,0,other_language,Spanish,Modern,Technical,word_lookup,112,104,0.9285714285714286,1,1,111,1,0.9279279279279279,1
+text-30943a428146,texts/Modern - Spanish - Technical - Voynich Wiki.txt,0,other_language,Spanish,Modern,Technical,entropy_based,112,0,0.0,0,0,111,1,0.0,0
+text-30943a428146,texts/Modern - Spanish - Technical - Voynich Wiki.txt,0,other_language,Spanish,Modern,Technical,hf_all,112,54,0.48214285714285715,0,1,111,1,0.4774774774774775,0
+text-30943a428146,texts/Modern - Spanish - Technical - Voynich Wiki.txt,0,other_language,Spanish,Modern,Technical,hf_strict,112,24,0.21428571428571427,0,1,111,1,0.21621621621621623,0
+text-315861729c5a,texts/Historical - Flemish - Literary - NT.txt,0,other_language,Flemish,Historical,Literary,english,346,38,0.10982658959537572,0,1,345,1,0.11014492753623188,0
+text-315861729c5a,texts/Historical - Flemish - Literary - NT.txt,0,other_language,Flemish,Historical,Literary,english_extended,346,42,0.12138728323699421,0,1,345,1,0.12173913043478261,0
+text-315861729c5a,texts/Historical - Flemish - Literary - NT.txt,0,other_language,Flemish,Historical,Literary,legacy,346,0,0.0,0,0,345,1,0.0,0
+text-315861729c5a,texts/Historical - Flemish - Literary - NT.txt,0,other_language,Flemish,Historical,Literary,word_lookup,346,237,0.684971098265896,1,1,345,1,0.6869565217391305,1
+text-315861729c5a,texts/Historical - Flemish - Literary - NT.txt,0,other_language,Flemish,Historical,Literary,entropy_based,346,0,0.0,0,0,345,1,0.0,0
+text-315861729c5a,texts/Historical - Flemish - Literary - NT.txt,0,other_language,Flemish,Historical,Literary,hf_all,346,346,1.0,1,1,345,1,1.0,1
+text-315861729c5a,texts/Historical - Flemish - Literary - NT.txt,0,other_language,Flemish,Historical,Literary,hf_strict,346,345,0.9971098265895953,1,1,345,1,0.9971014492753624,1
+text-334132fc35c0,texts/Modern - Russian - Technical - Voynich Wiki.txt,0,other_language,Russian,Modern,Technical,english,112,112,1.0,1,1,111,1,1.0,1
+text-334132fc35c0,texts/Modern - Russian - Technical - Voynich Wiki.txt,0,other_language,Russian,Modern,Technical,english_extended,112,112,1.0,1,1,111,1,1.0,1
+text-334132fc35c0,texts/Modern - Russian - Technical - Voynich Wiki.txt,0,other_language,Russian,Modern,Technical,legacy,112,112,1.0,1,1,111,1,1.0,1
+text-334132fc35c0,texts/Modern - Russian - Technical - Voynich Wiki.txt,0,other_language,Russian,Modern,Technical,word_lookup,112,15,0.13392857142857142,0,1,111,1,0.13513513513513514,0
+text-334132fc35c0,texts/Modern - Russian - Technical - Voynich Wiki.txt,0,other_language,Russian,Modern,Technical,entropy_based,112,112,1.0,1,1,111,1,1.0,1
+text-334132fc35c0,texts/Modern - Russian - Technical - Voynich Wiki.txt,0,other_language,Russian,Modern,Technical,hf_all,112,112,1.0,1,1,111,1,1.0,1
+text-334132fc35c0,texts/Modern - Russian - Technical - Voynich Wiki.txt,0,other_language,Russian,Modern,Technical,hf_strict,112,0,0.0,0,0,111,1,0.0,0
+text-378717d0a34c,texts/Historical - Arabic - Technical - Avicenna.txt,0,other_language,Arabic,Historical,Technical,english,7331,7331,1.0,1,1,7330,1,1.0,1
+text-378717d0a34c,texts/Historical - Arabic - Technical - Avicenna.txt,0,other_language,Arabic,Historical,Technical,english_extended,7331,7331,1.0,1,1,7330,1,1.0,1
+text-378717d0a34c,texts/Historical - Arabic - Technical - Avicenna.txt,0,other_language,Arabic,Historical,Technical,legacy,7331,7331,1.0,1,1,7330,1,1.0,1
+text-378717d0a34c,texts/Historical - Arabic - Technical - Avicenna.txt,0,other_language,Arabic,Historical,Technical,word_lookup,7331,0,0.0,0,0,7330,1,0.0,0
+text-378717d0a34c,texts/Historical - Arabic - Technical - Avicenna.txt,0,other_language,Arabic,Historical,Technical,entropy_based,7331,7331,1.0,1,1,7330,1,1.0,1
+text-378717d0a34c,texts/Historical - Arabic - Technical - Avicenna.txt,0,other_language,Arabic,Historical,Technical,hf_all,7331,7331,1.0,1,1,7330,1,1.0,1
+text-378717d0a34c,texts/Historical - Arabic - Technical - Avicenna.txt,0,other_language,Arabic,Historical,Technical,hf_strict,7331,0,0.0,0,0,7330,1,0.0,0
+text-3e5a7ef45812,texts/Modern - Turkish - Technical - Middle Ages Wiki.txt,0,other_language,Turkish,Modern,Technical,english,63,33,0.5238095238095238,1,1,62,1,0.5161290322580645,1
+text-3e5a7ef45812,texts/Modern - Turkish - Technical - Middle Ages Wiki.txt,0,other_language,Turkish,Modern,Technical,english_extended,63,33,0.5238095238095238,1,1,62,1,0.5161290322580645,1
+text-3e5a7ef45812,texts/Modern - Turkish - Technical - Middle Ages Wiki.txt,0,other_language,Turkish,Modern,Technical,legacy,63,33,0.5238095238095238,1,1,62,1,0.5161290322580645,1
+text-3e5a7ef45812,texts/Modern - Turkish - Technical - Middle Ages Wiki.txt,0,other_language,Turkish,Modern,Technical,word_lookup,63,63,1.0,1,1,62,1,1.0,1
+text-3e5a7ef45812,texts/Modern - Turkish - Technical - Middle Ages Wiki.txt,0,other_language,Turkish,Modern,Technical,entropy_based,63,0,0.0,0,0,62,1,0.0,0
+text-3e5a7ef45812,texts/Modern - Turkish - Technical - Middle Ages Wiki.txt,0,other_language,Turkish,Modern,Technical,hf_all,63,63,1.0,1,1,62,1,1.0,1
+text-3e5a7ef45812,texts/Modern - Turkish - Technical - Middle Ages Wiki.txt,0,other_language,Turkish,Modern,Technical,hf_strict,63,63,1.0,1,1,62,1,1.0,1
+text-3e87981eff79,texts/Modern - Turkish - Literary - NT.txt,0,other_language,Turkish,Modern,Literary,english,2136,1436,0.6722846441947565,1,1,2135,1,0.6721311475409836,1
+text-3e87981eff79,texts/Modern - Turkish - Literary - NT.txt,0,other_language,Turkish,Modern,Literary,english_extended,2136,1437,0.672752808988764,1,1,2135,1,0.672599531615925,1
+text-3e87981eff79,texts/Modern - Turkish - Literary - NT.txt,0,other_language,Turkish,Modern,Literary,legacy,2136,1428,0.6685393258426966,1,1,2135,1,0.668384074941452,1
+text-3e87981eff79,texts/Modern - Turkish - Literary - NT.txt,0,other_language,Turkish,Modern,Literary,word_lookup,2136,2135,0.9995318352059925,1,1,2135,1,1.0,1
+text-3e87981eff79,texts/Modern - Turkish - Literary - NT.txt,0,other_language,Turkish,Modern,Literary,entropy_based,2136,0,0.0,0,0,2135,1,0.0,0
+text-3e87981eff79,texts/Modern - Turkish - Literary - NT.txt,0,other_language,Turkish,Modern,Literary,hf_all,2136,2134,0.9990636704119851,1,1,2135,1,0.9990632318501171,1
+text-3e87981eff79,texts/Modern - Turkish - Literary - NT.txt,0,other_language,Turkish,Modern,Literary,hf_strict,2136,2132,0.99812734082397,1,1,2135,1,0.9981264637002342,1
+text-4118bc060c5e,texts/Historical - French - Literary - NT - Martin.txt,0,other_language,French,Historical,Literary,english,2589,278,0.10737736577829278,0,1,2588,1,0.10741885625965997,0
+text-4118bc060c5e,texts/Historical - French - Literary - NT - Martin.txt,0,other_language,French,Historical,Literary,english_extended,2589,278,0.10737736577829278,0,1,2588,1,0.10741885625965997,0
+text-4118bc060c5e,texts/Historical - French - Literary - NT - Martin.txt,0,other_language,French,Historical,Literary,legacy,2589,0,0.0,0,0,2588,1,0.0,0
+text-4118bc060c5e,texts/Historical - French - Literary - NT - Martin.txt,0,other_language,French,Historical,Literary,word_lookup,2589,1585,0.6122054847431441,1,1,2588,1,0.6124420401854714,1
+text-4118bc060c5e,texts/Historical - French - Literary - NT - Martin.txt,0,other_language,French,Historical,Literary,entropy_based,2589,0,0.0,0,0,2588,1,0.0,0
+text-4118bc060c5e,texts/Historical - French - Literary - NT - Martin.txt,0,other_language,French,Historical,Literary,hf_all,2589,2511,0.9698725376593279,1,1,2588,1,0.9698608964451314,1
+text-4118bc060c5e,texts/Historical - French - Literary - NT - Martin.txt,0,other_language,French,Historical,Literary,hf_strict,2589,2300,0.8883738895326381,1,1,2588,1,0.8883307573415765,1
+text-498ea31b3031,texts/Modern - French - Technical - Voynich Wiki.txt,0,other_language,French,Modern,Technical,english,129,3,0.023255813953488372,0,1,128,1,0.0234375,0
+text-498ea31b3031,texts/Modern - French - Technical - Voynich Wiki.txt,0,other_language,French,Modern,Technical,english_extended,129,3,0.023255813953488372,0,1,128,1,0.0234375,0
+text-498ea31b3031,texts/Modern - French - Technical - Voynich Wiki.txt,0,other_language,French,Modern,Technical,legacy,129,0,0.0,0,0,128,1,0.0,0
+text-498ea31b3031,texts/Modern - French - Technical - Voynich Wiki.txt,0,other_language,French,Modern,Technical,word_lookup,129,100,0.7751937984496124,1,1,128,1,0.7734375,1
+text-498ea31b3031,texts/Modern - French - Technical - Voynich Wiki.txt,0,other_language,French,Modern,Technical,entropy_based,129,0,0.0,0,0,128,1,0.0,0
+text-498ea31b3031,texts/Modern - French - Technical - Voynich Wiki.txt,0,other_language,French,Modern,Technical,hf_all,129,127,0.9844961240310077,1,1,128,1,0.984375,1
+text-498ea31b3031,texts/Modern - French - Technical - Voynich Wiki.txt,0,other_language,French,Modern,Technical,hf_strict,129,17,0.13178294573643412,0,1,128,1,0.1328125,0
+text-4bc190332756,texts/Modern - Wolof - Technical - Senegal Wiki.txt,0,other_language,Wolof,Modern,Technical,english,60,8,0.13333333333333333,0,1,59,1,0.13559322033898305,0
+text-4bc190332756,texts/Modern - Wolof - Technical - Senegal Wiki.txt,0,other_language,Wolof,Modern,Technical,english_extended,60,8,0.13333333333333333,0,1,59,1,0.13559322033898305,0
+text-4bc190332756,texts/Modern - Wolof - Technical - Senegal Wiki.txt,0,other_language,Wolof,Modern,Technical,legacy,60,0,0.0,0,0,59,1,0.0,0
+text-4bc190332756,texts/Modern - Wolof - Technical - Senegal Wiki.txt,0,other_language,Wolof,Modern,Technical,word_lookup,60,60,1.0,1,1,59,1,1.0,1
+text-4bc190332756,texts/Modern - Wolof - Technical - Senegal Wiki.txt,0,other_language,Wolof,Modern,Technical,entropy_based,60,0,0.0,0,0,59,1,0.0,0
+text-4bc190332756,texts/Modern - Wolof - Technical - Senegal Wiki.txt,0,other_language,Wolof,Modern,Technical,hf_all,60,60,1.0,1,1,59,1,1.0,1
+text-4bc190332756,texts/Modern - Wolof - Technical - Senegal Wiki.txt,0,other_language,Wolof,Modern,Technical,hf_strict,60,60,1.0,1,1,59,1,1.0,1
+text-4fa2dabc55bc,texts/Modern - Hebrew - Literary - NT.txt,0,other_language,Hebrew,Modern,Literary,english,1349,1349,1.0,1,1,1348,1,1.0,1
+text-4fa2dabc55bc,texts/Modern - Hebrew - Literary - NT.txt,0,other_language,Hebrew,Modern,Literary,english_extended,1349,1349,1.0,1,1,1348,1,1.0,1
+text-4fa2dabc55bc,texts/Modern - Hebrew - Literary - NT.txt,0,other_language,Hebrew,Modern,Literary,legacy,1349,1349,1.0,1,1,1348,1,1.0,1
+text-4fa2dabc55bc,texts/Modern - Hebrew - Literary - NT.txt,0,other_language,Hebrew,Modern,Literary,word_lookup,1349,2,0.0014825796886582653,0,1,1348,1,0.001483679525222552,0
+text-4fa2dabc55bc,texts/Modern - Hebrew - Literary - NT.txt,0,other_language,Hebrew,Modern,Literary,entropy_based,1349,1349,1.0,1,1,1348,1,1.0,1
+text-4fa2dabc55bc,texts/Modern - Hebrew - Literary - NT.txt,0,other_language,Hebrew,Modern,Literary,hf_all,1349,3,0.002223869532987398,0,1,1348,1,0.002225519287833828,0
+text-4fa2dabc55bc,texts/Modern - Hebrew - Literary - NT.txt,0,other_language,Hebrew,Modern,Literary,hf_strict,1349,0,0.0,0,0,1348,1,0.0,0
+text-539b27e92910,texts/Historical - Mayan (Yucatec) - Technical - Chilam Balam.txt,0,other_language,Mayan (Yucatec),Historical,Technical,english,13,0,0.0,0,0,12,1,0.0,0
+text-539b27e92910,texts/Historical - Mayan (Yucatec) - Technical - Chilam Balam.txt,0,other_language,Mayan (Yucatec),Historical,Technical,english_extended,13,0,0.0,0,0,12,1,0.0,0
+text-539b27e92910,texts/Historical - Mayan (Yucatec) - Technical - Chilam Balam.txt,0,other_language,Mayan (Yucatec),Historical,Technical,legacy,13,0,0.0,0,0,12,1,0.0,0
+text-539b27e92910,texts/Historical - Mayan (Yucatec) - Technical - Chilam Balam.txt,0,other_language,Mayan (Yucatec),Historical,Technical,word_lookup,13,12,0.9230769230769231,1,1,12,1,1.0,1
+text-539b27e92910,texts/Historical - Mayan (Yucatec) - Technical - Chilam Balam.txt,0,other_language,Mayan (Yucatec),Historical,Technical,entropy_based,13,0,0.0,0,0,12,1,0.0,0
+text-539b27e92910,texts/Historical - Mayan (Yucatec) - Technical - Chilam Balam.txt,0,other_language,Mayan (Yucatec),Historical,Technical,hf_all,13,13,1.0,1,1,12,1,1.0,1
+text-539b27e92910,texts/Historical - Mayan (Yucatec) - Technical - Chilam Balam.txt,0,other_language,Mayan (Yucatec),Historical,Technical,hf_strict,13,13,1.0,1,1,12,1,1.0,1
+text-5b8e90fe4923,texts/Modern - French - Literary - NT.txt,0,other_language,French,Modern,Literary,english,2497,280,0.11213456147376852,0,1,2496,1,0.11217948717948718,0
+text-5b8e90fe4923,texts/Modern - French - Literary - NT.txt,0,other_language,French,Modern,Literary,english_extended,2497,280,0.11213456147376852,0,1,2496,1,0.11217948717948718,0
+text-5b8e90fe4923,texts/Modern - French - Literary - NT.txt,0,other_language,French,Modern,Literary,legacy,2497,0,0.0,0,0,2496,1,0.0,0
+text-5b8e90fe4923,texts/Modern - French - Literary - NT.txt,0,other_language,French,Modern,Literary,word_lookup,2497,1510,0.604725670804966,1,1,2496,1,0.6049679487179487,1
+text-5b8e90fe4923,texts/Modern - French - Literary - NT.txt,0,other_language,French,Modern,Literary,entropy_based,2497,0,0.0,0,0,2496,1,0.0,0
+text-5b8e90fe4923,texts/Modern - French - Literary - NT.txt,0,other_language,French,Modern,Literary,hf_all,2497,2355,0.9431317581097317,1,1,2496,1,0.9431089743589743,1
+text-5b8e90fe4923,texts/Modern - French - Literary - NT.txt,0,other_language,French,Modern,Literary,hf_strict,2497,2172,0.8698438125750901,1,1,2496,1,0.8697916666666666,1
+text-68283186cb28,texts/Historical - Sanskrit - Literary - Mahabharata.txt,0,other_language,Sanskrit,Historical,Literary,english,1547,1547,1.0,1,1,1546,1,1.0,1
+text-68283186cb28,texts/Historical - Sanskrit - Literary - Mahabharata.txt,0,other_language,Sanskrit,Historical,Literary,english_extended,1547,1547,1.0,1,1,1546,1,1.0,1
+text-68283186cb28,texts/Historical - Sanskrit - Literary - Mahabharata.txt,0,other_language,Sanskrit,Historical,Literary,legacy,1547,1547,1.0,1,1,1546,1,1.0,1
+text-68283186cb28,texts/Historical - Sanskrit - Literary - Mahabharata.txt,0,other_language,Sanskrit,Historical,Literary,word_lookup,1547,0,0.0,0,0,1546,1,0.0,0
+text-68283186cb28,texts/Historical - Sanskrit - Literary - Mahabharata.txt,0,other_language,Sanskrit,Historical,Literary,entropy_based,1547,1547,1.0,1,1,1546,1,1.0,1
+text-68283186cb28,texts/Historical - Sanskrit - Literary - Mahabharata.txt,0,other_language,Sanskrit,Historical,Literary,hf_all,1547,104,0.06722689075630252,0,1,1546,1,0.06727037516170763,0
+text-68283186cb28,texts/Historical - Sanskrit - Literary - Mahabharata.txt,0,other_language,Sanskrit,Historical,Literary,hf_strict,1547,0,0.0,0,0,1546,1,0.0,0
+text-6dda5c94c794,texts/Conlangs - Toki Pona - Literary - NT - Sermon on the Mount.txt,0,other_language,Toki Pona,Conlangs,Literary,english,28,0,0.0,0,0,27,1,0.0,0
+text-6dda5c94c794,texts/Conlangs - Toki Pona - Literary - NT - Sermon on the Mount.txt,0,other_language,Toki Pona,Conlangs,Literary,english_extended,28,0,0.0,0,0,27,1,0.0,0
+text-6dda5c94c794,texts/Conlangs - Toki Pona - Literary - NT - Sermon on the Mount.txt,0,other_language,Toki Pona,Conlangs,Literary,legacy,28,0,0.0,0,0,27,1,0.0,0
+text-6dda5c94c794,texts/Conlangs - Toki Pona - Literary - NT - Sermon on the Mount.txt,0,other_language,Toki Pona,Conlangs,Literary,word_lookup,28,25,0.8928571428571429,1,1,27,1,0.8888888888888888,1
+text-6dda5c94c794,texts/Conlangs - Toki Pona - Literary - NT - Sermon on the Mount.txt,0,other_language,Toki Pona,Conlangs,Literary,entropy_based,28,0,0.0,0,0,27,1,0.0,0
+text-6dda5c94c794,texts/Conlangs - Toki Pona - Literary - NT - Sermon on the Mount.txt,0,other_language,Toki Pona,Conlangs,Literary,hf_all,28,28,1.0,1,1,27,1,1.0,1
+text-6dda5c94c794,texts/Conlangs - Toki Pona - Literary - NT - Sermon on the Mount.txt,0,other_language,Toki Pona,Conlangs,Literary,hf_strict,28,28,1.0,1,1,27,1,1.0,1
+text-6ec097937047,texts/Conlangs - Esperanto - Technical - Voynich Wiki.txt,0,other_language,Esperanto,Conlangs,Technical,english,55,0,0.0,0,0,54,1,0.0,0
+text-6ec097937047,texts/Conlangs - Esperanto - Technical - Voynich Wiki.txt,0,other_language,Esperanto,Conlangs,Technical,english_extended,55,0,0.0,0,0,54,1,0.0,0
+text-6ec097937047,texts/Conlangs - Esperanto - Technical - Voynich Wiki.txt,0,other_language,Esperanto,Conlangs,Technical,legacy,55,0,0.0,0,0,54,1,0.0,0
+text-6ec097937047,texts/Conlangs - Esperanto - Technical - Voynich Wiki.txt,0,other_language,Esperanto,Conlangs,Technical,word_lookup,55,55,1.0,1,1,54,1,1.0,1
+text-6ec097937047,texts/Conlangs - Esperanto - Technical - Voynich Wiki.txt,0,other_language,Esperanto,Conlangs,Technical,entropy_based,55,0,0.0,0,0,54,1,0.0,0
+text-6ec097937047,texts/Conlangs - Esperanto - Technical - Voynich Wiki.txt,0,other_language,Esperanto,Conlangs,Technical,hf_all,55,55,1.0,1,1,54,1,1.0,1
+text-6ec097937047,texts/Conlangs - Esperanto - Technical - Voynich Wiki.txt,0,other_language,Esperanto,Conlangs,Technical,hf_strict,55,54,0.9818181818181818,1,1,54,1,0.9814814814814815,1
+text-6f1768c12841,texts/Modern - Swahili - Literary - NT.txt,0,other_language,Swahili,Modern,Literary,english,2348,29,0.012350936967632026,0,1,2347,1,0.012356199403493822,0
+text-6f1768c12841,texts/Modern - Swahili - Literary - NT.txt,0,other_language,Swahili,Modern,Literary,english_extended,2348,29,0.012350936967632026,0,1,2347,1,0.012356199403493822,0
+text-6f1768c12841,texts/Modern - Swahili - Literary - NT.txt,0,other_language,Swahili,Modern,Literary,legacy,2348,2,0.0008517887563884157,0,1,2347,1,0.0008521516829995739,0
+text-6f1768c12841,texts/Modern - Swahili - Literary - NT.txt,0,other_language,Swahili,Modern,Literary,word_lookup,2348,2348,1.0,1,1,2347,1,1.0,1
+text-6f1768c12841,texts/Modern - Swahili - Literary - NT.txt,0,other_language,Swahili,Modern,Literary,entropy_based,2348,0,0.0,0,0,2347,1,0.0,0
+text-6f1768c12841,texts/Modern - Swahili - Literary - NT.txt,0,other_language,Swahili,Modern,Literary,hf_all,2348,2348,1.0,1,1,2347,1,1.0,1
+text-6f1768c12841,texts/Modern - Swahili - Literary - NT.txt,0,other_language,Swahili,Modern,Literary,hf_strict,2348,2347,0.9995741056218058,1,1,2347,1,0.9995739241585002,1
+text-79448b669f1c,texts/Conlangs - Lojban - Technical - Science News.txt,0,other_language,Lojban,Conlangs,Technical,english,21,1,0.047619047619047616,0,1,20,1,0.0,0
+text-79448b669f1c,texts/Conlangs - Lojban - Technical - Science News.txt,0,other_language,Lojban,Conlangs,Technical,english_extended,21,2,0.09523809523809523,0,1,20,1,0.05,0
+text-79448b669f1c,texts/Conlangs - Lojban - Technical - Science News.txt,0,other_language,Lojban,Conlangs,Technical,legacy,21,1,0.047619047619047616,0,1,20,1,0.0,0
+text-79448b669f1c,texts/Conlangs - Lojban - Technical - Science News.txt,0,other_language,Lojban,Conlangs,Technical,word_lookup,21,21,1.0,1,1,20,1,1.0,1
+text-79448b669f1c,texts/Conlangs - Lojban - Technical - Science News.txt,0,other_language,Lojban,Conlangs,Technical,entropy_based,21,0,0.0,0,0,20,1,0.0,0
+text-79448b669f1c,texts/Conlangs - Lojban - Technical - Science News.txt,0,other_language,Lojban,Conlangs,Technical,hf_all,21,21,1.0,1,1,20,1,1.0,1
+text-79448b669f1c,texts/Conlangs - Lojban - Technical - Science News.txt,0,other_language,Lojban,Conlangs,Technical,hf_strict,21,21,1.0,1,1,20,1,1.0,1
+text-7a35e2e197af,texts/Conlangs - Volapuk - Technical - History Wiki.txt,0,other_language,Volapuk,Conlangs,Technical,english,27,0,0.0,0,0,26,1,0.0,0
+text-7a35e2e197af,texts/Conlangs - Volapuk - Technical - History Wiki.txt,0,other_language,Volapuk,Conlangs,Technical,english_extended,27,0,0.0,0,0,26,1,0.0,0
+text-7a35e2e197af,texts/Conlangs - Volapuk - Technical - History Wiki.txt,0,other_language,Volapuk,Conlangs,Technical,legacy,27,0,0.0,0,0,26,1,0.0,0
+text-7a35e2e197af,texts/Conlangs - Volapuk - Technical - History Wiki.txt,0,other_language,Volapuk,Conlangs,Technical,word_lookup,27,27,1.0,1,1,26,1,1.0,1
+text-7a35e2e197af,texts/Conlangs - Volapuk - Technical - History Wiki.txt,0,other_language,Volapuk,Conlangs,Technical,entropy_based,27,0,0.0,0,0,26,1,0.0,0
+text-7a35e2e197af,texts/Conlangs - Volapuk - Technical - History Wiki.txt,0,other_language,Volapuk,Conlangs,Technical,hf_all,27,27,1.0,1,1,26,1,1.0,1
+text-7a35e2e197af,texts/Conlangs - Volapuk - Technical - History Wiki.txt,0,other_language,Volapuk,Conlangs,Technical,hf_strict,27,25,0.9259259259259259,1,1,26,1,0.9230769230769231,1
+text-7dc249644b99,texts/Historical - Latin - Literary - NT (Vulgate).txt,0,other_language,Latin,Historical,Literary,english,3390,167,0.04926253687315634,0,1,3389,1,0.0492770728828563,0
+text-7dc249644b99,texts/Historical - Latin - Literary - NT (Vulgate).txt,0,other_language,Latin,Historical,Literary,english_extended,3390,167,0.04926253687315634,0,1,3389,1,0.0492770728828563,0
+text-7dc249644b99,texts/Historical - Latin - Literary - NT (Vulgate).txt,0,other_language,Latin,Historical,Literary,legacy,3390,0,0.0,0,0,3389,1,0.0,0
+text-7dc249644b99,texts/Historical - Latin - Literary - NT (Vulgate).txt,0,other_language,Latin,Historical,Literary,word_lookup,3390,3363,0.9920353982300885,1,1,3389,1,0.9920330480967837,1
+text-7dc249644b99,texts/Historical - Latin - Literary - NT (Vulgate).txt,0,other_language,Latin,Historical,Literary,entropy_based,3390,0,0.0,0,0,3389,1,0.0,0
+text-7dc249644b99,texts/Historical - Latin - Literary - NT (Vulgate).txt,0,other_language,Latin,Historical,Literary,hf_all,3390,3389,0.9997050147492625,1,1,3389,1,0.9997049277072882,1
+text-7dc249644b99,texts/Historical - Latin - Literary - NT (Vulgate).txt,0,other_language,Latin,Historical,Literary,hf_strict,3390,3375,0.995575221238938,1,1,3389,1,0.9955739156093243,1
+text-86fcb8e44b2c,texts/Modern - Hebrew - Technical - Voynich Wiki.txt,0,other_language,Hebrew,Modern,Technical,english,21,21,1.0,1,1,20,1,1.0,1
+text-86fcb8e44b2c,texts/Modern - Hebrew - Technical - Voynich Wiki.txt,0,other_language,Hebrew,Modern,Technical,english_extended,21,21,1.0,1,1,20,1,1.0,1
+text-86fcb8e44b2c,texts/Modern - Hebrew - Technical - Voynich Wiki.txt,0,other_language,Hebrew,Modern,Technical,legacy,21,21,1.0,1,1,20,1,1.0,1
+text-86fcb8e44b2c,texts/Modern - Hebrew - Technical - Voynich Wiki.txt,0,other_language,Hebrew,Modern,Technical,word_lookup,21,3,0.14285714285714285,0,1,20,1,0.1,0
+text-86fcb8e44b2c,texts/Modern - Hebrew - Technical - Voynich Wiki.txt,0,other_language,Hebrew,Modern,Technical,entropy_based,21,21,1.0,1,1,20,1,1.0,1
+text-86fcb8e44b2c,texts/Modern - Hebrew - Technical - Voynich Wiki.txt,0,other_language,Hebrew,Modern,Technical,hf_all,21,0,0.0,0,0,20,1,0.0,0
+text-86fcb8e44b2c,texts/Modern - Hebrew - Technical - Voynich Wiki.txt,0,other_language,Hebrew,Modern,Technical,hf_strict,21,0,0.0,0,0,20,1,0.0,0
+text-89f9dda41364,texts/Historical - Latin (Abbreviated) - Literary - NT (Vulgate).txt,0,other_language,Latin (Abbreviated),Historical,Literary,english,2531,151,0.05966021335440538,0,1,2530,1,0.059683794466403164,0
+text-89f9dda41364,texts/Historical - Latin (Abbreviated) - Literary - NT (Vulgate).txt,0,other_language,Latin (Abbreviated),Historical,Literary,english_extended,2531,1313,0.5187672856578428,1,1,2530,1,0.5189723320158103,1
+text-89f9dda41364,texts/Historical - Latin (Abbreviated) - Literary - NT (Vulgate).txt,0,other_language,Latin (Abbreviated),Historical,Literary,legacy,2531,0,0.0,0,0,2530,1,0.0,0
+text-89f9dda41364,texts/Historical - Latin (Abbreviated) - Literary - NT (Vulgate).txt,0,other_language,Latin (Abbreviated),Historical,Literary,word_lookup,2531,2530,0.9996048992493086,1,1,2530,1,1.0,1
+text-89f9dda41364,texts/Historical - Latin (Abbreviated) - Literary - NT (Vulgate).txt,0,other_language,Latin (Abbreviated),Historical,Literary,entropy_based,2531,0,0.0,0,0,2530,1,0.0,0
+text-89f9dda41364,texts/Historical - Latin (Abbreviated) - Literary - NT (Vulgate).txt,0,other_language,Latin (Abbreviated),Historical,Literary,hf_all,2531,2531,1.0,1,1,2530,1,1.0,1
+text-89f9dda41364,texts/Historical - Latin (Abbreviated) - Literary - NT (Vulgate).txt,0,other_language,Latin (Abbreviated),Historical,Literary,hf_strict,2531,2531,1.0,1,1,2530,1,1.0,1
+text-8ba8b3e92f49,texts/Conlangs - Toki Pona - Technical - Turkey-Mexico Wikia.txt,0,other_language,Toki Pona,Conlangs,Technical,english,18,0,0.0,0,0,17,1,0.0,0
+text-8ba8b3e92f49,texts/Conlangs - Toki Pona - Technical - Turkey-Mexico Wikia.txt,0,other_language,Toki Pona,Conlangs,Technical,english_extended,18,0,0.0,0,0,17,1,0.0,0
+text-8ba8b3e92f49,texts/Conlangs - Toki Pona - Technical - Turkey-Mexico Wikia.txt,0,other_language,Toki Pona,Conlangs,Technical,legacy,18,0,0.0,0,0,17,1,0.0,0
+text-8ba8b3e92f49,texts/Conlangs - Toki Pona - Technical - Turkey-Mexico Wikia.txt,0,other_language,Toki Pona,Conlangs,Technical,word_lookup,18,14,0.7777777777777778,1,1,17,1,0.8235294117647058,1
+text-8ba8b3e92f49,texts/Conlangs - Toki Pona - Technical - Turkey-Mexico Wikia.txt,0,other_language,Toki Pona,Conlangs,Technical,entropy_based,18,0,0.0,0,0,17,1,0.0,0
+text-8ba8b3e92f49,texts/Conlangs - Toki Pona - Technical - Turkey-Mexico Wikia.txt,0,other_language,Toki Pona,Conlangs,Technical,hf_all,18,18,1.0,1,1,17,1,1.0,1
+text-8ba8b3e92f49,texts/Conlangs - Toki Pona - Technical - Turkey-Mexico Wikia.txt,0,other_language,Toki Pona,Conlangs,Technical,hf_strict,18,18,1.0,1,1,17,1,1.0,1
+text-96f1c195c874,texts/Historical - Russian - Literary - NT - Codex Marianus.txt,0,other_language,Russian,Historical,Literary,english,853,853,1.0,1,1,852,1,1.0,1
+text-96f1c195c874,texts/Historical - Russian - Literary - NT - Codex Marianus.txt,0,other_language,Russian,Historical,Literary,english_extended,853,853,1.0,1,1,852,1,1.0,1
+text-96f1c195c874,texts/Historical - Russian - Literary - NT - Codex Marianus.txt,0,other_language,Russian,Historical,Literary,legacy,853,853,1.0,1,1,852,1,1.0,1
+text-96f1c195c874,texts/Historical - Russian - Literary - NT - Codex Marianus.txt,0,other_language,Russian,Historical,Literary,word_lookup,853,0,0.0,0,0,852,1,0.0,0
+text-96f1c195c874,texts/Historical - Russian - Literary - NT - Codex Marianus.txt,0,other_language,Russian,Historical,Literary,entropy_based,853,853,1.0,1,1,852,1,1.0,1
+text-96f1c195c874,texts/Historical - Russian - Literary - NT - Codex Marianus.txt,0,other_language,Russian,Historical,Literary,hf_all,853,853,1.0,1,1,852,1,1.0,1
+text-96f1c195c874,texts/Historical - Russian - Literary - NT - Codex Marianus.txt,0,other_language,Russian,Historical,Literary,hf_strict,853,17,0.01992966002344666,0,1,852,1,0.018779342723004695,0
+text-97230a2827d9,texts/Historical - Sanskrit - Technical - Charaka Samhita.txt,0,other_language,Sanskrit,Historical,Technical,english,585,585,1.0,1,1,584,1,1.0,1
+text-97230a2827d9,texts/Historical - Sanskrit - Technical - Charaka Samhita.txt,0,other_language,Sanskrit,Historical,Technical,english_extended,585,585,1.0,1,1,584,1,1.0,1
+text-97230a2827d9,texts/Historical - Sanskrit - Technical - Charaka Samhita.txt,0,other_language,Sanskrit,Historical,Technical,legacy,585,585,1.0,1,1,584,1,1.0,1
+text-97230a2827d9,texts/Historical - Sanskrit - Technical - Charaka Samhita.txt,0,other_language,Sanskrit,Historical,Technical,word_lookup,585,0,0.0,0,0,584,1,0.0,0
+text-97230a2827d9,texts/Historical - Sanskrit - Technical - Charaka Samhita.txt,0,other_language,Sanskrit,Historical,Technical,entropy_based,585,585,1.0,1,1,584,1,1.0,1
+text-97230a2827d9,texts/Historical - Sanskrit - Technical - Charaka Samhita.txt,0,other_language,Sanskrit,Historical,Technical,hf_all,585,14,0.023931623931623933,0,1,584,1,0.023972602739726026,0
+text-97230a2827d9,texts/Historical - Sanskrit - Technical - Charaka Samhita.txt,0,other_language,Sanskrit,Historical,Technical,hf_strict,585,0,0.0,0,0,584,1,0.0,0
+text-98ff32d44789,texts/Conlangs - Esperanto - Literary - NT.txt,0,other_language,Esperanto,Conlangs,Literary,english,2204,144,0.06533575317604355,0,1,2203,1,0.06536541080344985,0
+text-98ff32d44789,texts/Conlangs - Esperanto - Literary - NT.txt,0,other_language,Esperanto,Conlangs,Literary,english_extended,2204,145,0.06578947368421052,0,1,2203,1,0.0658193372673627,0
+text-98ff32d44789,texts/Conlangs - Esperanto - Literary - NT.txt,0,other_language,Esperanto,Conlangs,Literary,legacy,2204,6,0.0027223230490018148,0,1,2203,1,0.0027235587834770767,0
+text-98ff32d44789,texts/Conlangs - Esperanto - Literary - NT.txt,0,other_language,Esperanto,Conlangs,Literary,word_lookup,2204,2204,1.0,1,1,2203,1,1.0,1
+text-98ff32d44789,texts/Conlangs - Esperanto - Literary - NT.txt,0,other_language,Esperanto,Conlangs,Literary,entropy_based,2204,0,0.0,0,0,2203,1,0.0,0
+text-98ff32d44789,texts/Conlangs - Esperanto - Literary - NT.txt,0,other_language,Esperanto,Conlangs,Literary,hf_all,2204,2204,1.0,1,1,2203,1,1.0,1
+text-98ff32d44789,texts/Conlangs - Esperanto - Literary - NT.txt,0,other_language,Esperanto,Conlangs,Literary,hf_strict,2204,2204,1.0,1,1,2203,1,1.0,1
+text-9ba054b53ae2,texts/Historical - Italian - Technical - Della Pittura.txt,0,other_language,Italian,Historical,Technical,english,250,69,0.276,0,1,249,1,0.27710843373493976,0
+text-9ba054b53ae2,texts/Historical - Italian - Technical - Della Pittura.txt,0,other_language,Italian,Historical,Technical,english_extended,250,69,0.276,0,1,249,1,0.27710843373493976,0
+text-9ba054b53ae2,texts/Historical - Italian - Technical - Della Pittura.txt,0,other_language,Italian,Historical,Technical,legacy,250,0,0.0,0,0,249,1,0.0,0
+text-9ba054b53ae2,texts/Historical - Italian - Technical - Della Pittura.txt,0,other_language,Italian,Historical,Technical,word_lookup,250,237,0.948,1,1,249,1,0.9477911646586346,1
+text-9ba054b53ae2,texts/Historical - Italian - Technical - Della Pittura.txt,0,other_language,Italian,Historical,Technical,entropy_based,250,0,0.0,0,0,249,1,0.0,0
+text-9ba054b53ae2,texts/Historical - Italian - Technical - Della Pittura.txt,0,other_language,Italian,Historical,Technical,hf_all,250,248,0.992,1,1,249,1,0.9919678714859438,1
+text-9ba054b53ae2,texts/Historical - Italian - Technical - Della Pittura.txt,0,other_language,Italian,Historical,Technical,hf_strict,250,246,0.984,1,1,249,1,0.9839357429718876,1
+text-9cdff0a870b9,texts/Conlangs - Klingon - Technical - Proxima Centauri B Wikia.txt,0,other_language,Klingon,Conlangs,Technical,english,12,2,0.16666666666666666,0,1,11,1,0.18181818181818182,0
+text-9cdff0a870b9,texts/Conlangs - Klingon - Technical - Proxima Centauri B Wikia.txt,0,other_language,Klingon,Conlangs,Technical,english_extended,12,2,0.16666666666666666,0,1,11,1,0.18181818181818182,0
+text-9cdff0a870b9,texts/Conlangs - Klingon - Technical - Proxima Centauri B Wikia.txt,0,other_language,Klingon,Conlangs,Technical,legacy,12,2,0.16666666666666666,0,1,11,1,0.18181818181818182,0
+text-9cdff0a870b9,texts/Conlangs - Klingon - Technical - Proxima Centauri B Wikia.txt,0,other_language,Klingon,Conlangs,Technical,word_lookup,12,12,1.0,1,1,11,1,1.0,1
+text-9cdff0a870b9,texts/Conlangs - Klingon - Technical - Proxima Centauri B Wikia.txt,0,other_language,Klingon,Conlangs,Technical,entropy_based,12,0,0.0,0,0,11,1,0.0,0
+text-9cdff0a870b9,texts/Conlangs - Klingon - Technical - Proxima Centauri B Wikia.txt,0,other_language,Klingon,Conlangs,Technical,hf_all,12,12,1.0,1,1,11,1,1.0,1
+text-9cdff0a870b9,texts/Conlangs - Klingon - Technical - Proxima Centauri B Wikia.txt,0,other_language,Klingon,Conlangs,Technical,hf_strict,12,12,1.0,1,1,11,1,1.0,1
+text-9e3363836f8f,texts/Conlangs - Lojban - Literary - Alice in Wonderland.txt,0,other_language,Lojban,Conlangs,Literary,english,380,0,0.0,0,0,379,1,0.0,0
+text-9e3363836f8f,texts/Conlangs - Lojban - Literary - Alice in Wonderland.txt,0,other_language,Lojban,Conlangs,Literary,english_extended,380,10,0.02631578947368421,0,1,379,1,0.026385224274406333,0
+text-9e3363836f8f,texts/Conlangs - Lojban - Literary - Alice in Wonderland.txt,0,other_language,Lojban,Conlangs,Literary,legacy,380,0,0.0,0,0,379,1,0.0,0
+text-9e3363836f8f,texts/Conlangs - Lojban - Literary - Alice in Wonderland.txt,0,other_language,Lojban,Conlangs,Literary,word_lookup,380,380,1.0,1,1,379,1,1.0,1
+text-9e3363836f8f,texts/Conlangs - Lojban - Literary - Alice in Wonderland.txt,0,other_language,Lojban,Conlangs,Literary,entropy_based,380,0,0.0,0,0,379,1,0.0,0
+text-9e3363836f8f,texts/Conlangs - Lojban - Literary - Alice in Wonderland.txt,0,other_language,Lojban,Conlangs,Literary,hf_all,380,380,1.0,1,1,379,1,1.0,1
+text-9e3363836f8f,texts/Conlangs - Lojban - Literary - Alice in Wonderland.txt,0,other_language,Lojban,Conlangs,Literary,hf_strict,380,380,1.0,1,1,379,1,1.0,1
+text-a7c14bdb5e51,texts/Historical - German - Technical - German Herbarium.txt,0,other_language,German,Historical,Technical,english,203,37,0.18226600985221675,0,1,202,1,0.18316831683168316,0
+text-a7c14bdb5e51,texts/Historical - German - Technical - German Herbarium.txt,0,other_language,German,Historical,Technical,english_extended,203,60,0.2955665024630542,0,1,202,1,0.297029702970297,0
+text-a7c14bdb5e51,texts/Historical - German - Technical - German Herbarium.txt,0,other_language,German,Historical,Technical,legacy,203,0,0.0,0,0,202,1,0.0,0
+text-a7c14bdb5e51,texts/Historical - German - Technical - German Herbarium.txt,0,other_language,German,Historical,Technical,word_lookup,203,133,0.6551724137931034,1,1,202,1,0.6584158415841584,1
+text-a7c14bdb5e51,texts/Historical - German - Technical - German Herbarium.txt,0,other_language,German,Historical,Technical,entropy_based,203,0,0.0,0,0,202,1,0.0,0
+text-a7c14bdb5e51,texts/Historical - German - Technical - German Herbarium.txt,0,other_language,German,Historical,Technical,hf_all,203,203,1.0,1,1,202,1,1.0,1
+text-a7c14bdb5e51,texts/Historical - German - Technical - German Herbarium.txt,0,other_language,German,Historical,Technical,hf_strict,203,193,0.9507389162561576,1,1,202,1,0.9504950495049505,1
+text-a924068a4a5a,texts/Modern - German - Literary - NT.txt,0,other_language,German,Modern,Literary,english,2519,117,0.04644700277888051,0,1,2518,1,0.04646544876886418,0
+text-a924068a4a5a,texts/Modern - German - Literary - NT.txt,0,other_language,German,Modern,Literary,english_extended,2519,437,0.17348154029376736,0,1,2518,1,0.17355043685464655,0
+text-a924068a4a5a,texts/Modern - German - Literary - NT.txt,0,other_language,German,Modern,Literary,legacy,2519,0,0.0,0,0,2518,1,0.0,0
+text-a924068a4a5a,texts/Modern - German - Literary - NT.txt,0,other_language,German,Modern,Literary,word_lookup,2519,124,0.04922588328701866,0,1,2518,1,0.04924543288324067,0
+text-a924068a4a5a,texts/Modern - German - Literary - NT.txt,0,other_language,German,Modern,Literary,entropy_based,2519,0,0.0,0,0,2518,1,0.0,0
+text-a924068a4a5a,texts/Modern - German - Literary - NT.txt,0,other_language,German,Modern,Literary,hf_all,2519,2506,0.9948392219134577,1,1,2518,1,0.9948371723590151,1
+text-a924068a4a5a,texts/Modern - German - Literary - NT.txt,0,other_language,German,Modern,Literary,hf_strict,2519,2460,0.9765780071456928,1,1,2518,1,0.9765687053216838,1
+text-afce1ea9a5b7,texts/Conlangs - Volapuk - Literary - NT.txt,0,other_language,Volapuk,Conlangs,Literary,english,1952,12,0.006147540983606557,0,1,1951,1,0.006150691952844695,0
+text-afce1ea9a5b7,texts/Conlangs - Volapuk - Literary - NT.txt,0,other_language,Volapuk,Conlangs,Literary,english_extended,1952,12,0.006147540983606557,0,1,1951,1,0.006150691952844695,0
+text-afce1ea9a5b7,texts/Conlangs - Volapuk - Literary - NT.txt,0,other_language,Volapuk,Conlangs,Literary,legacy,1952,0,0.0,0,0,1951,1,0.0,0
+text-afce1ea9a5b7,texts/Conlangs - Volapuk - Literary - NT.txt,0,other_language,Volapuk,Conlangs,Literary,word_lookup,1952,1941,0.9943647540983607,1,1,1951,1,0.9943618657098924,1
+text-afce1ea9a5b7,texts/Conlangs - Volapuk - Literary - NT.txt,0,other_language,Volapuk,Conlangs,Literary,entropy_based,1952,0,0.0,0,0,1951,1,0.0,0
+text-afce1ea9a5b7,texts/Conlangs - Volapuk - Literary - NT.txt,0,other_language,Volapuk,Conlangs,Literary,hf_all,1952,1950,0.9989754098360656,1,1,1951,1,0.9989748846745259,1
+text-afce1ea9a5b7,texts/Conlangs - Volapuk - Literary - NT.txt,0,other_language,Volapuk,Conlangs,Literary,hf_strict,1952,1949,0.9984631147540983,1,1,1951,1,0.9984623270117888,1
+text-b45821698a44,texts/Modern - Italian - Technical - Voynich Wiki.txt,0,other_language,Italian,Modern,Technical,english,48,7,0.14583333333333334,0,1,47,1,0.14893617021276595,0
+text-b45821698a44,texts/Modern - Italian - Technical - Voynich Wiki.txt,0,other_language,Italian,Modern,Technical,english_extended,48,7,0.14583333333333334,0,1,47,1,0.14893617021276595,0
+text-b45821698a44,texts/Modern - Italian - Technical - Voynich Wiki.txt,0,other_language,Italian,Modern,Technical,legacy,48,0,0.0,0,0,47,1,0.0,0
+text-b45821698a44,texts/Modern - Italian - Technical - Voynich Wiki.txt,0,other_language,Italian,Modern,Technical,word_lookup,48,43,0.8958333333333334,1,1,47,1,0.8936170212765957,1
+text-b45821698a44,texts/Modern - Italian - Technical - Voynich Wiki.txt,0,other_language,Italian,Modern,Technical,entropy_based,48,0,0.0,0,0,47,1,0.0,0
+text-b45821698a44,texts/Modern - Italian - Technical - Voynich Wiki.txt,0,other_language,Italian,Modern,Technical,hf_all,48,38,0.7916666666666666,1,1,47,1,0.7872340425531915,1
+text-b45821698a44,texts/Modern - Italian - Technical - Voynich Wiki.txt,0,other_language,Italian,Modern,Technical,hf_strict,48,24,0.5,1,1,47,1,0.48936170212765956,0
+text-b61eb1994d47,texts/Historical - Nahuatl - Technical - Florentine Codex.txt,0,other_language,Nahuatl,Historical,Technical,english,42,1,0.023809523809523808,0,1,41,1,0.024390243902439025,0
+text-b61eb1994d47,texts/Historical - Nahuatl - Technical - Florentine Codex.txt,0,other_language,Nahuatl,Historical,Technical,english_extended,42,2,0.047619047619047616,0,1,41,1,0.04878048780487805,0
+text-b61eb1994d47,texts/Historical - Nahuatl - Technical - Florentine Codex.txt,0,other_language,Nahuatl,Historical,Technical,legacy,42,0,0.0,0,0,41,1,0.0,0
+text-b61eb1994d47,texts/Historical - Nahuatl - Technical - Florentine Codex.txt,0,other_language,Nahuatl,Historical,Technical,word_lookup,42,42,1.0,1,1,41,1,1.0,1
+text-b61eb1994d47,texts/Historical - Nahuatl - Technical - Florentine Codex.txt,0,other_language,Nahuatl,Historical,Technical,entropy_based,42,0,0.0,0,0,41,1,0.0,0
+text-b61eb1994d47,texts/Historical - Nahuatl - Technical - Florentine Codex.txt,0,other_language,Nahuatl,Historical,Technical,hf_all,42,42,1.0,1,1,41,1,1.0,1
+text-b61eb1994d47,texts/Historical - Nahuatl - Technical - Florentine Codex.txt,0,other_language,Nahuatl,Historical,Technical,hf_strict,42,42,1.0,1,1,41,1,1.0,1
+text-b7616f84fd4e,texts/Modern - Tagalog - Technical - Tuberculosis Wiki.txt,0,other_language,Tagalog,Modern,Technical,english,98,0,0.0,0,0,97,1,0.0,0
+text-b7616f84fd4e,texts/Modern - Tagalog - Technical - Tuberculosis Wiki.txt,0,other_language,Tagalog,Modern,Technical,english_extended,98,4,0.04081632653061224,0,1,97,1,0.041237113402061855,0
+text-b7616f84fd4e,texts/Modern - Tagalog - Technical - Tuberculosis Wiki.txt,0,other_language,Tagalog,Modern,Technical,legacy,98,0,0.0,0,0,97,1,0.0,0
+text-b7616f84fd4e,texts/Modern - Tagalog - Technical - Tuberculosis Wiki.txt,0,other_language,Tagalog,Modern,Technical,word_lookup,98,96,0.9795918367346939,1,1,97,1,0.979381443298969,1
+text-b7616f84fd4e,texts/Modern - Tagalog - Technical - Tuberculosis Wiki.txt,0,other_language,Tagalog,Modern,Technical,entropy_based,98,0,0.0,0,0,97,1,0.0,0
+text-b7616f84fd4e,texts/Modern - Tagalog - Technical - Tuberculosis Wiki.txt,0,other_language,Tagalog,Modern,Technical,hf_all,98,98,1.0,1,1,97,1,1.0,1
+text-b7616f84fd4e,texts/Modern - Tagalog - Technical - Tuberculosis Wiki.txt,0,other_language,Tagalog,Modern,Technical,hf_strict,98,88,0.8979591836734694,1,1,97,1,0.8969072164948454,1
+text-c0c809ed24b1,texts/Conlangs - LOLCat - Literary - NT - Matthew.txt,0,other_language,LOLCat,Conlangs,Literary,english,240,10,0.041666666666666664,0,1,239,1,0.04184100418410042,0
+text-c0c809ed24b1,texts/Conlangs - LOLCat - Literary - NT - Matthew.txt,0,other_language,LOLCat,Conlangs,Literary,english_extended,240,33,0.1375,0,1,239,1,0.13389121338912133,0
+text-c0c809ed24b1,texts/Conlangs - LOLCat - Literary - NT - Matthew.txt,0,other_language,LOLCat,Conlangs,Literary,legacy,240,3,0.0125,0,1,239,1,0.012552301255230125,0
+text-c0c809ed24b1,texts/Conlangs - LOLCat - Literary - NT - Matthew.txt,0,other_language,LOLCat,Conlangs,Literary,word_lookup,240,14,0.058333333333333334,0,1,239,1,0.058577405857740586,0
+text-c0c809ed24b1,texts/Conlangs - LOLCat - Literary - NT - Matthew.txt,0,other_language,LOLCat,Conlangs,Literary,entropy_based,240,0,0.0,0,0,239,1,0.0,0
+text-c0c809ed24b1,texts/Conlangs - LOLCat - Literary - NT - Matthew.txt,0,other_language,LOLCat,Conlangs,Literary,hf_all,240,240,1.0,1,1,239,1,1.0,1
+text-c0c809ed24b1,texts/Conlangs - LOLCat - Literary - NT - Matthew.txt,0,other_language,LOLCat,Conlangs,Literary,hf_strict,240,27,0.1125,0,1,239,1,0.11297071129707113,0
+text-c4454b0514e3,texts/Historical - Nahuatl - Literary - Nican Mopohua.txt,0,other_language,Nahuatl,Historical,Literary,english,65,0,0.0,0,0,64,1,0.0,0
+text-c4454b0514e3,texts/Historical - Nahuatl - Literary - Nican Mopohua.txt,0,other_language,Nahuatl,Historical,Literary,english_extended,65,0,0.0,0,0,64,1,0.0,0
+text-c4454b0514e3,texts/Historical - Nahuatl - Literary - Nican Mopohua.txt,0,other_language,Nahuatl,Historical,Literary,legacy,65,0,0.0,0,0,64,1,0.0,0
+text-c4454b0514e3,texts/Historical - Nahuatl - Literary - Nican Mopohua.txt,0,other_language,Nahuatl,Historical,Literary,word_lookup,65,65,1.0,1,1,64,1,1.0,1
+text-c4454b0514e3,texts/Historical - Nahuatl - Literary - Nican Mopohua.txt,0,other_language,Nahuatl,Historical,Literary,entropy_based,65,0,0.0,0,0,64,1,0.0,0
+text-c4454b0514e3,texts/Historical - Nahuatl - Literary - Nican Mopohua.txt,0,other_language,Nahuatl,Historical,Literary,hf_all,65,65,1.0,1,1,64,1,1.0,1
+text-c4454b0514e3,texts/Historical - Nahuatl - Literary - Nican Mopohua.txt,0,other_language,Nahuatl,Historical,Literary,hf_strict,65,65,1.0,1,1,64,1,1.0,1
+text-c4703a3fae10,texts/Historical - Mayan (Kaqchikel) - Literary - Annals of the Cakchiquels.txt,0,other_language,Mayan (Kaqchikel),Historical,Literary,english,208,85,0.40865384615384615,0,1,207,1,0.4106280193236715,0
+text-c4703a3fae10,texts/Historical - Mayan (Kaqchikel) - Literary - Annals of the Cakchiquels.txt,0,other_language,Mayan (Kaqchikel),Historical,Literary,english_extended,208,85,0.40865384615384615,0,1,207,1,0.4106280193236715,0
+text-c4703a3fae10,texts/Historical - Mayan (Kaqchikel) - Literary - Annals of the Cakchiquels.txt,0,other_language,Mayan (Kaqchikel),Historical,Literary,legacy,208,83,0.39903846153846156,0,1,207,1,0.40096618357487923,0
+text-c4703a3fae10,texts/Historical - Mayan (Kaqchikel) - Literary - Annals of the Cakchiquels.txt,0,other_language,Mayan (Kaqchikel),Historical,Literary,word_lookup,208,208,1.0,1,1,207,1,1.0,1
+text-c4703a3fae10,texts/Historical - Mayan (Kaqchikel) - Literary - Annals of the Cakchiquels.txt,0,other_language,Mayan (Kaqchikel),Historical,Literary,entropy_based,208,0,0.0,0,0,207,1,0.0,0
+text-c4703a3fae10,texts/Historical - Mayan (Kaqchikel) - Literary - Annals of the Cakchiquels.txt,0,other_language,Mayan (Kaqchikel),Historical,Literary,hf_all,208,208,1.0,1,1,207,1,1.0,1
+text-c4703a3fae10,texts/Historical - Mayan (Kaqchikel) - Literary - Annals of the Cakchiquels.txt,0,other_language,Mayan (Kaqchikel),Historical,Literary,hf_strict,208,208,1.0,1,1,207,1,1.0,1
+text-c4cb40c2480a,texts/Historical - German - Literary - NT - Luther.txt,0,other_language,German,Historical,Literary,english,2458,149,0.06061838893409276,0,1,2457,1,0.060643060643060645,0
+text-c4cb40c2480a,texts/Historical - German - Literary - NT - Luther.txt,0,other_language,German,Historical,Literary,english_extended,2458,399,0.16232709519934907,0,1,2457,1,0.1623931623931624,0
+text-c4cb40c2480a,texts/Historical - German - Literary - NT - Luther.txt,0,other_language,German,Historical,Literary,legacy,2458,0,0.0,0,0,2457,1,0.0,0
+text-c4cb40c2480a,texts/Historical - German - Literary - NT - Luther.txt,0,other_language,German,Historical,Literary,word_lookup,2458,146,0.059397884458909686,0,1,2457,1,0.05942205942205942,0
+text-c4cb40c2480a,texts/Historical - German - Literary - NT - Luther.txt,0,other_language,German,Historical,Literary,entropy_based,2458,0,0.0,0,0,2457,1,0.0,0
+text-c4cb40c2480a,texts/Historical - German - Literary - NT - Luther.txt,0,other_language,German,Historical,Literary,hf_all,2458,2448,0.9959316517493898,1,1,2457,1,0.995929995929996,1
+text-c4cb40c2480a,texts/Historical - German - Literary - NT - Luther.txt,0,other_language,German,Historical,Literary,hf_strict,2458,2404,0.9780309194467046,1,1,2457,1,0.978021978021978,1
+text-c6d4cc209310,texts/Historical - Greek - Literary - NT - Textus Receptus.txt,0,other_language,Greek,Historical,Literary,english,2098,2098,1.0,1,1,2097,1,1.0,1
+text-c6d4cc209310,texts/Historical - Greek - Literary - NT - Textus Receptus.txt,0,other_language,Greek,Historical,Literary,english_extended,2098,2098,1.0,1,1,2097,1,1.0,1
+text-c6d4cc209310,texts/Historical - Greek - Literary - NT - Textus Receptus.txt,0,other_language,Greek,Historical,Literary,legacy,2098,2098,1.0,1,1,2097,1,1.0,1
+text-c6d4cc209310,texts/Historical - Greek - Literary - NT - Textus Receptus.txt,0,other_language,Greek,Historical,Literary,word_lookup,2098,0,0.0,0,0,2097,1,0.0,0
+text-c6d4cc209310,texts/Historical - Greek - Literary - NT - Textus Receptus.txt,0,other_language,Greek,Historical,Literary,entropy_based,2098,2098,1.0,1,1,2097,1,1.0,1
+text-c6d4cc209310,texts/Historical - Greek - Literary - NT - Textus Receptus.txt,0,other_language,Greek,Historical,Literary,hf_all,2098,2098,1.0,1,1,2097,1,1.0,1
+text-c6d4cc209310,texts/Historical - Greek - Literary - NT - Textus Receptus.txt,0,other_language,Greek,Historical,Literary,hf_strict,2098,2096,0.9990467111534795,1,1,2097,1,0.9990462565569862,1
+text-cce34dd578f2,texts/Historical - Latin (Abbreviated) - Technical - Pliny's Natural History.txt,0,other_language,Latin (Abbreviated),Historical,Technical,english,6090,233,0.03825944170771757,0,1,6089,1,0.03826572507800952,0
+text-cce34dd578f2,texts/Historical - Latin (Abbreviated) - Technical - Pliny's Natural History.txt,0,other_language,Latin (Abbreviated),Historical,Technical,english_extended,6090,3213,0.5275862068965518,1,1,6089,1,0.52767285268517,1
+text-cce34dd578f2,texts/Historical - Latin (Abbreviated) - Technical - Pliny's Natural History.txt,0,other_language,Latin (Abbreviated),Historical,Technical,legacy,6090,3,0.0004926108374384236,0,1,6089,1,0.0004926917392018393,0
+text-cce34dd578f2,texts/Historical - Latin (Abbreviated) - Technical - Pliny's Natural History.txt,0,other_language,Latin (Abbreviated),Historical,Technical,word_lookup,6090,6090,1.0,1,1,6089,1,1.0,1
+text-cce34dd578f2,texts/Historical - Latin (Abbreviated) - Technical - Pliny's Natural History.txt,0,other_language,Latin (Abbreviated),Historical,Technical,entropy_based,6090,0,0.0,0,0,6089,1,0.0,0
+text-cce34dd578f2,texts/Historical - Latin (Abbreviated) - Technical - Pliny's Natural History.txt,0,other_language,Latin (Abbreviated),Historical,Technical,hf_all,6090,6090,1.0,1,1,6089,1,1.0,1
+text-cce34dd578f2,texts/Historical - Latin (Abbreviated) - Technical - Pliny's Natural History.txt,0,other_language,Latin (Abbreviated),Historical,Technical,hf_strict,6090,6088,0.999671592775041,1,1,6089,1,0.9996715388405321,1
+text-ce77b6961095,texts/Conlangs - Neo-Quenya - Technical - Europe-Taipei Wikia.txt,0,other_language,Neo-Quenya,Conlangs,Technical,english,16,0,0.0,0,0,15,1,0.0,0
+text-ce77b6961095,texts/Conlangs - Neo-Quenya - Technical - Europe-Taipei Wikia.txt,0,other_language,Neo-Quenya,Conlangs,Technical,english_extended,16,0,0.0,0,0,15,1,0.0,0
+text-ce77b6961095,texts/Conlangs - Neo-Quenya - Technical - Europe-Taipei Wikia.txt,0,other_language,Neo-Quenya,Conlangs,Technical,legacy,16,0,0.0,0,0,15,1,0.0,0
+text-ce77b6961095,texts/Conlangs - Neo-Quenya - Technical - Europe-Taipei Wikia.txt,0,other_language,Neo-Quenya,Conlangs,Technical,word_lookup,16,15,0.9375,1,1,15,1,0.9333333333333333,1
+text-ce77b6961095,texts/Conlangs - Neo-Quenya - Technical - Europe-Taipei Wikia.txt,0,other_language,Neo-Quenya,Conlangs,Technical,entropy_based,16,0,0.0,0,0,15,1,0.0,0
+text-ce77b6961095,texts/Conlangs - Neo-Quenya - Technical - Europe-Taipei Wikia.txt,0,other_language,Neo-Quenya,Conlangs,Technical,hf_all,16,16,1.0,1,1,15,1,1.0,1
+text-ce77b6961095,texts/Conlangs - Neo-Quenya - Technical - Europe-Taipei Wikia.txt,0,other_language,Neo-Quenya,Conlangs,Technical,hf_strict,16,16,1.0,1,1,15,1,1.0,1
+text-cff7f72d79b8,texts/Historical - Anglo-Saxon - Technical - Leechbook.txt,0,other_language,Anglo-Saxon,Historical,Technical,english,13,13,1.0,1,1,12,1,1.0,1
+text-cff7f72d79b8,texts/Historical - Anglo-Saxon - Technical - Leechbook.txt,0,other_language,Anglo-Saxon,Historical,Technical,english_extended,13,13,1.0,1,1,12,1,1.0,1
+text-cff7f72d79b8,texts/Historical - Anglo-Saxon - Technical - Leechbook.txt,0,other_language,Anglo-Saxon,Historical,Technical,legacy,13,13,1.0,1,1,12,1,1.0,1
+text-cff7f72d79b8,texts/Historical - Anglo-Saxon - Technical - Leechbook.txt,0,other_language,Anglo-Saxon,Historical,Technical,word_lookup,13,13,1.0,1,1,12,1,1.0,1
+text-cff7f72d79b8,texts/Historical - Anglo-Saxon - Technical - Leechbook.txt,0,other_language,Anglo-Saxon,Historical,Technical,entropy_based,13,0,0.0,0,0,12,1,0.0,0
+text-cff7f72d79b8,texts/Historical - Anglo-Saxon - Technical - Leechbook.txt,0,other_language,Anglo-Saxon,Historical,Technical,hf_all,13,13,1.0,1,1,12,1,1.0,1
+text-cff7f72d79b8,texts/Historical - Anglo-Saxon - Technical - Leechbook.txt,0,other_language,Anglo-Saxon,Historical,Technical,hf_strict,13,13,1.0,1,1,12,1,1.0,1
+text-d1e5e970a9bd,texts/Conlangs - Klingon - Literary - NT - Mark.txt,0,other_language,Klingon,Conlangs,Literary,english,152,60,0.39473684210526316,0,1,151,1,0.3973509933774834,0
+text-d1e5e970a9bd,texts/Conlangs - Klingon - Literary - NT - Mark.txt,0,other_language,Klingon,Conlangs,Literary,english_extended,152,65,0.4276315789473684,0,1,151,1,0.4304635761589404,0
+text-d1e5e970a9bd,texts/Conlangs - Klingon - Literary - NT - Mark.txt,0,other_language,Klingon,Conlangs,Literary,legacy,152,60,0.39473684210526316,0,1,151,1,0.3973509933774834,0
+text-d1e5e970a9bd,texts/Conlangs - Klingon - Literary - NT - Mark.txt,0,other_language,Klingon,Conlangs,Literary,word_lookup,152,152,1.0,1,1,151,1,1.0,1
+text-d1e5e970a9bd,texts/Conlangs - Klingon - Literary - NT - Mark.txt,0,other_language,Klingon,Conlangs,Literary,entropy_based,152,0,0.0,0,0,151,1,0.0,0
+text-d1e5e970a9bd,texts/Conlangs - Klingon - Literary - NT - Mark.txt,0,other_language,Klingon,Conlangs,Literary,hf_all,152,152,1.0,1,1,151,1,1.0,1
+text-d1e5e970a9bd,texts/Conlangs - Klingon - Literary - NT - Mark.txt,0,other_language,Klingon,Conlangs,Literary,hf_strict,152,152,1.0,1,1,151,1,1.0,1
+text-d1e812eb9f8e,texts/Historical - Arabic - Literary - Quran.txt,0,other_language,Arabic,Historical,Literary,english,1724,1724,1.0,1,1,1723,1,1.0,1
+text-d1e812eb9f8e,texts/Historical - Arabic - Literary - Quran.txt,0,other_language,Arabic,Historical,Literary,english_extended,1724,1724,1.0,1,1,1723,1,1.0,1
+text-d1e812eb9f8e,texts/Historical - Arabic - Literary - Quran.txt,0,other_language,Arabic,Historical,Literary,legacy,1724,1724,1.0,1,1,1723,1,1.0,1
+text-d1e812eb9f8e,texts/Historical - Arabic - Literary - Quran.txt,0,other_language,Arabic,Historical,Literary,word_lookup,1724,0,0.0,0,0,1723,1,0.0,0
+text-d1e812eb9f8e,texts/Historical - Arabic - Literary - Quran.txt,0,other_language,Arabic,Historical,Literary,entropy_based,1724,1724,1.0,1,1,1723,1,1.0,1
+text-d1e812eb9f8e,texts/Historical - Arabic - Literary - Quran.txt,0,other_language,Arabic,Historical,Literary,hf_all,1724,1724,1.0,1,1,1723,1,1.0,1
+text-d1e812eb9f8e,texts/Historical - Arabic - Literary - Quran.txt,0,other_language,Arabic,Historical,Literary,hf_strict,1724,0,0.0,0,0,1723,1,0.0,0
+text-d250b427dd94,texts/Modern - Maori - Technical - Polandball Wiki.txt,0,other_language,Maori,Modern,Technical,english,19,0,0.0,0,0,18,1,0.0,0
+text-d250b427dd94,texts/Modern - Maori - Technical - Polandball Wiki.txt,0,other_language,Maori,Modern,Technical,english_extended,19,1,0.05263157894736842,0,1,18,1,0.05555555555555555,0
+text-d250b427dd94,texts/Modern - Maori - Technical - Polandball Wiki.txt,0,other_language,Maori,Modern,Technical,legacy,19,0,0.0,0,0,18,1,0.0,0
+text-d250b427dd94,texts/Modern - Maori - Technical - Polandball Wiki.txt,0,other_language,Maori,Modern,Technical,word_lookup,19,18,0.9473684210526315,1,1,18,1,0.9444444444444444,1
+text-d250b427dd94,texts/Modern - Maori - Technical - Polandball Wiki.txt,0,other_language,Maori,Modern,Technical,entropy_based,19,0,0.0,0,0,18,1,0.0,0
+text-d250b427dd94,texts/Modern - Maori - Technical - Polandball Wiki.txt,0,other_language,Maori,Modern,Technical,hf_all,19,19,1.0,1,1,18,1,1.0,1
+text-d250b427dd94,texts/Modern - Maori - Technical - Polandball Wiki.txt,0,other_language,Maori,Modern,Technical,hf_strict,19,19,1.0,1,1,18,1,1.0,1
+text-d3dc8fe359ae,texts/Historical - Anglo-Saxon - Literary - NT - Hatton Gospels.txt,0,other_language,Anglo-Saxon,Historical,Literary,english,950,878,0.9242105263157895,1,1,949,1,0.9241306638566913,1
+text-d3dc8fe359ae,texts/Historical - Anglo-Saxon - Literary - NT - Hatton Gospels.txt,0,other_language,Anglo-Saxon,Historical,Literary,english_extended,950,879,0.9252631578947368,1,1,949,1,0.9251844046364595,1
+text-d3dc8fe359ae,texts/Historical - Anglo-Saxon - Literary - NT - Hatton Gospels.txt,0,other_language,Anglo-Saxon,Historical,Literary,legacy,950,857,0.9021052631578947,1,1,949,1,0.9020021074815595,1
+text-d3dc8fe359ae,texts/Historical - Anglo-Saxon - Literary - NT - Hatton Gospels.txt,0,other_language,Anglo-Saxon,Historical,Literary,word_lookup,950,908,0.9557894736842105,1,1,949,1,0.9557428872497366,1
+text-d3dc8fe359ae,texts/Historical - Anglo-Saxon - Literary - NT - Hatton Gospels.txt,0,other_language,Anglo-Saxon,Historical,Literary,entropy_based,950,0,0.0,0,0,949,1,0.0,0
+text-d3dc8fe359ae,texts/Historical - Anglo-Saxon - Literary - NT - Hatton Gospels.txt,0,other_language,Anglo-Saxon,Historical,Literary,hf_all,950,950,1.0,1,1,949,1,1.0,1
+text-d3dc8fe359ae,texts/Historical - Anglo-Saxon - Literary - NT - Hatton Gospels.txt,0,other_language,Anglo-Saxon,Historical,Literary,hf_strict,950,950,1.0,1,1,949,1,1.0,1
+text-d5633916494f,texts/Modern - Chinese (Pinyin) - Technical - Voynich Wiki.txt,0,other_language,Chinese (Pinyin),Modern,Technical,english,21,9,0.42857142857142855,0,1,20,1,0.45,0
+text-d5633916494f,texts/Modern - Chinese (Pinyin) - Technical - Voynich Wiki.txt,0,other_language,Chinese (Pinyin),Modern,Technical,english_extended,21,9,0.42857142857142855,0,1,20,1,0.45,0
+text-d5633916494f,texts/Modern - Chinese (Pinyin) - Technical - Voynich Wiki.txt,0,other_language,Chinese (Pinyin),Modern,Technical,legacy,21,9,0.42857142857142855,0,1,20,1,0.45,0
+text-d5633916494f,texts/Modern - Chinese (Pinyin) - Technical - Voynich Wiki.txt,0,other_language,Chinese (Pinyin),Modern,Technical,word_lookup,21,2,0.09523809523809523,0,1,20,1,0.1,0
+text-d5633916494f,texts/Modern - Chinese (Pinyin) - Technical - Voynich Wiki.txt,0,other_language,Chinese (Pinyin),Modern,Technical,entropy_based,21,0,0.0,0,0,20,1,0.0,0
+text-d5633916494f,texts/Modern - Chinese (Pinyin) - Technical - Voynich Wiki.txt,0,other_language,Chinese (Pinyin),Modern,Technical,hf_all,21,20,0.9523809523809523,1,1,20,1,0.95,1
+text-d5633916494f,texts/Modern - Chinese (Pinyin) - Technical - Voynich Wiki.txt,0,other_language,Chinese (Pinyin),Modern,Technical,hf_strict,21,20,0.9523809523809523,1,1,20,1,0.95,1
+text-d7c11ebc98b7,texts/Historical - Italian - Literary - NT - Diodati.txt,0,other_language,Italian,Historical,Literary,english,2427,321,0.13226205191594562,0,1,2426,1,0.13231657048639736,0
+text-d7c11ebc98b7,texts/Historical - Italian - Literary - NT - Diodati.txt,0,other_language,Italian,Historical,Literary,english_extended,2427,321,0.13226205191594562,0,1,2426,1,0.13231657048639736,0
+text-d7c11ebc98b7,texts/Historical - Italian - Literary - NT - Diodati.txt,0,other_language,Italian,Historical,Literary,legacy,2427,0,0.0,0,0,2426,1,0.0,0
+text-d7c11ebc98b7,texts/Historical - Italian - Literary - NT - Diodati.txt,0,other_language,Italian,Historical,Literary,word_lookup,2427,2282,0.9402554594149155,1,1,2426,1,0.9406430338004946,1
+text-d7c11ebc98b7,texts/Historical - Italian - Literary - NT - Diodati.txt,0,other_language,Italian,Historical,Literary,entropy_based,2427,0,0.0,0,0,2426,1,0.0,0
+text-d7c11ebc98b7,texts/Historical - Italian - Literary - NT - Diodati.txt,0,other_language,Italian,Historical,Literary,hf_all,2427,2402,0.9896992171405027,1,1,2426,1,0.9896949711459192,1
+text-d7c11ebc98b7,texts/Historical - Italian - Literary - NT - Diodati.txt,0,other_language,Italian,Historical,Literary,hf_strict,2427,2397,0.9876390605686032,1,1,2426,1,0.9876339653751031,1
+text-da0191fcc17e,texts/Modern - Tagalog - Literary - NT - Ang Dating Biblia.txt,0,other_language,Tagalog,Modern,Literary,english,2884,139,0.048196948682385575,0,1,2883,1,0.04821366631980576,0
+text-da0191fcc17e,texts/Modern - Tagalog - Literary - NT - Ang Dating Biblia.txt,0,other_language,Tagalog,Modern,Literary,english_extended,2884,368,0.1276005547850208,0,1,2883,1,0.1276448144294138,0
+text-da0191fcc17e,texts/Modern - Tagalog - Literary - NT - Ang Dating Biblia.txt,0,other_language,Tagalog,Modern,Literary,legacy,2884,0,0.0,0,0,2883,1,0.0,0
+text-da0191fcc17e,texts/Modern - Tagalog - Literary - NT - Ang Dating Biblia.txt,0,other_language,Tagalog,Modern,Literary,word_lookup,2884,2873,0.9961858529819695,1,1,2883,1,0.9961845300034686,1
+text-da0191fcc17e,texts/Modern - Tagalog - Literary - NT - Ang Dating Biblia.txt,0,other_language,Tagalog,Modern,Literary,entropy_based,2884,0,0.0,0,0,2883,1,0.0,0
+text-da0191fcc17e,texts/Modern - Tagalog - Literary - NT - Ang Dating Biblia.txt,0,other_language,Tagalog,Modern,Literary,hf_all,2884,2883,0.9996532593619972,1,1,2883,1,0.9996531390912244,1
+text-da0191fcc17e,texts/Modern - Tagalog - Literary - NT - Ang Dating Biblia.txt,0,other_language,Tagalog,Modern,Literary,hf_strict,2884,2879,0.9982662968099861,1,1,2883,1,0.9982656954561221,1
+text-db76d6a22250,texts/Modern - Arabic - Literary - NT.txt,0,other_language,Arabic,Modern,Literary,english,1460,1460,1.0,1,1,1459,1,1.0,1
+text-db76d6a22250,texts/Modern - Arabic - Literary - NT.txt,0,other_language,Arabic,Modern,Literary,english_extended,1460,1460,1.0,1,1,1459,1,1.0,1
+text-db76d6a22250,texts/Modern - Arabic - Literary - NT.txt,0,other_language,Arabic,Modern,Literary,legacy,1460,1460,1.0,1,1,1459,1,1.0,1
+text-db76d6a22250,texts/Modern - Arabic - Literary - NT.txt,0,other_language,Arabic,Modern,Literary,word_lookup,1460,1,0.0006849315068493151,0,1,1459,1,0.0006854009595613434,0
+text-db76d6a22250,texts/Modern - Arabic - Literary - NT.txt,0,other_language,Arabic,Modern,Literary,entropy_based,1460,1460,1.0,1,1,1459,1,1.0,1
+text-db76d6a22250,texts/Modern - Arabic - Literary - NT.txt,0,other_language,Arabic,Modern,Literary,hf_all,1460,1460,1.0,1,1,1459,1,1.0,1
+text-db76d6a22250,texts/Modern - Arabic - Literary - NT.txt,0,other_language,Arabic,Modern,Literary,hf_strict,1460,0,0.0,0,0,1459,1,0.0,0
+text-e22f1c7fe367,texts/Historical - Flemish - Technical - Cruydeboeck.txt,0,other_language,Flemish,Historical,Technical,english,177,16,0.0903954802259887,0,1,176,1,0.09090909090909091,0
+text-e22f1c7fe367,texts/Historical - Flemish - Technical - Cruydeboeck.txt,0,other_language,Flemish,Historical,Technical,english_extended,177,47,0.2655367231638418,0,1,176,1,0.26704545454545453,0
+text-e22f1c7fe367,texts/Historical - Flemish - Technical - Cruydeboeck.txt,0,other_language,Flemish,Historical,Technical,legacy,177,0,0.0,0,0,176,1,0.0,0
+text-e22f1c7fe367,texts/Historical - Flemish - Technical - Cruydeboeck.txt,0,other_language,Flemish,Historical,Technical,word_lookup,177,157,0.8870056497175142,1,1,176,1,0.8863636363636364,1
+text-e22f1c7fe367,texts/Historical - Flemish - Technical - Cruydeboeck.txt,0,other_language,Flemish,Historical,Technical,entropy_based,177,0,0.0,0,0,176,1,0.0,0
+text-e22f1c7fe367,texts/Historical - Flemish - Technical - Cruydeboeck.txt,0,other_language,Flemish,Historical,Technical,hf_all,177,177,1.0,1,1,176,1,1.0,1
+text-e22f1c7fe367,texts/Historical - Flemish - Technical - Cruydeboeck.txt,0,other_language,Flemish,Historical,Technical,hf_strict,177,173,0.9774011299435028,1,1,176,1,0.9772727272727273,1
+text-e3d7c186158d,texts/Modern - Arabic - Technical - Voynich Wiki.txt,0,other_language,Arabic,Modern,Technical,english,31,31,1.0,1,1,30,1,1.0,1
+text-e3d7c186158d,texts/Modern - Arabic - Technical - Voynich Wiki.txt,0,other_language,Arabic,Modern,Technical,english_extended,31,31,1.0,1,1,30,1,1.0,1
+text-e3d7c186158d,texts/Modern - Arabic - Technical - Voynich Wiki.txt,0,other_language,Arabic,Modern,Technical,legacy,31,31,1.0,1,1,30,1,1.0,1
+text-e3d7c186158d,texts/Modern - Arabic - Technical - Voynich Wiki.txt,0,other_language,Arabic,Modern,Technical,word_lookup,31,0,0.0,0,0,30,1,0.0,0
+text-e3d7c186158d,texts/Modern - Arabic - Technical - Voynich Wiki.txt,0,other_language,Arabic,Modern,Technical,entropy_based,31,31,1.0,1,1,30,1,1.0,1
+text-e3d7c186158d,texts/Modern - Arabic - Technical - Voynich Wiki.txt,0,other_language,Arabic,Modern,Technical,hf_all,31,31,1.0,1,1,30,1,1.0,1
+text-e3d7c186158d,texts/Modern - Arabic - Technical - Voynich Wiki.txt,0,other_language,Arabic,Modern,Technical,hf_strict,31,0,0.0,0,0,30,1,0.0,0
+text-e5764078287b,texts/Modern - German - Technical - Voynich Wiki.txt,0,other_language,German,Modern,Technical,english,107,2,0.018691588785046728,0,1,106,1,0.018867924528301886,0
+text-e5764078287b,texts/Modern - German - Technical - Voynich Wiki.txt,0,other_language,German,Modern,Technical,english_extended,107,52,0.48598130841121495,0,1,106,1,0.49056603773584906,0
+text-e5764078287b,texts/Modern - German - Technical - Voynich Wiki.txt,0,other_language,German,Modern,Technical,legacy,107,0,0.0,0,0,106,1,0.0,0
+text-e5764078287b,texts/Modern - German - Technical - Voynich Wiki.txt,0,other_language,German,Modern,Technical,word_lookup,107,5,0.04672897196261682,0,1,106,1,0.04716981132075472,0
+text-e5764078287b,texts/Modern - German - Technical - Voynich Wiki.txt,0,other_language,German,Modern,Technical,entropy_based,107,0,0.0,0,0,106,1,0.0,0
+text-e5764078287b,texts/Modern - German - Technical - Voynich Wiki.txt,0,other_language,German,Modern,Technical,hf_all,107,103,0.9626168224299065,1,1,106,1,0.9716981132075472,1
+text-e5764078287b,texts/Modern - German - Technical - Voynich Wiki.txt,0,other_language,German,Modern,Technical,hf_strict,107,36,0.3364485981308411,0,1,106,1,0.33962264150943394,0
+text-e6f2dfa25bc3,texts/Conlangs - Interlingua - Literary - NT.txt,0,other_language,Interlingua,Conlangs,Literary,english,291,15,0.05154639175257732,0,1,290,1,0.05172413793103448,0
+text-e6f2dfa25bc3,texts/Conlangs - Interlingua - Literary - NT.txt,0,other_language,Interlingua,Conlangs,Literary,english_extended,291,15,0.05154639175257732,0,1,290,1,0.05172413793103448,0
+text-e6f2dfa25bc3,texts/Conlangs - Interlingua - Literary - NT.txt,0,other_language,Interlingua,Conlangs,Literary,legacy,291,0,0.0,0,0,290,1,0.0,0
+text-e6f2dfa25bc3,texts/Conlangs - Interlingua - Literary - NT.txt,0,other_language,Interlingua,Conlangs,Literary,word_lookup,291,281,0.9656357388316151,1,1,290,1,0.9655172413793104,1
+text-e6f2dfa25bc3,texts/Conlangs - Interlingua - Literary - NT.txt,0,other_language,Interlingua,Conlangs,Literary,entropy_based,291,0,0.0,0,0,290,1,0.0,0
+text-e6f2dfa25bc3,texts/Conlangs - Interlingua - Literary - NT.txt,0,other_language,Interlingua,Conlangs,Literary,hf_all,291,291,1.0,1,1,290,1,1.0,1
+text-e6f2dfa25bc3,texts/Conlangs - Interlingua - Literary - NT.txt,0,other_language,Interlingua,Conlangs,Literary,hf_strict,291,281,0.9656357388316151,1,1,290,1,0.9655172413793104,1
+text-ed2ce4b31880,texts/Modern - Chinese (Pinyin) - Literary - NT - Matthew.txt,0,other_language,Chinese (Pinyin),Modern,Literary,english,285,81,0.28421052631578947,0,1,284,1,0.2852112676056338,0
+text-ed2ce4b31880,texts/Modern - Chinese (Pinyin) - Literary - NT - Matthew.txt,0,other_language,Chinese (Pinyin),Modern,Literary,english_extended,285,81,0.28421052631578947,0,1,284,1,0.2852112676056338,0
+text-ed2ce4b31880,texts/Modern - Chinese (Pinyin) - Literary - NT - Matthew.txt,0,other_language,Chinese (Pinyin),Modern,Literary,legacy,285,81,0.28421052631578947,0,1,284,1,0.2852112676056338,0
+text-ed2ce4b31880,texts/Modern - Chinese (Pinyin) - Literary - NT - Matthew.txt,0,other_language,Chinese (Pinyin),Modern,Literary,word_lookup,285,26,0.0912280701754386,0,1,284,1,0.0880281690140845,0
+text-ed2ce4b31880,texts/Modern - Chinese (Pinyin) - Literary - NT - Matthew.txt,0,other_language,Chinese (Pinyin),Modern,Literary,entropy_based,285,0,0.0,0,0,284,1,0.0,0
+text-ed2ce4b31880,texts/Modern - Chinese (Pinyin) - Literary - NT - Matthew.txt,0,other_language,Chinese (Pinyin),Modern,Literary,hf_all,285,225,0.7894736842105263,1,1,284,1,0.7887323943661971,1
+text-ed2ce4b31880,texts/Modern - Chinese (Pinyin) - Literary - NT - Matthew.txt,0,other_language,Chinese (Pinyin),Modern,Literary,hf_strict,285,225,0.7894736842105263,1,1,284,1,0.7887323943661971,1
+text-ee6c45492cbd,texts/Modern - Italian - Literary - NT.txt,0,other_language,Italian,Modern,Literary,english,2338,319,0.1364414029084688,0,1,2337,1,0.1364997860504921,0
+text-ee6c45492cbd,texts/Modern - Italian - Literary - NT.txt,0,other_language,Italian,Modern,Literary,english_extended,2338,319,0.1364414029084688,0,1,2337,1,0.1364997860504921,0
+text-ee6c45492cbd,texts/Modern - Italian - Literary - NT.txt,0,other_language,Italian,Modern,Literary,legacy,2338,0,0.0,0,0,2337,1,0.0,0
+text-ee6c45492cbd,texts/Modern - Italian - Literary - NT.txt,0,other_language,Italian,Modern,Literary,word_lookup,2338,2132,0.911890504704876,1,1,2337,1,0.9122807017543859,1
+text-ee6c45492cbd,texts/Modern - Italian - Literary - NT.txt,0,other_language,Italian,Modern,Literary,entropy_based,2338,0,0.0,0,0,2337,1,0.0,0
+text-ee6c45492cbd,texts/Modern - Italian - Literary - NT.txt,0,other_language,Italian,Modern,Literary,hf_all,2338,2317,0.9910179640718563,1,1,2337,1,0.9910141206675225,1
+text-ee6c45492cbd,texts/Modern - Italian - Literary - NT.txt,0,other_language,Italian,Modern,Literary,hf_strict,2338,2310,0.9880239520958084,1,1,2337,1,0.9880188275566966,1
+text-ee937483592f,texts/Historical - Spanish - Literary - NT - Sagradas Escrituras.txt,0,other_language,Spanish,Historical,Literary,english,2281,18,0.00789127575624726,0,1,2280,1,0.007894736842105263,0
+text-ee937483592f,texts/Historical - Spanish - Literary - NT - Sagradas Escrituras.txt,0,other_language,Spanish,Historical,Literary,english_extended,2281,18,0.00789127575624726,0,1,2280,1,0.007894736842105263,0
+text-ee937483592f,texts/Historical - Spanish - Literary - NT - Sagradas Escrituras.txt,0,other_language,Spanish,Historical,Literary,legacy,2281,0,0.0,0,0,2280,1,0.0,0
+text-ee937483592f,texts/Historical - Spanish - Literary - NT - Sagradas Escrituras.txt,0,other_language,Spanish,Historical,Literary,word_lookup,2281,1776,0.7786058746163963,1,1,2280,1,0.7789473684210526,1
+text-ee937483592f,texts/Historical - Spanish - Literary - NT - Sagradas Escrituras.txt,0,other_language,Spanish,Historical,Literary,entropy_based,2281,0,0.0,0,0,2280,1,0.0,0
+text-ee937483592f,texts/Historical - Spanish - Literary - NT - Sagradas Escrituras.txt,0,other_language,Spanish,Historical,Literary,hf_all,2281,1591,0.6975010960105217,1,1,2280,1,0.6978070175438597,1
+text-ee937483592f,texts/Historical - Spanish - Literary - NT - Sagradas Escrituras.txt,0,other_language,Spanish,Historical,Literary,hf_strict,2281,1579,0.6922402455063569,1,1,2280,1,0.6925438596491228,1
+text-f0c22fd14ab1,texts/Conlangs - Neo-Quenya - Literary - NT.txt,0,other_language,Neo-Quenya,Conlangs,Literary,english,1956,48,0.024539877300613498,0,1,1955,1,0.024552429667519183,0
+text-f0c22fd14ab1,texts/Conlangs - Neo-Quenya - Literary - NT.txt,0,other_language,Neo-Quenya,Conlangs,Literary,english_extended,1956,48,0.024539877300613498,0,1,1955,1,0.024552429667519183,0
+text-f0c22fd14ab1,texts/Conlangs - Neo-Quenya - Literary - NT.txt,0,other_language,Neo-Quenya,Conlangs,Literary,legacy,1956,0,0.0,0,0,1955,1,0.0,0
+text-f0c22fd14ab1,texts/Conlangs - Neo-Quenya - Literary - NT.txt,0,other_language,Neo-Quenya,Conlangs,Literary,word_lookup,1956,1953,0.9984662576687117,1,1,1955,1,0.99846547314578,1
+text-f0c22fd14ab1,texts/Conlangs - Neo-Quenya - Literary - NT.txt,0,other_language,Neo-Quenya,Conlangs,Literary,entropy_based,1956,0,0.0,0,0,1955,1,0.0,0
+text-f0c22fd14ab1,texts/Conlangs - Neo-Quenya - Literary - NT.txt,0,other_language,Neo-Quenya,Conlangs,Literary,hf_all,1956,1956,1.0,1,1,1955,1,1.0,1
+text-f0c22fd14ab1,texts/Conlangs - Neo-Quenya - Literary - NT.txt,0,other_language,Neo-Quenya,Conlangs,Literary,hf_strict,1956,1953,0.9984662576687117,1,1,1955,1,0.99846547314578,1
+text-f4eb2f842f14,texts/Historical - Portuguese - Technical - Coloquios dos simples.txt,0,other_language,Portuguese,Historical,Technical,english,71,0,0.0,0,0,70,1,0.0,0
+text-f4eb2f842f14,texts/Historical - Portuguese - Technical - Coloquios dos simples.txt,0,other_language,Portuguese,Historical,Technical,english_extended,71,0,0.0,0,0,70,1,0.0,0
+text-f4eb2f842f14,texts/Historical - Portuguese - Technical - Coloquios dos simples.txt,0,other_language,Portuguese,Historical,Technical,legacy,71,0,0.0,0,0,70,1,0.0,0
+text-f4eb2f842f14,texts/Historical - Portuguese - Technical - Coloquios dos simples.txt,0,other_language,Portuguese,Historical,Technical,word_lookup,71,65,0.9154929577464789,1,1,70,1,0.9285714285714286,1
+text-f4eb2f842f14,texts/Historical - Portuguese - Technical - Coloquios dos simples.txt,0,other_language,Portuguese,Historical,Technical,entropy_based,71,0,0.0,0,0,70,1,0.0,0
+text-f4eb2f842f14,texts/Historical - Portuguese - Technical - Coloquios dos simples.txt,0,other_language,Portuguese,Historical,Technical,hf_all,71,71,1.0,1,1,70,1,1.0,1
+text-f4eb2f842f14,texts/Historical - Portuguese - Technical - Coloquios dos simples.txt,0,other_language,Portuguese,Historical,Technical,hf_strict,71,71,1.0,1,1,70,1,1.0,1
+text-fd7da82f3212,texts/Historical - Latin - Technical - Pliny's Natural History.txt,0,other_language,Latin,Historical,Technical,english,7279,304,0.04176397856848468,0,1,7278,1,0.041769716955207474,0
+text-fd7da82f3212,texts/Historical - Latin - Technical - Pliny's Natural History.txt,0,other_language,Latin,Historical,Technical,english_extended,7279,779,0.107020195081742,0,1,7278,1,0.10703489969771915,0
+text-fd7da82f3212,texts/Historical - Latin - Technical - Pliny's Natural History.txt,0,other_language,Latin,Historical,Technical,legacy,7279,9,0.001236433576040665,0,1,7278,1,0.001236603462489695,0
+text-fd7da82f3212,texts/Historical - Latin - Technical - Pliny's Natural History.txt,0,other_language,Latin,Historical,Technical,word_lookup,7279,7279,1.0,1,1,7278,1,1.0,1
+text-fd7da82f3212,texts/Historical - Latin - Technical - Pliny's Natural History.txt,0,other_language,Latin,Historical,Technical,entropy_based,7279,0,0.0,0,0,7278,1,0.0,0
+text-fd7da82f3212,texts/Historical - Latin - Technical - Pliny's Natural History.txt,0,other_language,Latin,Historical,Technical,hf_all,7279,7271,0.9989009479324082,1,1,7278,1,0.9989007969222314,1
+text-fd7da82f3212,texts/Historical - Latin - Technical - Pliny's Natural History.txt,0,other_language,Latin,Historical,Technical,hf_strict,7279,7137,0.9804918258002473,1,1,7278,1,0.9804891453696071,1

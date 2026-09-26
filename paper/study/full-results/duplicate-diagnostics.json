@@ -1,0 +1,5 @@
+{
+  "chunk_hashes_present_in_multiple_documents": {},
+  "chunk_hashes_with_conflicting_inherited_labels": [],
+  "note": "Exact normalized chunk matches, not semantic overlap"
+}

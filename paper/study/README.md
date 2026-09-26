@@ -1,82 +1,129 @@
-# Published-corpus study
+# Complete published-corpus comparison
 
-Everything needed for this evaluation lives here. The library itself is
-unchanged. This work evaluates inherited published labels without a new human
-audit, as requested by the author. It is not submitted or peer reviewed.
+Start with [the ten-page empirical review PDF](manuscript.pdf),
+[full results](full-results/report.md) and [submission handoff](submission.md).
+The main experiment evaluates every released labelled document from the
+published GitHub collection: **109 documents, 31,964,664 normalized characters,
+79,969 chunks**, with identical inputs for pygarble and a pinned local
+Hugging Face DistilBERT classifier. All source labels are inherited; no new
+human annotation or audit is performed. This is a draft, not a submission.
 
-## Reproduce
+The primary comparison uses all 38 gibberish documents and all text in four
+English controls (5,200 negative chunks). The other 67 meaningful documents
+are a separate language diagnostic. This avoids turning meaningful foreign
+languages into invented positive labels or treating 80,000 correlated chunks
+as independent research samples. See the [fixed extension protocol](full_corpus_protocol.md).
 
-From the repository root, using Python 3.8 or later (measured on 3.12):
+## Reproduce the complete comparison
+
+Run from the repository root. The optional HF environment was measured with
+Python 3.12.2; it is separate from pygarble's dependency-free base installation.
+Use a dedicated environment if desired:
 
 ```bash
-python -m unittest paper.study.test_study -v
-python -m paper.study.run
+python3.12 -m venv paper/study/.cache/hf-venv
+source paper/study/.cache/hf-venv/bin/activate
+python -m pip install -r paper/study/requirements-hf.txt
+python -m unittest paper.study.test_study paper.study.test_full_corpus -v
+python -m paper.study.full_corpus --download-model
+python -m paper.study.full_corpus --output paper/study/reproduction-full
 ```
 
-The runner uses only Python's standard library and the local pygarble source.
-The first run downloads about 14 MB from the pinned GitHub revision and checks
-SHA-256 hashes. No account, model weights, paid inference or API key is needed.
-Subsequent runs use the verified cache. Run from this repository's root, not
-from this subdirectory. Allow a few minutes on an ordinary CPU.
+Preparation retrieves about 14 MB of corpus archives and 268 MB of model
+weights, plus tokenizer/config files. Every asset is pinned and checksum
+verified. There is no hosted inference endpoint, API key or model training.
+Inference runs on CPU, uses batches of eight and four PyTorch threads, and
+can take substantial time on a laptop. It resumes verified completed documents
+if interrupted; incomplete documents are rerun. A code-manifest mismatch stops
+resumption instead of mixing implementations.
+
+`--download-model` downloads/verifies assets and exits. The following command
+runs the evaluation. Subsequent scoring uses local model files and no network
+inference. The source cache is also verified on reuse. An input exceeding the
+model's token limit would stop the run instead of truncating silently.
+
+To validate the checked-in results after preparing source/model assets:
 
 ```bash
-python -m paper.study.run --output paper/study/reproduction --skip-timing
+python -m paper.study.full_verify --replay
+python -m paper.study.full_diagnostics
 ```
 
-Compare deterministic `predictions.csv.gz`, `summary.json`, `calibration.json`,
-`documents.json`, `records.json` and `overlap.json` with `results/`. Runtime and
-environment metadata intentionally vary by run. Inspect the code manifest to
-identify the exact scripts and library resources used.
+`full_verify` checks all saved input identities, probabilities, decisions,
+coverage, code hashes and summaries. `--replay` additionally scores first,
+middle and last chunks from every document in a new offline model process.
+This is a fixed subset replay, not a second complete neural run. Replay allows
+probability differences up to 1e-5 from batch padding but requires identical
+decisions and exact pygarble scores/public-API decisions.
 
-## Review draft and figures
-
-Start with [the 7-page PDF](manuscript.pdf) and [submission handoff](submission.md).
-To rebuild tables from the saved results and compile the paper:
+For a new output directory, pass `--output` to `full_verify`. Recompute saved
+summaries without model inference using `full_corpus --analyze-only --output ...`.
+Do not run CPU benchmarks concurrently with the exhaustive model evaluation:
 
 ```bash
-# Optional plotting dependencies, preferably in a separate environment:
+python -m paper.study.full_runtime
+```
+
+This re-measures five pygarble configurations and the shared HF model in
+isolated timing and memory workers, using one thread, batch size one and the
+same fixed 76 inputs. It writes `full-results/runtime.json`. Local costs include
+CPU time, memory and disk; no external inference/compute fee is incurred.
+
+## Paper and figures
+
+```bash
 python -m pip install -r paper/study/requirements-figures.txt
-python -m paper.study.figures
-# Requires Pandoc and Tectonic:
+python -m paper.study.full_figures
+# Requires Pandoc and Tectonic on PATH:
 python -m paper.study.build_paper
 ```
 
-Editing `manuscript.template.md` preserves generated numerical tables.
-The compiled paper is a review draft with outstanding author declarations.
-The short JOSS software draft is `../paper.md`.
+Edit `manuscript.template.md`; `full_paper.py` inserts measured tables and
+numerical placeholders. `build_paper.py` generates Markdown, TeX, PDF and the
+review source archive. See [validation](validation.md) for executed checks.
+The separate JOSS-format software draft is `../paper.md`. Author declarations,
+scientific review and a publication decision remain outstanding.
 
-## Files
+## Artifact map
 
-- `protocol.md`: frozen methods, data rules, calibration and limitations.
-- `sources.json`, `LICENSES.md`: pinned source provenance and separate rights.
-- `data.py`: verified retrieval, selection, record IDs and overlap checks.
-- `detectors.py`: package adapters and independently trained character models.
-- `metrics.py`: source-level summaries and descriptive uncertainty.
-- `run.py`, `runtime.py`: evaluation and isolated CPU/RSS measurement.
-- `test_study.py`: meaningful checks of grouping, thresholds and statistics.
-- `verify_results.py`: saved-output, frozen-code and public-API verification.
-- `figures.py`, `build_paper.py`: plots and manuscript generation.
-- `validation.md`, `validation.json`: exact executed checks and their limits.
-- `results/`: full metrics and predictions; start with `results/report.md`.
-- `deviations.md`: corrections or departures from the frozen protocol.
+- `full_corpus_protocol.md`: fixed extension methods and limitations.
+- `sources.json`, `hf_model.json`, `LICENSES.md`: source/model provenance,
+  immutable revisions, checksums and separate rights.
+- `full_corpus.py`, `hf_backend.py`: exhaustive chunking, package adapters,
+  offline model inference and checkpointed per-document predictions.
+- `full_metrics.py`: document aggregation, source-aware rates and intervals.
+- `full-results/`: all measured full-corpus artifacts. Predictions are small
+  compressed JSONL shards with input hashes and offsets, not source prose.
+- `full-results/document-results.csv` and `.json.gz`: every method/document
+  decision, chunk rate, any-chunk result and tail-excluded rate.
+- `full-results/summary.json`: primary and per-language summaries.
+- `full-results/applicability.json`, `disagreements.json`: supplementary
+  abstention coverage and descriptive paired chunk counts.
+- `full_verify.py`, `test_full_corpus.py`: artifact/replay verification and tests.
+- `full_runtime.py`: isolated CPU/RSS measurement.
+- `full_figures.py`, `full_paper.py`, `build_paper.py`: publication artifacts.
 
-Raw source text stays in ignored `.cache/`. Results contain hashes and offsets
-into whitespace-normalized text, not redistributed comparison prose. The two
-Bible translations share a family. Every gibberish prefix retains its source
-ID; repeated length views and calibration folds are not independent samples.
+Raw comparison text and model weights remain in ignored `.cache/`; their
+separate licenses still apply. No package runtime code or dependency changes
+are required by this study.
 
-## Scope
+## Retained preliminary experiment
 
-The primary evaluation includes 38 released gibberish documents and up to
-100 400-character blocks from each of four English comparison documents.
-All meaningful/gibberish classes come from the original collection. We do
-not certify labels or treat historical spelling as modern clean English.
-The sample is small, curated and confounded by source, so headline precision
-or a general deployment accuracy claim would be misleading.
+`results/`, `protocol.md`, `data.py`, `detectors.py`, `metrics.py`, `run.py`,
+`runtime.py` and `verify_results.py` retain the earlier capped experiment and
+its frozen code. That experiment used 38 positive prefixes and 400 English
+control blocks, additional length views and source-held-out calibration of
+character models and package thresholds. It is preliminary and overlaps the
+full evaluation. Its character-model calibration is not represented as a
+new full-corpus run.
 
-The calibration experiment uses separate source families for model fitting,
-threshold selection and false-positive evaluation. A 1% rate on validation
-blocks is not a guaranteed 1% rate elsewhere. Character models are adaptations
-of the documented approach, not a claimed reproduction of upstream scores.
-A local evaluation is research evidence for author review; it does not by
-itself establish that JOSS's scope or substantial-contribution criteria are met.
+```bash
+python -m paper.study.run --output paper/study/reproduction --skip-timing
+python -m paper.study.verify_results
+```
+
+This preliminary runner uses only the standard library and local pygarble.
+A fresh dependency-free virtual environment reproduced its deterministic
+artifacts byte for byte. That evidence is distinct from the full transformer
+run's exhaustive artifact checks and fixed subset replay. See
+[the original results](results/report.md) and [protocol deviations](deviations.md).

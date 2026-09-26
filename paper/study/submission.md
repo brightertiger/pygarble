@@ -9,10 +9,12 @@ before deciding to publish. No new dataset audit is requested or planned.
 - `manuscript.pdf`: empirical paper preview.
 - `manuscript.md` / `manuscript.template.md`: rendered text and editable source.
 - `manuscript.tex`: compilable TeX with resolved references.
-- `review-source.tar.gz`: TeX, bibliography and the two referenced figures;
+- `review-source.tar.gz`: TeX, bibliography and the referenced figures;
   an author-review source bundle, not a declaration that it is ready to submit.
-- `results/report.md`: concise measured results; JSON/CSV files hold all outcomes.
-- `protocol.md`, `sources.json`, `LICENSES.md`, `validation.md`: provenance,
+- `full-results/report.md`: complete corpus results; JSON/CSV files hold outcomes.
+- `results/report.md`: retained preliminary capped comparison and calibration.
+- `full_corpus_protocol.md`, `sources.json`, `hf_model.json`, `LICENSES.md`,
+  `validation.md`: provenance,
   scope, rights, tests and reproduction evidence.
 - `../paper.md`: separate JOSS-format software article draft.
 
@@ -22,8 +24,8 @@ claiming responsibility for a paper. Automated checks are not that review.
 
 ## arXiv preparation
 
-Proposed title: **pygarble on published human-generated gibberish: local
-heuristics and calibration transfer**.
+Proposed title: **Low-cost gibberish screening: pygarble and DistilBERT on a complete
+published corpus**.
 
 Author: Ujjwal Singh Rao. Affiliation: Independent Researcher, India.
 Proposed category to assess: `cs.CL`; the author should verify subject fit

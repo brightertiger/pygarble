@@ -1,0 +1,2057 @@
+{
+  "by_language": [
+    {
+      "chunks": 963,
+      "documents": 2,
+      "language": "Anglo-Saxon",
+      "macro_fpr": 0.9621052631578948,
+      "majority_false_flags": 2,
+      "method": "english"
+    },
+    {
+      "chunks": 10546,
+      "documents": 4,
+      "language": "Arabic",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 4,
+      "method": "english"
+    },
+    {
+      "chunks": 306,
+      "documents": 2,
+      "language": "Chinese (Pinyin)",
+      "macro_fpr": 0.35639097744360904,
+      "majority_false_flags": 0,
+      "method": "english"
+    },
+    {
+      "chunks": 5200,
+      "documents": 4,
+      "language": "English",
+      "macro_fpr": 0.012052549270089054,
+      "majority_false_flags": 0,
+      "method": "english"
+    },
+    {
+      "chunks": 2259,
+      "documents": 2,
+      "language": "Esperanto",
+      "macro_fpr": 0.032667876588021776,
+      "majority_false_flags": 0,
+      "method": "english"
+    },
+    {
+      "chunks": 523,
+      "documents": 2,
+      "language": "Flemish",
+      "macro_fpr": 0.10011103491068221,
+      "majority_false_flags": 0,
+      "method": "english"
+    },
+    {
+      "chunks": 5215,
+      "documents": 3,
+      "language": "French",
+      "macro_fpr": 0.0809225804018499,
+      "majority_false_flags": 0,
+      "method": "english"
+    },
+    {
+      "chunks": 5287,
+      "documents": 4,
+      "language": "German",
+      "macro_fpr": 0.07700574758755918,
+      "majority_false_flags": 0,
+      "method": "english"
+    },
+    {
+      "chunks": 2179,
+      "documents": 2,
+      "language": "Greek",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "english"
+    },
+    {
+      "chunks": 1370,
+      "documents": 2,
+      "language": "Hebrew",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "english"
+    },
+    {
+      "chunks": 468,
+      "documents": 2,
+      "language": "Interlingua",
+      "macro_fpr": 0.03142291339041295,
+      "majority_false_flags": 0,
+      "method": "english"
+    },
+    {
+      "chunks": 5063,
+      "documents": 4,
+      "language": "Italian",
+      "macro_fpr": 0.17263419703943694,
+      "majority_false_flags": 0,
+      "method": "english"
+    },
+    {
+      "chunks": 164,
+      "documents": 2,
+      "language": "Klingon",
+      "macro_fpr": 0.2807017543859649,
+      "majority_false_flags": 0,
+      "method": "english"
+    },
+    {
+      "chunks": 240,
+      "documents": 1,
+      "language": "LOLCat",
+      "macro_fpr": 0.041666666666666664,
+      "majority_false_flags": 0,
+      "method": "english"
+    },
+    {
+      "chunks": 10669,
+      "documents": 2,
+      "language": "Latin",
+      "macro_fpr": 0.045513257720820516,
+      "majority_false_flags": 0,
+      "method": "english"
+    },
+    {
+      "chunks": 8621,
+      "documents": 2,
+      "language": "Latin (Abbreviated)",
+      "macro_fpr": 0.04895982753106147,
+      "majority_false_flags": 0,
+      "method": "english"
+    },
+    {
+      "chunks": 401,
+      "documents": 2,
+      "language": "Lojban",
+      "macro_fpr": 0.023809523809523808,
+      "majority_false_flags": 0,
+      "method": "english"
+    },
+    {
+      "chunks": 2665,
+      "documents": 2,
+      "language": "Maori",
+      "macro_fpr": 0.03439153439153439,
+      "majority_false_flags": 0,
+      "method": "english"
+    },
+    {
+      "chunks": 208,
+      "documents": 1,
+      "language": "Mayan (Kaqchikel)",
+      "macro_fpr": 0.40865384615384615,
+      "majority_false_flags": 0,
+      "method": "english"
+    },
+    {
+      "chunks": 13,
+      "documents": 1,
+      "language": "Mayan (Yucatec)",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "english"
+    },
+    {
+      "chunks": 107,
+      "documents": 2,
+      "language": "Nahuatl",
+      "macro_fpr": 0.011904761904761904,
+      "majority_false_flags": 0,
+      "method": "english"
+    },
+    {
+      "chunks": 1972,
+      "documents": 2,
+      "language": "Neo-Quenya",
+      "macro_fpr": 0.012269938650306749,
+      "majority_false_flags": 0,
+      "method": "english"
+    },
+    {
+      "chunks": 115,
+      "documents": 2,
+      "language": "Portuguese",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "english"
+    },
+    {
+      "chunks": 965,
+      "documents": 2,
+      "language": "Russian",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "english"
+    },
+    {
+      "chunks": 2132,
+      "documents": 2,
+      "language": "Sanskrit",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "english"
+    },
+    {
+      "chunks": 2411,
+      "documents": 3,
+      "language": "Spanish",
+      "macro_fpr": 0.00263042525208242,
+      "majority_false_flags": 0,
+      "method": "english"
+    },
+    {
+      "chunks": 2423,
+      "documents": 2,
+      "language": "Swahili",
+      "macro_fpr": 0.006175468483816013,
+      "majority_false_flags": 0,
+      "method": "english"
+    },
+    {
+      "chunks": 2982,
+      "documents": 2,
+      "language": "Tagalog",
+      "macro_fpr": 0.024098474341192788,
+      "majority_false_flags": 0,
+      "method": "english"
+    },
+    {
+      "chunks": 46,
+      "documents": 2,
+      "language": "Toki Pona",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "english"
+    },
+    {
+      "chunks": 2199,
+      "documents": 2,
+      "language": "Turkish",
+      "macro_fpr": 0.5980470840021401,
+      "majority_false_flags": 2,
+      "method": "english"
+    },
+    {
+      "chunks": 1979,
+      "documents": 2,
+      "language": "Volapuk",
+      "macro_fpr": 0.0030737704918032786,
+      "majority_false_flags": 0,
+      "method": "english"
+    },
+    {
+      "chunks": 60,
+      "documents": 1,
+      "language": "Wolof",
+      "macro_fpr": 0.13333333333333333,
+      "majority_false_flags": 0,
+      "method": "english"
+    },
+    {
+      "chunks": 45,
+      "documents": 1,
+      "language": "Yoruba",
+      "macro_fpr": 0.044444444444444446,
+      "majority_false_flags": 0,
+      "method": "english"
+    },
+    {
+      "chunks": 963,
+      "documents": 2,
+      "language": "Anglo-Saxon",
+      "macro_fpr": 0.9626315789473684,
+      "majority_false_flags": 2,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 10546,
+      "documents": 4,
+      "language": "Arabic",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 4,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 306,
+      "documents": 2,
+      "language": "Chinese (Pinyin)",
+      "macro_fpr": 0.35639097744360904,
+      "majority_false_flags": 0,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 5200,
+      "documents": 4,
+      "language": "English",
+      "macro_fpr": 0.018915003223517888,
+      "majority_false_flags": 0,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 2259,
+      "documents": 2,
+      "language": "Esperanto",
+      "macro_fpr": 0.03289473684210526,
+      "majority_false_flags": 0,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 523,
+      "documents": 2,
+      "language": "Flemish",
+      "macro_fpr": 0.193462003200418,
+      "majority_false_flags": 0,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 5215,
+      "documents": 3,
+      "language": "French",
+      "macro_fpr": 0.0809225804018499,
+      "majority_false_flags": 0,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 5287,
+      "documents": 4,
+      "language": "German",
+      "macro_fpr": 0.2793391115918464,
+      "majority_false_flags": 0,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 2179,
+      "documents": 2,
+      "language": "Greek",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 1370,
+      "documents": 2,
+      "language": "Hebrew",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 468,
+      "documents": 2,
+      "language": "Interlingua",
+      "macro_fpr": 0.03142291339041295,
+      "majority_false_flags": 0,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 5063,
+      "documents": 4,
+      "language": "Italian",
+      "macro_fpr": 0.17263419703943694,
+      "majority_false_flags": 0,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 164,
+      "documents": 2,
+      "language": "Klingon",
+      "macro_fpr": 0.29714912280701755,
+      "majority_false_flags": 0,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 240,
+      "documents": 1,
+      "language": "LOLCat",
+      "macro_fpr": 0.1375,
+      "majority_false_flags": 0,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 10669,
+      "documents": 2,
+      "language": "Latin",
+      "macro_fpr": 0.07814136597744917,
+      "majority_false_flags": 0,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 8621,
+      "documents": 2,
+      "language": "Latin (Abbreviated)",
+      "macro_fpr": 0.5231767462771972,
+      "majority_false_flags": 2,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 401,
+      "documents": 2,
+      "language": "Lojban",
+      "macro_fpr": 0.06077694235588972,
+      "majority_false_flags": 0,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 2665,
+      "documents": 2,
+      "language": "Maori",
+      "macro_fpr": 0.06788797390301149,
+      "majority_false_flags": 0,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 208,
+      "documents": 1,
+      "language": "Mayan (Kaqchikel)",
+      "macro_fpr": 0.40865384615384615,
+      "majority_false_flags": 0,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 13,
+      "documents": 1,
+      "language": "Mayan (Yucatec)",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 107,
+      "documents": 2,
+      "language": "Nahuatl",
+      "macro_fpr": 0.023809523809523808,
+      "majority_false_flags": 0,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 1972,
+      "documents": 2,
+      "language": "Neo-Quenya",
+      "macro_fpr": 0.012269938650306749,
+      "majority_false_flags": 0,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 115,
+      "documents": 2,
+      "language": "Portuguese",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 965,
+      "documents": 2,
+      "language": "Russian",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 2132,
+      "documents": 2,
+      "language": "Sanskrit",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 2411,
+      "documents": 3,
+      "language": "Spanish",
+      "macro_fpr": 0.021148943770600937,
+      "majority_false_flags": 0,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 2423,
+      "documents": 2,
+      "language": "Swahili",
+      "macro_fpr": 0.006175468483816013,
+      "majority_false_flags": 0,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 2982,
+      "documents": 2,
+      "language": "Tagalog",
+      "macro_fpr": 0.08420844065781652,
+      "majority_false_flags": 0,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 46,
+      "documents": 2,
+      "language": "Toki Pona",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 2199,
+      "documents": 2,
+      "language": "Turkish",
+      "macro_fpr": 0.5982811663991439,
+      "majority_false_flags": 2,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 1979,
+      "documents": 2,
+      "language": "Volapuk",
+      "macro_fpr": 0.0030737704918032786,
+      "majority_false_flags": 0,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 60,
+      "documents": 1,
+      "language": "Wolof",
+      "macro_fpr": 0.13333333333333333,
+      "majority_false_flags": 0,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 45,
+      "documents": 1,
+      "language": "Yoruba",
+      "macro_fpr": 0.06666666666666667,
+      "majority_false_flags": 0,
+      "method": "english_extended"
+    },
+    {
+      "chunks": 963,
+      "documents": 2,
+      "language": "Anglo-Saxon",
+      "macro_fpr": 0.9510526315789474,
+      "majority_false_flags": 2,
+      "method": "legacy"
+    },
+    {
+      "chunks": 10546,
+      "documents": 4,
+      "language": "Arabic",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 4,
+      "method": "legacy"
+    },
+    {
+      "chunks": 306,
+      "documents": 2,
+      "language": "Chinese (Pinyin)",
+      "macro_fpr": 0.35639097744360904,
+      "majority_false_flags": 0,
+      "method": "legacy"
+    },
+    {
+      "chunks": 5200,
+      "documents": 4,
+      "language": "English",
+      "macro_fpr": 0.0025236931737517942,
+      "majority_false_flags": 0,
+      "method": "legacy"
+    },
+    {
+      "chunks": 2259,
+      "documents": 2,
+      "language": "Esperanto",
+      "macro_fpr": 0.0013611615245009074,
+      "majority_false_flags": 0,
+      "method": "legacy"
+    },
+    {
+      "chunks": 523,
+      "documents": 2,
+      "language": "Flemish",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "legacy"
+    },
+    {
+      "chunks": 5215,
+      "documents": 3,
+      "language": "French",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "legacy"
+    },
+    {
+      "chunks": 5287,
+      "documents": 4,
+      "language": "German",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "legacy"
+    },
+    {
+      "chunks": 2179,
+      "documents": 2,
+      "language": "Greek",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "legacy"
+    },
+    {
+      "chunks": 1370,
+      "documents": 2,
+      "language": "Hebrew",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "legacy"
+    },
+    {
+      "chunks": 468,
+      "documents": 2,
+      "language": "Interlingua",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "legacy"
+    },
+    {
+      "chunks": 5063,
+      "documents": 4,
+      "language": "Italian",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "legacy"
+    },
+    {
+      "chunks": 164,
+      "documents": 2,
+      "language": "Klingon",
+      "macro_fpr": 0.2807017543859649,
+      "majority_false_flags": 0,
+      "method": "legacy"
+    },
+    {
+      "chunks": 240,
+      "documents": 1,
+      "language": "LOLCat",
+      "macro_fpr": 0.0125,
+      "majority_false_flags": 0,
+      "method": "legacy"
+    },
+    {
+      "chunks": 10669,
+      "documents": 2,
+      "language": "Latin",
+      "macro_fpr": 0.0006182167880203325,
+      "majority_false_flags": 0,
+      "method": "legacy"
+    },
+    {
+      "chunks": 8621,
+      "documents": 2,
+      "language": "Latin (Abbreviated)",
+      "macro_fpr": 0.0002463054187192118,
+      "majority_false_flags": 0,
+      "method": "legacy"
+    },
+    {
+      "chunks": 401,
+      "documents": 2,
+      "language": "Lojban",
+      "macro_fpr": 0.023809523809523808,
+      "majority_false_flags": 0,
+      "method": "legacy"
+    },
+    {
+      "chunks": 2665,
+      "documents": 2,
+      "language": "Maori",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "legacy"
+    },
+    {
+      "chunks": 208,
+      "documents": 1,
+      "language": "Mayan (Kaqchikel)",
+      "macro_fpr": 0.39903846153846156,
+      "majority_false_flags": 0,
+      "method": "legacy"
+    },
+    {
+      "chunks": 13,
+      "documents": 1,
+      "language": "Mayan (Yucatec)",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "legacy"
+    },
+    {
+      "chunks": 107,
+      "documents": 2,
+      "language": "Nahuatl",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "legacy"
+    },
+    {
+      "chunks": 1972,
+      "documents": 2,
+      "language": "Neo-Quenya",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "legacy"
+    },
+    {
+      "chunks": 115,
+      "documents": 2,
+      "language": "Portuguese",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "legacy"
+    },
+    {
+      "chunks": 965,
+      "documents": 2,
+      "language": "Russian",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "legacy"
+    },
+    {
+      "chunks": 2132,
+      "documents": 2,
+      "language": "Sanskrit",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "legacy"
+    },
+    {
+      "chunks": 2411,
+      "documents": 3,
+      "language": "Spanish",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "legacy"
+    },
+    {
+      "chunks": 2423,
+      "documents": 2,
+      "language": "Swahili",
+      "macro_fpr": 0.00042589437819420784,
+      "majority_false_flags": 0,
+      "method": "legacy"
+    },
+    {
+      "chunks": 2982,
+      "documents": 2,
+      "language": "Tagalog",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "legacy"
+    },
+    {
+      "chunks": 46,
+      "documents": 2,
+      "language": "Toki Pona",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "legacy"
+    },
+    {
+      "chunks": 2199,
+      "documents": 2,
+      "language": "Turkish",
+      "macro_fpr": 0.5961744248261103,
+      "majority_false_flags": 2,
+      "method": "legacy"
+    },
+    {
+      "chunks": 1979,
+      "documents": 2,
+      "language": "Volapuk",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "legacy"
+    },
+    {
+      "chunks": 60,
+      "documents": 1,
+      "language": "Wolof",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "legacy"
+    },
+    {
+      "chunks": 45,
+      "documents": 1,
+      "language": "Yoruba",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "legacy"
+    },
+    {
+      "chunks": 963,
+      "documents": 2,
+      "language": "Anglo-Saxon",
+      "macro_fpr": 0.9778947368421053,
+      "majority_false_flags": 2,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 10546,
+      "documents": 4,
+      "language": "Arabic",
+      "macro_fpr": 0.00017123287671232877,
+      "majority_false_flags": 0,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 306,
+      "documents": 2,
+      "language": "Chinese (Pinyin)",
+      "macro_fpr": 0.09323308270676692,
+      "majority_false_flags": 0,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 5200,
+      "documents": 4,
+      "language": "English",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 2259,
+      "documents": 2,
+      "language": "Esperanto",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 523,
+      "documents": 2,
+      "language": "Flemish",
+      "macro_fpr": 0.7859883739917051,
+      "majority_false_flags": 2,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 5215,
+      "documents": 3,
+      "language": "French",
+      "macro_fpr": 0.6640416513325742,
+      "majority_false_flags": 3,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 5287,
+      "documents": 4,
+      "language": "German",
+      "macro_fpr": 0.20263128837541214,
+      "majority_false_flags": 1,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 2179,
+      "documents": 2,
+      "language": "Greek",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 1370,
+      "documents": 2,
+      "language": "Hebrew",
+      "macro_fpr": 0.07216986127290055,
+      "majority_false_flags": 0,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 468,
+      "documents": 2,
+      "language": "Interlingua",
+      "macro_fpr": 0.9065466829751296,
+      "majority_false_flags": 2,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 5063,
+      "documents": 4,
+      "language": "Italian",
+      "macro_fpr": 0.9239948243632812,
+      "majority_false_flags": 4,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 164,
+      "documents": 2,
+      "language": "Klingon",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 240,
+      "documents": 1,
+      "language": "LOLCat",
+      "macro_fpr": 0.058333333333333334,
+      "majority_false_flags": 0,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 10669,
+      "documents": 2,
+      "language": "Latin",
+      "macro_fpr": 0.9960176991150442,
+      "majority_false_flags": 2,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 8621,
+      "documents": 2,
+      "language": "Latin (Abbreviated)",
+      "macro_fpr": 0.9998024496246543,
+      "majority_false_flags": 2,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 401,
+      "documents": 2,
+      "language": "Lojban",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 2665,
+      "documents": 2,
+      "language": "Maori",
+      "macro_fpr": 0.9727393881529219,
+      "majority_false_flags": 2,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 208,
+      "documents": 1,
+      "language": "Mayan (Kaqchikel)",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 1,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 13,
+      "documents": 1,
+      "language": "Mayan (Yucatec)",
+      "macro_fpr": 0.9230769230769231,
+      "majority_false_flags": 1,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 107,
+      "documents": 2,
+      "language": "Nahuatl",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 1972,
+      "documents": 2,
+      "language": "Neo-Quenya",
+      "macro_fpr": 0.9679831288343559,
+      "majority_false_flags": 2,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 115,
+      "documents": 2,
+      "language": "Portuguese",
+      "macro_fpr": 0.9009282970550576,
+      "majority_false_flags": 2,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 965,
+      "documents": 2,
+      "language": "Russian",
+      "macro_fpr": 0.06696428571428571,
+      "majority_false_flags": 0,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 2132,
+      "documents": 2,
+      "language": "Sanskrit",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 2411,
+      "documents": 3,
+      "language": "Spanish",
+      "macro_fpr": 0.9023924343959416,
+      "majority_false_flags": 3,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 2423,
+      "documents": 2,
+      "language": "Swahili",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 2982,
+      "documents": 2,
+      "language": "Tagalog",
+      "macro_fpr": 0.9878888448583316,
+      "majority_false_flags": 2,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 46,
+      "documents": 2,
+      "language": "Toki Pona",
+      "macro_fpr": 0.8353174603174603,
+      "majority_false_flags": 2,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 2199,
+      "documents": 2,
+      "language": "Turkish",
+      "macro_fpr": 0.9997659176029963,
+      "majority_false_flags": 2,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 1979,
+      "documents": 2,
+      "language": "Volapuk",
+      "macro_fpr": 0.9971823770491803,
+      "majority_false_flags": 2,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 60,
+      "documents": 1,
+      "language": "Wolof",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 1,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 45,
+      "documents": 1,
+      "language": "Yoruba",
+      "macro_fpr": 0.9555555555555556,
+      "majority_false_flags": 1,
+      "method": "word_lookup"
+    },
+    {
+      "chunks": 963,
+      "documents": 2,
+      "language": "Anglo-Saxon",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 10546,
+      "documents": 4,
+      "language": "Arabic",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 4,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 306,
+      "documents": 2,
+      "language": "Chinese (Pinyin)",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 5200,
+      "documents": 4,
+      "language": "English",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 2259,
+      "documents": 2,
+      "language": "Esperanto",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 523,
+      "documents": 2,
+      "language": "Flemish",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 5215,
+      "documents": 3,
+      "language": "French",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 5287,
+      "documents": 4,
+      "language": "German",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 2179,
+      "documents": 2,
+      "language": "Greek",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 1370,
+      "documents": 2,
+      "language": "Hebrew",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 468,
+      "documents": 2,
+      "language": "Interlingua",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 5063,
+      "documents": 4,
+      "language": "Italian",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 164,
+      "documents": 2,
+      "language": "Klingon",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 240,
+      "documents": 1,
+      "language": "LOLCat",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 10669,
+      "documents": 2,
+      "language": "Latin",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 8621,
+      "documents": 2,
+      "language": "Latin (Abbreviated)",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 401,
+      "documents": 2,
+      "language": "Lojban",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 2665,
+      "documents": 2,
+      "language": "Maori",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 208,
+      "documents": 1,
+      "language": "Mayan (Kaqchikel)",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 13,
+      "documents": 1,
+      "language": "Mayan (Yucatec)",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 107,
+      "documents": 2,
+      "language": "Nahuatl",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 1972,
+      "documents": 2,
+      "language": "Neo-Quenya",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 115,
+      "documents": 2,
+      "language": "Portuguese",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 965,
+      "documents": 2,
+      "language": "Russian",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 2132,
+      "documents": 2,
+      "language": "Sanskrit",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 2411,
+      "documents": 3,
+      "language": "Spanish",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 2423,
+      "documents": 2,
+      "language": "Swahili",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 2982,
+      "documents": 2,
+      "language": "Tagalog",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 46,
+      "documents": 2,
+      "language": "Toki Pona",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 2199,
+      "documents": 2,
+      "language": "Turkish",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 1979,
+      "documents": 2,
+      "language": "Volapuk",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 60,
+      "documents": 1,
+      "language": "Wolof",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 45,
+      "documents": 1,
+      "language": "Yoruba",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "entropy_based"
+    },
+    {
+      "chunks": 963,
+      "documents": 2,
+      "language": "Anglo-Saxon",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 10546,
+      "documents": 4,
+      "language": "Arabic",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 4,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 306,
+      "documents": 2,
+      "language": "Chinese (Pinyin)",
+      "macro_fpr": 0.8709273182957393,
+      "majority_false_flags": 2,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 5200,
+      "documents": 4,
+      "language": "English",
+      "macro_fpr": 0.48468777624246995,
+      "majority_false_flags": 1,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 2259,
+      "documents": 2,
+      "language": "Esperanto",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 523,
+      "documents": 2,
+      "language": "Flemish",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 5215,
+      "documents": 3,
+      "language": "French",
+      "macro_fpr": 0.9658334732666892,
+      "majority_false_flags": 3,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 5287,
+      "documents": 4,
+      "language": "German",
+      "macro_fpr": 0.9883469240231886,
+      "majority_false_flags": 4,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 2179,
+      "documents": 2,
+      "language": "Greek",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 1370,
+      "documents": 2,
+      "language": "Hebrew",
+      "macro_fpr": 0.001111934766493699,
+      "majority_false_flags": 0,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 468,
+      "documents": 2,
+      "language": "Interlingua",
+      "macro_fpr": 0.9915254237288136,
+      "majority_false_flags": 2,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 5063,
+      "documents": 4,
+      "language": "Italian",
+      "macro_fpr": 0.9410959619697564,
+      "majority_false_flags": 4,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 164,
+      "documents": 2,
+      "language": "Klingon",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 240,
+      "documents": 1,
+      "language": "LOLCat",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 1,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 10669,
+      "documents": 2,
+      "language": "Latin",
+      "macro_fpr": 0.9993029813408354,
+      "majority_false_flags": 2,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 8621,
+      "documents": 2,
+      "language": "Latin (Abbreviated)",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 401,
+      "documents": 2,
+      "language": "Lojban",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 2665,
+      "documents": 2,
+      "language": "Maori",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 208,
+      "documents": 1,
+      "language": "Mayan (Kaqchikel)",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 1,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 13,
+      "documents": 1,
+      "language": "Mayan (Yucatec)",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 1,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 107,
+      "documents": 2,
+      "language": "Nahuatl",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 1972,
+      "documents": 2,
+      "language": "Neo-Quenya",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 115,
+      "documents": 2,
+      "language": "Portuguese",
+      "macro_fpr": 0.9659090909090908,
+      "majority_false_flags": 2,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 965,
+      "documents": 2,
+      "language": "Russian",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 2132,
+      "documents": 2,
+      "language": "Sanskrit",
+      "macro_fpr": 0.045579257343963224,
+      "majority_false_flags": 0,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 2411,
+      "documents": 3,
+      "language": "Spanish",
+      "macro_fpr": 0.7265479843844597,
+      "majority_false_flags": 2,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 2423,
+      "documents": 2,
+      "language": "Swahili",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 2982,
+      "documents": 2,
+      "language": "Tagalog",
+      "macro_fpr": 0.9998266296809986,
+      "majority_false_flags": 2,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 46,
+      "documents": 2,
+      "language": "Toki Pona",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 2199,
+      "documents": 2,
+      "language": "Turkish",
+      "macro_fpr": 0.9995318352059925,
+      "majority_false_flags": 2,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 1979,
+      "documents": 2,
+      "language": "Volapuk",
+      "macro_fpr": 0.9994877049180328,
+      "majority_false_flags": 2,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 60,
+      "documents": 1,
+      "language": "Wolof",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 1,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 45,
+      "documents": 1,
+      "language": "Yoruba",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 1,
+      "method": "hf_all"
+    },
+    {
+      "chunks": 963,
+      "documents": 2,
+      "language": "Anglo-Saxon",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 10546,
+      "documents": 4,
+      "language": "Arabic",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 306,
+      "documents": 2,
+      "language": "Chinese (Pinyin)",
+      "macro_fpr": 0.8709273182957393,
+      "majority_false_flags": 2,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 5200,
+      "documents": 4,
+      "language": "English",
+      "macro_fpr": 0.0014279579291119802,
+      "majority_false_flags": 0,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 2259,
+      "documents": 2,
+      "language": "Esperanto",
+      "macro_fpr": 0.990909090909091,
+      "majority_false_flags": 2,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 523,
+      "documents": 2,
+      "language": "Flemish",
+      "macro_fpr": 0.987255478266549,
+      "majority_false_flags": 2,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 5215,
+      "documents": 3,
+      "language": "French",
+      "macro_fpr": 0.6300002159480541,
+      "majority_false_flags": 2,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 5287,
+      "documents": 4,
+      "language": "German",
+      "macro_fpr": 0.810449110244849,
+      "majority_false_flags": 3,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 2179,
+      "documents": 2,
+      "language": "Greek",
+      "macro_fpr": 0.9995233555767398,
+      "majority_false_flags": 2,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 1370,
+      "documents": 2,
+      "language": "Hebrew",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 468,
+      "documents": 2,
+      "language": "Interlingua",
+      "macro_fpr": 0.5195410332576155,
+      "majority_false_flags": 1,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 5063,
+      "documents": 4,
+      "language": "Italian",
+      "macro_fpr": 0.8649157531661029,
+      "majority_false_flags": 4,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 164,
+      "documents": 2,
+      "language": "Klingon",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 240,
+      "documents": 1,
+      "language": "LOLCat",
+      "macro_fpr": 0.1125,
+      "majority_false_flags": 0,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 10669,
+      "documents": 2,
+      "language": "Latin",
+      "macro_fpr": 0.9880335235195927,
+      "majority_false_flags": 2,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 8621,
+      "documents": 2,
+      "language": "Latin (Abbreviated)",
+      "macro_fpr": 0.9998357963875205,
+      "majority_false_flags": 2,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 401,
+      "documents": 2,
+      "language": "Lojban",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 2665,
+      "documents": 2,
+      "language": "Maori",
+      "macro_fpr": 0.9998110355253212,
+      "majority_false_flags": 2,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 208,
+      "documents": 1,
+      "language": "Mayan (Kaqchikel)",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 1,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 13,
+      "documents": 1,
+      "language": "Mayan (Yucatec)",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 1,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 107,
+      "documents": 2,
+      "language": "Nahuatl",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 1972,
+      "documents": 2,
+      "language": "Neo-Quenya",
+      "macro_fpr": 0.9992331288343559,
+      "majority_false_flags": 2,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 115,
+      "documents": 2,
+      "language": "Portuguese",
+      "macro_fpr": 0.8409090909090908,
+      "majority_false_flags": 2,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 965,
+      "documents": 2,
+      "language": "Russian",
+      "macro_fpr": 0.00996483001172333,
+      "majority_false_flags": 0,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 2132,
+      "documents": 2,
+      "language": "Sanskrit",
+      "macro_fpr": 0.0,
+      "majority_false_flags": 0,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 2411,
+      "documents": 3,
+      "language": "Spanish",
+      "macro_fpr": 0.6355086532640237,
+      "majority_false_flags": 2,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 2423,
+      "documents": 2,
+      "language": "Swahili",
+      "macro_fpr": 0.999787052810903,
+      "majority_false_flags": 2,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 2982,
+      "documents": 2,
+      "language": "Tagalog",
+      "macro_fpr": 0.9481127402417278,
+      "majority_false_flags": 2,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 46,
+      "documents": 2,
+      "language": "Toki Pona",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 2,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 2199,
+      "documents": 2,
+      "language": "Turkish",
+      "macro_fpr": 0.9990636704119851,
+      "majority_false_flags": 2,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 1979,
+      "documents": 2,
+      "language": "Volapuk",
+      "macro_fpr": 0.9621945203400122,
+      "majority_false_flags": 2,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 60,
+      "documents": 1,
+      "language": "Wolof",
+      "macro_fpr": 1.0,
+      "majority_false_flags": 1,
+      "method": "hf_strict"
+    },
+    {
+      "chunks": 45,
+      "documents": 1,
+      "language": "Yoruba",
+      "macro_fpr": 0.9777777777777777,
+      "majority_false_flags": 1,
+      "method": "hf_strict"
+    }
+  ],
+  "primary": [
+    {
+      "document_recall": 0.34210526315789475,
+      "english_any_false_flags": 4,
+      "english_chunks": 5200,
+      "english_documents": 4,
+      "english_false_flag_chunks": 41,
+      "english_full_width_macro_fpr": 0.012102632412535487,
+      "english_macro_chunk_fpr": 0.012052549270089054,
+      "english_majority_false_flags": 0,
+      "method": "english",
+      "other_language_documents": 67,
+      "other_language_macro_fpr": 0.2838896120667935,
+      "other_language_majority_false_flags": 16,
+      "paired_document_delta_vs_hf_ci95": [
+        -0.7894736842105263,
+        -0.5
+      ],
+      "positive_any_detected": 18,
+      "positive_chunks": 173,
+      "positive_documents": 38,
+      "positive_flagged_chunks": 49,
+      "positive_full_width_macro_fraction": 0.3587719298245614,
+      "positive_macro_flagged_fraction": 0.3416666666666667,
+      "positive_majority_detected": 13,
+      "recall_wilson95_conditional": [
+        0.21212415179959412,
+        0.5010789644821693
+      ]
+    },
+    {
+      "document_recall": 0.5263157894736842,
+      "english_any_false_flags": 4,
+      "english_chunks": 5200,
+      "english_documents": 4,
+      "english_false_flag_chunks": 58,
+      "english_full_width_macro_fpr": 0.018994818544247213,
+      "english_macro_chunk_fpr": 0.018915003223517888,
+      "english_majority_false_flags": 0,
+      "method": "english_extended",
+      "other_language_documents": 67,
+      "other_language_macro_fpr": 0.32125025361895687,
+      "other_language_majority_false_flags": 18,
+      "paired_document_delta_vs_hf_ci95": [
+        -0.631578947368421,
+        -0.3157894736842105
+      ],
+      "positive_any_detected": 26,
+      "positive_chunks": 173,
+      "positive_documents": 38,
+      "positive_flagged_chunks": 73,
+      "positive_full_width_macro_fraction": 0.48552631578947364,
+      "positive_macro_flagged_fraction": 0.4787593984962406,
+      "positive_majority_detected": 20,
+      "recall_wilson95_conditional": [
+        0.3725897138449667,
+        0.6752097667747392
+      ]
+    },
+    {
+      "document_recall": 0.34210526315789475,
+      "english_any_false_flags": 3,
+      "english_chunks": 5200,
+      "english_documents": 4,
+      "english_false_flag_chunks": 6,
+      "english_full_width_macro_fpr": 0.002540041711275331,
+      "english_macro_chunk_fpr": 0.0025236931737517942,
+      "english_majority_false_flags": 0,
+      "method": "legacy",
+      "other_language_documents": 67,
+      "other_language_macro_fpr": 0.25124030211709913,
+      "other_language_majority_false_flags": 16,
+      "paired_document_delta_vs_hf_ci95": [
+        -0.7894736842105263,
+        -0.5
+      ],
+      "positive_any_detected": 15,
+      "positive_chunks": 173,
+      "positive_documents": 38,
+      "positive_flagged_chunks": 45,
+      "positive_full_width_macro_fraction": 0.3328947368421053,
+      "positive_macro_flagged_fraction": 0.32105263157894737,
+      "positive_majority_detected": 13,
+      "recall_wilson95_conditional": [
+        0.21212415179959412,
+        0.5010789644821693
+      ]
+    },
+    {
+      "document_recall": 1.0,
+      "english_any_false_flags": 0,
+      "english_chunks": 5200,
+      "english_documents": 4,
+      "english_false_flag_chunks": 0,
+      "english_full_width_macro_fpr": 0.0,
+      "english_macro_chunk_fpr": 0.0,
+      "english_majority_false_flags": 0,
+      "method": "word_lookup",
+      "other_language_documents": 67,
+      "other_language_macro_fpr": 0.6905119794602802,
+      "other_language_majority_false_flags": 49,
+      "paired_document_delta_vs_hf_ci95": [
+        0.0,
+        0.0
+      ],
+      "positive_any_detected": 38,
+      "positive_chunks": 173,
+      "positive_documents": 38,
+      "positive_flagged_chunks": 173,
+      "positive_full_width_macro_fraction": 1.0,
+      "positive_macro_flagged_fraction": 1.0,
+      "positive_majority_detected": 38,
+      "recall_wilson95_conditional": [
+        0.908190131774416,
+        0.9999999999999999
+      ]
+    },
+    {
+      "document_recall": 0.0,
+      "english_any_false_flags": 0,
+      "english_chunks": 5200,
+      "english_documents": 4,
+      "english_false_flag_chunks": 0,
+      "english_full_width_macro_fpr": 0.0,
+      "english_macro_chunk_fpr": 0.0,
+      "english_majority_false_flags": 0,
+      "method": "entropy_based",
+      "other_language_documents": 67,
+      "other_language_macro_fpr": 0.1791044776119403,
+      "other_language_majority_false_flags": 12,
+      "paired_document_delta_vs_hf_ci95": [
+        -1.0,
+        -1.0
+      ],
+      "positive_any_detected": 0,
+      "positive_chunks": 173,
+      "positive_documents": 38,
+      "positive_flagged_chunks": 0,
+      "positive_full_width_macro_fraction": 0.0,
+      "positive_macro_flagged_fraction": 0.0,
+      "positive_majority_detected": 0,
+      "recall_wilson95_conditional": [
+        0.0,
+        0.09180986822558396
+      ]
+    },
+    {
+      "document_recall": 1.0,
+      "english_any_false_flags": 4,
+      "english_chunks": 5200,
+      "english_documents": 4,
+      "english_false_flag_chunks": 1494,
+      "english_full_width_macro_fpr": 0.48365745749348893,
+      "english_macro_chunk_fpr": 0.48468777624246995,
+      "english_majority_false_flags": 1,
+      "method": "hf_all",
+      "other_language_documents": 67,
+      "other_language_macro_fpr": 0.9185271681985843,
+      "other_language_majority_false_flags": 62,
+      "paired_document_delta_vs_hf_ci95": [
+        0.0,
+        0.0
+      ],
+      "positive_any_detected": 38,
+      "positive_chunks": 173,
+      "positive_documents": 38,
+      "positive_flagged_chunks": 173,
+      "positive_full_width_macro_fraction": 1.0,
+      "positive_macro_flagged_fraction": 1.0,
+      "positive_majority_detected": 38,
+      "recall_wilson95_conditional": [
+        0.908190131774416,
+        0.9999999999999999
+      ]
+    },
+    {
+      "document_recall": 1.0,
+      "english_any_false_flags": 2,
+      "english_chunks": 5200,
+      "english_documents": 4,
+      "english_false_flag_chunks": 6,
+      "english_full_width_macro_fpr": 0.0014314489096914958,
+      "english_macro_chunk_fpr": 0.0014279579291119802,
+      "english_majority_false_flags": 0,
+      "method": "hf_strict",
+      "other_language_documents": 67,
+      "other_language_macro_fpr": 0.7584845846216978,
+      "other_language_majority_false_flags": 52,
+      "paired_document_delta_vs_hf_ci95": [
+        0.0,
+        0.0
+      ],
+      "positive_any_detected": 38,
+      "positive_chunks": 173,
+      "positive_documents": 38,
+      "positive_flagged_chunks": 172,
+      "positive_full_width_macro_fraction": 1.0,
+      "positive_macro_flagged_fraction": 0.9956140350877194,
+      "positive_majority_detected": 38,
+      "recall_wilson95_conditional": [
+        0.908190131774416,
+        0.9999999999999999
+      ]
+    }
+  ]
+}

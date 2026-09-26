@@ -78,3 +78,15 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+
+## Optional Hugging Face model
+
+The full comparison downloads (but does not redistribute) Madhur Jindal's
+`autonlp-Gibberish-Detector-492513457` at revision
+`76672dd7d3575f68ab980705bcec975cc62de71c`. Its model card declares MIT.
+See <https://huggingface.co/madhurjindal/autonlp-Gibberish-Detector-492513457>.
+`hf_model.json` records hashes for the local assets; model weights stay in
+ignored `.cache/hf-model/`. The named training dataset was inaccessible through
+the unauthenticated public API; this does not establish either an unrestricted
+training-data license or absence of evaluation overlap. The model and
+DistilBERT architecture are cited in `references.bib`.

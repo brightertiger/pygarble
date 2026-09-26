@@ -1,76 +1,91 @@
 # Validation record
 
-Evaluation performed on an Apple M2, 8 GiB RAM, macOS ARM64, Python 3.12.2.
-The frozen protocol/harness commit is `22f30d8`; exact evaluation source
-hashes are in `results/code-manifest.json`. No detector implementation or
-configuration was changed after observing outcomes.
+Measured on an Apple M2, 8 GiB RAM, macOS ARM64, Python 3.12.2.
+The full-corpus scoring protocol and core were frozen in `717ceee` before
+new predictions. Exact source hashes are in `full-results/code-manifest.json`.
+The earlier capped experiment remains frozen at `22f30d8` with its original
+code and results. No package configuration or scoring threshold was changed.
 
-## Executed checks
+## Complete corpus: executed checks
 
-- Thirteen standard-library unit tests passed in both the working interpreter
-  and a fresh virtual environment. Tests cover smoothing, document boundaries,
-  tied-score calibration, empty/invalid inputs, applicability, disjoint family
-  roles, nonoverlapping blocks, short documents and uncertainty calculations.
-- A complete rerun in a fresh virtual environment with no installed research
-  dependencies produced byte-identical predictions, calibration settings,
-  summaries, record/document manifests, overlap results and the report.
-- `verify_results.py` recomputes summaries from saved predictions, verifies
-  every file in the original code manifest, compares public `predict` decisions
-  with the harness and checks the reproduction artifacts. Machine-readable
-  counts are recorded in `validation.json`.
-- Black, isort and flake8 checks apply to this folder's Python source files.
-  Ignored cache files, downloaded upstream code and virtual environments are
-  excluded; they are not modified to satisfy this project's formatting.
-- The empirical manuscript is rendered with Pandoc/citeproc and compiled with
-  Tectonic. The 7-page PDF has been inspected for readable text, tables and
-  figures. TeX reports a 0.124-point table alignment overflow; no content is
-  visibly clipped. The author must inspect the final post-review build too.
-- The review source archive compiled in an isolated directory with identical
-  extracted page text; all text blocks fit within the page boundaries.
-- The JOSS draft's citations parse in a generic Pandoc HTML preview. Official
-  JOSS Inara/Docker rendering has not run; Docker is unavailable locally.
+- All 109 labelled documents and 31,964,664 normalized characters were covered
+  by 79,969 lossless, consecutive chunks. Source/model asset hashes matched.
+  No inputs were truncated; the largest model input had 348 tokens.
+- Every input identity, offset, length and hash was checked against the
+  reconstructed source. All 399,845 saved pygarble decisions and 159,938 HF
+  policy decisions were checked against their saved scores/probabilities.
+  Document summaries and aggregate statistics were recomputed.
+- A new offline process replayed 325 fixed first/middle/last inputs across
+  all documents. Every policy decision matched. The maximum HF probability
+  difference was 1.103e-6, below the predeclared 1e-5 tolerance. All 1,625
+  replayed pygarble public `predict` decisions and score/status tuples matched.
+  This is a subset replay, not a second complete neural inference run.
+- No exact duplicate chunks or conflicting exact-hash inherited labels were
+  found. All 438 preliminary primary input hashes occur in the full corpus;
+  the extension is not an independent replication.
+- Twenty-one standard-library study tests passed in both the working
+  interpreter and a clean virtual environment without research dependencies.
+  Tests include tied-score calibration, grouping, source boundaries, tails,
+  majority ties, neural label mapping and equal document weighting.
+- All 18 study Python files passed Black, isort and flake8 checks. Downloaded
+  assets and ignored virtual environments are excluded from these checks.
+- CPU timing and RSS ran in fresh, separate workers after exhaustive scoring
+  ended. Both systems used the same 76 inputs, one thread and batch size one;
+  one warm pass preceded five timed passes. Timings are observations from
+  this machine, not deployment guarantees or energy measurements.
+- The generated ten-page empirical PDF compiled without TeX warnings.
+  Its tables/figures were visually inspected, and every extracted text block
+  fits inside its page. An isolated extraction of `review-source.tar.gz`
+  compiled without warnings and produced identical extracted page text.
+  Numerical prose guards and generated tables check the manuscript against
+  saved measurements. `full-results/paper-validation.json` records the build.
+- The JOSS software draft's citations parsed in a generic Pandoc HTML preview.
+  Official JOSS Inara/Docker rendering has not run; Docker is unavailable.
 
-The repository's existing PR CI covers library tests, optional backends,
-quality, docs and package building. It does not discover `paper/study` tests;
-those are explicitly run locally as documented here. PR checks must be
-checked on the latest pushed commit before any merge.
+Machine-readable checks are in `full-results/validation.json`. The complete
+scoring pass took about 48.7 minutes on this CPU, excluding preparation and
+subsequent validation/timing. No cross-machine or independent human
+reproduction of the transformer experiment is claimed.
+
+## Retained preliminary reproduction
+
+The original standard-library experiment reproduced seven deterministic
+artifacts byte for byte in a fresh virtual environment: predictions,
+calibration settings, summaries, records, document manifests, overlap results
+and its report. `verify_results.py` verified 130 original source hashes,
+11,470 prediction rows through summary recomputation and 6,560 public API
+decisions. The original `validation.json` retains those counts.
 
 ## Commands
 
-Run from the repository root:
+Run from the repository root; prepare the source/model assets as described
+in [README.md](README.md) before full artifact verification:
 
 ```bash
-python -m unittest paper.study.test_study -v
+python -m unittest paper.study.test_study paper.study.test_full_corpus -v
+python -m paper.study.full_verify --replay
+python -m paper.study.full_diagnostics
+python -m paper.study.full_runtime
+python -m paper.study.full_figures
+python -m paper.study.build_paper
 python -m black --check paper/study/*.py
 python -m isort --check-only paper/study/*.py
 python -m flake8 paper/study/*.py
-python -m venv paper/study/.cache/repro-venv
-paper/study/.cache/repro-venv/bin/python -m paper.study.run \
-  --output paper/study/reproduction --skip-timing
-paper/study/.cache/repro-venv/bin/python -m paper.study.verify_results
 ```
 
-Plotting uses optional Matplotlib/NumPy dependencies in
-`requirements-figures.txt`; the evaluation itself does not need them:
-
-```bash
-python -m paper.study.figures
-python -m paper.study.build_paper
-```
-
-The paper build additionally requires Pandoc and Tectonic. Timing varies by
-machine and is deliberately excluded from byte-identical comparisons. A
-fresh virtual environment on the same computer is an environment-isolation
-check, not an independent human reproduction or cross-platform validation.
+The isolated PDF check used PyMuPDF to compare extracted text and page bounds;
+PDF compilation uses Pandoc and Tectonic. The model dependencies and measured
+versions are recorded separately from the dependency-free package. Existing
+PR CI covers library tests, optional backends, quality, docs and packaging;
+it does not discover these study-specific tests, which were run explicitly.
+Check the PR's latest commit before any merge.
 
 ## Scope and spending
 
-Source labels were reused without a new human annotation/audit. Automated
-verification checks computations, not whether the inherited labels suit a
-future deployment. No paid data, model inference, annotation service, cloud
-compute or publication service was procured. Additional external-service
-spend for this execution: US$0, excluding existing subscriptions/hardware.
-
-Study results are for author review. No manuscript has been submitted, no
-software release was published, and no acceptance or Scholar indexing claim
-is made.
+Source labels were inherited without a new human annotation/audit. Automated
+verification checks computations, not the scientific adequacy of those labels.
+Author review of methods, claims and AI-assisted text remains outstanding.
+No paid data, inference endpoint, annotation service, cloud compute or
+publication service was procured. Additional external-service spend: US$0,
+excluding existing subscriptions and hardware. No paper has been submitted,
+package release published, merge performed or indexing outcome asserted.

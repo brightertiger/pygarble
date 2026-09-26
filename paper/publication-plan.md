@@ -6,20 +6,28 @@ the earlier proposal for a larger pilot and additional annotation. Historical
 plans remain in Git history.
 
 The technical study is complete for review. Start with
-[the results](study/results/report.md), [the empirical draft](study/manuscript.pdf)
-and [the frozen protocol](study/protocol.md). All research code and artifacts
+[the full results](study/full-results/report.md), [the empirical draft](study/manuscript.pdf)
+and [the full protocol](study/full_corpus_protocol.md). All research code and artifacts
 are together in `paper/study/`. No submission or merge has been made.
 
 ## Completed research
 
-The study evaluates local gibberish detection on 38 released human-generated
-transcripts and four English comparison documents from the published
-Gaskell/Bowern GitHub collection. Original classifications are inherited;
-there is no new human label audit. Source-based grouping, fixed configurations,
-independent character-model implementations and explicit false-positive costs
-make the resulting comparison reproducible. A fresh virtual environment
-reproduced deterministic outputs. The corpus is too small and narrow for
-broad deployment claims; unfavorable calibration-transfer outcomes are retained.
+The full study compares unchanged pygarble configurations with a pinned local
+Hugging Face DistilBERT classifier across every released labelled text in the
+Gaskell/Bowern GitHub corpus. All 109 documents and 31,964,664 normalized
+characters are covered through 79,969 chunks. English is the primary target;
+the 67 other-language meaningful documents are a separate scope diagnostic.
+Two HF label mappings are fixed in advance and both are reported. CPU latency,
+process memory, document aggregation and tail sensitivity accompany accuracy
+measurements. Source labels are inherited without a new human audit.
+
+The original capped comparison and character-model calibration results remain
+available as preliminary evidence. The extension overlaps those data and is
+not an independent confirmation. More text does not remove the limited source
+diversity: only four meaningful English documents and 38 positive transcripts
+support the primary comparison. The transformer training-data overlap is
+unknown. Full coverage, fixed subset neural replay and the preliminary
+byte-identical reproduction are distinct checks with explicit scope.
 
 This is a completed author-requested, AI-assisted analysis awaiting scientific
 review, not independent external adoption. PII, secret and profanity screening

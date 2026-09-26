@@ -2,8 +2,8 @@
 
 import unittest
 
-from .full_corpus import chunks
-from .full_metrics import document_summary, majority
+from .full_corpus import METHODS, chunks
+from .full_metrics import document_summary, majority, summarize_documents
 from .hf_backend import policies
 
 
@@ -61,6 +61,36 @@ class FullCorpusTests(unittest.TestCase):
         self.assertEqual(result["full_width_majority"], 0)
         self.assertEqual(result["flagged_fraction"], 0.5)
         self.assertEqual(result["full_width_fraction"], 0.0)
+
+    def test_macro_rates_do_not_weight_long_sources_more(self) -> None:
+        rows = []
+        for method in METHODS:
+            for name, scope, chunks_n, flagged in [
+                ("gib", "positive", 3, 3),
+                ("long", "english", 4000, 0),
+                ("short", "english", 1, 1),
+                ("foreign", "other_language", 9, 9),
+            ]:
+                rows.append(
+                    dict(
+                        doc_id=name,
+                        method=method,
+                        label=int(scope == "positive"),
+                        scope=scope,
+                        language="English" if scope == "english" else name,
+                        chunks=chunks_n,
+                        flagged=flagged,
+                        flagged_fraction=flagged / chunks_n,
+                        majority_decision=int(flagged * 2 >= chunks_n),
+                        any_decision=int(flagged > 0),
+                        full_width_fraction=flagged / chunks_n,
+                    )
+                )
+        summary = summarize_documents(rows)["primary"][0]
+        self.assertEqual(summary["english_macro_chunk_fpr"], 0.5)
+        self.assertEqual(summary["english_false_flag_chunks"], 1)
+        self.assertEqual(summary["english_chunks"], 4001)
+        self.assertEqual(summary["other_language_macro_fpr"], 1.0)
 
 
 if __name__ == "__main__":

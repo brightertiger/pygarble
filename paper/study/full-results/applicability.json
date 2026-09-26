@@ -1,0 +1,4362 @@
+[
+  {
+    "chunks": 4,
+    "doc_id": "gib-DA_01",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DA_01",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DA_01",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DA_01",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DA_01",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DA_02",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DA_02",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DA_02",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DA_02",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DA_02",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_01",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_01",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_01",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_01",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_01",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_03",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_03",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_03",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_03",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_03",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_04",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_04",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_04",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_04",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_04",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_05",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_05",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_05",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_05",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_05",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 7,
+    "doc_id": "gib-DC_06",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 7,
+    "doc_id": "gib-DC_06",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 7,
+    "doc_id": "gib-DC_06",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 7,
+    "doc_id": "gib-DC_06",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 7,
+    "doc_id": "gib-DC_06",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_08",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_08",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_08",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_08",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_08",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_09",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_09",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_09",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_09",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_09",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_10",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_10",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_10",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_10",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_10",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_11",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_11",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_11",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_11",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_11",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_12",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_12",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_12",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_12",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_12",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 7,
+    "doc_id": "gib-DC_15",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 7,
+    "doc_id": "gib-DC_15",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 7,
+    "doc_id": "gib-DC_15",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 7,
+    "doc_id": "gib-DC_15",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 7,
+    "doc_id": "gib-DC_15",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 5,
+    "doc_id": "gib-DC_16",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 5,
+    "doc_id": "gib-DC_16",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 5,
+    "doc_id": "gib-DC_16",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 5,
+    "doc_id": "gib-DC_16",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 5,
+    "doc_id": "gib-DC_16",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_18",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_18",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_18",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_18",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_18",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 5,
+    "doc_id": "gib-DC_20",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 5,
+    "doc_id": "gib-DC_20",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 5,
+    "doc_id": "gib-DC_20",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 5,
+    "doc_id": "gib-DC_20",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 5,
+    "doc_id": "gib-DC_20",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_21",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_21",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_21",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_21",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_21",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 3,
+    "doc_id": "gib-DC_22",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 3,
+    "doc_id": "gib-DC_22",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 3,
+    "doc_id": "gib-DC_22",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 3,
+    "doc_id": "gib-DC_22",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 3,
+    "doc_id": "gib-DC_22",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 2,
+    "doc_id": "gib-DC_23",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 2,
+    "doc_id": "gib-DC_23",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 2,
+    "doc_id": "gib-DC_23",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 2,
+    "doc_id": "gib-DC_23",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 2,
+    "doc_id": "gib-DC_23",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 2,
+    "doc_id": "gib-DC_24",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 2,
+    "doc_id": "gib-DC_24",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 2,
+    "doc_id": "gib-DC_24",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 2,
+    "doc_id": "gib-DC_24",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 2,
+    "doc_id": "gib-DC_24",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 3,
+    "doc_id": "gib-DC_25",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 3,
+    "doc_id": "gib-DC_25",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 3,
+    "doc_id": "gib-DC_25",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 3,
+    "doc_id": "gib-DC_25",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 3,
+    "doc_id": "gib-DC_25",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_26",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_26",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_26",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_26",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_26",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 5,
+    "doc_id": "gib-DC_27",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 5,
+    "doc_id": "gib-DC_27",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 5,
+    "doc_id": "gib-DC_27",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 5,
+    "doc_id": "gib-DC_27",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 5,
+    "doc_id": "gib-DC_27",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_28",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_28",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_28",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_28",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_28",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 3,
+    "doc_id": "gib-DC_29",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 3,
+    "doc_id": "gib-DC_29",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 3,
+    "doc_id": "gib-DC_29",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 3,
+    "doc_id": "gib-DC_29",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 3,
+    "doc_id": "gib-DC_29",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_30",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_30",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_30",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_30",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_30",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_31",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_31",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_31",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_31",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_31",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_32",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_32",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_32",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_32",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_32",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_33",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_33",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_33",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_33",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_33",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_34",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_34",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_34",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_34",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_34",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_35",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_35",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_35",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_35",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_35",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 5,
+    "doc_id": "gib-DC_36",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 5,
+    "doc_id": "gib-DC_36",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 5,
+    "doc_id": "gib-DC_36",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 5,
+    "doc_id": "gib-DC_36",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 5,
+    "doc_id": "gib-DC_36",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_37",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_37",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_37",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_37",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_37",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_38",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_38",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_38",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_38",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 4,
+    "doc_id": "gib-DC_38",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 5,
+    "doc_id": "gib-DC_39",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 5,
+    "doc_id": "gib-DC_39",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 5,
+    "doc_id": "gib-DC_39",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 5,
+    "doc_id": "gib-DC_39",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 5,
+    "doc_id": "gib-DC_39",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_40",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_40",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_40",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_40",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_40",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 3,
+    "doc_id": "gib-DC_41",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 3,
+    "doc_id": "gib-DC_41",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 3,
+    "doc_id": "gib-DC_41",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 3,
+    "doc_id": "gib-DC_41",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 3,
+    "doc_id": "gib-DC_41",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_42",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_42",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "english_extended",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_42",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "legacy",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_42",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "word_lookup",
+    "scope": "positive"
+  },
+  {
+    "chunks": 6,
+    "doc_id": "gib-DC_42",
+    "insufficient_evidence": 0,
+    "language": "invented",
+    "method": "entropy_based",
+    "scope": "positive"
+  },
+  {
+    "chunks": 2379,
+    "doc_id": "text-97ecfb87c236",
+    "insufficient_evidence": 0,
+    "language": "English",
+    "method": "english",
+    "scope": "english"
+  },
+  {
+    "chunks": 2379,
+    "doc_id": "text-97ecfb87c236",
+    "insufficient_evidence": 0,
+    "language": "English",
+    "method": "english_extended",
+    "scope": "english"
+  },
+  {
+    "chunks": 2379,
+    "doc_id": "text-97ecfb87c236",
+    "insufficient_evidence": 0,
+    "language": "English",
+    "method": "legacy",
+    "scope": "english"
+  },
+  {
+    "chunks": 2379,
+    "doc_id": "text-97ecfb87c236",
+    "insufficient_evidence": 0,
+    "language": "English",
+    "method": "word_lookup",
+    "scope": "english"
+  },
+  {
+    "chunks": 2379,
+    "doc_id": "text-97ecfb87c236",
+    "insufficient_evidence": 0,
+    "language": "English",
+    "method": "entropy_based",
+    "scope": "english"
+  },
+  {
+    "chunks": 2419,
+    "doc_id": "text-dcff9610338d",
+    "insufficient_evidence": 0,
+    "language": "English",
+    "method": "english",
+    "scope": "english"
+  },
+  {
+    "chunks": 2419,
+    "doc_id": "text-dcff9610338d",
+    "insufficient_evidence": 0,
+    "language": "English",
+    "method": "english_extended",
+    "scope": "english"
+  },
+  {
+    "chunks": 2419,
+    "doc_id": "text-dcff9610338d",
+    "insufficient_evidence": 0,
+    "language": "English",
+    "method": "legacy",
+    "scope": "english"
+  },
+  {
+    "chunks": 2419,
+    "doc_id": "text-dcff9610338d",
+    "insufficient_evidence": 0,
+    "language": "English",
+    "method": "word_lookup",
+    "scope": "english"
+  },
+  {
+    "chunks": 2419,
+    "doc_id": "text-dcff9610338d",
+    "insufficient_evidence": 0,
+    "language": "English",
+    "method": "entropy_based",
+    "scope": "english"
+  },
+  {
+    "chunks": 125,
+    "doc_id": "text-e19506215b74",
+    "insufficient_evidence": 0,
+    "language": "English",
+    "method": "english",
+    "scope": "english"
+  },
+  {
+    "chunks": 125,
+    "doc_id": "text-e19506215b74",
+    "insufficient_evidence": 0,
+    "language": "English",
+    "method": "english_extended",
+    "scope": "english"
+  },
+  {
+    "chunks": 125,
+    "doc_id": "text-e19506215b74",
+    "insufficient_evidence": 0,
+    "language": "English",
+    "method": "legacy",
+    "scope": "english"
+  },
+  {
+    "chunks": 125,
+    "doc_id": "text-e19506215b74",
+    "insufficient_evidence": 0,
+    "language": "English",
+    "method": "word_lookup",
+    "scope": "english"
+  },
+  {
+    "chunks": 125,
+    "doc_id": "text-e19506215b74",
+    "insufficient_evidence": 0,
+    "language": "English",
+    "method": "entropy_based",
+    "scope": "english"
+  },
+  {
+    "chunks": 277,
+    "doc_id": "text-feb3d92da8f4",
+    "insufficient_evidence": 0,
+    "language": "English",
+    "method": "english",
+    "scope": "english"
+  },
+  {
+    "chunks": 277,
+    "doc_id": "text-feb3d92da8f4",
+    "insufficient_evidence": 0,
+    "language": "English",
+    "method": "english_extended",
+    "scope": "english"
+  },
+  {
+    "chunks": 277,
+    "doc_id": "text-feb3d92da8f4",
+    "insufficient_evidence": 0,
+    "language": "English",
+    "method": "legacy",
+    "scope": "english"
+  },
+  {
+    "chunks": 277,
+    "doc_id": "text-feb3d92da8f4",
+    "insufficient_evidence": 0,
+    "language": "English",
+    "method": "word_lookup",
+    "scope": "english"
+  },
+  {
+    "chunks": 277,
+    "doc_id": "text-feb3d92da8f4",
+    "insufficient_evidence": 0,
+    "language": "English",
+    "method": "entropy_based",
+    "scope": "english"
+  },
+  {
+    "chunks": 18,
+    "doc_id": "text-02babe8d8d6b",
+    "insufficient_evidence": 0,
+    "language": "Spanish",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 18,
+    "doc_id": "text-02babe8d8d6b",
+    "insufficient_evidence": 0,
+    "language": "Spanish",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 18,
+    "doc_id": "text-02babe8d8d6b",
+    "insufficient_evidence": 0,
+    "language": "Spanish",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 18,
+    "doc_id": "text-02babe8d8d6b",
+    "insufficient_evidence": 0,
+    "language": "Spanish",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 18,
+    "doc_id": "text-02babe8d8d6b",
+    "insufficient_evidence": 0,
+    "language": "Spanish",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 81,
+    "doc_id": "text-058bd6eec0da",
+    "insufficient_evidence": 0,
+    "language": "Greek",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 81,
+    "doc_id": "text-058bd6eec0da",
+    "insufficient_evidence": 0,
+    "language": "Greek",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 81,
+    "doc_id": "text-058bd6eec0da",
+    "insufficient_evidence": 0,
+    "language": "Greek",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 81,
+    "doc_id": "text-058bd6eec0da",
+    "insufficient_evidence": 0,
+    "language": "Greek",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 81,
+    "doc_id": "text-058bd6eec0da",
+    "insufficient_evidence": 0,
+    "language": "Greek",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 44,
+    "doc_id": "text-0cfbc98650d2",
+    "insufficient_evidence": 0,
+    "language": "Portuguese",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 44,
+    "doc_id": "text-0cfbc98650d2",
+    "insufficient_evidence": 0,
+    "language": "Portuguese",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 44,
+    "doc_id": "text-0cfbc98650d2",
+    "insufficient_evidence": 0,
+    "language": "Portuguese",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 44,
+    "doc_id": "text-0cfbc98650d2",
+    "insufficient_evidence": 0,
+    "language": "Portuguese",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 44,
+    "doc_id": "text-0cfbc98650d2",
+    "insufficient_evidence": 0,
+    "language": "Portuguese",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 75,
+    "doc_id": "text-11f61dce3bff",
+    "insufficient_evidence": 0,
+    "language": "Swahili",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 75,
+    "doc_id": "text-11f61dce3bff",
+    "insufficient_evidence": 0,
+    "language": "Swahili",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 75,
+    "doc_id": "text-11f61dce3bff",
+    "insufficient_evidence": 0,
+    "language": "Swahili",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 75,
+    "doc_id": "text-11f61dce3bff",
+    "insufficient_evidence": 0,
+    "language": "Swahili",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 75,
+    "doc_id": "text-11f61dce3bff",
+    "insufficient_evidence": 0,
+    "language": "Swahili",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 45,
+    "doc_id": "text-12d6ae63e173",
+    "insufficient_evidence": 0,
+    "language": "Yoruba",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 45,
+    "doc_id": "text-12d6ae63e173",
+    "insufficient_evidence": 0,
+    "language": "Yoruba",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 45,
+    "doc_id": "text-12d6ae63e173",
+    "insufficient_evidence": 0,
+    "language": "Yoruba",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 45,
+    "doc_id": "text-12d6ae63e173",
+    "insufficient_evidence": 0,
+    "language": "Yoruba",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 45,
+    "doc_id": "text-12d6ae63e173",
+    "insufficient_evidence": 0,
+    "language": "Yoruba",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 177,
+    "doc_id": "text-215ed0fbe07d",
+    "insufficient_evidence": 0,
+    "language": "Interlingua",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 177,
+    "doc_id": "text-215ed0fbe07d",
+    "insufficient_evidence": 0,
+    "language": "Interlingua",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 177,
+    "doc_id": "text-215ed0fbe07d",
+    "insufficient_evidence": 0,
+    "language": "Interlingua",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 177,
+    "doc_id": "text-215ed0fbe07d",
+    "insufficient_evidence": 0,
+    "language": "Interlingua",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 177,
+    "doc_id": "text-215ed0fbe07d",
+    "insufficient_evidence": 0,
+    "language": "Interlingua",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2646,
+    "doc_id": "text-2f65653c6e7d",
+    "insufficient_evidence": 0,
+    "language": "Maori",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2646,
+    "doc_id": "text-2f65653c6e7d",
+    "insufficient_evidence": 0,
+    "language": "Maori",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2646,
+    "doc_id": "text-2f65653c6e7d",
+    "insufficient_evidence": 0,
+    "language": "Maori",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2646,
+    "doc_id": "text-2f65653c6e7d",
+    "insufficient_evidence": 0,
+    "language": "Maori",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2646,
+    "doc_id": "text-2f65653c6e7d",
+    "insufficient_evidence": 0,
+    "language": "Maori",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 112,
+    "doc_id": "text-30943a428146",
+    "insufficient_evidence": 0,
+    "language": "Spanish",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 112,
+    "doc_id": "text-30943a428146",
+    "insufficient_evidence": 0,
+    "language": "Spanish",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 112,
+    "doc_id": "text-30943a428146",
+    "insufficient_evidence": 0,
+    "language": "Spanish",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 112,
+    "doc_id": "text-30943a428146",
+    "insufficient_evidence": 0,
+    "language": "Spanish",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 112,
+    "doc_id": "text-30943a428146",
+    "insufficient_evidence": 0,
+    "language": "Spanish",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 346,
+    "doc_id": "text-315861729c5a",
+    "insufficient_evidence": 0,
+    "language": "Flemish",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 346,
+    "doc_id": "text-315861729c5a",
+    "insufficient_evidence": 0,
+    "language": "Flemish",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 346,
+    "doc_id": "text-315861729c5a",
+    "insufficient_evidence": 0,
+    "language": "Flemish",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 346,
+    "doc_id": "text-315861729c5a",
+    "insufficient_evidence": 0,
+    "language": "Flemish",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 346,
+    "doc_id": "text-315861729c5a",
+    "insufficient_evidence": 0,
+    "language": "Flemish",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 112,
+    "doc_id": "text-334132fc35c0",
+    "insufficient_evidence": 0,
+    "language": "Russian",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 112,
+    "doc_id": "text-334132fc35c0",
+    "insufficient_evidence": 0,
+    "language": "Russian",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 112,
+    "doc_id": "text-334132fc35c0",
+    "insufficient_evidence": 0,
+    "language": "Russian",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 112,
+    "doc_id": "text-334132fc35c0",
+    "insufficient_evidence": 0,
+    "language": "Russian",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 112,
+    "doc_id": "text-334132fc35c0",
+    "insufficient_evidence": 0,
+    "language": "Russian",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 7331,
+    "doc_id": "text-378717d0a34c",
+    "insufficient_evidence": 0,
+    "language": "Arabic",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 7331,
+    "doc_id": "text-378717d0a34c",
+    "insufficient_evidence": 0,
+    "language": "Arabic",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 7331,
+    "doc_id": "text-378717d0a34c",
+    "insufficient_evidence": 0,
+    "language": "Arabic",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 7331,
+    "doc_id": "text-378717d0a34c",
+    "insufficient_evidence": 0,
+    "language": "Arabic",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 7331,
+    "doc_id": "text-378717d0a34c",
+    "insufficient_evidence": 0,
+    "language": "Arabic",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 63,
+    "doc_id": "text-3e5a7ef45812",
+    "insufficient_evidence": 0,
+    "language": "Turkish",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 63,
+    "doc_id": "text-3e5a7ef45812",
+    "insufficient_evidence": 0,
+    "language": "Turkish",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 63,
+    "doc_id": "text-3e5a7ef45812",
+    "insufficient_evidence": 0,
+    "language": "Turkish",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 63,
+    "doc_id": "text-3e5a7ef45812",
+    "insufficient_evidence": 0,
+    "language": "Turkish",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 63,
+    "doc_id": "text-3e5a7ef45812",
+    "insufficient_evidence": 0,
+    "language": "Turkish",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2136,
+    "doc_id": "text-3e87981eff79",
+    "insufficient_evidence": 0,
+    "language": "Turkish",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2136,
+    "doc_id": "text-3e87981eff79",
+    "insufficient_evidence": 0,
+    "language": "Turkish",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2136,
+    "doc_id": "text-3e87981eff79",
+    "insufficient_evidence": 0,
+    "language": "Turkish",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2136,
+    "doc_id": "text-3e87981eff79",
+    "insufficient_evidence": 0,
+    "language": "Turkish",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2136,
+    "doc_id": "text-3e87981eff79",
+    "insufficient_evidence": 0,
+    "language": "Turkish",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2589,
+    "doc_id": "text-4118bc060c5e",
+    "insufficient_evidence": 0,
+    "language": "French",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2589,
+    "doc_id": "text-4118bc060c5e",
+    "insufficient_evidence": 0,
+    "language": "French",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2589,
+    "doc_id": "text-4118bc060c5e",
+    "insufficient_evidence": 0,
+    "language": "French",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2589,
+    "doc_id": "text-4118bc060c5e",
+    "insufficient_evidence": 0,
+    "language": "French",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2589,
+    "doc_id": "text-4118bc060c5e",
+    "insufficient_evidence": 0,
+    "language": "French",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 129,
+    "doc_id": "text-498ea31b3031",
+    "insufficient_evidence": 0,
+    "language": "French",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 129,
+    "doc_id": "text-498ea31b3031",
+    "insufficient_evidence": 0,
+    "language": "French",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 129,
+    "doc_id": "text-498ea31b3031",
+    "insufficient_evidence": 0,
+    "language": "French",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 129,
+    "doc_id": "text-498ea31b3031",
+    "insufficient_evidence": 0,
+    "language": "French",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 129,
+    "doc_id": "text-498ea31b3031",
+    "insufficient_evidence": 0,
+    "language": "French",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 60,
+    "doc_id": "text-4bc190332756",
+    "insufficient_evidence": 0,
+    "language": "Wolof",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 60,
+    "doc_id": "text-4bc190332756",
+    "insufficient_evidence": 0,
+    "language": "Wolof",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 60,
+    "doc_id": "text-4bc190332756",
+    "insufficient_evidence": 0,
+    "language": "Wolof",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 60,
+    "doc_id": "text-4bc190332756",
+    "insufficient_evidence": 0,
+    "language": "Wolof",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 60,
+    "doc_id": "text-4bc190332756",
+    "insufficient_evidence": 0,
+    "language": "Wolof",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 1349,
+    "doc_id": "text-4fa2dabc55bc",
+    "insufficient_evidence": 0,
+    "language": "Hebrew",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 1349,
+    "doc_id": "text-4fa2dabc55bc",
+    "insufficient_evidence": 0,
+    "language": "Hebrew",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 1349,
+    "doc_id": "text-4fa2dabc55bc",
+    "insufficient_evidence": 0,
+    "language": "Hebrew",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 1349,
+    "doc_id": "text-4fa2dabc55bc",
+    "insufficient_evidence": 0,
+    "language": "Hebrew",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 1349,
+    "doc_id": "text-4fa2dabc55bc",
+    "insufficient_evidence": 0,
+    "language": "Hebrew",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 13,
+    "doc_id": "text-539b27e92910",
+    "insufficient_evidence": 0,
+    "language": "Mayan (Yucatec)",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 13,
+    "doc_id": "text-539b27e92910",
+    "insufficient_evidence": 0,
+    "language": "Mayan (Yucatec)",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 13,
+    "doc_id": "text-539b27e92910",
+    "insufficient_evidence": 0,
+    "language": "Mayan (Yucatec)",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 13,
+    "doc_id": "text-539b27e92910",
+    "insufficient_evidence": 0,
+    "language": "Mayan (Yucatec)",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 13,
+    "doc_id": "text-539b27e92910",
+    "insufficient_evidence": 0,
+    "language": "Mayan (Yucatec)",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2497,
+    "doc_id": "text-5b8e90fe4923",
+    "insufficient_evidence": 0,
+    "language": "French",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2497,
+    "doc_id": "text-5b8e90fe4923",
+    "insufficient_evidence": 0,
+    "language": "French",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2497,
+    "doc_id": "text-5b8e90fe4923",
+    "insufficient_evidence": 0,
+    "language": "French",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2497,
+    "doc_id": "text-5b8e90fe4923",
+    "insufficient_evidence": 0,
+    "language": "French",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2497,
+    "doc_id": "text-5b8e90fe4923",
+    "insufficient_evidence": 0,
+    "language": "French",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 1547,
+    "doc_id": "text-68283186cb28",
+    "insufficient_evidence": 0,
+    "language": "Sanskrit",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 1547,
+    "doc_id": "text-68283186cb28",
+    "insufficient_evidence": 0,
+    "language": "Sanskrit",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 1547,
+    "doc_id": "text-68283186cb28",
+    "insufficient_evidence": 0,
+    "language": "Sanskrit",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 1547,
+    "doc_id": "text-68283186cb28",
+    "insufficient_evidence": 0,
+    "language": "Sanskrit",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 1547,
+    "doc_id": "text-68283186cb28",
+    "insufficient_evidence": 0,
+    "language": "Sanskrit",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 28,
+    "doc_id": "text-6dda5c94c794",
+    "insufficient_evidence": 0,
+    "language": "Toki Pona",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 28,
+    "doc_id": "text-6dda5c94c794",
+    "insufficient_evidence": 0,
+    "language": "Toki Pona",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 28,
+    "doc_id": "text-6dda5c94c794",
+    "insufficient_evidence": 0,
+    "language": "Toki Pona",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 28,
+    "doc_id": "text-6dda5c94c794",
+    "insufficient_evidence": 0,
+    "language": "Toki Pona",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 28,
+    "doc_id": "text-6dda5c94c794",
+    "insufficient_evidence": 0,
+    "language": "Toki Pona",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 55,
+    "doc_id": "text-6ec097937047",
+    "insufficient_evidence": 0,
+    "language": "Esperanto",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 55,
+    "doc_id": "text-6ec097937047",
+    "insufficient_evidence": 0,
+    "language": "Esperanto",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 55,
+    "doc_id": "text-6ec097937047",
+    "insufficient_evidence": 0,
+    "language": "Esperanto",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 55,
+    "doc_id": "text-6ec097937047",
+    "insufficient_evidence": 0,
+    "language": "Esperanto",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 55,
+    "doc_id": "text-6ec097937047",
+    "insufficient_evidence": 0,
+    "language": "Esperanto",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2348,
+    "doc_id": "text-6f1768c12841",
+    "insufficient_evidence": 0,
+    "language": "Swahili",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2348,
+    "doc_id": "text-6f1768c12841",
+    "insufficient_evidence": 0,
+    "language": "Swahili",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2348,
+    "doc_id": "text-6f1768c12841",
+    "insufficient_evidence": 0,
+    "language": "Swahili",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2348,
+    "doc_id": "text-6f1768c12841",
+    "insufficient_evidence": 0,
+    "language": "Swahili",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2348,
+    "doc_id": "text-6f1768c12841",
+    "insufficient_evidence": 0,
+    "language": "Swahili",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 21,
+    "doc_id": "text-79448b669f1c",
+    "insufficient_evidence": 0,
+    "language": "Lojban",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 21,
+    "doc_id": "text-79448b669f1c",
+    "insufficient_evidence": 0,
+    "language": "Lojban",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 21,
+    "doc_id": "text-79448b669f1c",
+    "insufficient_evidence": 0,
+    "language": "Lojban",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 21,
+    "doc_id": "text-79448b669f1c",
+    "insufficient_evidence": 0,
+    "language": "Lojban",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 21,
+    "doc_id": "text-79448b669f1c",
+    "insufficient_evidence": 0,
+    "language": "Lojban",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 27,
+    "doc_id": "text-7a35e2e197af",
+    "insufficient_evidence": 0,
+    "language": "Volapuk",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 27,
+    "doc_id": "text-7a35e2e197af",
+    "insufficient_evidence": 0,
+    "language": "Volapuk",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 27,
+    "doc_id": "text-7a35e2e197af",
+    "insufficient_evidence": 0,
+    "language": "Volapuk",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 27,
+    "doc_id": "text-7a35e2e197af",
+    "insufficient_evidence": 0,
+    "language": "Volapuk",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 27,
+    "doc_id": "text-7a35e2e197af",
+    "insufficient_evidence": 0,
+    "language": "Volapuk",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 3390,
+    "doc_id": "text-7dc249644b99",
+    "insufficient_evidence": 0,
+    "language": "Latin",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 3390,
+    "doc_id": "text-7dc249644b99",
+    "insufficient_evidence": 0,
+    "language": "Latin",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 3390,
+    "doc_id": "text-7dc249644b99",
+    "insufficient_evidence": 0,
+    "language": "Latin",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 3390,
+    "doc_id": "text-7dc249644b99",
+    "insufficient_evidence": 0,
+    "language": "Latin",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 3390,
+    "doc_id": "text-7dc249644b99",
+    "insufficient_evidence": 0,
+    "language": "Latin",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 21,
+    "doc_id": "text-86fcb8e44b2c",
+    "insufficient_evidence": 0,
+    "language": "Hebrew",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 21,
+    "doc_id": "text-86fcb8e44b2c",
+    "insufficient_evidence": 0,
+    "language": "Hebrew",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 21,
+    "doc_id": "text-86fcb8e44b2c",
+    "insufficient_evidence": 0,
+    "language": "Hebrew",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 21,
+    "doc_id": "text-86fcb8e44b2c",
+    "insufficient_evidence": 0,
+    "language": "Hebrew",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 21,
+    "doc_id": "text-86fcb8e44b2c",
+    "insufficient_evidence": 0,
+    "language": "Hebrew",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2531,
+    "doc_id": "text-89f9dda41364",
+    "insufficient_evidence": 0,
+    "language": "Latin (Abbreviated)",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2531,
+    "doc_id": "text-89f9dda41364",
+    "insufficient_evidence": 0,
+    "language": "Latin (Abbreviated)",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2531,
+    "doc_id": "text-89f9dda41364",
+    "insufficient_evidence": 0,
+    "language": "Latin (Abbreviated)",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2531,
+    "doc_id": "text-89f9dda41364",
+    "insufficient_evidence": 0,
+    "language": "Latin (Abbreviated)",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2531,
+    "doc_id": "text-89f9dda41364",
+    "insufficient_evidence": 0,
+    "language": "Latin (Abbreviated)",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 18,
+    "doc_id": "text-8ba8b3e92f49",
+    "insufficient_evidence": 0,
+    "language": "Toki Pona",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 18,
+    "doc_id": "text-8ba8b3e92f49",
+    "insufficient_evidence": 0,
+    "language": "Toki Pona",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 18,
+    "doc_id": "text-8ba8b3e92f49",
+    "insufficient_evidence": 0,
+    "language": "Toki Pona",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 18,
+    "doc_id": "text-8ba8b3e92f49",
+    "insufficient_evidence": 0,
+    "language": "Toki Pona",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 18,
+    "doc_id": "text-8ba8b3e92f49",
+    "insufficient_evidence": 0,
+    "language": "Toki Pona",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 853,
+    "doc_id": "text-96f1c195c874",
+    "insufficient_evidence": 0,
+    "language": "Russian",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 853,
+    "doc_id": "text-96f1c195c874",
+    "insufficient_evidence": 0,
+    "language": "Russian",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 853,
+    "doc_id": "text-96f1c195c874",
+    "insufficient_evidence": 0,
+    "language": "Russian",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 853,
+    "doc_id": "text-96f1c195c874",
+    "insufficient_evidence": 0,
+    "language": "Russian",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 853,
+    "doc_id": "text-96f1c195c874",
+    "insufficient_evidence": 0,
+    "language": "Russian",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 585,
+    "doc_id": "text-97230a2827d9",
+    "insufficient_evidence": 0,
+    "language": "Sanskrit",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 585,
+    "doc_id": "text-97230a2827d9",
+    "insufficient_evidence": 0,
+    "language": "Sanskrit",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 585,
+    "doc_id": "text-97230a2827d9",
+    "insufficient_evidence": 0,
+    "language": "Sanskrit",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 585,
+    "doc_id": "text-97230a2827d9",
+    "insufficient_evidence": 0,
+    "language": "Sanskrit",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 585,
+    "doc_id": "text-97230a2827d9",
+    "insufficient_evidence": 0,
+    "language": "Sanskrit",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2204,
+    "doc_id": "text-98ff32d44789",
+    "insufficient_evidence": 0,
+    "language": "Esperanto",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2204,
+    "doc_id": "text-98ff32d44789",
+    "insufficient_evidence": 0,
+    "language": "Esperanto",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2204,
+    "doc_id": "text-98ff32d44789",
+    "insufficient_evidence": 0,
+    "language": "Esperanto",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2204,
+    "doc_id": "text-98ff32d44789",
+    "insufficient_evidence": 0,
+    "language": "Esperanto",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2204,
+    "doc_id": "text-98ff32d44789",
+    "insufficient_evidence": 0,
+    "language": "Esperanto",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 250,
+    "doc_id": "text-9ba054b53ae2",
+    "insufficient_evidence": 0,
+    "language": "Italian",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 250,
+    "doc_id": "text-9ba054b53ae2",
+    "insufficient_evidence": 0,
+    "language": "Italian",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 250,
+    "doc_id": "text-9ba054b53ae2",
+    "insufficient_evidence": 0,
+    "language": "Italian",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 250,
+    "doc_id": "text-9ba054b53ae2",
+    "insufficient_evidence": 0,
+    "language": "Italian",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 250,
+    "doc_id": "text-9ba054b53ae2",
+    "insufficient_evidence": 0,
+    "language": "Italian",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 12,
+    "doc_id": "text-9cdff0a870b9",
+    "insufficient_evidence": 0,
+    "language": "Klingon",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 12,
+    "doc_id": "text-9cdff0a870b9",
+    "insufficient_evidence": 0,
+    "language": "Klingon",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 12,
+    "doc_id": "text-9cdff0a870b9",
+    "insufficient_evidence": 0,
+    "language": "Klingon",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 12,
+    "doc_id": "text-9cdff0a870b9",
+    "insufficient_evidence": 0,
+    "language": "Klingon",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 12,
+    "doc_id": "text-9cdff0a870b9",
+    "insufficient_evidence": 0,
+    "language": "Klingon",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 380,
+    "doc_id": "text-9e3363836f8f",
+    "insufficient_evidence": 0,
+    "language": "Lojban",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 380,
+    "doc_id": "text-9e3363836f8f",
+    "insufficient_evidence": 0,
+    "language": "Lojban",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 380,
+    "doc_id": "text-9e3363836f8f",
+    "insufficient_evidence": 0,
+    "language": "Lojban",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 380,
+    "doc_id": "text-9e3363836f8f",
+    "insufficient_evidence": 0,
+    "language": "Lojban",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 380,
+    "doc_id": "text-9e3363836f8f",
+    "insufficient_evidence": 0,
+    "language": "Lojban",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 203,
+    "doc_id": "text-a7c14bdb5e51",
+    "insufficient_evidence": 0,
+    "language": "German",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 203,
+    "doc_id": "text-a7c14bdb5e51",
+    "insufficient_evidence": 0,
+    "language": "German",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 203,
+    "doc_id": "text-a7c14bdb5e51",
+    "insufficient_evidence": 0,
+    "language": "German",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 203,
+    "doc_id": "text-a7c14bdb5e51",
+    "insufficient_evidence": 0,
+    "language": "German",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 203,
+    "doc_id": "text-a7c14bdb5e51",
+    "insufficient_evidence": 0,
+    "language": "German",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2519,
+    "doc_id": "text-a924068a4a5a",
+    "insufficient_evidence": 0,
+    "language": "German",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2519,
+    "doc_id": "text-a924068a4a5a",
+    "insufficient_evidence": 0,
+    "language": "German",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2519,
+    "doc_id": "text-a924068a4a5a",
+    "insufficient_evidence": 0,
+    "language": "German",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2519,
+    "doc_id": "text-a924068a4a5a",
+    "insufficient_evidence": 0,
+    "language": "German",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2519,
+    "doc_id": "text-a924068a4a5a",
+    "insufficient_evidence": 0,
+    "language": "German",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 1952,
+    "doc_id": "text-afce1ea9a5b7",
+    "insufficient_evidence": 0,
+    "language": "Volapuk",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 1952,
+    "doc_id": "text-afce1ea9a5b7",
+    "insufficient_evidence": 0,
+    "language": "Volapuk",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 1952,
+    "doc_id": "text-afce1ea9a5b7",
+    "insufficient_evidence": 0,
+    "language": "Volapuk",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 1952,
+    "doc_id": "text-afce1ea9a5b7",
+    "insufficient_evidence": 0,
+    "language": "Volapuk",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 1952,
+    "doc_id": "text-afce1ea9a5b7",
+    "insufficient_evidence": 0,
+    "language": "Volapuk",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 48,
+    "doc_id": "text-b45821698a44",
+    "insufficient_evidence": 0,
+    "language": "Italian",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 48,
+    "doc_id": "text-b45821698a44",
+    "insufficient_evidence": 0,
+    "language": "Italian",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 48,
+    "doc_id": "text-b45821698a44",
+    "insufficient_evidence": 0,
+    "language": "Italian",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 48,
+    "doc_id": "text-b45821698a44",
+    "insufficient_evidence": 0,
+    "language": "Italian",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 48,
+    "doc_id": "text-b45821698a44",
+    "insufficient_evidence": 0,
+    "language": "Italian",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 42,
+    "doc_id": "text-b61eb1994d47",
+    "insufficient_evidence": 0,
+    "language": "Nahuatl",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 42,
+    "doc_id": "text-b61eb1994d47",
+    "insufficient_evidence": 0,
+    "language": "Nahuatl",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 42,
+    "doc_id": "text-b61eb1994d47",
+    "insufficient_evidence": 0,
+    "language": "Nahuatl",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 42,
+    "doc_id": "text-b61eb1994d47",
+    "insufficient_evidence": 0,
+    "language": "Nahuatl",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 42,
+    "doc_id": "text-b61eb1994d47",
+    "insufficient_evidence": 0,
+    "language": "Nahuatl",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 98,
+    "doc_id": "text-b7616f84fd4e",
+    "insufficient_evidence": 0,
+    "language": "Tagalog",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 98,
+    "doc_id": "text-b7616f84fd4e",
+    "insufficient_evidence": 0,
+    "language": "Tagalog",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 98,
+    "doc_id": "text-b7616f84fd4e",
+    "insufficient_evidence": 0,
+    "language": "Tagalog",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 98,
+    "doc_id": "text-b7616f84fd4e",
+    "insufficient_evidence": 0,
+    "language": "Tagalog",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 98,
+    "doc_id": "text-b7616f84fd4e",
+    "insufficient_evidence": 0,
+    "language": "Tagalog",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 240,
+    "doc_id": "text-c0c809ed24b1",
+    "insufficient_evidence": 0,
+    "language": "LOLCat",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 240,
+    "doc_id": "text-c0c809ed24b1",
+    "insufficient_evidence": 0,
+    "language": "LOLCat",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 240,
+    "doc_id": "text-c0c809ed24b1",
+    "insufficient_evidence": 0,
+    "language": "LOLCat",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 240,
+    "doc_id": "text-c0c809ed24b1",
+    "insufficient_evidence": 0,
+    "language": "LOLCat",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 240,
+    "doc_id": "text-c0c809ed24b1",
+    "insufficient_evidence": 0,
+    "language": "LOLCat",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 65,
+    "doc_id": "text-c4454b0514e3",
+    "insufficient_evidence": 0,
+    "language": "Nahuatl",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 65,
+    "doc_id": "text-c4454b0514e3",
+    "insufficient_evidence": 0,
+    "language": "Nahuatl",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 65,
+    "doc_id": "text-c4454b0514e3",
+    "insufficient_evidence": 0,
+    "language": "Nahuatl",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 65,
+    "doc_id": "text-c4454b0514e3",
+    "insufficient_evidence": 0,
+    "language": "Nahuatl",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 65,
+    "doc_id": "text-c4454b0514e3",
+    "insufficient_evidence": 0,
+    "language": "Nahuatl",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 208,
+    "doc_id": "text-c4703a3fae10",
+    "insufficient_evidence": 0,
+    "language": "Mayan (Kaqchikel)",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 208,
+    "doc_id": "text-c4703a3fae10",
+    "insufficient_evidence": 0,
+    "language": "Mayan (Kaqchikel)",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 208,
+    "doc_id": "text-c4703a3fae10",
+    "insufficient_evidence": 0,
+    "language": "Mayan (Kaqchikel)",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 208,
+    "doc_id": "text-c4703a3fae10",
+    "insufficient_evidence": 0,
+    "language": "Mayan (Kaqchikel)",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 208,
+    "doc_id": "text-c4703a3fae10",
+    "insufficient_evidence": 0,
+    "language": "Mayan (Kaqchikel)",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2458,
+    "doc_id": "text-c4cb40c2480a",
+    "insufficient_evidence": 0,
+    "language": "German",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2458,
+    "doc_id": "text-c4cb40c2480a",
+    "insufficient_evidence": 0,
+    "language": "German",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2458,
+    "doc_id": "text-c4cb40c2480a",
+    "insufficient_evidence": 0,
+    "language": "German",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2458,
+    "doc_id": "text-c4cb40c2480a",
+    "insufficient_evidence": 0,
+    "language": "German",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2458,
+    "doc_id": "text-c4cb40c2480a",
+    "insufficient_evidence": 0,
+    "language": "German",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2098,
+    "doc_id": "text-c6d4cc209310",
+    "insufficient_evidence": 0,
+    "language": "Greek",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2098,
+    "doc_id": "text-c6d4cc209310",
+    "insufficient_evidence": 0,
+    "language": "Greek",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2098,
+    "doc_id": "text-c6d4cc209310",
+    "insufficient_evidence": 0,
+    "language": "Greek",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2098,
+    "doc_id": "text-c6d4cc209310",
+    "insufficient_evidence": 0,
+    "language": "Greek",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2098,
+    "doc_id": "text-c6d4cc209310",
+    "insufficient_evidence": 0,
+    "language": "Greek",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 6090,
+    "doc_id": "text-cce34dd578f2",
+    "insufficient_evidence": 0,
+    "language": "Latin (Abbreviated)",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 6090,
+    "doc_id": "text-cce34dd578f2",
+    "insufficient_evidence": 0,
+    "language": "Latin (Abbreviated)",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 6090,
+    "doc_id": "text-cce34dd578f2",
+    "insufficient_evidence": 0,
+    "language": "Latin (Abbreviated)",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 6090,
+    "doc_id": "text-cce34dd578f2",
+    "insufficient_evidence": 0,
+    "language": "Latin (Abbreviated)",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 6090,
+    "doc_id": "text-cce34dd578f2",
+    "insufficient_evidence": 0,
+    "language": "Latin (Abbreviated)",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 16,
+    "doc_id": "text-ce77b6961095",
+    "insufficient_evidence": 0,
+    "language": "Neo-Quenya",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 16,
+    "doc_id": "text-ce77b6961095",
+    "insufficient_evidence": 0,
+    "language": "Neo-Quenya",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 16,
+    "doc_id": "text-ce77b6961095",
+    "insufficient_evidence": 0,
+    "language": "Neo-Quenya",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 16,
+    "doc_id": "text-ce77b6961095",
+    "insufficient_evidence": 0,
+    "language": "Neo-Quenya",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 16,
+    "doc_id": "text-ce77b6961095",
+    "insufficient_evidence": 0,
+    "language": "Neo-Quenya",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 13,
+    "doc_id": "text-cff7f72d79b8",
+    "insufficient_evidence": 0,
+    "language": "Anglo-Saxon",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 13,
+    "doc_id": "text-cff7f72d79b8",
+    "insufficient_evidence": 0,
+    "language": "Anglo-Saxon",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 13,
+    "doc_id": "text-cff7f72d79b8",
+    "insufficient_evidence": 0,
+    "language": "Anglo-Saxon",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 13,
+    "doc_id": "text-cff7f72d79b8",
+    "insufficient_evidence": 0,
+    "language": "Anglo-Saxon",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 13,
+    "doc_id": "text-cff7f72d79b8",
+    "insufficient_evidence": 0,
+    "language": "Anglo-Saxon",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 152,
+    "doc_id": "text-d1e5e970a9bd",
+    "insufficient_evidence": 0,
+    "language": "Klingon",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 152,
+    "doc_id": "text-d1e5e970a9bd",
+    "insufficient_evidence": 0,
+    "language": "Klingon",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 152,
+    "doc_id": "text-d1e5e970a9bd",
+    "insufficient_evidence": 0,
+    "language": "Klingon",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 152,
+    "doc_id": "text-d1e5e970a9bd",
+    "insufficient_evidence": 0,
+    "language": "Klingon",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 152,
+    "doc_id": "text-d1e5e970a9bd",
+    "insufficient_evidence": 0,
+    "language": "Klingon",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 1724,
+    "doc_id": "text-d1e812eb9f8e",
+    "insufficient_evidence": 0,
+    "language": "Arabic",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 1724,
+    "doc_id": "text-d1e812eb9f8e",
+    "insufficient_evidence": 0,
+    "language": "Arabic",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 1724,
+    "doc_id": "text-d1e812eb9f8e",
+    "insufficient_evidence": 0,
+    "language": "Arabic",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 1724,
+    "doc_id": "text-d1e812eb9f8e",
+    "insufficient_evidence": 0,
+    "language": "Arabic",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 1724,
+    "doc_id": "text-d1e812eb9f8e",
+    "insufficient_evidence": 0,
+    "language": "Arabic",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 19,
+    "doc_id": "text-d250b427dd94",
+    "insufficient_evidence": 0,
+    "language": "Maori",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 19,
+    "doc_id": "text-d250b427dd94",
+    "insufficient_evidence": 0,
+    "language": "Maori",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 19,
+    "doc_id": "text-d250b427dd94",
+    "insufficient_evidence": 0,
+    "language": "Maori",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 19,
+    "doc_id": "text-d250b427dd94",
+    "insufficient_evidence": 0,
+    "language": "Maori",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 19,
+    "doc_id": "text-d250b427dd94",
+    "insufficient_evidence": 0,
+    "language": "Maori",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 950,
+    "doc_id": "text-d3dc8fe359ae",
+    "insufficient_evidence": 0,
+    "language": "Anglo-Saxon",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 950,
+    "doc_id": "text-d3dc8fe359ae",
+    "insufficient_evidence": 0,
+    "language": "Anglo-Saxon",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 950,
+    "doc_id": "text-d3dc8fe359ae",
+    "insufficient_evidence": 0,
+    "language": "Anglo-Saxon",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 950,
+    "doc_id": "text-d3dc8fe359ae",
+    "insufficient_evidence": 0,
+    "language": "Anglo-Saxon",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 950,
+    "doc_id": "text-d3dc8fe359ae",
+    "insufficient_evidence": 0,
+    "language": "Anglo-Saxon",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 21,
+    "doc_id": "text-d5633916494f",
+    "insufficient_evidence": 0,
+    "language": "Chinese (Pinyin)",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 21,
+    "doc_id": "text-d5633916494f",
+    "insufficient_evidence": 0,
+    "language": "Chinese (Pinyin)",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 21,
+    "doc_id": "text-d5633916494f",
+    "insufficient_evidence": 0,
+    "language": "Chinese (Pinyin)",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 21,
+    "doc_id": "text-d5633916494f",
+    "insufficient_evidence": 0,
+    "language": "Chinese (Pinyin)",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 21,
+    "doc_id": "text-d5633916494f",
+    "insufficient_evidence": 0,
+    "language": "Chinese (Pinyin)",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2427,
+    "doc_id": "text-d7c11ebc98b7",
+    "insufficient_evidence": 0,
+    "language": "Italian",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2427,
+    "doc_id": "text-d7c11ebc98b7",
+    "insufficient_evidence": 0,
+    "language": "Italian",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2427,
+    "doc_id": "text-d7c11ebc98b7",
+    "insufficient_evidence": 0,
+    "language": "Italian",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2427,
+    "doc_id": "text-d7c11ebc98b7",
+    "insufficient_evidence": 0,
+    "language": "Italian",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2427,
+    "doc_id": "text-d7c11ebc98b7",
+    "insufficient_evidence": 0,
+    "language": "Italian",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2884,
+    "doc_id": "text-da0191fcc17e",
+    "insufficient_evidence": 0,
+    "language": "Tagalog",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2884,
+    "doc_id": "text-da0191fcc17e",
+    "insufficient_evidence": 0,
+    "language": "Tagalog",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2884,
+    "doc_id": "text-da0191fcc17e",
+    "insufficient_evidence": 0,
+    "language": "Tagalog",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2884,
+    "doc_id": "text-da0191fcc17e",
+    "insufficient_evidence": 0,
+    "language": "Tagalog",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2884,
+    "doc_id": "text-da0191fcc17e",
+    "insufficient_evidence": 0,
+    "language": "Tagalog",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 1460,
+    "doc_id": "text-db76d6a22250",
+    "insufficient_evidence": 0,
+    "language": "Arabic",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 1460,
+    "doc_id": "text-db76d6a22250",
+    "insufficient_evidence": 0,
+    "language": "Arabic",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 1460,
+    "doc_id": "text-db76d6a22250",
+    "insufficient_evidence": 0,
+    "language": "Arabic",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 1460,
+    "doc_id": "text-db76d6a22250",
+    "insufficient_evidence": 0,
+    "language": "Arabic",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 1460,
+    "doc_id": "text-db76d6a22250",
+    "insufficient_evidence": 0,
+    "language": "Arabic",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 177,
+    "doc_id": "text-e22f1c7fe367",
+    "insufficient_evidence": 0,
+    "language": "Flemish",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 177,
+    "doc_id": "text-e22f1c7fe367",
+    "insufficient_evidence": 0,
+    "language": "Flemish",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 177,
+    "doc_id": "text-e22f1c7fe367",
+    "insufficient_evidence": 0,
+    "language": "Flemish",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 177,
+    "doc_id": "text-e22f1c7fe367",
+    "insufficient_evidence": 0,
+    "language": "Flemish",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 177,
+    "doc_id": "text-e22f1c7fe367",
+    "insufficient_evidence": 0,
+    "language": "Flemish",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 31,
+    "doc_id": "text-e3d7c186158d",
+    "insufficient_evidence": 0,
+    "language": "Arabic",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 31,
+    "doc_id": "text-e3d7c186158d",
+    "insufficient_evidence": 0,
+    "language": "Arabic",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 31,
+    "doc_id": "text-e3d7c186158d",
+    "insufficient_evidence": 0,
+    "language": "Arabic",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 31,
+    "doc_id": "text-e3d7c186158d",
+    "insufficient_evidence": 0,
+    "language": "Arabic",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 31,
+    "doc_id": "text-e3d7c186158d",
+    "insufficient_evidence": 0,
+    "language": "Arabic",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 107,
+    "doc_id": "text-e5764078287b",
+    "insufficient_evidence": 0,
+    "language": "German",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 107,
+    "doc_id": "text-e5764078287b",
+    "insufficient_evidence": 0,
+    "language": "German",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 107,
+    "doc_id": "text-e5764078287b",
+    "insufficient_evidence": 0,
+    "language": "German",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 107,
+    "doc_id": "text-e5764078287b",
+    "insufficient_evidence": 0,
+    "language": "German",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 107,
+    "doc_id": "text-e5764078287b",
+    "insufficient_evidence": 0,
+    "language": "German",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 291,
+    "doc_id": "text-e6f2dfa25bc3",
+    "insufficient_evidence": 0,
+    "language": "Interlingua",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 291,
+    "doc_id": "text-e6f2dfa25bc3",
+    "insufficient_evidence": 0,
+    "language": "Interlingua",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 291,
+    "doc_id": "text-e6f2dfa25bc3",
+    "insufficient_evidence": 0,
+    "language": "Interlingua",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 291,
+    "doc_id": "text-e6f2dfa25bc3",
+    "insufficient_evidence": 0,
+    "language": "Interlingua",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 291,
+    "doc_id": "text-e6f2dfa25bc3",
+    "insufficient_evidence": 0,
+    "language": "Interlingua",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 285,
+    "doc_id": "text-ed2ce4b31880",
+    "insufficient_evidence": 0,
+    "language": "Chinese (Pinyin)",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 285,
+    "doc_id": "text-ed2ce4b31880",
+    "insufficient_evidence": 0,
+    "language": "Chinese (Pinyin)",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 285,
+    "doc_id": "text-ed2ce4b31880",
+    "insufficient_evidence": 0,
+    "language": "Chinese (Pinyin)",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 285,
+    "doc_id": "text-ed2ce4b31880",
+    "insufficient_evidence": 0,
+    "language": "Chinese (Pinyin)",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 285,
+    "doc_id": "text-ed2ce4b31880",
+    "insufficient_evidence": 0,
+    "language": "Chinese (Pinyin)",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2338,
+    "doc_id": "text-ee6c45492cbd",
+    "insufficient_evidence": 0,
+    "language": "Italian",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2338,
+    "doc_id": "text-ee6c45492cbd",
+    "insufficient_evidence": 0,
+    "language": "Italian",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2338,
+    "doc_id": "text-ee6c45492cbd",
+    "insufficient_evidence": 0,
+    "language": "Italian",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2338,
+    "doc_id": "text-ee6c45492cbd",
+    "insufficient_evidence": 0,
+    "language": "Italian",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2338,
+    "doc_id": "text-ee6c45492cbd",
+    "insufficient_evidence": 0,
+    "language": "Italian",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2281,
+    "doc_id": "text-ee937483592f",
+    "insufficient_evidence": 0,
+    "language": "Spanish",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2281,
+    "doc_id": "text-ee937483592f",
+    "insufficient_evidence": 0,
+    "language": "Spanish",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2281,
+    "doc_id": "text-ee937483592f",
+    "insufficient_evidence": 0,
+    "language": "Spanish",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2281,
+    "doc_id": "text-ee937483592f",
+    "insufficient_evidence": 0,
+    "language": "Spanish",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 2281,
+    "doc_id": "text-ee937483592f",
+    "insufficient_evidence": 0,
+    "language": "Spanish",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 1956,
+    "doc_id": "text-f0c22fd14ab1",
+    "insufficient_evidence": 0,
+    "language": "Neo-Quenya",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 1956,
+    "doc_id": "text-f0c22fd14ab1",
+    "insufficient_evidence": 0,
+    "language": "Neo-Quenya",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 1956,
+    "doc_id": "text-f0c22fd14ab1",
+    "insufficient_evidence": 0,
+    "language": "Neo-Quenya",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 1956,
+    "doc_id": "text-f0c22fd14ab1",
+    "insufficient_evidence": 0,
+    "language": "Neo-Quenya",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 1956,
+    "doc_id": "text-f0c22fd14ab1",
+    "insufficient_evidence": 0,
+    "language": "Neo-Quenya",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 71,
+    "doc_id": "text-f4eb2f842f14",
+    "insufficient_evidence": 0,
+    "language": "Portuguese",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 71,
+    "doc_id": "text-f4eb2f842f14",
+    "insufficient_evidence": 0,
+    "language": "Portuguese",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 71,
+    "doc_id": "text-f4eb2f842f14",
+    "insufficient_evidence": 0,
+    "language": "Portuguese",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 71,
+    "doc_id": "text-f4eb2f842f14",
+    "insufficient_evidence": 0,
+    "language": "Portuguese",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 71,
+    "doc_id": "text-f4eb2f842f14",
+    "insufficient_evidence": 0,
+    "language": "Portuguese",
+    "method": "entropy_based",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 7279,
+    "doc_id": "text-fd7da82f3212",
+    "insufficient_evidence": 0,
+    "language": "Latin",
+    "method": "english",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 7279,
+    "doc_id": "text-fd7da82f3212",
+    "insufficient_evidence": 0,
+    "language": "Latin",
+    "method": "english_extended",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 7279,
+    "doc_id": "text-fd7da82f3212",
+    "insufficient_evidence": 0,
+    "language": "Latin",
+    "method": "legacy",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 7279,
+    "doc_id": "text-fd7da82f3212",
+    "insufficient_evidence": 0,
+    "language": "Latin",
+    "method": "word_lookup",
+    "scope": "other_language"
+  },
+  {
+    "chunks": 7279,
+    "doc_id": "text-fd7da82f3212",
+    "insufficient_evidence": 0,
+    "language": "Latin",
+    "method": "entropy_based",
+    "scope": "other_language"
+  }
+]
