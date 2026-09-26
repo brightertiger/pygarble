@@ -780,7 +780,7 @@
     "category": "secrets",
     "kind": "stripe_key",
     "start": 0,
-    "end": 32,
+    "end": 28,
     "confidence": 1.0,
     "reason": "known_prefix"
    }
@@ -797,7 +797,7 @@
     "category": "secrets",
     "kind": "stripe_key",
     "start": 7,
-    "end": 39,
+    "end": 35,
     "confidence": 0.8,
     "reason": "known_prefix"
    }

@@ -51,10 +51,10 @@
 {"findings": [["gibberish", "garbled", 0, 74, 0.65, "garbled"], ["secrets", "slack_webhook", 9, 74, 1.0, "known_prefix"]], "flagged": true, "length": 74, "options": {}, "sha256": "95079228e080d19ec29f0447c33a6f4e4c379939c8e90aec06fa599af3528fea", "source": "vector"}
 {"findings": [["secrets", "slack_webhook", 5, 66, 1.0, "known_prefix"]], "flagged": true, "length": 66, "options": {}, "sha256": "82e497d06c32fed678a773921280ed1a0d53abf40e654bb83424573645ed037e", "source": "vector"}
 {"findings": [], "flagged": false, "length": 33, "options": {}, "sha256": "cc29c43f807e6e833fbbebe297580e7fac354f9d4d758009ae5138eda3096e6b", "source": "vector"}
-{"findings": [["secrets", "stripe_key", 0, 32, 1.0, "known_prefix"]], "flagged": true, "length": 32, "options": {}, "sha256": "78a08441f4314f0a2833cfe58c62e555a162264206982cda39f6804f5048f570", "source": "vector"}
-{"findings": [["secrets", "stripe_key", 7, 39, 0.8, "known_prefix"]], "flagged": true, "length": 39, "options": {}, "sha256": "1a9cdf37fdcb5a2ea1149e6d3570baa3e7bef2809c5da411646f52e8d1c2310d", "source": "vector"}
+{"findings": [["secrets", "stripe_key", 0, 28, 1.0, "known_prefix"]], "flagged": true, "length": 28, "options": {}, "sha256": "7a71cbb0e2eb73b32f6b0af7dc821be424ff05ea6d4f79ffc10d2f6e519244ae", "source": "vector"}
+{"findings": [["secrets", "stripe_key", 7, 35, 0.8, "known_prefix"]], "flagged": true, "length": 35, "options": {}, "sha256": "a344e1b40273e7223d47bfc0eeb4b358dfca72597a189fc51df6db61d35e3be7", "source": "vector"}
 {"findings": [["gibberish", "garbled", 0, 28, 1.0, "garbled"], ["secrets", "stripe_key", 0, 28, 1.0, "known_prefix"]], "flagged": true, "length": 28, "options": {}, "sha256": "addd1f09bf113e64a6be46a48019949785270657433f52a74d4b351131b7ef3f", "source": "vector"}
-{"findings": [], "flagged": false, "length": 32, "options": {}, "sha256": "ccd4826d66aca93b472d3ea0d5a3c4b4e9c75d33a9424e22f72c6072dfbba23b", "source": "vector"}
+{"findings": [], "flagged": false, "length": 28, "options": {}, "sha256": "37ed72b5549663740d6912e755e77b9790012962bf70f2e16dca72e5cecce564", "source": "vector"}
 {"findings": [["secrets", "google_api_key", 0, 39, 1.0, "known_prefix"]], "flagged": true, "length": 39, "options": {}, "sha256": "5e8a6a8b9d10a937179bda8192ed390733120e7b5478608152094a09b4975ec8", "source": "vector"}
 {"findings": [["secrets", "google_api_key", 9, 48, 1.0, "known_prefix"]], "flagged": true, "length": 54, "options": {}, "sha256": "e283ff008e3f5c9c83d02218f03b15206d071a10366b52a23837244f76eff6b2", "source": "vector"}
 {"findings": [["secrets", "google_api_key", 5, 44, 1.0, "known_prefix"]], "flagged": true, "length": 44, "options": {}, "sha256": "0152897865260f00e859be6bc297a3fcf402bf665ee92502832fb1273b70ba52", "source": "vector"}
