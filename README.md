@@ -19,6 +19,48 @@
 
 ## Ten-second start
 
+Use `pygarble.screening` for **secrets, PII and profanity**. Keep gibberish
+detection separate with `GarbleDetector` / `EnsembleDetector`. The existing
+top-level `Scanner` retains its four-category defaults for compatibility.
+
+```python
+from pygarble.screening import Scanner
+
+scanner = Scanner(max_input_length=100_000)
+assert scanner.redact("mail jane@example.com").text == "mail [EMAIL]"
+assert not scanner.scan("qxzjkwpv bnmqwer zzxqv").flagged
+```
+
+The dedicated document CLI keeps source text out of scan reports and handles
+multiline private keys during redaction:
+
+```bash
+python -m pygarble.screening scan document.txt
+python -m pygarble.screening redact document.txt
+```
+
+Optional local backends are explicitly enabled, and do not change the base
+installation. `pip install 'pygarble[screening]'` adds `phonenumberslite`,
+`python-stdnum` and `detect-secrets`. Gitleaks requires a separately installed
+executable. None requires LLM calls or model downloads.
+
+```text
+scanner = Scanner(
+    backends=["phonenumbers", "stdnum", "detect-secrets", "gitleaks"],
+    backend_options={"phonenumbers": {"region": "GB"}},
+    max_input_length=100_000,
+)
+```
+
+See the [standalone screening guide](https://brightertiger.github.io/pygarble/standalone-screening.html)
+for individual extras, backend options, custom detectors and coverage limits.
+Reuse a scanner across documents; Gitleaks starts a subprocess per document.
+
+## Existing combined API and line CLI
+
+The original API remains supported. Its line-oriented CLI echoes input text;
+use the document CLI above for findings-only logs and multiline redaction.
+
 ```bash
 python -m pip install pygarble
 printf 'mail jane@example.com\nhello\n' | pygarble scan

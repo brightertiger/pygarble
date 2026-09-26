@@ -200,14 +200,6 @@ def _outranks(finding: Finding, current: Finding) -> bool:
     )
 
 
-def _strictly_inside(inner: Finding, outer: Finding) -> bool:
-    return (
-        outer.start <= inner.start
-        and inner.end <= outer.end
-        and (inner.start, inner.end) != (outer.start, outer.end)
-    )
-
-
 class PIIDetector:
     category = CATEGORY
 
@@ -299,13 +291,27 @@ class PIIDetector:
             current = best.get(key)
             if current is None or _outranks(finding, current):
                 best[key] = finding
+        # best retains start/end order. Track the farthest phone end whose
+        # start is no later than this finding; never compare every pair.
         phones = [f for f in best.values() if f.kind == "phone"]
-        kept = [
-            f
-            for f in best.values()
-            if not (f.kind == "nhs_number" and f.reason == "mod11")
-            or not any(_strictly_inside(f, phone) for phone in phones)
-        ]
+        kept = []
+        phone_index = 0
+        farthest_end = -1
+        for finding in best.values():
+            while (
+                phone_index < len(phones)
+                and phones[phone_index].start <= finding.start
+            ):
+                farthest_end = max(farthest_end, phones[phone_index].end)
+                phone_index += 1
+            # Identical spans were already resolved by _outranks above.
+            if (
+                finding.kind == "nhs_number"
+                and finding.reason == "mod11"
+                and farthest_end >= finding.end
+            ):
+                continue
+            kept.append(finding)
         return tuple(sorted(kept, key=sort_key))
 
 

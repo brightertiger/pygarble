@@ -48,6 +48,33 @@ jobs:
         name: codecov-umbrella
         fail_ci_if_error: false
 
+  screening-backends:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.8', '3.12']
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+    - run: pip install -e ".[screening]" pytest
+    - name: Install pinned Gitleaks executable
+      env:
+        GITLEAKS_VERSION: 8.30.1
+      run: |
+        mkdir -p "$RUNNER_TEMP/pygarble-gitleaks"
+        cd "$RUNNER_TEMP/pygarble-gitleaks"
+        curl -fsSLO "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+        curl -fsSLO "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_checksums.txt"
+        sha256sum --check --ignore-missing "gitleaks_${GITLEAKS_VERSION}_checksums.txt"
+        tar -xzf "gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz" gitleaks
+        echo "$RUNNER_TEMP/pygarble-gitleaks" >> "$GITHUB_PATH"
+    - name: Exercise optional backends without Python network access
+      run: |
+        gitleaks version
+        pytest tests/test_screening*.py -v --tb=short
+
   quality:
     runs-on: ubuntu-latest
     steps:
@@ -70,7 +97,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    needs: [test, quality]
+    needs: [test, quality, screening-backends]
     steps:
     - uses: actions/checkout@v4
 
@@ -97,4 +124,4 @@ jobs:
         /tmp/pygarble-wheel/bin/pip install --no-deps dist/*.whl
         cd /tmp
         /tmp/pygarble-wheel/bin/python -c "from pygarble import EnsembleDetector; d = EnsembleDetector(); assert d.predict('नमस्ते दुनिया'); assert not d.predict('Hello world'); assert d.predict('hello\\x00world')"
-
+        /tmp/pygarble-wheel/bin/python -c "from pygarble.screening import Scanner; s = Scanner(); assert s.scan('mail a@b.co').flagged; assert not s.scan('qxzjkwpv bnmqwer').flagged"

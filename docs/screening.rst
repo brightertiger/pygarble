@@ -1,6 +1,11 @@
 Screening and redaction
 =======================
 
+For an API dedicated to secrets, PII and profanity, use
+``pygarble.screening.Scanner``. It supports optional local backends and a
+document CLI; see :doc:`standalone-screening`. The combined API below retains
+its original four-category behavior for compatibility.
+
 :class:`pygarble.Scanner` runs every enabled category over a text and
 returns a :class:`pygarble.ScanReport`. Findings say what was found and
 where; they never contain the matched text, so logging a report object

@@ -3,6 +3,26 @@
 All notable changes to pygarble are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Added
+- `pygarble.screening`: a dedicated secrets, PII and profanity API, with
+  explicit optional backends for phonenumberslite, python-stdnum,
+  detect-secrets and a separately installed Gitleaks executable.
+- Per-instance custom detectors, kind filtering, source-free backend errors,
+  and shared span validation/redaction. Existing top-level APIs retain their
+  defaults; importing screening does not load the gibberish engine.
+- `pygarble-screen` / `python -m pygarble.screening`: whole-document scanning
+  and redaction, findings-only scan output, and a configurable input limit.
+  This avoids the legacy line CLI's exposed multiline key bodies and echoed
+  source text. The legacy CLI is retained unchanged.
+- Optional-backend CI, offline Python integration tests, Unicode/CRLF offset
+  checks and subprocess error/timeout tests.
+
+### Fixed
+- NHS/phone overlap filtering now uses a sorted sweep rather than a pairwise
+  search, keeping dense PII documents from causing quadratic work.
+
 ## [0.11.0] - 2026-09-26
 
 ### Added

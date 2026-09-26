@@ -7,11 +7,15 @@ from typing import Any as _Any
 from typing import List as _List
 
 from .analysis import Analysis, Signal, Span
-from .calibration import CalibrationReport, ThresholdPoint, calibrate
-from .core import EnsembleDetector, GarbleDetector, Strategy
 from .findings import Finding, Redaction, ScanReport
 
 if _TYPE_CHECKING:
+    from .calibration import CalibrationReport as CalibrationReport
+    from .calibration import ThresholdPoint as ThresholdPoint
+    from .calibration import calibrate as calibrate
+    from .core import EnsembleDetector as EnsembleDetector
+    from .core import GarbleDetector as GarbleDetector
+    from .core import Strategy as Strategy
     from .pii import PIIDetector as PIIDetector
     from .profanity import ProfanityDetector as ProfanityDetector
     from .scanner import Scanner as Scanner
@@ -20,6 +24,12 @@ if _TYPE_CHECKING:
     from .secrets import SecretsDetector as SecretsDetector
 
 _LAZY = {
+    "GarbleDetector": ("core", "GarbleDetector"),
+    "EnsembleDetector": ("core", "EnsembleDetector"),
+    "Strategy": ("core", "Strategy"),
+    "CalibrationReport": ("calibration", "CalibrationReport"),
+    "ThresholdPoint": ("calibration", "ThresholdPoint"),
+    "calibrate": ("calibration", "calibrate"),
     "Scanner": ("scanner", "Scanner"),
     "scan": ("scanner", "scan"),
     "redact": ("scanner", "redact"),
