@@ -39,7 +39,7 @@ def _profanity_detector(
     allowlist: Optional[Iterable[str]],
 ) -> Optional[Detector]:
     try:
-        from .profanity import ProfanityDetector  # type: ignore[attr-defined]
+        from .profanity import ProfanityDetector
     except ImportError:  # pragma: no cover - until Task 7 lands
         return None
     return ProfanityDetector(allowlist=allowlist)

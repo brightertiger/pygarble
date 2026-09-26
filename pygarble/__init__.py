@@ -2,7 +2,6 @@ __version__ = "0.10.0"
 __author__ = "Ujjwal Singh Rao"
 __email__ = "ujjwalsrao@gmail.com"
 
-from importlib.util import find_spec
 from typing import TYPE_CHECKING, Any
 
 from .analysis import Analysis, Signal, Span
@@ -11,8 +10,8 @@ from .core import EnsembleDetector, GarbleDetector, Strategy
 from .findings import Finding, Redaction, ScanReport
 
 if TYPE_CHECKING:
-    from .pii import PIIDetector
-    from .profanity import ProfanityDetector  # type: ignore[attr-defined]
+    from .pii import PIIDetector as PIIDetector
+    from .profanity import ProfanityDetector as ProfanityDetector
     from .scanner import Scanner as Scanner
     from .scanner import redact as redact
     from .scanner import scan as scan
@@ -48,13 +47,6 @@ __all__ = [
     "PIIDetector",
     "ProfanityDetector",
 ]
-
-# Leave out lazy names whose subpackage is not installed yet, so
-# `from pygarble import *` never trips over them. find_spec does not import.
-for _name in ("PIIDetector", "ProfanityDetector"):
-    if find_spec("." + _LAZY[_name][0], __name__) is None:
-        __all__.remove(_name)
-del _name
 
 
 def __getattr__(name: str) -> Any:
