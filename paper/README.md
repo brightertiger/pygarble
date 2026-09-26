@@ -1,7 +1,16 @@
-# JOSS submission preparation
+# Publication preparation
 
 Status: working draft, not ready for submission. No journal submission or
 package release has been made. Requirements checked on 26 September 2026.
+
+The current route and proposed research protocol are in
+[publication-plan.md](publication-plan.md): pilot, independent evaluation,
+reference application, manuscript, arXiv, journal submission and discovery.
+The manuscript below remains a JOSS-format working draft; adapt it only once
+the venue and evidence are settled. The author has a verified arXiv account.
+The budget is capped at US$100, with a US$0 incremental spending target.
+Start source selection with the [dataset shortlist](dataset-candidates.md);
+its candidates have not yet been admitted to an evaluation benchmark.
 
 Start with [paper.md](paper.md) and its [bibliography](paper.bib). Visible
 `TODO` markers identify facts requiring author input. The author has confirmed
@@ -37,15 +46,12 @@ The strongest documented connection concerns gibberish detection; the
 new PII, secret and profanity modules need their own application evidence
 if they are central to the paper's research contribution.
 
-A possible next project is a reproducible study of random-looking names in
-behavioral reports. First define a research question and obtain a permitted,
-labelled corpus of name strings; do not download or execute malware for a
-text-screening comparison. Compare appropriate pygarble configurations with
-simple length/character rules, entropy and a relevant character-model
-baseline. Separate calibration from evaluation, preserve ordinary software
-names as difficult negatives, and publish error cases and timing methods.
-Do not infer malware-detection improvement from a name-classification result.
-This is a proposed study, not completed evidence or a guarantee of JOSS fit.
+The proposed primary study concerns English corpus-quality assessment,
+comparing local detectors with independent data and explicit error costs.
+A filename study motivated by Trident remains optional future work. Neither
+study has been completed; see the publication plan for the protocol and
+decision points. Do not infer malware-detection improvement from text
+classification results.
 
 ## Work to complete
 
