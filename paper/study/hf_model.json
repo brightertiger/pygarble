@@ -1,0 +1,47 @@
+{
+  "model_id": "madhurjindal/autonlp-Gibberish-Detector-492513457",
+  "revision": "76672dd7d3575f68ab980705bcec975cc62de71c",
+  "license_declared": "mit",
+  "architecture": "DistilBertForSequenceClassification",
+  "parameters": 66956548,
+  "checked_date": "2026-09-27",
+  "training_dataset": "madhurjindal/autonlp-data-Gibberish-Detector",
+  "training_dataset_access": "Public API returned HTTP 401; training overlap cannot be verified.",
+  "files": [
+    {
+      "name": "README.md",
+      "sha256": "a4dde6854776f843dbe5f70a9adec36da3d95a872715bcac8cae741f092de483",
+      "bytes": 11462
+    },
+    {
+      "name": "config.json",
+      "sha256": "31b97892be4bb8ed5fca4162b64fc8e5a9a0e7d4a5c2cc5e5d3f68af8da489ca",
+      "bytes": 870
+    },
+    {
+      "name": "model.safetensors",
+      "sha256": "278bd923924e82f8021d73c771840e98c5d2a1f032a6cba5d09dab1583cd2e82",
+      "bytes": 267838720
+    },
+    {
+      "name": "special_tokens_map.json",
+      "sha256": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3",
+      "bytes": 112
+    },
+    {
+      "name": "tokenizer.json",
+      "sha256": "0f5c2a18b34402d19ff8f878ec161cfa1bd5223c4f4faba79a4724c9f49c87bc",
+      "bytes": 466245
+    },
+    {
+      "name": "tokenizer_config.json",
+      "sha256": "25f5e77e3f0fb634363b48e7ca24d41bd45294640f851959f73b4e148a388a32",
+      "bytes": 317
+    },
+    {
+      "name": "vocab.txt",
+      "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3",
+      "bytes": 231508
+    }
+  ]
+}

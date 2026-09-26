@@ -1,0 +1,7 @@
+# Optional benchmark environment; never dependencies of pygarble itself.
+# Validated on Python 3.12 / macOS ARM64.
+torch==2.9.0
+transformers==4.53.3
+huggingface-hub==0.35.1
+safetensors==0.6.2
+numpy==1.26.4
