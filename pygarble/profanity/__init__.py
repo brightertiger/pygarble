@@ -28,6 +28,7 @@ _WILD_CHARS = frozenset("*#@$!")
 _WILD_TOKEN = re.compile(r"^[\w*#@$!]+$")
 _GAP = re.compile(r"^[ .\-]{1,3}$")
 _POSSESSIVE = re.compile(r"['’][sS]$")
+_SPACED_FILLERS = frozenset({"a", "i"})  # one-letter words before a run
 _PHRASE_MAX = max(len(p) for p in PHRASES)
 _BY_LENGTH: Dict[int, Tuple[str, ...]] = {}
 for _word in PROFANITY_STRONG:
@@ -53,6 +54,23 @@ def _clean_words(length: int) -> Tuple[str, ...]:
 
 def _fits(masked: str, word: str) -> bool:
     return all(c in _WILD_CHARS or c == w for c, w in zip(masked, word))
+
+
+@lru_cache(maxsize=4096)
+def _masked_candidates(masked: str) -> Tuple[Tuple[str, ...], bool]:
+    """Strong words a lowercase masked token fits, and whether a clean
+    English word fits it too. Independent of any allowlist."""
+    if not _WILD_TOKEN.match(masked) or not (set(masked) & _WILD_CHARS):
+        return ((), False)
+    if sum(1 for c in masked if c.isalpha()) < 2:
+        return ((), False)
+    strong = tuple(
+        word for word in _BY_LENGTH.get(len(masked), ()) if _fits(masked, word)
+    )
+    if not strong:
+        return ((), False)
+    clean = any(_fits(masked, word) for word in _clean_words(len(masked)))
+    return (strong, clean)
 
 
 class ProfanityDetector:
@@ -97,8 +115,9 @@ class ProfanityDetector:
                 collapsed = collapse_runs(norm, width)
                 if collapsed in self.allowlist:
                     return None
-                if self._tier(collapsed) is not None:
-                    return (0.8, "elongated")
+                collapsed_tier = self._tier(collapsed)
+                if collapsed_tier is not None:
+                    return (min(0.8, collapsed_tier[0]), "elongated")
         if self.strong and any(
             w in norm and w not in self.allowlist for w in EMBEDDED
         ):
@@ -108,21 +127,11 @@ class ProfanityDetector:
         return None
 
     def _wildcard(self, raw: str) -> Optional[Tuple[float, str]]:
-        masked = raw.lower()
-        if not _WILD_TOKEN.match(masked) or not (set(masked) & _WILD_CHARS):
-            return None
-        if sum(1 for c in masked if c.isalpha()) < 2:
-            return None
-        matches = [
-            word
-            for word in _BY_LENGTH.get(len(masked), ())
-            if _fits(masked, word) and word not in self.allowlist
-        ]
+        strong, clean = _masked_candidates(raw.lower())
+        matches = [word for word in strong if word not in self.allowlist]
         if not matches:
             return None
-        if len(matches) > 1 or any(
-            _fits(masked, word) for word in _clean_words(len(masked))
-        ):
+        if len(matches) > 1 or clean:
             return (0.6, "masked_ambiguous")
         return (0.9, "masked")
 
@@ -178,29 +187,51 @@ class ProfanityDetector:
             ):
                 j += 1
             if j - i + 1 >= 3 and i not in used:
-                joined = "".join(t[3] for t in tokens[i : j + 1])
-                if joined not in self.allowlist and self._tier(joined):
+                hit = self._spaced_run(tokens, i, j)
+                if hit is not None:
+                    first, last, confidence = hit
                     out.append(
                         Finding(
                             CATEGORY,
                             KIND,
-                            tokens[i][0],
-                            tokens[j][1],
-                            0.8,
+                            tokens[first][0],
+                            tokens[last][1],
+                            confidence,
                             "spaced",
                         )
                     )
-                    used.update(range(i, j + 1))
+                    used.update(range(first, last + 1))
                 i = j + 1
             else:
                 i += 1
+
+    def _spaced_run(
+        self, tokens: Sequence[Token], i: int, j: int
+    ) -> Optional[Tuple[int, int, float]]:
+        """The listed word spelled by tokens i..j, or by that run without a
+        leading or trailing "a"/"I" ("what a s h i t show")."""
+        lead = tokens[i][3] in _SPACED_FILLERS
+        trail = tokens[j][3] in _SPACED_FILLERS
+        spans = [(i, j), (i + 1, j) if lead else None]
+        spans += [(i, j - 1) if trail else None]
+        spans += [(i + 1, j - 1) if lead and trail else None]
+        for span in spans:
+            if span is None or span[1] - span[0] + 1 < 3:
+                continue
+            first, last = span
+            joined = "".join(t[3] for t in tokens[first : last + 1])
+            tier = None if joined in self.allowlist else self._tier(joined)
+            if tier is not None:
+                return (first, last, min(0.8, tier[0]))
+        return None
 
     def detect(self, text: str) -> Tuple[Finding, ...]:
         if not isinstance(text, str):
             raise TypeError("text must be a string")
         tokens: List[Token] = []
         for match in TOKEN_RE.finditer(text):
-            raw = _POSSESSIVE.sub("", match.group())
+            # Strip "!" off the end ("Shit!") but keep it inside ("sh!t").
+            raw = _POSSESSIVE.sub("", match.group().rstrip("!"))
             # A digits-only token ("455") never matches: no "ass".
             norm = "" if raw.isdigit() else normalize_token(raw)
             tokens.append((match.start(), match.end(), raw, norm))

@@ -1,5 +1,7 @@
 """Each matching rule, in order, with its confidence and reason."""
 
+import time
+
 import pytest
 
 from pygarble.profanity import ALL_KINDS, ProfanityDetector, detect
@@ -79,6 +81,8 @@ def test_elongation_rule():
     assert hits("asss") == [("asss", 0.8, "elongated")]
     assert hits("sooo good") == []  # "so" and "soo" are not listed
     assert hits("boooook") == []
+    # Obfuscated mild words never score above the plain mild 0.7.
+    assert hits("daaamn") == [("daaamn", 0.7, "elongated")]
 
 
 def test_embedded_rule():
@@ -114,6 +118,34 @@ def test_spaced_rule():
     assert hits("a b c") == []
     assert hits("i am a") == []
     assert hits("s h i t", obfuscation=False) == []
+    assert hits("d a m n") == [("d a m n", 0.7, "spaced")]
+
+
+def test_spaced_rule_after_a_or_i():
+    assert hits("what a s h i t show") == [("s h i t", 0.8, "spaced")]
+    assert hits("I s h i t you not") == [("s h i t", 0.8, "spaced")]
+    assert hits("He's a p.r.i.c.k") == [("p.r.i.c.k", 0.7, "spaced")]
+    assert hits("s h i t a") == [("s h i t", 0.8, "spaced")]
+    assert hits("a b c d") == []
+
+
+def test_trailing_exclamation_marks():
+    assert hits("Damn!") == [("Damn!", 0.7, "mild")]
+    assert hits("Shit!") == [("Shit!", 1.0, "strong")]
+    assert hits("Fuck!!!") == [("Fuck!!!", 1.0, "strong")]
+    assert hits("You ass!") == [("ass!", 1.0, "strong")]
+    assert hits("sh!t") == [("sh!t", 1.0, "strong")]
+    assert hits("b!tch") == [("b!tch", 1.0, "strong")]
+    assert hits("Wow!!! Great!") == []
+
+
+def test_many_masked_tokens_scan_quickly():
+    text = "f*ck " * 5000
+    started = time.perf_counter()
+    found = detect(text)
+    elapsed = time.perf_counter() - started
+    assert len(found) == 5000
+    assert elapsed < 0.5, elapsed
 
 
 def test_phrase_rule():
