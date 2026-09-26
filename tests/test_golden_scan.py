@@ -8,7 +8,8 @@ import pytest
 
 def test_golden_scan_corpus_reproduces():
     golden_scan = pytest.importorskip(
-        "regression.golden_scan", reason="regression/ is not shipped in sdist"
+        "paper.regression.golden_scan",
+        reason="paper/regression/ is not shipped in sdist",
     )
     assert golden_scan.render() == golden_scan.OUTPUT.read_text(
         encoding="utf-8"
@@ -16,14 +17,14 @@ def test_golden_scan_corpus_reproduces():
 
 
 def test_golden_scan_checksum_matches():
-    golden_scan = pytest.importorskip("regression.golden_scan")
+    golden_scan = pytest.importorskip("paper.regression.golden_scan")
     content = golden_scan.OUTPUT.read_text(encoding="utf-8")
     digest = hashlib.sha256(content.encode("utf-8")).hexdigest()
     assert digest == golden_scan.CHECKSUM.read_text().strip()
 
 
 def test_golden_scan_rows_carry_no_text_and_record_options():
-    golden_scan = pytest.importorskip("regression.golden_scan")
+    golden_scan = pytest.importorskip("paper.regression.golden_scan")
     rows = [
         json.loads(line)
         for line in golden_scan.OUTPUT.read_text(encoding="utf-8").splitlines()

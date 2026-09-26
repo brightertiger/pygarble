@@ -1,0 +1,27 @@
+{
+  "chunks": 79969,
+  "documents": 109,
+  "duplicate_occurrences_beyond_first": 0,
+  "english_control_documents": 4,
+  "hf_class_counts": {
+    "english:clean": 3706,
+    "english:mild gibberish": 1488,
+    "english:word salad": 6,
+    "other_language:clean": 4517,
+    "other_language:mild gibberish": 12934,
+    "other_language:noise": 56974,
+    "other_language:word salad": 171,
+    "positive:mild gibberish": 1,
+    "positive:noise": 172
+  },
+  "max_tokens": 348,
+  "meaningful_documents": 71,
+  "new_human_label_audit": false,
+  "normalized_characters": 31964664,
+  "positive_documents": 38,
+  "preliminary_primary_unique_hash_overlap": 438,
+  "preliminary_primary_unique_hashes": 438,
+  "tail_chunks": 109,
+  "truncated_inputs": 0,
+  "unique_chunk_hashes": 79969
+}

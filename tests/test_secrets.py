@@ -355,7 +355,7 @@ def _secrets_vector_texts():
     import json
     from pathlib import Path
 
-    path = Path(__file__).resolve().parents[1] / "regression"
+    path = Path(__file__).resolve().parents[1] / "paper" / "regression"
     texts = [
         v
         for e in KNOWN_PATTERNS

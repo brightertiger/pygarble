@@ -165,7 +165,7 @@ Validation and maintenance
 .. code-block:: bash
 
    python -m sphinx -n -W --keep-going -b html docs /tmp/pygarble-docs
-   python scripts/check_discovery.py /tmp/pygarble-docs
+   python paper/scripts/check_discovery.py /tmp/pygarble-docs
 
 The discovery check validates sitemap coverage, canonical URLs, descriptions,
 structured data, index links and optional verification metadata in actual

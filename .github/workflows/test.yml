@@ -48,6 +48,16 @@ jobs:
         name: codecov-umbrella
         fail_ci_if_error: false
 
+  study:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - name: Check study analysis and saved predictions without neural dependencies
+      run: make benchmark-check
+
   screening-backends:
     runs-on: ubuntu-latest
     strategy:
@@ -83,21 +93,24 @@ jobs:
       with:
         python-version: '3.12'
     - run: pip install -e ".[dev]"
-    - run: black --check pygarble tests scripts regression docs/_ext
-    - run: isort --check-only pygarble tests scripts regression docs/_ext
-    - run: flake8 pygarble tests scripts regression docs/_ext
+    - run: black --check pygarble tests paper/scripts paper/regression docs/_ext
+    - run: isort --check-only pygarble tests paper/scripts paper/regression docs/_ext
+    - run: flake8 pygarble tests paper/scripts paper/regression docs/_ext
+    - run: black --check paper/study/*.py
+    - run: isort --check-only paper/study/*.py
+    - run: flake8 paper/study/*.py
     - run: mypy pygarble
-    - run: python scripts/update_strategy_docs.py --check
+    - run: python paper/scripts/update_strategy_docs.py --check
     - name: Verify generated data
-      run: python scripts/generate_data.py --check
+      run: python paper/scripts/generate_data.py --check
     - name: Golden corpus reproduces
-      run: python regression/golden.py --check
+      run: python paper/regression/golden.py --check
     - name: Golden scan corpus
-      run: python regression/golden_scan.py --check
+      run: python paper/regression/golden_scan.py --check
 
   build:
     runs-on: ubuntu-latest
-    needs: [test, quality, screening-backends]
+    needs: [test, quality, screening-backends, study]
     steps:
     - uses: actions/checkout@v4
 

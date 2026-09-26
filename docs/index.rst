@@ -32,6 +32,22 @@ nonsense detector. Scores are heuristics, not calibrated probabilities.
 
 See :doc:`installation` to install the package.
 
+Research and measured results
+-----------------------------
+
+The pygarble paper describes the modular scoring strategy and compares five
+configurations with a local DistilBERT classifier on a complete published corpus.
+On 5,373 English-comparison chunks, word lookup made no errors and the strict
+neural policy made seven; the default English profile recalled only 28.32% of
+gibberish. These are collection-specific findings, with significant language
+and source-diversity limitations. PII, secret and profanity performance was
+not evaluated by this study.
+
+Read :doc:`benchmarks` for every configuration's accuracy and confusion counts,
+CPU measurements, reproduction commands and sources, or
+:download:`download the paper <../paper/study/manuscript.pdf>`.
+The manuscript is not yet published on arXiv or peer reviewed.
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
@@ -51,6 +67,7 @@ See :doc:`installation` to install the package.
    examples
    migration
    architecture
+   benchmarks
    contributing
    publishing
 
@@ -75,7 +92,8 @@ per-strategy configuration, and abstention behavior.
 Evaluation
 ----------
 
-The repository preserves its legacy benchmark separately from reviewed English
-labels and a small authored challenge set. Reported engineering results are not
-production precision estimates. Run ``python regression/evaluate.py --split all``
-to reproduce metrics, or add ``--details`` for per-category errors.
+The :doc:`benchmarks` guide reports the paper's complete published-corpus
+comparison with local DistilBERT and explains its limitations. Fast authored
+regression fixtures remain separate from research results. Run
+``make benchmark-check`` for offline study checks; the full optional neural
+run is documented in the guide.

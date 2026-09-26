@@ -1,0 +1,83 @@
+{
+  "control_pairs": [
+    {
+      "a": "kjv",
+      "b": "secreta",
+      "jaccard": 8.481539399400991e-05,
+      "same_family": false,
+      "smaller_containment": 0.0007940052602848494
+    },
+    {
+      "a": "kjv",
+      "b": "net",
+      "jaccard": 0.033854402521419386,
+      "same_family": true,
+      "smaller_containment": 0.06654797934840662
+    },
+    {
+      "a": "kjv",
+      "b": "wiki",
+      "jaccard": 0.0,
+      "same_family": false,
+      "smaller_containment": 0.0
+    },
+    {
+      "a": "secreta",
+      "b": "net",
+      "jaccard": 5.152328594908469e-05,
+      "same_family": false,
+      "smaller_containment": 0.0004962532876780309
+    },
+    {
+      "a": "secreta",
+      "b": "wiki",
+      "jaccard": 0.0,
+      "same_family": false,
+      "smaller_containment": 0.0
+    },
+    {
+      "a": "net",
+      "b": "wiki",
+      "jaccard": 1.6496931570727845e-05,
+      "same_family": false,
+      "smaller_containment": 0.00037931470476672144
+    }
+  ],
+  "development_files": [
+    {
+      "file": "benchmark_data.json",
+      "sha256": "bf39c35bbafc14b36b51a075ae29d3da4969cde924464314383aa6fc10242373"
+    },
+    {
+      "file": "benchmark_results.json",
+      "sha256": "ca10b7734c21ced0bcc644c06de0237c351c44fb939244ca64468262210f1596"
+    },
+    {
+      "file": "english_challenge.json",
+      "sha256": "efb2927123c050d050422869146928e2d47a2da84fb814daa66c3ed7176ee8de"
+    },
+    {
+      "file": "english_results.json",
+      "sha256": "3363794e42809596263d7027dad7742fbecebecdd5f208e58d8e27c0adbb0c8e"
+    },
+    {
+      "file": "label_overrides.json",
+      "sha256": "d52cbe5319a428a00764db9b6d4377ba47c2322c292dedb7744d5f1a5ec15664"
+    },
+    {
+      "file": "performance_results.json",
+      "sha256": "702eb11098d496e1b6078705182463ef63c6624b05dc9a2d245f8c7f97c5db7e"
+    },
+    {
+      "file": "scan_vectors.json",
+      "sha256": "0f6b5f6b00b7ff251c508442c4c421c0573c5747fac0fd045218bce84d648a7e"
+    },
+    {
+      "file": "trigram_results.json",
+      "sha256": "e4e0642402761e1bdea0d338a9276f9860e61d0b05956c69f315b4f418fbdce5"
+    }
+  ],
+  "development_overlap_at_least_half_shingles": [],
+  "duplicate_primary_hashes": {},
+  "warning": "Automated overlap checks do not validate source labels."
+}

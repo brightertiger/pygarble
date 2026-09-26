@@ -1,0 +1,28 @@
+{
+  "repository": "https://github.com/danielgaskell/voynich",
+  "revision": "d076a7d081f35098fa405928239595afd2e75927",
+  "checked_date": "2026-09-26",
+  "files": [
+    {
+      "filename": "README.md",
+      "url": "https://raw.githubusercontent.com/danielgaskell/voynich/d076a7d081f35098fa405928239595afd2e75927/README.md",
+      "sha256": "cf719604e61ad2e58811372e41b7a095237b593c9625a1d440809ef67e615808",
+      "bytes": 4860
+    },
+    {
+      "filename": "gibberish_transcriptions.zip",
+      "url": "https://raw.githubusercontent.com/danielgaskell/voynich/d076a7d081f35098fa405928239595afd2e75927/data/gibberish_transcriptions.zip",
+      "sha256": "a4bfa58af956603ab6607227ad640e01cb695c7b492c6914488bd30f6d0aebbe",
+      "bytes": 36050
+    },
+    {
+      "filename": "meaningful.zip",
+      "url": "https://raw.githubusercontent.com/danielgaskell/voynich/d076a7d081f35098fa405928239595afd2e75927/data/meaningful.zip",
+      "sha256": "684edcf2a4e6abe08ce85b147c38d0e0dc5d48bd4d56cf81276c1251444342bd",
+      "bytes": 13367002
+    }
+  ],
+  "baseline_repository": "https://github.com/rrenaud/Gibberish-Detector",
+  "baseline_revision": "b1c6b122f58282f85d90de55338811c921e8a7c8",
+  "baseline_source_sha256": "d6d6087564fced79e5dd37096635813f2743bef5658bf68c62f4ac2bba48dba0"
+}

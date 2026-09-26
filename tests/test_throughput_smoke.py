@@ -25,7 +25,8 @@ def test_dense_nhs_phone_overlap_filter_scales_linearly():
 
 def test_rules_only_throughput_smoke():
     throughput = pytest.importorskip(
-        "regression.throughput", reason="regression/ is not shipped in sdist"
+        "paper.regression.throughput",
+        reason="paper/regression/ is not shipped in sdist",
     )
     lines = throughput.build_corpus(200_000)
     result = throughput.measure(RULES, lines)
@@ -34,12 +35,12 @@ def test_rules_only_throughput_smoke():
 
 
 def test_build_corpus_is_deterministic():
-    throughput = pytest.importorskip("regression.throughput")
+    throughput = pytest.importorskip("paper.regression.throughput")
     assert throughput.build_corpus(20_000) == throughput.build_corpus(20_000)
 
 
 def test_chunked_corpus_joins_the_same_lines():
-    throughput = pytest.importorskip("regression.throughput")
+    throughput = pytest.importorskip("paper.regression.throughput")
     lines = throughput.build_corpus(50_000)
     chunks = throughput.build_corpus(50_000, chunk_bytes=4096)
     assert "\n".join(chunks) == "\n".join(lines)

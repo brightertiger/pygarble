@@ -1,0 +1,302 @@
+[
+  {
+    "both_flag": 16,
+    "hf_only_flags": 1478,
+    "method": "english",
+    "neither_flags": 3681,
+    "pygarble_only_flags": 25,
+    "reference": "hf_all",
+    "scope": "english",
+    "unit": "descriptive dependent chunk counts"
+  },
+  {
+    "both_flag": 0,
+    "hf_only_flags": 6,
+    "method": "english",
+    "neither_flags": 5153,
+    "pygarble_only_flags": 41,
+    "reference": "hf_strict",
+    "scope": "english",
+    "unit": "descriptive dependent chunk counts"
+  },
+  {
+    "both_flag": 22,
+    "hf_only_flags": 1472,
+    "method": "english_extended",
+    "neither_flags": 3670,
+    "pygarble_only_flags": 36,
+    "reference": "hf_all",
+    "scope": "english",
+    "unit": "descriptive dependent chunk counts"
+  },
+  {
+    "both_flag": 1,
+    "hf_only_flags": 5,
+    "method": "english_extended",
+    "neither_flags": 5137,
+    "pygarble_only_flags": 57,
+    "reference": "hf_strict",
+    "scope": "english",
+    "unit": "descriptive dependent chunk counts"
+  },
+  {
+    "both_flag": 0,
+    "hf_only_flags": 1494,
+    "method": "entropy_based",
+    "neither_flags": 3706,
+    "pygarble_only_flags": 0,
+    "reference": "hf_all",
+    "scope": "english",
+    "unit": "descriptive dependent chunk counts"
+  },
+  {
+    "both_flag": 0,
+    "hf_only_flags": 6,
+    "method": "entropy_based",
+    "neither_flags": 5194,
+    "pygarble_only_flags": 0,
+    "reference": "hf_strict",
+    "scope": "english",
+    "unit": "descriptive dependent chunk counts"
+  },
+  {
+    "both_flag": 0,
+    "hf_only_flags": 1494,
+    "method": "legacy",
+    "neither_flags": 3700,
+    "pygarble_only_flags": 6,
+    "reference": "hf_all",
+    "scope": "english",
+    "unit": "descriptive dependent chunk counts"
+  },
+  {
+    "both_flag": 0,
+    "hf_only_flags": 6,
+    "method": "legacy",
+    "neither_flags": 5188,
+    "pygarble_only_flags": 6,
+    "reference": "hf_strict",
+    "scope": "english",
+    "unit": "descriptive dependent chunk counts"
+  },
+  {
+    "both_flag": 0,
+    "hf_only_flags": 1494,
+    "method": "word_lookup",
+    "neither_flags": 3706,
+    "pygarble_only_flags": 0,
+    "reference": "hf_all",
+    "scope": "english",
+    "unit": "descriptive dependent chunk counts"
+  },
+  {
+    "both_flag": 0,
+    "hf_only_flags": 6,
+    "method": "word_lookup",
+    "neither_flags": 5194,
+    "pygarble_only_flags": 0,
+    "reference": "hf_strict",
+    "scope": "english",
+    "unit": "descriptive dependent chunk counts"
+  },
+  {
+    "both_flag": 19436,
+    "hf_only_flags": 50643,
+    "method": "english",
+    "neither_flags": 1062,
+    "pygarble_only_flags": 3455,
+    "reference": "hf_all",
+    "scope": "other_language",
+    "unit": "descriptive dependent chunk counts"
+  },
+  {
+    "both_flag": 7740,
+    "hf_only_flags": 49405,
+    "method": "english",
+    "neither_flags": 2300,
+    "pygarble_only_flags": 15151,
+    "reference": "hf_strict",
+    "scope": "other_language",
+    "unit": "descriptive dependent chunk counts"
+  },
+  {
+    "both_flag": 25043,
+    "hf_only_flags": 45036,
+    "method": "english_extended",
+    "neither_flags": 1057,
+    "pygarble_only_flags": 3460,
+    "reference": "hf_all",
+    "scope": "other_language",
+    "unit": "descriptive dependent chunk counts"
+  },
+  {
+    "both_flag": 13278,
+    "hf_only_flags": 43867,
+    "method": "english_extended",
+    "neither_flags": 2226,
+    "pygarble_only_flags": 15225,
+    "reference": "hf_strict",
+    "scope": "other_language",
+    "unit": "descriptive dependent chunk counts"
+  },
+  {
+    "both_flag": 13811,
+    "hf_only_flags": 56268,
+    "method": "entropy_based",
+    "neither_flags": 1136,
+    "pygarble_only_flags": 3381,
+    "reference": "hf_all",
+    "scope": "other_language",
+    "unit": "descriptive dependent chunk counts"
+  },
+  {
+    "both_flag": 2194,
+    "hf_only_flags": 54951,
+    "method": "entropy_based",
+    "neither_flags": 2453,
+    "pygarble_only_flags": 14998,
+    "reference": "hf_strict",
+    "scope": "other_language",
+    "unit": "descriptive dependent chunk counts"
+  },
+  {
+    "both_flag": 16377,
+    "hf_only_flags": 53702,
+    "method": "legacy",
+    "neither_flags": 1112,
+    "pygarble_only_flags": 3405,
+    "reference": "hf_all",
+    "scope": "other_language",
+    "unit": "descriptive dependent chunk counts"
+  },
+  {
+    "both_flag": 4756,
+    "hf_only_flags": 52389,
+    "method": "legacy",
+    "neither_flags": 2425,
+    "pygarble_only_flags": 15026,
+    "reference": "hf_strict",
+    "scope": "other_language",
+    "unit": "descriptive dependent chunk counts"
+  },
+  {
+    "both_flag": 48082,
+    "hf_only_flags": 21997,
+    "method": "word_lookup",
+    "neither_flags": 3751,
+    "pygarble_only_flags": 766,
+    "reference": "hf_all",
+    "scope": "other_language",
+    "unit": "descriptive dependent chunk counts"
+  },
+  {
+    "both_flag": 47329,
+    "hf_only_flags": 9816,
+    "method": "word_lookup",
+    "neither_flags": 15932,
+    "pygarble_only_flags": 1519,
+    "reference": "hf_strict",
+    "scope": "other_language",
+    "unit": "descriptive dependent chunk counts"
+  },
+  {
+    "both_flag": 49,
+    "hf_only_flags": 124,
+    "method": "english",
+    "neither_flags": 0,
+    "pygarble_only_flags": 0,
+    "reference": "hf_all",
+    "scope": "positive",
+    "unit": "descriptive dependent chunk counts"
+  },
+  {
+    "both_flag": 49,
+    "hf_only_flags": 123,
+    "method": "english",
+    "neither_flags": 1,
+    "pygarble_only_flags": 0,
+    "reference": "hf_strict",
+    "scope": "positive",
+    "unit": "descriptive dependent chunk counts"
+  },
+  {
+    "both_flag": 73,
+    "hf_only_flags": 100,
+    "method": "english_extended",
+    "neither_flags": 0,
+    "pygarble_only_flags": 0,
+    "reference": "hf_all",
+    "scope": "positive",
+    "unit": "descriptive dependent chunk counts"
+  },
+  {
+    "both_flag": 73,
+    "hf_only_flags": 99,
+    "method": "english_extended",
+    "neither_flags": 1,
+    "pygarble_only_flags": 0,
+    "reference": "hf_strict",
+    "scope": "positive",
+    "unit": "descriptive dependent chunk counts"
+  },
+  {
+    "both_flag": 0,
+    "hf_only_flags": 173,
+    "method": "entropy_based",
+    "neither_flags": 0,
+    "pygarble_only_flags": 0,
+    "reference": "hf_all",
+    "scope": "positive",
+    "unit": "descriptive dependent chunk counts"
+  },
+  {
+    "both_flag": 0,
+    "hf_only_flags": 172,
+    "method": "entropy_based",
+    "neither_flags": 1,
+    "pygarble_only_flags": 0,
+    "reference": "hf_strict",
+    "scope": "positive",
+    "unit": "descriptive dependent chunk counts"
+  },
+  {
+    "both_flag": 45,
+    "hf_only_flags": 128,
+    "method": "legacy",
+    "neither_flags": 0,
+    "pygarble_only_flags": 0,
+    "reference": "hf_all",
+    "scope": "positive",
+    "unit": "descriptive dependent chunk counts"
+  },
+  {
+    "both_flag": 45,
+    "hf_only_flags": 127,
+    "method": "legacy",
+    "neither_flags": 1,
+    "pygarble_only_flags": 0,
+    "reference": "hf_strict",
+    "scope": "positive",
+    "unit": "descriptive dependent chunk counts"
+  },
+  {
+    "both_flag": 173,
+    "hf_only_flags": 0,
+    "method": "word_lookup",
+    "neither_flags": 0,
+    "pygarble_only_flags": 0,
+    "reference": "hf_all",
+    "scope": "positive",
+    "unit": "descriptive dependent chunk counts"
+  },
+  {
+    "both_flag": 172,
+    "hf_only_flags": 0,
+    "method": "word_lookup",
+    "neither_flags": 0,
+    "pygarble_only_flags": 1,
+    "reference": "hf_strict",
+    "scope": "positive",
+    "unit": "descriptive dependent chunk counts"
+  }
+]

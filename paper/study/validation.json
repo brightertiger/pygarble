@@ -1,0 +1,16 @@
+{
+  "byte_identical_reproduction_artifacts": [
+    "predictions.csv.gz",
+    "summary.json",
+    "calibration.json",
+    "documents.json",
+    "records.json",
+    "overlap.json",
+    "report.md"
+  ],
+  "frozen_source_files_verified": 130,
+  "new_human_label_audit": false,
+  "prediction_rows": 11470,
+  "public_predict_api_decisions_checked": 6560,
+  "saved_summary_recomputed": true
+}

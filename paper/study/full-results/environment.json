@@ -1,0 +1,22 @@
+{
+  "attention": "sdpa",
+  "batch_size": 8,
+  "device": "cpu",
+  "dtype": "float32",
+  "elapsed_seconds_this_invocation": 2920.9664074169996,
+  "machine": "arm64",
+  "model": "76672dd7d3575f68ab980705bcec975cc62de71c",
+  "new_human_label_audit": false,
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "python": "3.12.2 | packaged by conda-forge | (main, Feb 16 2024, 20:54:21) [Clang 16.0.6 ]",
+  "threads": 4,
+  "utc": "2026-09-26T20:00:44.154896+00:00",
+  "versions": {
+    "huggingface-hub": "0.35.1",
+    "numpy": "1.26.4",
+    "safetensors": "0.6.2",
+    "tokenizers": "0.21.4",
+    "torch": "2.9.0",
+    "transformers": "4.53.3"
+  }
+}

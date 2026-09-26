@@ -1,0 +1,13 @@
+{
+  "chunks_verified": 79969,
+  "coverage_and_summaries_recomputed": true,
+  "documents": 109,
+  "hf_policy_decisions_verified": 159938,
+  "pygarble_decisions_verified": 399845,
+  "replay_all_decisions_identical": true,
+  "replay_inputs": 325,
+  "replay_max_probability_difference": 1.1026859283447266e-06,
+  "replay_performed": true,
+  "replay_public_api_decisions": 1625,
+  "source_and_model_hashes_verified": true
+}

@@ -319,7 +319,8 @@ def test_decisions_are_deterministic_across_processes():
 
 def test_frozen_challenge_has_no_family_leakage():
     evaluate = pytest.importorskip(
-        "regression.evaluate", reason="regression/ is not shipped in sdist"
+        "paper.regression.evaluate",
+        reason="paper/regression/ is not shipped in sdist",
     )
     assert evaluate.challenge("development")
     assert evaluate.challenge("holdout")

@@ -141,7 +141,7 @@ Overlapping findings merge into one region. `placeholder` templates accept `{KIN
 
 ## Throughput
 
-Measured on an Apple M2 (macOS arm64, Python 3.12.2) with `python regression/throughput.py --size-mb 2`, on a synthetic corpus of five ASCII English paragraphs with 5% planted findings. MB is 10^6 UTF-8 bytes of scanned text; your numbers will differ.
+Measured on an Apple M2 (macOS arm64, Python 3.12.2) with `python paper/regression/throughput.py --size-mb 2`, on a synthetic corpus of five ASCII English paragraphs with 5% planted findings. MB is 10^6 UTF-8 bytes of scanned text; your numbers will differ.
 
 | Categories | Short lines (~110 bytes), MB/s | 4 KB documents (`--chunk-bytes 4096`), MB/s |
 | --- | --- | --- |
@@ -262,17 +262,31 @@ assert corruption.predict("hello\x00world") is True
 The unreleased module reorganization preserves existing imports, defaults and
 scores. Version 0.11.0 added the combined scanner; it did not introduce the new
 module layout. Review the [upgrade guide](https://brightertiger.github.io/pygarble/migration.html) before changing
-versions. The benchmark and challenge sets are engineering regression data,
-not production accuracy estimates; measure on your own inputs before choosing
-thresholds.
+versions. Research benchmark results now come from the
+[paper's complete published-corpus study](paper/README.md). It evaluates 79,969
+chunks from 109 source files against a pinned local DistilBERT classifier.
+The English comparison uses 173 gibberish and 5,200 meaningful chunks; see the
+[benchmark guide](https://brightertiger.github.io/pygarble/benchmarks.html) for
+confusion counts, accuracy, latency and limitations. The manuscript is not yet
+published or peer reviewed. PII, secrets and profanity are outside that study.
+
+Run `make benchmark-check` for fast offline study checks. `make benchmark`
+executes a new full comparison after preparing the optional research environment
+and assets; results go to an ignored directory, preserving paper measurements.
+Small authored challenge sets remain engineering regression fixtures.
 
 - [Changelog](https://github.com/brightertiger/pygarble/blob/main/CHANGELOG.md)
-- [Evaluation and implementation report](https://github.com/brightertiger/pygarble/blob/main/docs/dev/2026-07-implementation.md)
-- [Recorded evaluation results](https://github.com/brightertiger/pygarble/blob/main/regression/english_results.json)
-- [Golden corpus](https://github.com/brightertiger/pygarble/blob/main/regression/golden.jsonl) of frozen detector outputs for every profile, and a [golden scan corpus](https://github.com/brightertiger/pygarble/blob/main/regression/golden_scan.jsonl) for the scanner, both checked in CI
-- [Data provenance and curation](https://github.com/brightertiger/pygarble/blob/main/scripts/data_curation.json)
+- [Paper, results and reproduction](paper/README.md)
+- [Engineering regression checks](paper/regression/README.md)
+- [Golden corpus](https://github.com/brightertiger/pygarble/blob/main/paper/regression/golden.jsonl) of frozen detector outputs for every profile, and a [golden scan corpus](https://github.com/brightertiger/pygarble/blob/main/paper/regression/golden_scan.jsonl) for the scanner, both checked in CI
+- [Data provenance and curation](https://github.com/brightertiger/pygarble/blob/main/paper/scripts/data_curation.json)
 
 ## Repository layout and compatibility
+
+Library code is in `pygarble/`, unit tests in `tests/`, and the website in
+`docs/`. Research and tooling are grouped under `paper/`: `study/` contains
+the paper evaluation, `regression/` contains engineering checks, and `scripts/`
+contains package/data/documentation maintenance tools.
 
 ```text
 pygarble/

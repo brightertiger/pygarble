@@ -1,0 +1,79 @@
+"""Build review-ready Markdown, TeX and PDF from measured result tables."""
+
+import argparse
+import gzip
+import io
+import shutil
+import subprocess
+import tarfile
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent
+BUILD = ROOT / ".cache" / "publication"
+
+
+def render() -> str:
+    from .full_paper import render as render_full
+
+    return render_full()
+
+
+def bundle_review() -> None:
+    """Archive paper sources, excluding all raw comparison data."""
+    names = [
+        "manuscript.tex",
+        "references.bib",
+        "figures/chunk-confusions.pdf",
+        "figures/full-languages.pdf",
+    ]
+    stream = io.BytesIO()
+    with tarfile.open(fileobj=stream, mode="w") as archive:
+        for name in names:
+            raw = (BUILD / name).read_bytes()
+            info = tarfile.TarInfo(name)
+            info.size = len(raw)
+            info.mtime = 0
+            info.mode = 0o644
+            archive.addfile(info, io.BytesIO(raw))
+    (BUILD / "review-source.tar.gz").write_bytes(
+        gzip.compress(stream.getvalue(), mtime=0)
+    )
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--skip-pdf", action="store_true")
+    args = parser.parse_args()
+    (BUILD / "figures").mkdir(parents=True, exist_ok=True)
+    for name in (
+        "references.bib",
+        "figures/chunk-confusions.pdf",
+        "figures/full-languages.pdf",
+    ):
+        shutil.copy2(ROOT / name, BUILD / name)
+    (BUILD / "manuscript.md").write_text(render(), encoding="utf-8")
+    subprocess.run(
+        [
+            "pandoc",
+            str(BUILD / "manuscript.md"),
+            "--citeproc",
+            "--standalone",
+            "--number-sections",
+            "--template=article.tex",
+            "--lua-filter=tables.lua",
+            "--to",
+            "latex",
+            "--output",
+            str(BUILD / "manuscript.tex"),
+        ],
+        cwd=ROOT,
+        check=True,
+    )
+    if not args.skip_pdf:
+        subprocess.run(["tectonic", "manuscript.tex"], cwd=BUILD, check=True)
+        shutil.copy2(BUILD / "manuscript.pdf", ROOT / "manuscript.pdf")
+    bundle_review()
+
+
+if __name__ == "__main__":
+    main()

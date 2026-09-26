@@ -131,3 +131,33 @@ Pickles referencing the old paths still load. Class introspection and newly
 written pickles use canonical paths; loading those new pickles in older
 pygarble versions is not guaranteed. See :doc:`migration` for a runnable
 import example and :doc:`contributing` for the compatibility checks.
+
+Research and maintenance layout
+-------------------------------
+
+The paper describes the software separately from its empirical validation.
+The repository follows that division:
+
+.. code-block:: text
+
+   pygarble/           # installable library and compatibility pointers
+   tests/              # package unit and integration tests
+   docs/               # maintained website and user guides
+   paper/
+     study/            # research protocol, code, predictions and manuscript
+     regression/       # engineering fixtures, golden checks and throughput
+     scripts/          # data/docs generation and documentation checks
+
+Only ``pygarble`` is installed as library code. The optional neural environment
+belongs to ``paper/study/`` and does not add dependencies to the base package.
+The manuscript, measured results and benchmark scope are linked from
+:doc:`benchmarks`. Generated paper build files live in the ignored
+``paper/study/.cache/publication/`` directory.
+
+Within gibberish analysis, shared features retain token offsets and lexical
+novelty for the selected strategies. Evidence consists of a score, applicability,
+reason and optional spans; the ensemble combines only applicable signals.
+``analyze()`` records all signals, while ``predict()`` can short-circuit ``any``
+and ``all`` decisions. The paper's CPU comparison measures the full score and
+applicability path, so it should not be presented as a timing guarantee for
+every API call.
