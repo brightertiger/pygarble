@@ -116,6 +116,10 @@ class ProfanityDetector:
             )
         self.strong = _STRONG if "strong" in chosen else frozenset()
         self.mild = _MILD if "mild" in chosen else frozenset()
+        if isinstance(allowlist, str):
+            raise ValueError(
+                "allowlist must be an iterable of names, not a string"
+            )
         self.allowlist = frozenset(
             " ".join(normalize_token(word) for word in entry.split())
             for entry in (allowlist or ())
@@ -310,7 +314,8 @@ class ProfanityDetector:
         for index, token in enumerate(tokens):
             if index in used:
                 continue
-            if cache is None:
+            if cache is None or len(token[2]) > _FORMS_MAX_LENGTH:
+                # Long tokens are rare and would pin their text in memory.
                 verdict = self._single(token)
             elif token[2] in cache:
                 verdict = cache[token[2]]

@@ -185,3 +185,19 @@ def test_deterministic_and_sorted():
     first = detect(text)
     assert first == detect(text)
     assert [f.start for f in first] == [0, 5, 10]
+
+
+def test_long_tokens_do_not_enter_the_verdict_cache():
+    detector = ProfanityDetector()
+    token = "q" * 100_000
+    assert detector.detect(f"hello {token} damn") != ()
+    cache = detector._verdict_cache
+    assert token not in cache
+    assert all(len(key) <= 64 for key in cache)
+    assert "hello" in cache
+
+
+def test_bare_string_allowlist_is_rejected():
+    with pytest.raises(ValueError, match="not a string"):
+        ProfanityDetector(allowlist="ass")
+    assert ProfanityDetector(allowlist=["ass"]).detect("ass") == ()
