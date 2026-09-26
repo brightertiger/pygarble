@@ -1,0 +1,161 @@
+---
+title: 'pygarble: Local rule-based text screening and English gibberish detection'
+tags:
+  - Python
+  - text processing
+  - data quality
+  - privacy
+authors:
+  - name: Ujjwal Singh Rao
+    affiliation: 1
+affiliations:
+  - name: 'Independent Researcher, India'
+    index: 1
+date: 26 September 2026
+bibliography: paper.bib
+---
+
+> Working draft. Research-use evidence and disclosure review
+> remain incomplete. This manuscript has not been submitted to JOSS.
+
+# Summary
+
+pygarble is a Python library for screening text locally before further
+processing. It identifies selected patterns associated with personal
+identifiers, exposed credentials, English profanity and garbled English
+text. Applications can inspect findings or redact their text spans. The
+base installation has no runtime dependencies, and built-in detection does
+not call a language model or send text to an external inference service.
+Optional integrations extend coverage using locally installed tools.
+
+The package separates sensitive-content screening from gibberish detection.
+This allows applications to select the checks relevant to their data instead
+of treating every unusual string as a content problem. Results identify the
+rules and locations responsible for a finding. The library is intended as an
+inexpensive initial filter whose outputs can be inspected and followed by
+additional analysis. It does not establish that unflagged text is safe,
+anonymous, meaningful or appropriate for a particular research dataset.
+
+# Statement of need
+
+Text-processing workflows can require several distinct decisions: whether
+an input appears corrupted, whether it contains a structured identifier,
+whether a credential may have been exposed, and whether selected vocabulary
+should be flagged. These decisions have different error costs. Removing
+unfamiliar technical language as gibberish can discard useful observations;
+missing a sensitive identifier can leave material requiring further review.
+A configurable first pass can make these decisions explicit and reproducible
+without requiring a remote inference service.
+
+Potential research applications include checking collected text before
+corpus analysis and inspecting outputs from text-generation experiments.
+These are candidate applications, not evidence of adoption. The proposed
+contribution is a common local screening interface with separable detection
+policies, inspectable evidence and controlled dependencies. Its research
+value must be demonstrated in a concrete workflow, including why these
+properties matter to that workflow's data and constraints.
+
+TODO: Identify the actual research application, its users and the problem
+that motivated development. Explain how pygarble is used in that work and
+provide a supporting reference or reproducible example.
+
+# State of the field
+
+Existing projects address related parts of the problem. Presidio offers
+extensible PII detection and de-identification, including pattern-based and
+NLP recognizers [@presidio]. Gitleaks and detect-secrets focus on finding
+credentials [@gitleaks; @detectsecrets]. The phonenumbers library parses and
+validates telephone numbers, while python-stdnum supplies parsers and
+validators for standardized identifiers [@phonenumbers; @stdnum].
+better_profanity supports word-list censorship and modified spellings
+[@betterprofanity]. Gibberish-Detector illustrates character-transition
+modeling for gibberish classification [@gibberishdetector].
+
+pygarble reuses phonenumbers, python-stdnum, detect-secrets and Gitleaks
+through explicit optional adapters. Its native rules provide a dependency-free
+baseline; the shared finding and redaction representation lets applications
+combine selected tools. This is a design rationale for integration, not a
+claim that individual rules are novel or that existing systems cannot support
+similar workflows. Presidio's broader entity recognition and specialized
+secret scanners remain relevant alternatives. A narrow rule set also trades
+contextual coverage for simplicity: word matching does not assess toxicity,
+and structured-identifier checks do not recognize every personal reference.
+
+TODO: Complete the research-specific comparison and justify maintaining a
+separate package rather than extending an existing project. Identify the
+scholarly contribution beyond combining existing capabilities.
+
+# Software design
+
+The architecture separates the screening and gibberish modules while
+preserving earlier import paths. This separation lets sensitive-content
+scanning avoid loading the gibberish ensemble and its resources. Shared
+finding types retain original character offsets and rule reasons, and
+redaction combines overlapping qualifying spans before replacement. Native
+PII checks combine candidate patterns with applicable checksums; profanity
+checks normalize selected obfuscations; secret checks combine known formats
+and contextual heuristics. Their outputs are evidence tiers, not calibrated
+probabilities or confirmation that a credential is active.
+
+Gibberish detection combines configurable strategies through profiles and
+voting policies. An applicability signal distinguishes unavailable evidence
+from a clean result. Threshold calibration supports choosing a decision
+boundary against labelled examples. English-oriented dictionaries and rules
+restrict the interpretation of those scores; valid identifiers, specialist
+vocabulary and other languages require appropriate configuration and testing.
+
+Optional backends are selected explicitly. Installing an extra does not
+silently change detection behavior. Python integrations run in process;
+Gitleaks runs as a local subprocess per document, which introduces launch
+cost and a different resource-management boundary. Its byte offsets must be
+translated to Python character offsets before redaction. Backend failures
+raise errors rather than produce an apparently clean scan. These choices
+favor predictable composition while leaving deployment-specific limits and
+failure handling to the calling application.
+
+# Research impact statement
+
+Trident [@saul2026trident, Section 5.3] cites pygarble as a possible
+postprocessing tool for distinguishing random-looking filenames from
+non-random matches in malware-detection rules. The authors explicitly state
+that their evaluated approach applies no postprocessing. This citation
+therefore documents independent recognition of a potential application,
+not deployment or a measured contribution to Trident's results. It concerns
+gibberish detection and provides no evaluation of the newer screening modules.
+
+TODO: Supply verifiable evidence of actual research use, at least by the
+developer. A prospective application and engineering tests do not establish
+that the software has been used in a research analysis.
+
+The repository currently supplies automated tests, frozen detector outputs,
+labelled English challenge cases, screening vectors and synthetic timing
+scripts. These materials support checking implementation consistency and
+examining known error cases. They do not constitute an independent sample of
+research data or a general accuracy estimate. A research evaluation should
+report the chosen configuration, data provenance, annotation procedure,
+false-positive and false-negative behavior, and how those errors affect the
+downstream analysis. Runtime measurements should separate scanner construction,
+steady-state work and optional subprocess overhead. No comparative speed or
+accuracy claim is made in this draft.
+
+# AI usage disclosure
+
+The author reports using OpenAI Codex and Anthropic Claude. Codex assisted
+with repository development and documentation work,
+including module organization, optional backend integration, validation work
+and preparation of this manuscript. This drafting session uses GPT-6.
+Automated tests and CI provide implementation checks; they do not replace
+human review of the manuscript or scientific claims.
+
+TODO: The author must verify this account, record model versions where known,
+and describe Claude's scope of assistance. After personally reviewing
+and validating the material, confirm human responsibility for core design
+decisions and all AI-assisted outputs. That confirmation is not asserted here
+on the authors' behalf.
+
+# Acknowledgements
+
+TODO: Confirm contributors, funding and other acknowledgements. If there
+was no funding, confirm that explicitly before replacing this placeholder.
+
+# References
