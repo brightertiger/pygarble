@@ -195,11 +195,11 @@ All known patterns compile into one alternation with named groups; one `finditer
 |---|---|---|---|
 | us | ssn_us | `AAA-GG-SSSS` with `-` or space; area not 000, 666, 900-999; group not 00; serial not 0000 | 0.8; 0.6 when bare 9 digits preceded within 30 chars by `ssn` or `social security` |
 | uk | nino | two letters (excluding D, F, I, Q, U, V in either, O in second; prefixes BG GB NK KN TN NT ZZ rejected), six digits, suffix A-D, spaces optional | 0.9 |
-| uk | nhs_number | ten digits (`NNN NNN NNNN` or bare), mod-11 check digit valid | 0.9 |
-| in | aadhaar | twelve digits (`NNNN NNNN NNNN` or bare), first digit 2-9, Verhoeff valid | 1.0 |
+| uk | nhs_number | ten digits as `NNN NNN NNNN`, or bare when preceded within 30 characters by `nhs`; mod-11 check digit valid | 0.9 |
+| in | aadhaar | twelve digits as `NNNN NNNN NNNN`, or bare when preceded within 30 characters by `aadhaar`/`uidai`; first digit 2-9, Verhoeff valid | 1.0 |
 | in | pan | `[A-Z]{3}[ABCFGHLJPT][A-Z]\d{4}[A-Z]` | 0.9 |
 
-Phone national formats are locale-gated too. Checksums live in `checksums.py` as pure functions with their own unit tests: `luhn(digits)`, `iban_mod97(iban)`, `verhoeff(digits)`, `nhs_mod11(digits)`.
+Phone national formats are locale-gated too. Each PII rule compiles to its own regex (backreferences and per-kind validators make one alternation impractical); all start with a literal, digit class or lookbehind. Checksums live in `checksums.py` as pure functions with their own unit tests: `luhn(digits)`, `iban_mod97(iban)`, `verhoeff(digits)`, `nhs_mod11(digits)`.
 
 **Overlap rule within PII:** when a credit card and a phone match the same digits, the checksum-verified kind wins and the other is dropped. In general, two findings with identical spans keep the higher confidence; nested findings of different kinds are both kept (redaction merges them).
 
@@ -218,7 +218,7 @@ Phone national formats are locale-gated too. Checksums live in `checksums.py` as
 1. Exact: normalised token in strong or mild list → conf 1.0 / 0.7, reason `"strong"` / `"mild"`.
 2. Elongation: if the token contains a run of three or more of the same letter, test `collapse_runs(t, 2)` and `collapse_runs(t, 1)` against the lists → conf 0.8, reason `"elongated"`. Tokens without such a run never use collapsed forms, so `as` never matches `ass`.
 3. Embedded: token contains an `EMBEDDED` word as a substring → conf 0.8, reason `"embedded"`, span is the whole token.
-4. Wildcard (obfuscation=True): token from the *raw* text matches `[\w*#@$!]+` with at least one of `* # @ $ !` and at least two letters; each symbol is treated as a one-letter wildcard; if exactly one strong-list word of the same length matches → conf 0.9, reason `"masked"`; if more than one matches → conf 0.6, reason `"masked_ambiguous"`; if a match is also an ordinary word in `ENGLISH_WORDS` (e.g. `d*ck` → `duck`) confidence drops to 0.6. Wildcard is never applied to the mild list.
+4. Wildcard (obfuscation=True): token from the *raw* text matches `[\w*#@$!]+` with at least one of `* # @ $ !` and at least two letters; each symbol is treated as a one-letter wildcard; if exactly one strong-list word of the same length matches → conf 0.9, reason `"masked"`; if more than one matches → conf 0.6, reason `"masked_ambiguous"`; if the wildcard pattern also fits an ordinary word in `ENGLISH_WORDS` (e.g. `sh*t` → `shot`) confidence drops to 0.6. Bare-digit checksum forms need a keyword because a random number passes mod-11 or Verhoeff about one time in ten. `dick` is not listed because it is a common name; its compounds are. Wildcard is never applied to the mild list.
 5. Spaced (obfuscation=True): a run of three or more consecutive single-letter tokens separated only by spaces, dots or hyphens is joined and tested as an exact token → conf 0.8, reason `"spaced"`, span covers the run.
 
 Multi-word entries are checked as sliding windows over the normalised token stream before single-token matching. The allowlist (normalised) suppresses any finding whose span text normalises to an allowlisted entry. `kind` is always `"profanity"`; the tier is in `reason` and drives confidence.
