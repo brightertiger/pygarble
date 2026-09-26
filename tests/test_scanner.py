@@ -300,3 +300,12 @@ def test_email_inside_url_credentials_is_not_reported():
     assert Scanner(["pii"]).scan(text).kinds() == ("email",)
     plain = Scanner().scan("db https://example.com/app mail bob@example.com")
     assert plain.kinds() == ("email",)
+
+
+def test_dir_lists_lazy_names_and_hides_typing_helpers():
+    names = dir(pygarble)
+    for name in pygarble.__all__:
+        assert name in names
+    for leaked in ("Any", "TYPE_CHECKING", "List"):
+        assert leaked not in names
+    assert names == sorted(names)
