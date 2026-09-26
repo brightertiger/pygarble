@@ -182,16 +182,22 @@ KNOWN_PATTERNS: Tuple[Dict[str, Any], ...] = (
         "private_key",
         r"-----BEGIN (?:RSA |EC |DSA |OPENSSH |PGP |ENCRYPTED )?PRIVATE KEY"
         r"(?: BLOCK)?-----"
-        # With END: the span runs to END. Without END: the base64 body. A
-        # body "-" may not start a "-----" marker, which keeps the scan from
-        # running past the next BEGIN line (linear time).
-        r"(?:(?:[A-Za-z0-9+/=\s:,]|-(?!----))*?-----END (?:RSA |EC |DSA "
-        r"|OPENSSH |PGP |ENCRYPTED )?PRIVATE KEY(?: BLOCK)?-----"
-        r"|[A-Za-z0-9+/=\r\n]*)",
+        # With END: the span runs to END; the body may hold any text (armor
+        # headers such as "Version: GnuPG v2 (GNU/Linux)") but a "-" may not
+        # start a "-----" marker, so the scan stops at the next marker
+        # (linear time). Without END: consecutive non-blank lines after
+        # BEGIN, stopping at the first blank line or the end of the text.
+        r"(?:(?:[^-]|-(?!----))*?-----END (?:RSA |EC |DSA |OPENSSH |PGP "
+        r"|ENCRYPTED )?PRIVATE KEY(?: BLOCK)?-----"
+        r"|(?:[^\n]|\n(?![ \t]*(?:\n|$)))*)",
         1.0,
         [
             "-----BEGIN PRIVATE KEY-----\nMIIE\n-----END PRIVATE KEY-----",
             "-----BEGIN RSA PRIVATE KEY-----\nMIIEowIBAAKCAQEA\n",
+            "-----BEGIN PGP PRIVATE KEY BLOCK-----\n"
+            "Version: GnuPG v2.0.22 (GNU/Linux)\n"
+            "Comment: user@example.com\n\nlQOYBF\n"
+            "-----END PGP PRIVATE KEY BLOCK-----",
         ],
         ["-----BEGIN CERTIFICATE-----"],
         raw=True,

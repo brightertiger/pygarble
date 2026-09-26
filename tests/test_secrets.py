@@ -204,6 +204,7 @@ def test_export_carries_short_value_rule():
         "a_" * 50000,
         "com.example.service.module." * 4000,
         "-----BEGIN PRIVATE KEY-----\n" * 3500,
+        "-----BEGIN PGP PRIVATE KEY BLOCK-----\nVersion: x (y)\n" * 2000,
         "password=" * 12000,
         "password" * 12000,
     ],
@@ -215,11 +216,34 @@ def test_adversarial_inputs_scan_in_linear_time(text):
     assert time.perf_counter() - started < 0.5
 
 
-def test_truncated_private_key_covers_its_body():
-    text = "-----BEGIN RSA PRIVATE KEY-----\nMIIEowIBAAKCAQEA\nAB==\n"
-    (finding,) = detect(text + "next: line")
+def test_truncated_private_key_stops_at_blank_line():
+    text = (
+        "cfg\n-----BEGIN RSA PRIVATE KEY-----\n"
+        "Proc-Type: 4,ENCRYPTED\nMIIEowIBAAKCAQEA\nAB==\n\nnext"
+    )
+    (finding,) = detect(text)
     assert finding.kind == "private_key"
-    assert text[finding.start : finding.end] == text
+    assert finding.start == text.index("-----BEGIN")
+    assert finding.end == text.index("\n\nnext")
+
+
+def test_truncated_private_key_at_end_of_text():
+    text = "-----BEGIN PRIVATE KEY-----\nMIIEowIBAAKCAQEA\n"
+    (finding,) = detect(text)
+    assert (finding.start, finding.end) == (0, len(text) - 1)
+
+
+def test_pgp_armor_headers_stay_inside_the_span():
+    text = (
+        "key:\n-----BEGIN PGP PRIVATE KEY BLOCK-----\n"
+        "Version: GnuPG v2.0.22 (GNU/Linux)\n"
+        "Comment: user@example.com\n\nlQOYBFx0AB==\n=Xy9z\n"
+        "-----END PGP PRIVATE KEY BLOCK-----\ntail"
+    )
+    (finding,) = detect(text)
+    assert finding.kind == "private_key"
+    assert finding.start == text.index("-----BEGIN")
+    assert finding.end == text.index("\ntail")
 
 
 @pytest.mark.parametrize(
