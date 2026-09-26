@@ -132,7 +132,7 @@ gibberish detection and provides no evaluation of the newer screening modules.
 An author-requested, AI-assisted external evaluation has now been executed
 using the published corpus [@gaskell2022]. Its frozen protocol, source hashes,
 code, predictions and report are available in
-[paper/study](https://github.com/brightertiger/pygarble/tree/docs/joss-submission/paper/study).
+[paper/study](https://github.com/brightertiger/pygarble/tree/main/paper/study).
 The full experiment processes every released labelled document: 38 gibberish
 transcripts and 71 meaningful texts, comprising 79,969 consecutive chunks.
 English controls are primary; the other 67 meaningful documents are reported
@@ -165,15 +165,15 @@ corpus study design, implementation, execution, analysis and draft text. This dr
 Automated tests and CI provide implementation checks; they do not replace
 human review of the manuscript or scientific claims.
 
-TODO: The author must verify this account, record model versions where known,
-and describe Claude's scope of assistance. After personally reviewing
+Claude assisted with coding and running comparison experiments; exact model
+versions were not recorded. The author must verify this disclosure. After personally reviewing
 and validating the material, confirm human responsibility for core design
 decisions and all AI-assisted outputs. That confirmation is not asserted here
 on the authors' behalf.
 
 # Acknowledgements
 
-TODO: Confirm contributors, funding and other acknowledgements. If there
-was no funding, confirm that explicitly before replacing this placeholder.
+The author confirms that this work received no funding and declares no
+conflicts of interest. The author is the developer of pygarble.
 
 # References

@@ -8,13 +8,33 @@ import sys
 import unicodedata
 from collections import defaultdict
 from pathlib import Path
+from typing import Any, Dict, List
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from pygarble import EnsembleDetector, GarbleDetector, Strategy, __version__
-from regression.benchmark import load_test_cases
 
 ROOT = Path(__file__).resolve().parent
+
+
+def load_test_cases(json_path: str) -> List[Dict[str, Any]]:
+    with open(json_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    all_cases = []
+    for category_data in data["test_cases"]:
+        category = category_data["category"]
+        source = category_data.get("source", "internal")
+        for case in category_data["cases"]:
+            all_cases.append(
+                {
+                    "category": category,
+                    "source": source,
+                    "text": case["text"],
+                    "expected": case["expected_garbled"],
+                }
+            )
+    return all_cases
 
 
 def reviewed_legacy():

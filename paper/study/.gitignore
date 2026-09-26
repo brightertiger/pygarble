@@ -8,3 +8,8 @@ __pycache__/
 *.synctex.gz
 reproduction/
 reproduction-full/
+
+# Derived previews; retain only the two figures used by the manuscript.
+figures/*
+!figures/chunk-confusions.pdf
+!figures/full-languages.pdf

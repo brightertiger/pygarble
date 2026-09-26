@@ -1,19 +1,27 @@
 # Complete published-corpus comparison
 
 Start with [the revised software-and-evaluation PDF](manuscript.pdf),
-[full results](full-results/report.md) and [submission handoff](submission.md).
+[full results](full-results/report.md) and [publication status](../README.md#publication-status).
 The main experiment evaluates every released labelled document from the
 published GitHub collection: **109 documents, 31,964,664 normalized characters,
 79,969 chunks**, with identical inputs for pygarble and a pinned local
 Hugging Face DistilBERT classifier. All source labels are inherited; no new
-human annotation or audit is performed. The arXiv workflow has been opened as an unfinished draft; nothing has been
-submitted for announcement.
+human annotation or audit is performed. The authorized arXiv submission is blocked before upload by cs.CL endorsement.
 
 The primary comparison uses all 38 gibberish documents and all text in four
 English controls (5,200 negative chunks). The other 67 meaningful documents
 are a separate language diagnostic. This avoids turning meaningful foreign
 languages into invented positive labels or treating 80,000 correlated chunks
 as independent research samples. See the [fixed extension protocol](full_corpus_protocol.md).
+
+## Quick checks
+
+From the repository root, `make benchmark-check` runs the 25 standard-library
+study tests, including saved confusion-count verification. CI runs this without
+model dependencies. `make benchmark-prepare` downloads pinned assets, and
+`make benchmark` runs a new comparison to ignored `reproduction-full/` after
+the optional environment is installed. These commands do not replace the
+paper's frozen `full-results/`.
 
 ## Reproduce the complete comparison
 
@@ -81,8 +89,10 @@ python -m paper.study.build_paper
 ```
 
 Edit `manuscript.template.md`; `full_paper.py` inserts measured tables and
-numerical placeholders. `build_paper.py` generates Markdown, TeX, PDF and the
-review source archive. See [validation](validation.md) for executed checks.
+numerical placeholders. `build_paper.py` generates Markdown, TeX and the review
+source archive under ignored `.cache/publication/`, and updates the tracked
+`manuscript.pdf` for review. Only the two referenced figure PDFs are retained
+in Git; optional figure previews can be regenerated. See [validation](validation.md) for executed checks.
 `article.tex` supplies the two-column article layout; `tables.lua` renders
 numbered table floats. The title and body foreground pygarble's architecture
 and detection strategies before presenting the comparison. Wide appendix
@@ -96,7 +106,7 @@ recounts all target-comparison predictions.
 
 The separate JOSS-format software draft is `../paper.md`. Funding, conflicts,
 Claude's assistance and the arXiv license choice have been confirmed. The
-revised scientific text remains under author review; see the submission handoff.
+arXiv workflow awaits category endorsement; see the publication status.
 
 ## Artifact map
 

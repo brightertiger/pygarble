@@ -85,6 +85,11 @@ those examples separately with their dependencies installed.
 Data and evaluation
 -------------------
 
+Use :doc:`benchmarks` for the paper-based research benchmark.
+``make benchmark-check`` runs its fast offline checks; full inference is
+optional and writes new outputs rather than replacing paper results.
+
+
 .. code-block:: bash
 
    python scripts/generate_data.py --check

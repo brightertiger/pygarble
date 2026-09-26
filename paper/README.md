@@ -1,70 +1,55 @@
-# Publication preparation
+# pygarble paper and benchmark
 
-Status: revised paper under author review; an unfinished arXiv workflow draft
-is open, but no submission for announcement has been completed.
-The study was run without a new human label audit, as requested. A journal
-acceptance or Scholar indexing outcome is not guaranteed.
+The [paper PDF](study/manuscript.pdf) describes pygarble's architecture and
+strategies, then evaluates gibberish detection against local DistilBERT.
+[Study instructions](study/README.md), [full results](study/full-results/report.md)
+and [validation](study/validation.md) explain the data, reproduction and limits.
+The paper study is the reference for reported gibberish benchmark results;
+`regression/` retains fast engineering checks for the broader library.
 
-Start with the [full study report](study/full-results/report.md),
-[review manuscript PDF](study/manuscript.pdf) and
-[study reproduction instructions](study/README.md). All new research code,
-provenance, results, figures and the empirical manuscript are in `study/`.
-The [JOSS-format software draft](paper.md) remains separate from that empirical
-paper and cites the completed workflow. Both need the author's review.
+## Contents
 
-Confirmed author: Ujjwal Singh Rao, Independent Researcher, India.
-[Scholar profile](https://scholar.google.com/citations?user=tf4MVAgAAAAJ&hl=en).
-No ORCID has been supplied. The budget ceiling is US$100; no paid external
-services have been procured for the study. Package publication remains deferred.
+- `study/manuscript.template.md`, `references.bib`, `article.tex`, `tables.lua`
+  and the two referenced figure PDFs: editable paper sources and layout.
+- `study/manuscript.pdf`: review copy, retained for easy access.
+- `study/`: pinned protocols, provenance, study code and tests.
+- `study/full-results/`: frozen complete-corpus measurements and predictions.
+- `study/results/`: preliminary results referenced by the paper; these overlap
+  the full corpus and are not independent replication.
+- `paper.md`, `paper.bib`: separate short JOSS-format software draft.
 
-## What is complete
+Generated Markdown, TeX and the upload archive live in ignored
+`study/.cache/publication/`. Rebuild from the repository root with `make paper`
+(Pandoc and Tectonic required). This updates the review PDF and creates
+`study/.cache/publication/review-source.tar.gz`. The bundle contains compilable
+TeX, bibliography and both figures, not raw corpus text or model weights.
+Obsolete planning documents and duplicate previews are retained in Git history.
+Historical paths mentioned by the frozen protocols refer to that earlier
+revision; the protocols themselves remain unchanged for provenance.
 
-- Frozen published-corpus protocol and pinned, checksum-verified retrieval.
-- Exhaustive evaluation of 109 labelled documents: 38 gibberish transcripts,
-  four English controls and 67 other-language meaningful documents.
-- Identical 400-character chunks for pygarble and a pinned local HF DistilBERT
-  benchmark: 79,969 chunks, without a sampling cap or silent truncation.
-- Fixed package profiles, two explicit transformer label policies, document
-  aggregation sensitivity and comparative CPU/RSS measurements.
-- Retained preliminary character-model calibration and length experiments.
-- Inherited source labels; no new human annotation, audit or invented labels.
-- Prediction-level results, figures, empirical draft and local PDF build.
-- Exhaustive saved-output checks and a fixed offline neural subset replay.
-- Separate preliminary reproduction in a standard-library-only environment.
+## Publication status
 
-See [validation](study/validation.md) for exact checks and limitations. The
-existing PR CI does not automatically execute the new study-specific tests;
-those are run separately and have an explicit reproduction command.
+Author: **Ujjwal Singh Rao**, with a name-only paper byline. The author confirmed
+no funding, no conflicts, Codex assistance and Claude's coding/experiment
+assistance. The author is also the software's developer. No ORCID was supplied.
 
-## What remains before submission
+The author authorized arXiv submission and selected the perpetual,
+non-exclusive distribution license. The Chrome workflow is blocked before
+upload because the account needs **cs.CL endorsement**. arXiv sent the request
+to the author's email. No paper has been submitted for announcement or accepted;
+a public identifier must not be invented. Once endorsement is granted, resume
+the existing draft, upload the rebuilt bundle, and check arXiv's compiled PDF
+and final metadata. Local compilation does not verify arXiv's TeX environment.
+See [arXiv's endorsement instructions](https://info.arxiv.org/help/endorsement.html).
 
-1. The author reviews the scientific claims, scope, methods and drafts. This
-   review is distinct from a dataset audit; no new dataset audit is planned.
-2. Funding (none), conflicts (none), Claude's coding/experiment assistance and
-   the perpetual non-exclusive arXiv license have been confirmed. The revised
-   paper uses only the author's name in its byline.
-3. Finish the authorized arXiv submission after the current manuscript review
-   and factual author declarations. Category, endorsement, compilation and
-   moderation requirements still apply.
-4. Assess JOSS's substantial-software-contribution and public-development
-   requirements. The completed analysis improves the evidence available but
-   does not guarantee scope acceptance or independent adoption.
-5. Finalize an appropriate software release/archive and update the short JOSS
-   paper. Disclose the related empirical manuscript; do not submit it to JOSS
-   as a results-focused software article.
+The JOSS draft is separate and still requires assessment against the journal's
+software contribution, development history, research use and archival-release
+requirements. The completed author-led evaluation is not independent adoption.
+Disclose the related manuscript; do not submit the longer empirical article as
+the short JOSS paper. Official Inara rendering has not run locally because
+Docker is unavailable; the generic Pandoc citation preview has passed.
 
-The [submission handoff](study/submission.md) records the review and publishing
-steps. JOSS's current policy requires human-written author/editor/reviewer
-conversations except translation; see its
-[submission requirements](https://joss.readthedocs.io/en/latest/submitting.html).
-
-## JOSS draft preview
-
-```bash
-cd paper
-pandoc paper.md --citeproc --standalone --to html -o /tmp/pygarble-paper.html
-```
-
-This checks citations, not the official JOSS layout. The empirical manuscript
-has a compiled PDF; the official JOSS PDF has not been built with Inara/Docker.
-Docker is unavailable in the current environment.
+No paid service has been procured; the external-spend ceiling remains US$100.
+Package publication remains deferred. After an actual public release, add the
+real paper links/citation metadata and check Scholar indexing; neither journal
+acceptance nor indexing is guaranteed.

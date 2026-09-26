@@ -125,5 +125,5 @@ All 28 strategies remain individually available. Check both valid English inputs
 and expected corruption, including domain terms, identifiers, and short strings.
 Scores are not calibrated probabilities, and no strategy guarantees zero false
 positives. See :doc:`api` for voting and abstention, and :doc:`migration` for changes
-from the previous default. A conditional-trigram experiment remains in repository
-evaluation tooling; no additional trigram model is shipped by 0.10.0.
+from the previous default. The earlier conditional-trigram experiment is retained in Git history;
+no additional trigram model is shipped by 0.10.0.

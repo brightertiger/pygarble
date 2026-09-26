@@ -37,7 +37,7 @@ code and results. No package configuration or scoring threshold was changed.
 - The revised nine-page paper uses a two-column article body and references,
   with full-width appendices. The PDF and all figures/tables were visually
   inspected. Every extracted text block fits inside its page. An isolated
-  extraction of `review-source.tar.gz` compiled with identical extracted page
+  extraction of `.cache/publication/review-source.tar.gz` compiled with identical extracted page
   text and no overfull boxes. Eight distinct underfull-line warning locations
   remain; these concern justified spacing, not clipped text. All six citation
   keys resolve. The author byline is exactly Ujjwal Singh Rao.
@@ -46,6 +46,10 @@ code and results. No package configuration or scoring threshold was changed.
 - All 130 frozen source hashes still match the full-run manifest. Only
   reporting, manuscript and build files changed; the inference run and fixed
   replay were not repeated for a presentation-only revision.
+- After repository cleanup, `make paper` rebuilt from the relocated generated
+  files in `.cache/publication/`. Its nine-page extracted text matched the
+  pre-cleanup PDF exactly; an isolated upload-bundle build matched again.
+  All 130 frozen source hashes remained unchanged.
 - The JOSS software draft's citations parsed in a generic Pandoc HTML preview.
   Official JOSS Inara/Docker rendering has not run; Docker is unavailable.
 
@@ -85,16 +89,17 @@ The isolated PDF check used PyMuPDF to compare extracted text and page bounds;
 PDF compilation uses Pandoc and Tectonic. The model dependencies and measured
 versions are recorded separately from the dependency-free package. Existing
 PR CI covers library tests, optional backends, quality, docs and packaging;
-it does not discover these study-specific tests, which were run explicitly.
+a separate CI study job now runs the 25 standard-library study tests without
+neural dependencies. Full inference and PDF compilation remain local checks.
 Check the PR's latest commit before any merge.
 
 ## Scope and spending
 
 Source labels were inherited without a new human annotation/audit. Automated
 verification checks computations, not the scientific adequacy of those labels.
-Author review of the revised methods, claims and AI-assisted text is in progress.
+The author authorized submission after the manuscript revisions.
 Funding, conflicts, AI assistance and the arXiv license choice are confirmed.
 No paid data, inference endpoint, annotation service, cloud compute or
 publication service was procured. Additional external-service spend: US$0,
-excluding existing subscriptions and hardware. An unfinished arXiv draft is open; no paper has been submitted for announcement,
+excluding existing subscriptions and hardware. arXiv requires cs.CL endorsement before upload; no paper has been submitted for announcement,
 package release published, merge performed or indexing outcome asserted.

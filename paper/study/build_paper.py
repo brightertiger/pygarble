@@ -3,11 +3,13 @@
 import argparse
 import gzip
 import io
+import shutil
 import subprocess
 import tarfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
+BUILD = ROOT / ".cache" / "publication"
 
 
 def render() -> str:
@@ -27,13 +29,13 @@ def bundle_review() -> None:
     stream = io.BytesIO()
     with tarfile.open(fileobj=stream, mode="w") as archive:
         for name in names:
-            raw = (ROOT / name).read_bytes()
+            raw = (BUILD / name).read_bytes()
             info = tarfile.TarInfo(name)
             info.size = len(raw)
             info.mtime = 0
             info.mode = 0o644
             archive.addfile(info, io.BytesIO(raw))
-    (ROOT / "review-source.tar.gz").write_bytes(
+    (BUILD / "review-source.tar.gz").write_bytes(
         gzip.compress(stream.getvalue(), mtime=0)
     )
 
@@ -42,11 +44,18 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--skip-pdf", action="store_true")
     args = parser.parse_args()
-    (ROOT / "manuscript.md").write_text(render(), encoding="utf-8")
+    (BUILD / "figures").mkdir(parents=True, exist_ok=True)
+    for name in (
+        "references.bib",
+        "figures/chunk-confusions.pdf",
+        "figures/full-languages.pdf",
+    ):
+        shutil.copy2(ROOT / name, BUILD / name)
+    (BUILD / "manuscript.md").write_text(render(), encoding="utf-8")
     subprocess.run(
         [
             "pandoc",
-            "manuscript.md",
+            str(BUILD / "manuscript.md"),
             "--citeproc",
             "--standalone",
             "--number-sections",
@@ -55,13 +64,14 @@ def main() -> None:
             "--to",
             "latex",
             "--output",
-            "manuscript.tex",
+            str(BUILD / "manuscript.tex"),
         ],
         cwd=ROOT,
         check=True,
     )
     if not args.skip_pdf:
-        subprocess.run(["tectonic", "manuscript.tex"], cwd=ROOT, check=True)
+        subprocess.run(["tectonic", "manuscript.tex"], cwd=BUILD, check=True)
+        shutil.copy2(BUILD / "manuscript.pdf", ROOT / "manuscript.pdf")
     bundle_review()
 
 

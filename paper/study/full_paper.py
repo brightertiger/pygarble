@@ -269,4 +269,4 @@ def render() -> str:
 
 
 if __name__ == "__main__":
-    (ROOT / "manuscript.md").write_text(render())
+    print(render())
