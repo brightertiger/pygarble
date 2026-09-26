@@ -1,4 +1,9 @@
-# Dataset candidates
+# Dataset candidates (historical shortlist)
+
+Superseded for the executed study: the author selected the published GitHub
+collection only, with no new human label audit. See [the frozen protocol](study/protocol.md)
+and [results](study/results/report.md). The unexecuted proposals below are
+retained as background, not current requirements.
 
 Metadata reviewed on 26 September 2026. This is a source shortlist, not an
 acquired or validated benchmark. Dataset contents, versions and hashes still

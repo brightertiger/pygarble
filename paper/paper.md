@@ -11,12 +11,12 @@ authors:
 affiliations:
   - name: 'Independent Researcher, India'
     index: 1
-date: 26 September 2026
+date: 27 September 2026
 bibliography: paper.bib
 ---
 
-> Working draft. Research-use evidence and disclosure review
-> remain incomplete. This manuscript has not been submitted to JOSS.
+> Working draft. A reproducible evaluation is available for author review;
+> disclosure and submission-readiness review remain incomplete. This manuscript has not been submitted to JOSS.
 
 # Summary
 
@@ -47,17 +47,18 @@ missing a sensitive identifier can leave material requiring further review.
 A configurable first pass can make these decisions explicit and reproducible
 without requiring a remote inference service.
 
-Potential research applications include checking collected text before
-corpus analysis and inspecting outputs from text-generation experiments.
-These are candidate applications, not evidence of adoption. The proposed
-contribution is a common local screening interface with separable detection
-policies, inspectable evidence and controlled dependencies. Its research
-value must be demonstrated in a concrete workflow, including why these
-properties matter to that workflow's data and constraints.
+The accompanying research workflow evaluates published human-produced
+gibberish and English comparison texts [@gaskell2022]. It records source
+classifications, detector scores, applicability and false flags, and compares
+fixed profiles with local character models. This provides a concrete use of
+pygarble for investigating the limits of inexpensive text filters. The shared
+analysis interface makes configuration differences inspectable without
+requiring remote inference. It does not supply contextual semantic judgments.
 
-TODO: Identify the actual research application, its users and the problem
-that motivated development. Explain how pygarble is used in that work and
-provide a supporting reference or reproducible example.
+The contribution is a maintained, configurable library and reproducible
+workflow for composing local screening policies. The independent performance
+of each component remains a separate question; this evaluation does not
+establish the research performance of PII, secret or profanity screening.
 
 # State of the field
 
@@ -81,9 +82,12 @@ secret scanners remain relevant alternatives. A narrow rule set also trades
 contextual coverage for simplicity: word matching does not assess toxicity,
 and structured-identifier checks do not recognize every personal reference.
 
-TODO: Complete the research-specific comparison and justify maintaining a
-separate package rather than extending an existing project. Identify the
-scholarly contribution beyond combining existing capabilities.
+The accompanying comparison includes single-strategy references and locally
+trained character bigram/trigram baselines. Word lookup outperformed the
+default ensembles on the small published collection. This finding argues
+for explicit configuration and evaluation, not a claim of ensemble superiority.
+The software's significance beyond this workflow remains for author and
+editorial assessment; combining existing tools alone does not establish it.
 
 # Software design
 
@@ -123,27 +127,33 @@ therefore documents independent recognition of a potential application,
 not deployment or a measured contribution to Trident's results. It concerns
 gibberish detection and provides no evaluation of the newer screening modules.
 
-TODO: Supply verifiable evidence of actual research use, at least by the
-developer. A prospective application and engineering tests do not establish
-that the software has been used in a research analysis.
+An author-requested, AI-assisted external evaluation has now been executed
+using the published corpus [@gaskell2022]. Its frozen protocol, source hashes,
+code, predictions and report are available in
+[paper/study](https://github.com/brightertiger/pygarble/tree/docs/joss-submission/paper/study).
+At 400 characters, the default English profile detected 16 of 38 released
+gibberish transcripts; word lookup detected all 38 with no false flags in
+400 selected blocks from four English control documents. Separate
+source-held-out calibration exposed substantial false-positive shifts.
+These are collection-specific measurements, not population accuracy claims.
 
-The repository currently supplies automated tests, frozen detector outputs,
-labelled English challenge cases, screening vectors and synthetic timing
-scripts. These materials support checking implementation consistency and
-examining known error cases. They do not constitute an independent sample of
-research data or a general accuracy estimate. A research evaluation should
-report the chosen configuration, data provenance, annotation procedure,
-false-positive and false-negative behavior, and how those errors affect the
-downstream analysis. Runtime measurements should separate scanner construction,
-steady-state work and optional subprocess overhead. No comparative speed or
-accuracy claim is made in this draft.
+The workflow retains supplied classifications without a new human label
+audit. Limited source diversity, historical spelling, source/class confounding
+and unknown participant dependencies constrain interpretation. An automated
+rerun in a fresh virtual environment reproduced deterministic results byte
+for byte; this is not an independent human reproduction or manuscript review.
+The study establishes an executed research workflow for author review,
+without claiming external adoption, downstream improvement or automatic JOSS
+eligibility. The broader repository supplies tests, CI, example workflows
+and regression corpora to support continued maintenance and reuse.
 
 # AI usage disclosure
 
 The author reports using OpenAI Codex and Anthropic Claude. Codex assisted
 with repository development and documentation work,
 including module organization, optional backend integration, validation work
-and preparation of this manuscript. This drafting session uses GPT-6.
+and preparation of this manuscript. Codex also assisted with the published-
+corpus study design, implementation, execution, analysis and draft text. This drafting session uses GPT-6.
 Automated tests and CI provide implementation checks; they do not replace
 human review of the manuscript or scientific claims.
 

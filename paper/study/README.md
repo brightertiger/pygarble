@@ -28,6 +28,23 @@ Compare deterministic `predictions.csv.gz`, `summary.json`, `calibration.json`,
 environment metadata intentionally vary by run. Inspect the code manifest to
 identify the exact scripts and library resources used.
 
+## Review draft and figures
+
+Start with [the 7-page PDF](manuscript.pdf) and [submission handoff](submission.md).
+To rebuild tables from the saved results and compile the paper:
+
+```bash
+# Optional plotting dependencies, preferably in a separate environment:
+python -m pip install -r paper/study/requirements-figures.txt
+python -m paper.study.figures
+# Requires Pandoc and Tectonic:
+python -m paper.study.build_paper
+```
+
+Editing `manuscript.template.md` preserves generated numerical tables.
+The compiled paper is a review draft with outstanding author declarations.
+The short JOSS software draft is `../paper.md`.
+
 ## Files
 
 - `protocol.md`: frozen methods, data rules, calibration and limitations.
@@ -37,6 +54,9 @@ identify the exact scripts and library resources used.
 - `metrics.py`: source-level summaries and descriptive uncertainty.
 - `run.py`, `runtime.py`: evaluation and isolated CPU/RSS measurement.
 - `test_study.py`: meaningful checks of grouping, thresholds and statistics.
+- `verify_results.py`: saved-output, frozen-code and public-API verification.
+- `figures.py`, `build_paper.py`: plots and manuscript generation.
+- `validation.md`, `validation.json`: exact executed checks and their limits.
 - `results/`: full metrics and predictions; start with `results/report.md`.
 - `deviations.md`: corrections or departures from the frozen protocol.
 

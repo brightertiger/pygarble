@@ -1,0 +1,12 @@
+{
+  "label_origin": "published source classifications",
+  "library_git_revision": "22f30d83c05ebb871b1f2954dc9dcf2e8c25c873",
+  "machine": "arm64",
+  "new_human_label_audit": false,
+  "paid_services_used": false,
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "pygarble_version": "0.11.0",
+  "python": "3.12.2 | packaged by conda-forge | (main, Feb 16 2024, 20:54:21) [Clang 16.0.6 ]",
+  "run_timestamp_utc": "2026-09-26T18:33:14.802579+00:00",
+  "study_protocol_sha256": "bda1dc0077c3f361c355999d47caf615f1ff1da34a4ef229c2e4bbe4caf5d719"
+}
