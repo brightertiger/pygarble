@@ -6,36 +6,36 @@ from typing import TYPE_CHECKING as _TYPE_CHECKING
 from typing import Any as _Any
 from typing import List as _List
 
-from .analysis import Analysis, Signal, Span
 from .findings import Finding, Redaction, ScanReport
+from .gibberish.analysis import Analysis, Signal, Span
 
 if _TYPE_CHECKING:
-    from .calibration import CalibrationReport as CalibrationReport
-    from .calibration import ThresholdPoint as ThresholdPoint
-    from .calibration import calibrate as calibrate
-    from .core import EnsembleDetector as EnsembleDetector
-    from .core import GarbleDetector as GarbleDetector
-    from .core import Strategy as Strategy
-    from .pii import PIIDetector as PIIDetector
-    from .profanity import ProfanityDetector as ProfanityDetector
+    from .gibberish.calibration import CalibrationReport as CalibrationReport
+    from .gibberish.calibration import ThresholdPoint as ThresholdPoint
+    from .gibberish.calibration import calibrate as calibrate
+    from .gibberish.core import EnsembleDetector as EnsembleDetector
+    from .gibberish.core import GarbleDetector as GarbleDetector
+    from .gibberish.core import Strategy as Strategy
     from .scanner import Scanner as Scanner
     from .scanner import redact as redact
     from .scanner import scan as scan
-    from .secrets import SecretsDetector as SecretsDetector
+    from .screening.pii import PIIDetector as PIIDetector
+    from .screening.profanity import ProfanityDetector as ProfanityDetector
+    from .screening.secrets import SecretsDetector as SecretsDetector
 
 _LAZY = {
-    "GarbleDetector": ("core", "GarbleDetector"),
-    "EnsembleDetector": ("core", "EnsembleDetector"),
-    "Strategy": ("core", "Strategy"),
-    "CalibrationReport": ("calibration", "CalibrationReport"),
-    "ThresholdPoint": ("calibration", "ThresholdPoint"),
-    "calibrate": ("calibration", "calibrate"),
+    "GarbleDetector": ("gibberish.core", "GarbleDetector"),
+    "EnsembleDetector": ("gibberish.core", "EnsembleDetector"),
+    "Strategy": ("gibberish.core", "Strategy"),
+    "CalibrationReport": ("gibberish.calibration", "CalibrationReport"),
+    "ThresholdPoint": ("gibberish.calibration", "ThresholdPoint"),
+    "calibrate": ("gibberish.calibration", "calibrate"),
     "Scanner": ("scanner", "Scanner"),
     "scan": ("scanner", "scan"),
     "redact": ("scanner", "redact"),
-    "SecretsDetector": ("secrets", "SecretsDetector"),
-    "PIIDetector": ("pii", "PIIDetector"),
-    "ProfanityDetector": ("profanity", "ProfanityDetector"),
+    "SecretsDetector": ("screening.secrets", "SecretsDetector"),
+    "PIIDetector": ("screening.pii", "PIIDetector"),
+    "ProfanityDetector": ("screening.profanity", "ProfanityDetector"),
 }
 
 __all__ = [

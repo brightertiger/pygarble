@@ -19,6 +19,50 @@ their four-category defaults for compatibility. Existing imports of
 they are also exported from ``pygarble.screening``. Detector implementations
 and collection/redaction logic are shared between the two APIs.
 
+Code layout and compatibility
+-----------------------------
+
+Native screening implementations and their rules live together:
+
+.. code-block:: text
+
+   pygarble/
+     screening/
+       pii/          # detector, patterns and checksums
+       profanity/    # detector, normalization and word lists
+       secrets/      # detector, patterns and entropy
+       backends/     # optional local integrations
+       scanner.py    # three-category API
+     gibberish/
+       detector.py
+       ensemble.py
+       strategies/
+       analysis.py
+       calibration.py
+       preprocessing.py
+       registry.py
+       scoring.py
+       options.py
+     data/           # shared dictionaries and portable JSON tables
+     findings.py     # shared result types
+     redaction.py
+     validation.py
+     scanner.py      # compatible four-category API
+
+Use ``from pygarble.gibberish import GarbleDetector, EnsembleDetector,
+Strategy`` for the gibberish API. Top-level exports and previous paths such
+as ``pygarble.core``, ``pygarble.detector``, ``pygarble.strategies.base``,
+``pygarble.pii.patterns`` and ``pygarble.profanity.wordlist`` remain supported.
+The old files are compatibility pointers, so detector classes, strategy
+enums, rule tables and caches are shared, not duplicated. The strategy
+package forwards its exports lazily. Existing pickles referencing old paths
+still load; class introspection and new pickles use the canonical paths.
+No defaults, scores, redaction behavior or CLI commands change.
+
+The gibberish engine and optional backends are still loaded only when used.
+The root package imports lightweight gibberish result types; importing
+screening does not load the ensemble, strategies or model tables.
+
 Installation and explicit selection
 ------------------------------------
 

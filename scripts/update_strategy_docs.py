@@ -7,9 +7,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from pygarble.ensemble import PROFILES
-from pygarble.options import PARAMETERS
-from pygarble.registry import STRATEGY_MAP, Strategy
+from pygarble.gibberish.ensemble import PROFILES
+from pygarble.gibberish.options import PARAMETERS
+from pygarble.gibberish.registry import STRATEGY_MAP, Strategy
 
 
 def render() -> str:

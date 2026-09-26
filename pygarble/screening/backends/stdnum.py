@@ -4,9 +4,9 @@ import re
 from typing import Callable, Dict, Iterable, List, Tuple
 
 from ...findings import Finding, sort_key
-from ...pii.patterns import IBAN
 from .._engine import _names
 from ..base import check_text, optional_module
+from ..pii.patterns import IBAN
 
 # format -> (kind, candidate expression). A broad number validator alone
 # cannot establish that arbitrary digits in prose are a personal identifier.

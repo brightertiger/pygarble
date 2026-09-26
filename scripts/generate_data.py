@@ -350,9 +350,13 @@ def main() -> None:
         write_json(sorted(trigrams), directory / "trigrams.json")
         if str(PROJECT_ROOT) not in sys.path:
             sys.path.insert(0, str(PROJECT_ROOT))
-        from pygarble.pii.patterns import export as pii_export
-        from pygarble.profanity.wordlist import export as profanity_export
-        from pygarble.secrets.patterns import export as secrets_export
+        from pygarble.screening.pii.patterns import export as pii_export
+        from pygarble.screening.profanity.wordlist import (
+            export as profanity_export,
+        )
+        from pygarble.screening.secrets.patterns import (
+            export as secrets_export,
+        )
 
         secrets_table = secrets_export()
         pii_table = pii_export()

@@ -1,26 +1,10 @@
-"""Shared deterministic character likelihood primitives."""
+"""Compatibility pointer to :mod:`pygarble.gibberish.scoring`."""
 
-import math
-from typing import Iterable, Tuple
+from typing import TYPE_CHECKING
 
+from ._compat import alias_module as _alias_module
 
-def sigmoid(value: float) -> float:
-    return 1.0 / (1.0 + math.exp(-max(-50.0, min(50.0, value))))
+if TYPE_CHECKING:
+    from .gibberish.scoring import *  # noqa: F401,F403
 
-
-def bigram_stats(words: Iterable[str]) -> Tuple[float, int]:
-    from .data import BIGRAM_LOG_PROBS, DEFAULT_LOG_PROB
-
-    total = 0.0
-    count = 0
-    for word in words:
-        padded = " " + word + " "
-        for i in range(len(padded) - 1):
-            total += BIGRAM_LOG_PROBS.get(padded[i : i + 2], DEFAULT_LOG_PROB)
-            count += 1
-    return total, count
-
-
-def word_log_probability(word: str) -> float:
-    total, count = bigram_stats((word,))
-    return total / count
+_alias_module(__name__, "pygarble.gibberish.scoring")

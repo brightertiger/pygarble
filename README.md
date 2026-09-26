@@ -20,7 +20,8 @@
 ## Ten-second start
 
 Use `pygarble.screening` for **secrets, PII and profanity**. Keep gibberish
-detection separate with `GarbleDetector` / `EnsembleDetector`. The existing
+detection separate with `pygarble.gibberish.GarbleDetector` /
+`pygarble.gibberish.EnsembleDetector`. The existing
 top-level `Scanner` retains its four-category defaults for compatibility.
 
 ```python
@@ -30,6 +31,14 @@ scanner = Scanner(max_input_length=100_000)
 assert scanner.redact("mail jane@example.com").text == "mail [EMAIL]"
 assert not scanner.scan("qxzjkwpv bnmqwer zzxqv").flagged
 ```
+
+The implementations live in two folders: `pygarble/gibberish/` contains the
+detectors, ensemble, strategies and calibration; `pygarble/screening/`
+contains PII patterns/checksums, profanity word lists/normalization, secret
+patterns/entropy and optional backends. Shared data, finding types and
+validation stay at the package root. Old imports such as
+`from pygarble import GarbleDetector` and `from pygarble.pii import PIIDetector`
+remain supported through compatibility pointers to the same implementations.
 
 The dedicated document CLI keeps source text out of scan reports and handles
 multiline private keys during redaction:

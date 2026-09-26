@@ -342,7 +342,7 @@ def run_texts(args: argparse.Namespace, out: Any, err: Any) -> int:
 
 
 def run_calibrate(args: argparse.Namespace, out: Any) -> int:
-    from .calibration import calibrate
+    from .gibberish.calibration import calibrate
 
     objective = args.objective
     if objective is None:

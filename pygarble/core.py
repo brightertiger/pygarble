@@ -1,7 +1,10 @@
-"""Compatibility facade for the public detection API."""
+"""Compatibility pointer to :mod:`pygarble.gibberish.core`."""
 
-from .detector import GarbleDetector
-from .ensemble import EnsembleDetector
-from .registry import STRATEGY_MAP, Strategy
+from typing import TYPE_CHECKING
 
-__all__ = ["GarbleDetector", "EnsembleDetector", "Strategy", "STRATEGY_MAP"]
+from ._compat import alias_module as _alias_module
+
+if TYPE_CHECKING:
+    from .gibberish.core import *  # noqa: F401,F403
+
+_alias_module(__name__, "pygarble.gibberish.core")
