@@ -19,62 +19,24 @@ their four-category defaults for compatibility. Existing imports of
 they are also exported from ``pygarble.screening``. Detector implementations
 and collection/redaction logic are shared between the two APIs.
 
-Code layout and compatibility
------------------------------
-
-Native screening implementations and their rules live together:
-
-.. code-block:: text
-
-   pygarble/
-     screening/
-       pii/          # detector, patterns and checksums
-       profanity/    # detector, normalization and word lists
-       secrets/      # detector, patterns and entropy
-       backends/     # optional local integrations
-       scanner.py    # three-category API
-     gibberish/
-       detector.py
-       ensemble.py
-       strategies/
-       analysis.py
-       calibration.py
-       preprocessing.py
-       registry.py
-       scoring.py
-       options.py
-     data/           # shared dictionaries and portable JSON tables
-     findings.py     # shared result types
-     redaction.py
-     validation.py
-     scanner.py      # compatible four-category API
-
-Use ``from pygarble.gibberish import GarbleDetector, EnsembleDetector,
-Strategy`` for the gibberish API. Top-level exports and previous paths such
-as ``pygarble.core``, ``pygarble.detector``, ``pygarble.strategies.base``,
-``pygarble.pii.patterns`` and ``pygarble.profanity.wordlist`` remain supported.
-The old files are compatibility pointers, so detector classes, strategy
-enums, rule tables and caches are shared, not duplicated. The strategy
-package forwards its exports lazily. Existing pickles referencing old paths
-still load; class introspection and new pickles use the canonical paths.
-No defaults, scores, redaction behavior or CLI commands change.
-
-The gibberish engine and optional backends are still loaded only when used.
-The root package imports lightweight gibberish result types; importing
-screening does not load the ensemble, strategies or model tables.
+See :doc:`architecture` for source layout and compatibility pointers, and
+:doc:`api` for the scanner, detector and backend signatures. These APIs are
+part of the unreleased source changes described in :doc:`migration`.
 
 Installation and explicit selection
 ------------------------------------
 
 The base install remains dependency-free. Optional backends supplement
 native rules only when selected; installing an extra alone changes nothing.
+For these unreleased features, install from the source checkout described in
+:doc:`installation`:
 
 .. code-block:: console
 
-   pip install 'pygarble[phones]'     # phonenumberslite
-   pip install 'pygarble[stdnum]'     # python-stdnum
-   pip install 'pygarble[secrets]'    # detect-secrets
-   pip install 'pygarble[screening]'  # all three Python dependencies
+   python -m pip install -e '.[phones]'     # phonenumberslite
+   python -m pip install -e '.[stdnum]'     # python-stdnum
+   python -m pip install -e '.[secrets]'    # detect-secrets
+   python -m pip install -e '.[screening]'  # all three Python dependencies
 
 Install Gitleaks >=8.19,<9 separately from its official distribution and
 put it on PATH, or supply its executable path. CI exercises Gitleaks 8.30.1.
@@ -82,10 +44,11 @@ The adapter does not download or install executables.
 
 The following example requires the optional packages and Gitleaks:
 
-.. code-block:: text
+.. code-block:: python
 
    from pygarble.screening import Scanner
 
+   document = "Call +442079460958 or mail jane@example.com."
    scanner = Scanner(
        backends=["phonenumbers", "stdnum", "detect-secrets", "gitleaks"],
        backend_options={
@@ -97,6 +60,8 @@ The following example requires the optional packages and Gitleaks:
    )
    report = scanner.scan(document)
    safe_text = scanner.redact(document).text
+   assert report.flagged
+   assert "jane@example.com" not in safe_text
 
 Reuse an instance for repeated calls. ``scan_batch`` accepts a sequence and
 ``iter_scan`` processes an iterable lazily. The module-level ``scan`` and

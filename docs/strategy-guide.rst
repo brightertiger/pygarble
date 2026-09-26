@@ -23,7 +23,7 @@ flagged. This strategy belongs to ``english``, ``english_extended``,
 
 .. code-block:: python
 
-   from pygarble import GarbleDetector, Strategy
+   from pygarble.gibberish import GarbleDetector, Strategy
 
    detector = GarbleDetector(
        Strategy.CONTROL_CHARACTERS,
@@ -47,7 +47,7 @@ shared bigram likelihood, and bounded token windows. It belongs to
 
 .. code-block:: python
 
-   from pygarble import GarbleDetector, Strategy
+   from pygarble.gibberish import GarbleDetector, Strategy
 
    detector = GarbleDetector(
        Strategy.LOCAL_ANOMALY,
@@ -84,7 +84,7 @@ bounded phrase repetition; intentional repetition can also be flagged.
 
 .. code-block:: python
 
-   from pygarble import GarbleDetector, Strategy
+   from pygarble.gibberish import GarbleDetector, Strategy
 
    keyboard = GarbleDetector(
        Strategy.KEYBOARD_ADJACENCY, keyboard_layout="azerty"
@@ -107,7 +107,7 @@ that retries or rejects a response before it reaches a user.
 
 .. code-block:: python
 
-   from pygarble import EnsembleDetector
+   from pygarble.gibberish import EnsembleDetector
 
    guard = EnsembleDetector(profile="llm_output")
    assert guard.predict("and so on and so on and so on and so on") is True

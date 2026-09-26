@@ -1,14 +1,14 @@
 Profanity
 =========
 
-:class:`pygarble.ProfanityDetector` finds English profanity at the token
+:class:`pygarble.screening.ProfanityDetector` finds English profanity at the token
 level, so words that merely contain a profane substring stay clean. Every
 finding has kind ``profanity``; the confidence tells strong words from mild
 ones and plain spellings from obfuscated ones.
 
 .. code-block:: python
 
-   from pygarble import ProfanityDetector
+   from pygarble.screening import ProfanityDetector
 
    detector = ProfanityDetector()
    assert detector.detect("Scunthorpe assassin classic bass") == ()
@@ -57,6 +57,12 @@ both.
 
 The detector covers English only and does not detect hate speech beyond its
 word list.
+
+Use ``Scanner(profanity_tiers=["strong"], profanity_allowlist=[...])``
+from ``pygarble.screening`` to configure these rules in a combined screening
+pass. The detector, normalization and word list live together under
+``pygarble/screening/profanity/``. Existing ``pygarble.profanity`` imports
+remain supported. No optional package or model is needed for profanity.
 
 Word list attribution
 ---------------------

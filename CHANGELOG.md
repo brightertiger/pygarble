@@ -24,6 +24,9 @@ All notable changes to pygarble are documented here. The format follows
   search, keeping dense PII documents from causing quadratic work.
 
 ### Changed
+- Updated the README, quick start, API reference, CLI and installation
+  guides for the separate modules and optional backends. Added architecture
+  and migration guidance covering compatibility pointers and unreleased APIs.
 - Gibberish implementations now live under `pygarble.gibberish`; native
   PII, profanity and secret detectors and their rules live under
   `pygarble.screening`. Old module paths and top-level exports remain

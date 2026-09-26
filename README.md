@@ -1,6 +1,6 @@
 # pygarble
 
-**A deterministic, zero-dependency first line of defence for text: secrets, PII, profanity and gibberish, with redaction. Pure Python, milliseconds per call, explainable findings.**
+**A local first line of defence for text: secrets, PII, profanity and gibberish, with explainable findings and redaction. No LLM calls or model downloads; the base install has no runtime dependencies.**
 
 [![PyPI](https://img.shields.io/pypi/v/pygarble.svg)](https://pypi.org/project/pygarble/)
 [![Python](https://img.shields.io/pypi/pyversions/pygarble.svg)](https://pypi.org/project/pygarble/)
@@ -11,11 +11,28 @@
 
 ## Why pygarble
 
-- **Zero dependencies, no model downloads.** `pip install pygarble` and go; nothing touches the network.
+- **Local processing.** Native checks use bundled rules, dictionaries and character statistics. Optional integrations run locally and are enabled explicitly.
 - **Deterministic and explainable.** Every finding has a kind, span, confidence and reason. `Finding` and `ScanReport` objects never carry the matched text, so logging a report from Python cannot leak a secret. `pygarble scan` rows include the input line; use `pygarble redact` when output goes to logs.
-- **Four categories in one call.** Secrets, PII, profanity and gibberish, each rule with a fixed confidence tier so you choose how strict to be.
+- **Separate APIs.** Screen secrets, PII and profanity together, or check gibberish independently. The original combined scanner still supports all four categories.
 - **Redaction in three modes.** Placeholders such as `[EMAIL]`, length-preserving masks, or partial masks that keep the last four digits of a card or phone number.
-- **A CLI for pipelines.** `pygarble scan` and `pygarble redact` read stdin or files. `scan` emits text, TSV or JSONL and exits non-zero when something is flagged; `redact` prints the redacted line, or the JSON object with `--field`.
+- **A document CLI.** `pygarble-screen scan` emits findings-only JSON per document; `pygarble-screen redact` preserves document structure, including multiline private keys. The original line-oriented CLI remains available.
+
+## Install and choose an API
+
+```bash
+python -m pip install pygarble
+```
+
+This README describes the current source, including **unreleased** module
+separation and optional backends. For those APIs, install a checkout of the
+reviewed branch or commit with `python -m pip install -e .`; see the
+[installation guide](docs/installation.rst) and [migration notes](docs/migration.rst).
+
+| Use case | Import | Default behavior |
+| --- | --- | --- |
+| Secrets, PII and profanity | `from pygarble.screening import Scanner` | Three native rule categories; optional backends are opt-in |
+| Gibberish detection | `from pygarble.gibberish import EnsembleDetector` | English gibberish profile |
+| Existing combined applications | `from pygarble import Scanner` | All four categories, unchanged |
 
 ## Ten-second start
 
@@ -32,14 +49,6 @@ assert scanner.redact("mail jane@example.com").text == "mail [EMAIL]"
 assert not scanner.scan("qxzjkwpv bnmqwer zzxqv").flagged
 ```
 
-The implementations live in two folders: `pygarble/gibberish/` contains the
-detectors, ensemble, strategies and calibration; `pygarble/screening/`
-contains PII patterns/checksums, profanity word lists/normalization, secret
-patterns/entropy and optional backends. Shared data, finding types and
-validation stay at the package root. Old imports such as
-`from pygarble import GarbleDetector` and `from pygarble.pii import PIIDetector`
-remain supported through compatibility pointers to the same implementations.
-
 The dedicated document CLI keeps source text out of scan reports and handles
 multiline private keys during redaction:
 
@@ -49,11 +58,15 @@ python -m pygarble.screening redact document.txt
 ```
 
 Optional local backends are explicitly enabled, and do not change the base
-installation. `pip install 'pygarble[screening]'` adds `phonenumberslite`,
+installation. In a source checkout, `pip install -e '.[screening]'` adds `phonenumberslite`,
 `python-stdnum` and `detect-secrets`. Gitleaks requires a separately installed
 executable. None requires LLM calls or model downloads.
 
-```text
+After installing the optional dependencies and Gitleaks:
+
+```python
+from pygarble.screening import Scanner
+
 scanner = Scanner(
     backends=["phonenumbers", "stdnum", "detect-secrets", "gitleaks"],
     backend_options={"phonenumbers": {"region": "GB"}},
@@ -105,12 +118,16 @@ assert redact("mail jane@example.com").text == "mail [EMAIL]"
 
 Confidence is 1.0 for checksum-verified or vendor-prefixed matches, down to 0.6 for keyword-plus-entropy secrets and ambiguous masking, and 0.5 for standalone high-entropy strings, which are opt-in (`secrets_without_context=True`); see the [screening guide](https://brightertiger.github.io/pygarble/screening.html).
 
-**What it doesn't catch:** names, postal addresses, free-text dates of birth, hate speech beyond the word list, secrets without a recognisable shape, and non-English profanity. Those need NLP or a model; run pygarble first and send the rest on.
+**Coverage limits:** native rules do not detect names, postal addresses,
+free-text dates of birth, hate speech beyond the word list, secrets without a
+recognisable shape, or non-English profanity. A clean result means the selected
+checks found nothing; choose any further review according to your application's
+requirements.
 
 ## Redact
 
 ```python
-from pygarble import Scanner
+from pygarble.screening import Scanner
 
 scanner = Scanner(categories=["secrets", "pii"])
 text = "card 4111 1111 1111 1111, mail jane@example.com"
@@ -135,14 +152,19 @@ Measured on an Apple M2 (macOS arm64, Python 3.12.2) with `python regression/thr
 | `gibberish` | 0.8 | 1.1 |
 | all four | 0.7 | 0.8 |
 
-The gibberish ensemble is the slow member; pass `categories=["secrets", "pii", "profanity"]` when you do not need it. A single 1 MB line through the three rule categories takes 0.11 s (repeated sentence) to 0.37 s (random dictionary words).
+These measurements use the native rules through the combined scanner and do
+not include optional backends. Use `pygarble.screening.Scanner` for the three
+rule categories without the gibberish ensemble. A single 1 MB line through
+the three rule categories took 0.11 s (repeated sentence) to 0.37 s (random
+dictionary words) in this benchmark. Reuse scanner instances; Gitleaks adds a
+subprocess invocation for each document.
 
 ## Gibberish detection
 
 The `gibberish` category is pygarble's original English gibberish detector, still available on its own. It flags keyboard mashing, mojibake, control artifacts and degenerate model output.
 
 ```python
-from pygarble import EnsembleDetector
+from pygarble.gibberish import EnsembleDetector
 
 detector = EnsembleDetector()
 assert detector.predict("Hello world") is False
@@ -176,7 +198,7 @@ garbled	the the the the the the the the
 ### Calibrate, explain, configure
 
 ```python
-from pygarble import EnsembleDetector, calibrate
+from pygarble.gibberish import EnsembleDetector, calibrate
 
 garbled = ["qxzjkwpv bnmqwer", "asdfghjkl"]
 clean = ["hello world", "please send the invoice"]
@@ -191,7 +213,7 @@ assert detector.predict(clean) == [False, False]
 ```python
 import json
 from dataclasses import asdict
-from pygarble import GarbleDetector, Strategy
+from pygarble.gibberish import GarbleDetector, Strategy
 
 controls = GarbleDetector(Strategy.CONTROL_CHARACTERS)
 assert controls.predict("hello\x00world") is True
@@ -209,7 +231,7 @@ payload = json.dumps(asdict(result))
 All 28 strategies are available through `GarbleDetector` and the `Strategy` enum; see the [strategy guide](https://brightertiger.github.io/pygarble/strategy-guide.html). `analyze()` records the decision, score, status, per-strategy signals and spans (Python string offsets, exclusive end). Empty or wholly inapplicable input returns `False` with status `insufficient_evidence`.
 
 ```python
-from pygarble import EnsembleDetector
+from pygarble.gibberish import EnsembleDetector
 
 detector = EnsembleDetector(
     allowlist=["syzygy", "myproductname"],
@@ -225,7 +247,7 @@ Allowlists apply to every strategy. Oversized input raises `ValueError`; invalid
 Meaningful Hindi and other non-English text may score as gibberish. **This is expected for English-specific checks.** A `False` result does not prove the text is meaningful English; pygarble is not a language identifier or semantic nonsense detector. The `corruption` profile checks encoding and control artifacts without English plausibility scoring:
 
 ```python
-from pygarble import EnsembleDetector
+from pygarble.gibberish import EnsembleDetector
 
 assert EnsembleDetector().predict("नमस्ते दुनिया") is True
 
@@ -237,13 +259,42 @@ assert corruption.predict("hello\x00world") is True
 
 ### Upgrading and evaluation
 
-0.11.0 is additive: the gibberish API, profiles and scores are unchanged. Review the [upgrade guide](https://brightertiger.github.io/pygarble/migration.html) before changing versions. The repository's benchmark and challenge sets are engineering regression data, not production accuracy estimates; measure on your own inputs before choosing thresholds.
+The unreleased module reorganization preserves existing imports, defaults and
+scores. Version 0.11.0 added the combined scanner; it did not introduce the new
+module layout. Review the [upgrade guide](docs/migration.rst) before changing
+versions. The benchmark and challenge sets are engineering regression data,
+not production accuracy estimates; measure on your own inputs before choosing
+thresholds.
 
 - [Changelog](https://github.com/brightertiger/pygarble/blob/main/CHANGELOG.md)
 - [Evaluation and implementation report](https://github.com/brightertiger/pygarble/blob/main/docs/dev/2026-07-implementation.md)
 - [Recorded evaluation results](https://github.com/brightertiger/pygarble/blob/main/regression/english_results.json)
 - [Golden corpus](https://github.com/brightertiger/pygarble/blob/main/regression/golden.jsonl) of frozen detector outputs for every profile, and a [golden scan corpus](https://github.com/brightertiger/pygarble/blob/main/regression/golden_scan.jsonl) for the scanner, both checked in CI
 - [Data provenance and curation](https://github.com/brightertiger/pygarble/blob/main/scripts/data_curation.json)
+
+## Repository layout and compatibility
+
+```text
+pygarble/
+  screening/
+    pii/           # detector, patterns, checksums
+    profanity/     # detector, word lists, normalization
+    secrets/       # detector, patterns, entropy
+    backends/      # phonenumbers, stdnum, detect-secrets, Gitleaks
+    scanner.py     # standalone three-category scanner
+  gibberish/
+    strategies/    # individual heuristic strategies
+    detector.py    # single-strategy API
+    ensemble.py    # profiles and voting
+    calibration.py # threshold selection
+  data/            # shared tables and portable JSON copies
+  scanner.py       # compatible four-category scanner
+```
+
+Old paths such as `pygarble.core`, `pygarble.strategies`, `pygarble.pii` and
+`pygarble.profanity` remain compatibility pointers. Old and new imports share
+classes, enums, rule tables and caches. See the [architecture guide](docs/architecture.rst)
+for the full layout, import mappings and lazy-loading behavior.
 
 ## Contributing
 

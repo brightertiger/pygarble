@@ -1,9 +1,69 @@
 Command-line interface
 ======================
 
-``pygarble`` is installed as a console script; ``python -m pygarble`` is
-equivalent. Input is read as UTF-8, one text per line, and invalid UTF-8 is
-replaced with U+FFFD.
+The package provides two command-line entry points:
+
+.. list-table::
+   :header-rows: 1
+
+   * - Command
+     - Input and purpose
+   * - ``pygarble-screen`` / ``python -m pygarble.screening``
+     - Whole UTF-8 documents; secrets, PII and profanity
+   * - ``pygarble`` / ``python -m pygarble``
+     - One text per line; gibberish commands and the compatible combined scanner
+
+The document CLI is part of the unreleased source changes; see
+:doc:`installation`. The existing line-oriented commands keep their behavior.
+
+Screen or redact a document
+---------------------------
+
+.. code-block:: bash
+
+   python -m pygarble.screening scan document.txt
+   python -m pygarble.screening redact document.txt
+   printf 'mail jane@example.com\n' | pygarble-screen redact --mode mask
+
+``scan`` emits one JSON report per file or stdin document, with findings and
+offsets but no source text. ``--include-text`` explicitly adds the original
+document. ``redact`` writes transformed text, preserving line endings and
+handling private-key blocks across lines. When processing multiple files,
+redacted outputs are concatenated without adding separators.
+
+Inputs default to stdin; ``-`` also names stdin. The CLI reads at most
+``--max-input-length`` Python characters (default 1,000,000), and rejects
+oversized documents and invalid UTF-8. The Python scanner's input limit is
+``None`` by default. Exit code 0 means no flagged document for ``scan``, or
+successful redaction; 1 means ``scan`` flagged at least one document; 2 means
+an input, configuration or backend error. On error, no clean result is
+available for the failed document; earlier documents may already have output.
+
+Native categories default to ``secrets,pii,profanity``. Select subsets with
+``--categories``, ``--kinds``, ``--exclude-kinds`` and ``--locales`` (comma
+lists); use ``--min-confidence`` for the flagging/redaction cutoff and
+``--mode placeholder|mask|partial`` for redaction style.
+
+After installing optional dependencies, enable backends explicitly:
+
+.. code-block:: bash
+
+   pygarble-screen scan document.txt --backends phonenumbers,stdnum \
+     --backend-options '{"phonenumbers":{"region":"GB"}}'
+   pygarble-screen scan document.txt --categories secrets \
+     --backends detect-secrets,gitleaks
+
+``--no-builtin`` disables native rules, so at least one selected backend
+must supply a detector for the chosen categories. Backend option keys are
+documented in :doc:`standalone-screening`. The two CLIs have different flags:
+the document CLI has no gibberish ``--profile``, JSON field extraction or
+``--format`` setting. Use ``pygarble-screen --help`` for its complete list.
+
+Gibberish line commands
+-----------------------
+
+The following ``pygarble`` commands read UTF-8 one text per line; invalid
+UTF-8 is replaced with U+FFFD.
 
 Check lines from stdin or files
 -------------------------------
@@ -81,11 +141,14 @@ Text output starts with the objective in use.
 Pass the recommended value back with ``--threshold``. See
 :doc:`calibration` for the Python API.
 
-Screening: ``scan`` and ``redact``
-----------------------------------
+Compatible combined line scanner
+--------------------------------
 
 ``pygarble scan`` runs the :class:`~pygarble.Scanner` over each input line
 and prints one row per line. ``pygarble redact`` prints the redacted line.
+All four categories, including gibberish, are enabled by default for scanning.
+These commands do not accept optional backends. Use the document CLI above
+for findings-only scan reports or multiline private keys.
 
 .. code-block:: bash
 

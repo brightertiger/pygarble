@@ -1,13 +1,13 @@
 PII
 ===
 
-:class:`pygarble.PIIDetector` finds personal data by structure and, where the
+:class:`pygarble.screening.PIIDetector` finds personal data by structure and, where the
 format has one, a checksum. Findings carry the kind, span, confidence and
 reason, never the value.
 
 .. code-block:: python
 
-   from pygarble import PIIDetector
+   from pygarble.screening import PIIDetector
 
    detector = PIIDetector()
    report = detector.detect("call +14155550123 or mail jane@example.com")
@@ -99,3 +99,14 @@ Matching rules
   keyword-less NHS number nested inside a phone is dropped.
 
 Names, postal addresses and free-text dates of birth are not detected.
+
+Implementation and optional coverage
+------------------------------------
+
+Native patterns and checksums live in ``pygarble/screening/pii/``. Existing
+``pygarble.pii`` imports remain compatibility pointers to the same objects.
+The ``phonenumbers`` backend adds numbering-plan validation; ``stdnum`` adds
+selected identifier validators. Enable them on
+:class:`pygarble.screening.Scanner`; constructing ``PIIDetector`` continues
+to run native rules only. See :doc:`standalone-screening` for supported
+formats and the difference between native ``locales`` and backend ``region``.

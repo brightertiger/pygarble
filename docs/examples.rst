@@ -1,8 +1,46 @@
 Python examples
 ===============
 
-These examples use the 0.11.0 API; see :doc:`installation`. Each example
+These examples use the current source APIs, including unreleased module
+paths; see :doc:`installation`. Each example
 includes its own imports and data. Reuse a configured detector across calls.
+
+Redact a batch without gibberish checks
+---------------------------------------
+
+.. code-block:: python
+
+   from pygarble.screening import Scanner
+
+   scanner = Scanner(categories=["secrets", "pii"], max_input_length=10_000)
+   texts = ["mail jane@example.com", "key AKIAIOSFODNN7EXAMPLE", "hello"]
+   reports = scanner.scan_batch(texts)
+   assert [report.flagged for report in reports] == [True, True, False]
+   redacted = [scanner.redact(text).text for text in texts]
+   assert redacted == ["mail [EMAIL]", "key [AWS_ACCESS_KEY_ID]", "hello"]
+   assert scanner.scan("qxzjkwpv bnmqwer zzxqv").flagged is False
+
+For a large input stream, ``scanner.iter_scan(iterable)`` yields reports
+one at a time. It does not split a document or materialize the input iterable.
+
+Configure native screening rules
+--------------------------------
+
+.. code-block:: python
+
+   from pygarble.screening import Scanner
+
+   scanner = Scanner(
+       categories=["pii", "profanity"],
+       locales=["uk"],
+       profanity_allowlist=["damn"],
+   )
+   assert scanner.scan("NI AB123456C").kinds() == ("nino",)
+   assert scanner.scan("damn").findings == ()
+
+``locales`` selects native PII packs. Optional phone-number backends have
+their own ``region`` option. See :doc:`standalone-screening` for complete
+backend examples and :doc:`pii`, :doc:`profanity` and :doc:`secrets` for rules.
 
 Validate a required English field
 ---------------------------------
@@ -10,7 +48,7 @@ Validate a required English field
 .. code-block:: python
 
    from typing import Optional
-   from pygarble import EnsembleDetector
+   from pygarble.gibberish import EnsembleDetector
 
    detector = EnsembleDetector(max_input_length=10_000)
 
@@ -35,7 +73,7 @@ Partition a dataset for review
 
 .. code-block:: python
 
-   from pygarble import EnsembleDetector
+   from pygarble.gibberish import EnsembleDetector
 
    texts = ["Hello world", "asdfghjkl", "Please review this text"]
    detector = EnsembleDetector()
@@ -55,7 +93,7 @@ Export explanations as JSON
 
    import json
    from dataclasses import asdict
-   from pygarble import GarbleDetector, Strategy
+   from pygarble.gibberish import GarbleDetector, Strategy
 
    text = "Please review qxzjkwpvm before delivery."
    result = GarbleDetector(Strategy.LOCAL_ANOMALY).analyze(text)
@@ -73,7 +111,7 @@ Check encoding independently of language
 
 .. code-block:: python
 
-   from pygarble import EnsembleDetector
+   from pygarble.gibberish import EnsembleDetector
 
    detector = EnsembleDetector(profile="corruption")
    texts = ["नमस्ते दुनिया", "Café au lait", "CafÃ© au lait", "hello\x00world"]
@@ -87,7 +125,7 @@ Configure members independently
 
 .. code-block:: python
 
-   from pygarble import EnsembleDetector, Strategy
+   from pygarble.gibberish import EnsembleDetector, Strategy
 
    detector = EnsembleDetector(
        strategies=[Strategy.MARKOV_CHAIN, Strategy.WORD_ANOMALY],

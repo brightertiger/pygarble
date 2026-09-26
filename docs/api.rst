@@ -1,24 +1,69 @@
 API Reference
 =============
 
-Language strategies target English. Non-English text, including meaningful Hindi,
-may be classified as gibberish. Scores are heuristic values, not calibrated
-probabilities; the library does not establish semantic meaning or identify languages.
+Use ``pygarble.screening`` for secrets, PII and profanity, and
+``pygarble.gibberish`` for gibberish detection. The original ``pygarble``
+exports remain supported. This reference includes unreleased source changes;
+see :doc:`installation` and :doc:`migration` for version guidance.
 
-This reference describes the 0.11.0 API. See :doc:`migration` for changed
-behavior. Public imports are available from ``pygarble``.
+Standalone screening
+--------------------
 
-Scanner
--------
-
-.. autoclass:: pygarble.scanner.Scanner
+.. autoclass:: pygarble.screening.Scanner
    :members: scan, scan_batch, iter_scan, redact
+   :inherited-members:
+
+.. autofunction:: pygarble.screening.scan
+
+.. autofunction:: pygarble.screening.redact
+
+The default categories are ``secrets``, ``pii`` and ``profanity``. Native
+rules are enabled; optional backends run only when explicitly selected.
+There is no gibberish ``profile`` or ``threshold`` setting on this scanner.
+``min_confidence`` controls whether findings flag the input and are redacted;
+findings below it remain in scan reports. Reuse a ``Scanner`` for repeated
+calls: the convenience functions construct an instance per call.
+See :doc:`standalone-screening` for options, filtering and custom detectors.
+
+Optional backends and extension contract
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autoclass:: pygarble.screening.backends.PhoneNumbersDetector
+   :members: detect
+
+.. autoclass:: pygarble.screening.backends.StdnumDetector
+   :members: detect
+
+.. autoclass:: pygarble.screening.backends.DetectSecretsDetector
+   :members: detect
+
+.. autoclass:: pygarble.screening.backends.GitleaksDetector
+   :members: detect
+
+.. autoclass:: pygarble.screening.ScreeningDetector
+
+.. autoexception:: pygarble.screening.BackendError
+
+Backend constructors require their optional package or executable. Importing
+these adapter classes does not load optional dependencies. Scan errors
+propagate; they do not become clean reports. A custom detector declares its
+``category`` and ``kinds``, and returns findings with original-text offsets.
+
+Compatible combined scanner
+---------------------------
+
+.. autoclass:: pygarble.Scanner
+   :members: scan, scan_batch, iter_scan, redact
+   :inherited-members:
 
 .. autofunction:: pygarble.scan
 
 .. autofunction:: pygarble.redact
 
-See :doc:`screening` for categories, confidence tiers and redaction modes.
+This scanner keeps all four categories, including gibberish, enabled by
+default. Its convenience functions reuse a cached scanner per configuration.
+It does not accept the standalone scanner's ``backends`` or ``detectors``
+settings. See :doc:`screening` for the existing contract.
 
 Findings
 --------
@@ -30,28 +75,37 @@ Findings
 
 .. autoclass:: pygarble.findings.Redaction
 
-Detectors
----------
+Native screening detectors
+--------------------------
 
-.. autoclass:: pygarble.secrets.SecretsDetector
+.. autoclass:: pygarble.screening.SecretsDetector
    :members: detect
 
-.. autoclass:: pygarble.pii.PIIDetector
+.. autoclass:: pygarble.screening.PIIDetector
    :members: detect
 
-.. autoclass:: pygarble.profanity.ProfanityDetector
+.. autoclass:: pygarble.screening.ProfanityDetector
    :members: detect
+
+Gibberish detection
+-------------------
+
+Language strategies target English. Meaningful non-English text may be
+flagged; these checks do not establish semantic meaning or identify languages.
+Scores are heuristic values, not calibrated probabilities.
+
+.. autoclass:: pygarble.gibberish.Strategy
 
 GarbleDetector
---------------
+~~~~~~~~~~~~~~
 
-.. autoclass:: pygarble.detector.GarbleDetector
+.. autoclass:: pygarble.gibberish.GarbleDetector
    :members: predict, predict_proba, score, analyze, applicable
 
 EnsembleDetector
-----------------
+~~~~~~~~~~~~~~~~
 
-.. autoclass:: pygarble.ensemble.EnsembleDetector
+.. autoclass:: pygarble.gibberish.EnsembleDetector
    :members: predict, predict_proba, score, analyze
 
 Under ``voting='majority'`` the decision counts member votes, so
@@ -107,7 +161,7 @@ release.
 
 .. code-block:: python
 
-   from pygarble import GarbleDetector, Strategy
+   from pygarble.gibberish import GarbleDetector, Strategy
 
    detector = GarbleDetector(
        Strategy.CONTROL_CHARACTERS,
@@ -205,11 +259,11 @@ when the ``legacy`` strategy set is selected.
 Calibration
 -----------
 
-.. autofunction:: pygarble.calibrate
+.. autofunction:: pygarble.gibberish.calibrate
 
-.. autoclass:: pygarble.CalibrationReport
+.. autoclass:: pygarble.gibberish.CalibrationReport
 
-.. autoclass:: pygarble.ThresholdPoint
+.. autoclass:: pygarble.gibberish.ThresholdPoint
 
 ``calibrate(detector, garbled, clean, *, objective="f1",
 max_false_positive_rate=None, thresholds=None)`` accepts any detector with a
@@ -228,13 +282,13 @@ holds ``threshold``, ``precision``, ``recall``, ``f1`` and
 Result records
 --------------
 
-.. autoclass:: pygarble.analysis.Analysis
+.. autoclass:: pygarble.gibberish.Analysis
    :members:
 
-.. autoclass:: pygarble.analysis.Signal
+.. autoclass:: pygarble.gibberish.Signal
    :members:
 
-.. autoclass:: pygarble.analysis.Span
+.. autoclass:: pygarble.gibberish.Span
    :members:
 
 Spans use offsets into the original Python string. Analysis can be converted with
