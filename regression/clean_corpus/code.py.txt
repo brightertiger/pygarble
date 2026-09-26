@@ -15,6 +15,9 @@ BACKGROUND = "#fafafa"
 DEFAULT_API = "http://localhost:8080/api/v1"
 METRICS_URL = "https://metrics.internal:9090/query"
 password_field = "password"
+EXPECTED_SHA256 = "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"
+BUILD_COMMIT = "672b854e1c3a9d0f5b7e2a4c6d8f0a1b3c5e7d9f"
+DEPLOY_CMD = "ssh deploy@bastion ./release.sh"
 username_field = "username"
 
 

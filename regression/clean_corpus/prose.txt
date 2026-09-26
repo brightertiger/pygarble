@@ -2,6 +2,8 @@ Welcome to the team handbook. This page explains how we plan, build and ship.
 Our quarterly assessment looks at reliability, cost and customer feedback.
 Each squad writes a short summary and a classic retrospective at the end of the cycle.
 Please pass the draft to your lead a week before the review meeting.
+To deploy, run ssh deploy@bastion and then the release script.
+Upload the retina logo as logo@2x.png next to the standard one.
 Hello and thanks for reading this far; the rest of the page is reference material.
 
 Changelog

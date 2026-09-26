@@ -1,5 +1,7 @@
 2026-09-26T08:00:01.112Z INFO  server starting version=1.2.3 pid=4121
 2026-09-26T08:00:01.240Z INFO  loaded config from /etc/orders/config.json
+2026-09-26T08:00:01.251Z INFO  build commit=672b854e1c3a9d0f5b7e2a4c6d8f0a1b3c5e7d9f ts=1790409601
+2026-09-26T08:00:01.260Z INFO  artifact sha256=9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
 2026-09-26T08:00:01.301Z INFO  connected to db.internal:5432 pool=2..20
 2026-09-26T08:00:01.355Z INFO  connected to redis.internal:6379
 2026-09-26T08:00:01.402Z INFO  listening on port 8080

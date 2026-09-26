@@ -514,14 +514,6 @@
     "end": 56,
     "confidence": 0.9,
     "reason": "keyword_prefix"
-   },
-   {
-    "category": "secrets",
-    "kind": "generic_secret",
-    "start": 16,
-    "end": 56,
-    "confidence": 0.6,
-    "reason": "keyword_entropy"
    }
   ]
  },
@@ -582,14 +574,6 @@
   ],
   "note": "github oauth",
   "expected": [
-   {
-    "category": "secrets",
-    "kind": "generic_secret",
-    "start": 9,
-    "end": 51,
-    "confidence": 0.6,
-    "reason": "keyword_entropy"
-   },
    {
     "category": "secrets",
     "kind": "github_token",
@@ -1047,14 +1031,6 @@
   "expected": [
    {
     "category": "secrets",
-    "kind": "generic_secret",
-    "start": 9,
-    "end": 46,
-    "confidence": 0.6,
-    "reason": "keyword_entropy"
-   },
-   {
-    "category": "secrets",
     "kind": "huggingface_token",
     "start": 9,
     "end": 46,
@@ -1112,14 +1088,6 @@
   ],
   "note": "npmrc",
   "expected": [
-   {
-    "category": "secrets",
-    "kind": "generic_secret",
-    "start": 33,
-    "end": 73,
-    "confidence": 0.6,
-    "reason": "keyword_entropy"
-   },
    {
     "category": "secrets",
     "kind": "npm_token",
@@ -1238,14 +1206,6 @@
   ],
   "note": "sendgrid env",
   "expected": [
-   {
-    "category": "secrets",
-    "kind": "generic_secret",
-    "start": 17,
-    "end": 86,
-    "confidence": 0.6,
-    "reason": "keyword_entropy"
-   },
    {
     "category": "secrets",
     "kind": "sendgrid_key",
@@ -2431,7 +2391,7 @@
     "category": "profanity",
     "kind": "profanity",
     "start": 4,
-    "end": 12,
+    "end": 11,
     "confidence": 1.0,
     "reason": "strong"
    }
@@ -2459,7 +2419,7 @@
   "categories": [
    "profanity"
   ],
-  "note": "embedded fuck",
+  "note": "compound in word list",
   "expected": [
    {
     "category": "profanity",
@@ -2618,6 +2578,233 @@
    "gibberish"
   ],
   "note": "code snippet",
+  "expected": []
+ },
+ {
+  "text": "what a clusterfuck",
+  "categories": [
+   "profanity"
+  ],
+  "note": "embedded clusterfuck",
+  "expected": [
+   {
+    "category": "profanity",
+    "kind": "profanity",
+    "start": 7,
+    "end": 18,
+    "confidence": 0.8,
+    "reason": "embedded"
+   }
+  ]
+ },
+ {
+  "text": "pure dumbfuckery here",
+  "categories": [
+   "profanity"
+  ],
+  "note": "embedded dumbfuckery",
+  "expected": [
+   {
+    "category": "profanity",
+    "kind": "profanity",
+    "start": 5,
+    "end": 16,
+    "confidence": 0.8,
+    "reason": "embedded"
+   }
+  ]
+ },
+ {
+  "text": "graduated magna cum laude",
+  "categories": [
+   "profanity"
+  ],
+  "note": "mild cum in latin phrase",
+  "expected": [
+   {
+    "category": "profanity",
+    "kind": "profanity",
+    "start": 16,
+    "end": 19,
+    "confidence": 0.7,
+    "reason": "mild"
+   }
+  ]
+ },
+ {
+  "text": "blue tits at the feeder",
+  "categories": [
+   "profanity"
+  ],
+  "note": "mild tits bird",
+  "expected": [
+   {
+    "category": "profanity",
+    "kind": "profanity",
+    "start": 5,
+    "end": 9,
+    "confidence": 0.7,
+    "reason": "mild"
+   }
+  ]
+ },
+ {
+  "text": "a chink in the armour",
+  "categories": [
+   "profanity"
+  ],
+  "note": "mild chink idiom",
+  "expected": [
+   {
+    "category": "profanity",
+    "kind": "profanity",
+    "start": 2,
+    "end": 7,
+    "confidence": 0.7,
+    "reason": "mild"
+   }
+  ]
+ },
+ {
+  "text": "our Maine Coon sleeps",
+  "categories": [
+   "profanity"
+  ],
+  "note": "mild coon cat breed",
+  "expected": [
+   {
+    "category": "profanity",
+    "kind": "profanity",
+    "start": 10,
+    "end": 14,
+    "confidence": 0.7,
+    "reason": "mild"
+   }
+  ]
+ },
+ {
+  "text": "that bitch's car",
+  "categories": [
+   "profanity"
+  ],
+  "note": "possessive hits",
+  "expected": [
+   {
+    "category": "profanity",
+    "kind": "profanity",
+    "start": 5,
+    "end": 12,
+    "confidence": 1.0,
+    "reason": "strong"
+   }
+  ]
+ },
+ {
+  "text": "lunch at Dick's diner",
+  "categories": [
+   "profanity"
+  ],
+  "note": "possessive name clean",
+  "expected": []
+ },
+ {
+  "text": "what a s h i t show",
+  "categories": [
+   "profanity"
+  ],
+  "note": "spaced after a",
+  "expected": [
+   {
+    "category": "profanity",
+    "kind": "profanity",
+    "start": 7,
+    "end": 14,
+    "confidence": 0.8,
+    "reason": "spaced"
+   }
+  ]
+ },
+ {
+  "text": "😀 AKIAIOSFODNN7EXAMPLE",
+  "categories": [
+   "secrets"
+  ],
+  "note": "non-ascii emoji before aws id",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "aws_access_key_id",
+    "start": 2,
+    "end": 22,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "café jane@example.com",
+  "categories": [
+   "pii"
+  ],
+  "note": "non-ascii accent before email",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "email",
+    "start": 5,
+    "end": 21,
+    "confidence": 0.9,
+    "reason": "structure"
+   }
+  ]
+ },
+ {
+  "text": "401 023 2137",
+  "categories": [
+   "pii"
+  ],
+  "note": "nhs without keyword",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "nhs_number",
+    "start": 0,
+    "end": 12,
+    "confidence": 0.8,
+    "reason": "mod11"
+   }
+  ]
+ },
+ {
+  "text": "file name@2x.png",
+  "categories": [
+   "pii"
+  ],
+  "note": "retina asset not email",
+  "expected": []
+ },
+ {
+  "text": "see icon@3x.webp and main.min.js",
+  "categories": [
+   "pii"
+  ],
+  "note": "asset names not email",
+  "expected": []
+ },
+ {
+  "text": "call 012 345 6788",
+  "categories": [
+   "pii"
+  ],
+  "note": "us phone bad area code",
+  "expected": []
+ },
+ {
+  "text": "call 415 055 2671",
+  "categories": [
+   "pii"
+  ],
+  "note": "us phone bad exchange",
   "expected": []
  }
 ]
