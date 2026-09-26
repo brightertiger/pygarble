@@ -5,7 +5,14 @@ from typing import Any, Dict, FrozenSet, Iterable, List, Optional, Tuple
 
 from ..findings import Finding, sort_key
 from .checksums import iban_mod97, luhn, nhs_mod11, verhoeff
-from .patterns import GENERIC, IBAN_LENGTHS, IIN, LOCALE_RULES, Rule
+from .patterns import (
+    EMAIL_EXCLUDED_TLDS,
+    GENERIC,
+    IBAN_LENGTHS,
+    IIN,
+    LOCALE_RULES,
+    Rule,
+)
 
 CATEGORY = "pii"
 LOCALES: Tuple[str, ...] = ("us", "uk", "in")
@@ -41,6 +48,9 @@ def _validate(validator: str, value: str) -> Optional[str]:
     None to reject the match."""
     if validator == "":
         return ""
+    if validator == "email":
+        tld = value.rsplit(".", 1)[-1].lower()
+        return None if tld in EMAIL_EXCLUDED_TLDS else ""
     if validator == "phone_digits":
         digits = re.sub(r"\D", "", value)
         return "" if 7 <= len(digits) <= 15 else None

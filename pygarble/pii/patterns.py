@@ -9,6 +9,40 @@ EMAIL = (
     r"(?<![A-Za-z0-9._%+\-])[A-Za-z0-9._%+\-]+@[A-Za-z0-9\-]+"
     r"(?:\.[A-Za-z0-9\-]+)*\.[A-Za-z]{2,}(?![A-Za-z0-9\-])"
 )
+# Final labels that are file extensions, not TLDs ("icon@2x.png").
+EMAIL_EXCLUDED_TLDS = frozenset(
+    {
+        "png",
+        "jpg",
+        "jpeg",
+        "gif",
+        "svg",
+        "webp",
+        "ico",
+        "css",
+        "js",
+        "json",
+        "txt",
+        "html",
+        "htm",
+        "yml",
+        "yaml",
+        "xml",
+        "pdf",
+        "zip",
+        "tar",
+        "mp3",
+        "mp4",
+        "csv",
+        "tsx",
+        "jsx",
+        "woff",
+        "woff2",
+        "ttf",
+        "map",
+        "lock",
+    }
+)
 E164 = r"(?<![\w+\-])\+[1-9]\d{6,14}(?![\w\-])"
 CARD = r"(?<![\w+\-])(?:\d[ \-]?){12,18}\d(?![\w\-])"
 IBAN = (
@@ -31,7 +65,7 @@ IPV6 = (
 )
 
 GENERIC: Tuple[Rule, ...] = (
-    ("email", EMAIL, 0.9, "structure", ""),
+    ("email", EMAIL, 0.9, "structure", "email"),
     ("phone", E164, 0.9, "e164", "phone_digits"),
     ("credit_card", CARD, 1.0, "luhn", "card"),
     ("iban", IBAN, 1.0, "mod97", "iban"),
@@ -43,8 +77,10 @@ LOCALE_RULES: Dict[str, Tuple[Rule, ...]] = {
     "us": (
         (
             "phone",
-            r"(?<![\w+\-])(?:\+?1[\s.\-]?)?(?:\(\d{3}\)\s?|\d{3}[\s.\-])"
-            r"\d{3}[\s.\-]\d{4}(?![\w\-])",
+            # NANP: area code and exchange both start with 2-9.
+            r"(?<![\w+\-])(?:\+?1[\s.\-]?)?"
+            r"(?:\([2-9]\d{2}\)\s?|[2-9]\d{2}[\s.\-])"
+            r"[2-9]\d{2}[\s.\-]\d{4}(?![\w\-])",
             0.8,
             "national_us",
             "phone_digits",
@@ -239,6 +275,7 @@ def export() -> Dict[str, Any]:
     return {
         "generic": rows(GENERIC),
         "locales": {name: rows(rules) for name, rules in LOCALE_RULES.items()},
+        "email_excluded_tlds": sorted(EMAIL_EXCLUDED_TLDS),
         "iban_lengths": IBAN_LENGTHS,
         "iin": [
             {"brand": brand, "prefix": prefix, "lengths": list(lengths)}

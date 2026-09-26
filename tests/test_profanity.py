@@ -130,10 +130,13 @@ def test_spaced_rule_after_a_or_i():
 
 
 def test_trailing_exclamation_marks():
-    assert hits("Damn!") == [("Damn!", 0.7, "mild")]
-    assert hits("Shit!") == [("Shit!", 1.0, "strong")]
-    assert hits("Fuck!!!") == [("Fuck!!!", 1.0, "strong")]
-    assert hits("You ass!") == [("ass!", 1.0, "strong")]
+    # The span excludes the stripped "!", as it excludes a trailing ".".
+    assert hits("Damn!") == [("Damn", 0.7, "mild")]
+    assert hits("Shit!") == [("Shit", 1.0, "strong")]
+    assert hits("Fuck!!!") == [("Fuck", 1.0, "strong")]
+    assert hits("You ass!") == [("ass", 1.0, "strong")]
+    assert hits("you asshole!") == [("asshole", 1.0, "strong")]
+    assert hits("sh!t!") == [("sh!t", 1.0, "strong")]
     assert hits("sh!t") == [("sh!t", 1.0, "strong")]
     assert hits("b!tch") == [("b!tch", 1.0, "strong")]
     assert hits("Wow!!! Great!") == []

@@ -172,7 +172,14 @@ class SecretsDetector:
             raise TypeError("text must be a string")
         findings = self._known(text)
         if "generic_secret" in self.kinds:
-            findings.extend(self._keyword(text))
+            # A known-prefix finding already names the value; drop keyword
+            # findings that overlap one so a value is reported once.
+            known = [(f.start, f.end) for f in findings]
+            findings.extend(
+                f
+                for f in self._keyword(text)
+                if not any(s < f.end and f.start < e for s, e in known)
+            )
         if self.without_context and "high_entropy_string" in self.kinds:
             taken = [(f.start, f.end) for f in findings]
             findings.extend(self._standalone(text, taken))

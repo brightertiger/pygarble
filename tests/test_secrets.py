@@ -275,3 +275,22 @@ def test_kind_arguments_reject_bare_strings():
         SecretsDetector(kinds="jwt")
     with pytest.raises(ValueError, match=message):
         SecretsDetector(exclude_kinds="jwt")
+
+
+def test_keyword_finding_dropped_when_known_prefix_covers_value():
+    aws_value = "Hk9pQ2wR7tY4uI1oP3aS6dF8gJ0kL5zX2cV7bN4m"
+    text = "AWS_SECRET_KEY: " + aws_value
+    found = detect(text)
+    assert [(f.kind, text[f.start : f.end]) for f in found] == [
+        ("aws_secret_access_key", aws_value)
+    ]
+    gho = "gho_" + "Zz9Yy8Xx7Ww6Vv5Uu4Tt3Ss2Rr1Qq0Pp9Oo8Nn"
+    text = "GH_TOKEN=" + gho
+    found = detect(text)
+    assert [(f.kind, text[f.start : f.end]) for f in found] == [
+        ("github_token", gho)
+    ]
+    # With no known prefix the keyword finding still stands.
+    assert [f.kind for f in detect("password = 'q8Zt3vP2xL9mK4nR'")] == [
+        "generic_secret"
+    ]

@@ -220,3 +220,26 @@ def test_digit_rules_stop_inside_identifiers():
     assert not [f for f in found if f.kind == "nhs_number"]
     for text in ("+14155552671", "(415) 555-2671", "+91 98765 43210"):
         assert [f.kind for f in detect(text)][:1] == ["phone"], text
+
+
+def test_email_rejects_file_extension_tld():
+    assert spans("file name@2x.png", detect("file name@2x.png")) == []
+    assert spans("logo@3x.WEBP", detect("logo@3x.WEBP")) == []
+    assert spans("jane@example.com", detect("jane@example.com")) == [
+        ("email", "jane@example.com", 0.9)
+    ]
+    assert spans("a@b.co", detect("a@b.co")) == [("email", "a@b.co", 0.9)]
+    assert "png" in export()["email_excluded_tlds"]
+    assert "co" not in export()["email_excluded_tlds"]
+
+
+def test_us_phone_requires_nanp_area_and_exchange():
+    found = detect("401 023 2137")
+    assert [(f.kind, f.confidence, f.reason) for f in found] == [
+        ("nhs_number", 0.8, "mod11")
+    ]
+    assert spans("(415) 555-2671", detect("(415) 555-2671")) == [
+        ("phone", "(415) 555-2671", 0.8)
+    ]
+    assert detect("012 345 6789", locales=["us"]) == ()
+    assert detect("415 055 2671", locales=["us"]) == ()

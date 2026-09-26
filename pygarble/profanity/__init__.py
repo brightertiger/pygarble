@@ -230,11 +230,14 @@ class ProfanityDetector:
             raise TypeError("text must be a string")
         tokens: List[Token] = []
         for match in TOKEN_RE.finditer(text):
-            # Strip "!" off the end ("Shit!") but keep it inside ("sh!t").
-            raw = _POSSESSIVE.sub("", match.group().rstrip("!"))
+            # Strip "!" off the end ("Shit!") but keep it inside ("sh!t");
+            # the span ends where the stripped token ends.
+            bare = match.group().rstrip("!")
+            raw = _POSSESSIVE.sub("", bare)
             # A digits-only token ("455") never matches: no "ass".
             norm = "" if raw.isdigit() else normalize_token(raw)
-            tokens.append((match.start(), match.end(), raw, norm))
+            end = match.start() + len(bare)
+            tokens.append((match.start(), end, raw, norm))
         out: List[Finding] = []
         used: Set[int] = set()
         self._phrases(tokens, used, out)
