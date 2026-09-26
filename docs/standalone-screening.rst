@@ -120,6 +120,37 @@ Profanity remains the native English word-list engine. Configure
 ``profanity_tiers=["strong"]`` and ``profanity_allowlist`` as needed. This
 change adds no contextual toxicity classifier or multilingual profanity model.
 
+Runtime cost
+-------------
+
+A local smoke measurement on Python 3.12/macOS ARM64 used a synthetic,
+approximately 1 KB document containing repeated English prose and an email.
+After warm-up, median scan times were:
+
+.. list-table::
+   :header-rows: 1
+
+   * - Configuration
+     - Milliseconds per document
+   * - Native rules
+     - 0.16
+   * - Native + phonenumbers
+     - 0.21
+   * - Native + stdnum
+     - 0.40
+   * - Native + detect-secrets
+     - 1.39
+   * - Native + Gitleaks
+     - 283
+
+These are 100 repeated scans per configuration (30 for Gitleaks), excluding
+Python scanner construction but including each Gitleaks subprocess. They are
+not production latency guarantees or detection-quality measurements. Package
+versions are recorded in the development plan. Keep native rules as the cheap
+default; enable optional providers where their additional coverage is needed.
+Gitleaks is better suited to larger documents or a separate bulk pass than
+to a process launch for each chat message.
+
 Errors and resource limits
 --------------------------
 
