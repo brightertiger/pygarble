@@ -67,9 +67,20 @@ def test_known_kinds_and_export_shape():
     assert "aws_access_key_id" in ALL_KINDS
     assert {"generic_secret", "high_entropy_string"} <= ALL_KINDS
     payload = export()
-    assert set(payload) == {"known", "keywords", "limits", "placeholders"}
+    assert set(payload) == {
+        "known",
+        "keywords",
+        "limits",
+        "placeholders",
+        "vectors_encoding",
+    }
+    assert payload["vectors_encoding"] == "chunks8"
     for entry in payload["known"]:
         re.compile(entry["regex"])
+    github = next(e for e in payload["known"] if e["kind"] == "github_token")
+    python = next(e for e in KNOWN_PATTERNS if e["kind"] == "github_token")
+    decoded = "".join(github["vectors"]["positive"][0])
+    assert decoded == python["vectors"]["positive"][0]
 
 
 def test_aws_key_offsets_and_confidence():

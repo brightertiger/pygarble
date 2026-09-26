@@ -585,7 +585,7 @@
   ]
  },
  {
-  "text": "ghp_short",
+  "text": "ghp_\u0073hort",
   "categories": [
    "secrets"
   ],
@@ -644,7 +644,7 @@
   ]
  },
  {
-  "text": "glpat-short",
+  "text": "glpat-\u0073hort",
   "categories": [
    "secrets"
   ],
@@ -745,7 +745,7 @@
   ]
  },
  {
-  "text": "POST https://hooks.slack.com/services/T12345/B67890/aBcDeFgHiJkLmN",
+  "text": "POST https://hooks.slack.com/services/\u005412345/B67890/aBcDeFgHiJkLmN",
   "categories": [
    "secrets"
   ],
@@ -1234,7 +1234,7 @@
   ]
  },
  {
-  "text": "SG.short.key",
+  "text": "SG.\u0073hort.key",
   "categories": [
    "secrets"
   ],

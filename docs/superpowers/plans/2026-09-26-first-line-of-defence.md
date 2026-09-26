@@ -701,21 +701,21 @@ KNOWN_PATTERNS: Tuple[Dict[str, Any], ...] = (
             "ghp_\u00611B2c3D4e5F6g7H8i9J0k1L2m3N4o5P6q7R8",
             "github_pat_\u00311ABCDEFG0123456789_abcdefghijklmnop",
         ],
-        ["ghp_short", "the ghp_ prefix alone"],
+        ["ghp_\u0073hort", "the ghp_ prefix alone"],
     ),
     _entry(
         "gitlab_token",
         r"glpat-[A-Za-z0-9_\-]{20,}",
         1.0,
         ["glpat-\u0041bCdEfGhIjKlMnOpQrSt"],
-        ["glpat-short"],
+        ["glpat-\u0073hort"],
     ),
     _entry(
         "slack_token",
         r"xox[abprs]-[0-9A-Za-z\-]{10,}",
         1.0,
         ["xoxb-\u003123456789012-abcdefghijkl"],
-        ["xoxz-123456789012-abcdefghijkl", "xoxb-short"],
+        ["xoxz-123456789012-abcdefghijkl", "xoxb-\u0073hort"],
     ),
     _entry(
         "slack_webhook",
@@ -738,7 +738,7 @@ KNOWN_PATTERNS: Tuple[Dict[str, Any], ...] = (
         r"(?:sk|rk)_test_[A-Za-z0-9]{16,}",
         0.8,
         ["sk_test_\u0034eC39HqLyjWDarjtT1zd"],
-        ["sk_test_short"],
+        ["sk_test_\u0073hort"],
     ),
     _entry(
         "google_api_key",
@@ -759,13 +759,13 @@ KNOWN_PATTERNS: Tuple[Dict[str, Any], ...] = (
         r"sk-[A-Za-z0-9]{48}",
         0.9,
         ["sk-" + "a" * 20 + "B" * 20 + "0" * 8],
-        ["sk-\u0061nt-api03-" + "a" * 80],
+        ["sk-ant-\u0061pi03-" + "a" * 80],
     ),
     _entry(
         "anthropic_api_key",
         r"sk-ant-(?:api|admin)\d{2}-[A-Za-z0-9_\-]{80,}",
         1.0,
-        ["sk-\u0061nt-api03-" + "a" * 90],
+        ["sk-ant-\u0061pi03-" + "a" * 90],
         ["sk-ant-\u0061pi03-short"],
     ),
     _entry(
@@ -794,7 +794,7 @@ KNOWN_PATTERNS: Tuple[Dict[str, Any], ...] = (
         r"SG\.[A-Za-z0-9_\-]{22}\.[A-Za-z0-9_\-]{43}",
         1.0,
         ["SG." + "d" * 22 + "." + "e" * 43],
-        ["SG.short.key"],
+        ["SG.\u0073hort.key"],
     ),
     _entry(
         "jwt",

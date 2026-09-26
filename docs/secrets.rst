@@ -9,7 +9,7 @@ the kind, span, confidence and reason, never the secret itself.
    from pygarble import SecretsDetector
 
    detector = SecretsDetector()
-   (finding,) = detector.detect("token ghp_a1B2c3D4e5F6g7H8i9J0k1L2m3N4o5P6q7R8")
+   (finding,) = detector.detect("token ghp_\u00611B2c3D4e5F6g7H8i9J0k1L2m3N4o5P6q7R8")
    assert finding.kind == "github_token"
    assert finding.confidence == 1.0
 
@@ -110,3 +110,7 @@ the findings of a kind are the same whether or not other kinds are
 selected, and an unselected rule never hides a selected one. In a
 :class:`pygarble.Scanner`, ``secrets_without_context=True`` enables
 ``high_entropy_string``.
+
+The test vectors in ``pygarble/data/secrets.json`` are split into
+8-character chunks (``"vectors_encoding": "chunks8"``) so secret scanners
+do not flag them; a port concatenates each list.
