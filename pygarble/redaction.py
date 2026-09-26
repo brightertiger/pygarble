@@ -39,7 +39,13 @@ def replacement(
                 kind=finding.kind,
                 category=finding.category,
             )
-        except (KeyError, IndexError, ValueError) as error:
+        except (
+            AttributeError,
+            IndexError,
+            KeyError,
+            TypeError,
+            ValueError,
+        ) as error:
             raise ValueError(
                 "placeholder may use only {KIND}, {kind} and {category}: "
                 f"{error}"

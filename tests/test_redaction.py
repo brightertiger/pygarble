@@ -38,6 +38,9 @@ def test_placeholder_template_fields():
 def test_placeholder_unknown_field_is_value_error():
     with pytest.raises(ValueError, match="placeholder"):
         render(TEXT, [f("email", 5, 11)], "placeholder", "[{nope}]", "*")
+    for template in ("[{kind.x}]", "[{kind[x]}]"):
+        with pytest.raises(ValueError, match="placeholder"):
+            render(TEXT, [f("email", 5, 11)], "placeholder", template, "*")
 
 
 def test_mask_mode_preserves_length():
