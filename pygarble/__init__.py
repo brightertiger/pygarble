@@ -12,7 +12,7 @@ from .findings import Finding, Redaction, ScanReport
 
 if TYPE_CHECKING:
     from .pii import PIIDetector
-    from .profanity import ProfanityDetector  # type: ignore[import-not-found]
+    from .profanity import ProfanityDetector  # type: ignore[attr-defined]
     from .scanner import Scanner as Scanner
     from .scanner import redact as redact
     from .scanner import scan as scan
