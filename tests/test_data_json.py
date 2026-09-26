@@ -45,3 +45,26 @@ def test_manifest_lists_json_files():
     assert {"words.json", "bigrams.json", "trigrams.json"} <= set(
         manifest["files"]
     )
+
+
+def test_rule_tables_match_python_sources():
+    from pygarble.pii.patterns import export as pii_export
+    from pygarble.profanity.wordlist import export as profanity_export
+    from pygarble.secrets.patterns import export as secrets_export
+
+    for name, export in (
+        ("secrets.json", secrets_export),
+        ("pii.json", pii_export),
+        ("profanity.json", profanity_export),
+    ):
+        path = DATA / name
+        if not path.is_file():
+            pytest.skip(f"{name} is not shipped in wheels")
+        assert json.loads(path.read_text(encoding="utf-8")) == export()
+
+
+def test_manifest_hashes_rule_tables():
+    manifest = json.loads((DATA / "manifest.json").read_text())
+    for name in ("secrets.json", "pii.json", "profanity.json"):
+        if (DATA / name).is_file():
+            assert name in manifest["files"]

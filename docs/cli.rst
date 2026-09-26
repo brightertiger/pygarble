@@ -80,3 +80,35 @@ Text output starts with the objective in use.
 
 Pass the recommended value back with ``--threshold``. See
 :doc:`calibration` for the Python API.
+
+Screening: ``scan`` and ``redact``
+----------------------------------
+
+``pygarble scan`` runs the :class:`~pygarble.Scanner` over each input line
+and prints one row per line. ``pygarble redact`` prints the redacted line.
+
+.. code-block:: bash
+
+   printf 'mail a@b.co\nhello\n' | pygarble scan
+   printf 'key AKIAIOSFODNN7EXAMPLE\n' | pygarble redact --mode mask
+   pygarble scan --categories secrets,pii --format jsonl records.jsonl
+   pygarble redact --field message --mode partial events.jsonl
+
+Options shared by both: ``--categories``, ``--kinds``, ``--exclude-kinds``,
+``--locales`` (comma lists), ``--min-confidence``, ``--profile``,
+``--threshold`` and ``--allowlist`` for the gibberish category, and
+``--field NAME`` to read a JSON object per line. ``--categories``,
+``--kinds`` and ``--locales`` need at least one name; ``--exclude-kinds``
+may be empty. ``scan`` adds
+``--format text|tsv|jsonl`` and ``--show-matches``. Text rows are the label,
+the kinds and the line; TSV rows are the decision as ``1`` or ``0``, the
+finding count, the kinds and the line. Both count only findings at
+``--min-confidence`` or above (and any gibberish finding), so a clean row
+names no kind; JSONL rows carry every finding. Without it, matched
+substrings are omitted from the findings, but every row still carries the
+input line; use ``redact`` when output goes to logs. ``redact`` adds ``--mode
+placeholder|mask|partial``, ``--placeholder`` (fields ``{KIND}``, ``{kind}``,
+``{category}``) and ``--mask-char``.
+
+Exit codes: ``scan`` returns 1 when any line was flagged; ``redact`` returns
+0; both return 2 on bad input or options.

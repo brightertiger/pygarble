@@ -16,6 +16,7 @@ import argparse
 import hashlib
 import json
 import math
+import sys
 import tempfile
 import urllib.request
 from collections import Counter, defaultdict
@@ -347,6 +348,18 @@ def main() -> None:
             directory / "bigrams.json",
         )
         write_json(sorted(trigrams), directory / "trigrams.json")
+        if str(PROJECT_ROOT) not in sys.path:
+            sys.path.insert(0, str(PROJECT_ROOT))
+        from pygarble.pii.patterns import export as pii_export
+        from pygarble.profanity.wordlist import export as profanity_export
+        from pygarble.secrets.patterns import export as secrets_export
+
+        secrets_table = secrets_export()
+        pii_table = pii_export()
+        profanity_table = profanity_export()
+        write_json(secrets_table, directory / "secrets.json")
+        write_json(pii_table, directory / "pii.json")
+        write_json(profanity_table, directory / "profanity.json")
         manifest = {
             "model_version": "english-v2",
             "source_url": curation["source_url"],
@@ -358,6 +371,11 @@ def main() -> None:
                 "words": len(words),
                 "bigrams": len(bigrams),
                 "trigrams": len(trigrams),
+                "secret_patterns": len(secrets_table["known"]),
+                "pii_rules": len(pii_table["generic"])
+                + sum(len(r) for r in pii_table["locales"].values()),
+                "profanity_strong": len(profanity_table["strong"]),
+                "profanity_mild": len(profanity_table["mild"]),
             },
             "files": {
                 file.name: hashlib.sha256(file.read_bytes()).hexdigest()

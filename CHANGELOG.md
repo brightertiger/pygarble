@@ -3,6 +3,41 @@
 All notable changes to pygarble are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.11.0] - 2026-09-26
+
+### Added
+- `Scanner`, `scan()` and `redact()`: one call that screens text for
+  secrets, PII, profanity and gibberish and returns findings with kind,
+  span, confidence and reason. Findings never carry the matched text.
+- Secrets detector: known vendor prefixes (AWS, GitHub, GitLab, Slack,
+  Stripe, Google, OpenAI, Anthropic, Hugging Face, npm, PyPI, SendGrid),
+  JWTs, private key blocks, credentials in URLs, bearer tokens,
+  keyword-plus-entropy generic secrets, and an opt-in
+  `high_entropy_string` rule (`secrets_without_context=True`).
+- PII detector: email, phone, credit card (Luhn), IBAN (mod-97), IPv4/IPv6,
+  plus locale packs for the US (SSN), UK (National Insurance and NHS
+  numbers) and India (Aadhaar with Verhoeff, PAN), each with its national
+  phone formats.
+- Profanity detector: an attributed word list with leetspeak, elongation,
+  embedded, masked and spaced obfuscation handling and an allowlist.
+- Redaction in placeholder, mask and partial modes.
+- `pygarble scan` and `pygarble redact` commands.
+- JSON copies of the rule tables for ports, a golden scan corpus with a CI
+  check, a clean-corpus false-positive gate and a throughput script.
+- Throughput work on the rule detectors: literal prefilters, an ASCII fast
+  path and a token cache. `regression/throughput.py` reports MB/s per
+  category, with `--chunk-bytes` for document-sized inputs.
+- Documentation pages for screening and redaction, secrets, PII and
+  profanity; the README now leads with screening.
+- A vendor token or JWT inside a bearer token or URL credentials is also
+  reported as its own nested finding; selecting kinds only filters the
+  default output.
+- `Scanner` raises `ValueError` when a selection leaves nothing to scan or
+  redact; the CLI rejects empty `--categories`, `--kinds` and `--locales`.
+
+### Notes
+- The gibberish API is unchanged. This release is additive.
+
 ## [0.10.0] - 2026-09-26
 
 ### Added

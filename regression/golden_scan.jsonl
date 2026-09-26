@@ -1,0 +1,621 @@
+{"findings": [["secrets", "aws_access_key_id", 25, 45, 1.0, "known_prefix"]], "flagged": true, "length": 45, "options": {}, "sha256": "68aae02e1f92939ed1fe8e857d9b77c17660692341d8de260c7171da6de609e8", "source": "vector"}
+{"findings": [["secrets", "github_token", 6, 46, 1.0, "known_prefix"]], "flagged": true, "length": 46, "options": {}, "sha256": "c750c6c85a0c0e0fac3d75b65c9631c4d311b16b1b0ad99f8743503437158765", "source": "vector"}
+{"findings": [["secrets", "url_credentials", 11, 26, 0.9, "url_userinfo"]], "flagged": true, "length": 47, "options": {}, "sha256": "d4d514fcd55311b966db398410e4e525bdfe6d5134ad016c67f5ec29457175c6", "source": "vector"}
+{"findings": [["secrets", "generic_secret", 12, 28, 0.6, "keyword_entropy"]], "flagged": true, "length": 29, "options": {}, "sha256": "dee8d19711a4ae3844df29a9ef2f63064c45455af82d754931c877e7f83cf980", "source": "vector"}
+{"findings": [], "flagged": false, "length": 38, "options": {}, "sha256": "062bd3e761177a78276a20e535e9dc63c7b9363d20cad986641ee7cc8d914e9e", "source": "vector"}
+{"findings": [], "flagged": false, "length": 33, "options": {}, "sha256": "ec0a853dcfbb5aa527fede1f26194d4b8ea72b540faf1d5831b81fcdc70b19a7", "source": "vector"}
+{"findings": [], "flagged": false, "length": 55, "options": {}, "sha256": "7bf179d8a94606250abf4a4127fb9bfea881e54819d9321284cdb89baaa2c3dc", "source": "vector"}
+{"findings": [], "flagged": false, "length": 25, "options": {}, "sha256": "08c3703ec36d1fc4ad5d059ed5cdee0676f2c63c5fc9c094ec48ac16e52571e7", "source": "vector"}
+{"findings": [["pii", "email", 6, 33, 0.9, "structure"]], "flagged": true, "length": 37, "options": {}, "sha256": "f975632d5fcfbe0b28905b3b70546ea0eef5378ac102c118ac4708f816df83f9", "source": "vector"}
+{"findings": [["pii", "phone", 5, 19, 0.8, "national_us"], ["pii", "phone", 23, 35, 0.9, "e164"]], "flagged": true, "length": 35, "options": {}, "sha256": "2e79f20871fcc751d9cbe7932ed1d35dce681acbe4ec44aa6dbafd84a5843e24", "source": "vector"}
+{"findings": [["pii", "credit_card", 5, 24, 1.0, "luhn_visa"]], "flagged": true, "length": 34, "options": {}, "sha256": "18bb371bf7ff1c082694beef92db62ff6535c9d6d4b25470c3acc2cfdf8522d0", "source": "vector"}
+{"findings": [["pii", "iban", 5, 32, 1.0, "mod97"]], "flagged": true, "length": 32, "options": {}, "sha256": "bd722adcfc13a6cb14c89d5f7c011087dfa47643d0e9de46befdc15c7e85a782", "source": "vector"}
+{"findings": [["pii", "ssn_us", 4, 15, 0.8, "structure"]], "flagged": true, "length": 15, "options": {}, "sha256": "539fff6ed79eaad4ba8a5c427519f820dbb2ef7a62b7b03fc04620f62a754e94", "source": "vector"}
+{"findings": [["pii", "nino", 3, 16, 0.9, "structure"]], "flagged": true, "length": 16, "options": {}, "sha256": "ade8319e455f5bf37c2b2ccfe1f4ddc66ac1099fcd1b9629f3f53b24e029bf47", "source": "vector"}
+{"findings": [["pii", "pan", 4, 14, 0.9, "structure"]], "flagged": true, "length": 14, "options": {}, "sha256": "7f7498f76ba4fce4564d8505405cd64ad5dc78b542bf9b74bd0b4927b6d12382", "source": "vector"}
+{"findings": [["pii", "ipv4", 5, 17, 0.7, "structure"]], "flagged": true, "length": 43, "options": {}, "sha256": "57e5dbaab6647595f1f029462e3e0abf98392730d15df6400566197f4b7368db", "source": "vector"}
+{"findings": [], "flagged": false, "length": 40, "options": {}, "sha256": "fbc3abd234a4f9d2a5fafe89fb3c6090e8eddf2021d94d301c9dca1618e5863f", "source": "vector"}
+{"findings": [], "flagged": false, "length": 19, "options": {}, "sha256": "76e6c3bf096f2a9529ff876ce43b7ea5d68b1fe3ae0d9ee9bc741928e2b5843a", "source": "vector"}
+{"findings": [], "flagged": false, "length": 17, "options": {}, "sha256": "db9380c5705228f2c4ee72f8ed330f6993a930987c94f4d71c628a95b0c976f5", "source": "vector"}
+{"findings": [["profanity", "profanity", 9, 13, 1.0, "strong"]], "flagged": true, "length": 13, "options": {}, "sha256": "2341bdd2d99b46318f363e09fbbcdf9d76817a2f6810c4b00b83fa9106f05570", "source": "vector"}
+{"findings": [["profanity", "profanity", 6, 10, 0.7, "mild"]], "flagged": true, "length": 11, "options": {}, "sha256": "1dd378c30feda2a5db4ed3ce359d23e85b2aba517e2f30293d0323b25d7021b9", "source": "vector"}
+{"findings": [["profanity", "profanity", 0, 4, 1.0, "strong"], ["profanity", "profanity", 5, 9, 0.6, "masked_ambiguous"], ["profanity", "profanity", 10, 17, 0.8, "spaced"]], "flagged": true, "length": 17, "options": {}, "sha256": "1d564fef62b029f1125c3bf0e2b90aaee12da85cfcec68a69154be6b45c17055", "source": "vector"}
+{"findings": [], "flagged": false, "length": 32, "options": {}, "sha256": "11c83e55d93b0701db7a1f2b609722a6e430f23084d1763a6aadb1a03e3c91e5", "source": "vector"}
+{"findings": [], "flagged": false, "length": 31, "options": {}, "sha256": "a7103c05a081a9299f65208c906a3703fa62ddd9f1cb5b06aeae3376f12d4cd6", "source": "vector"}
+{"findings": [["gibberish", "garbled", 0, 22, 1.0, "garbled"]], "flagged": true, "length": 22, "options": {}, "sha256": "ea44c0ff75be6210b873f0c4cc100acd251e883a25ee0a9eabef7f52276d4aa9", "source": "vector"}
+{"findings": [], "flagged": false, "length": 17, "options": {}, "sha256": "cbb2d50bd9c870e0f098b9230d66d2f74d55544f2e57f1aabe3830443a040eb6", "source": "vector"}
+{"findings": [["pii", "email", 8, 14, 0.9, "structure"], ["secrets", "aws_access_key_id", 20, 40, 1.0, "known_prefix"], ["profanity", "profanity", 42, 46, 0.7, "mild"]], "flagged": true, "length": 46, "options": {}, "sha256": "f64c0212d2cda46c63d1841a3a2336d6adccd25debcebc7c71e6ad932e4c56c0", "source": "vector"}
+{"findings": [], "flagged": false, "length": 0, "options": {}, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "source": "vector"}
+{"findings": [], "flagged": false, "length": 3, "options": {}, "sha256": "0aad7da77d2ed59c396c99a74e49f3a4524dcdbcb5163251b1433d640247aeb4", "source": "vector"}
+{"findings": [["secrets", "aws_access_key_id", 0, 20, 1.0, "known_prefix"], ["gibberish", "garbled", 0, 39, 0.642987868776, "garbled"]], "flagged": true, "length": 39, "options": {}, "sha256": "9582bc437803d841d01bea38a1d78a59bd34597cf4788618e280ea7bf9a6804b", "source": "vector"}
+{"findings": [["gibberish", "garbled", 0, 25, 1.0, "garbled"], ["secrets", "aws_access_key_id", 4, 24, 1.0, "known_prefix"]], "flagged": true, "length": 25, "options": {}, "sha256": "c4a761c65e14e615b5aa3daaece7593f6c220533eb6f3fdd8975c6e38ffcdf67", "source": "vector"}
+{"findings": [], "flagged": false, "length": 21, "options": {}, "sha256": "7e564ec12ab370f61791ce023cda1da3d4b41bc4198b4ad1930a008f1504b3a5", "source": "vector"}
+{"findings": [], "flagged": false, "length": 21, "options": {}, "sha256": "f687ec37effd273e996b3925b435bcb16a0d76ef430d558a57697c42954cda6a", "source": "vector"}
+{"findings": [["secrets", "aws_secret_access_key", 24, 64, 0.9, "keyword_prefix"]], "flagged": true, "length": 64, "options": {}, "sha256": "e0c5bc92a2e4a4127b706ee57655cf47e718867a360e1d2bb4e69fe8b698d1b2", "source": "vector"}
+{"findings": [["secrets", "aws_secret_access_key", 16, 56, 0.9, "keyword_prefix"]], "flagged": true, "length": 56, "options": {}, "sha256": "7cadea2bb79e4b71088f66371989861016b81450bfa956526acf1e111e9f7a50", "source": "vector"}
+{"findings": [["secrets", "aws_secret_access_key", 8, 48, 0.9, "keyword_prefix"]], "flagged": true, "length": 48, "options": {}, "sha256": "1633a7726319034bcff87efe8ffe383c0a526d7c29a2fd573edcdaa5c8488f71", "source": "vector"}
+{"findings": [], "flagged": false, "length": 62, "options": {}, "sha256": "886ea2faf8cdfa87dfc90a3f312097a477d67823d0e41e3c9ea3f511b30c632d", "source": "vector"}
+{"findings": [], "flagged": false, "length": 50, "options": {}, "sha256": "60aa8972b164f6d57a65004d67d9b25b0c4e5685e64091cff6c618e143f8a63b", "source": "vector"}
+{"findings": [["secrets", "github_token", 0, 47, 1.0, "known_prefix"]], "flagged": true, "length": 47, "options": {}, "sha256": "a928368c270b9019b1712d7348a8a179d0f8ea83e7928a1cb407306aae122455", "source": "vector"}
+{"findings": [["secrets", "github_token", 9, 51, 1.0, "known_prefix"]], "flagged": true, "length": 51, "options": {}, "sha256": "15ce189039f6129e879826bc31aaaa16f2e9080fcdf0423dd27fcd2abf32e719", "source": "vector"}
+{"findings": [["gibberish", "garbled", 0, 9, 0.657984766191, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "12fc86f69f479ebbfdd2b9ad484c0761e67d9749c4c0db909559faec6943b089", "source": "vector"}
+{"findings": [["secrets", "gitlab_token", 0, 26, 1.0, "known_prefix"]], "flagged": true, "length": 26, "options": {}, "sha256": "fbad068ef94cdb22fc9f388d524711d55a064bc7accf4a2a9b9de1d33ba82eb2", "source": "vector"}
+{"findings": [["secrets", "gitlab_token", 9, 35, 1.0, "known_prefix"]], "flagged": true, "length": 35, "options": {}, "sha256": "f5addd9b18b33d8de39c9f2bac65d084f1dda62ad2a81951a8a171cdadcbe1f7", "source": "vector"}
+{"findings": [["secrets", "gitlab_token", 11, 39, 1.0, "known_prefix"]], "flagged": true, "length": 39, "options": {}, "sha256": "8cad365f9aab6284b77a6a2f4905afcccf652af25adf66c0bd7b7158a73462f4", "source": "vector"}
+{"findings": [], "flagged": false, "length": 11, "options": {}, "sha256": "ca311ce4bdca6df46163bb41c1c4dae9f1889467b7d60886de7d7c912668ea01", "source": "vector"}
+{"findings": [["secrets", "slack_token", 0, 30, 1.0, "known_prefix"]], "flagged": true, "length": 30, "options": {}, "sha256": "7dd866a2f4ffbca0f2d07b59771645fb1933c031d61e55d8e270382d26246def", "source": "vector"}
+{"findings": [["gibberish", "garbled", 0, 32, 0.733333333333, "garbled"], ["secrets", "slack_token", 6, 32, 1.0, "known_prefix"]], "flagged": true, "length": 32, "options": {}, "sha256": "ce2092108a9ef493803af8dae2e81359a58e51e048e322f546ba8d08adcd55f1", "source": "vector"}
+{"findings": [["secrets", "slack_token", 4, 30, 1.0, "known_prefix"]], "flagged": true, "length": 42, "options": {}, "sha256": "f993b9e8b214065b0d5216c4f72f754e9bbdabeea4ff6d48782dbe66458a78d3", "source": "vector"}
+{"findings": [], "flagged": false, "length": 30, "options": {}, "sha256": "bb89ab987f0f5ee7debada8f15637bea3ba3ffd8929a87e9b6252c702b23c421", "source": "vector"}
+{"findings": [["secrets", "slack_webhook", 0, 65, 1.0, "known_prefix"]], "flagged": true, "length": 65, "options": {}, "sha256": "eaed320c56342c7d4a6a00867b16bf7d3ee34759cab9b5ec3efab772d220bd85", "source": "vector"}
+{"findings": [["gibberish", "garbled", 0, 74, 0.65, "garbled"], ["secrets", "slack_webhook", 9, 74, 1.0, "known_prefix"]], "flagged": true, "length": 74, "options": {}, "sha256": "95079228e080d19ec29f0447c33a6f4e4c379939c8e90aec06fa599af3528fea", "source": "vector"}
+{"findings": [["secrets", "slack_webhook", 5, 66, 1.0, "known_prefix"]], "flagged": true, "length": 66, "options": {}, "sha256": "82e497d06c32fed678a773921280ed1a0d53abf40e654bb83424573645ed037e", "source": "vector"}
+{"findings": [], "flagged": false, "length": 33, "options": {}, "sha256": "cc29c43f807e6e833fbbebe297580e7fac354f9d4d758009ae5138eda3096e6b", "source": "vector"}
+{"findings": [["secrets", "stripe_key", 0, 28, 1.0, "known_prefix"]], "flagged": true, "length": 28, "options": {}, "sha256": "7a71cbb0e2eb73b32f6b0af7dc821be424ff05ea6d4f79ffc10d2f6e519244ae", "source": "vector"}
+{"findings": [["secrets", "stripe_key", 7, 35, 0.8, "known_prefix"]], "flagged": true, "length": 35, "options": {}, "sha256": "a344e1b40273e7223d47bfc0eeb4b358dfca72597a189fc51df6db61d35e3be7", "source": "vector"}
+{"findings": [["gibberish", "garbled", 0, 28, 1.0, "garbled"], ["secrets", "stripe_key", 0, 28, 1.0, "known_prefix"]], "flagged": true, "length": 28, "options": {}, "sha256": "addd1f09bf113e64a6be46a48019949785270657433f52a74d4b351131b7ef3f", "source": "vector"}
+{"findings": [], "flagged": false, "length": 28, "options": {}, "sha256": "37ed72b5549663740d6912e755e77b9790012962bf70f2e16dca72e5cecce564", "source": "vector"}
+{"findings": [["secrets", "google_api_key", 0, 39, 1.0, "known_prefix"]], "flagged": true, "length": 39, "options": {}, "sha256": "5e8a6a8b9d10a937179bda8192ed390733120e7b5478608152094a09b4975ec8", "source": "vector"}
+{"findings": [["secrets", "google_api_key", 9, 48, 1.0, "known_prefix"]], "flagged": true, "length": 54, "options": {}, "sha256": "e283ff008e3f5c9c83d02218f03b15206d071a10366b52a23837244f76eff6b2", "source": "vector"}
+{"findings": [["secrets", "google_api_key", 5, 44, 1.0, "known_prefix"]], "flagged": true, "length": 44, "options": {}, "sha256": "0152897865260f00e859be6bc297a3fcf402bf665ee92502832fb1273b70ba52", "source": "vector"}
+{"findings": [], "flagged": false, "length": 14, "options": {}, "sha256": "1b74ce833448c3f7250a0f9e39b13d157b356225db99f1a473fc87f3f18355d7", "source": "vector"}
+{"findings": [["secrets", "openai_api_key", 0, 60, 1.0, "known_prefix"]], "flagged": true, "length": 60, "options": {}, "sha256": "9ea1c622b9c7e38773ed153a43509ecf1d8a3e50b1aa9a8a79f45b95295baae0", "source": "vector"}
+{"findings": [["secrets", "openai_api_key", 15, 66, 0.9, "known_prefix"]], "flagged": true, "length": 66, "options": {}, "sha256": "1de821751ce9bec040caa8c89f77f987f94994bfeab4d8beef3768988de9c30a", "source": "vector"}
+{"findings": [["secrets", "openai_api_key", 0, 51, 0.9, "known_prefix"]], "flagged": true, "length": 51, "options": {}, "sha256": "3a8d630cc0d01ee8de2e0d961b69ce475775fc93a53d2e6a3fc4eab06633dedf", "source": "vector"}
+{"findings": [["gibberish", "garbled", 0, 34, 1.0, "garbled"]], "flagged": true, "length": 34, "options": {}, "sha256": "3193831645bd691450f50c575c8f3019bcd83b9be8448321f223ef36671e03c5", "source": "vector"}
+{"findings": [["gibberish", "garbled", 0, 103, 0.8, "garbled"], ["secrets", "anthropic_api_key", 0, 103, 1.0, "known_prefix"]], "flagged": true, "length": 103, "options": {}, "sha256": "31b568ae9f527c66dcf8b5309b3244fbcb00ed09491d12d3d5bc9c3dde9f9d8d", "source": "vector"}
+{"findings": [["secrets", "anthropic_api_key", 18, 113, 1.0, "known_prefix"]], "flagged": true, "length": 113, "options": {}, "sha256": "06d78a457bab8a7294ce00bd4b49e8f43cd6ed52551904c8eb5dfbcddc395d23", "source": "vector"}
+{"findings": [["secrets", "anthropic_api_key", 0, 105, 1.0, "known_prefix"]], "flagged": true, "length": 105, "options": {}, "sha256": "fc4a49c3ebe8d02ba5c46197e4aa8155095b7712bc8527117a932c2ca2454671", "source": "vector"}
+{"findings": [], "flagged": false, "length": 18, "options": {}, "sha256": "89baac098d86f892be95599122c190aef5ef661172eea219946e03bb89266bae", "source": "vector"}
+{"findings": [["gibberish", "garbled", 0, 37, 1.0, "garbled"], ["secrets", "huggingface_token", 0, 37, 1.0, "known_prefix"]], "flagged": true, "length": 37, "options": {}, "sha256": "fa7c36a45c9b4ccbc0029e3cf49b09a1213bf0fb186d5304592cb64aaa13e2eb", "source": "vector"}
+{"findings": [["secrets", "huggingface_token", 9, 46, 1.0, "known_prefix"]], "flagged": true, "length": 46, "options": {}, "sha256": "f748a837a830eb0793a6768ef93c7ca075682e54e62f3ff9cdcf130f0c776086", "source": "vector"}
+{"findings": [["gibberish", "garbled", 0, 47, 0.8, "garbled"], ["secrets", "huggingface_token", 6, 43, 1.0, "known_prefix"]], "flagged": true, "length": 47, "options": {}, "sha256": "18630417efd3015ddcccc1dc093704fe1c96b9756bbe90b0392bf7d4f9d83fcb", "source": "vector"}
+{"findings": [["gibberish", "garbled", 0, 13, 1.0, "garbled"]], "flagged": true, "length": 13, "options": {}, "sha256": "7e7b02b5b24f50abc596d26665fde5ff82c7064a96174e95c730507749dbb06f", "source": "vector"}
+{"findings": [["gibberish", "garbled", 0, 40, 1.0, "garbled"], ["secrets", "npm_token", 0, 40, 1.0, "known_prefix"]], "flagged": true, "length": 40, "options": {}, "sha256": "596d6670e6376693084542b1bb55cff334985b601868823c9f95120b4cc9d708", "source": "vector"}
+{"findings": [["secrets", "npm_token", 33, 73, 1.0, "known_prefix"]], "flagged": true, "length": 73, "options": {}, "sha256": "eeacd292e7f9e2995de6d2851aa597ba9f63e386abc59bf4e8e4086c61dd1951", "source": "vector"}
+{"findings": [["secrets", "npm_token", 4, 44, 1.0, "known_prefix"]], "flagged": true, "length": 48, "options": {}, "sha256": "5d4c8b4d9f72a6e4e34d559eb252d5ef8aaecbb08e1d4d3cfc6b80deb9fc4249", "source": "vector"}
+{"findings": [["gibberish", "garbled", 0, 11, 0.800257577706, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "2dcee121ad24df8217895d47a987d6eea66b9823e880ed83ee4e2b77ed29d96e", "source": "vector"}
+{"findings": [["gibberish", "garbled", 0, 80, 1.0, "garbled"], ["secrets", "pypi_token", 0, 80, 1.0, "known_prefix"]], "flagged": true, "length": 80, "options": {}, "sha256": "e63d501674a5ad7330850a9d6964510bc892afe0f016b1375594ef5ff03748d2", "source": "vector"}
+{"findings": [["secrets", "pypi_token", 10, 90, 1.0, "known_prefix"]], "flagged": true, "length": 90, "options": {}, "sha256": "5e60a0d1e95dc4231f7a9f29d74ed3a704563ede0a56f9b5b657413ddb4cebc9", "source": "vector"}
+{"findings": [["secrets", "pypi_token", 6, 86, 1.0, "known_prefix"]], "flagged": true, "length": 86, "options": {}, "sha256": "219d79dd9a331e12ff992ba7082f56a05772aea57f2bb72e039fb4e38c986898", "source": "vector"}
+{"findings": [], "flagged": false, "length": 20, "options": {}, "sha256": "9c19196bccd3b627f98d7fd362bb04da5a01f937ea42e8ae3b53b533bcfbde70", "source": "vector"}
+{"findings": [["gibberish", "garbled", 0, 69, 1.0, "garbled"], ["secrets", "sendgrid_key", 0, 69, 1.0, "known_prefix"]], "flagged": true, "length": 69, "options": {}, "sha256": "3506dafb98b608bc6d853fbfc7cf805b96e07b50172be46fce29895451f263da", "source": "vector"}
+{"findings": [["gibberish", "garbled", 0, 86, 0.733333333333, "garbled"], ["secrets", "sendgrid_key", 17, 86, 1.0, "known_prefix"]], "flagged": true, "length": 86, "options": {}, "sha256": "d9e81a9de157c98070ff07230364d65c6666e3733dd03ca3a9b3691fef1ea7d8", "source": "vector"}
+{"findings": [["secrets", "sendgrid_key", 4, 73, 1.0, "known_prefix"]], "flagged": true, "length": 76, "options": {}, "sha256": "225ae42bdbeb13ed393fde38c3b7f6038150437575a282eaf66b3b06d2af742f", "source": "vector"}
+{"findings": [], "flagged": false, "length": 12, "options": {}, "sha256": "6b6d748b85a6e2949122f7a5a45433c9386d988616e21f7dde543f0ae1046f8b", "source": "vector"}
+{"findings": [["secrets", "jwt", 0, 108, 1.0, "known_prefix"]], "flagged": true, "length": 108, "options": {}, "sha256": "3908a0662c6e684ad678756fac43a62e10f5a6fb23bdbd1778dd816edeb6f704", "source": "vector"}
+{"findings": [["gibberish", "garbled", 0, 69, 0.7, "garbled"], ["secrets", "jwt", 7, 69, 1.0, "known_prefix"]], "flagged": true, "length": 69, "options": {}, "sha256": "77f809740ef58292c47f03370ef2c4a6b8c5a88c65745cb29d9154b9862185a8", "source": "vector"}
+{"findings": [["secrets", "jwt", 0, 55, 0.8, "known_prefix"]], "flagged": true, "length": 55, "options": {}, "sha256": "6b8b8b361ad3353ffe433451314efea0b11e88f58f5825df2b1c05a7b2477ed4", "source": "vector"}
+{"findings": [], "flagged": false, "length": 34, "options": {}, "sha256": "8b9c28a566b6408b22cab8a2c5fa4705b1a9d56296ff6259486c187109f4777b", "source": "vector"}
+{"findings": [["secrets", "private_key", 0, 58, 1.0, "known_prefix"]], "flagged": true, "length": 58, "options": {}, "sha256": "eeeb79f2573ca7de3df1ccb518abbd88112f05069ba68409962168747ca23de2", "source": "vector"}
+{"findings": [["secrets", "private_key", 0, 48, 1.0, "known_prefix"]], "flagged": true, "length": 49, "options": {}, "sha256": "a25ac44baa398be95c7927e6968d4b98faee3221d3301acec1e0bca2d2bdc273", "source": "vector"}
+{"findings": [["secrets", "private_key", 5, 99, 1.0, "known_prefix"]], "flagged": true, "length": 104, "options": {}, "sha256": "bf7ccb5debc433f214cc299b8182d39ae7dd5b61756ed7a4b61bed93a25379fc", "source": "vector"}
+{"findings": [], "flagged": false, "length": 58, "options": {}, "sha256": "13ac236dbfb801cd65bf2dbc4a5a241925013450d4e7a0b0d2f15a1e11eb6cce", "source": "vector"}
+{"findings": [], "flagged": false, "length": 26, "options": {}, "sha256": "59a58325e88756ac23f5bb454ca0de6a1ae0701d3bce4e05ca78483beca46bec", "source": "vector"}
+{"findings": [["secrets", "url_credentials", 8, 22, 0.9, "url_userinfo"]], "flagged": true, "length": 35, "options": {}, "sha256": "72812e2461d91cd544882a9f1b4e3beadc78ecc455fe20d97903d88539e12791", "source": "vector"}
+{"findings": [["secrets", "url_credentials", 7, 18, 0.9, "url_userinfo"]], "flagged": true, "length": 31, "options": {}, "sha256": "7b598910f7f1a8fbb2057385dc5d97d96a7b3b34dcdc549161e90e875ab0ba63", "source": "vector"}
+{"findings": [["pii", "email", 7, 26, 0.9, "structure"]], "flagged": true, "length": 26, "options": {}, "sha256": "2b922b81122b7094be42800b57a93d6619306267a9c0f61de1969082489bb172", "source": "vector"}
+{"findings": [["pii", "email", 6, 20, 0.9, "structure"]], "flagged": true, "length": 33, "options": {}, "sha256": "bd03e035bf19a3fcb9b88c649a9d330754828d10630483cd6e7e460500e092e8", "source": "vector"}
+{"findings": [["secrets", "bearer_token", 22, 47, 0.8, "bearer_prefix"]], "flagged": true, "length": 47, "options": {}, "sha256": "9679c0ed4f5bb0687813735cba8aad97036aec871299d3749c3d003dd79b0c24", "source": "vector"}
+{"findings": [["gibberish", "garbled", 0, 56, 0.92702245517, "garbled"], ["secrets", "bearer_token", 31, 55, 0.8, "bearer_prefix"]], "flagged": true, "length": 56, "options": {}, "sha256": "7d53e708ad589812b64b70c56204aa10c97b12fef051b241a0db2c5cc92a3c67", "source": "vector"}
+{"findings": [["secrets", "bearer_token", 7, 43, 0.8, "bearer_prefix"]], "flagged": true, "length": 43, "options": {}, "sha256": "68144f4cf4cdeb33f143ba2914d41b941a0f2e6107061784184e29b62537a75c", "source": "vector"}
+{"findings": [], "flagged": false, "length": 29, "options": {}, "sha256": "ff04fb2d28ca469241c9c4c4d6221ef28973dc9c12088c74a2923185ff4f33ee", "source": "vector"}
+{"findings": [], "flagged": false, "length": 25, "options": {}, "sha256": "827e14f872c5bbdb2c5d1396f10f3891ff3210383b54827adfaefa1f77abda46", "source": "vector"}
+{"findings": [], "flagged": false, "length": 47, "options": {}, "sha256": "80df2d5af7293e307b669c06a2b8a7c7535afa3b25690b51e03fe6549de7eac1", "source": "vector"}
+{"findings": [["secrets", "generic_secret", 12, 22, 0.6, "keyword_entropy"]], "flagged": true, "length": 22, "options": {}, "sha256": "4a084378666ac8164ae46c64c4670c342a6716250fd05d0279b1717ceec41bc2", "source": "vector"}
+{"findings": [["secrets", "generic_secret", 10, 42, 0.6, "keyword_entropy"]], "flagged": true, "length": 43, "options": {}, "sha256": "a4610e7acac59d5de93a370a6911ff9e014242bdda2d2078f4deddbf9b31e53f", "source": "vector"}
+{"findings": [["secrets", "generic_secret", 17, 49, 0.6, "keyword_entropy"]], "flagged": true, "length": 49, "options": {}, "sha256": "2b70be386a32a48e87edfd2262cd5df6cdf235ad143dcf3746b767fadfb6185f", "source": "vector"}
+{"findings": [], "flagged": false, "length": 23, "options": {}, "sha256": "fa58e0627a2760194b7a45e5a73e87f7c5a7f7640f49c7c5229e5c9fdcecf70d", "source": "vector"}
+{"findings": [], "flagged": false, "length": 21, "options": {}, "sha256": "54ab7bd99cef0f81daab2e932799a061b4aaabac41083e7f087079b4a32dcbba", "source": "vector"}
+{"findings": [], "flagged": false, "length": 16, "options": {}, "sha256": "2d7fcbcbdebbadc92a45fc83f668194d4bd5fc01033f4c3fa34e9c074e74fe23", "source": "vector"}
+{"findings": [["gibberish", "garbled", 0, 18, 1.0, "garbled"]], "flagged": true, "length": 18, "options": {}, "sha256": "9049635b0a143455d7b0549c46036f91e27588996e23695fcc08c4dca3b44019", "source": "vector"}
+{"findings": [["secrets", "high_entropy_string", 0, 32, 0.5, "entropy"]], "flagged": true, "length": 32, "options": {"secrets_without_context": true}, "sha256": "43880f8b249da240fad63fea4884ae3d503e2832044b1743fa78119ae7e915b8", "source": "vector"}
+{"findings": [["secrets", "high_entropy_string", 7, 39, 0.5, "entropy"]], "flagged": true, "length": 55, "options": {"secrets_without_context": true}, "sha256": "7bf179d8a94606250abf4a4127fb9bfea881e54819d9321284cdb89baaa2c3dc", "source": "vector"}
+{"findings": [["secrets", "high_entropy_string", 5, 44, 0.5, "entropy"]], "flagged": true, "length": 53, "options": {"secrets_without_context": true}, "sha256": "5cbd7958aaf4533205ebe4d45731fb19b39db4ebb3594bde502087f764010c64", "source": "vector"}
+{"findings": [["gibberish", "garbled", 0, 38, 1.0, "garbled"]], "flagged": true, "length": 38, "options": {"secrets_without_context": true}, "sha256": "365a9c3e2c2af0a56e47a9dac51c2c5381bf8f41273bad3175e0e619126ad087", "source": "vector"}
+{"findings": [], "flagged": false, "length": 32, "options": {"secrets_without_context": true}, "sha256": "84e0c0eafaa95a34c293f278ac52e45ce537bab5e752a00e6959a13ae103b65a", "source": "vector"}
+{"findings": [], "flagged": false, "length": 43, "options": {"secrets_without_context": true}, "sha256": "05c6e08f1d9fdafa03147fcb8f82f124c76d2f70e3d989dc8aadb5e7d7450bec", "source": "vector"}
+{"findings": [["pii", "email", 9, 24, 0.9, "structure"], ["pii", "email", 28, 50, 0.9, "structure"]], "flagged": true, "length": 50, "options": {}, "sha256": "38f659db08f72fdb342d67b1b6dc080307a4b97e0bfb7d2e157b813b10b61c22", "source": "vector"}
+{"findings": [["pii", "email", 0, 34, 0.9, "structure"]], "flagged": true, "length": 44, "options": {}, "sha256": "2a871f30639d4c879355fac20f6bb61878936e33f51e9580314feaabca1e45e6", "source": "vector"}
+{"findings": [], "flagged": false, "length": 27, "options": {}, "sha256": "ad8fb6adbd3909126d559a73feb04da3a08aabc6d46ab438f16ede21905442cb", "source": "vector"}
+{"findings": [["pii", "phone", 10, 23, 0.8, "national_uk"]], "flagged": true, "length": 23, "options": {}, "sha256": "e1aa3412ed4eccfc806d700b0debbe4a66ff016fa27447aab1c2328d28b623c0", "source": "vector"}
+{"findings": [["pii", "phone", 7, 22, 0.8, "national_uk"]], "flagged": true, "length": 22, "options": {}, "sha256": "1811f9fd7391a122dcad684959658c98df68e4977d8d2919e49ca0bed2303249", "source": "vector"}
+{"findings": [["pii", "phone", 5, 16, 0.8, "national_in"]], "flagged": true, "length": 22, "options": {}, "sha256": "d92eb6c4a0ce296de11ad51445e191a0f7f684f1c023f78c5635a1c579e44db9", "source": "vector"}
+{"findings": [["pii", "phone", 5, 15, 0.8, "national_in"]], "flagged": true, "length": 15, "options": {}, "sha256": "8d2ead4c9ec0a80c7b58183daeb98209c02043452bec3144641ddc32a0f5cda6", "source": "vector"}
+{"findings": [], "flagged": false, "length": 13, "options": {}, "sha256": "ede634e921fc23bddeab427d9168a833de6b46b94bbe9499ad88cf4b3f30b546", "source": "vector"}
+{"findings": [], "flagged": false, "length": 10, "options": {}, "sha256": "a363437ee2e18337b8f667f5e3ec83868914856140b0e90c6cdaf82b6f1b92ac", "source": "vector"}
+{"findings": [["pii", "credit_card", 0, 19, 1.0, "luhn_mastercard"]], "flagged": true, "length": 19, "options": {}, "sha256": "74462c1b7085f889693e117cbed89d5398f3b7051ae881cbc4620df290945294", "source": "vector"}
+{"findings": [["pii", "credit_card", 5, 20, 1.0, "luhn_amex"]], "flagged": true, "length": 20, "options": {}, "sha256": "20a4b5ca651bb9f978eb47037abd4171aff05354cce5a69bee31c0a50d872357", "source": "vector"}
+{"findings": [["pii", "credit_card", 9, 28, 1.0, "luhn_discover"]], "flagged": true, "length": 28, "options": {}, "sha256": "f9025971452fb54191269eb91b3f1c1cfbe2bdca4fe9a40b77f371a1f5acc782", "source": "vector"}
+{"findings": [], "flagged": false, "length": 28, "options": {}, "sha256": "bb12a8ed945c288a915baffb8ceac9fa14e3ae34bcb7747c518ab7ff8f55725a", "source": "vector"}
+{"findings": [["pii", "iban", 0, 22, 1.0, "mod97"]], "flagged": true, "length": 22, "options": {}, "sha256": "faf7e1c0107370ff6f5d03205da7d8ae41ba8e22b31e94b986a65210075d9a1d", "source": "vector"}
+{"findings": [["pii", "iban", 4, 37, 1.0, "mod97"]], "flagged": true, "length": 37, "options": {}, "sha256": "dff5b595343a9db5a4024d40aa9e60bd5a9529ea4f43fc88fca225783907344e", "source": "vector"}
+{"findings": [], "flagged": false, "length": 27, "options": {}, "sha256": "67e21128faf269b20671de3224973236971c296ea38d6d2661c03a7a98dd21d0", "source": "vector"}
+{"findings": [], "flagged": false, "length": 14, "options": {}, "sha256": "c6477ac8b11e697d30840046ca9187d0578fa2283614f278f475adff9733ac15", "source": "vector"}
+{"findings": [["pii", "ssn_us", 4, 15, 0.8, "structure"]], "flagged": true, "length": 15, "options": {}, "sha256": "0f12c1b990afab3d868320cc82156d1529ccd433814bb7a734a5c5b78c839767", "source": "vector"}
+{"findings": [["pii", "ssn_us", 24, 33, 0.6, "keyword_context"]], "flagged": true, "length": 33, "options": {}, "sha256": "4d58c67c69ed1ea7f11878949e887c5a708dd05be60e21160c07436e8af5d9af", "source": "vector"}
+{"findings": [["pii", "ssn_us", 4, 15, 0.8, "structure"]], "flagged": true, "length": 15, "options": {}, "sha256": "bcab98516fc06cbedc61d532b50a1e119ae986e044037782e68f075c02552db4", "source": "vector"}
+{"findings": [], "flagged": false, "length": 11, "options": {}, "sha256": "dd1659dcafd4f81e728ad480f918d830b140115925a8eb61aca6a462f15df8a6", "source": "vector"}
+{"findings": [], "flagged": false, "length": 11, "options": {}, "sha256": "5abf1b4e7626803766e603a607b6f0c68f0094a514a9c49ce22e9af3cf2d42ce", "source": "vector"}
+{"findings": [], "flagged": false, "length": 10, "options": {}, "sha256": "da18a0a6806c1852181498e43f3c8bde832d1b115aec2c4b2b4c04132325507f", "source": "vector"}
+{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"], ["pii", "nino", 0, 9, 0.9, "structure"]], "flagged": true, "length": 9, "options": {}, "sha256": "c745e5a7246305b8156f3f55dcb7fa9cbf88fc2e6f6ac6aa264b864e0c2eb3b2", "source": "vector"}
+{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "0faa6aedafcf6f5c6a31d6854b513a65c7d43b3872c1f7eb84946910f456dda1", "source": "vector"}
+{"findings": [["pii", "nino", 19, 32, 0.9, "structure"]], "flagged": true, "length": 32, "options": {}, "sha256": "4c85c39c2d676eb97fa79ef449e529dd39349f03d226a0b64956a7d4f702dd0f", "source": "vector"}
+{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "71394b3e910740a03003e090d23fcdbae2dd197bfd14aef024b0d47b898af953", "source": "vector"}
+{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "a61449a3a034fc843260930b7b4f2454a22dd07ab29451a6ee8b984fc81ded05", "source": "vector"}
+{"findings": [["pii", "nhs_number", 11, 23, 0.9, "mod11_keyword"]], "flagged": true, "length": 23, "options": {}, "sha256": "552ad0aaa6e749c8b0cfd8bc7ca5aa62cf2535e23c91cd3dd6829d44792d4159", "source": "vector"}
+{"findings": [["pii", "nhs_number", 5, 15, 0.9, "mod11_keyword"]], "flagged": true, "length": 15, "options": {}, "sha256": "b87315bdc3807124d4f41d3e687955178952cc42087d9ed31336392b1c77c6f0", "source": "vector"}
+{"findings": [["pii", "nhs_number", 16, 28, 0.9, "mod11_keyword"]], "flagged": true, "length": 28, "options": {}, "sha256": "1afdc2c15ed1f637375eac52c5d42de65add41a1a882f3d48fd528f84b63430e", "source": "vector"}
+{"findings": [["pii", "phone", 0, 12, 0.8, "national_us"]], "flagged": true, "length": 12, "options": {}, "sha256": "29141a17987c88d3b012bbdc22c83f6e33e7975fdba6864b85c9039e37cf0396", "source": "vector"}
+{"findings": [["gibberish", "garbled", 0, 22, 0.715327075816, "garbled"], ["pii", "aadhaar", 8, 22, 1.0, "verhoeff"]], "flagged": true, "length": 22, "options": {}, "sha256": "8242357804c9ca64eb500ac030f8eced16fee9d6644aef95c0b4ae3918b78e3d", "source": "vector"}
+{"findings": [["pii", "aadhaar", 6, 18, 1.0, "verhoeff"]], "flagged": true, "length": 18, "options": {}, "sha256": "f8c62ded9c6998baf21651f0d3f2e881d7263aae56798f60ae6e87c52990bbb9", "source": "vector"}
+{"findings": [["pii", "aadhaar", 3, 17, 1.0, "verhoeff"]], "flagged": true, "length": 17, "options": {}, "sha256": "4c86d6b285e3c93faa7e4cf968186a2fc8874a31dea5b934094a1a1e0e217791", "source": "vector"}
+{"findings": [], "flagged": false, "length": 14, "options": {}, "sha256": "e36637c8acee30d5d915f87a3530cc0877eb71a9192d8ed36d76ebdfc2bc42b3", "source": "vector"}
+{"findings": [], "flagged": false, "length": 14, "options": {}, "sha256": "48d49a5fa90e1005e850e412d219483f03d2b18bb6b04e7dc8e024ef1bd80847", "source": "vector"}
+{"findings": [["pii", "pan", 0, 10, 0.9, "structure"]], "flagged": true, "length": 10, "options": {}, "sha256": "103317fa72aada9de4f0746c7b1909e70a50e063ee4c3d5e1604459df3f201eb", "source": "vector"}
+{"findings": [["pii", "pan", 5, 15, 0.9, "structure"]], "flagged": true, "length": 15, "options": {}, "sha256": "f79d0df04ebdf6f547f3599329afb563bbf82b1131bfb8a84f36e6cbf96fa173", "source": "vector"}
+{"findings": [], "flagged": false, "length": 10, "options": {}, "sha256": "6442fd73a940c1186d6268bd27f89233e12429902c7805037e8aab6e717be6d9", "source": "vector"}
+{"findings": [], "flagged": false, "length": 10, "options": {}, "sha256": "bd45e3ecb6e7030c460f9db3ae094c4094b6fb9619795db19322cd44caf7c4ae", "source": "vector"}
+{"findings": [["pii", "ipv4", 4, 11, 0.7, "structure"]], "flagged": true, "length": 11, "options": {}, "sha256": "c54b0c43387bb3eb370b96c12c7cb579bd25e73441b61fb6e2b35d1c9a37a719", "source": "vector"}
+{"findings": [["pii", "ipv4", 0, 10, 0.7, "structure"]], "flagged": true, "length": 27, "options": {}, "sha256": "d7f34c68a8408f2c7db83c69414bd0e553f56f49a22c799db51e57c9467b8560", "source": "vector"}
+{"findings": [], "flagged": false, "length": 9, "options": {}, "sha256": "22c23dbb2e115ffcdd0c349a62959cf4b8100e91627cb83d1084a97056aad862", "source": "vector"}
+{"findings": [], "flagged": false, "length": 9, "options": {}, "sha256": "b8b9f26c0d51e56b892f8ecdc61968867eb1e1da1bcdcc05f8b7d2597147a2e2", "source": "vector"}
+{"findings": [["pii", "ipv6", 5, 16, 0.7, "structure"]], "flagged": true, "length": 16, "options": {}, "sha256": "28f6470901cee88075629cb10b5c34ff1386e7fb5fd23a5497ea4f138a6308d4", "source": "vector"}
+{"findings": [["pii", "ipv6", 0, 24, 0.7, "structure"]], "flagged": true, "length": 24, "options": {}, "sha256": "3ac8777daa7003c912839f157805eb997b9c62d4a1bc24c6bf8b67b547bba5fc", "source": "vector"}
+{"findings": [["pii", "ipv6", 0, 3, 0.7, "structure"]], "flagged": true, "length": 3, "options": {}, "sha256": "eff8e7ca506627fe15dda5e0e512fcaad70b6d520f37cc76597fdb4f2d83a1a3", "source": "vector"}
+{"findings": [], "flagged": false, "length": 21, "options": {}, "sha256": "b228f1319becf5c30df0efd416e77c94612339fdb35180a7d31429606ba4d7b3", "source": "vector"}
+{"findings": [], "flagged": false, "length": 10, "options": {}, "sha256": "c80724dfa3e96a4858630507e1a365f45f76f01d601b5e1cb6b925450143da82", "source": "vector"}
+{"findings": [["profanity", "profanity", 0, 4, 1.0, "strong"]], "flagged": true, "length": 12, "options": {}, "sha256": "2297e06b8717e32cffff90698a890450c51e84f14a7cc43bf31e1567239da843", "source": "vector"}
+{"findings": [["profanity", "profanity", 0, 7, 0.8, "elongated"], ["gibberish", "garbled", 0, 12, 1.0, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "6b1b48196b20576a21a2179bc14aa0d14ed32ec4cf6df034c06df8071ae6c1cd", "source": "vector"}
+{"findings": [["profanity", "profanity", 4, 11, 1.0, "strong"]], "flagged": true, "length": 12, "options": {}, "sha256": "e5a941831954cec3a2ef85b40955e131fef5bfe09cfb971eaacb853a091ca9e8", "source": "vector"}
+{"findings": [["profanity", "profanity", 0, 7, 0.9, "masked"]], "flagged": true, "length": 12, "options": {}, "sha256": "e9ee4d11009c8a98bdd582975db6deb344e019d2d0c7d654a4d47bc8172f71aa", "source": "vector"}
+{"findings": [["profanity", "profanity", 0, 12, 1.0, "strong"]], "flagged": true, "length": 12, "options": {}, "sha256": "2f5f6ce5ae30b54aa5d7ced1ba566982bab34ba2814a51ce1865d2c2d8815cd4", "source": "vector"}
+{"findings": [["profanity", "profanity", 0, 8, 1.0, "strong"]], "flagged": true, "length": 8, "options": {}, "sha256": "30a989afc82c0a21139573591de4e5ff37994f7d1506a9acf2b5997005c2649f", "source": "vector"}
+{"findings": [["profanity", "profanity", 0, 6, 0.7, "mild"]], "flagged": true, "length": 10, "options": {}, "sha256": "728c113d7a02481bac3edb18712208f25b17606cea0f25530416df1b3dacc7a2", "source": "vector"}
+{"findings": [], "flagged": false, "length": 33, "options": {}, "sha256": "b22706ae36adbb66de33eead6f9c36e7799349b34fa97c34ec61e952dcd72691", "source": "vector"}
+{"findings": [], "flagged": false, "length": 28, "options": {}, "sha256": "19409e95fb100f5eec33029954f85890e4288043eeac81662f43523c114568c3", "source": "vector"}
+{"findings": [], "flagged": false, "length": 19, "options": {}, "sha256": "4209d0a5327ddd219d90246bae26fa3d2e1b3f7432fbda1eee6db8391fc2502d", "source": "vector"}
+{"findings": [], "flagged": false, "length": 12, "options": {}, "sha256": "4b06103d9afbd66c8c1868404412ff25a0ca05d27bda345d02625d3b1a4d4c94", "source": "vector"}
+{"findings": [], "flagged": false, "length": 11, "options": {}, "sha256": "12998c017066eb0d2a70b94e6ed3192985855ce390f321bbdb832022888bd251", "source": "vector"}
+{"findings": [["gibberish", "garbled", 0, 28, 1.0, "garbled"]], "flagged": true, "length": 28, "options": {}, "sha256": "5f4cfa87abe779fca46e5c1fe3eb572436046869c4b19b8e39fc2403e0f7fbbe", "source": "vector"}
+{"findings": [["gibberish", "garbled", 0, 26, 1.0, "garbled"]], "flagged": true, "length": 26, "options": {}, "sha256": "c91f6e9b2772175e5f158c612967c8b9cac34702f629e68d237e48a0be46e99b", "source": "vector"}
+{"findings": [["gibberish", "garbled", 0, 22, 1.0, "garbled"]], "flagged": true, "length": 22, "options": {}, "sha256": "a5ca999be531d97d2fc8a08a03716f5d7a5401d47e8622d2140449f6de1c0813", "source": "vector"}
+{"findings": [], "flagged": false, "length": 28, "options": {}, "sha256": "e264a054c8e879137fcb420644b69938190ab71944d9929e513cbe549fd3812c", "source": "vector"}
+{"findings": [], "flagged": false, "length": 48, "options": {}, "sha256": "2ac4fd6e2e464d17e813f8378d39061b5f8824168c3a7073a673589eabc5bd7d", "source": "vector"}
+{"findings": [], "flagged": false, "length": 9, "options": {}, "sha256": "de2abade832c8e350a1bdc98cfcdb1e202ac4749c5fc51a4a970d41736b6df5c", "source": "vector"}
+{"findings": [["profanity", "profanity", 7, 18, 0.8, "embedded"]], "flagged": true, "length": 18, "options": {}, "sha256": "eb19a306ab29602e56e31095ec00118bfc5610d257ad8cdb48cec951d6c425b6", "source": "vector"}
+{"findings": [["profanity", "profanity", 5, 16, 0.8, "embedded"]], "flagged": true, "length": 21, "options": {}, "sha256": "b54eb9ed731c4273944b778af871db5c0611df44733e09510590dec5f69f61ac", "source": "vector"}
+{"findings": [["profanity", "profanity", 16, 19, 0.7, "mild"]], "flagged": true, "length": 25, "options": {}, "sha256": "0e04903bbb4d3828d5cf30689a0a5478bc93dec47c7f2916b194f19fa59b23cc", "source": "vector"}
+{"findings": [["profanity", "profanity", 5, 9, 0.7, "mild"]], "flagged": true, "length": 23, "options": {}, "sha256": "ed4d8c6972c7930114ce3fbd0659d35b605defd675092b0d0570e97f50693d43", "source": "vector"}
+{"findings": [["profanity", "profanity", 2, 7, 0.7, "mild"]], "flagged": true, "length": 21, "options": {}, "sha256": "6f7266407b4d9dd7f92620a17dd1028c3f030628a8253c1ebd4f17fa4462546d", "source": "vector"}
+{"findings": [["profanity", "profanity", 10, 14, 0.7, "mild"]], "flagged": true, "length": 21, "options": {}, "sha256": "9decf9199288a4380c45ea6ec96034bc21937eb93e39f81f6e93facb30c70174", "source": "vector"}
+{"findings": [["profanity", "profanity", 5, 12, 1.0, "strong"]], "flagged": true, "length": 16, "options": {}, "sha256": "211be65658d8673e3513de62f3d8a8f99a870b78ecb15bb94383c6e9e1ab34dc", "source": "vector"}
+{"findings": [], "flagged": false, "length": 21, "options": {}, "sha256": "35d0ac8ab91a8ac0551a0ac076f4d38f45c2d9cc3840cb7352efc30c98dc08d8", "source": "vector"}
+{"findings": [["profanity", "profanity", 7, 14, 0.8, "spaced"]], "flagged": true, "length": 19, "options": {}, "sha256": "1b59468736d23a0d0eb7f63f28b1e7ca18f1606aed8e9523f196a7ee4547749c", "source": "vector"}
+{"findings": [["secrets", "aws_access_key_id", 2, 22, 1.0, "known_prefix"]], "flagged": true, "length": 22, "options": {}, "sha256": "528ba5ea11956107b00f06033e208785745b5b4b4c7c5ee35094fbbd416f80e5", "source": "vector"}
+{"findings": [["pii", "email", 5, 21, 0.9, "structure"]], "flagged": true, "length": 21, "options": {}, "sha256": "8cb18b45f71f6d5f155873561713ccc1b7d223408e2b8f83165ea21d394d418f", "source": "vector"}
+{"findings": [["pii", "nhs_number", 0, 12, 0.8, "mod11"]], "flagged": true, "length": 12, "options": {}, "sha256": "cd0b46778cd775867fb7be882a5fa86ad4691c77fe325d9942c8393abcde1e7c", "source": "vector"}
+{"findings": [], "flagged": false, "length": 16, "options": {}, "sha256": "05dab480a07c8f58183825af24f3f49338dfebc63b817bd8068d500303b080f5", "source": "vector"}
+{"findings": [], "flagged": false, "length": 32, "options": {}, "sha256": "6b8d6e6abfc82a053af64216cc7e5957aa2c97d878c59e92933d21d1c3a547d1", "source": "vector"}
+{"findings": [], "flagged": false, "length": 17, "options": {}, "sha256": "2558760b6a216b6baa9b3dd4f80a61303bf650bce31189cb1669c13eb3c590a9", "source": "vector"}
+{"findings": [], "flagged": false, "length": 17, "options": {}, "sha256": "53b05011a61683058205e179010ae944a3eedf85b9fd4b636613b469567112d8", "source": "vector"}
+{"findings": [["secrets", "bearer_token", 22, 62, 0.8, "bearer_prefix"], ["secrets", "github_token", 22, 62, 1.0, "known_prefix"]], "flagged": true, "length": 62, "options": {}, "sha256": "094bab8185c60d2c135a3b423c2b8f2cf6a4f7d8469f55386b9ed1bec3f0a665", "source": "vector"}
+{"findings": [["secrets", "github_token", 22, 62, 1.0, "known_prefix"]], "flagged": true, "length": 62, "options": {"exclude_kinds": ["bearer_token"]}, "sha256": "094bab8185c60d2c135a3b423c2b8f2cf6a4f7d8469f55386b9ed1bec3f0a665", "source": "vector"}
+{"findings": [["secrets", "github_token", 22, 62, 1.0, "known_prefix"]], "flagged": true, "length": 62, "options": {"kinds": ["github_token"]}, "sha256": "094bab8185c60d2c135a3b423c2b8f2cf6a4f7d8469f55386b9ed1bec3f0a665", "source": "vector"}
+{"findings": [["secrets", "bearer_token", 22, 130, 0.8, "bearer_prefix"], ["secrets", "jwt", 22, 130, 1.0, "known_prefix"]], "flagged": true, "length": 130, "options": {}, "sha256": "b365e892d83f574accb4f9d448113b48ade6762d337d47c682a59d177bddc99d", "source": "vector"}
+{"findings": [["secrets", "jwt", 22, 130, 1.0, "known_prefix"]], "flagged": true, "length": 130, "options": {"exclude_kinds": ["bearer_token"]}, "sha256": "b365e892d83f574accb4f9d448113b48ade6762d337d47c682a59d177bddc99d", "source": "vector"}
+{"findings": [["secrets", "jwt", 22, 130, 1.0, "known_prefix"]], "flagged": true, "length": 130, "options": {"kinds": ["jwt"]}, "sha256": "b365e892d83f574accb4f9d448113b48ade6762d337d47c682a59d177bddc99d", "source": "vector"}
+{"findings": [["secrets", "url_credentials", 18, 60, 0.9, "url_userinfo"], ["secrets", "github_token", 20, 60, 1.0, "known_prefix"]], "flagged": true, "length": 79, "options": {}, "sha256": "b0debcd1a39117197918ccd88e7d8d5f781901f5afbeddf4b8615d60876bdfae", "source": "vector"}
+{"findings": [["secrets", "url_credentials", 18, 60, 0.9, "url_userinfo"], ["secrets", "github_token", 20, 60, 1.0, "known_prefix"]], "flagged": true, "length": 79, "options": {"exclude_kinds": ["bearer_token"]}, "sha256": "b0debcd1a39117197918ccd88e7d8d5f781901f5afbeddf4b8615d60876bdfae", "source": "vector"}
+{"findings": [["secrets", "github_token", 20, 60, 1.0, "known_prefix"]], "flagged": true, "length": 79, "options": {"kinds": ["github_token"]}, "sha256": "b0debcd1a39117197918ccd88e7d8d5f781901f5afbeddf4b8615d60876bdfae", "source": "vector"}
+{"findings": [["secrets", "url_credentials", 11, 21, 0.9, "url_userinfo"]], "flagged": true, "length": 37, "options": {}, "sha256": "d54ebe77a3748cb91d0c597ab00a63049d9c19907f265415da246bce0bd1a4ac", "source": "vector"}
+{"findings": [["pii", "email", 32, 47, 0.9, "structure"]], "flagged": true, "length": 47, "options": {}, "sha256": "692b87a07a7d897460abc509c153cb56f96a89e24b22ac0cf57ec0893a5e51e8", "source": "vector"}
+{"findings": [["pii", "nhs_number", 4, 14, 0.9, "mod11_keyword"]], "flagged": true, "length": 14, "options": {}, "sha256": "6afaec5043d14a9e0e9d925aa87f080a9e87ec5c2d789c3df687a1b51b9a3375", "source": "vector"}
+{"findings": [["pii", "ssn_us", 4, 13, 0.6, "keyword_context"]], "flagged": true, "length": 13, "options": {}, "sha256": "2b26958cbb92baa255fe27bfbb9b2f36d9683facfccccd42adbffc174e935c49", "source": "vector"}
+{"findings": [["pii", "aadhaar", 8, 20, 1.0, "verhoeff"]], "flagged": true, "length": 20, "options": {}, "sha256": "e5ebbcf019d625bce5bf14a39d7ab8b6df426e69a3078d35743c011798c18f68", "source": "vector"}
+{"findings": [], "flagged": false, "length": 13, "options": {}, "sha256": "8e8cc72e61ff6f6c0c945a976756d112732c499cd64fc5b207bb213fc84a1e40", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 35, "options": {}, "sha256": "e065a49059e493d4d1f938d91ecf94649080e5ade71de72a4958e3edbe7cf0c4", "source": "code.js.txt"}
+{"findings": [["gibberish", "garbled", 0, 39, 0.701651965625, "garbled"]], "flagged": true, "length": 39, "options": {}, "sha256": "ea0cf8b5ef487b35b5610694b9a436d1eeb61166519afa56273a656cb3334a69", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 67, "options": {}, "sha256": "65f24e45c127917217b900e60277c7ab3e77a4fbcea429de434a63ffff244026", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 25, "options": {}, "sha256": "0b3baab8829bcfb8aff7153cd470542fa7857f81aee92929c0786af4d4370f49", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 34, "options": {}, "sha256": "8169d9b641b5b701ba078a2c52d472858b7e433374a302b1680974449425a370", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 58, "options": {}, "sha256": "68503ff7fc5d97b6c3f52e39c69088af1fdceccda5ee72ff071cbcac3d9843ff", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 46, "options": {}, "sha256": "8c35061e896a81e491c3f205e57c8d409db9eee8f8fb11e013b082f20201cb2d", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 39, "options": {}, "sha256": "af822bbd6da34f7f8b9c53ff18ca80b4338ddcb4cf52c061315c4ae77028b7eb", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 135, "options": {}, "sha256": "bddfbe900545c993d540a76adc11fc88f36d844acd935c6717b36a86e999aa63", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 86, "options": {}, "sha256": "3e4a720ab3df15c883c623b3c2d44eff85d8317b3c6eda216381e030bd92c897", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 61, "options": {}, "sha256": "3dcc407f20d6a5b2f067bb20a45bb786de5fe679f66f86bd5954746262ca9a45", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 22, "options": {}, "sha256": "0ba021d569ddf3ab471dc4136c623e45480d84e1062b9d82abeb9ef9cb261ab9", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 40, "options": {}, "sha256": "95b86fc26d06bcebd898f715f57ae5f26d6d956a1d98abf4125b244836f59604", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 38, "options": {}, "sha256": "5c1e27ab2508991cbd85952b2a39679e16f18889fafd95d3ff3179323d78f7c0", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 43, "options": {}, "sha256": "ad3e1c2b86f3ebd32b69df3e33cdf7858f1248f2aaab7bd868656ada5ea0599a", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 16, "options": {}, "sha256": "64c9d709fc6cdc943e67fe996a6a2e909321f036cbafd84af0077bc90ee41d3f", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 75, "options": {}, "sha256": "a5e4b4aed8054ff795ea7d1ff7c4b21851284e80fcb5e55c2b5179401b535e36", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 3, "options": {}, "sha256": "737db166c79ae98e44bbe5ad43e03bf3774f7b3696068842d56a72e863dfeb20", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 44, "options": {}, "sha256": "a25c1b418fe44c1ab68425a2362c1cfcd786472b043b8a8aa50729891f75c0dd", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 38, "options": {}, "sha256": "bfa689ac70e5d646caa579105e69366fa8274326cf94e2aa6575c2a742a5b302", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 75, "options": {}, "sha256": "9fa25a4bafec3fdda4ce93631f51674c904918cc69beac70c1e9a653eb77325f", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 20, "options": {}, "sha256": "6fbd2c8bec72594df1175f49cd777d9a32ba22765f80e0ffeed538728a37ffd6", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 16, "options": {}, "sha256": "03897ff52fe1d30174fb84e66004ac1ddd9bdc7bdfefd9e3138133dff9b5728a", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 1, "options": {}, "sha256": "d10b36aa74a59bcf4a88185837f658afaf3646eff2bb16c3928d0e9335e945d2", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 34, "options": {}, "sha256": "f69673e6305fb0a88faf65e3bb9a7ca79a5bee911f87eeb124002ed848b61499", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 70, "options": {}, "sha256": "2ae1ff111a5a622ad3144ecdd58777c06a548732ddec9cb8a34794a139cdad19", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 3, "options": {}, "sha256": "29576b54e255e3c948eea5b5904fa38b81682fdd3cbd9ae841ff0e7bd80d394c", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 63, "options": {}, "sha256": "939b2fcdc3ab4726519869a5bc2516bcbadc41f9b8edb4c2c40d517c859cdb4f", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 41, "options": {}, "sha256": "0fe2ee365f3fbfdc30b35b9d441899541aedfa77f93d3268988250d7701f96b1", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 29, "options": {}, "sha256": "a88f733418ed783f757a634e39cda01fada4899802793dcc64c0a67875e1a664", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 7, "options": {}, "sha256": "ace3e1ec12734881e6e41e8b74a6bab6187b3a1d7c7a66f69512067f6d0dcc00", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 60, "options": {}, "sha256": "82cf8f09f55f2dd8c68ffe9f1b3063ff076fe3145b098d20751c93181255e224", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 60, "options": {}, "sha256": "b94655006165ac3d22d3599abc139c59ac2eecd0340fa42512ecc19ad4699c72", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 7, "options": {}, "sha256": "275a923163c40021b18d55557a9627fd01a87b44bc2258b504d65c31f5e06a9d", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 39, "options": {}, "sha256": "147f74060a0a0305de0df5ff7f01c7f20d8f4e95a286c86b996598e1aca51b19", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 43, "options": {}, "sha256": "784557c0970bda80b5ce4ac515e48bba0d025150a8068c20365decd701ac82bd", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 17, "options": {}, "sha256": "2d99a6865f1f232cce4faae2e15d02833426a061c3f9052289a5cbf9e26d7f76", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 60, "options": {}, "sha256": "9cc6703e2b0a16745ced183a0f7a27199e66c71abf38a73d72fe63252a82d2c9", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 13, "options": {}, "sha256": "851e757e25f4dabbce8a93055916ec89156440fb540d9cb038766e9c9a3e23d6", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 67, "options": {}, "sha256": "af45a41b64720605457307d9b1c0f7b3d33c4c9caf36881d9de681d4d3ee3ea0", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 55, "options": {}, "sha256": "e008831df6b90d796735495f0d1721480cee166617da94793bf2bf2634edb760", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 72, "options": {}, "sha256": "c42f01221afd47fcae726a9f3a89cb912ce036dfbf0ea403772bdfe2f5d0a768", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 35, "options": {}, "sha256": "b14e2aa5cf82fd51d64d402d5b675beab955380f54c3a03642a171145ab22cde", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 46, "options": {}, "sha256": "63fe3ca08ad2c9799476183e79974d91e4da47d731eca4a12abbf3b829b3fc2a", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 30, "options": {}, "sha256": "731b4f464960566bf426053fc90f11546d4384cf4498ede97c2af3c491a62809", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 23, "options": {}, "sha256": "589c5b122bdf061b28f9d2a4fa12a21d6b048fdd28ec38ac1c856ee47b249a70", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 63, "options": {}, "sha256": "d61b744db40333f2f18b9b015a88479608658e5ee18b47c36c5f6cc8668f73f4", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 24, "options": {}, "sha256": "ba8653ace29098a9a0b6b26624afed3b1f505a5e6621c09ca786784128929516", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 52, "options": {}, "sha256": "a0e072739e4c7ea7c25b04563c3c49ef06972326991029adcdd0541f29b8d546", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 21, "options": {}, "sha256": "1b07a2af9301544db6bc66bb5656fec9c8e2c42a810c01bfa651501e6351f5df", "source": "code.js.txt"}
+{"findings": [], "flagged": false, "length": 52, "options": {}, "sha256": "8c96946f24e611276d9ebaaf9850b8211076b87ce64671443b9530e1e2b6bee9", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 15, "options": {}, "sha256": "f534a72c58d199602723840a24761409f227f4238759b1f6b1982afb8956b460", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 14, "options": {}, "sha256": "ada1d9e0a360cda0fd1c8757d297aa74a4fc8d7193a69d3c28b43afc6950e9f9", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 14, "options": {}, "sha256": "27dced094c9514184c1983402a02c05d10c904156f13318d12650d0243454e60", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 40, "options": {}, "sha256": "e98b1ef8c905ca7881ab778fdd7ac7001d0bb818527b22a1bc7321b3198135da", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 24, "options": {}, "sha256": "6d69f2ac09017b8a49d050ab336e953b8fa02ae08c24396916ea7ea42418e627", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 33, "options": {}, "sha256": "370ddbc0bf43021c2b073907410552de4c0d6e6b2e7728a47709c8663803eb90", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 33, "options": {}, "sha256": "16f4611c4b8a63e85d4aa65bebf20d6082b2ce3266818872981e0c026b03652f", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 26, "options": {}, "sha256": "6dcfe6bb397f174bdb0e8bbaf66775602e471571b2eb17f45a88278e9d2ff81a", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 25, "options": {}, "sha256": "9b2316fbc7559d1bf03f9a4ee4144a8802345dc32352bbe75bba13a439d6f781", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 22, "options": {}, "sha256": "a1a0eba5ef9a92d72ce44826182383b12df92a21244c0a978268625e34b7ec7c", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 44, "options": {}, "sha256": "619c9557b609d49b0032d6fb38b5041f766d08faf37634564e66cdbadaa0b1dd", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 51, "options": {}, "sha256": "bced87a502fe76aa061d3bbb3f4d21f13544802099dabe63cc57886e51260f3c", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 27, "options": {}, "sha256": "5593786c554f3c47bec43214f38333f57364db6fa0532f5de8ea81d3f1ea6dbf", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 84, "options": {}, "sha256": "15cdf37b52bcba6d625370c2ba86609cb990603886ab12a72e28bc928a4f668e", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 57, "options": {}, "sha256": "f6b5d696c08b380590837a459beb10e4781db2d35c67124d470b52f4e812379c", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 46, "options": {}, "sha256": "97a525609811cc5af27fd2921757071c496500fd676c7b6f9f996330102cbecc", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 27, "options": {}, "sha256": "c9196dbc26968b8a924d8d4287690d8696109dcbdad8491d9309b7fd1e0ae7a4", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 10, "options": {}, "sha256": "e14f90dd3ff85ddd4d5c1a4f8efbb401fea4b95763c5c6acb98f507e9ad25701", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 19, "options": {}, "sha256": "c3526eb1b0300d9b37450c7573c400484c344ccd3529d993c8e1cd8a7ef29198", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 16, "options": {}, "sha256": "50e488eadc377ba3d000aebb2869ca9a34d96b24e65253988d3a64ac0646c4d1", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 16, "options": {}, "sha256": "525adbc47581d907bccbba40b12524d079d42919152746a745c28c27667a1f41", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 21, "options": {}, "sha256": "106a48c1a759851752455cb988120c0c8c93f7f7f6a061536f173905e43c927e", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 20, "options": {}, "sha256": "7158febe533f705b3838019e053cb1d7da8910b46678a87f1c464ec15f1d3b23", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 52, "options": {}, "sha256": "530723d67d26391064b2416e0be8e371c59c6386fb94b69d30c1823b4dc56ec3", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 33, "options": {}, "sha256": "6fd54fe0872e82bc22dcb503ca153222d7541f6962b14694062f86c5befbbe65", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 32, "options": {}, "sha256": "b065eaa6256461f1550e7e7cfbf51d8a1cd342d01982d34e57f858c3a027a465", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 29, "options": {}, "sha256": "7fd18b2696d1ce48e1272a185691e60f11a6db0e1bfbbc53223e10fbd51fdf62", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 35, "options": {}, "sha256": "5f798b580858f9b7c394bc97b6e914e8d39954a3689e47cfa52de56d6c0fd5ad", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 59, "options": {}, "sha256": "3ae484da9adef4732cf2f62fcbfeed48f968fa986e191a617e62093cdc3b8fbb", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 32, "options": {}, "sha256": "6c9df7ce6f5269da23b1a83b208b2ec88556fa28d058ef12b92ca2437575b862", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 29, "options": {}, "sha256": "924bbe873197e8130f5229be438dabdb67fe19c82489f6c101204757ad02bc96", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 46, "options": {}, "sha256": "9df5ab6ada98aa5db6129037b5aea855c06abae31dd1091f29738645e878f05b", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 75, "options": {}, "sha256": "7de7fd5a1443990435c48edfb9d9793e167a70020fca27dd38ca170120359949", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 44, "options": {}, "sha256": "7cccff030b383ae760040af84fc863453842cf51eae9188a856d45060bb67233", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 44, "options": {}, "sha256": "14afc87048c6c8c22ec0aade62608e22b750e04f451c3597adb4914d35dd1f7c", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 58, "options": {}, "sha256": "6b18bf578b0eb47d7832e72fa7217bffea58c71713495da5546b328e87507174", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 57, "options": {}, "sha256": "eaa1a504cc285179797040a35325391a0b9f9a5ca6a405344c67d0da2e18da88", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 57, "options": {}, "sha256": "a3361a8dc87ac2f296fe9616a5f5161523692cb502feb8e93576c70887aecc4b", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 57, "options": {}, "sha256": "f5f53beaf2f2dc5a1bbbd4aa8eff297f31033ed0a2e0c425e8f2f4b57647007d", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 17, "options": {}, "sha256": "616da6130533a2d4169f4e3eec7016bafc277d97f94cc3a4ca56262eab1c5609", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 40, "options": {}, "sha256": "71ac2d2877b6b0ba76b1b65fc46fae53e210f8e9916019eee40fe9a65d41fc14", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 12, "options": {}, "sha256": "1820032bbb0eecc004f2e4c6dc384c6d8af28d23088f5f57b0f061e237a3cb82", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 52, "options": {}, "sha256": "b269bfe1da94ec832214109fa2a385db92bcb62106f17b86a3a95ffa7c674cf1", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 69, "options": {}, "sha256": "5898942003c056f973b031153e0a4e60274d1bbc45423b470af4c4b37ab84926", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 42, "options": {}, "sha256": "170eab0ad95b2d55b2a6e2c3ede9ff0b67c5e9c131cbdae93538a49ad95575da", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 45, "options": {}, "sha256": "a0afb53d17ab4e4005c86ae834246093ada4f57c9d8db3bd8a31416cc763bb55", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 17, "options": {}, "sha256": "5d06cb81c845aeace7ea8e66ae8cd44b5e07569a44d4f3188b6e58b57f9eed9f", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 15, "options": {}, "sha256": "46269ab705464fb5b449b0744e0860a1d08ef661627de67d51b30da70822aae7", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 50, "options": {}, "sha256": "af024f1bbb2b817be6b7ee592ed65be2e5e1d1424b5b29db329e9f74f874a628", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 42, "options": {}, "sha256": "33ece5bfddf49acc88486c61f22a581d2d27ef7c553fb1c5cc1109097ddb40c8", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 78, "options": {}, "sha256": "1a370899d3a84eb4fc2a68a818f776b81c125a6ed4b3805cc30569580a1451d2", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 26, "options": {}, "sha256": "af4879440ffb3d427c124d933ede3e9d0b2de86c0c664d901aaf16aa3ecdb0da", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 27, "options": {}, "sha256": "2f784c43f8f09634b2ce7b3bf148aead0f077a88bc253dac04bfee2832b7fbb4", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 27, "options": {}, "sha256": "5a5e7bda66369d62dc72d55408941b89008a675a2eea0ff106809c1249e0a740", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 29, "options": {}, "sha256": "3e286ed77adb279c342c8e6adfbc1e372bc3df4dc003f6ee70660ddbf4fa6975", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 29, "options": {}, "sha256": "c0476f19ac332bfcbf70d5fa161dbc43cbd02b1ea7957199e9622535f9e456cf", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 29, "options": {}, "sha256": "4c4f09e3fff17f0148e8234ce9c5482ba355472cfed1ccb9ed804d6e5895c27b", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 5, "options": {}, "sha256": "ff19446752c33c181ea9232a795beff15bc3feedd2a58087b3f5c33eeb62e992", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 26, "options": {}, "sha256": "7859f8477779bba3aabf0ecfcc2db2a0d8e7a97f4705572571cfdb72442fb0ae", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 72, "options": {}, "sha256": "641b954b6fd6ac1fac8a90afbb37616e352dd3290fb0b1ca51b453c1d4fa7b14", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 12, "options": {}, "sha256": "e894e71c35f32db04dfe0962003f16ad8fb888cb47b2f0efed7cb875233fca92", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 26, "options": {}, "sha256": "3412809c1cf42d7343047cba6a497584fa6c468737e2ef3fc443e11211447ea5", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 28, "options": {}, "sha256": "cc79ea1de8f5cf7c4f02e7b43c494b1ae782416b138c209cd6f7b5ff347fc48c", "source": "code.py.txt"}
+{"findings": [], "flagged": false, "length": 1, "options": {}, "sha256": "021fb596db81e6d02bf3d2586ee3981fe519f275c0ac9ca76bbcf2ebb4097d96", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 27, "options": {}, "sha256": "a6f646cfeae90955da629e8018a9719223cacd7682d2f67e110ad52210205879", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 21, "options": {}, "sha256": "bda3f53f7612c96758fbe332602d39157a6a90d7f43b75db6db7dcd04a183cdc", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 27, "options": {}, "sha256": "e74e42d1d31f4d11e73ac3cb1f806979aff0aaaf9c6ab2af365a5ce08c9507ed", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 15, "options": {}, "sha256": "b27a8360592adc8e9f69c0723f8a2d854caeb1db93ce55ba48a9104287218bb0", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 26, "options": {}, "sha256": "62811f000c638cc807e8d5a7637e5154880eeb157168664f5422688c5cefd12f", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 17, "options": {}, "sha256": "e8e0746e7fb09967a98fa58abf1ebe6e9979d96000eb76d03a20846829331fba", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 18, "options": {}, "sha256": "47728b7eb84bb9ea8ac67f43596935f3ea3299fb1b4e5bdfcacbb38dc25778cc", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 33, "options": {}, "sha256": "d79642fb7602216c986e5dd4711995af807e273bbaa361001bcf5142d1ba63ba", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 13, "options": {}, "sha256": "483db766c3e755adcdea252c7fde584a0014854205397c7eb4fb65bb0cb6d2c0", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 15, "options": {}, "sha256": "c28d0aadae0639d20c10802c088a79b37569718afc331bc559d59d38a47d64cc", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 16, "options": {}, "sha256": "410c59a84795e0f8723e8bdb2106015d2b6aecdbadb841c8f1da49266de8a3e9", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 30, "options": {}, "sha256": "5b42cbdd68c5c0d89d50895d44ab1b08c47c91baffe77036e699c49544ab67b0", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 5, "options": {}, "sha256": "28d86778615f6af47bb1bc4f40face756749768e5111f114cfa234a5060c25af", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 4, "options": {}, "sha256": "3288a136ca3e7c8564fedd3322a308b2d045f273db5055e2e2aea1f82d16218e", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 12, "options": {}, "sha256": "5ad8ccc590c169f1796897b961c74a91336e4dccda4827e57e5c719ad86e0f11", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 29, "options": {}, "sha256": "15c0744ba77989156b5ad2e91665394ffbfb78231f6647889c3fcf81fc772efa", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 17, "options": {}, "sha256": "60092d59720bb5edca1f573541659e2113e5ae371785f9683f70f942678a91b4", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 22, "options": {}, "sha256": "14c61bbb0024f4368dd4f316cdb4a3527b5b7d1848423a4e1094b4f32dcb4d4b", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 11, "options": {}, "sha256": "1e5d68a6df79d86d7884c0a37ce4acd16872522a4c354dd558b4b8b033373942", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 24, "options": {}, "sha256": "06de7296fe06547fe99e820aeb4cbfe7798f47fa0d7ea1dc3843da02b1c9bab3", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 45, "options": {}, "sha256": "582b2d8a144503d26057b8b35339baeac981146784b005e144b02d3f84e8908a", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 73, "options": {}, "sha256": "ce867343b311cbff3bce446a5330a05894538c4cbd537cf8bc9e23afd9d8685f", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 18, "options": {}, "sha256": "be5c2be0f8a1acc4355cf63f7b4756b31c8cfe07149e983f98946f4618768105", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 16, "options": {}, "sha256": "bca221b05d2e2f49f762e1f4672eaa0e2581fc775303e7ec37133f2ed843fd67", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 11, "options": {}, "sha256": "dc5a65a64ac4d20c524ca64f8a5b7b1f7dd86ea54f4d6d13418da1f703fb7f48", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 41, "options": {}, "sha256": "dbfdb14a25b389a25bfbce6ea23e36bdd044fb648d0661f83f402d3c21e21eca", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 29, "options": {}, "sha256": "8e7e0f9e9293e11103d47a8ef2a19eafdce20109b427d2b199e1f10b2bd1f940", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 30, "options": {}, "sha256": "a3994e4c053355830060d5afcbd5730a769322c7e4eeb83196adfc688e39be33", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 46, "options": {}, "sha256": "ed35aa91e05e1df1a7864659d5e32e897792a2cf8bdaa3759f9336a6b9158b94", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 31, "options": {}, "sha256": "fa760890a4fe3eabe1dcf27c66b93a75d5865dac129a9d509310420ce0a44f7a", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 15, "options": {}, "sha256": "3c58c294e8fe1289ece2359753c83d29e047e623a6f6b2a7cfbd1d9b8a508003", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 25, "options": {}, "sha256": "bfaef1db75d3f6f5e54e703766f610a28d73a28d84cef1e58856b29f4e9bed09", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 27, "options": {}, "sha256": "b7b2be37b99064712d3f793fefc517f1d886b016238833d631e52e8c87f1b005", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 27, "options": {}, "sha256": "6194452b7364edcd3eb6fbcca1114be503501a82c3a44479747adc4b24c7e18f", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 14, "options": {}, "sha256": "acc2ff564029221f56baa15bea689ad948ffc32b34d7218dd40aad0415ad2123", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 20, "options": {}, "sha256": "3b2875fd8e04ed44530d07d095ca7cab63cb56fcfb40379252375f003bc824a5", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 21, "options": {}, "sha256": "8ea8b9692d818deeea8b7fd251aea0a84945d51b75b0bdab0628a474b23c2fbd", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 23, "options": {}, "sha256": "8e7bbf16332083549945e7c9e1f813a58b216a328b8bca1dd169fe8e15fd5de3", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 12, "options": {}, "sha256": "b3747a1b4ceb2d3d2f55f8db64f7933efe4e876ad1b94debc477578d99694192", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 25, "options": {}, "sha256": "9bf6f1fc72ffa0481f3fef5c5402969dd09cdcb34acdbadcebee7137ed28375a", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 27, "options": {}, "sha256": "86072042643795df8b7a09212d8eff14602c6d31642484b9bdcc48763177019a", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 19, "options": {}, "sha256": "b4e5fa0abee57f8f375a4398c37e4a5ad7fa108044e845e395b02144d9cb1d48", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 19, "options": {}, "sha256": "59bf4363a382dbb4a0ca943e86d7beee70384daa582c8707c08e107062889912", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 25, "options": {}, "sha256": "405f41a22b54fe12f6b0d75961031fa83461d42a64f8ebee9d928946df2cbc86", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 19, "options": {}, "sha256": "a0e984bc874ead37639adf4c0ed511f835896d1fa38d1eda39ce4e4401a713c1", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 23, "options": {}, "sha256": "85233c21a05212c4aa24028bf05f4e9ea88ab4b2a81dde9c9ef693a54f8f97c6", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 12, "options": {}, "sha256": "cabd770c522dc9ab83d463ed6bdb1df2a6d431a79a47d12874ec0458385e09f1", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 24, "options": {}, "sha256": "e2fbacd4c89d7d40ea45bca9a27deae9c6e6017d03706e7eb14dbf4d1c6281c5", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 25, "options": {}, "sha256": "02ca1efb64ec538cec928bf37322f246683fbee23e26c2e2f20c0f055b51a839", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 18, "options": {}, "sha256": "63ceff85ddbdc32a5e88e3ae3c8985bdba9638f3ca6c965967b8aa1ae7a4b3cc", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 15, "options": {}, "sha256": "384fd91728694eceb74b4f683a2b67c99b9b9ebd6c4878b493c51c2fb25fa578", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 15, "options": {}, "sha256": "f53d8516605fd37ef853cceffe5b5aa67bdf8784135df0976d6b3d364e23f19c", "source": "config.json.txt"}
+{"findings": [], "flagged": false, "length": 69, "options": {}, "sha256": "8035b73dfe559f296c5460728e9e893f0ebc2d09dc0c1dc371f3334299db9340", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 73, "options": {}, "sha256": "a4d0d92af4583e830889bdf60ddaac418e443364c1da7c929ebbbdb92427c907", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 98, "options": {}, "sha256": "e1ccc93ed9374026e4fb21b39520b7b5b63d0fc1b48cdf6ff465069fa4908e99", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 111, "options": {}, "sha256": "5dbe3c7355bae9f99fd0e03c87923e745b50015a3ff4eeffc3559c7eff169adf", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 71, "options": {}, "sha256": "45954168f457d094d14ff96a2d880466f2aed85bdf449fb3b60c4dce04e245d2", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 63, "options": {}, "sha256": "91968c43619a20a4fd13aea7a5e8cc740074d532f4fa46c531b25d2b7c05e0b9", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 53, "options": {}, "sha256": "d7d5738da447ecc0efadef94fa4650a24a7ee1534fbf0a54c60a63538934a234", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 61, "options": {}, "sha256": "23cd14f8b63c6b441ec750c6ab4f01b79cc421c1e841a0d2044b95cc88b1a932", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 71, "options": {}, "sha256": "d6406341dda9fefb75328d7d51131a5766f9ed57120e7aeb4aa7bf346da5a8b0", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 71, "options": {}, "sha256": "e1307cfd0ddd842aef399e94d4100b160dfa2c5a95ff9f92bcc2349bf47273a2", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 78, "options": {}, "sha256": "a57141c8960d7aa1b71111880ca28a9a7c6d24a18e07f62573f9f8e84101eb5c", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 86, "options": {}, "sha256": "d0a6de858f036a829426931e4140bcb4462c8adc10a690445f34b0bde80bbb43", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 78, "options": {}, "sha256": "24a110256ed43b911fd192dbf535e44bead65d2a37969da634c187c92a49f4cd", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 61, "options": {}, "sha256": "88c5e19ec57addd5a44948c53e4a9fe4c857cd077028815be50b68822297ba6d", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 71, "options": {}, "sha256": "f49bd70b54ebd72273de2eb13c0193b4e3745dce6138e4d69c93f4aec1e6dc2c", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 96, "options": {}, "sha256": "d94bf60dcbca9997dad469c9f7fe043a55d10948c448ea4f25e1f0d1c977bc7d", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 68, "options": {}, "sha256": "b5c6f57be32e3df672c7527a8dfe54222282aeb0e89d89f7cf44c2a62d772b10", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 79, "options": {}, "sha256": "f4394c2a5504dba4efc2626071951eb326fac076c3ee8cbe58d55f804ee3e051", "source": "logs.txt"}
+{"findings": [["pii", "ipv4", 49, 57, 0.7, "structure"]], "flagged": true, "length": 60, "options": {}, "sha256": "7605cb352b2c86eaf364a5fbdaf262c70525dbbcbfb616170547bb717fddf720", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 87, "options": {}, "sha256": "7da3693fc05b4244dab40c5139871fff6fa132b75a7cf75e895521ae6ad614b1", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 72, "options": {}, "sha256": "33ac8e641624a2e55f4d0bcd4c760df7ecbec542117bcea09a1bcbc8ac85a925", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 74, "options": {}, "sha256": "65d91435e42fb11fe2d09b67eb4e6f02fcea55b09a187f00d3cbbdd5a847a7af", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 73, "options": {}, "sha256": "779770fc0afb972b02fd6395958ee22b03822710413f85efbdae72a05ff98f5e", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 71, "options": {}, "sha256": "1348a481d0e9bc45fe914e0525855df29b3799dd678b90a207a96845e72411da", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 75, "options": {}, "sha256": "7607f83d8fdd4cd0f52f46fa1d0c4dd54effc8aa549ed1e11396b7cd0177a3fd", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 76, "options": {}, "sha256": "9220cc71437d9caf33628acfd299bfed593a85e52da12c1b06227e27d7a6f120", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 70, "options": {}, "sha256": "1f164929e6d166f70cc919026bcd3ccf5cb09d2861d75b6b755bd5777b762056", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 69, "options": {}, "sha256": "7c75a3ed25075c37aa8349daed0351d8e806be1b56fbb4396685ec4283d43912", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 90, "options": {}, "sha256": "cc298d52a8d9c20bbb0bc6717da78b8a93ced354dddefa8835fe8b9df8a67232", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 70, "options": {}, "sha256": "a70744e1b554a19b1e50197b02185bd4338e98df31cede1b253cf8116a84145c", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 76, "options": {}, "sha256": "c88b32b09ead205bc06d82f8816750d522b2ed54e21f89b1199abea28263b741", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 88, "options": {}, "sha256": "f655692faa451afa333b7e26d62f317c87ba79190e9daf8b8be583d235699046", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 71, "options": {}, "sha256": "a8c1392b070664a8412fca07ad95f9403c97ffc1e490044d250105d86a276501", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 82, "options": {}, "sha256": "243e7518be06ff0d7baca196d467b8d48454437fc7c8e43f04f3b93b22de7032", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 68, "options": {}, "sha256": "4aa10b6d67b7113adbf08c8c66a25cbd50768dcf87c9a34d5c08a1f543290ccf", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 81, "options": {}, "sha256": "91ab1ad6d928ff90045c739881f837f9143315f0880ccd251bb3ccdb7d1e98aa", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 71, "options": {}, "sha256": "d62fe06f9def55269172fa2130f400c02df214cf3fff835982649e8965da7cb4", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 90, "options": {}, "sha256": "426186943d976af388d653c8f1dced165cce27c944ae0dd76d2517214df1b126", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 55, "options": {}, "sha256": "d0202fda1ba79defa915b2a91d1820ed8a9bb4760d6970683527fc73758513d3", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 61, "options": {}, "sha256": "12022be3c4f368b8e3a8c01574a4444cfc2ef1f79116df74a33ed3e6d1637942", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 78, "options": {}, "sha256": "20c04ee4a93eb5c744d7ff3631ce5ce65d05cfcef0106c2e76c367d5c5101959", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 66, "options": {}, "sha256": "aed6631995fbb4de5d2d0559a8ce7ce1b55d2b522dfa1539412cfb6ff7841665", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 63, "options": {}, "sha256": "dc994a6ba64388100d45f40fc81863edc531c1ca75bc5775eee1ae1ded58a4a4", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 66, "options": {}, "sha256": "45a94833b4803701da31ab4431792a690496a4384e714e2e0f78b7ea2852b350", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 56, "options": {}, "sha256": "11fef03b7cc6fd68c1b39e9287eda59bf8e1e3c714766061f88b0f7deacd5145", "source": "logs.txt"}
+{"findings": [], "flagged": false, "length": 77, "options": {}, "sha256": "b1dc94ef7b88a180a9e5cf113fe3a3a8af3617b0d81617279859f670ee903e59", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 74, "options": {}, "sha256": "9fee8c52c035f14202f3db00e01400e4d9f2dd322b56833652bb12eea0731675", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 86, "options": {}, "sha256": "a8b6505c7e7f2f96536ad13b1a23eb882376c20903d1ac7a2728ce5a7b142a4a", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 68, "options": {}, "sha256": "0e231ecf3feda33e2cf8137a6d7305aa4d2e3f5c8019741d81712df366df2a60", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 62, "options": {}, "sha256": "b40bc6e983dc5784dcad4190c90d744bd70e5d6cfec6ddfe180c58e4017448f7", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 63, "options": {}, "sha256": "8a935174aff1a129863bbaa3a23a5621836946757fb69c1e24e01946bd2f033f", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 82, "options": {}, "sha256": "0036d05b1ca194c2dbba207c7ef3522b7a0bceed7502bd22c4e432f2bec321dd", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 9, "options": {}, "sha256": "ead07c84baac57a9542f388a07a2a5209456ce790b04251bc9bd7d179ea85cb1", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 14, "options": {}, "sha256": "75552b548ab2463984222d806ec1b0767899a7afdc95d29958a83c82fc11ab4f", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 49, "options": {}, "sha256": "58e12ecf68e0de018255664fdec5c6b1cb6b3b196bfc089f6ed9c8399be89541", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 70, "options": {}, "sha256": "1894b1fb4a45e2ccba38f1c9b46494d0e33742239af06327101d843c2b4f81d7", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 58, "options": {}, "sha256": "dc27680647685f43e2cfb5aa760e7bb0e03e9960821cf528bb7e58c205ed2506", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 14, "options": {}, "sha256": "8a0b479d5334f92ff941545634c062eb2e8d7e403d4e9a429d08d7565d13d35a", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 46, "options": {}, "sha256": "4257130026567859252e491a7bcef3191e2f303bb1d3c9f07593a04b763c60ee", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 50, "options": {}, "sha256": "2cf4266e1fc8be40f8d9ed8d79dc531f0e13ec327eac63965f91b7df73502809", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 38, "options": {}, "sha256": "46ec6855d3b032858d337dadb1abf341a5050ac47c9bb2a88f84cb3c5cee31eb", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 14, "options": {}, "sha256": "b4847a12163dd98ab85fd65d2a3e274d2daf4c6d756077ed8940f049d5e1dc96", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 62, "options": {}, "sha256": "52c7a164356893989613e1a7f6fe3d7b1ed6b7e8e5b01bba6062fd8ddff857d3", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 45, "options": {}, "sha256": "a9af5d8869a88c700383375d628ea17bc3819599b491400db264d28a4fe50767", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 26, "options": {}, "sha256": "e956a9404b467e6b372e082d28cb9d4710af764c2fa5e56a415211e12166be0e", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 27, "options": {}, "sha256": "b5e96206461a8212ec54effac3efc5f23e038f38b8c9f30042ca28d8b905bcd8", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 72, "options": {}, "sha256": "760726f0cec7c6ee0e02b6950200b247745fa41b43a8a41b31fec03f9728fc5e", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 36, "options": {}, "sha256": "046e2f6a271df957b6bf2885e7e43001fa1e90934203cf16615c99adc28f14f0", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 63, "options": {}, "sha256": "e4f71cc68f80d2f435440bf13801d2fe37d8e9000af1f0bf33c9b7c00cc664dc", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 30, "options": {}, "sha256": "19e1488ff7352e45f442ac31af181e2eedd51a65d3189fc6353effefec9f9f32", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 72, "options": {}, "sha256": "dd3f6b0dfffb56eebb15546d26020687f28c7def7d935e261744db36697a69c1", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 21, "options": {}, "sha256": "9f9697b4cfef730ffab62d5741a7e55a180d5be3b1996bf0c1fa5e4367bd517f", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 53, "options": {}, "sha256": "09adb0b77b6b5355ab6f1e00e1061d2760d2478bb0e0e1915bda726524b4977b", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 30, "options": {}, "sha256": "f1af329c1f84de27179b723de66aa5d6288ff3f357e4b1b4fc3afd3832a040ec", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 64, "options": {}, "sha256": "2bd1b5e7ecd8413ea1189251301bd6c368502f0109e989e2c0a8a1c63fa5417c", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 10, "options": {}, "sha256": "6f2c1f7bce3ff5071ff29480d0a0a424d5ecd0be58800da99d61594279838fb2", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 66, "options": {}, "sha256": "764c8deb0de78896ba723f7cafb36c1a4d88ed10e88d70c46c92e9032c78e0a4", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 67, "options": {}, "sha256": "e57819fd57d1fb958b76a6d7d47f62cdc6b9a1608a68a2218957723a6663793d", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 64, "options": {}, "sha256": "1b717f3be4a489f93b85c531536e9736b69e25a206f761f5f3249ed769614153", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 74, "options": {}, "sha256": "69a052bdf70721e626e4d2d478c6aec3cc52407d8aa2b9a0527850865d8f0daa", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 74, "options": {}, "sha256": "6846cc36f1976afb2e521e3ac36df2986faaea8055c98e5b04cbbc58d523fc4f", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 61, "options": {}, "sha256": "3e2181f37309be3a2873dd757c04ba59dca7ccc223445cc8029e5b18fbfde160", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 65, "options": {}, "sha256": "2a84dc386df5525b089ea23b5b9e11449c2b7ec4570630b147ed4892414d52a7", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 55, "options": {}, "sha256": "2b498787402ecd877e07be902f9809dd49a28c9b2e9a8833e8b426271c106078", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 73, "options": {}, "sha256": "d9864f4a831f02205829949790d2b6a0e8ae95975bc2a3c74cc2cdeb9761b9f4", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 73, "options": {}, "sha256": "8cd618e737cca214a17af2c18b099da174cba4d269243726450850d65a05c331", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 39, "options": {}, "sha256": "149dd3cb53165d0c1217e7e7f5464b366113102b8630c32d40e1f13123c09871", "source": "prose.txt"}
+{"findings": [], "flagged": false, "length": 46, "options": {}, "sha256": "f86f94884cd07fa7eb2b6686b70ba88e96106c4acc7d10078899737bd7a6b0e2", "source": "golden"}
+{"findings": [], "flagged": false, "length": 45, "options": {}, "sha256": "0914eb97a56cfb7bc069d8ea842c7324311e70038cf29865c85f062f93f0a544", "source": "golden"}
+{"findings": [], "flagged": false, "length": 58, "options": {}, "sha256": "68fef2789e2efb13f6b54ad1374653bd06b1a8fdeb974a1d607722ae334ad49c", "source": "golden"}
+{"findings": [], "flagged": false, "length": 57, "options": {}, "sha256": "cda8b0266ec4407e2128625ba14333d13643bb3ab80658883492de764e7005a3", "source": "golden"}
+{"findings": [], "flagged": false, "length": 53, "options": {}, "sha256": "1eec38f389aad7c684ac7fbf92eec8515e3eb4a8f603390acab5c12a4f8d8fc0", "source": "golden"}
+{"findings": [], "flagged": false, "length": 53, "options": {}, "sha256": "e2f027d386c2e6ad178f5b4d8bb2eb0e1d47df690c09c9d4bb215f15c1a45f35", "source": "golden"}
+{"findings": [], "flagged": false, "length": 43, "options": {}, "sha256": "5194b60ff156c642a0fa24dae4f7dce7c9c088230f0c728a1af38f8b9e693a5f", "source": "golden"}
+{"findings": [], "flagged": false, "length": 44, "options": {}, "sha256": "267f995b4c249758265d2327f86aa334f5d674519c6466f0bf944f54ea26a22b", "source": "golden"}
+{"findings": [], "flagged": false, "length": 62, "options": {}, "sha256": "e110078d9290504d2d9fc05fd05920c00a62b5ccf01321d4229374bfc1bc8be1", "source": "golden"}
+{"findings": [], "flagged": false, "length": 53, "options": {}, "sha256": "c69fa067fc8ceb222b107917170b26dd8642f8400550c5866815faf726d1b6e3", "source": "golden"}
+{"findings": [], "flagged": false, "length": 43, "options": {}, "sha256": "89928b9d597a8ac193b34a6eeccb28c23d99dab2ea4962eaa5f386fa8945f358", "source": "golden"}
+{"findings": [], "flagged": false, "length": 52, "options": {}, "sha256": "6becb3138230f9c6d2cf7971e58dcc9d538c9952a070dc5f86b7d527ad637657", "source": "golden"}
+{"findings": [], "flagged": false, "length": 13, "options": {}, "sha256": "bc25f0786cbf7047c110a7ac53ce898da64558fc6628fea552340e7b3b4b5789", "source": "golden"}
+{"findings": [], "flagged": false, "length": 14, "options": {}, "sha256": "27ec23febc09f3c9c66b9ebba9afbd89a9a68ce6732f5ae58e26d7294db6742b", "source": "golden"}
+{"findings": [], "flagged": false, "length": 10, "options": {}, "sha256": "cc52d03280b7034c8e3653d2748ebd489a873ef4bbc89cb187fbfcabfbbf6873", "source": "golden"}
+{"findings": [], "flagged": false, "length": 5, "options": {}, "sha256": "5be1ecc7935f1dd85635d4feedaf660594030253cc97c9e9ca3819ffeac36b65", "source": "golden"}
+{"findings": [], "flagged": false, "length": 6, "options": {}, "sha256": "ead3e38f4291209091f610982a9f94d0104ceb357afc4c5039ec66e1c285ce2c", "source": "golden"}
+{"findings": [], "flagged": false, "length": 34, "options": {}, "sha256": "30059116c25523954a3c202c1d2bc46d8cd7b9ba4b59795ea54807d1d31cf8ae", "source": "golden"}
+{"findings": [["pii", "email", 0, 16, 0.9, "structure"]], "flagged": true, "length": 16, "options": {}, "sha256": "708351d7f03ac1373791077d398110c70f4bdfa1cb7c1b5df432ee7f760f7f91", "source": "golden"}
+{"findings": [], "flagged": false, "length": 10, "options": {}, "sha256": "1df0dc2fd904aa80eb181ded7a95f003ab78a7056f5a4f7f5aba6e01c2f8bbf6", "source": "golden"}
+{"findings": [], "flagged": false, "length": 10, "options": {}, "sha256": "ed827267b7e2980b2d5f401a8b3976f2ca33f2e31f1cb01fae9edc4501e3abcb", "source": "golden"}
+{"findings": [], "flagged": false, "length": 13, "options": {}, "sha256": "e3c6cc9273ee75c2563d7cd94825033e37ab3fa3a28157ac75673acf9fc4362a", "source": "golden"}
+{"findings": [], "flagged": false, "length": 33, "options": {}, "sha256": "eca12c081df0b78e50e568a8cca97d36f2fed9ec240e1fb4e71a3d86e63ce4c4", "source": "golden"}
+{"findings": [], "flagged": false, "length": 45, "options": {}, "sha256": "b23c15d3429406747fad3b838f891bbdad23940b6f89c180b15dd614d1bd134d", "source": "golden"}
+{"findings": [], "flagged": false, "length": 35, "options": {}, "sha256": "bc51cb565b06abc61dc31b7b67dad5cb59909c206924b73bc3454e0bb60df4bd", "source": "golden"}
+{"findings": [], "flagged": false, "length": 32, "options": {}, "sha256": "10d2a89cad9ada52e70780b3fb1008ac719b092ab6ef213ec21ab01640bfe44a", "source": "golden"}
+{"findings": [], "flagged": false, "length": 23, "options": {}, "sha256": "ca83bb3aa7a7d6a78ac97956a414301bf6ed332fd921069331e9f5cf573618f5", "source": "golden"}
+{"findings": [], "flagged": false, "length": 7, "options": {}, "sha256": "797b1a73b260c639e79f4695af48577697832914d84f96e554de21b45d504ef9", "source": "golden"}
+{"findings": [], "flagged": false, "length": 5, "options": {}, "sha256": "3454f8088d3cd493e2d2e6b509b9a76f479586be911316988938accf4254598c", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 0.81801774648, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "df0c4dd19ae70dc64b7b03ab398e9bf652ae7171072dd8a7d933ff909b26acee", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 0.698919661282, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "d63d9f2678047f082ba496ff94ad3a02147b7930332581c0fd74276f344e25c5", "source": "golden"}
+{"findings": [], "flagged": false, "length": 6, "options": {}, "sha256": "213c4d2db026ed435600846708e0d056658f34fab86071f297925e534d209325", "source": "golden"}
+{"findings": [], "flagged": false, "length": 8, "options": {}, "sha256": "597d0dd6aa15b00d9be09a8f5eb48649e84e12a3c9b671f50efa210e7ff0cbe5", "source": "golden"}
+{"findings": [], "flagged": false, "length": 8, "options": {}, "sha256": "6250fef1f20df13994e26f0561883c2b23979bc4c1a2ada2354703cd0c49f7b5", "source": "golden"}
+{"findings": [], "flagged": false, "length": 16, "options": {}, "sha256": "ac226f1b3595fd7879bfa8d36dd66861324d586fa10e8da2e74b2a1e8c2a1165", "source": "golden"}
+{"findings": [], "flagged": false, "length": 5, "options": {}, "sha256": "df7682099c96e3f66171aed65ba78ae5200ba7200278569327e6cabf16c98b96", "source": "golden"}
+{"findings": [], "flagged": false, "length": 5, "options": {}, "sha256": "fb8a358fd9e654355ae124a120470ac3a74e1cb2c21a09fde76a3775a18840b0", "source": "golden"}
+{"findings": [], "flagged": false, "length": 10, "options": {}, "sha256": "ab6296e2fcab380425471a3009c49fcdb1f2e68bef4daa820bde78506658ffab", "source": "golden"}
+{"findings": [], "flagged": false, "length": 5, "options": {}, "sha256": "07d715edb696fb5f628f7298e5d7217ed4d2bdfc5347a1c55fee30832267f21d", "source": "golden"}
+{"findings": [], "flagged": false, "length": 20, "options": {}, "sha256": "473b3fb858a25787be603efb35c0f48a583999ea6585280bad48d27c06f37686", "source": "golden"}
+{"findings": [], "flagged": false, "length": 45, "options": {}, "sha256": "877a819b49d0dde80924127e9f5376634874124f92d03b77171d91d332ae8635", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "5c80565db6f29da0b01aa12522c37b32f121cbe47a861ef7f006cb22922dffa1", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 1.0, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "65e84be33532fb784c48129675f9eff3a682b27168c0ea744b2cf58ee02337c5", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 1.0, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "9a900403ac313ba27a1bc81f0932652b8020dac92c234d98fa0b06bf0040ecfd", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 7, 1.0, "garbled"]], "flagged": true, "length": 7, "options": {}, "sha256": "1df1854015e31ca286d015345eaff29a6c6073f70984a3a746823d4cac16b075", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 1.0, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "091364025ac80949dbc4413fa467bc2035f094a22ffdc95a64e81b10b144b4e8", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 7, 1.0, "garbled"]], "flagged": true, "length": 7, "options": {}, "sha256": "2e6887c8745b28fce2e729491ab7e4c63b527baf8c76a649f277623af34be211", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 1.0, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "17417ebfe065a26e4fe02b9fe45db1e6905c1b61525b948af94f1cd273d81412", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 1.0, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "f6ee94ecb014f74f887b9dcc52daecf73ab3e3333320cadd98bcb59d895c52f5", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "afd25087b9a776c47c41315fe8d04dbd38f5a33b32b6e2b5f7bc5f0f4e692c8e", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 13, 0.8, "garbled"]], "flagged": true, "length": 13, "options": {}, "sha256": "4c549b97cc23e4339c160a0d2dbd129dcac4c362296410a69f07a913c64cfe64", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 15, 0.666666666667, "garbled"]], "flagged": true, "length": 15, "options": {}, "sha256": "895f6422ad194a95eacf81531ef342a48f2e2c1f36293a57f934d59b8363578a", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 17, 1.0, "garbled"]], "flagged": true, "length": 17, "options": {}, "sha256": "83608bb896e19711944efa13b95b6165c78427cda83c637d3d0c7df02513d643", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 14, 0.8, "garbled"]], "flagged": true, "length": 14, "options": {}, "sha256": "11b3fa057bf89c6cacb4a6a56db7f4fc93126cb8d6bc4efdc2a8619c8641be09", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 13, 0.9, "garbled"]], "flagged": true, "length": 13, "options": {}, "sha256": "a74946c27dc6e254e1a2b60ab539d7a4ff2eb84a78e7d26922a08a01c44dec3f", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 0.9, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "b206899bc103669c8e7b36de29d73f95b46795b508aa87d612b2ce84bfb29df2", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 0.9, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "ddc5f43ce7912de01c6c175972db7e90c5684355156edf9a2e93b128dee60615", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 0.9, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "bd6141fb31ac2573c5c1861d20c16efe129f3556216c2ae1426dc03d3315a58d", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 13, 0.999997739676, "garbled"]], "flagged": true, "length": 13, "options": {}, "sha256": "d7be5996fa562294908ffe50c6aece46c34d6bed34e241dec5d1e8b5e83f7596", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 4, 0.999997739676, "garbled"]], "flagged": true, "length": 4, "options": {}, "sha256": "beca6335b20ff57ccc47403ef4d9e0b8fccb4442b3151c2e7d50050673d43172", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 0.999997739676, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "830d1964dc8673182a40f9adebf598960d37fbe200405b249774ecfa5b465748", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 13, 0.999997739676, "garbled"]], "flagged": true, "length": 13, "options": {}, "sha256": "9262a0a791605071a500c1a15bef2d5efcc6c8f198567105e9ab364811377e9f", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 0.999997739676, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "3a57bd94b9bcda801052f149337366d3ec00555c67efaf5d355c80d347678061", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 69, 0.997874895401, "garbled"]], "flagged": true, "length": 69, "options": {}, "sha256": "79c838389cf6678eb5c5e2b625f4c471802bb09eb9af206ba1e63c7078eb9f4b", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 67, 0.998025440306, "garbled"]], "flagged": true, "length": 67, "options": {}, "sha256": "df04e6ae8f2343831ba5f2e0e63b37ec660bca889f1daca761e18bbb99997744", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "9c911ab1ba9b5553b767fdf2ec79b0708e7be72834f89904967bcc4e1c70f732", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "83cb9a0bbb399d21a28f2f56736394130648496eed1d69282d8554211ceb960b", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 19, 1.0, "garbled"]], "flagged": true, "length": 19, "options": {}, "sha256": "dc02355fdac08eca9aab4b0070ca40d2df611ed206e650e537746032924690b1", "source": "golden"}
+{"findings": [], "flagged": false, "length": 54, "options": {}, "sha256": "939bd9f2730a539987346dd644860253a52ed433363400eac937c72184c8c759", "source": "golden"}
+{"findings": [], "flagged": false, "length": 58, "options": {}, "sha256": "d27a6bec0da955e5d19cc1043beebb6b26fe94be009916d87642f028facb19ab", "source": "golden"}
+{"findings": [], "flagged": false, "length": 69, "options": {}, "sha256": "e05ec7d4c7965537db397a6aafe2a3ee027b8a767ed48c7f09a86a2260c99954", "source": "golden"}
+{"findings": [], "flagged": false, "length": 49, "options": {}, "sha256": "3c4ce31a1efe9b4ba1827d5b23581eee1e36a4b47c5e064de46b732f2aa5fcdc", "source": "golden"}
+{"findings": [], "flagged": false, "length": 59, "options": {}, "sha256": "0243efa1e0f07653add74c0135002a1222e83c963eaf4554fae8f838a9a79b0f", "source": "golden"}
+{"findings": [], "flagged": false, "length": 59, "options": {}, "sha256": "306b1cdba6697ec840ee7cc268d92710cf1ac7f17a1d61326a0c6582906c0c3d", "source": "golden"}
+{"findings": [], "flagged": false, "length": 57, "options": {}, "sha256": "f73cbe46855e2522581d7e47737086247a903617d7e801f48734c83c49e336f5", "source": "golden"}
+{"findings": [], "flagged": false, "length": 64, "options": {}, "sha256": "ccdeab55b60407176a9f44e70b1e9058f209d5adeac0b02c0e795f9aedf65b09", "source": "golden"}
+{"findings": [], "flagged": false, "length": 57, "options": {}, "sha256": "0a87f1875ff1e75ce96877f4ae9509c4e1def28ed5dc388820916ac1c196a843", "source": "golden"}
+{"findings": [], "flagged": false, "length": 62, "options": {}, "sha256": "c0365ac79afd153b0cb9d013fdbb3f656b23a730851bcb4ef31a67b9d54da125", "source": "golden"}
+{"findings": [], "flagged": false, "length": 51, "options": {}, "sha256": "0528972d98b911e76ec25010284402ad9376670ffab7648e5fb9fd06edefe97c", "source": "golden"}
+{"findings": [], "flagged": false, "length": 63, "options": {}, "sha256": "a58b26be7221928a178e725f37397dffc9fcef581ff09c6e7decefca73125c9c", "source": "golden"}
+{"findings": [], "flagged": false, "length": 22, "options": {}, "sha256": "1788cbf857c4cef38e1385db97249bb54f479bc35c30ec5826e0b964478d1023", "source": "golden"}
+{"findings": [], "flagged": false, "length": 14, "options": {}, "sha256": "97f64d5e88390efc86be5942bfd74fda383450279864731e09d80328b25d4672", "source": "golden"}
+{"findings": [], "flagged": false, "length": 21, "options": {}, "sha256": "fea165b5229e2d765e5943922a18e38785025eaa470ee5239c6adec8e5bc3cf9", "source": "golden"}
+{"findings": [], "flagged": false, "length": 13, "options": {}, "sha256": "a44adeb25adaeb4f7f6048214eebe82fc382d2d5ecf24efcd9ed77d06aec051a", "source": "golden"}
+{"findings": [], "flagged": false, "length": 14, "options": {}, "sha256": "03b896aa39acc8c699d083da829611dc2dedd2012d96fe9d6796c0e520b61294", "source": "golden"}
+{"findings": [], "flagged": false, "length": 7, "options": {}, "sha256": "20fbc6f55da84ad9a88978c7fd8688f8d2da3a5e65d3498b67fd65aa9438fb53", "source": "golden"}
+{"findings": [], "flagged": false, "length": 10, "options": {}, "sha256": "17407120d83814df8c12401d951e724934f3de4676db927fa621bb8bd1ddcbb2", "source": "golden"}
+{"findings": [], "flagged": false, "length": 12, "options": {}, "sha256": "acb208d3ac02ab6d5a45120b4187f12bc41a132011fe1c64ec0bfb89c40a4f67", "source": "golden"}
+{"findings": [], "flagged": false, "length": 61, "options": {}, "sha256": "58f552cd0e0849f32091c4976f6ecf61c9059abdf4a57f848777ac07ee0aed2b", "source": "golden"}
+{"findings": [], "flagged": false, "length": 59, "options": {}, "sha256": "b7d62ee0ead51489d8c681302c9fd6af9373509df6bdedefba2a9dcf00514f62", "source": "golden"}
+{"findings": [], "flagged": false, "length": 60, "options": {}, "sha256": "3263214a99e827dde5546d361a74c60bc86a5a37b36fad91b0868b6b4114f690", "source": "golden"}
+{"findings": [], "flagged": false, "length": 48, "options": {}, "sha256": "ac669b995d24f1a793ca461ff37778b7e8f7b7f150fa5384528818a946cdfaf3", "source": "golden"}
+{"findings": [], "flagged": false, "length": 46, "options": {}, "sha256": "38295eb7bef619ef81426ebc33b8de01a6033d0116eb0c840bd963301a8598c9", "source": "golden"}
+{"findings": [["pii", "email", 0, 17, 0.9, "structure"]], "flagged": true, "length": 17, "options": {}, "sha256": "3b6b8e9fe6c5a2bf6d50af13e7e754f87253a2d88f43342c21d5aea7ebab0fb6", "source": "golden"}
+{"findings": [], "flagged": false, "length": 33, "options": {}, "sha256": "1ce792b8d621b4c36008c046effe234f3f987f9fd8f0d19bef606e171a779371", "source": "golden"}
+{"findings": [], "flagged": false, "length": 8, "options": {}, "sha256": "481c9d1c28aaa92ea278ee1b3c6bb3097ac0663d8ac1ae049886ef64c8910145", "source": "golden"}
+{"findings": [], "flagged": false, "length": 6, "options": {}, "sha256": "0429b82ebc9e1cb909b544f520b0a183e9191cebba0aaaaee992df5ad4fa5ace", "source": "golden"}
+{"findings": [], "flagged": false, "length": 7, "options": {}, "sha256": "4441c82450c7514fdb77d962ad99a47b53fa276f5ef691fbc5b04cab7d7a5899", "source": "golden"}
+{"findings": [], "flagged": false, "length": 32, "options": {}, "sha256": "1d887eaeee721d8270785778179620245d8bca3ab8b6b79b2fbfdeeb1837da22", "source": "golden"}
+{"findings": [], "flagged": false, "length": 35, "options": {}, "sha256": "a147c95014ce23d46d30ec33677921310d7040e74019acd6236c9adb7513dac2", "source": "golden"}
+{"findings": [], "flagged": false, "length": 27, "options": {}, "sha256": "84f8e4de0613bfa9db0ba03c591f1ea9d34dda53691566944621f825ce303a20", "source": "golden"}
+{"findings": [], "flagged": false, "length": 34, "options": {}, "sha256": "eebdcabc9b4f5c9e7c34cbfa3a5206909523706a904bb9f815d3e4e23b95c97f", "source": "golden"}
+{"findings": [], "flagged": false, "length": 56, "options": {}, "sha256": "79d29586c0d87c15710dc29223d3f727d6d631c3ed6091ff5cd9937afeb8f4ee", "source": "golden"}
+{"findings": [], "flagged": false, "length": 54, "options": {}, "sha256": "54aa4c98532076793042cf57c2e477a1576fd9a2b274654900868dc6ac5ca271", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "80d41c54a8ce6d26ae0bdd509db6b187140cae39b4b771269a0d006b0620e2d2", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "c470c4f648536ad787f54cbb062988bb0495ce8f4db3c86431588be88ac4a6c4", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 0.718940098384, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "3f35b24ee2c9a074eaaebeede9481583d5aadc2ec7701f73ec2eb1639bebd7a3", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "281c1da06c46a8fbbf4c7a551515929079c3ce12ae2e31882d3f3e31b7600dbd", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 15, 1.0, "garbled"]], "flagged": true, "length": 15, "options": {}, "sha256": "6265db0c8c5db1619e5733481eed6464f8b2c6e4fa0d9f05cf100566965b6c1b", "source": "golden"}
+{"findings": [], "flagged": false, "length": 12, "options": {}, "sha256": "7fd06f0e2a61fec4b93fcf78df8759e5e4e2a2da2f5a627cfad24b801416ebbb", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "166e8b931d9037c6e260fb5a88197e728804f8a19a8232ce531e8387faa896e0", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 24, 0.8, "garbled"]], "flagged": true, "length": 24, "options": {}, "sha256": "0cf545772da1c628214f73936aeafea771d1aa2351fa9e720a2a98981839e61b", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 40, 0.9, "garbled"]], "flagged": true, "length": 40, "options": {}, "sha256": "d5256ede17878d805a242d6d6cf4cc10cab4586419f7e93a5713abfaaa997896", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 17, 0.588235294118, "garbled"]], "flagged": true, "length": 17, "options": {}, "sha256": "c3772eb462f4f500b45c3b1c08d1d4a2f6bc089b3ee4220bc0a972b51d863b8d", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 27, 0.8, "garbled"]], "flagged": true, "length": 27, "options": {}, "sha256": "c9efffecda6926163f9a7f428ba999b6ff6ccf5c5480f71351df83e598b59374", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 13, 1.0, "garbled"]], "flagged": true, "length": 13, "options": {}, "sha256": "707fe96df490b9f468228419e5c19f3c41ba20e29a22761a5acbb813aee20cca", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 13, 0.9, "garbled"]], "flagged": true, "length": 13, "options": {}, "sha256": "3b28d597a73e39933cc0f87bda034be18a228470755556f814ab6a090b96d57f", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 0.9, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "00b0a63e0d2d3ac74f2e5de6664ef1e204cdfdc466ffc5125b2e268bbc57edb7", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 15, 0.9, "garbled"]], "flagged": true, "length": 15, "options": {}, "sha256": "d57a878495ce5ea31e403d7bd98d727a12b8a25b5ec97ba224bb26ebda1f1d95", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 217, 0.990820645667, "garbled"]], "flagged": true, "length": 217, "options": {}, "sha256": "cebbd4a3ba18c60d38a9b98ea14f3d6e18cff016f35b1fc03b6321b70952e957", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 219, 0.991445918241, "garbled"]], "flagged": true, "length": 219, "options": {}, "sha256": "39768e57ad38fc1d60dbc2d5ace9c8144f0993d6d8b56d84319672763c63cd94", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 62, 0.986542388742, "garbled"]], "flagged": true, "length": 62, "options": {}, "sha256": "f4d5ce298bf8f5dd3f2719a8ddc36c6804ddd9ecea123d735e0a65f766b87d8d", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 74, 0.995930511615, "garbled"]], "flagged": true, "length": 74, "options": {}, "sha256": "30ebf9332ac17062b5341785cf36a6ca206b49c156ee074f2192693eea69fccf", "source": "golden"}
+{"findings": [], "flagged": false, "length": 59, "options": {}, "sha256": "5d0f2a85936dbe7497c79033d929f0fa5c46e422bca9cd170b5f24671a8011b7", "source": "golden"}
+{"findings": [], "flagged": false, "length": 68, "options": {}, "sha256": "bdf1ad5771cd8a71acebcd1d10ea93a54f57e35427767440232fbfe81e4c36f5", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 25, 0.635563787476, "garbled"]], "flagged": true, "length": 25, "options": {}, "sha256": "8bc6f24e83493a2335c74745a0dd2e5ba625dd3f8999ea3fd257079fb595e7c7", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 16, 1.0, "garbled"]], "flagged": true, "length": 16, "options": {}, "sha256": "a0d139df7200d6d3412f6240f3486bbece5f88f137d449a65be14a18db801847", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 24, 0.999997739676, "garbled"]], "flagged": true, "length": 24, "options": {}, "sha256": "7a947aa9c610c00325c6834a1d201361e004a4ebf65d6258e0b4267c4aff2995", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 7, 0.999997739676, "garbled"]], "flagged": true, "length": 7, "options": {}, "sha256": "de9d2be77bf5c258bbc3705b209aa1b0e729897b1dfd6387c066e26b97f449b5", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 16, 0.999997739676, "garbled"]], "flagged": true, "length": 16, "options": {}, "sha256": "345ce287f82b5d3cfa9dac1f02615257fbb2b8c26b87000791dba7702613b26f", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 17, 0.999997739676, "garbled"]], "flagged": true, "length": 17, "options": {}, "sha256": "097b63721ae64cb980143628101fcc99f7b2b34b7e20382a748ecc2677d9a760", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 0.999997739676, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "3d78192e44da7f38fc873f6599867109a667c94cd77bfd35faf4d8aba5ebcacc", "source": "golden"}
+{"findings": [], "flagged": false, "length": 1, "options": {}, "sha256": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb", "source": "golden"}
+{"findings": [], "flagged": false, "length": 3, "options": {}, "sha256": "d4c963eb87b8230ab944af9bc31202059131336f34b986cca0027a4ec23e09fa", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 1.0, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "4a406a667661884daf9b4538f225676c8ce748c683b7602146d6cd7abe9e940d", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 0.9, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "e2a7e423d0f1fc53012eecd6adaeb5c519112eefff3a724ce366883da1a3e554", "source": "golden"}
+{"findings": [], "flagged": false, "length": 5000, "options": {}, "sha256": "af3cfb4dc1dd2268114ddd91833a6afcd8f8e6c2ba19cdc16eda27b90bdd6455", "source": "golden"}
+{"findings": [], "flagged": false, "length": 28, "options": {}, "sha256": "83a0d374c8ac3a9ac2aa54cd2a3d8794e428048d44a3869d29785f6d64fabba7", "source": "golden"}
+{"findings": [], "flagged": false, "length": 22, "options": {}, "sha256": "aee8b7b246df8f9039afb4144a1f6fd8d2ca17a180786b69acc140d282b71a49", "source": "golden"}
+{"findings": [], "flagged": false, "length": 24, "options": {}, "sha256": "e9310ee4be84f7b01e0f502c3ff018d50744535d10a826c304d6ddd7faec1f24", "source": "golden"}
+{"findings": [], "flagged": false, "length": 28, "options": {}, "sha256": "d551609e7949ff1cf605edb1e658b7c594875236d78723417eac23269969c830", "source": "golden"}
+{"findings": [], "flagged": false, "length": 36, "options": {}, "sha256": "986c0dc956dc822b5d8f698661b9eb1ef880786ff9043c16744d2a420e99e9bb", "source": "golden"}
+{"findings": [], "flagged": false, "length": 20, "options": {}, "sha256": "fc7c469ef238ffb29633016e5ba56bd65440f2e0e7cacff2a3b00e76778e7afe", "source": "golden"}
+{"findings": [], "flagged": false, "length": 32, "options": {}, "sha256": "e5ce5efbe3ca8bf5621c07294e5715e49cef4e3048bf0fc30ecc01e52dbf820e", "source": "golden"}
+{"findings": [], "flagged": false, "length": 20, "options": {}, "sha256": "cebd93f1bca489cea278b28e6ecc09bfbf1003ec2c69ecc9a1d24bac2b8ea8c6", "source": "golden"}
+{"findings": [], "flagged": false, "length": 40, "options": {}, "sha256": "3d217c6fb2ef615a53cd64e2486dc70ecfac5fbb4b16cf08550e0d19e243d427", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 0.918357805043, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "24591f6b58fcff7eb6d281846d85c093a51f91f35ee7ad7bd8968f8a24b331f3", "source": "golden"}
+{"findings": [], "flagged": false, "length": 12, "options": {}, "sha256": "e94e38c46a796f63f1077f31d705d74bbc233a1136c99ee040db28b2ac108350", "source": "golden"}
+{"findings": [], "flagged": false, "length": 14, "options": {}, "sha256": "497b22d4e86a3caa9f5baa24435a99ac1154094a0b9302b9bcd9d6544d6efbe9", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 49, 0.998831348189, "garbled"]], "flagged": true, "length": 49, "options": {}, "sha256": "8f578c2934bd2c59c885ff1da21ec8c4c06b052feebbb2c3fcc77a9c850b31eb", "source": "golden"}
+{"findings": [], "flagged": false, "length": 252, "options": {}, "sha256": "6fad775823148a9c1b43827a4a99fe30a50d58bf856dcc2e20748ad0ac67879e", "source": "golden"}

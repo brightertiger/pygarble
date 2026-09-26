@@ -1,0 +1,3112 @@
+[
+ {
+  "text": "export AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE",
+  "categories": [
+   "secrets"
+  ],
+  "note": "aws id",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "aws_access_key_id",
+    "start": 25,
+    "end": 45,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "token ghp_\u00611B2c3D4e5F6g7H8i9J0k1L2m3N4o5P6q7R8",
+  "categories": [
+   "secrets"
+  ],
+  "note": "github",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "github_token",
+    "start": 6,
+    "end": 46,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "postgres://admin:s3cr3t-pw@db.internal:5432/app",
+  "categories": [
+   "secrets"
+  ],
+  "note": "url creds",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "url_credentials",
+    "start": 11,
+    "end": 26,
+    "confidence": 0.9,
+    "reason": "url_userinfo"
+   }
+  ]
+ },
+ {
+  "text": "password = 'q8Zt3vP2xL9mK4nR'",
+  "categories": [
+   "secrets"
+  ],
+  "note": "keyword entropy",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "generic_secret",
+    "start": 12,
+    "end": 28,
+    "confidence": 0.6,
+    "reason": "keyword_entropy"
+   }
+  ]
+ },
+ {
+  "text": "password = 'correcthorsebatterystaple'",
+  "categories": [
+   "secrets"
+  ],
+  "note": "low entropy passphrase",
+  "expected": []
+ },
+ {
+  "text": "https://example.com:8080/path?x=1",
+  "categories": [
+   "secrets"
+  ],
+  "note": "url with port, no creds",
+  "expected": []
+ },
+ {
+  "text": "commit 5f4dcc3b5aa765d61d8327deb882cf99 fixed the build",
+  "categories": [
+   "secrets"
+  ],
+  "note": "git sha not flagged without context",
+  "expected": []
+ },
+ {
+  "text": "version 1.2.3-rc4+build.5",
+  "categories": [
+   "secrets"
+  ],
+  "note": "version string",
+  "expected": []
+ },
+ {
+  "text": "email jane.doe+news@example.co.uk now",
+  "categories": [
+   "pii"
+  ],
+  "note": "email",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "email",
+    "start": 6,
+    "end": 33,
+    "confidence": 0.9,
+    "reason": "structure"
+   }
+  ]
+ },
+ {
+  "text": "call (415) 555-2671 or +14155552671",
+  "categories": [
+   "pii"
+  ],
+  "note": "us phone and e164",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "phone",
+    "start": 5,
+    "end": 19,
+    "confidence": 0.8,
+    "reason": "national_us"
+   },
+   {
+    "category": "pii",
+    "kind": "phone",
+    "start": 23,
+    "end": 35,
+    "confidence": 0.9,
+    "reason": "e164"
+   }
+  ]
+ },
+ {
+  "text": "card 4111 1111 1111 1111 exp 12/28",
+  "categories": [
+   "pii"
+  ],
+  "note": "visa",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "credit_card",
+    "start": 5,
+    "end": 24,
+    "confidence": 1.0,
+    "reason": "luhn_visa"
+   }
+  ]
+ },
+ {
+  "text": "IBAN GB82 WEST 1234 5698 7654 32",
+  "categories": [
+   "pii"
+  ],
+  "note": "iban",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "iban",
+    "start": 5,
+    "end": 32,
+    "confidence": 1.0,
+    "reason": "mod97"
+   }
+  ]
+ },
+ {
+  "text": "ssn 123-45-6789",
+  "categories": [
+   "pii"
+  ],
+  "note": "ssn",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "ssn_us",
+    "start": 4,
+    "end": 15,
+    "confidence": 0.8,
+    "reason": "structure"
+   }
+  ]
+ },
+ {
+  "text": "NI AB 12 34 56 C",
+  "categories": [
+   "pii"
+  ],
+  "note": "nino",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "nino",
+    "start": 3,
+    "end": 16,
+    "confidence": 0.9,
+    "reason": "structure"
+   }
+  ]
+ },
+ {
+  "text": "PAN ABCPE1234F",
+  "categories": [
+   "pii"
+  ],
+  "note": "pan",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "pan",
+    "start": 4,
+    "end": 14,
+    "confidence": 0.9,
+    "reason": "structure"
+   }
+  ]
+ },
+ {
+  "text": "host 192.168.1.10 at 12:30:45 on 2026-09-26",
+  "categories": [
+   "pii"
+  ],
+  "note": "ipv4 with time and date",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "ipv4",
+    "start": 5,
+    "end": 17,
+    "confidence": 0.7,
+    "reason": "structure"
+   }
+  ]
+ },
+ {
+  "text": "order 000123 shipped 2026-09-26 at 10:00",
+  "categories": [
+   "pii"
+  ],
+  "note": "no pii",
+  "expected": []
+ },
+ {
+  "text": "4111 1111 1111 1112",
+  "categories": [
+   "pii"
+  ],
+  "note": "luhn fails",
+  "expected": []
+ },
+ {
+  "text": "v1.2.3.4 released",
+  "categories": [
+   "pii"
+  ],
+  "note": "version not ip",
+  "expected": []
+ },
+ {
+  "text": "what the fuck",
+  "categories": [
+   "profanity"
+  ],
+  "note": "strong",
+  "expected": [
+   {
+    "category": "profanity",
+    "kind": "profanity",
+    "start": 9,
+    "end": 13,
+    "confidence": 1.0,
+    "reason": "strong"
+   }
+  ]
+ },
+ {
+  "text": "well, damn.",
+  "categories": [
+   "profanity"
+  ],
+  "note": "mild",
+  "expected": [
+   {
+    "category": "profanity",
+    "kind": "profanity",
+    "start": 6,
+    "end": 10,
+    "confidence": 0.7,
+    "reason": "mild"
+   }
+  ]
+ },
+ {
+  "text": "sh1t f*ck s.h.i.t",
+  "categories": [
+   "profanity"
+  ],
+  "note": "leet, masked, spaced",
+  "expected": [
+   {
+    "category": "profanity",
+    "kind": "profanity",
+    "start": 0,
+    "end": 4,
+    "confidence": 1.0,
+    "reason": "strong"
+   },
+   {
+    "category": "profanity",
+    "kind": "profanity",
+    "start": 5,
+    "end": 9,
+    "confidence": 0.6,
+    "reason": "masked_ambiguous"
+   },
+   {
+    "category": "profanity",
+    "kind": "profanity",
+    "start": 10,
+    "end": 17,
+    "confidence": 0.8,
+    "reason": "spaced"
+   }
+  ]
+ },
+ {
+  "text": "Scunthorpe assassin classic bass",
+  "categories": [
+   "profanity"
+  ],
+  "note": "scunthorpe",
+  "expected": []
+ },
+ {
+  "text": "the analyst assessed the assets",
+  "categories": [
+   "profanity"
+  ],
+  "note": "clean prose",
+  "expected": []
+ },
+ {
+  "text": "qxzjkwpv bnmqwer zzxqv",
+  "categories": [
+   "gibberish"
+  ],
+  "note": "gibberish",
+  "expected": [
+   {
+    "category": "gibberish",
+    "kind": "garbled",
+    "start": 0,
+    "end": 22,
+    "confidence": 1.0,
+    "reason": "garbled"
+   }
+  ]
+ },
+ {
+  "text": "hello world again",
+  "categories": [
+   "gibberish"
+  ],
+  "note": "clean text",
+  "expected": []
+ },
+ {
+  "text": "Contact a@b.co, key AKIAIOSFODNN7EXAMPLE, damn",
+  "categories": [
+   "secrets",
+   "pii",
+   "profanity",
+   "gibberish"
+  ],
+  "note": "mixed",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "email",
+    "start": 8,
+    "end": 14,
+    "confidence": 0.9,
+    "reason": "structure"
+   },
+   {
+    "category": "secrets",
+    "kind": "aws_access_key_id",
+    "start": 20,
+    "end": 40,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   },
+   {
+    "category": "profanity",
+    "kind": "profanity",
+    "start": 42,
+    "end": 46,
+    "confidence": 0.7,
+    "reason": "mild"
+   }
+  ]
+ },
+ {
+  "text": "",
+  "categories": [
+   "secrets",
+   "pii",
+   "profanity",
+   "gibberish"
+  ],
+  "note": "empty",
+  "expected": []
+ },
+ {
+  "text": "   ",
+  "categories": [
+   "secrets",
+   "pii",
+   "profanity",
+   "gibberish"
+  ],
+  "note": "whitespace",
+  "expected": []
+ },
+ {
+  "text": "ASIAQWERTYUIOPASDFGH in the session log",
+  "categories": [
+   "secrets"
+  ],
+  "note": "aws temporary id",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "aws_access_key_id",
+    "start": 0,
+    "end": 20,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "key=ABIAZXCVBNMLKJHGFDSA;",
+  "categories": [
+   "secrets"
+  ],
+  "note": "aws id abia prefix",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "aws_access_key_id",
+    "start": 4,
+    "end": 24,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "xAKIAIOSFODNN7EXAMPLE",
+  "categories": [
+   "secrets"
+  ],
+  "note": "aws id glued to a word",
+  "expected": []
+ },
+ {
+  "text": "AKIA1234 is too short",
+  "categories": [
+   "secrets"
+  ],
+  "note": "aws id too short",
+  "expected": []
+ },
+ {
+  "text": "aws_secret_access_key = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+  "categories": [
+   "secrets"
+  ],
+  "note": "aws secret",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "aws_secret_access_key",
+    "start": 24,
+    "end": 64,
+    "confidence": 0.9,
+    "reason": "keyword_prefix"
+   }
+  ]
+ },
+ {
+  "text": "AWS_SECRET_KEY: Hk9pQ2wR7tY4uI1oP3aS6dF8gJ0kL5zX2cV7bN4m",
+  "categories": [
+   "secrets"
+  ],
+  "note": "aws secret upper",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "aws_secret_access_key",
+    "start": 16,
+    "end": 56,
+    "confidence": 0.9,
+    "reason": "keyword_prefix"
+   }
+  ]
+ },
+ {
+  "text": "aws key=Zq8Wm3Xn6Yb1Vc4Tr7Pl0Ko5Ji2Hu9Gy3Ft6Ed1S",
+  "categories": [
+   "secrets"
+  ],
+  "note": "aws secret short prefix",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "aws_secret_access_key",
+    "start": 8,
+    "end": 48,
+    "confidence": 0.9,
+    "reason": "keyword_prefix"
+   }
+  ]
+ },
+ {
+  "text": "aws secret is stored in the vault, see the runbook for details",
+  "categories": [
+   "secrets"
+  ],
+  "note": "aws secret prose",
+  "expected": []
+ },
+ {
+  "text": "laws key: 0123456789abcdef0123456789abcdef01234567",
+  "categories": [
+   "secrets"
+  ],
+  "note": "laws is not aws",
+  "expected": []
+ },
+ {
+  "text": "github_pat_\u00311ABCDEFG0123456789_abcdefghijklmnop",
+  "categories": [
+   "secrets"
+  ],
+  "note": "github fine-grained pat",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "github_token",
+    "start": 0,
+    "end": 47,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "GH_TOKEN=gho_\u005az9Yy8Xx7Ww6Vv5Uu4Tt3Ss2Rr1Qq0Pp9Oo8Nn",
+  "categories": [
+   "secrets"
+  ],
+  "note": "github oauth",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "github_token",
+    "start": 9,
+    "end": 51,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "ghp_\u0073hort",
+  "categories": [
+   "secrets"
+  ],
+  "note": "github too short",
+  "expected": []
+ },
+ {
+  "text": "glpat-\u0041bCdEfGhIjKlMnOpQrSt",
+  "categories": [
+   "secrets"
+  ],
+  "note": "gitlab",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "gitlab_token",
+    "start": 0,
+    "end": 26,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "CI_TOKEN glpat-\u00787Y2z9Q4w1E6r3T8y5U0",
+  "categories": [
+   "secrets"
+  ],
+  "note": "gitlab in ci",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "gitlab_token",
+    "start": 9,
+    "end": 35,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "clone with glpat-\u005az_9-Aa8Bb7Cc6Dd5Ee4Ff",
+  "categories": [
+   "secrets"
+  ],
+  "note": "gitlab with dash",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "gitlab_token",
+    "start": 11,
+    "end": 39,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "glpat-\u0073hort",
+  "categories": [
+   "secrets"
+  ],
+  "note": "gitlab too short",
+  "expected": []
+ },
+ {
+  "text": "xoxb-\u003123456789012-abcdefghijkl",
+  "categories": [
+   "secrets"
+  ],
+  "note": "slack bot",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "slack_token",
+    "start": 0,
+    "end": 30,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "SLACK=xoxp-\u0032468013579-Qw3Er5Ty7U",
+  "categories": [
+   "secrets"
+  ],
+  "note": "slack user",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "slack_token",
+    "start": 6,
+    "end": 32,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "use xoxa-\u0039876543210-zyxwvutsrq for the app",
+  "categories": [
+   "secrets"
+  ],
+  "note": "slack app",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "slack_token",
+    "start": 4,
+    "end": 30,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "xoxz-123456789012-abcdefghijkl",
+  "categories": [
+   "secrets"
+  ],
+  "note": "slack bad letter",
+  "expected": []
+ },
+ {
+  "text": "https://hooks.slack.com/services/\u00540000ABCD/B0000EFGH/abcdefghij12",
+  "categories": [
+   "secrets"
+  ],
+  "note": "slack webhook",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "slack_webhook",
+    "start": 0,
+    "end": 65,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "webhook: https://hooks.slack.com/services/\u0054ABCDE123/BZYXWV987/Qw3Er5Ty7Ui9",
+  "categories": [
+   "secrets"
+  ],
+  "note": "slack webhook in config",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "slack_webhook",
+    "start": 9,
+    "end": 74,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "POST https://hooks.slack.com/services/\u005412345/B67890/aBcDeFgHiJkLmN",
+  "categories": [
+   "secrets"
+  ],
+  "note": "slack webhook post",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "slack_webhook",
+    "start": 5,
+    "end": 66,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "https://hooks.slack.com/services/",
+  "categories": [
+   "secrets"
+  ],
+  "note": "slack webhook no path",
+  "expected": []
+ },
+ {
+  "text": "sk_live_\u0034eC39HqLyjWDarjtT1zd",
+  "categories": [
+   "secrets"
+  ],
+  "note": "stripe live",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "stripe_key",
+    "start": 0,
+    "end": 28,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "STRIPE=sk_test_\u0034eC39HqLyjWDarjtT1zd",
+  "categories": [
+   "secrets"
+  ],
+  "note": "stripe test",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "stripe_key",
+    "start": 7,
+    "end": 35,
+    "confidence": 0.8,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "rk_live_\u0051w3Er5Ty7Ui9Op1As3Df",
+  "categories": [
+   "secrets"
+  ],
+  "note": "stripe restricted",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "stripe_key",
+    "start": 0,
+    "end": 28,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "pk_live_\u0034eC39HqLyjWDarjtT1zd",
+  "categories": [
+   "secrets"
+  ],
+  "note": "stripe publishable",
+  "expected": []
+ },
+ {
+  "text": "AIza\u0053yA1234567890abcdefghijklmnopqrstuv",
+  "categories": [
+   "secrets"
+  ],
+  "note": "google api key",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "google_api_key",
+    "start": 0,
+    "end": 39,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "maps key AIza\u0053yBz_9-Qw3Er5Ty7Ui9Op1As3Df5Gh7Jk9L in js",
+  "categories": [
+   "secrets"
+  ],
+  "note": "google key in js",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "google_api_key",
+    "start": 9,
+    "end": 48,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "&key=AIza\u0053yC0123456789-ABCDEFGHIJKLMNOPQRSTU",
+  "categories": [
+   "secrets"
+  ],
+  "note": "google key in query",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "google_api_key",
+    "start": 5,
+    "end": 44,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "AIza too short",
+  "categories": [
+   "secrets"
+  ],
+  "note": "google too short",
+  "expected": []
+ },
+ {
+  "text": "sk-proj-\u0061bcdefghijklmnopqrstuvT3BlbkFJabcdefghijklmnopqrstuv",
+  "categories": [
+   "secrets"
+  ],
+  "note": "openai project",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "openai_api_key",
+    "start": 0,
+    "end": 60,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "OPENAI_API_KEY=sk-\u0061aaaaaaaaaaaaaaaaaaaBBBBBBBBBBBBBBBBBBBB00000000",
+  "categories": [
+   "secrets"
+  ],
+  "note": "openai legacy",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "openai_api_key",
+    "start": 15,
+    "end": 66,
+    "confidence": 0.9,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "sk-\u0051w3Er5Ty7Ui9Op1As3Df5Gh7Jk9Lz2Xc4Vb6Nm8Qw0Er2Ty4",
+  "categories": [
+   "secrets"
+  ],
+  "note": "openai legacy mixed",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "openai_api_key",
+    "start": 0,
+    "end": 51,
+    "confidence": 0.9,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "sk-proj-\u0061bcdefghijklmnopqrstuvwxyz",
+  "categories": [
+   "secrets"
+  ],
+  "note": "openai project without marker",
+  "expected": []
+ },
+ {
+  "text": "sk-ant-\u0061pi03-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "categories": [
+   "secrets"
+  ],
+  "note": "anthropic",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "anthropic_api_key",
+    "start": 0,
+    "end": 103,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "ANTHROPIC_API_KEY=sk-ant-\u0061pi03-aaaaaaaaaaaaaaaaaaaaBBBBBBBBBBBBBBBBBBBBccccccccccccccccccccDDDDDDDDDDDDDDDDDDDDDD",
+  "categories": [
+   "secrets"
+  ],
+  "note": "anthropic env",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "anthropic_api_key",
+    "start": 18,
+    "end": 113,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "sk-ant-\u0061dmin01-Qw3Er5Ty7UQw3Er5Ty7UQw3Er5Ty7UQw3Er5Ty7UQw3Er5Ty7UQw3Er5Ty7UQw3Er5Ty7UQw3Er5Ty7UQw3Er5Ty7U",
+  "categories": [
+   "secrets"
+  ],
+  "note": "anthropic admin",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "anthropic_api_key",
+    "start": 0,
+    "end": 105,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "sk-ant-\u0061pi03-short",
+  "categories": [
+   "secrets"
+  ],
+  "note": "anthropic too short",
+  "expected": []
+ },
+ {
+  "text": "hf_\u0061aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "categories": [
+   "secrets"
+  ],
+  "note": "huggingface",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "huggingface_token",
+    "start": 0,
+    "end": 37,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "HF_TOKEN=hf_\u0051w3Er5Ty7Ui9Op1As3Df5Gh7Jk9Lz2Xc4V",
+  "categories": [
+   "secrets"
+  ],
+  "note": "huggingface env",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "huggingface_token",
+    "start": 9,
+    "end": 46,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "login hf_\u005aZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ now",
+  "categories": [
+   "secrets"
+  ],
+  "note": "huggingface upper",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "huggingface_token",
+    "start": 6,
+    "end": 43,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "hf_\u0061aaaaaaaaa",
+  "categories": [
+   "secrets"
+  ],
+  "note": "huggingface too short",
+  "expected": []
+ },
+ {
+  "text": "npm_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "categories": [
+   "secrets"
+  ],
+  "note": "npm",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "npm_token",
+    "start": 0,
+    "end": 40,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "//registry.npmjs.org/:_authToken=npm_Qw3Er5Ty7Ui9Op1As3Df5Gh7Jk9Lz2Xc4Vb6",
+  "categories": [
+   "secrets"
+  ],
+  "note": "npmrc",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "npm_token",
+    "start": 33,
+    "end": 73,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "NPM npm_0123456789abcdefghijABCDEFGHIJ012345 set",
+  "categories": [
+   "secrets"
+  ],
+  "note": "npm mixed",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "npm_token",
+    "start": 4,
+    "end": 44,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "npm_install",
+  "categories": [
+   "secrets"
+  ],
+  "note": "npm word",
+  "expected": []
+ },
+ {
+  "text": "pypi-AgEIcHlwaS5vcmc\u0063ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "categories": [
+   "secrets"
+  ],
+  "note": "pypi",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "pypi_token",
+    "start": 0,
+    "end": 80,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "password: pypi-AgEIcHlwaS5vcmc\u0051w3Er5Ty7UQw3Er5Ty7UQw3Er5Ty7UQw3Er5Ty7UQw3Er5Ty7UQw3Er5Ty7U",
+  "categories": [
+   "secrets"
+  ],
+  "note": "pypi in pypirc",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "pypi_token",
+    "start": 10,
+    "end": 90,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "TWINE=pypi-AgEIcHlwaS5vcmc\u005az_9-Zz_9-Zz_9-Zz_9-Zz_9-Zz_9-Zz_9-Zz_9-Zz_9-Zz_9-Zz_9-Zz_9-",
+  "categories": [
+   "secrets"
+  ],
+  "note": "pypi twine",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "pypi_token",
+    "start": 6,
+    "end": 86,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "pypi-AgEIcHlwaS5vcmc",
+  "categories": [
+   "secrets"
+  ],
+  "note": "pypi prefix only",
+  "expected": []
+ },
+ {
+  "text": "SG.\u0064ddddddddddddddddddddd.eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+  "categories": [
+   "secrets"
+  ],
+  "note": "sendgrid",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "sendgrid_key",
+    "start": 0,
+    "end": 69,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "SENDGRID_API_KEY=SG.\u0051w3Er5Ty7Ui9Op1As3Df5G.Gh7Jk9Lz2Xc4Vb6Nm8Qw0Er2Ty4Ui6Op8As0Df2Gh4J",
+  "categories": [
+   "secrets"
+  ],
+  "note": "sendgrid env",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "sendgrid_key",
+    "start": 17,
+    "end": 86,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "key SG.\u0061B_cD-eF1gH2iJ3kL4mN5o.pQ6rS7tU8vW9xY0zA1bC2dE3fG4hI5jK6lM7nO8pQ9r ok",
+  "categories": [
+   "secrets"
+  ],
+  "note": "sendgrid mixed",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "sendgrid_key",
+    "start": 4,
+    "end": 73,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "SG.\u0073hort.key",
+  "categories": [
+   "secrets"
+  ],
+  "note": "sendgrid too short",
+  "expected": []
+ },
+ {
+  "text": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+  "categories": [
+   "secrets"
+  ],
+  "note": "jwt",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "jwt",
+    "start": 0,
+    "end": 108,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "cookie=eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdXRoIn0.Qw3Er5Ty7Ui9Op1As3Df5",
+  "categories": [
+   "secrets"
+  ],
+  "note": "jwt rs256 in cookie",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "jwt",
+    "start": 7,
+    "end": 69,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "eyJmb28iOiJiYXIifQ.eyJzdWIiOiIxMjM0In0.abcdefghijklmnop",
+  "categories": [
+   "secrets"
+  ],
+  "note": "jwt header without alg",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "jwt",
+    "start": 0,
+    "end": 55,
+    "confidence": 0.8,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "eyJhbGciOiJIUzI1NiJ9.notbase64.sig",
+  "categories": [
+   "secrets"
+  ],
+  "note": "jwt malformed",
+  "expected": []
+ },
+ {
+  "text": "-----BEGIN PRIVATE KEY-----\nMIIE\n-----END PRIVATE KEY-----",
+  "categories": [
+   "secrets"
+  ],
+  "note": "private key",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "private_key",
+    "start": 0,
+    "end": 58,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "-----BEGIN RSA PRIVATE KEY-----\nMIIEowIBAAKCAQEA\n",
+  "categories": [
+   "secrets"
+  ],
+  "note": "private key truncated",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "private_key",
+    "start": 0,
+    "end": 48,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "key:\n-----BEGIN OPENSSH PRIVATE KEY-----\nb3BlbnNzaC1rZXktdjEAAAAA\n-----END OPENSSH PRIVATE KEY-----\ndone",
+  "categories": [
+   "secrets"
+  ],
+  "note": "openssh key",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "private_key",
+    "start": 5,
+    "end": 99,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "-----BEGIN CERTIFICATE-----\nMIIC\n-----END CERTIFICATE-----",
+  "categories": [
+   "secrets"
+  ],
+  "note": "certificate",
+  "expected": []
+ },
+ {
+  "text": "-----BEGIN PUBLIC KEY-----",
+  "categories": [
+   "secrets"
+  ],
+  "note": "public key",
+  "expected": []
+ },
+ {
+  "text": "mysql://root:Xk3pL9vQ2@localhost/db",
+  "categories": [
+   "secrets"
+  ],
+  "note": "mysql creds",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "url_credentials",
+    "start": 8,
+    "end": 22,
+    "confidence": 0.9,
+    "reason": "url_userinfo"
+   }
+  ]
+ },
+ {
+  "text": "amqp://guest:guest@rabbit:5672/",
+  "categories": [
+   "secrets"
+  ],
+  "note": "amqp creds",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "url_credentials",
+    "start": 7,
+    "end": 18,
+    "confidence": 0.9,
+    "reason": "url_userinfo"
+   }
+  ]
+ },
+ {
+  "text": "mailto:someone@example.com",
+  "categories": [
+   "secrets"
+  ],
+  "note": "mailto not creds",
+  "expected": []
+ },
+ {
+  "text": "ssh://git@github.com/org/repo.git",
+  "categories": [
+   "secrets"
+  ],
+  "note": "user without password",
+  "expected": []
+ },
+ {
+  "text": "Authorization: Bearer Zx9Qw3Er7Ty1Ui5Op2AsDf6Gh",
+  "categories": [
+   "secrets"
+  ],
+  "note": "bearer",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "bearer_token",
+    "start": 22,
+    "end": 47,
+    "confidence": 0.8,
+    "reason": "bearer_prefix"
+   }
+  ]
+ },
+ {
+  "text": "curl -H 'authorization: bearer abcdefghijklmnopqrstuvwx'",
+  "categories": [
+   "secrets"
+  ],
+  "note": "bearer lowercase",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "bearer_token",
+    "start": 31,
+    "end": 55,
+    "confidence": 0.8,
+    "reason": "bearer_prefix"
+   }
+  ]
+ },
+ {
+  "text": "Bearer Qw3Er5Ty7Ui9Op1As3Df5Gh7.Jk9Lz2Xc4Vb",
+  "categories": [
+   "secrets"
+  ],
+  "note": "bearer dotted",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "bearer_token",
+    "start": 7,
+    "end": 43,
+    "confidence": 0.8,
+    "reason": "bearer_prefix"
+   }
+  ]
+ },
+ {
+  "text": "Bearer <your-token-goes-here>",
+  "categories": [
+   "secrets"
+  ],
+  "note": "bearer placeholder",
+  "expected": []
+ },
+ {
+  "text": "the bearer of this letter",
+  "categories": [
+   "secrets"
+  ],
+  "note": "bearer prose",
+  "expected": []
+ },
+ {
+  "text": "Authorization: Bearer your_token_here_123456789",
+  "categories": [
+   "secrets"
+  ],
+  "note": "bearer your_ placeholder",
+  "expected": []
+ },
+ {
+  "text": "DB_PASSWORD=Xk3#pL9vQ2",
+  "categories": [
+   "secrets"
+  ],
+  "note": "prefixed keyword short value",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "generic_secret",
+    "start": 12,
+    "end": 22,
+    "confidence": 0.6,
+    "reason": "keyword_entropy"
+   }
+  ]
+ },
+ {
+  "text": "api_key: \"Tq3vR8xZ1pL6mN0sK4wY7bH2cF5gJ9dA\"",
+  "categories": [
+   "secrets"
+  ],
+  "note": "api key base64-ish",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "generic_secret",
+    "start": 10,
+    "end": 42,
+    "confidence": 0.6,
+    "reason": "keyword_entropy"
+   }
+  ]
+ },
+ {
+  "text": "client_secret => 9f86d081884c7d659a2feaa0c55ad015",
+  "categories": [
+   "secrets"
+  ],
+  "note": "client secret hex",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "generic_secret",
+    "start": 17,
+    "end": 49,
+    "confidence": 0.6,
+    "reason": "keyword_entropy"
+   }
+  ]
+ },
+ {
+  "text": "password=${DB_PASSWORD}",
+  "categories": [
+   "secrets"
+  ],
+  "note": "templated password",
+  "expected": []
+ },
+ {
+  "text": "password = \"changeme\"",
+  "categories": [
+   "secrets"
+  ],
+  "note": "placeholder password",
+  "expected": []
+ },
+ {
+  "text": "secret: 12345678",
+  "categories": [
+   "secrets"
+  ],
+  "note": "digits only secret",
+  "expected": []
+ },
+ {
+  "text": "token=aaaaaaaaaaaa",
+  "categories": [
+   "secrets"
+  ],
+  "note": "repeated char token",
+  "expected": []
+ },
+ {
+  "text": "Tq3vR8xZ1pL6mN0sK4wY7bH2cF5gJ9dA",
+  "categories": [
+   "secrets"
+  ],
+  "note": "bare base64 token",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "high_entropy_string",
+    "start": 0,
+    "end": 32,
+    "confidence": 0.5,
+    "reason": "entropy"
+   }
+  ],
+  "options": {
+   "secrets_without_context": true
+  }
+ },
+ {
+  "text": "commit 5f4dcc3b5aa765d61d8327deb882cf99 fixed the build",
+  "categories": [
+   "secrets"
+  ],
+  "note": "bare hex with context off",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "high_entropy_string",
+    "start": 7,
+    "end": 39,
+    "confidence": 0.5,
+    "reason": "entropy"
+   }
+  ],
+  "options": {
+   "secrets_without_context": true
+  }
+ },
+ {
+  "text": "blob Qw3Er5Ty7Ui9Op1As3Df5Gh7Jk9Lz2Xc4Vb6Nm8 attached",
+  "categories": [
+   "secrets"
+  ],
+  "note": "bare token in sentence",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "high_entropy_string",
+    "start": 5,
+    "end": 44,
+    "confidence": 0.5,
+    "reason": "entropy"
+   }
+  ],
+  "options": {
+   "secrets_without_context": true
+  }
+ },
+ {
+  "text": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "categories": [
+   "secrets"
+  ],
+  "note": "repeated char no entropy",
+  "expected": [],
+  "options": {
+   "secrets_without_context": true
+  }
+ },
+ {
+  "text": "00000000000000000000000000000000",
+  "categories": [
+   "secrets"
+  ],
+  "note": "zero hex",
+  "expected": [],
+  "options": {
+   "secrets_without_context": true
+  }
+ },
+ {
+  "text": "the quick brown fox jumps over the lazy dog",
+  "categories": [
+   "secrets"
+  ],
+  "note": "prose with context off",
+  "expected": [],
+  "options": {
+   "secrets_without_context": true
+  }
+ },
+ {
+  "text": "write to ops@example.com or sales@corp.example.org",
+  "categories": [
+   "pii"
+  ],
+  "note": "two emails",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "email",
+    "start": 9,
+    "end": 24,
+    "confidence": 0.9,
+    "reason": "structure"
+   },
+   {
+    "category": "pii",
+    "kind": "email",
+    "start": 28,
+    "end": 50,
+    "confidence": 0.9,
+    "reason": "structure"
+   }
+  ]
+ },
+ {
+  "text": "User.Name_42@sub-domain.example.io signed up",
+  "categories": [
+   "pii"
+  ],
+  "note": "email with subdomain",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "email",
+    "start": 0,
+    "end": 34,
+    "confidence": 0.9,
+    "reason": "structure"
+   }
+  ]
+ },
+ {
+  "text": "twitter @handle and foo@bar",
+  "categories": [
+   "pii"
+  ],
+  "note": "at without domain",
+  "expected": []
+ },
+ {
+  "text": "UK office 020 7946 0958",
+  "categories": [
+   "pii"
+  ],
+  "note": "uk phone",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "phone",
+    "start": 10,
+    "end": 23,
+    "confidence": 0.8,
+    "reason": "national_uk"
+   }
+  ]
+ },
+ {
+  "text": "mobile +44 7700 900123",
+  "categories": [
+   "pii"
+  ],
+  "note": "uk mobile e164 spaced",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "phone",
+    "start": 7,
+    "end": 22,
+    "confidence": 0.8,
+    "reason": "national_uk"
+   }
+  ]
+ },
+ {
+  "text": "call 98765 43210 today",
+  "categories": [
+   "pii"
+  ],
+  "note": "india phone spaced",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "phone",
+    "start": 5,
+    "end": 16,
+    "confidence": 0.8,
+    "reason": "national_in"
+   }
+  ]
+ },
+ {
+  "text": "ring 9876543210",
+  "categories": [
+   "pii"
+  ],
+  "note": "india phone bare",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "phone",
+    "start": 5,
+    "end": 15,
+    "confidence": 0.8,
+    "reason": "national_in"
+   }
+  ]
+ },
+ {
+  "text": "call 555-2671",
+  "categories": [
+   "pii"
+  ],
+  "note": "seven digit local",
+  "expected": []
+ },
+ {
+  "text": "id 1234567",
+  "categories": [
+   "pii"
+  ],
+  "note": "short digits",
+  "expected": []
+ },
+ {
+  "text": "5555 5555 5555 4444",
+  "categories": [
+   "pii"
+  ],
+  "note": "mastercard",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "credit_card",
+    "start": 0,
+    "end": 19,
+    "confidence": 1.0,
+    "reason": "luhn_mastercard"
+   }
+  ]
+ },
+ {
+  "text": "amex 378282246310005",
+  "categories": [
+   "pii"
+  ],
+  "note": "amex",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "credit_card",
+    "start": 5,
+    "end": 20,
+    "confidence": 1.0,
+    "reason": "luhn_amex"
+   }
+  ]
+ },
+ {
+  "text": "discover 6011-1111-1111-1117",
+  "categories": [
+   "pii"
+  ],
+  "note": "discover dashed",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "credit_card",
+    "start": 9,
+    "end": 28,
+    "confidence": 1.0,
+    "reason": "luhn_discover"
+   }
+  ]
+ },
+ {
+  "text": "tracking 1234 5678 9012 3456",
+  "categories": [
+   "pii"
+  ],
+  "note": "card-like fails luhn or iin",
+  "expected": []
+ },
+ {
+  "text": "DE89370400440532013000",
+  "categories": [
+   "pii"
+  ],
+  "note": "iban de compact",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "iban",
+    "start": 0,
+    "end": 22,
+    "confidence": 1.0,
+    "reason": "mod97"
+   }
+  ]
+ },
+ {
+  "text": "pay FR14 2004 1010 0505 0001 3M02 606",
+  "categories": [
+   "pii"
+  ],
+  "note": "iban fr",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "iban",
+    "start": 4,
+    "end": 37,
+    "confidence": 1.0,
+    "reason": "mod97"
+   }
+  ]
+ },
+ {
+  "text": "GB82 WEST 1234 5698 7654 33",
+  "categories": [
+   "pii"
+  ],
+  "note": "iban bad check",
+  "expected": []
+ },
+ {
+  "text": "DE12 3456 7890",
+  "categories": [
+   "pii"
+  ],
+  "note": "iban too short",
+  "expected": []
+ },
+ {
+  "text": "SSN 078-05-1120",
+  "categories": [
+   "pii"
+  ],
+  "note": "ssn woolworth",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "ssn_us",
+    "start": 4,
+    "end": 15,
+    "confidence": 0.8,
+    "reason": "structure"
+   }
+  ]
+ },
+ {
+  "text": "social security number: 219099999",
+  "categories": [
+   "pii"
+  ],
+  "note": "ssn keyword compact",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "ssn_us",
+    "start": 24,
+    "end": 33,
+    "confidence": 0.6,
+    "reason": "keyword_context"
+   }
+  ]
+ },
+ {
+  "text": "ssn 123 45 6789",
+  "categories": [
+   "pii"
+  ],
+  "note": "ssn spaced",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "ssn_us",
+    "start": 4,
+    "end": 15,
+    "confidence": 0.8,
+    "reason": "structure"
+   }
+  ]
+ },
+ {
+  "text": "000-12-3456",
+  "categories": [
+   "pii"
+  ],
+  "note": "ssn area 000",
+  "expected": []
+ },
+ {
+  "text": "666-12-3456",
+  "categories": [
+   "pii"
+  ],
+  "note": "ssn area 666",
+  "expected": []
+ },
+ {
+  "text": "123-45-678",
+  "categories": [
+   "pii"
+  ],
+  "note": "ssn short",
+  "expected": []
+ },
+ {
+  "text": "AB123456C",
+  "categories": [
+   "pii"
+  ],
+  "note": "nino compact",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "nino",
+    "start": 0,
+    "end": 9,
+    "confidence": 0.9,
+    "reason": "structure"
+   }
+  ]
+ },
+ {
+  "text": "QQ123456C",
+  "categories": [
+   "pii"
+  ],
+  "note": "nino qq prefix invalid",
+  "expected": []
+ },
+ {
+  "text": "national insurance JG 10 37 59 A",
+  "categories": [
+   "pii"
+  ],
+  "note": "nino spaced",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "nino",
+    "start": 19,
+    "end": 32,
+    "confidence": 0.9,
+    "reason": "structure"
+   }
+  ]
+ },
+ {
+  "text": "BG123456A",
+  "categories": [
+   "pii"
+  ],
+  "note": "nino banned prefix",
+  "expected": []
+ },
+ {
+  "text": "AB123456E",
+  "categories": [
+   "pii"
+  ],
+  "note": "nino bad suffix",
+  "expected": []
+ },
+ {
+  "text": "NHS number 943 476 5919",
+  "categories": [
+   "pii"
+  ],
+  "note": "nhs keyword",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "nhs_number",
+    "start": 11,
+    "end": 23,
+    "confidence": 0.9,
+    "reason": "mod11_keyword"
+   }
+  ]
+ },
+ {
+  "text": "nhs: 9434765919",
+  "categories": [
+   "pii"
+  ],
+  "note": "nhs keyword compact",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "nhs_number",
+    "start": 5,
+    "end": 15,
+    "confidence": 0.9,
+    "reason": "mod11_keyword"
+   }
+  ]
+ },
+ {
+  "text": "patient NHS no. 401 023 2137",
+  "categories": [
+   "pii"
+  ],
+  "note": "nhs keyword second",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "nhs_number",
+    "start": 16,
+    "end": 28,
+    "confidence": 0.9,
+    "reason": "mod11_keyword"
+   }
+  ]
+ },
+ {
+  "text": "943 476 5918",
+  "categories": [
+   "pii"
+  ],
+  "note": "nhs bad check falls to us phone",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "phone",
+    "start": 0,
+    "end": 12,
+    "confidence": 0.8,
+    "reason": "national_us"
+   }
+  ]
+ },
+ {
+  "text": "aadhaar 2345 6789 0124",
+  "categories": [
+   "pii"
+  ],
+  "note": "aadhaar",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "aadhaar",
+    "start": 8,
+    "end": 22,
+    "confidence": 1.0,
+    "reason": "verhoeff"
+   }
+  ]
+ },
+ {
+  "text": "UIDAI 498765432102",
+  "categories": [
+   "pii"
+  ],
+  "note": "aadhaar keyword compact",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "aadhaar",
+    "start": 6,
+    "end": 18,
+    "confidence": 1.0,
+    "reason": "verhoeff"
+   }
+  ]
+ },
+ {
+  "text": "id 5551 2345 6781",
+  "categories": [
+   "pii"
+  ],
+  "note": "aadhaar spaced",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "aadhaar",
+    "start": 3,
+    "end": 17,
+    "confidence": 1.0,
+    "reason": "verhoeff"
+   }
+  ]
+ },
+ {
+  "text": "2345 6789 0125",
+  "categories": [
+   "pii"
+  ],
+  "note": "aadhaar bad check",
+  "expected": []
+ },
+ {
+  "text": "1234 5678 9012",
+  "categories": [
+   "pii"
+  ],
+  "note": "aadhaar starts with 1",
+  "expected": []
+ },
+ {
+  "text": "AAAPL1234C",
+  "categories": [
+   "pii"
+  ],
+  "note": "pan individual",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "pan",
+    "start": 0,
+    "end": 10,
+    "confidence": 0.9,
+    "reason": "structure"
+   }
+  ]
+ },
+ {
+  "text": "pan: BNZPM2501F",
+  "categories": [
+   "pii"
+  ],
+  "note": "pan second",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "pan",
+    "start": 5,
+    "end": 15,
+    "confidence": 0.9,
+    "reason": "structure"
+   }
+  ]
+ },
+ {
+  "text": "ABCDE1234F",
+  "categories": [
+   "pii"
+  ],
+  "note": "pan bad fourth letter",
+  "expected": []
+ },
+ {
+  "text": "abcpe1234f",
+  "categories": [
+   "pii"
+  ],
+  "note": "pan lowercase",
+  "expected": []
+ },
+ {
+  "text": "dns 8.8.8.8",
+  "categories": [
+   "pii"
+  ],
+  "note": "ipv4 dns",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "ipv4",
+    "start": 4,
+    "end": 11,
+    "confidence": 0.7,
+    "reason": "structure"
+   }
+  ]
+ },
+ {
+  "text": "10.0.0.255 is the broadcast",
+  "categories": [
+   "pii"
+  ],
+  "note": "ipv4 broadcast",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "ipv4",
+    "start": 0,
+    "end": 10,
+    "confidence": 0.7,
+    "reason": "structure"
+   }
+  ]
+ },
+ {
+  "text": "256.1.1.1",
+  "categories": [
+   "pii"
+  ],
+  "note": "ipv4 octet overflow",
+  "expected": []
+ },
+ {
+  "text": "1.2.3.4.5",
+  "categories": [
+   "pii"
+  ],
+  "note": "five octets",
+  "expected": []
+ },
+ {
+  "text": "ping 2001:db8::1",
+  "categories": [
+   "pii"
+  ],
+  "note": "ipv6 doc",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "ipv6",
+    "start": 5,
+    "end": 16,
+    "confidence": 0.7,
+    "reason": "structure"
+   }
+  ]
+ },
+ {
+  "text": "fe80::1ff:fe23:4567:890a",
+  "categories": [
+   "pii"
+  ],
+  "note": "ipv6 link local",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "ipv6",
+    "start": 0,
+    "end": 24,
+    "confidence": 0.7,
+    "reason": "structure"
+   }
+  ]
+ },
+ {
+  "text": "::1",
+  "categories": [
+   "pii"
+  ],
+  "note": "ipv6 loopback",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "ipv6",
+    "start": 0,
+    "end": 3,
+    "confidence": 0.7,
+    "reason": "structure"
+   }
+  ]
+ },
+ {
+  "text": "mac de:ad:be:ef:00:01",
+  "categories": [
+   "pii"
+  ],
+  "note": "mac address",
+  "expected": []
+ },
+ {
+  "text": "time 12:30",
+  "categories": [
+   "pii"
+  ],
+  "note": "short time",
+  "expected": []
+ },
+ {
+  "text": "SHIT happens",
+  "categories": [
+   "profanity"
+  ],
+  "note": "uppercase",
+  "expected": [
+   {
+    "category": "profanity",
+    "kind": "profanity",
+    "start": 0,
+    "end": 4,
+    "confidence": 1.0,
+    "reason": "strong"
+   }
+  ]
+ },
+ {
+  "text": "fuuuuck that",
+  "categories": [
+   "profanity"
+  ],
+  "note": "elongated",
+  "expected": [
+   {
+    "category": "profanity",
+    "kind": "profanity",
+    "start": 0,
+    "end": 7,
+    "confidence": 0.8,
+    "reason": "elongated"
+   }
+  ]
+ },
+ {
+  "text": "you asshole!",
+  "categories": [
+   "profanity"
+  ],
+  "note": "trailing bang",
+  "expected": [
+   {
+    "category": "profanity",
+    "kind": "profanity",
+    "start": 4,
+    "end": 11,
+    "confidence": 1.0,
+    "reason": "strong"
+   }
+  ]
+ },
+ {
+  "text": "f*cking hell",
+  "categories": [
+   "profanity"
+  ],
+  "note": "masked",
+  "expected": [
+   {
+    "category": "profanity",
+    "kind": "profanity",
+    "start": 0,
+    "end": 7,
+    "confidence": 0.9,
+    "reason": "masked"
+   }
+  ]
+ },
+ {
+  "text": "motherfucker",
+  "categories": [
+   "profanity"
+  ],
+  "note": "compound in word list",
+  "expected": [
+   {
+    "category": "profanity",
+    "kind": "profanity",
+    "start": 0,
+    "end": 12,
+    "confidence": 1.0,
+    "reason": "strong"
+   }
+  ]
+ },
+ {
+  "text": "bullshit",
+  "categories": [
+   "profanity"
+  ],
+  "note": "compound",
+  "expected": [
+   {
+    "category": "profanity",
+    "kind": "profanity",
+    "start": 0,
+    "end": 8,
+    "confidence": 1.0,
+    "reason": "strong"
+   }
+  ]
+ },
+ {
+  "text": "pissed off",
+  "categories": [
+   "profanity"
+  ],
+  "note": "mild pissed",
+  "expected": [
+   {
+    "category": "profanity",
+    "kind": "profanity",
+    "start": 0,
+    "end": 6,
+    "confidence": 0.7,
+    "reason": "mild"
+   }
+  ]
+ },
+ {
+  "text": "The cocktail at Essex was classic",
+  "categories": [
+   "profanity"
+  ],
+  "note": "cocktail essex",
+  "expected": []
+ },
+ {
+  "text": "Dickens wrote about shiitake",
+  "categories": [
+   "profanity"
+  ],
+  "note": "dickens shiitake",
+  "expected": []
+ },
+ {
+  "text": "pass the assessment",
+  "categories": [
+   "profanity"
+  ],
+  "note": "pass assessment",
+  "expected": []
+ },
+ {
+  "text": "call 5318008",
+  "categories": [
+   "profanity"
+  ],
+  "note": "digits only",
+  "expected": []
+ },
+ {
+  "text": "hello there",
+  "categories": [
+   "profanity"
+  ],
+  "note": "hello",
+  "expected": []
+ },
+ {
+  "text": "asdfghjkl qwertyuiop zxcvbnm",
+  "categories": [
+   "gibberish"
+  ],
+  "note": "keyboard mash",
+  "expected": [
+   {
+    "category": "gibberish",
+    "kind": "garbled",
+    "start": 0,
+    "end": 28,
+    "confidence": 1.0,
+    "reason": "garbled"
+   }
+  ]
+ },
+ {
+  "text": "xkcd vbqz mnprt lkjhg wqzx",
+  "categories": [
+   "gibberish"
+  ],
+  "note": "consonant soup",
+  "expected": [
+   {
+    "category": "gibberish",
+    "kind": "garbled",
+    "start": 0,
+    "end": 26,
+    "confidence": 1.0,
+    "reason": "garbled"
+   }
+  ]
+ },
+ {
+  "text": "jfkdlsa;fjdkslafjdksla",
+  "categories": [
+   "gibberish"
+  ],
+  "note": "keysmash",
+  "expected": [
+   {
+    "category": "gibberish",
+    "kind": "garbled",
+    "start": 0,
+    "end": 22,
+    "confidence": 1.0,
+    "reason": "garbled"
+   }
+  ]
+ },
+ {
+  "text": "The weather is lovely today.",
+  "categories": [
+   "gibberish"
+  ],
+  "note": "sentence",
+  "expected": []
+ },
+ {
+  "text": "Please review the attached report before Friday.",
+  "categories": [
+   "gibberish"
+  ],
+  "note": "business sentence",
+  "expected": []
+ },
+ {
+  "text": "import os",
+  "categories": [
+   "gibberish"
+  ],
+  "note": "code snippet",
+  "expected": []
+ },
+ {
+  "text": "what a clusterfuck",
+  "categories": [
+   "profanity"
+  ],
+  "note": "embedded clusterfuck",
+  "expected": [
+   {
+    "category": "profanity",
+    "kind": "profanity",
+    "start": 7,
+    "end": 18,
+    "confidence": 0.8,
+    "reason": "embedded"
+   }
+  ]
+ },
+ {
+  "text": "pure dumbfuckery here",
+  "categories": [
+   "profanity"
+  ],
+  "note": "embedded dumbfuckery",
+  "expected": [
+   {
+    "category": "profanity",
+    "kind": "profanity",
+    "start": 5,
+    "end": 16,
+    "confidence": 0.8,
+    "reason": "embedded"
+   }
+  ]
+ },
+ {
+  "text": "graduated magna cum laude",
+  "categories": [
+   "profanity"
+  ],
+  "note": "mild cum in latin phrase",
+  "expected": [
+   {
+    "category": "profanity",
+    "kind": "profanity",
+    "start": 16,
+    "end": 19,
+    "confidence": 0.7,
+    "reason": "mild"
+   }
+  ]
+ },
+ {
+  "text": "blue tits at the feeder",
+  "categories": [
+   "profanity"
+  ],
+  "note": "mild tits bird",
+  "expected": [
+   {
+    "category": "profanity",
+    "kind": "profanity",
+    "start": 5,
+    "end": 9,
+    "confidence": 0.7,
+    "reason": "mild"
+   }
+  ]
+ },
+ {
+  "text": "a chink in the armour",
+  "categories": [
+   "profanity"
+  ],
+  "note": "mild chink idiom",
+  "expected": [
+   {
+    "category": "profanity",
+    "kind": "profanity",
+    "start": 2,
+    "end": 7,
+    "confidence": 0.7,
+    "reason": "mild"
+   }
+  ]
+ },
+ {
+  "text": "our Maine Coon sleeps",
+  "categories": [
+   "profanity"
+  ],
+  "note": "mild coon cat breed",
+  "expected": [
+   {
+    "category": "profanity",
+    "kind": "profanity",
+    "start": 10,
+    "end": 14,
+    "confidence": 0.7,
+    "reason": "mild"
+   }
+  ]
+ },
+ {
+  "text": "that bitch's car",
+  "categories": [
+   "profanity"
+  ],
+  "note": "possessive hits",
+  "expected": [
+   {
+    "category": "profanity",
+    "kind": "profanity",
+    "start": 5,
+    "end": 12,
+    "confidence": 1.0,
+    "reason": "strong"
+   }
+  ]
+ },
+ {
+  "text": "lunch at Dick's diner",
+  "categories": [
+   "profanity"
+  ],
+  "note": "possessive name clean",
+  "expected": []
+ },
+ {
+  "text": "what a s h i t show",
+  "categories": [
+   "profanity"
+  ],
+  "note": "spaced after a",
+  "expected": [
+   {
+    "category": "profanity",
+    "kind": "profanity",
+    "start": 7,
+    "end": 14,
+    "confidence": 0.8,
+    "reason": "spaced"
+   }
+  ]
+ },
+ {
+  "text": "😀 AKIAIOSFODNN7EXAMPLE",
+  "categories": [
+   "secrets"
+  ],
+  "note": "non-ascii emoji before aws id",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "aws_access_key_id",
+    "start": 2,
+    "end": 22,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "café jane@example.com",
+  "categories": [
+   "pii"
+  ],
+  "note": "non-ascii accent before email",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "email",
+    "start": 5,
+    "end": 21,
+    "confidence": 0.9,
+    "reason": "structure"
+   }
+  ]
+ },
+ {
+  "text": "401 023 2137",
+  "categories": [
+   "pii"
+  ],
+  "note": "nhs without keyword",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "nhs_number",
+    "start": 0,
+    "end": 12,
+    "confidence": 0.8,
+    "reason": "mod11"
+   }
+  ]
+ },
+ {
+  "text": "file name@2x.png",
+  "categories": [
+   "pii"
+  ],
+  "note": "retina asset not email",
+  "expected": []
+ },
+ {
+  "text": "see icon@3x.webp and main.min.js",
+  "categories": [
+   "pii"
+  ],
+  "note": "asset names not email",
+  "expected": []
+ },
+ {
+  "text": "call 012 345 6788",
+  "categories": [
+   "pii"
+  ],
+  "note": "us phone bad area code",
+  "expected": []
+ },
+ {
+  "text": "call 415 055 2671",
+  "categories": [
+   "pii"
+  ],
+  "note": "us phone bad exchange",
+  "expected": []
+ },
+ {
+  "text": "Authorization: Bearer ghp_\u00611B2c3D4e5F6g7H8i9J0k1L2m3N4o5P6q7R8",
+  "categories": [
+   "secrets"
+  ],
+  "note": "bearer + github, nested",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "bearer_token",
+    "start": 22,
+    "end": 62,
+    "confidence": 0.8,
+    "reason": "bearer_prefix"
+   },
+   {
+    "category": "secrets",
+    "kind": "github_token",
+    "start": 22,
+    "end": 62,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "Authorization: Bearer ghp_\u00611B2c3D4e5F6g7H8i9J0k1L2m3N4o5P6q7R8",
+  "categories": [
+   "secrets"
+  ],
+  "note": "bearer + github, bearer excluded",
+  "options": {
+   "exclude_kinds": [
+    "bearer_token"
+   ]
+  },
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "github_token",
+    "start": 22,
+    "end": 62,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "Authorization: Bearer ghp_\u00611B2c3D4e5F6g7H8i9J0k1L2m3N4o5P6q7R8",
+  "categories": [
+   "secrets"
+  ],
+  "note": "bearer + github, github_token only",
+  "options": {
+   "kinds": [
+    "github_token"
+   ]
+  },
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "github_token",
+    "start": 22,
+    "end": 62,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+  "categories": [
+   "secrets"
+  ],
+  "note": "bearer + jwt, nested",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "bearer_token",
+    "start": 22,
+    "end": 130,
+    "confidence": 0.8,
+    "reason": "bearer_prefix"
+   },
+   {
+    "category": "secrets",
+    "kind": "jwt",
+    "start": 22,
+    "end": 130,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+  "categories": [
+   "secrets"
+  ],
+  "note": "bearer + jwt, bearer excluded",
+  "options": {
+   "exclude_kinds": [
+    "bearer_token"
+   ]
+  },
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "jwt",
+    "start": 22,
+    "end": 130,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+  "categories": [
+   "secrets"
+  ],
+  "note": "bearer + jwt, jwt only",
+  "options": {
+   "kinds": [
+    "jwt"
+   ]
+  },
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "jwt",
+    "start": 22,
+    "end": 130,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "git clone https://x:ghp_\u00611B2c3D4e5F6g7H8i9J0k1L2m3N4o5P6q7R8@github.com/o/r.git",
+  "categories": [
+   "secrets"
+  ],
+  "note": "url userinfo + github, nested",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "url_credentials",
+    "start": 18,
+    "end": 60,
+    "confidence": 0.9,
+    "reason": "url_userinfo"
+   },
+   {
+    "category": "secrets",
+    "kind": "github_token",
+    "start": 20,
+    "end": 60,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "git clone https://x:ghp_\u00611B2c3D4e5F6g7H8i9J0k1L2m3N4o5P6q7R8@github.com/o/r.git",
+  "categories": [
+   "secrets"
+  ],
+  "note": "url userinfo + github, bearer excluded",
+  "options": {
+   "exclude_kinds": [
+    "bearer_token"
+   ]
+  },
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "url_credentials",
+    "start": 18,
+    "end": 60,
+    "confidence": 0.9,
+    "reason": "url_userinfo"
+   },
+   {
+    "category": "secrets",
+    "kind": "github_token",
+    "start": 20,
+    "end": 60,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "git clone https://x:ghp_\u00611B2c3D4e5F6g7H8i9J0k1L2m3N4o5P6q7R8@github.com/o/r.git",
+  "categories": [
+   "secrets"
+  ],
+  "note": "url userinfo + github, github_token only",
+  "options": {
+   "kinds": [
+    "github_token"
+   ]
+  },
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "github_token",
+    "start": 20,
+    "end": 60,
+    "confidence": 1.0,
+    "reason": "known_prefix"
+   }
+  ]
+ },
+ {
+  "text": "db https://bob:secret@example.com/app",
+  "categories": [
+   "secrets",
+   "pii"
+  ],
+  "note": "url password is not an email",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "url_credentials",
+    "start": 11,
+    "end": 21,
+    "confidence": 0.9,
+    "reason": "url_userinfo"
+   }
+  ]
+ },
+ {
+  "text": "db https://example.com/app mail bob@example.com",
+  "categories": [
+   "secrets",
+   "pii"
+  ],
+  "note": "email beside a url without credentials",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "email",
+    "start": 32,
+    "end": 47,
+    "confidence": 0.9,
+    "reason": "structure"
+   }
+  ]
+ },
+ {
+  "text": "NHS-9434765919",
+  "categories": [
+   "pii"
+  ],
+  "note": "nhs keyword then hyphen",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "nhs_number",
+    "start": 4,
+    "end": 14,
+    "confidence": 0.9,
+    "reason": "mod11_keyword"
+   }
+  ]
+ },
+ {
+  "text": "SSN-123456789",
+  "categories": [
+   "pii"
+  ],
+  "note": "ssn keyword then hyphen",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "ssn_us",
+    "start": 4,
+    "end": 13,
+    "confidence": 0.6,
+    "reason": "keyword_context"
+   }
+  ]
+ },
+ {
+  "text": "aadhaar-234123412346",
+  "categories": [
+   "pii"
+  ],
+  "note": "aadhaar keyword then hyphen",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "aadhaar",
+    "start": 8,
+    "end": 20,
+    "confidence": 1.0,
+    "reason": "verhoeff"
+   }
+  ]
+ }
+]

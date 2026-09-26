@@ -1,4 +1,4 @@
-"""Command-line interface: check, score, analyze and calibrate texts."""
+"""Command-line interface: check, score, analyze, calibrate, scan, redact."""
 
 import argparse
 import io
@@ -130,6 +130,65 @@ def build_parser() -> argparse.ArgumentParser:
     )
     cal.add_argument("--format", choices=["text", "jsonl"], default="text")
     cal.set_defaults(threshold=0.5)
+
+    def add_scan_common(sub: argparse.ArgumentParser) -> None:
+        sub.add_argument(
+            "inputs",
+            nargs="*",
+            help="files to read, one text per line; '-' or none = stdin",
+        )
+        sub.add_argument(
+            "-t",
+            "--text",
+            action="append",
+            default=None,
+            help="evaluate this text instead of reading inputs (repeatable)",
+        )
+        sub.add_argument(
+            "--field",
+            default=None,
+            help="read JSON objects and process this field; echo JSONL",
+        )
+        sub.add_argument(
+            "--categories", default=None, help="comma list; default all"
+        )
+        sub.add_argument("--kinds", default=None, help="comma list of kinds")
+        sub.add_argument(
+            "--exclude-kinds", default=None, help="comma list of kinds"
+        )
+        sub.add_argument(
+            "--locales", default=None, help="comma list of us,uk,in"
+        )
+        sub.add_argument("--min-confidence", type=float, default=0.5)
+        sub.add_argument(
+            "--profile", default="english", help="gibberish profile"
+        )
+        sub.add_argument(
+            "--threshold", type=float, default=0.5, help="gibberish threshold"
+        )
+        sub.add_argument(
+            "--allowlist", default=None, help="file of words never gibberish"
+        )
+
+    scan_parser = subparsers.add_parser(
+        "scan", help="find secrets, PII, profanity and gibberish"
+    )
+    add_scan_common(scan_parser)
+    scan_parser.add_argument(
+        "--format", choices=["text", "tsv", "jsonl"], default="text"
+    )
+    scan_parser.add_argument(
+        "--show-matches", action="store_true", help="include matched text"
+    )
+    redact_parser = subparsers.add_parser("redact", help="print redacted text")
+    add_scan_common(redact_parser)
+    redact_parser.add_argument(
+        "--mode",
+        choices=["placeholder", "mask", "partial"],
+        default="placeholder",
+    )
+    redact_parser.add_argument("--placeholder", default="[{KIND}]")
+    redact_parser.add_argument("--mask-char", default="*")
     return parser
 
 
@@ -323,6 +382,144 @@ def run_calibrate(args: argparse.Namespace, out: Any) -> int:
     return EXIT_OK
 
 
+def _split(
+    value: Optional[str], option: str, allow_empty: bool = False
+) -> Optional[List[str]]:
+    """Comma list of names; None when the option was not given. An
+    option given with no names is a usage error unless allow_empty."""
+    if value is None:
+        return None
+    names = [item.strip() for item in value.split(",") if item.strip()]
+    if not names and not allow_empty:
+        raise CliError(f"{option} needs at least one name")
+    return names
+
+
+def make_scanner(args: argparse.Namespace) -> Any:
+    from .scanner import DEFAULT_CATEGORIES, Scanner
+
+    categories = _split(args.categories, "--categories")
+    kinds = _split(args.kinds, "--kinds")
+    exclude = _split(args.exclude_kinds, "--exclude-kinds", allow_empty=True)
+    locales = _split(args.locales, "--locales")
+    allowlist = load_allowlist(args.allowlist) if args.allowlist else None
+    try:
+        if args.command == "redact" and args.mode == "placeholder":
+            from .redaction import validate_placeholder
+
+            # Up front, so a bad template fails even on empty input.
+            validate_placeholder(args.placeholder)
+        return Scanner(
+            DEFAULT_CATEGORIES if categories is None else categories,
+            min_confidence=args.min_confidence,
+            kinds=kinds,
+            exclude_kinds=exclude or (),
+            locales=("us", "uk", "in") if locales is None else locales,
+            profile=args.profile,
+            threshold=args.threshold,
+            allowlist=allowlist,
+        )
+    except ValueError as error:
+        raise CliError(str(error))
+
+
+def scan_row(text: str, report: Any, show: bool) -> Dict[str, Any]:
+    findings = []
+    for finding in report.findings:
+        row = finding.to_dict()
+        if show:
+            row["match"] = text[finding.start : finding.end]
+        findings.append(row)
+    return {"flagged": report.flagged, "findings": findings}
+
+
+def format_scan(
+    fmt: str, text: str, report: Any, show: bool, min_confidence: float
+) -> str:
+    if fmt == "jsonl":
+        row: Dict[str, Any] = {"text": text}
+        row.update(scan_row(text, report, show))
+        return json.dumps(row, ensure_ascii=False)
+    # Text and TSV rows list only the findings that count towards flagged,
+    # so a clean row never names a kind; JSONL keeps every finding.
+    shown = [
+        f
+        for f in report.findings
+        if f.confidence >= min_confidence or f.category == "gibberish"
+    ]
+    kinds = ",".join(sorted({f.kind for f in shown}))
+    if fmt == "text":
+        label = "flagged" if report.flagged else "clean"
+        return f"{label}\t{kinds}\t{text}"
+    return f"{int(report.flagged)}\t{len(shown)}\t{kinds}\t{text}"
+
+
+def run_scan(args: argparse.Namespace, out: Any, err: Any) -> int:
+    scanner = make_scanner(args)
+    redacting = args.command == "redact"
+    any_flagged = False
+    had_error = False
+    if args.text is not None:
+        pairs: Iterable[Tuple[int, Any]] = enumerate(args.text, 1)
+    else:
+        pairs = enumerate(iter_lines(args.inputs), 1)
+
+    def redact_line(value: str) -> str:
+        try:
+            redaction = scanner.redact(
+                value,
+                mode=args.mode,
+                placeholder=args.placeholder,
+                mask_char=args.mask_char,
+            )
+        except ValueError as error:
+            raise CliError(str(error))
+        return str(redaction.text)
+
+    for number, line in pairs:
+        if args.field is None:
+            if redacting:
+                out.write(redact_line(line) + "\n")
+                continue
+            report = scanner.scan(line)
+            any_flagged = any_flagged or report.flagged
+            out.write(
+                format_scan(
+                    args.format,
+                    line,
+                    report,
+                    args.show_matches,
+                    scanner.min_confidence,
+                )
+                + "\n"
+            )
+            continue
+        problem: Optional[str] = None
+        try:
+            obj = json.loads(line)
+        except ValueError as error:
+            problem = f"invalid JSON: {error}"
+        else:
+            problem = field_problem(obj, args.field)
+        if problem is not None:
+            err.write(f"line {number}: {problem}\n")
+            had_error = True
+            continue
+        value = obj[args.field]
+        if redacting:
+            obj[args.field] = redact_line(value)
+        else:
+            report = scanner.scan(value)
+            any_flagged = any_flagged or report.flagged
+            obj["pygarble"] = scan_row(value, report, args.show_matches)
+        out.write(json.dumps(obj, ensure_ascii=False) + "\n")
+    if had_error:
+        return EXIT_ERROR
+    if not redacting and any_flagged:
+        return EXIT_GARBLED
+    return EXIT_OK
+
+
 def silence_stdout() -> None:
     try:
         devnull = os.open(os.devnull, os.O_WRONLY)
@@ -352,6 +549,8 @@ def main(argv: Optional[List[str]] = None) -> int:
     try:
         if args.command == "calibrate":
             return run_calibrate(args, out)
+        if args.command in ("scan", "redact"):
+            return run_scan(args, out, sys.stderr)
         return run_texts(args, out, sys.stderr)
     except CliError as error:
         sys.stderr.write(f"pygarble: {error}\n")

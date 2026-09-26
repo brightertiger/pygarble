@@ -5,8 +5,42 @@ Language strategies target English. Non-English text, including meaningful Hindi
 may be classified as gibberish. Scores are heuristic values, not calibrated
 probabilities; the library does not establish semantic meaning or identify languages.
 
-This reference describes the 0.10.0 API. See :doc:`migration` for changed
+This reference describes the 0.11.0 API. See :doc:`migration` for changed
 behavior. Public imports are available from ``pygarble``.
+
+Scanner
+-------
+
+.. autoclass:: pygarble.scanner.Scanner
+   :members: scan, scan_batch, iter_scan, redact
+
+.. autofunction:: pygarble.scan
+
+.. autofunction:: pygarble.redact
+
+See :doc:`screening` for categories, confidence tiers and redaction modes.
+
+Findings
+--------
+
+.. autoclass:: pygarble.findings.Finding
+
+.. autoclass:: pygarble.findings.ScanReport
+   :members: by_category, kinds, to_dict
+
+.. autoclass:: pygarble.findings.Redaction
+
+Detectors
+---------
+
+.. autoclass:: pygarble.secrets.SecretsDetector
+   :members: detect
+
+.. autoclass:: pygarble.pii.PIIDetector
+   :members: detect
+
+.. autoclass:: pygarble.profanity.ProfanityDetector
+   :members: detect
 
 GarbleDetector
 --------------

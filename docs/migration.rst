@@ -1,6 +1,15 @@
 Upgrading
 =========
 
+Upgrading to 0.11.0
+-------------------
+
+Version 0.11.0 has no breaking changes. It adds :class:`pygarble.Scanner`,
+:func:`pygarble.scan`, :func:`pygarble.redact`, the ``secrets``, ``pii`` and
+``profanity`` detectors, and the ``pygarble scan`` and ``pygarble redact``
+commands. The gibberish API, its profiles, defaults and scores are unchanged.
+See :doc:`screening` to get started.
+
 Upgrading to 0.10.0
 -------------------
 

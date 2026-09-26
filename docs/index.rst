@@ -1,11 +1,23 @@
-pygarble: English gibberish detection
-=====================================
+pygarble: a first line of defence for text
+==========================================
 
-**Deterministic, lightweight gibberish detection for English text.**
+**Deterministic, zero-dependency text screening: secrets, PII, profanity and
+gibberish, with redaction.**
 
-pygarble combines fixed character models, English word patterns, keyboard paths,
-and encoding checks. It has no runtime dependencies, training, or downloads.
-Meaningful Hindi and other non-English text may be flagged; this is expected
+pygarble screens text with fixed rules, checksums, a word list, character
+models and encoding checks. It has no runtime dependencies, training, or
+downloads. Every finding has a kind, span, confidence and reason, and never
+carries the matched text. See :doc:`screening` for the scanner and redaction.
+
+.. code-block:: python
+
+   from pygarble import redact, scan
+
+   report = scan("mail jane@example.com, key AKIAIOSFODNN7EXAMPLE")
+   assert report.kinds() == ("aws_access_key_id", "email")
+   assert redact("mail jane@example.com").text == "mail [EMAIL]"
+
+The gibberish category is English-specific. Meaningful Hindi and other non-English text may be flagged; this is expected
 for English-specific scoring. It is not a language identifier or a semantic
 nonsense detector. Scores are heuristics, not calibrated probabilities.
 
@@ -19,6 +31,10 @@ See :doc:`installation` to install the package.
    quickstart
    cli
    calibration
+   screening
+   secrets
+   pii
+   profanity
    strategy-guide
    strategies
    api
@@ -26,8 +42,8 @@ See :doc:`installation` to install the package.
    migration
    contributing
 
-Quick Start
------------
+Gibberish quick start
+---------------------
 
 .. code-block:: python
 

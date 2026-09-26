@@ -1,6 +1,6 @@
 # pygarble
 
-**Detect gibberish, keyboard mashing, mojibake and degenerate model output in English text. Pure Python, zero dependencies, deterministic, explainable.**
+**A deterministic, zero-dependency first line of defence for text: secrets, PII, profanity and gibberish, with redaction. Pure Python, milliseconds per call, explainable findings.**
 
 [![PyPI](https://img.shields.io/pypi/v/pygarble.svg)](https://pypi.org/project/pygarble/)
 [![Python](https://img.shields.io/pypi/pyversions/pygarble.svg)](https://pypi.org/project/pygarble/)
@@ -11,18 +11,84 @@
 
 ## Why pygarble
 
-- **Zero dependencies, no model downloads.** `pip install pygarble` and go; nothing touches the network at inference time.
-- **Deterministic and explainable.** The same input always gives the same score, and `analyze()` tells you which spans triggered which check.
-- **28 strategies behind 6 profiles.** Character models, English word patterns, keyboard paths, repetition, encoding damage and Unicode spoofing, combined by profile for your use case.
-- **A CLI for pipelines.** `pygarble check` reads stdin or files, emits text, TSV or JSONL, and exits non-zero when something is garbled.
-- **Calibrate to your data.** `pygarble.calibrate()` sweeps thresholds over your own labeled samples and recommends one.
+- **Zero dependencies, no model downloads.** `pip install pygarble` and go; nothing touches the network.
+- **Deterministic and explainable.** Every finding has a kind, span, confidence and reason. `Finding` and `ScanReport` objects never carry the matched text, so logging a report from Python cannot leak a secret. `pygarble scan` rows include the input line; use `pygarble redact` when output goes to logs.
+- **Four categories in one call.** Secrets, PII, profanity and gibberish, each rule with a fixed confidence tier so you choose how strict to be.
+- **Redaction in three modes.** Placeholders such as `[EMAIL]`, length-preserving masks, or partial masks that keep the last four digits of a card or phone number.
+- **A CLI for pipelines.** `pygarble scan` and `pygarble redact` read stdin or files. `scan` emits text, TSV or JSONL and exits non-zero when something is flagged; `redact` prints the redacted line, or the JSON object with `--field`.
 
 ## Ten-second start
 
 ```bash
 python -m pip install pygarble
-printf 'hello world\nasdfghjkl\n' | pygarble check
+printf 'mail jane@example.com\nhello\n' | pygarble scan
+printf 'key AKIAIOSFODNN7EXAMPLE\n' | pygarble redact
 ```
+
+```console
+$ printf 'mail jane@example.com\nhello\n' | pygarble scan
+flagged	email	mail jane@example.com
+clean		hello
+$ printf 'key AKIAIOSFODNN7EXAMPLE\n' | pygarble redact
+key [AWS_ACCESS_KEY_ID]
+```
+
+```python
+from pygarble import redact, scan
+
+report = scan("mail jane@example.com, key AKIAIOSFODNN7EXAMPLE, damn")
+assert report.kinds() == ("aws_access_key_id", "email", "profanity")
+assert redact("mail jane@example.com").text == "mail [EMAIL]"
+```
+
+`report.flagged` is true when any finding reaches `min_confidence` (default 0.5) or the gibberish ensemble flags the text. Each `Finding` has `category`, `kind`, `start`, `end`, `confidence` and `reason`; `report.to_dict()` is JSON-ready.
+
+## What it catches
+
+| Category | Kinds | How |
+| --- | --- | --- |
+| `secrets` | AWS, GitHub, GitLab, Slack, Stripe, Google, OpenAI, Anthropic, Hugging Face, npm, PyPI and SendGrid keys; JWTs; private key blocks; credentials in URLs; bearer tokens; generic secrets | Unique vendor prefixes; JWTs at 1.0 (0.8 when the header does not decode); PEM/PGP private key blocks; credentials in URLs; `Bearer` prefixes; keyword plus entropy for generic secrets |
+| `pii` | email, phone, credit card, IBAN, IPv4/IPv6; US SSN; UK National Insurance and NHS numbers; Indian Aadhaar and PAN | Structure plus checksums (Luhn, mod-97, mod-11, Verhoeff) and locale packs `us`, `uk`, `in` |
+| `profanity` | profanity (strong and mild tiers) | Attributed English word list with leetspeak, elongation, masking, spacing and phrase handling; token-level, so Scunthorpe stays clean |
+| `gibberish` | garbled | The existing English gibberish ensemble, whole text |
+
+Confidence is 1.0 for checksum-verified or vendor-prefixed matches, down to 0.6 for keyword-plus-entropy secrets and ambiguous masking, and 0.5 for standalone high-entropy strings, which are opt-in (`secrets_without_context=True`); see the [screening guide](https://brightertiger.github.io/pygarble/screening.html).
+
+**What it doesn't catch:** names, postal addresses, free-text dates of birth, hate speech beyond the word list, secrets without a recognisable shape, and non-English profanity. Those need NLP or a model; run pygarble first and send the rest on.
+
+## Redact
+
+```python
+from pygarble import Scanner
+
+scanner = Scanner(categories=["secrets", "pii"])
+text = "card 4111 1111 1111 1111, mail jane@example.com"
+assert scanner.redact(text).text == "card [CREDIT_CARD], mail [EMAIL]"
+assert scanner.redact(text, mode="partial").text == (
+    "card ***************1111, mail ****************"
+)
+```
+
+Overlapping findings merge into one region. `placeholder` templates accept `{KIND}`, `{kind}` and `{category}`; `mask` preserves length; `partial` keeps the last four characters when a region ends with a `credit_card`, `phone`, `iban`, `ssn_us`, `nhs_number` or `aadhaar` finding. Gibberish is never redacted.
+
+## Throughput
+
+Measured on an Apple M2 (macOS arm64, Python 3.12.2) with `python regression/throughput.py --size-mb 2`, on a synthetic corpus of five ASCII English paragraphs with 5% planted findings. MB is 10^6 UTF-8 bytes of scanned text; your numbers will differ.
+
+| Categories | Short lines (~110 bytes), MB/s | 4 KB documents (`--chunk-bytes 4096`), MB/s |
+| --- | --- | --- |
+| `secrets` | 23.0 | 14.7 |
+| `pii` | 13.3 | 7.7 |
+| `profanity` | 10.7 | 10.7 |
+| `secrets`, `pii`, `profanity` | 4.8 (about 4.5 with a varied vocabulary) | 3.5 |
+| `gibberish` | 0.8 | 1.1 |
+| all four | 0.7 | 0.8 |
+
+The gibberish ensemble is the slow member; pass `categories=["secrets", "pii", "profanity"]` when you do not need it. A single 1 MB line through the three rule categories takes 0.11 s (repeated sentence) to 0.37 s (random dictionary words).
+
+## Gibberish detection
+
+The `gibberish` category is pygarble's original English gibberish detector, still available on its own. It flags keyboard mashing, mojibake, control artifacts and degenerate model output.
 
 ```python
 from pygarble import EnsembleDetector
@@ -35,43 +101,28 @@ assert detector.predict(["Hello world", "qxzjkwpv"]) == [False, True]
 
 `True` means the selected checks flagged the text. `score()` returns the same heuristic value as a float in `[0, 1]`; it is not a calibrated probability.
 
-## Use cases
-
-| Need | Start with |
-| --- | --- |
-| Reject junk in form fields (names, messages, usernames) | `EnsembleDetector()` and an `allowlist` of your product words |
-| Guard LLM responses against loops and encoding damage | `EnsembleDetector(profile="llm_output")` |
-| Clean scraped or OCR'd corpora | `pygarble check --format tsv` in your pipeline |
-| Drop noise lines from logs | `pygarble check --strategy control_characters` |
-
-## Choose a profile
+### Profiles and use cases
 
 | Profile | Checks and intended use |
 | --- | --- |
-| `english` (default) | Markov, likelihood ratio, word anomaly, mojibake, keyboard adjacency, and control characters; general English screening |
-| `english_extended` | Adds pattern matching, localized anomalies, and repetition; more aggressive screening with more potential false positives |
-| `legacy` | Former three-member set: Markov, likelihood ratio, and word anomaly, using current preprocessing and fixes |
-| `corruption` | Mojibake and control artifacts, independent of English plausibility |
+| `english` (default) | Markov, likelihood ratio, word anomaly, mojibake, keyboard adjacency, and control characters; general English screening, junk in form fields |
+| `english_extended` | Adds pattern matching, localized anomalies, and repetition; more aggressive, more potential false positives |
+| `legacy` | Former three-member set: Markov, likelihood ratio, and word anomaly |
+| `corruption` | Mojibake and control artifacts, independent of English plausibility; scraped or OCR'd corpora |
 | `spoofing` | Unicode script/confusable heuristic; not a complete phishing detector |
-| `llm_output` | Repetition, control characters, mojibake, local anomaly; deterministic pre-check for degenerate model output, quiet on code and technical prose |
+| `llm_output` | Repetition, control characters, mojibake, local anomaly; degenerate model output, quiet on code and technical prose |
 
-Named profiles default to `any` voting: an applicable member reaching the decision threshold flags the text. Use the [API guide](https://brightertiger.github.io/pygarble/api.html) for custom voting rules and per-member settings.
-
-## Command line
+Named profiles default to `any` voting. `pygarble check`, `score` and `analyze` read one text per line (`--field NAME` for JSON lines); `check` exits 1 when any line is garbled. See the [CLI guide](https://brightertiger.github.io/pygarble/cli.html) and [API guide](https://brightertiger.github.io/pygarble/api.html).
 
 ```console
 $ printf 'hello world\nasdfghjkl\n' | pygarble check
 clean	hello world
 garbled	asdfghjkl
-$ pygarble score -t "please review qxzjkwpvm"
-0.9974	please review qxzjkwpvm
 $ pygarble check --profile llm_output -t "the the the the the the the the"
 garbled	the the the the the the the the
 ```
 
-`check`, `score` and `analyze` read one text per line from files or stdin, and `--field NAME` reads JSON lines. `check` exits with 1 when any line is garbled and 2 on a usage or input error. See the [CLI guide](https://brightertiger.github.io/pygarble/cli.html) for every option.
-
-## Calibrate the threshold
+### Calibrate, explain, configure
 
 ```python
 from pygarble import EnsembleDetector, calibrate
@@ -84,51 +135,27 @@ assert detector.predict(garbled) == [True, True]
 assert detector.predict(clean) == [False, False]
 ```
 
-`calibrate()` scores both samples once, reports precision, recall, F1 and false-positive rate at every observed score, and recommends a threshold by F1 or by a maximum false-positive rate. `pygarble calibrate --garbled bad.txt --clean good.txt` does the same from files. See the [calibration guide](https://brightertiger.github.io/pygarble/calibration.html).
-
-## Use an individual strategy
-
-All 28 strategies are available through `GarbleDetector` and the `Strategy` enum. Two strategies are new in 0.9.0:
-
-```python
-from pygarble import GarbleDetector, Strategy
-
-controls = GarbleDetector(Strategy.CONTROL_CHARACTERS)
-assert controls.predict("hello\x00world") is True
-assert controls.predict("hello\nworld") is False
-
-local = GarbleDetector(Strategy.LOCAL_ANOMALY)
-text = "Please review qxzjkwpvm before delivery."
-assert local.predict(text) is True
-```
-
-`CONTROL_CHARACTERS` detects unexpected controls, replacement characters, lone surrogates, and excessive combining-mark runs. It is included in the default English and corruption profiles. `LOCAL_ANOMALY` finds severe unknown tokens and bounded token windows inside otherwise readable English; it is included in `english_extended` and `llm_output`.
-
-Keyboard adjacency also supports QWERTY, AZERTY, and QWERTZ. Repetition detection includes repeated phrases. See the [strategy guide](https://brightertiger.github.io/pygarble/strategy-guide.html) for examples and the [strategy reference](https://brightertiger.github.io/pygarble/strategies.html) for accepted settings.
-
-## Inspect explanations
+`calibrate()` reports precision, recall, F1 and false-positive rate at every observed score and recommends a threshold; `pygarble calibrate --garbled bad.txt --clean good.txt` does the same from files. See the [calibration guide](https://brightertiger.github.io/pygarble/calibration.html).
 
 ```python
 import json
 from dataclasses import asdict
 from pygarble import GarbleDetector, Strategy
 
+controls = GarbleDetector(Strategy.CONTROL_CHARACTERS)
+assert controls.predict("hello\x00world") is True
+assert controls.predict("hello\nworld") is False
+
 text = "Please review qxzjkwpvm before delivery."
 result = GarbleDetector(Strategy.LOCAL_ANOMALY).analyze(text)
-
 assert result.garbled is True
 assert result.status == "garbled"
 for span in result.spans:
     print(text[span.start:span.end], span.reason)
-
 payload = json.dumps(asdict(result))
 ```
 
-Analysis records contain the decision, score, status, per-strategy signals, profile, and model version. Span offsets index the original Python string, with an exclusive end. Not every strategy produces spans. `analyze()` evaluates all selected members; `predict()` may stop early for `any` and `all`.
-
-An empty input or an ensemble with no applicable members returns `False` and status `insufficient_evidence`. Applications should validate required fields separately.
-
-## Configure domain vocabulary and limits
+All 28 strategies are available through `GarbleDetector` and the `Strategy` enum; see the [strategy guide](https://brightertiger.github.io/pygarble/strategy-guide.html). `analyze()` records the decision, score, status, per-strategy signals and spans (Python string offsets, exclusive end). Empty or wholly inapplicable input returns `False` with status `insufficient_evidence`.
 
 ```python
 from pygarble import EnsembleDetector
@@ -140,15 +167,11 @@ detector = EnsembleDetector(
 assert detector.predict("syzygy") is False
 ```
 
-Since 0.9.0 allowlists apply to every strategy: allowlisted words are excluded from English scoring and blanked out of the text that keyboard, pattern, and other raw-text checks scan. `SYMBOL_RATIO` reads the raw text because allowlisted letters can only lower its score. Control characters and encoding damage outside allowlisted words are still reported. Shared English scoring excludes structured tokens such as URLs, paths, digit-containing identifiers, and camel-case identifiers; other strategies can still flag them.
+Allowlists apply to every strategy. Oversized input raises `ValueError`; invalid batch entries raise `TypeError` before processing begins.
 
-Oversized input raises `ValueError`. Invalid batch entries raise `TypeError` before processing begins. Optional threads can process batches, but are not a guaranteed speedup. `timeout_per_text` only bounds waits for threaded results; it is not a hard execution deadline. See the [API reference](https://brightertiger.github.io/pygarble/api.html) for configuration and error behavior.
+### English-specific behavior
 
-## English-specific behavior
-
-Meaningful Hindi and other non-English text may score as gibberish. **This is expected for English-specific checks.** A `False` result means the checks did not flag the text; it does not prove the text is meaningful English. pygarble is not a multilingual validator, language identifier, or semantic nonsense detector. Non-English text written in Latin letters can pass, and names, rare English words, and technical terms can be flagged.
-
-The default profile flags Hindi. The `corruption` profile checks encoding and control artifacts without English plausibility scoring:
+Meaningful Hindi and other non-English text may score as gibberish. **This is expected for English-specific checks.** A `False` result does not prove the text is meaningful English; pygarble is not a language identifier or semantic nonsense detector. The `corruption` profile checks encoding and control artifacts without English plausibility scoring:
 
 ```python
 from pygarble import EnsembleDetector
@@ -161,16 +184,14 @@ assert corruption.predict("CafÃ© au lait") is True
 assert corruption.predict("hello\x00world") is True
 ```
 
-## Upgrading and evaluation
+### Upgrading and evaluation
 
-0.10.0 is additive over 0.9.0. The 0.9.0 default adds specialist checks and changes preprocessing. The `legacy` profile restores the former strategy selection, not exact earlier scores. Review the [upgrade guide](https://brightertiger.github.io/pygarble/migration.html) before changing versions.
-
-The repository contains reproducible benchmark tooling and a small authored challenge set. These engineering datasets are not production accuracy estimates; measure false positives and missed detections on your own English inputs before choosing thresholds. Inference is deterministic for a fixed package, configuration, and Python/Unicode data version.
+0.11.0 is additive: the gibberish API, profiles and scores are unchanged. Review the [upgrade guide](https://brightertiger.github.io/pygarble/migration.html) before changing versions. The repository's benchmark and challenge sets are engineering regression data, not production accuracy estimates; measure on your own inputs before choosing thresholds.
 
 - [Changelog](https://github.com/brightertiger/pygarble/blob/main/CHANGELOG.md)
 - [Evaluation and implementation report](https://github.com/brightertiger/pygarble/blob/main/docs/dev/2026-07-implementation.md)
 - [Recorded evaluation results](https://github.com/brightertiger/pygarble/blob/main/regression/english_results.json)
-- [Golden corpus](https://github.com/brightertiger/pygarble/blob/main/regression/golden.jsonl) of frozen detector outputs for every profile, checked in CI
+- [Golden corpus](https://github.com/brightertiger/pygarble/blob/main/regression/golden.jsonl) of frozen detector outputs for every profile, and a [golden scan corpus](https://github.com/brightertiger/pygarble/blob/main/regression/golden_scan.jsonl) for the scanner, both checked in CI
 - [Data provenance and curation](https://github.com/brightertiger/pygarble/blob/main/scripts/data_curation.json)
 
 ## Contributing
@@ -186,4 +207,4 @@ See the [contributing guide](https://brightertiger.github.io/pygarble/contributi
 
 ## License
 
-Library code is MIT licensed. Data provenance and attribution are recorded separately in the curation manifest linked above.
+Library code is MIT licensed. The profanity word list is seeded from the LDNOOBW English list (Shutterstock), CC-BY-4.0, filtered and extended by the pygarble maintainers. Data provenance for the gibberish tables is recorded in the curation manifest linked above.
