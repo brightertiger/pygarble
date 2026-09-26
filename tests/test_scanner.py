@@ -209,3 +209,94 @@ def test_unknown_locale_rejected_even_without_pii():
         Scanner(categories=["secrets"], locales=["zz"])
     with pytest.raises(ValueError, match="not a string"):
         Scanner(categories=["secrets"], locales="us")
+
+
+def test_redact_never_runs_the_gibberish_ensemble(monkeypatch):
+    from pygarble import scanner as scanner_module
+
+    def boom(self, text):
+        raise AssertionError("gibberish detector ran during redact")
+
+    monkeypatch.setattr(scanner_module._Gibberish, "detect", boom)
+    scanner = Scanner()
+    text = f"mail a@b.co key {AWS} qxzjkwpv bnmqwer zzxqv"
+    assert scanner.redact(text).text == (
+        "mail [EMAIL] key [AWS_ACCESS_KEY_ID] qxzjkwpv bnmqwer zzxqv"
+    )
+    assert scanner.redact(text, categories=["pii"]).count == 1
+    with pytest.raises(AssertionError, match="gibberish detector ran"):
+        scanner.scan(text)
+
+
+@pytest.mark.parametrize(
+    "kwargs",
+    [
+        {"kinds": []},
+        {"categories": ["secrets"], "kinds": ["email"]},
+        {"categories": ["profanity"], "exclude_kinds": ["profanity"]},
+        {"categories": ["gibberish"], "exclude_kinds": ["garbled"]},
+        {"categories": ["pii"], "kinds": ["nino"], "locales": ["us"]},
+        {"categories": ["secrets"], "kinds": ["high_entropy_string"]},
+    ],
+)
+def test_empty_effective_selection_raises(kwargs):
+    with pytest.raises(ValueError, match="nothing to scan for"):
+        Scanner(**kwargs)
+
+
+def test_partial_selection_across_categories_is_accepted():
+    scanner = Scanner(categories=["secrets", "pii"], kinds=["email"])
+    assert scanner.scan(f"a@b.co {AWS}").kinds() == ("email",)
+    loose = Scanner(
+        categories=["secrets"],
+        kinds=["high_entropy_string"],
+        secrets_without_context=True,
+    )
+    blob = "9f86d081884c7d659a2feaa0c55ad015" * 2
+    assert loose.scan(blob).kinds() == ("high_entropy_string",)
+
+
+@pytest.mark.parametrize(
+    "scanner,categories",
+    [
+        (Scanner(["pii"]), ["secrets"]),
+        (Scanner(), ["gibberish"]),
+        (Scanner(["gibberish"]), None),
+        (Scanner(["secrets", "pii"], kinds=["email"]), ["secrets"]),
+    ],
+)
+def test_redact_with_no_rule_category_left_raises(scanner, categories):
+    with pytest.raises(ValueError, match="nothing to redact"):
+        scanner.redact("mail a@b.co", categories=categories)
+
+
+@pytest.mark.parametrize(
+    "kwargs,message",
+    [
+        ({"threshold": 1.5}, "threshold"),
+        ({"threshold": float("nan")}, "threshold"),
+        ({"profile": "nope"}, "unknown profile"),
+        ({"profanity_allowlist": "damn"}, "not a string"),
+    ],
+)
+def test_gibberish_and_profanity_options_validated_when_unselected(
+    kwargs, message
+):
+    with pytest.raises(ValueError, match=message):
+        Scanner(categories=["secrets"], **kwargs)
+    with pytest.raises(ValueError, match=message):
+        Scanner(**kwargs)
+
+
+def test_email_inside_url_credentials_is_not_reported():
+    text = "db https://bob:secret@example.com/app"
+    report = Scanner().scan(text)
+    assert report.kinds() == ("url_credentials",)
+    assert (
+        Scanner().redact(text).text
+        == "db https://[URL_CREDENTIALS]@example.com/app"
+    )
+    # Without the secrets category there is no URL finding to defer to.
+    assert Scanner(["pii"]).scan(text).kinds() == ("email",)
+    plain = Scanner().scan("db https://example.com/app mail bob@example.com")
+    assert plain.kinds() == ("email",)

@@ -128,6 +128,19 @@ class Scanner:
             raise ValueError("at least one category is required")
         self.categories = chosen
         self.min_confidence = unit_interval("min_confidence", min_confidence)
+        # Validated even when gibberish or profanity is not selected, so a
+        # typo fails the same way whatever the categories.
+        threshold = unit_interval("threshold", threshold)
+        from .ensemble import PROFILES
+
+        if profile not in PROFILES:
+            raise ValueError(
+                f"unknown profile: {profile}; valid: {', '.join(PROFILES)}"
+            )
+        if profanity_allowlist is not None:
+            profanity_allowlist = tuple(
+                _names("profanity_allowlist", profanity_allowlist)
+            )
         self.max_input_length = (
             None
             if max_input_length is None
@@ -155,23 +168,30 @@ class Scanner:
         self._kinds = wanted
         self._exclude = excluded
         self._detectors: List[Detector] = []
+        from .pii import locale_kinds
+
         for category in chosen:
             allowed = known[category]
             selected = (
                 allowed if wanted is None else (allowed & wanted)
             ) - excluded
             if category == "secrets":
-                self._detectors.append(
-                    _secrets(selected, secrets_without_context)
-                )
-            elif category == "pii":
-                self._detectors.append(
-                    _pii_detector(
-                        chosen_locales,
-                        None if wanted is None else selected,
-                        excluded & allowed,
+                live = selected
+                if not secrets_without_context:
+                    live = live - {"high_entropy_string"}
+                if live:
+                    self._detectors.append(
+                        _secrets(selected, secrets_without_context)
                     )
-                )
+            elif category == "pii":
+                if selected & locale_kinds(chosen_locales):
+                    self._detectors.append(
+                        _pii_detector(
+                            chosen_locales,
+                            None if wanted is None else selected,
+                            excluded & allowed,
+                        )
+                    )
             elif category == "profanity":
                 if "profanity" in selected:
                     self._detectors.append(
@@ -181,8 +201,14 @@ class Scanner:
                 self._detectors.append(
                     _Gibberish(profile, threshold, allowlist, max_input_length)
                 )
+        if not self._detectors:
+            raise ValueError(
+                "nothing to scan for: no kind of the selected categories "
+                "is left after kinds, exclude_kinds, locales and "
+                "secrets_without_context"
+            )
 
-    def _scan_one(self, text: str) -> ScanReport:
+    def _check(self, text: str) -> None:
         if not isinstance(text, str):
             raise TypeError("text must be a string")
         if (
@@ -190,12 +216,20 @@ class Scanner:
             and len(text) > self.max_input_length
         ):
             raise ValueError("text exceeds max_input_length")
+
+    def _collect(
+        self, text: str, detectors: Sequence[Detector]
+    ) -> Tuple[Finding, ...]:
         findings: List[Finding] = []
-        for detector in self._detectors:
+        for detector in detectors:
             findings.extend(detector.detect(text))
-        if not findings:
+        return _drop_url_emails(tuple(sorted(findings, key=sort_key)))
+
+    def _scan_one(self, text: str) -> ScanReport:
+        self._check(text)
+        ordered = self._collect(text, self._detectors)
+        if not ordered:
             return ScanReport((), False, len(text))
-        ordered = tuple(sorted(findings, key=sort_key))
         flagged = any(
             f.confidence >= self.min_confidence or f.category == "gibberish"
             for f in ordered
@@ -232,15 +266,51 @@ class Scanner:
         unknown = sorted(allowed - frozenset(CATEGORIES))
         if unknown:
             raise ValueError(f"unknown category: {', '.join(unknown)}")
-        report = self._scan_one(text)
+        # Gibberish is never redacted, so its ensemble is never run here.
+        detectors = [
+            d
+            for d in self._detectors
+            if d.category in allowed and d.category != "gibberish"
+        ]
+        if not detectors:
+            raise ValueError(
+                "nothing to redact: no rule category (secrets, pii, "
+                "profanity) is both selected by this Scanner and allowed "
+                "by categories"
+            )
+        self._check(text)
         chosen = [
             f
-            for f in report.findings
-            if f.category in allowed
-            and f.category != "gibberish"
-            and f.confidence >= self.min_confidence
+            for f in self._collect(text, detectors)
+            if f.confidence >= self.min_confidence
         ]
         return render(text, chosen, mode, placeholder, mask_char)
+
+
+def _drop_url_emails(ordered: Tuple[Finding, ...]) -> Tuple[Finding, ...]:
+    """Drop email findings overlapping a url_credentials span: in
+    "https://user:pass@host.tld" the "pass@host.tld" part is a password
+    and a host, not an address. ordered is sorted by start; one sweep."""
+    urls: List[List[int]] = []
+    for f in ordered:
+        if f.kind != "url_credentials":
+            continue
+        if urls and f.start <= urls[-1][1]:
+            urls[-1][1] = max(urls[-1][1], f.end)
+        else:
+            urls.append([f.start, f.end])
+    if not urls:
+        return ordered
+    kept: List[Finding] = []
+    index = 0
+    for f in ordered:
+        if f.kind == "email":
+            while index < len(urls) and urls[index][1] <= f.start:
+                index += 1
+            if index < len(urls) and urls[index][0] < f.end:
+                continue
+        kept.append(f)
+    return tuple(kept)
 
 
 def _secrets(selected: FrozenSet[str], without_context: bool) -> Detector:

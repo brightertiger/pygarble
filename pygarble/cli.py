@@ -382,23 +382,39 @@ def run_calibrate(args: argparse.Namespace, out: Any) -> int:
     return EXIT_OK
 
 
-def _split(value: Optional[str]) -> Optional[List[str]]:
+def _split(
+    value: Optional[str], option: str, allow_empty: bool = False
+) -> Optional[List[str]]:
+    """Comma list of names; None when the option was not given. An
+    option given with no names is a usage error unless allow_empty."""
     if value is None:
         return None
-    return [item.strip() for item in value.split(",") if item.strip()]
+    names = [item.strip() for item in value.split(",") if item.strip()]
+    if not names and not allow_empty:
+        raise CliError(f"{option} needs at least one name")
+    return names
 
 
 def make_scanner(args: argparse.Namespace) -> Any:
     from .scanner import DEFAULT_CATEGORIES, Scanner
 
+    categories = _split(args.categories, "--categories")
+    kinds = _split(args.kinds, "--kinds")
+    exclude = _split(args.exclude_kinds, "--exclude-kinds", allow_empty=True)
+    locales = _split(args.locales, "--locales")
     allowlist = load_allowlist(args.allowlist) if args.allowlist else None
     try:
+        if args.command == "redact" and args.mode == "placeholder":
+            from .redaction import validate_placeholder
+
+            # Up front, so a bad template fails even on empty input.
+            validate_placeholder(args.placeholder)
         return Scanner(
-            _split(args.categories) or DEFAULT_CATEGORIES,
+            DEFAULT_CATEGORIES if categories is None else categories,
             min_confidence=args.min_confidence,
-            kinds=_split(args.kinds),
-            exclude_kinds=_split(args.exclude_kinds) or (),
-            locales=_split(args.locales) or ("us", "uk", "in"),
+            kinds=kinds,
+            exclude_kinds=exclude or (),
+            locales=("us", "uk", "in") if locales is None else locales,
             profile=args.profile,
             threshold=args.threshold,
             allowlist=allowlist,
@@ -417,17 +433,25 @@ def scan_row(text: str, report: Any, show: bool) -> Dict[str, Any]:
     return {"flagged": report.flagged, "findings": findings}
 
 
-def format_scan(fmt: str, text: str, report: Any, show: bool) -> str:
-    kinds = ",".join(report.kinds())
+def format_scan(
+    fmt: str, text: str, report: Any, show: bool, min_confidence: float
+) -> str:
+    if fmt == "jsonl":
+        row: Dict[str, Any] = {"text": text}
+        row.update(scan_row(text, report, show))
+        return json.dumps(row, ensure_ascii=False)
+    # Text and TSV rows list only the findings that count towards flagged,
+    # so a clean row never names a kind; JSONL keeps every finding.
+    shown = [
+        f
+        for f in report.findings
+        if f.confidence >= min_confidence or f.category == "gibberish"
+    ]
+    kinds = ",".join(sorted({f.kind for f in shown}))
     if fmt == "text":
         label = "flagged" if report.flagged else "clean"
-        return f"{label}\t{kinds if report.flagged else ''}\t{text}"
-    if fmt == "tsv":
-        flagged = int(report.flagged)
-        return f"{flagged}\t{len(report.findings)}\t{kinds}\t{text}"
-    row: Dict[str, Any] = {"text": text}
-    row.update(scan_row(text, report, show))
-    return json.dumps(row, ensure_ascii=False)
+        return f"{label}\t{kinds}\t{text}"
+    return f"{int(report.flagged)}\t{len(shown)}\t{kinds}\t{text}"
 
 
 def run_scan(args: argparse.Namespace, out: Any, err: Any) -> int:
@@ -460,7 +484,13 @@ def run_scan(args: argparse.Namespace, out: Any, err: Any) -> int:
             report = scanner.scan(line)
             any_flagged = any_flagged or report.flagged
             out.write(
-                format_scan(args.format, line, report, args.show_matches)
+                format_scan(
+                    args.format,
+                    line,
+                    report,
+                    args.show_matches,
+                    scanner.min_confidence,
+                )
                 + "\n"
             )
             continue

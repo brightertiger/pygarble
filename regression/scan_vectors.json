@@ -3021,5 +3021,41 @@
     "reason": "known_prefix"
    }
   ]
+ },
+ {
+  "text": "db https://bob:secret@example.com/app",
+  "categories": [
+   "secrets",
+   "pii"
+  ],
+  "note": "url password is not an email",
+  "expected": [
+   {
+    "category": "secrets",
+    "kind": "url_credentials",
+    "start": 11,
+    "end": 21,
+    "confidence": 0.9,
+    "reason": "url_userinfo"
+   }
+  ]
+ },
+ {
+  "text": "db https://example.com/app mail bob@example.com",
+  "categories": [
+   "secrets",
+   "pii"
+  ],
+  "note": "email beside a url without credentials",
+  "expected": [
+   {
+    "category": "pii",
+    "kind": "email",
+    "start": 32,
+    "end": 47,
+    "confidence": 0.9,
+    "reason": "structure"
+   }
+  ]
  }
 ]

@@ -185,3 +185,62 @@ def test_redact_field_mode_bad_line_exits_two(capsys, monkeypatch):
 def test_redact_exit_zero_even_when_flagged(capsys):
     code, out, _ = run(capsys, ["redact", "-t", f"key {AWS}"])
     assert code == 0 and out == "key [AWS_ACCESS_KEY_ID]\n"
+
+
+@pytest.mark.parametrize("option", ["--kinds", "--categories", "--locales"])
+@pytest.mark.parametrize("command", ["scan", "redact"])
+def test_empty_selection_option_is_a_usage_error(capsys, option, command):
+    for value in ("", " , "):
+        code, out, err = run(capsys, [command, option, value, "-t", "x"])
+        assert code == 2 and out == ""
+        assert err == f"pygarble: {option} needs at least one name\n"
+
+
+def test_empty_exclude_kinds_is_allowed(capsys):
+    code, out, _ = run(capsys, ["scan", "--exclude-kinds", "", "-t", "x y"])
+    assert code == 0 and out == "clean\t\tx y\n"
+
+
+def test_selection_leaving_no_kind_exits_two(capsys):
+    code, out, err = run(
+        capsys,
+        ["scan", "--categories", "secrets", "--kinds", "email", "-t", "x"],
+    )
+    assert code == 2 and out == "" and "nothing to scan for" in err
+
+
+def test_rows_list_only_kinds_at_min_confidence(capsys):
+    text = f"mail a@b.co key {AWS}"
+    strict = ["--min-confidence", "0.95"]
+    _, out, _ = run(capsys, ["scan", *strict, "-t", "mail a@b.co", "-t", text])
+    assert out.splitlines() == [
+        "clean\t\tmail a@b.co",
+        f"flagged\taws_access_key_id\t{text}",
+    ]
+    _, out, _ = run(
+        capsys,
+        ["scan", *strict, "--format", "tsv", "-t", "mail a@b.co", "-t", text],
+    )
+    assert out.splitlines() == [
+        "0\t0\t\tmail a@b.co",
+        f"1\t1\taws_access_key_id\t{text}",
+    ]
+    _, out, _ = run(capsys, ["scan", *strict, "--format", "jsonl", "-t", text])
+    kinds = [f["kind"] for f in json.loads(out)["findings"]]
+    assert kinds == ["email", "aws_access_key_id"]
+
+
+def test_bad_placeholder_fails_on_empty_input(capsys, monkeypatch):
+    code, out, err = run(
+        capsys,
+        ["redact", "--placeholder", "{nope}"],
+        stdin="",
+        monkeypatch=monkeypatch,
+    )
+    assert code == 2 and out == ""
+    assert err.startswith("pygarble: placeholder may use only")
+    code, _, _ = run(
+        capsys,
+        ["redact", "--mode", "mask", "--placeholder", "{nope}", "-t", "x"],
+    )
+    assert code == 0

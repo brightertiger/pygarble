@@ -177,6 +177,14 @@ def _validate(validator: str, value: str) -> Optional[str]:
     raise ValueError(f"unknown validator {validator!r}")
 
 
+def locale_kinds(locales: Iterable[str]) -> FrozenSet[str]:
+    """The kinds some rule can report under these locales."""
+    kinds = set(_GENERIC_KINDS)
+    for locale in locales:
+        kinds.update(rule[0] for rule in LOCALE_RULES[locale])
+    return frozenset(kinds)
+
+
 def _names(label: str, value: Iterable[str]) -> Iterable[str]:
     if isinstance(value, str):
         raise ValueError(f"{label} must be an iterable of names, not a string")
