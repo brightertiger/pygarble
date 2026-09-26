@@ -1,6 +1,10 @@
 {
   "counts": {
     "bigrams": 729,
+    "pii_rules": 17,
+    "profanity_mild": 26,
+    "profanity_strong": 103,
+    "secret_patterns": 20,
     "trigrams": 2000,
     "words": 49330
   },
@@ -8,6 +12,9 @@
   "files": {
     "bigrams.json": "b32223d650d57c9a25498f3c44de7ba2a0f892c3c6024abe5dcdb1679db981f9",
     "bigrams.py": "332e3353e1cc72051e844b42cfd3e22fc69331efb0ca22c4325e1350a3a89660",
+    "pii.json": "35a5e6b7363a9a1ef4c2769567450410a1178a87203e400f9781e89e30e0a053",
+    "profanity.json": "8f782c8095b37df025b2eb809fd63960769dd0582aed7e55e711a4e0d1001d38",
+    "secrets.json": "d3c5cfa5cc46ce47dd0cea2bdbf183870d301f08ebf2c3cc5737d6032996b1d0",
     "trigrams.json": "54fd27a84e468789e6684e446bd846436fc8ac06b65fabae2583573d67c22db4",
     "trigrams.py": "78d309dfa9b146b051dd780d6011767574c0cd953994b450e5971a4c85771b09",
     "words.json": "a9ca32666018ccd632d308e6f2a25dd0cbc4700ed06887527b779ccd8e2c15f8",

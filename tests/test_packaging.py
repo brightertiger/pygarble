@@ -30,3 +30,34 @@ def test_author_email_is_not_placeholder():
     text = (ROOT / "pyproject.toml").read_text()
     assert "example.com" not in text
     assert pygarble.__email__ in text
+
+
+JSON_TABLES = (
+    "words.json",
+    "bigrams.json",
+    "trigrams.json",
+    "secrets.json",
+    "pii.json",
+    "profanity.json",
+)
+
+
+def test_json_tables_excluded_from_wheel():
+    text = (ROOT / "pyproject.toml").read_text()
+    match = re.search(
+        r"^\[tool\.setuptools\.exclude-package-data\]\s*\n"
+        r'"pygarble\.data"\s*=\s*\[([^\]]*)\]',
+        text,
+        re.M,
+    )
+    assert match is not None
+    excluded = set(re.findall(r'"([^"]+)"', match.group(1)))
+    assert set(JSON_TABLES) <= excluded
+
+
+def test_json_tables_included_in_sdist():
+    manifest_in = ROOT / "MANIFEST.in"
+    if not manifest_in.exists():
+        pytest.skip("MANIFEST.in is not installed")
+    lines = manifest_in.read_text().splitlines()
+    assert "recursive-include pygarble *.py *.json" in lines
