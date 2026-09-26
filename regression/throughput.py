@@ -75,7 +75,8 @@ def build_corpus(
 
 
 def measure(categories: List[str], texts: List[str]) -> Dict[str, Any]:
-    """Scan each text once; MB is 10^6 UTF-8 bytes of scanned text."""
+    """Scan each text once; MB is 10^6 UTF-8 bytes of scanned text.
+    "lines_per_s" counts texts, which are documents with --chunk-bytes."""
     scanner = Scanner(categories=categories)
     size = sum(len(text.encode("utf-8")) for text in texts)
     findings = 0

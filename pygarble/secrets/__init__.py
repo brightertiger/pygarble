@@ -64,7 +64,8 @@ _ANCHORS: Tuple[Tuple[str, Tuple[str, ...]], ...] = (
     ("cs", ("://",)),  # url_credentials: scheme://user:pass@
     ("ci", ("bearer",)),  # bearer_token: (?i:bearer)
 )
-assert len(_ANCHORS) == len(KNOWN_PATTERNS)
+if len(_ANCHORS) != len(KNOWN_PATTERNS):
+    raise RuntimeError("_ANCHORS must have one entry per known pattern")
 _CI_ANCHORS = {
     index: re.compile("(?i:" + "|".join(literals) + ")")
     for index, (mode, literals) in enumerate(_ANCHORS)

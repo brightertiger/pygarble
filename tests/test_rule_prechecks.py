@@ -91,6 +91,24 @@ def test_pii_rules_follow_kind_changes():
     assert {f.kind for f in detector.detect(text)} == {"phone"}
 
 
+def test_pii_rules_follow_in_place_kind_changes():
+    detector = PIIDetector()
+    text = "mail jane.doe@example.com or call +442079460958"
+    detector.kinds = {"phone"}
+    assert {f.kind for f in detector.detect(text)} == {"phone"}
+    detector.kinds.add("email")
+    assert {f.kind for f in detector.detect(text)} == {"phone", "email"}
+
+
+def test_pii_rules_follow_in_place_locale_changes():
+    detector = PIIDetector()
+    text = "PAN ABCPD1234E"
+    detector.locales = ["us"]
+    assert detector.detect(text) == ()
+    detector.locales.append("in")
+    assert {f.kind for f in detector.detect(text)} == {"pan"}
+
+
 def test_every_known_secret_pattern_has_an_anchor():
     assert len(secrets._ANCHORS) == len(secrets.KNOWN_PATTERNS)
 

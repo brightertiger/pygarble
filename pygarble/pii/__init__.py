@@ -82,10 +82,10 @@ _PRECHECKS: Dict[str, Tuple[Tuple[Check, ...], ...]] = {
         (("run", 4), _re(r"[A-Z]\d{4}[A-Z]")),  # pan: [A-Z]\d{4}[A-Z]
     ),
 }
-assert len(_PRECHECKS["generic"]) == len(GENERIC)
-assert all(
-    len(_PRECHECKS[name]) == len(rules) for name, rules in LOCALE_RULES.items()
-)
+if len(_PRECHECKS["generic"]) != len(GENERIC) or any(
+    len(_PRECHECKS[name]) != len(rules) for name, rules in LOCALE_RULES.items()
+):
+    raise RuntimeError("_PRECHECKS must have one entry per rule")
 _ANY_DIGIT = re.compile(r"\d")
 # ASCII bytes: each digit becomes "0", every other byte "x".
 _DIGIT_MAP = bytes(
@@ -231,17 +231,27 @@ class PIIDetector:
         self._active: List[_Active] = []
         self._active_key: Optional[Tuple[Any, ...]] = None
 
+    def _build_rules(self) -> List[_Active]:
+        active: List[_Active] = []
+        for scope in ("generic",) + tuple(self.locales):
+            checks = _PRECHECKS[scope]
+            for (rule, pattern), check in zip(_compiled(scope), checks):
+                if rule[0] in self.kinds:
+                    active.append((rule, pattern, check))
+        return active
+
     def _rules(self) -> List[_Active]:
-        """The selected rules in the order the detector runs them."""
+        """The selected rules in the order the detector runs them. Cached
+        only while kinds is a frozenset and locales a tuple; a mutable
+        value could change in place, so it is re-read on every call."""
+        if not (
+            isinstance(self.kinds, frozenset)
+            and isinstance(self.locales, tuple)
+        ):
+            return self._build_rules()
         key = (self.kinds, self.locales)
         if self._active_key != key:
-            active: List[_Active] = []
-            for scope in ("generic",) + tuple(self.locales):
-                checks = _PRECHECKS[scope]
-                for (rule, pattern), check in zip(_compiled(scope), checks):
-                    if rule[0] in self.kinds:
-                        active.append((rule, pattern, check))
-            self._active = active
+            self._active = self._build_rules()
             self._active_key = key
         return self._active
 
