@@ -27,40 +27,29 @@ def _pii_detector(
     locales: Tuple[str, ...],
     kinds: Optional[FrozenSet[str]],
     exclude: FrozenSet[str],
-) -> Optional[Detector]:
-    try:
-        from .pii import PIIDetector
-    except ImportError:  # pragma: no cover - until Task 5 lands
-        return None
+) -> Detector:
+    from .pii import PIIDetector
+
     return PIIDetector(kinds=kinds, exclude_kinds=exclude, locales=locales)
 
 
-def _profanity_detector(
-    allowlist: Optional[Iterable[str]],
-) -> Optional[Detector]:
-    try:
-        from .profanity import ProfanityDetector
-    except ImportError:  # pragma: no cover - until Task 7 lands
-        return None
+def _profanity_detector(allowlist: Optional[Iterable[str]]) -> Detector:
+    from .profanity import ProfanityDetector
+
     return ProfanityDetector(allowlist=allowlist)
 
 
 def _all_kinds() -> Dict[str, FrozenSet[str]]:
+    from .pii import ALL_KINDS as PII_KINDS
+    from .profanity import ALL_KINDS as PROFANITY_KINDS
     from .secrets.patterns import ALL_KINDS as SECRET_KINDS
 
-    kinds = {
+    return {
         "secrets": frozenset(SECRET_KINDS),
-        "pii": frozenset(),
-        "profanity": frozenset({"profanity"}),
+        "pii": frozenset(PII_KINDS),
+        "profanity": frozenset(PROFANITY_KINDS),
         "gibberish": GIBBERISH_KINDS,
     }
-    try:
-        from .pii import ALL_KINDS as PII_KINDS
-
-        kinds["pii"] = frozenset(PII_KINDS)
-    except ImportError:  # pragma: no cover - until Task 5 lands
-        pass
-    return kinds
 
 
 def _names(label: str, value: Iterable[str]) -> Iterable[str]:
@@ -176,18 +165,18 @@ class Scanner:
                     _secrets(selected, secrets_without_context)
                 )
             elif category == "pii":
-                detector = _pii_detector(
-                    chosen_locales,
-                    None if wanted is None else selected,
-                    excluded & allowed,
+                self._detectors.append(
+                    _pii_detector(
+                        chosen_locales,
+                        None if wanted is None else selected,
+                        excluded & allowed,
+                    )
                 )
-                if detector is not None:
-                    self._detectors.append(detector)
             elif category == "profanity":
                 if "profanity" in selected:
-                    detector = _profanity_detector(profanity_allowlist)
-                    if detector is not None:
-                        self._detectors.append(detector)
+                    self._detectors.append(
+                        _profanity_detector(profanity_allowlist)
+                    )
             elif "garbled" in selected:
                 self._detectors.append(
                     _Gibberish(profile, threshold, allowlist, max_input_length)

@@ -51,10 +51,6 @@ def _clean_words(length: int) -> Tuple[str, ...]:
     )
 
 
-def _has_letter(raw: str) -> bool:
-    return any(c.isalpha() for c in raw)
-
-
 def _fits(masked: str, word: str) -> bool:
     return all(c in _WILD_CHARS or c == w for c, w in zip(masked, word))
 
@@ -205,8 +201,8 @@ class ProfanityDetector:
         tokens: List[Token] = []
         for match in TOKEN_RE.finditer(text):
             raw = _POSSESSIVE.sub("", match.group())
-            # A token with no letter ("455") never matches: no "ass".
-            norm = normalize_token(raw) if _has_letter(raw) else ""
+            # A digits-only token ("455") never matches: no "ass".
+            norm = "" if raw.isdigit() else normalize_token(raw)
             tokens.append((match.start(), match.end(), raw, norm))
         out: List[Finding] = []
         used: Set[int] = set()

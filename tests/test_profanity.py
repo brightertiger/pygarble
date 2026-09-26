@@ -60,6 +60,9 @@ def test_digit_only_tokens_never_match():
         assert hits(text) == [], text
     # A digit token between words does not bridge a phrase.
     assert hits("son of 4 bitch") == [("bitch", 1.0, "strong")]
+    # Symbol masks are not digits-only, so they still go through the rules.
+    assert hits("@$$") == [("@$$", 1.0, "strong")]
+    assert hits("$h1t") == [("$h1t", 1.0, "strong")]
 
 
 def test_possessives_are_stripped_for_lookup():
