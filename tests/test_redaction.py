@@ -90,3 +90,66 @@ def test_placeholder_is_idempotent():
     once = render(TEXT, [f("email", 5, 11)], "placeholder", "[{KIND}]", "*")
     again = render(once.text, [], "placeholder", "[{KIND}]", "*")
     assert again.text == once.text
+
+
+def test_partial_never_reveals_tail_of_non_revealable_finding():
+    text = "555-1234bob@x.com"
+    phone = f("phone", 0, 8, 0.9)
+    email = f("email", 8, 17, 0.8)
+    out = render(text, [phone, email], "partial", "[{KIND}]", "*")
+    assert out.text == "*" * len(text)
+
+
+def test_partial_reveals_when_region_ends_with_revealable_finding():
+    text = "bob@x.com4111111111111111"
+    email = f("email", 0, 9, 0.9)
+    card = f("credit_card", 9, 25, 0.8)
+    out = render(text, [email, card], "partial", "[{KIND}]", "*")
+    assert out.text == "*" * 21 + "1111"
+
+
+def test_partial_hides_tail_covered_by_non_revealable_finding():
+    text = "4111111111111111"
+    card = f("credit_card", 0, 16, 1.0)
+    email = f("email", 12, 16, 0.5)
+    out = render(text, [card, email], "partial", "[{KIND}]", "*")
+    assert out.text == "*" * 16
+
+
+def test_bad_template_raises_even_without_findings():
+    with pytest.raises(ValueError, match="placeholder"):
+        render("clean", [], "placeholder", "[{nope}]", "*")
+
+
+@pytest.mark.parametrize(
+    "template",
+    [
+        "[{kind[0]}]",
+        "[{KIND.__class__}]",
+        "[{}]",
+        "[{0}]",
+        "[{kind!r}]",
+        "[{kind:>9}]",
+        "[{kind",
+        "[kind}]",
+    ],
+)
+def test_template_rejects_access_conversion_and_spec(template):
+    with pytest.raises(ValueError, match="placeholder may use only"):
+        render(TEXT, [], "placeholder", template, "*")
+
+
+def test_template_fields_all_render():
+    out = render(
+        TEXT,
+        [f("email", 5, 11)],
+        "placeholder",
+        "{{{KIND}|{kind}|{category}}}",
+        "*",
+    )
+    assert out.text.startswith("mail {EMAIL|email|pii} card")
+
+
+def test_template_is_not_validated_outside_placeholder_mode():
+    out = render(TEXT, [f("email", 5, 11)], "mask", "[{nope}]", "*")
+    assert out.text.startswith("mail ****** card")
