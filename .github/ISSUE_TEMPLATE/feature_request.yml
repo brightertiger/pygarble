@@ -1,0 +1,14 @@
+name: Feature or rule request
+description: Suggest a use case, detection rule or documentation improvement.
+body:
+  - type: textarea
+    id: use_case
+    attributes:
+      label: Use case and proposed behavior
+    validations:
+      required: true
+  - type: textarea
+    id: examples
+    attributes:
+      label: Synthetic examples and coverage limits
+      description: Include cases that should be flagged and cases that should stay clean.

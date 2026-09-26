@@ -1,6 +1,8 @@
 include README.md
 include CHANGELOG.md
 include LICENSE
+include CONTRIBUTING.md
+include SECURITY.md
 include requirements.txt
 include requirements-dev.txt
 include tests/fixtures/legacy_layout_pickles.json

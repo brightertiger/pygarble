@@ -83,9 +83,9 @@ jobs:
       with:
         python-version: '3.12'
     - run: pip install -e ".[dev]"
-    - run: black --check pygarble tests scripts regression
-    - run: isort --check-only pygarble tests scripts regression
-    - run: flake8 pygarble tests scripts regression
+    - run: black --check pygarble tests scripts regression docs/_ext
+    - run: isort --check-only pygarble tests scripts regression docs/_ext
+    - run: flake8 pygarble tests scripts regression docs/_ext
     - run: mypy pygarble
     - run: python scripts/update_strategy_docs.py --check
     - name: Verify generated data

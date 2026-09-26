@@ -1,6 +1,7 @@
 name: Build and Deploy Documentation
 
 on:
+  workflow_dispatch:
   push:
     branches: [ main ]
   pull_request:
@@ -32,10 +33,15 @@ jobs:
         pip install -e .
     
     - name: Build documentation
+      env:
+        GOOGLE_SITE_VERIFICATION: ${{ vars.GOOGLE_SITE_VERIFICATION }}
       run: |
         cd docs
         make clean
         make html SPHINXOPTS="-n -W --keep-going"
+
+    - name: Validate search discovery files
+      run: python scripts/check_discovery.py docs/_build/html
     
     - name: Check documentation build
       run: |

@@ -5,7 +5,7 @@
 [![PyPI](https://img.shields.io/pypi/v/pygarble.svg)](https://pypi.org/project/pygarble/)
 [![Python](https://img.shields.io/pypi/pyversions/pygarble.svg)](https://pypi.org/project/pygarble/)
 [![Tests](https://github.com/brightertiger/pygarble/actions/workflows/test.yml/badge.svg)](https://github.com/brightertiger/pygarble/actions/workflows/test.yml)
-[![License](https://img.shields.io/pypi/l/pygarble.svg)](LICENSE)
+[![License](https://img.shields.io/pypi/l/pygarble.svg)](https://github.com/brightertiger/pygarble/blob/main/LICENSE)
 
 [Documentation](https://brightertiger.github.io/pygarble/) · [Changelog](https://github.com/brightertiger/pygarble/blob/main/CHANGELOG.md) · [Issues](https://github.com/brightertiger/pygarble/issues)
 
@@ -26,7 +26,7 @@ python -m pip install pygarble
 This README describes the current source, including **unreleased** module
 separation and optional backends. For those APIs, install a checkout of the
 reviewed branch or commit with `python -m pip install -e .`; see the
-[installation guide](docs/installation.rst) and [migration notes](docs/migration.rst).
+[installation guide](https://brightertiger.github.io/pygarble/installation.html) and [migration notes](https://brightertiger.github.io/pygarble/migration.html).
 
 | Use case | Import | Default behavior |
 | --- | --- | --- |
@@ -261,7 +261,7 @@ assert corruption.predict("hello\x00world") is True
 
 The unreleased module reorganization preserves existing imports, defaults and
 scores. Version 0.11.0 added the combined scanner; it did not introduce the new
-module layout. Review the [upgrade guide](docs/migration.rst) before changing
+module layout. Review the [upgrade guide](https://brightertiger.github.io/pygarble/migration.html) before changing
 versions. The benchmark and challenge sets are engineering regression data,
 not production accuracy estimates; measure on your own inputs before choosing
 thresholds.
@@ -293,7 +293,7 @@ pygarble/
 
 Old paths such as `pygarble.core`, `pygarble.strategies`, `pygarble.pii` and
 `pygarble.profanity` remain compatibility pointers. Old and new imports share
-classes, enums, rule tables and caches. See the [architecture guide](docs/architecture.rst)
+classes, enums, rule tables and caches. See the [architecture guide](https://brightertiger.github.io/pygarble/architecture.html)
 for the full layout, import mappings and lazy-loading behavior.
 
 ## Contributing
@@ -306,6 +306,15 @@ python -m pytest -q
 ```
 
 See the [contributing guide](https://brightertiger.github.io/pygarble/contributing.html) for quality checks, documentation builds, and data regeneration. Please include your Python version, package version, selected profile, and a minimal input when reporting a problem.
+
+## Open source and publishing
+
+The repository is public, and releases are distributed on
+[PyPI](https://pypi.org/project/pygarble/). Contributions and synthetic bug
+reports are welcome; see [CONTRIBUTING.md](https://github.com/brightertiger/pygarble/blob/main/CONTRIBUTING.md)
+and [SECURITY.md](https://github.com/brightertiger/pygarble/blob/main/SECURITY.md).
+The [maintainer guide](https://brightertiger.github.io/pygarble/publishing.html)
+covers releases, Google Search Console and documentation discovery.
 
 ## License
 
