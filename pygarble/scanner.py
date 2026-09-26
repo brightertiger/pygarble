@@ -146,6 +146,15 @@ class Scanner:
             if max_input_length is None
             else positive_int("max_input_length", max_input_length)
         )
+        from .pii import LOCALES
+
+        chosen_locales = tuple(dict.fromkeys(_names("locales", locales)))
+        bad_locales = [loc for loc in chosen_locales if loc not in LOCALES]
+        if bad_locales:
+            raise ValueError(
+                f"unknown locale: {', '.join(bad_locales)}; "
+                f"valid: {', '.join(LOCALES)}"
+            )
         known = _all_kinds()
         universe = frozenset().union(*known.values())
         wanted = None if kinds is None else frozenset(_names("kinds", kinds))
@@ -170,7 +179,7 @@ class Scanner:
                 )
             elif category == "pii":
                 detector = _pii_detector(
-                    tuple(dict.fromkeys(locales)),
+                    chosen_locales,
                     None if wanted is None else selected,
                     excluded & allowed,
                 )

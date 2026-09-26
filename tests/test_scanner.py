@@ -202,3 +202,10 @@ def test_redact_rejects_unknown_category_before_scanning():
         scanner.redact(f"key {AWS}", categories=["nope"])
     with pytest.raises(ValueError, match="unknown category"):
         scanner.redact(None, categories=["nope"])  # type: ignore[arg-type]
+
+
+def test_unknown_locale_rejected_even_without_pii():
+    with pytest.raises(ValueError, match="unknown locale"):
+        Scanner(categories=["secrets"], locales=["zz"])
+    with pytest.raises(ValueError, match="not a string"):
+        Scanner(categories=["secrets"], locales="us")
