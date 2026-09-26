@@ -190,3 +190,33 @@ def test_bare_string_names_are_rejected():
     for key in ("kinds", "exclude_kinds", "locales"):
         with pytest.raises(ValueError, match="not a string"):
             PIIDetector(**{key: "email" if "kinds" in key else "us"})
+
+
+def test_phone_outranks_keywordless_nhs_on_identical_span():
+    # 943 476 5919 passes NHS mod-11 and is also a US-shaped phone.
+    for text in ("415 555 2671", "ref 943 476 5919"):
+        found = detect(text)
+        assert [(f.kind, f.confidence) for f in found] == [("phone", 0.8)]
+    (only_uk,) = PIIDetector(locales=["uk"]).detect("ref 943 476 5919")
+    assert (only_uk.kind, only_uk.confidence, only_uk.reason) == (
+        "nhs_number",
+        0.8,
+        "mod11",
+    )
+    (keyword,) = detect("NHS number 943 476 5919")
+    assert keyword.reason == "mod11_keyword"
+
+
+def test_digit_rules_stop_inside_identifiers():
+    for text in (
+        "abc9876543210def",
+        "a4111111111111111b",
+        "tok_2345 6789 0124",
+        "classname: 123456789",
+        "id_123-45-6789",
+    ):
+        assert detect(text) == (), text
+    found = detect("xnhs 9434765919")
+    assert not [f for f in found if f.kind == "nhs_number"]
+    for text in ("+14155552671", "(415) 555-2671", "+91 98765 43210"):
+        assert [f.kind for f in detect(text)][:1] == ["phone"], text

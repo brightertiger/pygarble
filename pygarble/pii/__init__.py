@@ -13,6 +13,7 @@ ALL_KINDS: FrozenSet[str] = frozenset(
     [rule[0] for rule in GENERIC]
     + [rule[0] for rules in LOCALE_RULES.values() for rule in rules]
 )
+_GENERIC_KINDS = frozenset(rule[0] for rule in GENERIC)
 _SEPARATORS = re.compile(r"[ \-]")
 _IIN = [(brand, re.compile(prefix), lengths) for brand, prefix, lengths in IIN]
 _COMPILED: Dict[str, List[Tuple[Rule, "re.Pattern[str]"]]] = {}
@@ -62,6 +63,15 @@ def _names(label: str, value: Iterable[str]) -> Iterable[str]:
     if isinstance(value, str):
         raise ValueError(f"{label} must be an iterable of names, not a string")
     return value
+
+
+def _outranks(finding: Finding, current: Finding) -> bool:
+    """Higher confidence wins; on a tie a generic kind beats a locale kind."""
+    if finding.confidence != current.confidence:
+        return finding.confidence > current.confidence
+    return (
+        finding.kind in _GENERIC_KINDS and current.kind not in _GENERIC_KINDS
+    )
 
 
 class PIIDetector:
@@ -128,7 +138,7 @@ class PIIDetector:
         for finding in sorted(found, key=sort_key):
             key = (finding.start, finding.end)
             current = best.get(key)
-            if current is None or finding.confidence > current.confidence:
+            if current is None or _outranks(finding, current):
                 best[key] = finding
         return tuple(sorted(best.values(), key=sort_key))
 
