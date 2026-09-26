@@ -11,7 +11,7 @@ from .core import EnsembleDetector, GarbleDetector, Strategy
 from .findings import Finding, Redaction, ScanReport
 
 if TYPE_CHECKING:
-    from .pii import PIIDetector  # type: ignore[import-not-found]
+    from .pii import PIIDetector  # type: ignore[attr-defined]
     from .profanity import ProfanityDetector  # type: ignore[import-not-found]
     from .scanner import Scanner as Scanner
     from .scanner import redact as redact

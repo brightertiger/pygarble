@@ -29,7 +29,7 @@ def _pii_detector(
     exclude: FrozenSet[str],
 ) -> Optional[Detector]:
     try:
-        from .pii import PIIDetector  # type: ignore[import-not-found]
+        from .pii import PIIDetector  # type: ignore[attr-defined]
     except ImportError:  # pragma: no cover - until Task 5 lands
         return None
     return PIIDetector(kinds=kinds, exclude_kinds=exclude, locales=locales)
