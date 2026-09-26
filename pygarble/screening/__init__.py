@@ -1,11 +1,11 @@
 """Local secrets, PII and profanity screening, independent of gibberish."""
 
 from ..findings import Finding, Redaction, ScanReport
-from ..pii import PIIDetector
-from ..profanity import ProfanityDetector
-from ..secrets import SecretsDetector
 from .base import BackendError, ScreeningDetector
+from .pii import PIIDetector
+from .profanity import ProfanityDetector
 from .scanner import Scanner, redact, scan
+from .secrets import SecretsDetector
 
 __all__ = [
     "Scanner",

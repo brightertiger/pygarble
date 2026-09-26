@@ -1,12 +1,12 @@
 Secrets
 =======
 
-:class:`pygarble.SecretsDetector` finds credentials by shape. Findings carry
+:class:`pygarble.screening.SecretsDetector` finds credentials by shape. Findings carry
 the kind, span, confidence and reason, never the secret itself.
 
 .. code-block:: python
 
-   from pygarble import SecretsDetector
+   from pygarble.screening import SecretsDetector
 
    detector = SecretsDetector()
    (finding,) = detector.detect("token ghp_\u00611B2c3D4e5F6g7H8i9J0k1L2m3N4o5P6q7R8")
@@ -108,9 +108,20 @@ and ``github_token``. Redaction merges the two into one region.
 Pass ``kinds`` or ``exclude_kinds`` to select rules. Selection only filters:
 the findings of a kind are the same whether or not other kinds are
 selected, and an unselected rule never hides a selected one. In a
-:class:`pygarble.Scanner`, ``secrets_without_context=True`` enables
+:class:`pygarble.screening.Scanner`, ``secrets_without_context=True`` enables
 ``high_entropy_string``.
 
 The test vectors in ``pygarble/data/secrets.json`` are split into
 8-character chunks (``"vectors_encoding": "chunks8"``) so secret scanners
 do not flag them; a port concatenates each list.
+
+Implementation and optional scanners
+------------------------------------
+
+Native patterns and entropy checks live in ``pygarble/screening/secrets/``;
+old ``pygarble.secrets`` imports remain compatibility pointers. Use
+:class:`pygarble.screening.Scanner` to add ``detect-secrets`` or ``gitleaks``
+explicitly. These backends emit their own kinds and supplement native rules;
+they do not verify whether a credential is active. Native rules still provide
+complete multiline private-key spans. See :doc:`standalone-screening` for
+backend options, errors and subprocess cost.

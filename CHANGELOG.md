@@ -23,6 +23,16 @@ All notable changes to pygarble are documented here. The format follows
 - NHS/phone overlap filtering now uses a sorted sweep rather than a pairwise
   search, keeping dense PII documents from causing quadratic work.
 
+### Changed
+- Updated the README, quick start, API reference, CLI and installation
+  guides for the separate modules and optional backends. Added architecture
+  and migration guidance covering compatibility pointers and unreleased APIs.
+- Gibberish implementations now live under `pygarble.gibberish`; native
+  PII, profanity and secret detectors and their rules live under
+  `pygarble.screening`. Old module paths and top-level exports remain
+  compatibility pointers to the same implementations. Scanner defaults,
+  lazy strategy loading and CLI behavior are unchanged.
+
 ## [0.11.0] - 2026-09-26
 
 ### Added

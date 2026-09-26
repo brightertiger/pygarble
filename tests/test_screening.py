@@ -16,7 +16,10 @@ from pygarble.screening import Scanner
 s = Scanner()
 assert s.scan('mail jane@example.com').kinds() == ('email',)
 assert not s.scan('qxzjkwpv bnmqwer zzxqv').flagged
-for name in ('pygarble.ensemble', 'pygarble.registry', 'phonenumbers',
+for name in ('pygarble.ensemble', 'pygarble.registry',
+             'pygarble.gibberish.ensemble', 'pygarble.gibberish.registry',
+             'pygarble.gibberish.strategies', 'pygarble.data.words',
+             'phonenumbers',
              'stdnum', 'detect_secrets', 'spacy', 'numpy'):
     assert name not in sys.modules, name
 """

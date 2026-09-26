@@ -35,7 +35,7 @@ jobs:
       run: |
         cd docs
         make clean
-        make html
+        make html SPHINXOPTS="-n -W --keep-going"
     
     - name: Check documentation build
       run: |
@@ -47,6 +47,8 @@ jobs:
         assert 'index.html' in files, 'index.html not found'
         assert 'api.html' in files, 'api.html not found'
         assert 'strategies.html' in files, 'strategies.html not found'
+        assert 'standalone-screening.html' in files, 'standalone screening guide not found'
+        assert 'architecture.html' in files, 'architecture guide not found'
         print('Documentation build successful!')
         "
     

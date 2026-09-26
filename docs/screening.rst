@@ -1,5 +1,5 @@
-Screening and redaction
-=======================
+Combined screening and redaction
+================================
 
 For an API dedicated to secrets, PII and profanity, use
 ``pygarble.screening.Scanner``. It supports optional local backends and a
@@ -7,7 +7,7 @@ document CLI; see :doc:`standalone-screening`. The combined API below retains
 its original four-category behavior for compatibility.
 
 :class:`pygarble.Scanner` runs every enabled category over a text and
-returns a :class:`pygarble.ScanReport`. Findings say what was found and
+returns a :class:`pygarble.findings.ScanReport`. Findings say what was found and
 where; they never contain the matched text, so logging a report object
 cannot leak a secret. The ``pygarble scan`` command is different: its rows
 include the input line, so use ``pygarble redact`` when output goes to logs.
@@ -26,9 +26,9 @@ The module-level :func:`pygarble.scan` and :func:`pygarble.redact` accept the
 same keyword arguments and reuse a cached scanner per configuration.
 ``scan_batch`` screens a list and ``iter_scan`` screens any iterable lazily.
 
-Each :class:`pygarble.Finding` has a ``category``, ``kind``, ``start`` and
+Each :class:`pygarble.findings.Finding` has a ``category``, ``kind``, ``start`` and
 ``end`` (Python string offsets, end exclusive), a ``confidence`` and a short
-``reason``. :class:`pygarble.ScanReport` groups findings with
+``reason``. :class:`pygarble.findings.ScanReport` groups findings with
 ``by_category()``, lists distinct kinds with ``kinds()`` and serialises with
 ``to_dict()``.
 
@@ -59,7 +59,7 @@ Categories
 constructor to run fewer. ``kinds`` and ``exclude_kinds`` select individual
 kinds across categories; ``locales`` selects PII locale packs (``us``,
 ``uk``, ``in``); ``profile``, ``threshold`` and ``allowlist`` configure the
-gibberish category exactly like :class:`pygarble.EnsembleDetector`.
+gibberish category exactly like :class:`pygarble.gibberish.EnsembleDetector`.
 ``profanity_allowlist`` exempts words from the profanity check,
 ``secrets_without_context=True`` enables standalone high-entropy strings, and
 ``max_input_length`` rejects oversized input with ``ValueError``. A
@@ -117,7 +117,7 @@ Redaction
 ``redact`` replaces every finding at or above ``min_confidence`` in the
 chosen categories (all but gibberish by default; it raises ``ValueError``
 when none of them is a rule category this scanner runs) and returns a
-:class:`pygarble.Redaction` with the new ``text``, the ``findings`` it
+:class:`pygarble.findings.Redaction` with the new ``text``, the ``findings`` it
 replaced and a ``count``. Overlapping findings become one region, labelled
 with the highest-confidence kind. Modes:
 
@@ -156,4 +156,5 @@ What it does not catch
 
 Names, postal addresses, free-text dates of birth, hate speech beyond a
 word list, non-English profanity, and secrets without a recognisable shape.
-Send those to a model after this pass.
+A clean report means that the selected checks found no qualifying evidence.
+Choose any further validation or review according to your application.

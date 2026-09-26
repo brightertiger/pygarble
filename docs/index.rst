@@ -1,21 +1,30 @@
 pygarble: a first line of defence for text
 ==========================================
 
-**Deterministic, zero-dependency text screening: secrets, PII, profanity and
-gibberish, with redaction.**
+**Local secrets, PII and profanity screening, plus independent gibberish
+detection. No LLM calls or inference-model downloads.**
 
 pygarble screens text with fixed rules, checksums, a word list, character
-models and encoding checks. It has no runtime dependencies, training, or
-downloads. Every finding has a kind, span, confidence and reason, and never
-carries the matched text. See :doc:`screening` for the scanner and redaction.
+statistics and encoding checks. The base install has no runtime dependencies;
+optional local backends extend coverage when explicitly selected. Every
+finding has a kind, span, confidence and reason, without the matched text.
+This documentation includes unreleased source changes; see :doc:`installation`
+for installing them and :doc:`migration` for compatibility.
 
 .. code-block:: python
 
-   from pygarble import redact, scan
+   from pygarble.screening import Scanner
 
-   report = scan("mail jane@example.com, key AKIAIOSFODNN7EXAMPLE")
+   scanner = Scanner(max_input_length=100_000)
+   report = scanner.scan("mail jane@example.com, key AKIAIOSFODNN7EXAMPLE")
    assert report.kinds() == ("aws_access_key_id", "email")
-   assert redact("mail jane@example.com").text == "mail [EMAIL]"
+   assert scanner.redact("mail jane@example.com").text == "mail [EMAIL]"
+
+Use :doc:`standalone-screening` for the three rule categories, optional
+backends and document CLI. Use ``pygarble.gibberish`` for gibberish detection.
+The original ``from pygarble import Scanner`` still runs all four categories;
+its guide is :doc:`screening`. See :doc:`architecture` for module ownership
+and old import pointers.
 
 The gibberish category is English-specific. Meaningful Hindi and other non-English text may be flagged; this is expected
 for English-specific scoring. It is not a language identifier or a semantic
@@ -29,18 +38,19 @@ See :doc:`installation` to install the package.
 
    installation
    quickstart
-   cli
-   calibration
-   screening
    standalone-screening
    secrets
    pii
    profanity
+   cli
+   screening
    strategy-guide
    strategies
+   calibration
    api
    examples
    migration
+   architecture
    contributing
 
 Gibberish quick start
@@ -48,7 +58,7 @@ Gibberish quick start
 
 .. code-block:: python
 
-   from pygarble import EnsembleDetector
+   from pygarble.gibberish import EnsembleDetector
 
    detector = EnsembleDetector()
    detector.predict("Hello world")     # False

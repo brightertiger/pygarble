@@ -3,6 +3,7 @@ include CHANGELOG.md
 include LICENSE
 include requirements.txt
 include requirements-dev.txt
+include tests/fixtures/legacy_layout_pickles.json
 recursive-include pygarble *.py *.json
 global-exclude __pycache__
 global-exclude *.py[co]

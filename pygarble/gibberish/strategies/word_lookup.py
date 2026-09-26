@@ -1,0 +1,115 @@
+"""
+Word lookup strategy for garble detection.
+
+Uses an embedded set of common English words to validate text.
+No external dependencies required.
+"""
+
+import re
+from typing import Any, List
+
+from ...data import ENGLISH_WORDS
+from ...validation import parameter_value
+from .base import BaseStrategy
+
+
+class WordLookupStrategy(BaseStrategy):
+    """
+    Detect garbled text by checking words against a dictionary.
+
+    This strategy tokenizes input text and checks what proportion
+    of words appear in the embedded English word set (49,330 words
+    derived from Peter Norvig's word frequency list).
+
+    Parameters
+    ----------
+    unknown_threshold : float, optional
+        Proportion of unknown words above which text is considered
+        garbled. Default is 0.5 (50% unknown words).
+
+    min_word_length : int, optional
+        Minimum word length to check. Shorter words are ignored.
+        Default is 2.
+
+    Examples
+    --------
+    >>> from pygarble import GarbleDetector, Strategy
+    >>> detector = GarbleDetector(Strategy.WORD_LOOKUP)
+    >>> detector.predict("hello world")
+    False
+    >>> detector.predict("xyzzy plugh")
+    True
+    """
+
+    def __init__(self, **kwargs: Any):
+        super().__init__(**kwargs)
+        self.unknown_threshold: float = parameter_value(
+            "unknown_threshold", kwargs.get("unknown_threshold", 0.5), 0.5
+        )
+        self.min_word_length: int = parameter_value(
+            "min_word_length", kwargs.get("min_word_length", 2), 2
+        )
+
+        if not 0.0 <= self.unknown_threshold <= 1.0:
+            raise ValueError("unknown_threshold must be between 0.0 and 1.0")
+        if self.min_word_length < 1:
+            raise ValueError("min_word_length must be at least 1")
+
+    def _tokenize(self, text: str) -> List[str]:
+        """Extract words from text, preserving case.
+
+        Diacritics are folded first so accented words (café) match
+        their ASCII dictionary entries (cafe) instead of being split
+        at the accent.
+        """
+        folded = self._fold_diacritics(text)
+        words = re.findall(r"[a-zA-Z]+", folded)
+        # Filter by minimum length
+        return [w for w in words if len(w) >= self.min_word_length]
+
+    def _compute_unknown_ratio(self, text: str) -> float:
+        """
+        Compute the (weighted) ratio of words not found in the dictionary.
+
+        Unknown Titlecase words are likely proper nouns (names, brands,
+        places) rather than gibberish, so they count at half weight.
+
+        Returns a value between 0 and 1 where higher means more
+        unknown words (more likely garbled).
+        """
+        words = self._tokenize(text)
+
+        if not words:
+            return 0.0  # No words to check
+
+        unknown_weight = 0.0
+        for word in words:
+            if word.lower() in ENGLISH_WORDS:
+                continue
+            unknown_weight += 0.5 if word.istitle() else 1.0
+
+        return unknown_weight / len(words)
+
+    def _predict_proba_impl(self, text: str) -> float:
+        """
+        Compute garble probability based on word lookup.
+
+        Returns a value between 0 and 1 where:
+        - 0.0 = all words found in dictionary
+        - 1.0 = all words unknown
+
+        The default uses the raw unknown fraction. Custom thresholds map
+        their configured fraction to 0.5; this is not a probability.
+        """
+        ratio = self._compute_unknown_ratio(text)
+        # Map the configured unknown fraction to 0.5; preserve the old
+        # identity mapping when unknown_threshold is the default 0.5.
+        if ratio == 0.0:
+            return 0.0
+        if ratio >= self.unknown_threshold:
+            if self.unknown_threshold == 1.0:
+                return 0.5
+            return 0.5 + 0.5 * (ratio - self.unknown_threshold) / (
+                1.0 - self.unknown_threshold
+            )
+        return 0.5 * ratio / self.unknown_threshold

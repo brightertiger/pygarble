@@ -19,18 +19,24 @@ their four-category defaults for compatibility. Existing imports of
 they are also exported from ``pygarble.screening``. Detector implementations
 and collection/redaction logic are shared between the two APIs.
 
+See :doc:`architecture` for source layout and compatibility pointers, and
+:doc:`api` for the scanner, detector and backend signatures. These APIs are
+part of the unreleased source changes described in :doc:`migration`.
+
 Installation and explicit selection
 ------------------------------------
 
 The base install remains dependency-free. Optional backends supplement
 native rules only when selected; installing an extra alone changes nothing.
+For these unreleased features, install from the source checkout described in
+:doc:`installation`:
 
 .. code-block:: console
 
-   pip install 'pygarble[phones]'     # phonenumberslite
-   pip install 'pygarble[stdnum]'     # python-stdnum
-   pip install 'pygarble[secrets]'    # detect-secrets
-   pip install 'pygarble[screening]'  # all three Python dependencies
+   python -m pip install -e '.[phones]'     # phonenumberslite
+   python -m pip install -e '.[stdnum]'     # python-stdnum
+   python -m pip install -e '.[secrets]'    # detect-secrets
+   python -m pip install -e '.[screening]'  # all three Python dependencies
 
 Install Gitleaks >=8.19,<9 separately from its official distribution and
 put it on PATH, or supply its executable path. CI exercises Gitleaks 8.30.1.
@@ -42,6 +48,7 @@ The following example requires the optional packages and Gitleaks:
 
    from pygarble.screening import Scanner
 
+   document = "Call +442079460958 or mail jane@example.com."
    scanner = Scanner(
        backends=["phonenumbers", "stdnum", "detect-secrets", "gitleaks"],
        backend_options={
@@ -53,6 +60,8 @@ The following example requires the optional packages and Gitleaks:
    )
    report = scanner.scan(document)
    safe_text = scanner.redact(document).text
+   assert report.flagged
+   assert "jane@example.com" not in safe_text
 
 Reuse an instance for repeated calls. ``scan_batch`` accepts a sequence and
 ``iter_scan`` processes an iterable lazily. The module-level ``scan`` and

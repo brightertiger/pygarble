@@ -125,3 +125,18 @@ jobs:
         cd /tmp
         /tmp/pygarble-wheel/bin/python -c "from pygarble import EnsembleDetector; d = EnsembleDetector(); assert d.predict('नमस्ते दुनिया'); assert not d.predict('Hello world'); assert d.predict('hello\\x00world')"
         /tmp/pygarble-wheel/bin/python -c "from pygarble.screening import Scanner; s = Scanner(); assert s.scan('mail a@b.co').flagged; assert not s.scan('qxzjkwpv bnmqwer').flagged"
+        /tmp/pygarble-wheel/bin/python - <<'PY'
+        from importlib import import_module
+        from pygarble import EnsembleDetector
+        from pygarble.gibberish import EnsembleDetector as CanonicalDetector
+        from pygarble.gibberish.strategies import _EXPORTS
+        assert EnsembleDetector is CanonicalDetector
+        for name in set(_EXPORTS.values()):
+            assert import_module('pygarble.strategies.' + name) is import_module(
+                'pygarble.gibberish.strategies.' + name
+            )
+        for name in ('pii.patterns', 'profanity.wordlist', 'secrets.patterns'):
+            assert import_module('pygarble.' + name) is import_module(
+                'pygarble.screening.' + name
+            )
+        PY

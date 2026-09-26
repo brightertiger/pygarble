@@ -13,15 +13,15 @@ from typing import (
 )
 
 from ..findings import Finding, Redaction, ScanReport, sort_key
-from ..pii import ALL_KINDS as PII_KINDS
-from ..pii import PIIDetector, locale_kinds
-from ..profanity import ALL_KINDS as PROFANITY_KINDS
-from ..profanity import ProfanityDetector
-from ..secrets import ALL_KINDS as SECRET_KINDS
-from ..secrets import SecretsDetector
 from ..validation import positive_int, unit_interval
 from ._engine import ScanEngine, _drop_url_emails, _names
 from .base import BackendError, Detector, ScreeningDetector
+from .pii import ALL_KINDS as PII_KINDS
+from .pii import PIIDetector, locale_kinds
+from .profanity import ALL_KINDS as PROFANITY_KINDS
+from .profanity import ProfanityDetector
+from .secrets import ALL_KINDS as SECRET_KINDS
+from .secrets import SecretsDetector
 
 CATEGORIES = ("secrets", "pii", "profanity")
 _BUILTIN_KINDS = {

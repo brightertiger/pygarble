@@ -5,9 +5,13 @@ Scores are heuristic, not probabilities, so the right decision threshold
 depends on your data. ``calibrate`` scores labeled samples once and sweeps
 every observed score as a candidate threshold.
 
+This calibrates gibberish scoring under ``pygarble.gibberish``. It does not
+retrain screening rules or calibrate PII, profanity or secret confidence
+tiers; select ``min_confidence`` separately on the screening scanner.
+
 .. code-block:: python
 
-   from pygarble import EnsembleDetector, calibrate
+   from pygarble.gibberish import EnsembleDetector, calibrate
 
    garbled = ["qxzjkwpv bnmqwer", "asdfghjkl"]
    clean = ["hello world", "please send the invoice"]
@@ -28,7 +32,7 @@ the ``1.0`` fallback is never moved to a midpoint.
 
 .. code-block:: python
 
-   from pygarble import EnsembleDetector, calibrate
+   from pygarble.gibberish import EnsembleDetector, calibrate
 
    report = calibrate(
        EnsembleDetector(),

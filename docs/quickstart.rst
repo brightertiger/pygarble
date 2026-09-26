@@ -5,12 +5,46 @@ Install pygarble using :doc:`installation` before running these
 examples. Detectors operate on Python strings; decode bytes before calling them.
 No training or ``fit()`` step is needed.
 
-Screen English text
--------------------
+Screen and redact sensitive text
+--------------------------------
 
 .. code-block:: python
 
-   from pygarble import EnsembleDetector
+   from pygarble.screening import Scanner
+
+   scanner = Scanner(max_input_length=100_000)
+   text = "mail jane@example.com, key AKIAIOSFODNN7EXAMPLE, damn"
+   report = scanner.scan(text)
+   assert report.kinds() == ("aws_access_key_id", "email", "profanity")
+   assert report.flagged
+   assert scanner.redact("mail jane@example.com").text == "mail [EMAIL]"
+   assert not scanner.scan("qxzjkwpv bnmqwer zzxqv").flagged
+
+This scanner runs secrets, PII and profanity checks. It does not check
+gibberish. Findings omit matched text and use Python character offsets with
+an exclusive end. Reuse the scanner across inputs; ``scan_batch`` accepts a
+sequence and ``iter_scan`` processes an iterable lazily.
+
+Native rules need no optional dependencies. See :doc:`standalone-screening`
+to select phone-number, identifier or secret-scanning backends, and
+:doc:`examples` for batches and category configuration.
+
+.. code-block:: bash
+
+   printf 'mail jane@example.com\n' | python -m pygarble.screening scan
+   printf 'mail jane@example.com\n' | python -m pygarble.screening redact
+
+``scan`` emits one JSON report per document without source text and exits 1
+when a document is flagged. ``redact`` prints transformed text and exits 0
+on success. Both exit 2 on an error. See :doc:`cli` for document limits and
+the distinction from the original line-oriented commands.
+
+Check English gibberish separately
+----------------------------------
+
+.. code-block:: python
+
+   from pygarble.gibberish import EnsembleDetector
 
    detector = EnsembleDetector()
    assert detector.predict("Hello world") is False
@@ -25,7 +59,7 @@ Process a batch
 
 .. code-block:: python
 
-   from pygarble import EnsembleDetector
+   from pygarble.gibberish import EnsembleDetector
 
    detector = EnsembleDetector()
    texts = ["Hello world", "qxzjkwpv"]
@@ -43,7 +77,7 @@ Choose what to detect
 
 .. code-block:: python
 
-   from pygarble import EnsembleDetector, GarbleDetector, Strategy
+   from pygarble.gibberish import EnsembleDetector, GarbleDetector, Strategy
 
    corruption = EnsembleDetector(profile="corruption")
    assert corruption.predict("नमस्ते दुनिया") is False
@@ -79,7 +113,7 @@ Inspect a decision
 
 .. code-block:: python
 
-   from pygarble import EnsembleDetector
+   from pygarble.gibberish import EnsembleDetector
 
    result = EnsembleDetector().analyze("hello\x00world")
    assert result.garbled is True
@@ -93,3 +127,18 @@ Inspect a decision
 
 Required fields need a separate empty-input check. For JSON output and spans,
 see :doc:`examples`. For thresholds, voting, limits, and errors, see :doc:`api`.
+
+Keep an existing combined integration
+-------------------------------------
+
+.. code-block:: python
+
+   from pygarble import Scanner
+
+   scanner = Scanner()
+   assert scanner.scan("qxzjkwpv bnmqwer zzxqv").flagged
+   assert scanner.scan("mail jane@example.com").flagged
+
+Existing imports retain their behavior. This scanner includes gibberish by
+default. See :doc:`screening` for its configuration and :doc:`migration` for
+adopting the new module paths.

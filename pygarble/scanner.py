@@ -16,21 +16,21 @@ def _pii_detector(
     kinds: Optional[FrozenSet[str]],
     exclude: FrozenSet[str],
 ) -> Detector:
-    from .pii import PIIDetector
+    from .screening.pii import PIIDetector
 
     return PIIDetector(kinds=kinds, exclude_kinds=exclude, locales=locales)
 
 
 def _profanity_detector(allowlist: Optional[Iterable[str]]) -> Detector:
-    from .profanity import ProfanityDetector
+    from .screening.profanity import ProfanityDetector
 
     return ProfanityDetector(allowlist=allowlist)
 
 
 def _all_kinds() -> Dict[str, FrozenSet[str]]:
-    from .pii import ALL_KINDS as PII_KINDS
-    from .profanity import ALL_KINDS as PROFANITY_KINDS
-    from .secrets.patterns import ALL_KINDS as SECRET_KINDS
+    from .screening.pii import ALL_KINDS as PII_KINDS
+    from .screening.profanity import ALL_KINDS as PROFANITY_KINDS
+    from .screening.secrets.patterns import ALL_KINDS as SECRET_KINDS
 
     return {
         "secrets": frozenset(SECRET_KINDS),
@@ -50,7 +50,7 @@ class _Gibberish:
         allowlist: Optional[Iterable[str]],
         max_input_length: Optional[int],
     ) -> None:
-        from .ensemble import EnsembleDetector
+        from .gibberish.ensemble import EnsembleDetector
 
         self.detector = EnsembleDetector(
             profile=profile,
@@ -60,7 +60,7 @@ class _Gibberish:
         )
 
     def detect(self, text: str) -> Tuple[Finding, ...]:
-        from .analysis import Analysis
+        from .gibberish.analysis import Analysis
 
         analysis = cast(Analysis, self.detector.analyze(text))
         if not analysis.garbled:
@@ -113,7 +113,7 @@ class Scanner(ScanEngine):
         # Validated even when gibberish or profanity is not selected, so a
         # typo fails the same way whatever the categories.
         threshold = unit_interval("threshold", threshold)
-        from .ensemble import PROFILES
+        from .gibberish.ensemble import PROFILES
 
         if profile not in PROFILES:
             raise ValueError(
@@ -128,7 +128,7 @@ class Scanner(ScanEngine):
             if max_input_length is None
             else positive_int("max_input_length", max_input_length)
         )
-        from .pii import LOCALES
+        from .screening.pii import LOCALES
 
         chosen_locales = tuple(dict.fromkeys(_names("locales", locales)))
         bad_locales = [loc for loc in chosen_locales if loc not in LOCALES]
@@ -150,7 +150,7 @@ class Scanner(ScanEngine):
         self._kinds = wanted
         self._exclude = excluded
         self._detectors: List[Detector] = []
-        from .pii import locale_kinds
+        from .screening.pii import locale_kinds
 
         for category in chosen:
             allowed = known[category]
@@ -192,7 +192,7 @@ class Scanner(ScanEngine):
 
 
 def _secrets(selected: FrozenSet[str], without_context: bool) -> Detector:
-    from .secrets import SecretsDetector
+    from .screening.secrets import SecretsDetector
 
     return SecretsDetector(
         kinds=selected, exclude_kinds=(), without_context=without_context
