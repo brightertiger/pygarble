@@ -1,12 +1,13 @@
 # Complete published-corpus comparison
 
-Start with [the ten-page empirical review PDF](manuscript.pdf),
+Start with [the revised software-and-evaluation PDF](manuscript.pdf),
 [full results](full-results/report.md) and [submission handoff](submission.md).
 The main experiment evaluates every released labelled document from the
 published GitHub collection: **109 documents, 31,964,664 normalized characters,
 79,969 chunks**, with identical inputs for pygarble and a pinned local
 Hugging Face DistilBERT classifier. All source labels are inherited; no new
-human annotation or audit is performed. This is a draft, not a submission.
+human annotation or audit is performed. The arXiv workflow has been opened as an unfinished draft; nothing has been
+submitted for announcement.
 
 The primary comparison uses all 38 gibberish documents and all text in four
 English controls (5,200 negative chunks). The other 67 meaningful documents
@@ -24,7 +25,7 @@ Use a dedicated environment if desired:
 python3.12 -m venv paper/study/.cache/hf-venv
 source paper/study/.cache/hf-venv/bin/activate
 python -m pip install -r paper/study/requirements-hf.txt
-python -m unittest paper.study.test_study paper.study.test_full_corpus -v
+python -m unittest paper.study.test_study paper.study.test_full_corpus paper.study.test_chunk_metrics -v
 python -m paper.study.full_corpus --download-model
 python -m paper.study.full_corpus --output paper/study/reproduction-full
 ```
@@ -73,6 +74,7 @@ CPU time, memory and disk; no external inference/compute fee is incurred.
 
 ```bash
 python -m pip install -r paper/study/requirements-figures.txt
+python -m paper.study.chunk_metrics
 python -m paper.study.full_figures
 # Requires Pandoc and Tectonic on PATH:
 python -m paper.study.build_paper
@@ -81,8 +83,20 @@ python -m paper.study.build_paper
 Edit `manuscript.template.md`; `full_paper.py` inserts measured tables and
 numerical placeholders. `build_paper.py` generates Markdown, TeX, PDF and the
 review source archive. See [validation](validation.md) for executed checks.
-The separate JOSS-format software draft is `../paper.md`. Author declarations,
-scientific review and a publication decision remain outstanding.
+`article.tex` supplies the two-column article layout; `tables.lua` renders
+numbered table floats. The title and body foreground pygarble's architecture
+and detection strategies before presenting the comparison. Wide appendix
+material uses the full page. The byline contains only Ujjwal Singh Rao.
+
+Chunk accuracy, precision, recall, F1 and confusion matrices are additional
+post hoc summaries of saved predictions. The original source-level endpoints
+remain in Appendix A; no scoring settings changed. `chunk_metrics.py` writes
+`full-results/chunk-metrics.json`, and `test_chunk_metrics.py` independently
+recounts all target-comparison predictions.
+
+The separate JOSS-format software draft is `../paper.md`. Funding, conflicts,
+Claude's assistance and the arXiv license choice have been confirmed. The
+revised scientific text remains under author review; see the submission handoff.
 
 ## Artifact map
 

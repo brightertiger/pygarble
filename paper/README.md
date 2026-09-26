@@ -1,6 +1,7 @@
 # Publication preparation
 
-Status: research results and drafts ready for author review, not submitted.
+Status: revised paper under author review; an unfinished arXiv workflow draft
+is open, but no submission for announcement has been completed.
 The study was run without a new human label audit, as requested. A journal
 acceptance or Scholar indexing outcome is not guaranteed.
 
@@ -39,11 +40,12 @@ those are run separately and have an explicit reproduction command.
 
 1. The author reviews the scientific claims, scope, methods and drafts. This
    review is distinct from a dataset audit; no new dataset audit is planned.
-2. Confirm funding/conflict declarations and AI disclosures, including Claude's
-   scope and recoverable model versions. Human responsibility is not asserted
-   by an assistant on the author's behalf.
-3. Decide whether the modest empirical contribution is ready for arXiv.
-   Category, license, endorsement and moderation requirements still apply.
+2. Funding (none), conflicts (none), Claude's coding/experiment assistance and
+   the perpetual non-exclusive arXiv license have been confirmed. The revised
+   paper uses only the author's name in its byline.
+3. Finish the authorized arXiv submission after the current manuscript review
+   and factual author declarations. Category, endorsement, compilation and
+   moderation requirements still apply.
 4. Assess JOSS's substantial-software-contribution and public-development
    requirements. The completed analysis improves the evidence available but
    does not guarantee scope acceptance or independent adoption.

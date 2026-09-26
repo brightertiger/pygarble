@@ -23,22 +23,29 @@ code and results. No package configuration or scoring threshold was changed.
 - No exact duplicate chunks or conflicting exact-hash inherited labels were
   found. All 438 preliminary primary input hashes occur in the full corpus;
   the extension is not an independent replication.
-- Twenty-one standard-library study tests passed in both the working
+- Twenty-five standard-library study tests passed in both the working
   interpreter and a clean virtual environment without research dependencies.
   Tests include tied-score calibration, grouping, source boundaries, tails,
-  majority ties, neural label mapping and equal document weighting.
-- All 18 study Python files passed Black, isort and flake8 checks. Downloaded
+  majority ties, neural label mapping, equal document weighting, class-imbalance
+  baselines and independent reconstruction of target confusion counts.
+- All 20 study Python files passed Black, isort and flake8 checks. Downloaded
   assets and ignored virtual environments are excluded from these checks.
 - CPU timing and RSS ran in fresh, separate workers after exhaustive scoring
   ended. Both systems used the same 76 inputs, one thread and batch size one;
   one warm pass preceded five timed passes. Timings are observations from
   this machine, not deployment guarantees or energy measurements.
-- The generated ten-page empirical PDF compiled without TeX warnings.
-  Its tables/figures were visually inspected, and every extracted text block
-  fits inside its page. An isolated extraction of `review-source.tar.gz`
-  compiled without warnings and produced identical extracted page text.
+- The revised nine-page paper uses a two-column article body and references,
+  with full-width appendices. The PDF and all figures/tables were visually
+  inspected. Every extracted text block fits inside its page. An isolated
+  extraction of `review-source.tar.gz` compiled with identical extracted page
+  text and no overfull boxes. Eight distinct underfull-line warning locations
+  remain; these concern justified spacing, not clipped text. All six citation
+  keys resolve. The author byline is exactly Ujjwal Singh Rao.
   Numerical prose guards and generated tables check the manuscript against
   saved measurements. `full-results/paper-validation.json` records the build.
+- All 130 frozen source hashes still match the full-run manifest. Only
+  reporting, manuscript and build files changed; the inference run and fixed
+  replay were not repeated for a presentation-only revision.
 - The JOSS software draft's citations parsed in a generic Pandoc HTML preview.
   Official JOSS Inara/Docker rendering has not run; Docker is unavailable.
 
@@ -62,10 +69,11 @@ Run from the repository root; prepare the source/model assets as described
 in [README.md](README.md) before full artifact verification:
 
 ```bash
-python -m unittest paper.study.test_study paper.study.test_full_corpus -v
+python -m unittest paper.study.test_study paper.study.test_full_corpus paper.study.test_chunk_metrics -v
 python -m paper.study.full_verify --replay
 python -m paper.study.full_diagnostics
 python -m paper.study.full_runtime
+python -m paper.study.chunk_metrics
 python -m paper.study.full_figures
 python -m paper.study.build_paper
 python -m black --check paper/study/*.py
@@ -84,8 +92,9 @@ Check the PR's latest commit before any merge.
 
 Source labels were inherited without a new human annotation/audit. Automated
 verification checks computations, not the scientific adequacy of those labels.
-Author review of methods, claims and AI-assisted text remains outstanding.
+Author review of the revised methods, claims and AI-assisted text is in progress.
+Funding, conflicts, AI assistance and the arXiv license choice are confirmed.
 No paid data, inference endpoint, annotation service, cloud compute or
 publication service was procured. Additional external-service spend: US$0,
-excluding existing subscriptions and hardware. No paper has been submitted,
+excluding existing subscriptions and hardware. An unfinished arXiv draft is open; no paper has been submitted for announcement,
 package release published, merge performed or indexing outcome asserted.

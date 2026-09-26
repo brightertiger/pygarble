@@ -8,7 +8,8 @@ plans remain in Git history.
 The technical study is complete for review. Start with
 [the full results](study/full-results/report.md), [the empirical draft](study/manuscript.pdf)
 and [the full protocol](study/full_corpus_protocol.md). All research code and artifacts
-are together in `paper/study/`. No submission or merge has been made.
+are together in `paper/study/`. An unfinished arXiv draft has been opened; nothing has been submitted for
+announcement and no merge has been made.
 
 ## Completed research
 
@@ -49,15 +50,17 @@ equipment, subscriptions and author time. JORS's listed GBP824 software-paper
 fee exceeds the budget; it is an alternative only with a confirmed waiver
 that keeps the total within the ceiling.
 
-## Next steps after the author returns
+## Remaining publication steps
 
 1. Review methods, results, scope and scientific claims. Dataset labels remain
    inherited; this step is manuscript/scientific review, not new annotation.
-2. Complete author declarations and AI disclosure. Confirm authorship,
-   affiliation, funding/conflicts, Claude's scope and model versions where known.
-3. Finalize the empirical manuscript and choose an arXiv category/license.
-   The author submits the reviewed source bundle; account verification does
-   not remove moderation or category-specific requirements.
+2. Preserve the confirmed no-funding/no-conflicts declarations and disclosure
+   of Claude's coding and experimental assistance. Model versions are not
+   recorded. The paper byline is Ujjwal Singh Rao, without an affiliation line.
+3. Complete the requested revisions and the authorized arXiv workflow using
+   the selected perpetual non-exclusive distribution license. Review the final
+   scientific content and factual declarations before finalization. Account
+   verification does not remove moderation or category-specific requirements.
 4. Assess JOSS readiness against the current public-development and substantial
    research-software criteria. An executed analysis helps demonstrate use but
    does not ensure significance or admission to review. Finalize a reviewed

@@ -1,8 +1,10 @@
 # Author review and submission handoff
 
-Status: technical evaluation and review draft prepared; neither arXiv nor
-JOSS has received a submission. Review the PDF, full results and limitations
-before deciding to publish. No new dataset audit is requested or planned.
+Status: the author requested arXiv submission, then requested revisions to the
+title, software emphasis, layout and metrics section. The revised paper is under
+author review. An unfinished draft was opened in the logged-in arXiv workflow;
+no files have been uploaded and no announcement submission has been completed.
+JOSS has not received a submission. No new dataset audit is planned.
 
 ## Review packet
 
@@ -24,27 +26,33 @@ claiming responsibility for a paper. Automated checks are not that review.
 
 ## arXiv preparation
 
-Proposed title: **Low-cost gibberish screening: pygarble and DistilBERT on a complete
-published corpus**.
+Title: **pygarble: Modular, Low-Cost Gibberish Detection and Text Screening in Python**.
 
-Author: Ujjwal Singh Rao. Affiliation: Independent Researcher, India.
-Proposed category to assess: `cs.CL`; the author should verify subject fit
-and any endorsement requirements. Use the abstract in the reviewed manuscript.
-No ORCID, journal reference, DOI, submission ID or license choice is invented.
+Author byline: **Ujjwal Singh Rao** only, as requested. The previously supplied
+background affiliation is Independent Researcher, India; it is omitted from
+the paper byline. Proposed category: `cs.CL`, subject to fit and endorsement.
+Use the abstract in the final reviewed manuscript. No ORCID, public arXiv
+identifier, journal reference or DOI has been invented.
 
-Before uploading, confirm funding/conflicts and complete the AI disclosure,
-including Claude's scope and model versions where recoverable. Replace draft
-status only after the author has reviewed the scientific claims. Choose the
-arXiv distribution license explicitly. Rebuild and inspect the exact final
-bundle after edits. The current TeX uses a Unicode engine; select a supported
-XeLaTeX setup in arXiv and check its compilation preview. Local Tectonic
-compilation does not validate arXiv's separate TeX environment.
+The author confirmed no funding and no conflicts of interest. The paper also
+identifies the author as pygarble's developer. Claude assisted with coding and
+running comparison experiments; Codex's broader study/manuscript assistance
+is disclosed. Exact model versions were not recorded. The author selected
+**arXiv's perpetual, non-exclusive distribution license**.
 
-The author makes the final submission through their account after reviewing
-metadata and preview. Account verification does not guarantee category
-eligibility or moderation acceptance. arXiv publication is a preprint, not
-peer-reviewed journal acceptance. See the
-[official submission overview](https://info.arxiv.org/help/submit/index.html).
+The source bundle has a conventional two-column article body, numbered
+sections/equations/captions and full-width supplementary tables. The revised
+paper has not been accepted or reviewed by a journal. Before completing the
+arXiv workflow, review this revised scientific content and the actual account
+submission agreement, choose the confirmed license, upload the source bundle
+and inspect arXiv's own compilation preview. Local compilation is not a test
+of arXiv's TeX environment. Use XeLaTeX for the locally tested Unicode build.
+
+No agreement or author attestation has been checked in the browser workflow.
+The account's displayed affiliation differs from the previously supplied
+paper affiliation; verify the contact declaration before certifying it.
+The workflow remains at its start page while manuscript revisions are reviewed.
+See the [official submission overview](https://info.arxiv.org/help/submit/index.html).
 
 ## JOSS decision
 

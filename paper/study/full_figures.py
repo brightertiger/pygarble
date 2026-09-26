@@ -8,6 +8,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 
+from .chunk_metrics import summarize as chunk_summary  # noqa: E402
 from .data import ROOT  # noqa: E402
 from .full_paper import CONTROL_NAMES, NAMES  # noqa: E402
 
@@ -20,6 +21,36 @@ def save(fig: object, name: str) -> None:
     plt.close(fig)
 
 
+def confusion_figure(summary: dict) -> None:
+    rows = {r["method"]: r for r in chunk_summary(summary)}
+    fig, axes = plt.subplots(1, 3, figsize=(11, 3.6), layout="constrained")
+    for ax, method in zip(axes, ("english", "word_lookup", "hf_strict")):
+        row = rows[method]
+        counts = [[row["tp"], row["fn"]], [row["fp"], row["tn"]]]
+        fractions = [[v / sum(line) for v in line] for line in counts]
+        ax.imshow(fractions, vmin=0, vmax=1, cmap="Blues")
+        for y, line in enumerate(counts):
+            for x, count in enumerate(line):
+                ax.text(
+                    x,
+                    y,
+                    "{:,}\n({:.1%})".format(count, fractions[y][x]),
+                    ha="center",
+                    va="center",
+                    color="white" if fractions[y][x] > 0.55 else "black",
+                )
+        ax.set(
+            xticks=[0, 1],
+            xticklabels=["Gibberish", "Meaningful"],
+            yticks=[0, 1],
+            yticklabels=["Gibberish", "Meaningful"],
+            xlabel="Predicted class",
+            ylabel="Inherited source class",
+            title="{}\nAccuracy {:.2%}".format(NAMES[method], row["accuracy"]),
+        )
+    save(fig, "chunk-confusions")
+
+
 def main() -> None:
     summary = json.loads((ROOT / "full-results/summary.json").read_text())
     docs = json.loads(
@@ -28,6 +59,7 @@ def main() -> None:
         )
     )
     plt.rcParams.update({"font.size": 10, "pdf.fonttype": 42})
+    confusion_figure(summary)
     primary = {r["method"]: r for r in summary["primary"]}
     ys = list(range(len(NAMES)))
     fig, axes = plt.subplots(1, 2, figsize=(11, 4.6), layout="constrained")

@@ -3,6 +3,7 @@
 import gzip
 import json
 
+from .chunk_metrics import summarize as chunk_summary
 from .data import ROOT
 
 NAMES = {
@@ -98,6 +99,49 @@ def render() -> str:
             rows,
         )
     }
+    chunks = chunk_summary(summary)
+    chunk_names = {**NAMES, "keep_all": "Always keep"}
+    values["CONFUSION_TABLE"] = table(
+        ["Method", "TP", "FN", "FP", "TN"],
+        [
+            [chunk_names[r["method"]]]
+            + [str(r[k]) for k in ("tp", "fn", "fp", "tn")]
+            for r in chunks
+        ],
+    )
+    values["CHUNK_METRIC_TABLE"] = table(
+        ["Method", "Accuracy", "Precision", "Recall", "F1", "Balanced acc."],
+        [
+            [chunk_names[r["method"]]]
+            + [
+                "{:.2f}".format(100 * r[k]) if r[k] is not None else "--"
+                for k in (
+                    "accuracy",
+                    "precision",
+                    "recall",
+                    "f1",
+                    "balanced_accuracy",
+                )
+            ]
+            for r in chunks
+        ],
+    )
+    chunk_by_method = {r["method"]: r for r in chunks}
+    for method, prefix in (
+        ("word_lookup", "WORD"),
+        ("hf_strict", "HF_STRICT"),
+        ("hf_all", "HF_ALL"),
+        ("english", "ENGLISH"),
+        ("english_extended", "EXTENDED"),
+        ("keep_all", "KEEP_ALL"),
+    ):
+        for metric in ("accuracy", "precision", "recall", "f1"):
+            number = chunk_by_method[method][metric]
+            values[prefix + "_" + metric.upper()] = (
+                "{:.2f}%".format(100 * number)
+                if number is not None
+                else "undefined"
+            )
     controls = [
         next(
             r
@@ -159,11 +203,9 @@ def render() -> str:
                 "{:.1%}".format(row["other_language_macro_fpr"]),
             ]
         )
-    values["LANGUAGE_TABLE"] = table(
-        ["Method", "Other-language FP documents", "Mean chunk FPR"], rows
-    )
+    values["LANGUAGE_TABLE"] = table(["Method", "FP files", "Mean FPR"], rows)
     values["RUNTIME_TABLE"] = table(
-        ["Method", "Median ms", "p95 ms", "Process peak MiB"],
+        ["Method", "Median ms", "p95 ms", "RSS (MiB)"],
         [
             [
                 NAMES[r["method"]],
@@ -196,9 +238,9 @@ def render() -> str:
     )
     values["RECALL_DIFFERENCE_TABLE"] = table(
         [
-            "Method minus HF non-clean",
-            "Difference (pp)",
-            "Paired 95% interval (pp)",
+            "Method",
+            "Delta (pp)",
+            "95% interval (pp)",
         ],
         [
             [

@@ -34,3 +34,21 @@ Latin-letter words do not establish linguistic coverage. The paper describes
 these implementation details explicitly. The installed tokenizer version was
 added to the optional requirements for reproduction; no installed version or
 inference setting changed. PDF-only pagination changes resolved overfull boxes.
+
+## Additional chunk summaries and manuscript revision
+
+After inspecting the full results, the author requested accuracy and confusion
+matrices. `chunk_metrics.py` derives these post hoc descriptive measures from
+the saved target-comparison predictions and adds an always-keep reference.
+The reporting tests independently recount the same predictions. No corpus
+membership, inherited label, model, package configuration, threshold or stored
+prediction changed. The frozen source-level endpoints, intervals and sensitivity
+analyses remain in Appendix A; they were not replaced retroactively in the
+protocol.
+
+The manuscript was subsequently reorganized around pygarble's software
+architecture and strategies, followed by the empirical comparison. Two-column
+article typesetting, numbered equations/captions and a name-only byline are
+presentation changes. Funding and conflict declarations and Claude's scope
+were supplied by the author. Screening capabilities are described without
+claiming they were evaluated by the gibberish study.

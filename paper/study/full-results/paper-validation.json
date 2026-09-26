@@ -1,7 +1,29 @@
 {
-  "pages": 10,
+  "pages": 9,
   "isolated_bundle_compiled": true,
   "page_text_identical": true,
   "all_text_blocks_within_page_bounds": true,
-  "tex_warnings": 0
+  "overfull_boxes": 0,
+  "underfull_warning_locations": 8,
+  "underfull_warnings": [
+    "warning: manuscript.tex:151: Underfull \\hbox (badness 1067) in paragraph at lines 142--151",
+    "warning: manuscript.tex:183: Underfull \\hbox (badness 1024) in paragraph at lines 175--183",
+    "warning: manuscript.tex:253: Underfull \\hbox (badness 5667) in paragraph at lines 245--253",
+    "warning: manuscript.tex:270: Underfull \\hbox (badness 1237) in paragraph at lines 262--270",
+    "warning: manuscript.tex:402: Underfull \\hbox (badness 1342) in paragraph at lines 394--402",
+    "warning: manuscript.tex:533: Underfull \\hbox (badness 1281) in paragraph at lines 527--533",
+    "warning: manuscript.tex:533: Underfull \\hbox (badness 2343) in paragraph at lines 527--533",
+    "warning: manuscript.tex:689: Underfull \\hbox (badness 1082) in paragraph at lines 682--689"
+  ],
+  "resolved_citation_keys": [
+    "gaskell2022",
+    "jindal",
+    "norvig2009",
+    "pygarble",
+    "renaud",
+    "sanh2019"
+  ],
+  "frozen_source_hashes_verified": 130,
+  "byline": "Ujjwal Singh Rao",
+  "layout": "Two-column article body and references; full-width appendices"
 }

@@ -1,0 +1,111 @@
+{
+  "analysis": "post hoc descriptive reporting; no new predictions",
+  "rows": [
+    {
+      "accuracy": 0.9692908989391401,
+      "balanced_accuracy": 0.6376761894175189,
+      "f1": 0.3726235741444867,
+      "fn": 124,
+      "fp": 41,
+      "method": "english",
+      "precision": 0.5444444444444444,
+      "recall": 0.2832369942196532,
+      "specificity": 0.9921153846153846,
+      "tn": 5159,
+      "tp": 49
+    },
+    {
+      "accuracy": 0.9705937092871766,
+      "balanced_accuracy": 0.7054057358826145,
+      "f1": 0.48026315789473684,
+      "fn": 100,
+      "fp": 58,
+      "method": "english_extended",
+      "precision": 0.5572519083969466,
+      "recall": 0.42196531791907516,
+      "specificity": 0.9888461538461538,
+      "tn": 5142,
+      "tp": 73
+    },
+    {
+      "accuracy": 0.9750604876233017,
+      "balanced_accuracy": 0.629480880391285,
+      "f1": 0.4017857142857143,
+      "fn": 128,
+      "fp": 6,
+      "method": "legacy",
+      "precision": 0.8823529411764706,
+      "recall": 0.26011560693641617,
+      "specificity": 0.9988461538461538,
+      "tn": 5194,
+      "tp": 45
+    },
+    {
+      "accuracy": 1.0,
+      "balanced_accuracy": 1.0,
+      "f1": 1.0,
+      "fn": 0,
+      "fp": 0,
+      "method": "word_lookup",
+      "precision": 1.0,
+      "recall": 1.0,
+      "specificity": 1.0,
+      "tn": 5200,
+      "tp": 173
+    },
+    {
+      "accuracy": 0.9678019728270985,
+      "balanced_accuracy": 0.5,
+      "f1": 0.0,
+      "fn": 173,
+      "fp": 0,
+      "method": "entropy_based",
+      "precision": null,
+      "recall": 0.0,
+      "specificity": 1.0,
+      "tn": 5200,
+      "tp": 0
+    },
+    {
+      "accuracy": 0.7219430485762144,
+      "balanced_accuracy": 0.8563461538461539,
+      "f1": 0.18804347826086956,
+      "fn": 0,
+      "fp": 1494,
+      "method": "hf_all",
+      "precision": 0.10377924415116976,
+      "recall": 1.0,
+      "specificity": 0.7126923076923077,
+      "tn": 3706,
+      "tp": 173
+    },
+    {
+      "accuracy": 0.9986971896519635,
+      "balanced_accuracy": 0.9965329035126722,
+      "f1": 0.98005698005698,
+      "fn": 1,
+      "fp": 6,
+      "method": "hf_strict",
+      "precision": 0.9662921348314607,
+      "recall": 0.9942196531791907,
+      "specificity": 0.9988461538461538,
+      "tn": 5194,
+      "tp": 172
+    },
+    {
+      "accuracy": 0.9678019728270985,
+      "balanced_accuracy": 0.5,
+      "f1": 0.0,
+      "fn": 173,
+      "fp": 0,
+      "method": "keep_all",
+      "precision": null,
+      "recall": 0.0,
+      "specificity": 1.0,
+      "tn": 5200,
+      "tp": 0
+    }
+  ],
+  "scope": "released gibberish plus four English control files",
+  "unit": "dependent chunks of up to 400 characters"
+}

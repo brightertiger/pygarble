@@ -21,7 +21,7 @@ def bundle_review() -> None:
     names = [
         "manuscript.tex",
         "references.bib",
-        "figures/full-comparison.pdf",
+        "figures/chunk-confusions.pdf",
         "figures/full-languages.pdf",
     ]
     stream = io.BytesIO()
@@ -49,6 +49,9 @@ def main() -> None:
             "manuscript.md",
             "--citeproc",
             "--standalone",
+            "--number-sections",
+            "--template=article.tex",
+            "--lua-filter=tables.lua",
             "--to",
             "latex",
             "--output",
