@@ -103,9 +103,14 @@ profile or strategy list.
 
 The ``english_fusion`` profile uses it over three views of the same question:
 unknown words (``word_lookup``), character transitions
-(``log_likelihood_ratio``) and reuse of English phrases (``cross_parsing``). A
-text needs agreement between members, or one member far outside what the null
-reaches, to be flagged.
+(``log_likelihood_ratio``) and reuse of English phrases (``cross_parsing``).
+A member's p-value never goes below 0.001, so when several members apply, one
+member cannot flag a text on its own at the default ``fisher_alpha``: one
+member at 0.001 combines with two quiet members (p-value 1) to about 0.032,
+and with one quiet member to about 0.0079. At least two members must exceed
+their null thresholds, for example two at 0.001 with the third quiet (about
+0.00011), or one at 0.001 with one at 0.01 (about 0.00079). A single member
+flags on its own only when it is the only applicable member.
 
 This is a heuristic, not a test with a guaranteed error rate. The members are
 correlated, which Fisher's method does not account for, and synthetic word
