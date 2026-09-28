@@ -27,10 +27,11 @@ All notable changes to pygarble are documented here. The format follows
   the synthetic English null, loaded only for Fisher voting.
 - Opt-in `english_fusion` profile: `WORD_LOOKUP`, `LOG_LIKELIHOOD_RATIO` and
   `CROSS_PARSING` with `fisher` voting by default. Its members are
-  English-reference methods, so other languages written in Latin letters
-  may be flagged, more so the less they resemble English. Existing profiles,
-  their voting and the `EnsembleDetector()` default are unchanged; the
-  golden corpus gains `english_fusion` rows only.
+  English-reference methods, so meaningful text in other languages written
+  in Latin letters can be flagged, and text in other scripts gets no signal
+  (it reads as clean, which is not evidence that it is meaningful).
+  Existing profiles, their voting and the `EnsembleDetector()` default are
+  unchanged; the golden corpus gains `english_fusion` rows only.
 - Documentation discovery metadata, a generated sitemap and `llms.txt`,
   optional Search Console verification, and a publishing/discoverability guide.
 - Root contributor and security guides, issue templates, and package metadata

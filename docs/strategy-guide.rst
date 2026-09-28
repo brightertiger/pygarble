@@ -80,25 +80,28 @@ members of any named profile.
 
 Each statistic is measured against synthetic English of the same length,
 and a score of 0.5 sits well beyond what that English reaches. They are
-English-reference methods. Other languages written in Latin letters may be
-flagged, more so the less they resemble English: ordinary French and German
-sentences mostly score below 0.5, while romanised Hindi is flagged more often.
-Text in other scripts has no ASCII letters and is not scored (it reports
-``insufficient_evidence``). They need at least 8 letters (``min_length``) and
-become more reliable as text gets longer; text beyond 127 characters is
-split into windows and the median window decides, so one odd passage in a
-long document does not flag it.
+English-reference methods, so meaningful text in other languages written in
+Latin letters can be flagged. In spot checks, some ordinary French, German and
+Spanish sentences scored above 0.5 on ``cross_parsing`` and
+``primed_compression`` while others did not, and romanised Hindi and
+Indonesian crossed 0.5 more often. Text in other scripts has no ASCII letters
+and is not scored (it reports ``insufficient_evidence``). They need at least
+8 letters (``min_length``) and become more reliable as text gets longer; text
+beyond 127 characters is split into windows and the median window decides, so
+one odd passage in a long document does not flag it.
 
 Fisher voting and the english_fusion profile
 --------------------------------------------
 
 ``voting="fisher"`` treats each applicable member's score as a test
 statistic. A table shipped with the package records what that strategy
-scores on synthetic English (word salads drawn by word frequency, 8 to 480
-characters), and the member's p-value is the smallest tail probability, from
-0.5 down to 0.001, whose threshold the score strictly exceeds. Fisher's method
-combines the p-values, and ``fisher_alpha`` (default 0.001) places the combined
-p-value that scores exactly 0.5. Fisher voting is opt-in and works with any
+scores on synthetic English (word salads drawn by word frequency, with
+target lengths from 8 to 480 characters; a text stops before the word that
+would pass its target and always has at least one word, so some are shorter
+than 8 characters), and the member's p-value is the smallest tail
+probability, from 0.5 down to 0.001, whose threshold the score strictly
+exceeds. Fisher's method combines the p-values, and ``fisher_alpha`` (default
+0.001) places the combined p-value that scores exactly 0.5. Fisher voting is opt-in and works with any
 profile or strategy list.
 
 The ``english_fusion`` profile uses it over three views of the same question:
@@ -116,8 +119,13 @@ This is a heuristic, not a test with a guaranteed error rate. The members are
 correlated, which Fisher's method does not account for, and synthetic word
 salads are not real English, so the real false-positive rate at a given
 ``fisher_alpha`` can be higher or lower. All three members are
-English-reference methods, so other languages written in Latin letters may be
-flagged, more so the less they resemble English. Measure the profile on your
+English-reference methods. The profile can flag meaningful text in other
+languages written in Latin letters: in spot checks some French, German and
+Spanish sentences were flagged and others were not, and an Indonesian sentence
+was flagged. It gives no signal on other scripts. ``word_lookup`` applies to
+any non-empty text and scores 0 when there are no Latin-letter words, while
+the other two members do not apply, so Russian or Chinese text reads as clean;
+that is not evidence that the text is meaningful. Measure the profile on your
 own data before relying on it.
 
 .. code-block:: python

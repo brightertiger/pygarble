@@ -224,7 +224,8 @@ Profiles and aggregation
    * - ``english_fusion``
      - Opt-in. Word lookup, likelihood ratio and cross parsing combined with
        ``fisher`` voting; English plausibility only, so other languages
-       written in Latin letters may be flagged.
+       written in Latin letters can be flagged and other scripts get no
+       signal (they read as clean).
 
 See :doc:`strategy-guide` to choose checks and :doc:`strategies` for
 its current members. Profiles use union voting by default (``english_fusion``
