@@ -4,8 +4,10 @@ import zlib
 
 import pytest
 
+from pygarble.data import REFERENCE_WORDS
 from pygarble.gibberish.measures import (
     Lcg,
+    SuffixAutomaton,
     bucket,
     cross_parsing,
     ngram_rank_distance,
@@ -53,6 +55,81 @@ def test_cross_parsing_counts_phrases_by_hand():
 def test_cross_parsing_mixes_found_and_missing_characters():
     # "ab" | "q" | "ba" against a reference without "q".
     assert cross_parsing("abqba", "abba") == pytest.approx(3 / 5)
+
+
+def test_suffix_automaton_counts_phrases_by_hand():
+    index = SuffixAutomaton("abba")
+    # "ab" | "q" | "ba": "q" has no transition from the root.
+    assert index.phrases("abqba") == 3
+    # "abba" | "a": the first phrase is the whole reference.
+    assert index.phrases("abbaa") == 2
+    # "bb" | "bb": "bbb" does not occur, so the phrase stops at "bb".
+    assert index.phrases("bbbb") == 2
+    assert index.phrases("a") == 1
+    assert index.phrases("q") == 1
+    assert index.phrases("xyz") == 3
+    assert index.cross_parsing("abqba") == 3 / 5
+    index = SuffixAutomaton("the cat sat")
+    assert index.phrases("the cat") == 1
+    assert index.phrases("cat the sat") == 3
+
+
+@pytest.mark.parametrize(
+    ("window", "reference"),
+    [
+        ("abcab", "abc"),
+        ("xyz", "abc"),
+        ("aba", "abxaba"),
+        ("the cat", "the cat sat"),
+        ("abqba", "abba"),
+        ("aaaa", "a"),
+        ("abab", "aab"),
+    ],
+)
+def test_suffix_automaton_matches_cross_parsing_by_hand(window, reference):
+    index = SuffixAutomaton(reference)
+    assert index.cross_parsing(window) == cross_parsing(window, reference)
+
+
+def _pseudo_random_windows(count):
+    # English-like word runs, random letters, mixtures and characters
+    # absent from the reference, at lengths 1 to 300.
+    rng = Lcg(20260929)
+    words = REFERENCE_WORDS
+    alphabet = "abcdefghijklmnopqrstuvwxyz"
+    foreign = "0q7\u00e9-"
+    result = []
+    for number in range(count):
+        length = 1 + rng.below(300)
+        kind = number % 4
+        pieces = []
+        size = 0
+        while size < length:
+            if kind == 0 or (kind == 2 and rng.below(2)):
+                piece = words[rng.below(len(words))]
+            else:
+                piece = "".join(
+                    alphabet[rng.below(26)] for _ in range(1 + rng.below(8))
+                )
+            if kind == 3 and rng.below(3) == 0:
+                piece += foreign[rng.below(len(foreign))]
+            pieces.append(piece)
+            size += len(piece) + 1
+        window = " ".join(pieces)[:length]
+        result.append(window)
+    return result
+
+
+def test_suffix_automaton_matches_cross_parsing_on_the_reference():
+    reference = " ".join(reversed(REFERENCE_WORDS))
+    index = SuffixAutomaton(reference)
+    windows = _pseudo_random_windows(2000)
+    windows += list("abcxyz q") + ["\u00e9", "0", " ", reference[:300]]
+    assert {len(window) for window in windows} >= {1, 2, 150, 300}
+    for window in windows:
+        expected = cross_parsing(window, reference)
+        assert index.phrases(window) == round(expected * len(window))
+        assert index.cross_parsing(window) == expected
 
 
 def test_primed_compression_uses_raw_deflate_with_dictionary():

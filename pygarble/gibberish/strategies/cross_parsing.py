@@ -1,7 +1,24 @@
 """Ziv-Merhav cross parsing against an English word reference."""
 
-from ..measures import cross_parsing
+import threading
+from typing import Optional
+
+from ..measures import SuffixAutomaton
 from ._windowed import WindowedStrategy, reference_text
+
+# Built on first use, not at import; the lock keeps threads from building
+# it more than once.
+_INDEX: Optional[SuffixAutomaton] = None
+_INDEX_LOCK = threading.Lock()
+
+
+def _index() -> SuffixAutomaton:
+    global _INDEX
+    if _INDEX is None:
+        with _INDEX_LOCK:
+            if _INDEX is None:
+                _INDEX = SuffixAutomaton(reference_text())
+    return _INDEX
 
 
 class CrossParsingStrategy(WindowedStrategy):
@@ -32,4 +49,4 @@ class CrossParsingStrategy(WindowedStrategy):
     reason = "cross_parsing_rate"
 
     def _raw(self, window: str) -> float:
-        return cross_parsing(window, reference_text())
+        return _index().cross_parsing(window)

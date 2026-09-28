@@ -6,6 +6,7 @@ built tables. Higher values always mean less like English.
 """
 
 import zlib
+from array import array
 from collections import Counter
 from typing import List, Mapping, MutableSequence, Sequence, Tuple, TypeVar
 
@@ -98,6 +99,80 @@ def cross_parsing(window: str, reference: str) -> float:
         i += max(k - 1, 1)
         phrases += 1
     return phrases / n
+
+
+class SuffixAutomaton:
+    """Index of every substring of ``reference`` for fast cross parsing.
+
+    ``phrases`` and ``cross_parsing`` give exactly what ``cross_parsing``
+    gives for the same reference. Transitions are one flat array with a
+    row per state and a column per character of the reference; -1 marks
+    a missing transition.
+    """
+
+    def __init__(self, reference: str) -> None:
+        self.codes = {c: i for i, c in enumerate(sorted(set(reference)))}
+        width = len(self.codes)
+        empty = array("i", [-1]) * width
+        trans = array("i", empty)
+        # Suffix links and longest lengths are needed only while building.
+        link = [-1]
+        longest = [0]
+        last = 0
+        for character in reference:
+            c = self.codes[character]
+            current = len(longest)
+            longest.append(longest[last] + 1)
+            link.append(0)
+            trans.extend(empty)
+            p = last
+            while p != -1 and trans[p * width + c] == -1:
+                trans[p * width + c] = current
+                p = link[p]
+            if p != -1:
+                q = trans[p * width + c]
+                if longest[p] + 1 == longest[q]:
+                    link[current] = q
+                else:
+                    clone = len(longest)
+                    longest.append(longest[p] + 1)
+                    link.append(link[q])
+                    trans.extend(trans[q * width : (q + 1) * width])
+                    while p != -1 and trans[p * width + c] == q:
+                        trans[p * width + c] = clone
+                        p = link[p]
+                    link[q] = clone
+                    link[current] = clone
+            last = current
+        self.width = width
+        self.trans = trans
+
+    def phrases(self, window: str) -> int:
+        """Number of Ziv-Merhav phrases in ``window``."""
+        codes = self.codes
+        trans = self.trans
+        width = self.width
+        n = len(window)
+        i = phrases = 0
+        while i < n:
+            # Walk from the root until a character has no transition.
+            state = 0
+            j = i
+            while j < n:
+                c = codes.get(window[j])
+                if c is None:
+                    break
+                state = trans[state * width + c]
+                if state < 0:
+                    break
+                j += 1
+            i += max(j - i, 1)
+            phrases += 1
+        return phrases
+
+    def cross_parsing(self, window: str) -> float:
+        """Phrases per character, as ``cross_parsing`` computes it."""
+        return self.phrases(window) / len(window)
 
 
 def primed_compression(window: str, dictionary: bytes) -> float:

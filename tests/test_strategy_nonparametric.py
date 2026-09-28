@@ -1,13 +1,23 @@
 """Non-parametric strategies: windowed English-reference statistics."""
 
 import statistics
+import subprocess
+import sys
+import time
 
 import pytest
 
 from pygarble import GarbleDetector, Strategy
 from pygarble.data import STATISTIC_NULL
-from pygarble.gibberish.measures import bucket, standardised, windows
+from pygarble.gibberish.measures import (
+    SuffixAutomaton,
+    bucket,
+    cross_parsing,
+    standardised,
+    windows,
+)
 from pygarble.gibberish.scoring import sigmoid
+from pygarble.gibberish.strategies._windowed import reference_text
 from pygarble.preprocessing import TextFeatures
 from pygarble.registry import STRATEGY_MAP
 
@@ -344,3 +354,41 @@ def test_strategy_names_and_order():
         "NGramRankStrategy",
         "PermutationTestStrategy",
     ]
+
+
+def test_cross_parsing_index_is_not_built_at_import():
+    code = (
+        "import pygarble\n"
+        "from pygarble.gibberish.strategies import cross_parsing\n"
+        "assert cross_parsing._INDEX is None\n"
+        "pygarble.GarbleDetector(pygarble.Strategy.CROSS_PARSING)\n"
+        "assert cross_parsing._INDEX is None\n"
+    )
+    subprocess.run([sys.executable, "-c", code], check=True)
+
+
+def test_cross_parsing_index_is_built_once_across_threads(monkeypatch):
+    from pygarble.gibberish.strategies import cross_parsing as module
+
+    built = []
+
+    class Counting(SuffixAutomaton):
+        def __init__(self, reference):
+            built.append(reference)
+            time.sleep(0.05)
+            super().__init__(reference)
+
+    monkeypatch.setattr(module, "_INDEX", None)
+    monkeypatch.setattr(module, "SuffixAutomaton", Counting)
+    table = STATISTIC_NULL["cross_parsing"]
+    texts = [ENGLISH[1], SPEC_INVENTED, MASH] * 10
+    expected = []
+    for text in texts:
+        window = " ".join(TextFeatures(text).ascii_words)
+        raw = cross_parsing(window, reference_text())
+        expected.append(
+            _score_of(standardised(raw, bucket(len(window)), table))
+        )
+    detector = GarbleDetector(Strategy.CROSS_PARSING, threads=8)
+    assert detector.score(texts) == expected
+    assert len(built) == 1
