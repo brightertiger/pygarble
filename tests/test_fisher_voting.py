@@ -1,5 +1,6 @@
 """Fisher voting: tail p-values, their combination and english_fusion."""
 
+import itertools
 import math
 import subprocess
 import sys
@@ -16,6 +17,7 @@ from pygarble.gibberish.fisher import (
     fisher_score,
     tail_p_value,
 )
+from pygarble.gibberish.measures import Lcg
 
 THRESHOLDS = (0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9)
 FUSION = [
@@ -94,6 +96,63 @@ def test_quiet_members_score_zero():
 
 def test_combined_p_value_is_capped_at_one():
     assert combined_p_value([1.0] * 32) <= 1.0
+
+
+def _direct_series(p_values):
+    # The combination as first shipped, kept to pin the fast path.
+    half = -sum(math.log(p) for p in p_values)
+    term = total = 1.0
+    for j in range(1, len(p_values)):
+        term *= half / j
+        total += term
+    return min(1.0, math.prod(p_values) * total)
+
+
+def test_combined_p_value_matches_the_direct_series_bit_for_bit():
+    grid = (1.0,) + TAIL_GRID
+    lcg = Lcg(20260929)
+    checked = 0
+    for k in range(1, 33):
+        for _ in range(3000):
+            p_values = [grid[lcg.below(len(grid))] for _ in range(k)]
+            assert combined_p_value(p_values) == _direct_series(p_values)
+            checked += 1
+    for k in (1, 2, 3):
+        for p_values in itertools.product(grid, repeat=k):
+            assert combined_p_value(p_values) == _direct_series(p_values)
+            checked += 1
+    assert checked == 97110
+
+
+@pytest.mark.parametrize("k", [244, 500, 1000, 2000])
+def test_combined_p_value_survives_many_extreme_members(k):
+    p = combined_p_value([0.001] * k)
+    assert not math.isnan(p)
+    assert math.isfinite(p)
+    assert 0.0 <= p < 1e-300
+    assert fisher_score(p, 0.001) == 1.0
+
+
+def test_combined_p_value_survives_an_underflowing_product():
+    # 0.001 ** 110 underflows while the series stays finite.
+    p = combined_p_value([0.001] * 110)
+    half = 110 * math.log(1000)
+    log_terms = [j * math.log(half) - math.lgamma(j + 1) for j in range(110)]
+    peak = max(log_terms)
+    log_sum = peak + math.log(sum(math.exp(t - peak) for t in log_terms))
+    assert p == pytest.approx(math.exp(log_sum - half), rel=1e-9)
+    assert 1e-193 < p < 1e-192
+
+
+def test_combined_p_value_stays_near_one_for_many_quiet_members():
+    # 0.5 ** 1100 underflows and the series overflows; the chi-square
+    # survival at 2200 degrees of freedom and X = 1525 is close to 1.
+    assert combined_p_value([0.5] * 1100) == pytest.approx(1.0)
+    assert combined_p_value([0.5] * 1100) <= 1.0
+
+
+def test_fisher_score_reaches_one():
+    assert fisher_score(1e-100, 0.5) == 1.0
 
 
 def test_fisher_score_decides_at_alpha():
@@ -330,6 +389,41 @@ def test_fisher_voting_accepts_any_strategy(strategy):
         analysis = detector.analyze(text)
         assert 0.0 <= analysis.score <= 1.0
         assert detector.predict(text) is analysis.garbled
+
+
+@pytest.mark.parametrize(
+    "strategies",
+    [
+        ["word_lookup", "word_lookup"],
+        [Strategy.CROSS_PARSING, "markov_chain", "cross_parsing"],
+    ],
+)
+def test_fisher_voting_rejects_duplicate_members(strategies):
+    with pytest.raises(ValueError, match="duplicate"):
+        EnsembleDetector(strategies=strategies, voting="fisher")
+
+
+@pytest.mark.parametrize(
+    "voting", ["majority", "any", "all", "average", "weighted"]
+)
+def test_other_voting_modes_still_accept_duplicate_members(voting):
+    weighted = voting == "weighted"
+    doubled = EnsembleDetector(
+        strategies=["markov_chain", "markov_chain"],
+        voting=voting,
+        weights=[1.0, 2.0] if weighted else None,
+    )
+    assert doubled.strategies == [Strategy.MARKOV_CHAIN] * 2
+    single = EnsembleDetector(
+        strategies=["markov_chain"],
+        voting=voting,
+        weights=[1.0] if weighted else None,
+    )
+    for text in (MASH, ENGLISH[1]):
+        analysis = doubled.analyze(text)
+        assert len(analysis.signals) == 2
+        assert analysis.score == single.analyze(text).score
+        assert analysis.garbled == single.analyze(text).garbled
 
 
 def test_fisher_voting_without_applicable_members():

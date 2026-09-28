@@ -22,7 +22,8 @@ All notable changes to pygarble are documented here. The format follows
   equals `fisher_alpha`. It is opt-in and heuristic: members are correlated
   and the null is synthetic, so `fisher_alpha` is not a guaranteed
   false-positive rate. Passing `fisher_alpha` with another voting mode emits
-  a `FutureWarning`.
+  a `FutureWarning`; a strategy listed twice raises `ValueError` under
+  `fisher` only.
 - `SCORE_NULL_TAILS` in `pygarble.data`: per-strategy score thresholds on
   the synthetic English null, loaded only for Fisher voting.
 - Opt-in `english_fusion` profile: `WORD_LOOKUP`, `LOG_LIKELIHOOD_RATIO` and

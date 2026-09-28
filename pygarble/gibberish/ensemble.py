@@ -151,6 +151,12 @@ class EnsembleDetector:
         self._tails: Dict[str, Sequence[float]] = {}
         self._tail_grid: Sequence[float] = ()
         if self.voting == "fisher":
+            # A repeated member is perfectly dependent on itself, and
+            # Fisher's method would count its evidence twice.
+            if len(set(members)) != len(members):
+                raise ValueError(
+                    "voting='fisher' does not accept duplicate strategies"
+                )
             from ..data import SCORE_NULL_TAILS, TAIL_GRID
 
             self._tails = {s.value: SCORE_NULL_TAILS[s.value] for s in members}

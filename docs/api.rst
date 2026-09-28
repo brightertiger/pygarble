@@ -252,8 +252,10 @@ ignored; ``weights`` are ignored under ``fisher`` as under every mode except
 ``weighted``. The value is a heuristic: members are correlated and the null is
 synthetic, so ``fisher_alpha`` is not a guaranteed false-positive rate. The
 null tables describe default-constructed strategies, so member settings and
-allowlists shift scores without shifting the tables. The tables load only
-when ``fisher`` voting is used.
+allowlists shift scores without shifting the tables. A strategy listed twice
+raises ``ValueError`` under ``fisher``, since its evidence would count twice;
+other modes accept repeats as before. The tables load only when ``fisher``
+voting is used.
 
 .. code-block:: python
 
