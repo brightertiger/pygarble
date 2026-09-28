@@ -6,6 +6,15 @@ All notable changes to pygarble are documented here. The format follows
 ## [Unreleased]
 
 ### Added
+- Four English-reference strategies, `CROSS_PARSING`,
+  `PRIMED_COMPRESSION`, `NGRAM_RANK` and `PERMUTATION_TEST`, which compare
+  the lowercase ASCII words of a text with frequent English (cross parsing,
+  preset-dictionary deflate, character n-gram ranks and a letter-shuffle
+  permutation test). Each is standardised against a synthetic English null
+  and scored as the median over 127-character windows; they need at least
+  8 letters and are not members of any existing profile.
+  `PRIMED_COMPRESSION` sizes come from the platform's zlib, so its scores
+  can differ slightly between zlib builds.
 - Documentation discovery metadata, a generated sitemap and `llms.txt`,
   optional Search Console verification, and a publishing/discoverability guide.
 - Root contributor and security guides, issue templates, and package metadata

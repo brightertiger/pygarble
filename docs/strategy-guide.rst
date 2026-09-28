@@ -51,6 +51,36 @@ positive assertion that the text is meaningful. See :doc:`api` for other
 voting policies and score semantics, and :doc:`calibration` for threshold
 selection on your own labelled data.
 
+English-reference window strategies
+-----------------------------------
+
+Four strategies compare text with frequent English instead of applying
+hand-written rules. They read only the lowercase ASCII words, so numbers,
+URLs, versions and allowlisted words are left out, and they are not members
+of any named profile.
+
+* ``cross_parsing`` counts how many pieces are needed to spell the text from
+  a reference built from common English words. English reuses long pieces;
+  invented or mashed text breaks into many short ones.
+* ``primed_compression`` compresses the text with the same English words as
+  a preset dictionary. English compresses well against it; invented text
+  does not. Compressed sizes come from the platform's zlib, so scores can
+  differ slightly between zlib builds (for example zlib-ng).
+* ``ngram_rank`` ranks the text's one- to three-letter sequences by
+  frequency and measures how far those ranks are from English.
+* ``permutation_test`` asks how much more English-like the letter order is
+  than shuffles of the same letters. It is the weakest of the four on
+  pronounceable invented words, whose letter order is itself English-like,
+  and works best on keyboard mashing.
+
+Each statistic is measured against synthetic English of the same length,
+and a score of 0.5 sits well beyond what that English reaches. They are
+English-reference methods: other languages, including meaningful Hindi or
+French, will be flagged. They need at least 8 letters (``min_length``) and
+become more reliable as text gets longer; text beyond 127 characters is
+split into windows and the median window decides, so one odd passage in a
+long document does not flag it.
+
 Control characters: new in 0.9.0
 --------------------------------
 
@@ -161,7 +191,7 @@ that retries or rejects a response before it reaches a user.
 Tune on your own data
 ---------------------
 
-All 28 strategies remain individually available. Check both valid English inputs
+All 32 strategies remain individually available. Check both valid English inputs
 and expected corruption, including domain terms, identifiers, and short strings.
 Scores are not calibrated probabilities, and no strategy guarantees zero false
 positives. See :doc:`api` for voting and abstention, and :doc:`migration` for changes

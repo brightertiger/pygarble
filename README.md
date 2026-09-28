@@ -228,7 +228,7 @@ for span in result.spans:
 payload = json.dumps(asdict(result))
 ```
 
-All 28 strategies are available through `GarbleDetector` and the `Strategy` enum; see the [strategy guide](https://brightertiger.github.io/pygarble/strategy-guide.html). `analyze()` records the decision, score, status, per-strategy signals and spans (Python string offsets, exclusive end). Empty or wholly inapplicable input returns `False` with status `insufficient_evidence`.
+All 32 strategies are available through `GarbleDetector` and the `Strategy` enum; see the [strategy guide](https://brightertiger.github.io/pygarble/strategy-guide.html). `analyze()` records the decision, score, status, per-strategy signals and spans (Python string offsets, exclusive end). Empty or wholly inapplicable input returns `False` with status `insufficient_evidence`.
 
 ```python
 from pygarble.gibberish import EnsembleDetector
