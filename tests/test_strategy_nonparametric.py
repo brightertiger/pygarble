@@ -1,8 +1,13 @@
 """Non-parametric strategies: windowed English-reference statistics."""
 
+import statistics
+
 import pytest
 
 from pygarble import GarbleDetector, Strategy
+from pygarble.data import STATISTIC_NULL
+from pygarble.gibberish.measures import bucket, standardised, windows
+from pygarble.gibberish.scoring import sigmoid
 from pygarble.preprocessing import TextFeatures
 from pygarble.registry import STRATEGY_MAP
 
@@ -74,6 +79,31 @@ REASONS = {
 
 def _repeat(text, length):
     return (text * (length // len(text) + 1))[:length].rsplit(" ", 1)[0]
+
+
+# Normalised pieces that the window split keeps apart: two English
+# windows of 125 characters and one of keyboard mash.
+WINDOW_ENGLISH = [
+    "the library opens at nine in the morning and closes at six in the "
+    "evening and most visitors come to read the newspapers today",
+    "on saturdays the room is full of families and a volunteer reads "
+    "stories to the youngest ones while their parents choose books",
+]
+WINDOW_MASH = MASH
+
+
+def _window_values(strategy, parts):
+    instance = STRATEGY_MAP[strategy]()
+    assert windows(" ".join(parts)) == parts
+    table = STATISTIC_NULL[instance.statistic]
+    return [
+        standardised(instance._raw(part), bucket(len(part)), table)
+        for part in parts
+    ]
+
+
+def _score_of(z):
+    return sigmoid(2.0 * (z - 1.5))
 
 
 @pytest.mark.parametrize("strategy", NONPARAMETRIC, ids=lambda s: s.value)
@@ -170,6 +200,46 @@ def test_long_text_is_scored_through_windows(strategy):
     # The median over windows ignores one invented window among English.
     mixed = _repeat(LONG_ENGLISH, 1000) + " " + _invented(strategy)
     assert detector.score(mixed) < 0.5
+
+
+# Pinned end to end: raw statistic, bucket 1 null row (median, q99) and
+# sigmoid(2 * (z - 1.5)). primed_compression depends on the platform's
+# zlib, so it is not pinned.
+@pytest.mark.parametrize(
+    ("strategy", "expected"),
+    [
+        (Strategy.CROSS_PARSING, 0.03235209733765385),
+        (Strategy.NGRAM_RANK, 0.07163101410991993),
+        (Strategy.PERMUTATION_TEST, 0.014897384519839286),
+    ],
+    ids=["cross_parsing", "ngram_rank", "permutation_test"],
+)
+def test_exact_score_on_short_text(strategy, expected):
+    score = GarbleDetector(strategy).score("hello world again")
+    assert score == pytest.approx(expected, rel=1e-12)
+
+
+@pytest.mark.parametrize("strategy", NONPARAMETRIC, ids=lambda s: s.value)
+def test_two_windows_score_the_mean_of_both(strategy):
+    parts = [WINDOW_ENGLISH[0], WINDOW_MASH]
+    first, second = _window_values(strategy, parts)
+    assert second - first > 1.0
+    score = GarbleDetector(strategy).score(" ".join(parts))
+    assert score == pytest.approx(_score_of((first + second) / 2), rel=1e-12)
+    assert score != pytest.approx(_score_of(first), rel=1e-3)
+    assert score != pytest.approx(_score_of(second), rel=1e-3)
+
+
+@pytest.mark.parametrize("strategy", NONPARAMETRIC, ids=lambda s: s.value)
+def test_three_windows_score_the_median(strategy):
+    parts = WINDOW_ENGLISH + [WINDOW_MASH]
+    values = _window_values(strategy, parts)
+    median = statistics.median(values)
+    mean = sum(values) / len(values)
+    assert mean - median > 0.5
+    score = GarbleDetector(strategy).score(" ".join(parts))
+    assert score == pytest.approx(_score_of(median), rel=1e-12)
+    assert score != pytest.approx(_score_of(mean), rel=1e-3)
 
 
 @pytest.mark.parametrize("strategy", NONPARAMETRIC, ids=lambda s: s.value)
