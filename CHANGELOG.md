@@ -15,6 +15,21 @@ All notable changes to pygarble are documented here. The format follows
   8 letters and are not members of any existing profile.
   `PRIMED_COMPRESSION` sizes come from the platform's zlib, so its scores
   can differ slightly between zlib builds.
+- `EnsembleDetector(voting="fisher")` with keyword-only `fisher_alpha`
+  (default 0.001). Each applicable member's score is read against that
+  strategy's scores on a synthetic English null to give a tail p-value, and
+  Fisher's method combines them; the score is 0.5 when the combined p-value
+  equals `fisher_alpha`. It is opt-in and heuristic: members are correlated
+  and the null is synthetic, so `fisher_alpha` is not a guaranteed
+  false-positive rate. Passing `fisher_alpha` with another voting mode emits
+  a `FutureWarning`.
+- `SCORE_NULL_TAILS` in `pygarble.data`: per-strategy score thresholds on
+  the synthetic English null, loaded only for Fisher voting.
+- Opt-in `english_fusion` profile: `WORD_LOOKUP`, `LOG_LIKELIHOOD_RATIO` and
+  `CROSS_PARSING` with `fisher` voting by default. Its members are
+  English-reference methods and flag other languages. Existing profiles,
+  their voting and the `EnsembleDetector()` default are unchanged; the
+  golden corpus gains `english_fusion` rows only.
 - Documentation discovery metadata, a generated sitemap and `llms.txt`,
   optional Search Console verification, and a publishing/discoverability guide.
 - Root contributor and security guides, issue templates, and package metadata

@@ -31,7 +31,8 @@ Lexical and statistical strategies
   contribute half weight. The default score is the weighted unknown fraction;
   a score of at least 0.5 flags the input. No eligible tokens yields zero,
   which is not evidence of linguistic understanding. Word lookup is not a
-  member of the named English profiles.
+  member of the ``english``, ``english_extended`` or ``legacy`` profiles; it
+  is a member of the opt-in ``english_fusion`` profile described below.
 * ``markov_chain`` measures English character-transition likelihood over
   novel tokens. Dictionary-supported and recognized structured tokens do
   not contribute novelty evidence. Unlikely transitions increase the score.
@@ -44,7 +45,8 @@ Lexical and statistical strategies
   It detected no positive chunks at its default threshold in this study.
 
 Scores are strategy-specific evidence. Named English ensembles use ``any``
-voting across applicable strategies; an inapplicable strategy does not vote.
+voting across applicable strategies, except ``english_fusion``, which uses
+``fisher``; an inapplicable strategy does not vote.
 When all strategies are inapplicable, ``analyze()`` reports
 ``insufficient_evidence`` and an unflagged decision. That differs from a
 positive assertion that the text is meaningful. See :doc:`api` for other
@@ -56,8 +58,9 @@ English-reference window strategies
 
 Four strategies compare text with frequent English instead of applying
 hand-written rules. They read only the lowercase ASCII words, so numbers,
-URLs, versions and allowlisted words are left out, and they are not members
-of any named profile.
+URLs, versions and allowlisted words are left out. ``cross_parsing`` is a
+member of the opt-in ``english_fusion`` profile; the other three are not
+members of any named profile.
 
 * ``cross_parsing`` counts how many pieces are needed to spell the text from
   a reference built from common English words. English reuses long pieces;
@@ -80,6 +83,41 @@ French, will be flagged. They need at least 8 letters (``min_length``) and
 become more reliable as text gets longer; text beyond 127 characters is
 split into windows and the median window decides, so one odd passage in a
 long document does not flag it.
+
+Fisher voting and the english_fusion profile
+--------------------------------------------
+
+``voting="fisher"`` treats each applicable member's score as a test
+statistic. A table shipped with the package records what that strategy
+scores on synthetic English (word salads drawn by word frequency, 8 to 480
+characters), and the member's p-value is the smallest tail probability, from
+0.5 down to 0.001, whose threshold the score strictly exceeds. Fisher's method
+combines the p-values, and ``fisher_alpha`` (default 0.001) places the combined
+p-value that scores exactly 0.5. Fisher voting is opt-in and works with any
+profile or strategy list.
+
+The ``english_fusion`` profile uses it over three views of the same question:
+unknown words (``word_lookup``), character transitions
+(``log_likelihood_ratio``) and reuse of English phrases (``cross_parsing``). A
+text needs agreement between members, or one member far outside what the null
+reaches, to be flagged.
+
+This is a heuristic, not a test with a guaranteed error rate. The members are
+correlated, which Fisher's method does not account for, and synthetic word
+salads are not real English, so the real false-positive rate at a given
+``fisher_alpha`` can be higher or lower. All three members are
+English-reference methods, so other languages are flagged. Measure the profile
+on your own data before relying on it.
+
+.. code-block:: python
+
+   from pygarble.gibberish import EnsembleDetector
+
+   fusion = EnsembleDetector(profile="english_fusion")
+   assert fusion.predict("Please send the signed contract by Friday.") is False
+   assert fusion.predict("asdkfj qwpoeiru zxmcnv lkjasdf poiuqwer") is True
+
+   strict = EnsembleDetector(profile="english_fusion", fisher_alpha=0.0001)
 
 Control characters: new in 0.9.0
 --------------------------------

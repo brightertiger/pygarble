@@ -19,6 +19,7 @@ Profiles
 * ``corruption``: ``MOJIBAKE``, ``CONTROL_CHARACTERS``
 * ``spoofing``: ``UNICODE_SCRIPT``
 * ``llm_output``: ``REPETITION``, ``CONTROL_CHARACTERS``, ``MOJIBAKE``, ``LOCAL_ANOMALY``
+* ``english_fusion``: ``WORD_LOOKUP``, ``LOG_LIKELIHOOD_RATIO``, ``CROSS_PARSING`` (``fisher`` voting)
 
 Strategy settings
 -----------------
