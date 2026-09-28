@@ -78,8 +78,11 @@ members of any named profile.
 
 Each statistic is measured against synthetic English of the same length,
 and a score of 0.5 sits well beyond what that English reaches. They are
-English-reference methods: other languages, including meaningful Hindi or
-French, will be flagged. They need at least 8 letters (``min_length``) and
+English-reference methods. Other languages written in Latin letters may be
+flagged, more so the less they resemble English: ordinary French and German
+sentences mostly score below 0.5, while romanised Hindi is flagged more often.
+Text in other scripts has no ASCII letters and is not scored (it reports
+``insufficient_evidence``). They need at least 8 letters (``min_length``) and
 become more reliable as text gets longer; text beyond 127 characters is
 split into windows and the median window decides, so one odd passage in a
 long document does not flag it.
@@ -106,8 +109,9 @@ This is a heuristic, not a test with a guaranteed error rate. The members are
 correlated, which Fisher's method does not account for, and synthetic word
 salads are not real English, so the real false-positive rate at a given
 ``fisher_alpha`` can be higher or lower. All three members are
-English-reference methods, so other languages are flagged. Measure the profile
-on your own data before relying on it.
+English-reference methods, so other languages written in Latin letters may be
+flagged, more so the less they resemble English. Measure the profile on your
+own data before relying on it.
 
 .. code-block:: python
 

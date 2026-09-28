@@ -27,7 +27,8 @@ All notable changes to pygarble are documented here. The format follows
   the synthetic English null, loaded only for Fisher voting.
 - Opt-in `english_fusion` profile: `WORD_LOOKUP`, `LOG_LIKELIHOOD_RATIO` and
   `CROSS_PARSING` with `fisher` voting by default. Its members are
-  English-reference methods and flag other languages. Existing profiles,
+  English-reference methods, so other languages written in Latin letters
+  may be flagged, more so the less they resemble English. Existing profiles,
   their voting and the `EnsembleDetector()` default are unchanged; the
   golden corpus gains `english_fusion` rows only.
 - Documentation discovery metadata, a generated sitemap and `llms.txt`,

@@ -10,9 +10,11 @@ class CrossParsingStrategy(WindowedStrategy):
     The text is parsed left to right into the longest pieces found
     anywhere in a reference built from frequent English words. English
     reuses long pieces of the reference; invented or mashed text breaks
-    into many short ones. This is an English-reference method, so other
-    languages are flagged too. It needs at least ``min_length`` letters
-    (default 8) and grows more reliable with length.
+    into many short ones. This is an English-reference method: other
+    languages written in Latin letters may be flagged, more so the less
+    they resemble English, and text with no ASCII letters is not scored.
+    It needs at least ``min_length`` letters (default 8) and grows more
+    reliable with length.
 
     Args:
         midpoint: standardised value at which the score is 0.5

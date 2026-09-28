@@ -19,9 +19,11 @@ class NGramRankStrategy(WindowedStrategy):
 
     The text's 1- to 3-grams are ranked by frequency and compared with the
     ranks of the same n-grams in English; n-grams English rarely uses
-    carry the largest penalty. This is an English-reference method, so
-    other languages are flagged too. It needs at least ``min_length``
-    letters (default 8) and grows more reliable with length.
+    carry the largest penalty. This is an English-reference method: other
+    languages written in Latin letters may be flagged, more so the less
+    they resemble English, and text with no ASCII letters is not scored.
+    It needs at least ``min_length`` letters (default 8) and grows more
+    reliable with length.
 
     Args:
         midpoint: standardised value at which the score is 0.5

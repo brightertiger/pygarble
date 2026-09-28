@@ -223,8 +223,8 @@ Profiles and aggregation
        on code and technical prose.
    * - ``english_fusion``
      - Opt-in. Word lookup, likelihood ratio and cross parsing combined with
-       ``fisher`` voting; English plausibility only, so other languages are
-       flagged.
+       ``fisher`` voting; English plausibility only, so other languages
+       written in Latin letters may be flagged.
 
 See :doc:`strategy-guide` to choose checks and :doc:`strategies` for
 its current members. Profiles use union voting by default (``english_fusion``

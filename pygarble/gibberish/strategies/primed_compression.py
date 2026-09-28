@@ -17,9 +17,10 @@ class PrimedCompressionStrategy(WindowedStrategy):
     The text is deflated with a preset dictionary of frequent English
     words. English finds long matches in the dictionary and compresses
     well; invented or mashed text does not. This is an English-reference
-    method, so other languages are flagged too. It needs at least
-    ``min_length`` letters (default 8) and grows more reliable with
-    length.
+    method: other languages written in Latin letters may be flagged, more
+    so the less they resemble English, and text with no ASCII letters is
+    not scored. It needs at least ``min_length`` letters (default 8) and
+    grows more reliable with length.
 
     Compressed sizes come from the platform's zlib, so scores can differ
     slightly between zlib builds (for example zlib-ng).

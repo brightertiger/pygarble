@@ -13,9 +13,11 @@ class PermutationTestStrategy(WindowedStrategy):
     English letter order is far more probable under an English bigram
     model than the same letters shuffled; for invented or mashed text the
     gap is small. Shuffles are deterministic. This is an English-reference
-    method, so other languages are flagged too. It needs at least
-    ``min_length`` letters (default 8) and grows more reliable with
-    length; it is the weakest of the windowed strategies on short text.
+    method: other languages written in Latin letters may be flagged, more
+    so the less they resemble English, and text with no ASCII letters is
+    not scored. It needs at least ``min_length`` letters (default 8) and
+    grows more reliable with length; it is the weakest of the windowed
+    strategies on short text.
 
     Args:
         midpoint: standardised value at which the score is 0.5
