@@ -1,11 +1,22 @@
 """Deterministic aggregation with explicit English profiles."""
 
 import warnings
-from typing import Any, Dict, Iterable, List, Mapping, Optional, Tuple, Union
+from typing import (
+    Any,
+    Dict,
+    Iterable,
+    List,
+    Mapping,
+    Optional,
+    Sequence,
+    Tuple,
+    Union,
+)
 
 from ..validation import finite_number, process_input
 from .analysis import Analysis, Signal
 from .detector import GarbleDetector
+from .fisher import combined_p_value, fisher_score, tail_p_value
 from .options import accepted_options, unknown_options, warn_unknown_options
 from .preprocessing import TextFeatures
 from .registry import STRATEGY_MAP, Strategy
@@ -43,10 +54,35 @@ PROFILES = {
         Strategy.MOJIBAKE,
         Strategy.LOCAL_ANOMALY,
     ),
+    # Opt-in fusion of word, character and phrase evidence, each read
+    # against the synthetic English null and combined by Fisher's method.
+    "english_fusion": (
+        Strategy.WORD_LOOKUP,
+        Strategy.LOG_LIKELIHOOD_RATIO,
+        Strategy.CROSS_PARSING,
+    ),
 }
+# Profiles whose default voting is not "any".
+PROFILE_VOTING = {"english_fusion": "fisher"}
+VOTING_MODES = ("majority", "any", "all", "average", "weighted", "fisher")
+DEFAULT_FISHER_ALPHA = 0.001
 
 
 class EnsembleDetector:
+    """Combine several strategies under one voting rule.
+
+    voting="fisher" reads each applicable member's score against that
+    strategy's score distribution on a synthetic English null (word salads
+    drawn by word frequency) to get a tail p-value from a coarse grid
+    (1.0 down to 0.001), combines them with Fisher's method, and reports
+    ``1 - p ** (ln 0.5 / ln fisher_alpha)`` so that the default threshold
+    0.5 flags a combined p-value at or below ``fisher_alpha``. The result
+    is a heuristic: members are correlated and the null is synthetic, so
+    ``fisher_alpha`` is not a guaranteed false-positive rate. The tails
+    describe default-constructed strategies on unmodified text; member
+    options and allowlists shift scores but not the tails.
+    """
+
     def __init__(
         self,
         strategies: Optional[List[Union[Strategy, str]]] = None,
@@ -60,6 +96,7 @@ class EnsembleDetector:
         allowlist: Optional[Iterable[str]] = None,
         max_input_length: Optional[int] = None,
         timeout_per_text: Optional[float] = None,
+        fisher_alpha: Optional[float] = None,
         **kwargs: Any,
     ) -> None:
         if profile is not None and strategies is not None:
@@ -79,17 +116,16 @@ class EnsembleDetector:
         self.voting = (
             voting
             if voting is not None
-            else ("majority" if self.profile == "custom" else "any")
+            else (
+                "majority"
+                if self.profile == "custom"
+                else PROFILE_VOTING.get(self.profile, "any")
+            )
         )
-        if self.voting not in (
-            "majority",
-            "any",
-            "all",
-            "average",
-            "weighted",
-        ):
+        if self.voting not in VOTING_MODES:
             raise ValueError(
-                "voting must be majority, any, all, average, or weighted"
+                "voting must be majority, any, all, average, weighted, "
+                "or fisher"
             )
         if self.voting == "weighted" and weights is None:
             raise ValueError("weights required when voting='weighted'")
@@ -100,6 +136,25 @@ class EnsembleDetector:
                 FutureWarning,
                 stacklevel=2,
             )
+        self.fisher_alpha = DEFAULT_FISHER_ALPHA
+        if fisher_alpha is not None:
+            self.fisher_alpha = finite_number("fisher_alpha", fisher_alpha)
+            if not 0 < self.fisher_alpha < 1:
+                raise ValueError("fisher_alpha must be between 0 and 1")
+            if self.voting != "fisher":
+                warnings.warn(
+                    "fisher_alpha is ignored unless voting='fisher'; this "
+                    "will become an error in a future release",
+                    FutureWarning,
+                    stacklevel=2,
+                )
+        self._tails: Dict[str, Sequence[float]] = {}
+        self._tail_grid: Sequence[float] = ()
+        if self.voting == "fisher":
+            from ..data import SCORE_NULL_TAILS, TAIL_GRID
+
+            self._tails = {s.value: SCORE_NULL_TAILS[s.value] for s in members}
+            self._tail_grid = TAIL_GRID
         self.strategies = list(members)
         if weights is not None and len(weights) != len(members):
             raise ValueError("weights must have same length as strategies")
@@ -197,6 +252,18 @@ class EnsembleDetector:
             score = max(scores)
         elif self.voting == "all":
             score = min(scores)
+        elif self.voting == "fisher":
+            p = combined_p_value(
+                [
+                    tail_p_value(
+                        signal.score,
+                        self._tails[signal.strategy],
+                        self._tail_grid,
+                    )
+                    for signal, _ in pairs
+                ]
+            )
+            score = fisher_score(p, self.fisher_alpha)
         else:
             score = sum(scores) / len(scores)
         if self.voting == "majority":
@@ -274,6 +341,8 @@ class EnsembleDetector:
 
         Under voting='majority' the decision counts member votes, so
         Analysis.garbled can be True while Analysis.score is below threshold.
+        Under voting='fisher' the score maps the combined null p-value;
+        it is not the probability that the text is garbled.
         """
         return process_input(
             X,
