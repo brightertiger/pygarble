@@ -152,6 +152,9 @@ assert 'pygarble.gibberish.strategies' not in sys.modules
 d = api.GarbleDetector('vowel_ratio')
 assert not d.predict('Hello world')
 assert 'pygarble.data.words' not in sys.modules
+assert 'pygarble.data.reference' not in sys.modules
+assert 'pygarble.data.ngram_ranks' not in sys.modules
+assert 'pygarble.data.calibration' not in sys.modules
 assert 'pygarble.gibberish.strategies.markov_chain' not in sys.modules
 """
     result = subprocess.run(

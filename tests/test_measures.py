@@ -184,3 +184,28 @@ def test_standardised_uses_bucket_row():
     assert standardised(0.2, 1, table) == 0.0
     assert standardised(0.0, 3, table) == 0.0
     assert standardised(-0.3, 2, table) == pytest.approx(-1.0)
+
+
+def test_windows_fill_to_exactly_the_limit():
+    first = "a" * 63 + " " + "b" * 63
+    assert len(first) == 127
+    assert windows(first + " " + "c" * 70) == [first, "c" * 70]
+
+
+def test_windows_single_word_just_over_the_limit():
+    assert windows("x" * 128) == ["x" * 128]
+
+
+def test_permutation_gap_seed_and_chained_shuffles():
+    log_probs = {
+        "ab": -1.0,
+        "ba": -3.0,
+        "bc": -1.0,
+        "cb": -2.0,
+        "ac": -4.0,
+        "ca": -5.0,
+    }
+    # CRC-32 of "abc" seeds the generator: the first shuffle is "cab" and
+    # the second continues from it to "cba".
+    assert permutation_gap("abc", log_probs, -10.0, shuffles=1) == -2.0
+    assert permutation_gap("abc", log_probs, -10.0, shuffles=2) == -1.75
