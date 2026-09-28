@@ -28,9 +28,17 @@ INVENTED = (
     "alganth morphobon nila napt morja hoppa norla sappa nubi sanos"
 )
 
+# The pronounceable invented text given as an example in the design.
+SPEC_INVENTED = (
+    "glorb biga nuba sinja dabba horp minbo samboz sillinth manj hoopi "
+    "alganth morphobon nila napt"
+)
+
 # Letter order barely differs from its own shuffles in pronounceable
 # invented text, so the permutation test needs less English-like pairs:
-# it scores INVENTED (128 characters) at about 0.26.
+# it scores INVENTED at about 0.26. INVENTED is 128 characters, so it is
+# split into a 122-character window and a 5-character tail, which is
+# dropped.
 INVENTED_DOUBLED = (
     "ukka tavo pleem zirra gonfu yaxel mibbo tuzza kwelo farn dibbo zeeka "
     "loppu vint oggu pazzi reemo kuvva zolla yubbe teevo naxxa"
@@ -43,9 +51,7 @@ def _invented(strategy):
     return INVENTED
 
 
-MASH = (
-    "asdkfj qwpeoriu zxmcnv lkjhsdf poiuqwe mnbvzx asdlkfj qwerpoiu " "hjklgf"
-)
+MASH = "asdkfj qwpeoriu zxmcnv lkjhsdf poiuqwe mnbvzx asdlkfj qwerpoiu hjklgf"
 
 LONG_ENGLISH = (
     "The library opens at nine in the morning and closes at six in the "
@@ -102,6 +108,20 @@ def test_sixty_characters_of_invented_text_score_high(strategy):
     text = INVENTED[:65]
     assert len(text) == 65 and text.endswith("hoopi")
     assert GarbleDetector(strategy).score(text) > 0.5
+
+
+def test_permutation_test_misses_pronounceable_invented_text():
+    # Documents a known weakness, not desired behaviour: pronounceable
+    # invented words already have English-like letter order, so they are
+    # barely likelier than their own shuffles and the permutation test
+    # scores them as clean. The other three strategies flag the same text.
+    text = SPEC_INVENTED
+    permutation = GarbleDetector(Strategy.PERMUTATION_TEST)
+    assert permutation.score(text) < 0.5
+    # More text does not help: every window has the same weakness.
+    assert permutation.score(_repeat(text + " ", 2000)) < 0.5
+    for strategy in NONPARAMETRIC[:3]:
+        assert GarbleDetector(strategy).score(text) > 0.5
 
 
 @pytest.mark.parametrize("strategy", NONPARAMETRIC, ids=lambda s: s.value)

@@ -72,9 +72,11 @@ members of any named profile.
 * ``ngram_rank`` ranks the text's one- to three-letter sequences by
   frequency and measures how far those ranks are from English.
 * ``permutation_test`` asks how much more English-like the letter order is
-  than shuffles of the same letters. It is the weakest of the four on
-  pronounceable invented words, whose letter order is itself English-like,
-  and works best on keyboard mashing.
+  than shuffles of the same letters. It detects text whose letter order
+  carries no English structure, such as keyboard mash or random letters.
+  Pronounceable invented words already have English-like letter order, so
+  it often misses them at any length, not only in short text; it is the
+  weakest of the four on such text.
 
 Each statistic is measured against synthetic English of the same length,
 and a score of 0.5 sits well beyond what that English reaches. They are

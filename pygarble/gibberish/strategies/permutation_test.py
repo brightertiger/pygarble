@@ -11,13 +11,15 @@ class PermutationTestStrategy(WindowedStrategy):
     """How much likelier the text is than shuffles of its own letters.
 
     English letter order is far more probable under an English bigram
-    model than the same letters shuffled; for invented or mashed text the
-    gap is small. Shuffles are deterministic. This is an English-reference
-    method: other languages written in Latin letters may be flagged, more
-    so the less they resemble English, and text with no ASCII letters is
-    not scored. It needs at least ``min_length`` letters (default 8) and
-    grows more reliable with length; it is the weakest of the windowed
-    strategies on short text.
+    model than the same letters shuffled. It detects text whose letter
+    order carries no English structure, such as keyboard mash or random
+    letters. Pronounceable invented words already have English-like
+    letter order, so it often misses them at any length; it is the
+    weakest of the windowed strategies on such text. Shuffles are
+    deterministic. This is an English-reference method: other languages
+    written in Latin letters may be flagged, more so the less they
+    resemble English, and text with no ASCII letters is not scored. It
+    needs at least ``min_length`` letters (default 8).
 
     Args:
         midpoint: standardised value at which the score is 0.5
