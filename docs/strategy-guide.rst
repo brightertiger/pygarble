@@ -79,7 +79,7 @@ members of any named profile.
   weakest of the four on such text.
 
 Each statistic is measured against synthetic English of the same length,
-and a score of 0.5 sits well beyond what that English reaches. They are
+and a score of 0.5 sits beyond the 99th percentile of that English. They are
 English-reference methods, so meaningful text in other languages written in
 Latin letters can be flagged. In spot checks, some ordinary French, German and
 Spanish sentences scored above 0.5 on ``cross_parsing`` and
