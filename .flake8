@@ -5,5 +5,8 @@ per-file-ignores =
     pygarble/data/words.py:E501
     pygarble/data/bigrams.py:E501
     pygarble/data/trigrams.py:E501
+    pygarble/data/reference.py:E501
+    pygarble/data/ngram_ranks.py:E501
+    pygarble/data/calibration.py:E501
     paper/scripts/*.py:E402
     paper/regression/*.py:E402

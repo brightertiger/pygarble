@@ -39,6 +39,9 @@ JSON_TABLES = (
     "secrets.json",
     "pii.json",
     "profanity.json",
+    "reference.json",
+    "ngram_ranks.json",
+    "calibration.json",
 )
 
 

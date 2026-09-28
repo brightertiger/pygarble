@@ -13,6 +13,7 @@ The generated files are committed to the repository.
 """
 
 import argparse
+import bisect
 import hashlib
 import json
 import math
@@ -21,7 +22,7 @@ import tempfile
 import urllib.request
 from collections import Counter, defaultdict
 from pathlib import Path
-from typing import Dict, Set, Tuple
+from typing import Dict, List, Sequence, Set, Tuple
 
 # URLs for data sources
 NORVIG_WORD_FREQ_URL = "https://norvig.com/ngrams/count_1w.txt"
@@ -34,6 +35,23 @@ DATA_DIR = PROJECT_ROOT / "pygarble" / "data"
 
 # Log probability for unseen bigrams, shared by the .py and .json tables
 DEFAULT_LOG_PROB = -10.0
+
+# Reference text for the non-parametric strategies (deflate window size)
+REFERENCE_BYTES = 32768
+NGRAM_RANK_SIZE = 1000
+
+# Synthetic English null used to standardise the non-parametric statistics
+STATISTIC_NULL_SEED = 20260929
+STATISTIC_NULL_RANGES = ((8, 15), (16, 31), (32, 63), (64, 127))
+NULL_TEXTS_PER_RANGE = 2000
+NULL_MIN_LENGTH = 8
+STATISTICS = (
+    "cross_parsing",
+    "primed_compression",
+    "ngram_rank",
+    "permutation_test",
+)
+TAIL_GRID = (0.5, 0.25, 0.1, 0.05, 0.025, 0.01, 0.005, 0.0025, 0.001)
 
 
 def download_word_frequencies(url: str) -> Dict[str, int]:
@@ -150,6 +168,133 @@ def compute_trigram_frequencies(
 
     print(f"  Generated {len(top_trigrams)} common trigrams")
     return top_trigrams
+
+
+def select_reference_words(
+    words: Set[str], word_freq: Dict[str, int]
+) -> List[str]:
+    """Most frequent shipped words that fit the deflate window."""
+    ordered = sorted(words, key=lambda w: (-word_freq.get(w, 0), w))
+    selected: List[str] = []
+    size = -1
+    for word in ordered:
+        if size + 1 + len(word) > REFERENCE_BYTES:
+            break
+        selected.append(word)
+        size += 1 + len(word)
+    print(f"  Selected {len(selected)} reference words")
+    return selected
+
+
+def compute_ngram_ranks(
+    word_freq: Dict[str, int], top_n: int = NGRAM_RANK_SIZE
+) -> List[str]:
+    """Most frequent padded character 1- to 3-grams, in rank order."""
+    print(f"Computing top {top_n} n-gram ranks...")
+    counts: Dict[str, int] = defaultdict(int)
+    for word, freq in word_freq.items():
+        padded = " " + word + " "
+        for n in (1, 2, 3):
+            for i in range(len(padded) - n + 1):
+                counts[padded[i : i + n]] += freq
+    ordered = sorted(counts.items(), key=lambda item: (-item[1], item[0]))
+    return [gram for gram, _ in ordered[:top_n]]
+
+
+def load_null_words(text: str) -> Tuple[List[str], List[int]]:
+    """Null vocabulary in file order with cumulative counts."""
+    words: List[str] = []
+    cumulative: List[int] = []
+    total = 0
+    for line in text.splitlines():
+        word, count = line.split("\t")
+        if word.isalpha() and (len(word) >= 2 or word in ("a", "i")):
+            total += int(count)
+            words.append(word)
+            cumulative.append(total)
+    return words, cumulative
+
+
+def synthetic_texts(
+    words: Sequence[str],
+    cumulative: Sequence[int],
+    seed: int,
+    ranges: Sequence[Tuple[int, int]],
+    per_range: int = NULL_TEXTS_PER_RANGE,
+) -> List[str]:
+    """Frequency-weighted word salads with lengths drawn per range."""
+    from pygarble.gibberish.measures import Lcg
+
+    rng = Lcg(seed)
+    total = cumulative[-1]
+
+    def draw() -> str:
+        return words[bisect.bisect_right(cumulative, rng.below(total))]
+
+    texts = []
+    for lo, hi in ranges:
+        for _ in range(per_range):
+            target = lo + rng.below(hi - lo + 1)
+            text = draw()
+            while True:
+                word = draw()
+                if len(text) + 1 + len(word) > target:
+                    break
+                text += " " + word
+            texts.append(text)
+    return texts
+
+
+def quantile(values: Sequence[float], p: float) -> float:
+    """Lower empirical quantile of sorted ``values``."""
+    return values[min(len(values) - 1, int(p * len(values)))]
+
+
+def compute_statistic_null(
+    texts: Sequence[str],
+    reference_words: Sequence[str],
+    ngram_ranks: Sequence[str],
+    bigrams: Dict[str, float],
+) -> Dict[str, List[Tuple[float, float]]]:
+    """Per-bucket (median, q99) of each statistic on the null texts."""
+    from pygarble.gibberish import measures
+
+    print("Computing statistic null...")
+    reference = " ".join(reversed(reference_words))
+    dictionary = reference.encode("ascii")
+    ranks = {gram: rank for rank, gram in enumerate(ngram_ranks)}
+    samples: Dict[str, List[List[float]]] = {
+        name: [[] for _ in range(len(measures.BUCKET_EDGES) + 1)]
+        for name in STATISTICS
+    }
+    for text in texts:
+        b = measures.bucket(len(text))
+        samples["cross_parsing"][b].append(
+            measures.cross_parsing(text, reference)
+        )
+        samples["primed_compression"][b].append(
+            measures.primed_compression(text, dictionary)
+        )
+        samples["ngram_rank"][b].append(
+            measures.ngram_rank_distance(text, ranks)
+        )
+        samples["permutation_test"][b].append(
+            measures.permutation_gap(text, bigrams, DEFAULT_LOG_PROB)
+        )
+    table: Dict[str, List[Tuple[float, float]]] = {}
+    for name in STATISTICS:
+        table[name] = []
+        for values in samples[name]:
+            values.sort()
+            table[name].append(
+                (
+                    round(quantile(values, 0.5), 6),
+                    round(quantile(values, 0.99), 6),
+                )
+            )
+    for b, values in enumerate(samples["cross_parsing"]):
+        print(f"  Bucket {b}: {len(values)} texts")
+    return table
 
 
 def write_words_file(words: Set[str], filepath: Path) -> None:
@@ -292,6 +437,78 @@ COMMON_TRIGRAMS = frozenset({
     )
 
 
+def write_sequence_file(
+    header: str, name: str, items: Sequence[str], filepath: Path
+) -> None:
+    """Write an ordered tuple of strings as a Python module."""
+    print(f"Writing {name} to {filepath}...")
+    content = f'''"""
+{header}
+
+This file is auto-generated by paper/scripts/generate_data.py
+Data source: Peter Norvig's word frequency list (https://norvig.com/ngrams/)
+Source provenance: paper/scripts/data_curation.json
+
+Do not edit this file manually.
+"""
+
+# fmt: off
+{name} = (
+'''
+    chunk_size = 10
+    for i in range(0, len(items), chunk_size):
+        chunk = items[i : i + chunk_size]
+        content += "    " + ", ".join(json.dumps(s) for s in chunk) + ",\n"
+    content += """)
+# fmt: on
+"""
+    filepath.write_text(content, encoding="utf-8")
+    print(f"  Written {len(items)} entries")
+
+
+def python_literal(value: object, indent: str = "") -> str:
+    """Render calibration values one entry per line, tuples for lists."""
+    inner = indent + "    "
+    if isinstance(value, dict):
+        lines = [
+            f"{inner}{json.dumps(key)}: {python_literal(item, inner)},\n"
+            for key, item in value.items()
+        ]
+        return "{\n" + "".join(lines) + indent + "}"
+    if isinstance(value, (list, tuple)):
+        if all(isinstance(item, float) for item in value):
+            return repr(tuple(value))
+        lines = [f"{inner}{python_literal(item, inner)},\n" for item in value]
+        return "(\n" + "".join(lines) + indent + ")"
+    return repr(value)
+
+
+def write_calibration_file(
+    calibration: Dict[str, object], filepath: Path
+) -> None:
+    """Write calibration tables, one upper-case constant per key."""
+    print(f"Writing calibration to {filepath}...")
+    content = '''"""
+Synthetic English null calibration for the non-parametric strategies.
+
+This file is auto-generated by paper/scripts/generate_data.py
+Data source: Peter Norvig's word frequency list (https://norvig.com/ngrams/)
+Source provenance: paper/scripts/data_curation.json
+
+STATISTIC_NULL holds the (median, q99) of each raw statistic per length
+bucket; TAIL_GRID lists the upper-tail probabilities of the tail tables.
+
+Do not edit this file manually.
+"""
+
+# fmt: off
+'''
+    for key, value in calibration.items():
+        content += f"{key.upper()} = {python_literal(value)}\n"
+    content += "# fmt: on\n"
+    filepath.write_text(content, encoding="utf-8")
+
+
 def write_json(payload: object, filepath: Path) -> None:
     """Byte-reproducible JSON: sorted keys, compact, ASCII, final newline."""
     filepath.write_text(
@@ -338,6 +555,24 @@ def main() -> None:
     words.update(curation["include_words"])
     bigrams = compute_bigram_probabilities(word_freq)
     trigrams = compute_trigram_frequencies(word_freq, curation["top_trigrams"])
+    if str(PROJECT_ROOT) not in sys.path:
+        sys.path.insert(0, str(PROJECT_ROOT))
+    reference_words = select_reference_words(words, word_freq)
+    ngram_ranks = compute_ngram_ranks(word_freq)
+    null_words, cumulative = load_null_words(raw.decode("utf-8"))
+    null_texts = [
+        text
+        for text in synthetic_texts(
+            null_words, cumulative, STATISTIC_NULL_SEED, STATISTIC_NULL_RANGES
+        )
+        if len(text) >= NULL_MIN_LENGTH
+    ]
+    calibration: Dict[str, object] = {
+        "statistic_null": compute_statistic_null(
+            null_texts, reference_words, ngram_ranks, bigrams
+        ),
+        "tail_grid": list(TAIL_GRID),
+    }
     with tempfile.TemporaryDirectory() as temporary:
         directory = Path(temporary)
         write_words_file(words, directory / "words.py")
@@ -349,8 +584,22 @@ def main() -> None:
             directory / "bigrams.json",
         )
         write_json(sorted(trigrams), directory / "trigrams.json")
-        if str(PROJECT_ROOT) not in sys.path:
-            sys.path.insert(0, str(PROJECT_ROOT))
+        write_sequence_file(
+            "Most frequent English words, joined as the reference text.",
+            "REFERENCE_WORDS",
+            reference_words,
+            directory / "reference.py",
+        )
+        write_sequence_file(
+            "Most frequent character 1- to 3-grams, in rank order.",
+            "NGRAM_RANKS",
+            ngram_ranks,
+            directory / "ngram_ranks.py",
+        )
+        write_calibration_file(calibration, directory / "calibration.py")
+        write_json(reference_words, directory / "reference.json")
+        write_json(ngram_ranks, directory / "ngram_ranks.json")
+        write_json(calibration, directory / "calibration.json")
         from pygarble.screening.pii.patterns import export as pii_export
         from pygarble.screening.profanity.wordlist import (
             export as profanity_export,
@@ -381,6 +630,9 @@ def main() -> None:
                 + sum(len(r) for r in pii_table["locales"].values()),
                 "profanity_strong": len(profanity_table["strong"]),
                 "profanity_mild": len(profanity_table["mild"]),
+                "reference_words": len(reference_words),
+                "ngram_ranks": len(ngram_ranks),
+                "statistic_null_texts": len(null_texts),
             },
             "files": {
                 file.name: hashlib.sha256(file.read_bytes()).hexdigest()

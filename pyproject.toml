@@ -79,7 +79,7 @@ pygarble = ["data/manifest.json", "py.typed"]
 
 # JSON table copies are for ports; the sdist carries them, wheels do not.
 [tool.setuptools.exclude-package-data]
-"pygarble.data" = ["words.json", "bigrams.json", "trigrams.json", "secrets.json", "pii.json", "profanity.json"]
+"pygarble.data" = ["words.json", "bigrams.json", "trigrams.json", "secrets.json", "pii.json", "profanity.json", "reference.json", "ngram_ranks.json", "calibration.json"]
 
 [tool.setuptools.dynamic]
 version = {attr = "pygarble.__version__"}
@@ -87,7 +87,7 @@ version = {attr = "pygarble.__version__"}
 [tool.black]
 line-length = 79
 target-version = ['py38']
-force-exclude = '/pygarble/data/(words|bigrams|trigrams)\.py$'
+force-exclude = '/pygarble/data/(words|bigrams|trigrams|reference|ngram_ranks|calibration)\.py$'
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -105,4 +105,4 @@ disallow_untyped_defs = true
 profile = "black"
 line_length = 79
 
-skip_glob = ["pygarble/data/words.py", "pygarble/data/bigrams.py", "pygarble/data/trigrams.py"]
+skip_glob = ["pygarble/data/words.py", "pygarble/data/bigrams.py", "pygarble/data/trigrams.py", "pygarble/data/reference.py", "pygarble/data/ngram_ranks.py", "pygarble/data/calibration.py"]
