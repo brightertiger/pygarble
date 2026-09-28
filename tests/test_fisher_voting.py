@@ -1,10 +1,14 @@
 """Fisher voting: tail p-values, their combination and english_fusion."""
 
+import copy
 import itertools
 import math
+import os
+import pickle
 import subprocess
 import sys
 import warnings
+from pathlib import Path
 
 import pytest
 
@@ -19,6 +23,7 @@ from pygarble.gibberish.fisher import (
 )
 from pygarble.gibberish.measures import Lcg
 
+ROOT = Path(__file__).resolve().parent.parent
 THRESHOLDS = (0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9)
 FUSION = [
     Strategy.WORD_LOOKUP,
@@ -153,6 +158,32 @@ def test_combined_p_value_stays_near_one_for_many_quiet_members():
 
 def test_fisher_score_reaches_one():
     assert fisher_score(1e-100, 0.5) == 1.0
+
+
+def _log_space_p_value(p_values):
+    # Independent of the implementation: each Poisson term from lgamma.
+    half = -sum(math.log(p) for p in p_values)
+    if half == 0:
+        return 1.0
+    log_terms = [
+        j * math.log(half) - math.lgamma(j + 1) - half
+        for j in range(len(p_values))
+    ]
+    return min(1.0, sum(math.exp(t) for t in log_terms))
+
+
+def test_four_or_more_members_match_a_log_space_computation():
+    grid = (1.0,) + TAIL_GRID
+    lcg = Lcg(20261001)
+    for k in range(4, 13):
+        for _ in range(500):
+            p_values = [grid[lcg.below(len(grid))] for _ in range(k)]
+            assert combined_p_value(p_values) == pytest.approx(
+                _log_space_p_value(p_values), rel=1e-12, abs=0
+            )
+    half = -4 * math.log(0.05)
+    expected = 0.05**4 * (1 + half + half**2 / 2 + half**3 / 6)
+    assert combined_p_value([0.05] * 4) == pytest.approx(expected)
 
 
 def test_fisher_score_decides_at_alpha():
@@ -295,6 +326,32 @@ def test_fisher_score_combines_member_tails():
     assert analysis.score == fisher_score(combined_p_value(p_values), 0.001)
 
 
+def test_fisher_detector_with_five_members_matches_log_space():
+    detector = EnsembleDetector(
+        strategies=[
+            Strategy.WORD_LOOKUP,
+            Strategy.LOG_LIKELIHOOD_RATIO,
+            Strategy.CROSS_PARSING,
+            Strategy.NGRAM_RANK,
+            Strategy.MARKOV_CHAIN,
+        ],
+        voting="fisher",
+    )
+    for text in (MASH, INVENTED, ENGLISH[1]):
+        analysis = detector.analyze(text)
+        p_values = [
+            tail_p_value(s.score, SCORE_NULL_TAILS[s.strategy], TAIL_GRID)
+            for s in analysis.signals
+            if s.applicable
+        ]
+        assert len(p_values) == 5
+        p = _log_space_p_value(p_values)
+        expected = 1 - p ** (math.log(0.5) / math.log(0.001))
+        assert analysis.score == pytest.approx(expected, rel=1e-12)
+    assert detector.predict(MASH)
+    assert not detector.predict(ENGLISH[1])
+
+
 def test_fisher_predict_score_and_analyze_agree():
     detector = EnsembleDetector(profile="english_fusion")
     texts = ENGLISH + [INVENTED, MASH, "hi", ""]
@@ -333,6 +390,22 @@ def test_fisher_alpha_moves_the_decision():
     )
     assert lenient.analyze("anything").score == 0.5
     assert lenient.predict("anything")
+
+
+@pytest.mark.parametrize("voting", [None, "any", "average"])
+@pytest.mark.parametrize("alpha", [2, -1, 0, 1, float("inf")])
+def test_fisher_alpha_is_validated_under_every_voting_mode(voting, alpha):
+    with pytest.raises(ValueError, match="fisher_alpha"):
+        EnsembleDetector(voting=voting, fisher_alpha=alpha)
+
+
+@pytest.mark.parametrize("voting", [None, "fisher"])
+@pytest.mark.parametrize("alpha", ["0.1", True, False, [0.1], 1j])
+def test_fisher_alpha_must_be_a_real_number(voting, alpha):
+    # finite_number in pygarble.validation raises ValueError, not TypeError,
+    # for a value of the wrong type, as it does for every numeric option.
+    with pytest.raises(ValueError, match="fisher_alpha"):
+        EnsembleDetector(voting=voting, fisher_alpha=alpha)
 
 
 @pytest.mark.parametrize("alpha", [0, 1, -0.1, 1.5, float("nan")])
@@ -437,6 +510,41 @@ def test_fisher_voting_without_applicable_members():
     assert not detector.predict("")
 
 
+@pytest.mark.parametrize(
+    "clone",
+    [
+        lambda d: pickle.loads(pickle.dumps(d)),
+        copy.copy,
+        copy.deepcopy,
+    ],
+    ids=["pickle", "copy", "deepcopy"],
+)
+def test_fisher_detector_survives_pickle_and_copy(clone):
+    detector = EnsembleDetector(profile="english_fusion", fisher_alpha=0.01)
+    twin = clone(detector)
+    assert twin.voting == "fisher"
+    assert twin.fisher_alpha == 0.01
+    for text in (MASH, INVENTED, *ENGLISH, "", "hi"):
+        assert twin.analyze(text) == detector.analyze(text)
+
+
+def _run_in_checkout(code):
+    # Import this checkout's pygarble, never an installed copy.
+    check = (
+        "\nimport pathlib, pygarble\n"
+        f"root = pathlib.Path({str(ROOT)!r})\n"
+        "assert root in pathlib.Path(pygarble.__file__).resolve().parents, "
+        "pygarble.__file__\n"
+    )
+    return subprocess.run(
+        [sys.executable, "-c", code + check],
+        capture_output=True,
+        text=True,
+        cwd=str(ROOT),
+        env=dict(os.environ, PYTHONPATH=str(ROOT)),
+    )
+
+
 def test_tail_tables_load_only_for_fisher_voting():
     code = """
 import sys
@@ -451,7 +559,5 @@ assert 'pygarble.data.calibration' not in sys.modules
 EnsembleDetector(strategies=["word_lookup"], voting="fisher")
 assert 'pygarble.data.calibration' in sys.modules
 """
-    result = subprocess.run(
-        [sys.executable, "-c", code], capture_output=True, text=True
-    )
+    result = _run_in_checkout(code)
     assert result.returncode == 0, result.stderr

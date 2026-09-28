@@ -1,9 +1,11 @@
 """Non-parametric strategies: windowed English-reference statistics."""
 
+import os
 import statistics
 import subprocess
 import sys
 import time
+from pathlib import Path
 
 import pytest
 
@@ -21,6 +23,7 @@ from pygarble.gibberish.strategies._windowed import reference_text
 from pygarble.preprocessing import TextFeatures
 from pygarble.registry import STRATEGY_MAP
 
+ROOT = Path(__file__).resolve().parent.parent
 NONPARAMETRIC = [
     Strategy.CROSS_PARSING,
     Strategy.PRIMED_COMPRESSION,
@@ -363,8 +366,20 @@ def test_cross_parsing_index_is_not_built_at_import():
         "assert cross_parsing._INDEX is None\n"
         "pygarble.GarbleDetector(pygarble.Strategy.CROSS_PARSING)\n"
         "assert cross_parsing._INDEX is None\n"
+        "import pathlib\n"
+        f"root = pathlib.Path({str(ROOT)!r})\n"
+        "assert root in pathlib.Path(pygarble.__file__).resolve().parents, "
+        "pygarble.__file__\n"
     )
-    subprocess.run([sys.executable, "-c", code], check=True)
+    # Import this checkout's pygarble, never an installed copy.
+    result = subprocess.run(
+        [sys.executable, "-c", code],
+        capture_output=True,
+        text=True,
+        cwd=str(ROOT),
+        env=dict(os.environ, PYTHONPATH=str(ROOT)),
+    )
+    assert result.returncode == 0, result.stderr
 
 
 def test_cross_parsing_index_is_built_once_across_threads(monkeypatch):
