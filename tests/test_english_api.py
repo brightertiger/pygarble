@@ -141,7 +141,7 @@ def test_length_is_not_universal_gibberish_evidence():
 
 
 @pytest.mark.parametrize(
-    "voting", ["any", "all", "average", "weighted", "majority"]
+    "voting", ["any", "all", "average", "weighted", "majority", "fisher"]
 )
 def test_analysis_scalar_batch_and_threads_agree(voting):
     texts = [

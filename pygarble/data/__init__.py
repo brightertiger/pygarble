@@ -6,7 +6,12 @@ from typing import TYPE_CHECKING, Any
 if TYPE_CHECKING:
     from .bigrams import BIGRAM_LOG_PROBS as BIGRAM_LOG_PROBS
     from .bigrams import DEFAULT_LOG_PROB as DEFAULT_LOG_PROB
+    from .calibration import SCORE_NULL_TAILS as SCORE_NULL_TAILS
+    from .calibration import STATISTIC_NULL as STATISTIC_NULL
+    from .calibration import TAIL_GRID as TAIL_GRID
     from .function_words import FUNCTION_WORDS as FUNCTION_WORDS
+    from .ngram_ranks import NGRAM_RANKS as NGRAM_RANKS
+    from .reference import REFERENCE_WORDS as REFERENCE_WORDS
     from .trigrams import COMMON_TRIGRAMS as COMMON_TRIGRAMS
     from .words import ENGLISH_WORDS as ENGLISH_WORDS
 
@@ -16,6 +21,11 @@ _EXPORTS = {
     "DEFAULT_LOG_PROB": "bigrams",
     "COMMON_TRIGRAMS": "trigrams",
     "FUNCTION_WORDS": "function_words",
+    "REFERENCE_WORDS": "reference",
+    "NGRAM_RANKS": "ngram_ranks",
+    "STATISTIC_NULL": "calibration",
+    "SCORE_NULL_TAILS": "calibration",
+    "TAIL_GRID": "calibration",
 }
 __all__ = [
     "ENGLISH_WORDS",
@@ -23,6 +33,11 @@ __all__ = [
     "DEFAULT_LOG_PROB",
     "COMMON_TRIGRAMS",
     "FUNCTION_WORDS",
+    "REFERENCE_WORDS",
+    "NGRAM_RANKS",
+    "STATISTIC_NULL",
+    "SCORE_NULL_TAILS",
+    "TAIL_GRID",
 ]
 
 

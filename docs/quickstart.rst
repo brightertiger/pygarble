@@ -92,8 +92,11 @@ Choose what to detect
    assert keyboard.predict("azerty") is True
 
 Use ``english_extended`` to add local anomalies, repetition, and pattern matching
-to the default profile. It can flag more valid text. See :doc:`strategy-guide`
-for choosing checks and :doc:`strategies` for the complete settings catalog.
+to the default profile. It can flag more valid text. The opt-in
+``english_fusion`` profile combines word lookup, likelihood ratio and cross
+parsing with Fisher voting against a synthetic English null. See
+:doc:`strategy-guide` for choosing checks and :doc:`strategies` for the
+complete settings catalog.
 
 Use the command line
 --------------------

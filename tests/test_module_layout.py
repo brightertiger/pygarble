@@ -2,6 +2,7 @@
 
 import base64
 import json
+import os
 import pickle
 import subprocess
 import sys
@@ -15,6 +16,7 @@ from pygarble import gibberish, screening
 from pygarble.gibberish.registry import STRATEGY_MAP, Strategy
 from pygarble.gibberish.strategies import _EXPORTS
 
+ROOT = Path(__file__).resolve().parent.parent
 _GIBBERISH_MODULES = (
     "analysis",
     "calibration",
@@ -56,6 +58,23 @@ _MODULE_PAIRS = (
 )
 
 
+def _run_in_checkout(code):
+    # Import this checkout's pygarble, never an installed copy.
+    check = (
+        "\nimport pathlib, pygarble\n"
+        f"root = pathlib.Path({str(ROOT)!r})\n"
+        "assert root in pathlib.Path(pygarble.__file__).resolve().parents, "
+        "pygarble.__file__\n"
+    )
+    return subprocess.run(
+        [sys.executable, "-c", code + check],
+        capture_output=True,
+        text=True,
+        cwd=str(ROOT),
+        env=dict(os.environ, PYTHONPATH=str(ROOT)),
+    )
+
+
 @pytest.mark.parametrize("canonical_first", [False, True])
 def test_old_and_new_modules_are_identical_in_either_import_order(
     canonical_first,
@@ -72,9 +91,7 @@ for old, new in pairs:
     parent, _, child = old.rpartition('.')
     assert getattr(import_module(parent), child) is a, old
 """
-    result = subprocess.run(
-        [sys.executable, "-c", code], capture_output=True, text=True
-    )
+    result = _run_in_checkout(code)
     assert result.returncode == 0, result.stderr
 
 
@@ -152,9 +169,10 @@ assert 'pygarble.gibberish.strategies' not in sys.modules
 d = api.GarbleDetector('vowel_ratio')
 assert not d.predict('Hello world')
 assert 'pygarble.data.words' not in sys.modules
+assert 'pygarble.data.reference' not in sys.modules
+assert 'pygarble.data.ngram_ranks' not in sys.modules
+assert 'pygarble.data.calibration' not in sys.modules
 assert 'pygarble.gibberish.strategies.markov_chain' not in sys.modules
 """
-    result = subprocess.run(
-        [sys.executable, "-c", code], capture_output=True, text=True
-    )
+    result = _run_in_checkout(code)
     assert result.returncode == 0, result.stderr

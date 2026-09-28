@@ -221,10 +221,16 @@ Profiles and aggregation
      - Repetition, control characters, mojibake and local anomaly; a
        deterministic pre-check for degenerate model output that stays quiet
        on code and technical prose.
+   * - ``english_fusion``
+     - Opt-in. Word lookup, likelihood ratio and cross parsing combined with
+       ``fisher`` voting; English plausibility only, so other languages
+       written in Latin letters can be flagged and other scripts get no
+       signal (they read as clean).
 
 See :doc:`strategy-guide` to choose checks and :doc:`strategies` for
-its current members. Profiles use union voting by default; an explicit strategies
-list defaults to majority voting. Configure members independently through
+its current members. Profiles use union voting by default (``english_fusion``
+uses ``fisher``); an explicit strategies list defaults to majority voting. An
+explicit ``voting`` argument overrides either default. Configure members independently through
 ``strategy_kwargs={Strategy.MARKOV_CHAIN: {"min_length": 4}}``.
 
 Only applicable members participate. ``any`` and ``all`` use maximum and minimum
@@ -232,6 +238,32 @@ scores; ``average`` and ``weighted`` use applicable means. Majority decisions
 require strictly more than half the applicable members to cross the threshold,
 while the reported score is their mean. Thresholding that mean may therefore
 produce a different decision. Zero-weight members abstain from weighted decisions.
+
+``fisher`` reads each applicable member's score against a table of that
+strategy's scores on a synthetic English null (word salads drawn by word
+frequency) and takes the smallest tail probability, from 0.5 down to 0.001,
+whose null threshold the score strictly exceeds; a score that exceeds none
+gives 1. Fisher's method combines these p-values, and the reported score is
+``1 - p ** (ln 0.5 / ln fisher_alpha)``, so with the default threshold of 0.5
+the text is flagged when the combined p-value is at most ``fisher_alpha``
+(keyword-only, default 0.001, strictly between 0 and 1). Passing
+``fisher_alpha`` with another voting mode emits a ``FutureWarning`` and it is
+ignored; ``weights`` are ignored under ``fisher`` as under every mode except
+``weighted``. The value is a heuristic: members are correlated and the null is
+synthetic, so ``fisher_alpha`` is not a guaranteed false-positive rate. The
+null tables describe default-constructed strategies, so member settings and
+allowlists shift scores without shifting the tables. A strategy listed twice
+raises ``ValueError`` under ``fisher``, since its evidence would count twice;
+other modes accept repeats as before. The tables load only when ``fisher``
+voting is used.
+
+.. code-block:: python
+
+   from pygarble.gibberish import EnsembleDetector
+
+   fusion = EnsembleDetector(profile="english_fusion")
+   assert fusion.voting == "fisher"
+   assert fusion.predict("The committee will meet again next week.") is False
 
 An empty input or a set with no applicable members yields ``False`` and
 ``insufficient_evidence``. This does not certify meaningful English.

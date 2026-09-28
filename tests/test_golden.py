@@ -55,5 +55,5 @@ def test_golden_pins_spans_across_a_combining_mark():
         json.loads(line)
         for line in golden.OUTPUT.read_text(encoding="utf-8").splitlines()
     ]
-    assert len(rows) == 918
+    assert len(rows) == 1071
     assert any("\u0301" in r["text"] and r["spans"] for r in rows)

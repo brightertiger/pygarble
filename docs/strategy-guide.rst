@@ -31,7 +31,8 @@ Lexical and statistical strategies
   contribute half weight. The default score is the weighted unknown fraction;
   a score of at least 0.5 flags the input. No eligible tokens yields zero,
   which is not evidence of linguistic understanding. Word lookup is not a
-  member of the named English profiles.
+  member of the ``english``, ``english_extended`` or ``legacy`` profiles; it
+  is a member of the opt-in ``english_fusion`` profile described below.
 * ``markov_chain`` measures English character-transition likelihood over
   novel tokens. Dictionary-supported and recognized structured tokens do
   not contribute novelty evidence. Unlikely transitions increase the score.
@@ -44,12 +45,98 @@ Lexical and statistical strategies
   It detected no positive chunks at its default threshold in this study.
 
 Scores are strategy-specific evidence. Named English ensembles use ``any``
-voting across applicable strategies; an inapplicable strategy does not vote.
+voting across applicable strategies, except ``english_fusion``, which uses
+``fisher``; an inapplicable strategy does not vote.
 When all strategies are inapplicable, ``analyze()`` reports
 ``insufficient_evidence`` and an unflagged decision. That differs from a
 positive assertion that the text is meaningful. See :doc:`api` for other
 voting policies and score semantics, and :doc:`calibration` for threshold
 selection on your own labelled data.
+
+English-reference window strategies
+-----------------------------------
+
+Four strategies compare text with frequent English instead of applying
+hand-written rules. They read only the lowercase ASCII words, so numbers,
+URLs, versions and allowlisted words are left out. ``cross_parsing`` is a
+member of the opt-in ``english_fusion`` profile; the other three are not
+members of any named profile.
+
+* ``cross_parsing`` counts how many pieces are needed to spell the text from
+  a reference built from common English words. English reuses long pieces;
+  invented or mashed text breaks into many short ones.
+* ``primed_compression`` compresses the text with the same English words as
+  a preset dictionary. English compresses well against it; invented text
+  does not. Compressed sizes come from the platform's zlib, so scores can
+  differ slightly between zlib builds (for example zlib-ng).
+* ``ngram_rank`` ranks the text's one- to three-letter sequences by
+  frequency and measures how far those ranks are from English.
+* ``permutation_test`` asks how much more English-like the letter order is
+  than shuffles of the same letters. It detects text whose letter order
+  carries no English structure, such as keyboard mash or random letters.
+  Pronounceable invented words already have English-like letter order, so
+  it often misses them at any length, not only in short text; it is the
+  weakest of the four on such text.
+
+Each statistic is measured against synthetic English of the same length,
+and a score of 0.5 sits beyond the 99th percentile of that English. They are
+English-reference methods, so meaningful text in other languages written in
+Latin letters can be flagged. In spot checks, some ordinary French, German and
+Spanish sentences scored above 0.5 on ``cross_parsing`` and
+``primed_compression`` while others did not, and romanised Hindi and
+Indonesian crossed 0.5 more often. Text in other scripts has no ASCII letters
+and is not scored (it reports ``insufficient_evidence``). They need at least
+8 letters (``min_length``) and become more reliable as text gets longer; text
+beyond 127 characters is split into windows and the median window decides, so
+one odd passage in a long document does not flag it.
+
+Fisher voting and the english_fusion profile
+--------------------------------------------
+
+``voting="fisher"`` treats each applicable member's score as a test
+statistic. A table shipped with the package records what that strategy
+scores on synthetic English (word salads drawn by word frequency, with
+target lengths from 8 to 480 characters; a text stops before the word that
+would pass its target and always has at least one word, so some are shorter
+than 8 characters), and the member's p-value is the smallest tail
+probability, from 0.5 down to 0.001, whose threshold the score strictly
+exceeds. Fisher's method combines the p-values, and ``fisher_alpha`` (default
+0.001) places the combined p-value that scores exactly 0.5. Fisher voting is opt-in and works with any
+profile or strategy list.
+
+The ``english_fusion`` profile uses it over three views of the same question:
+unknown words (``word_lookup``), character transitions
+(``log_likelihood_ratio``) and reuse of English phrases (``cross_parsing``).
+A member's p-value never goes below 0.001, so when several members apply, one
+member cannot flag a text on its own at the default ``fisher_alpha``: one
+member at 0.001 combines with two quiet members (p-value 1) to about 0.032,
+and with one quiet member to about 0.0079. At least two members must exceed
+their null thresholds, for example two at 0.001 with the third quiet (about
+0.00011), or one at 0.001 with one at 0.01 (about 0.00079). A single member
+flags on its own only when it is the only applicable member.
+
+This is a heuristic, not a test with a guaranteed error rate. The members are
+correlated, which Fisher's method does not account for, and synthetic word
+salads are not real English, so the real false-positive rate at a given
+``fisher_alpha`` can be higher or lower. All three members are
+English-reference methods. The profile can flag meaningful text in other
+languages written in Latin letters: in spot checks some French, German and
+Spanish sentences were flagged and others were not, and an Indonesian sentence
+was flagged. It gives no signal on other scripts. ``word_lookup`` applies to
+any non-empty text and scores 0 when there are no Latin-letter words, while
+the other two members do not apply, so Russian or Chinese text reads as clean;
+that is not evidence that the text is meaningful. Measure the profile on your
+own data before relying on it.
+
+.. code-block:: python
+
+   from pygarble.gibberish import EnsembleDetector
+
+   fusion = EnsembleDetector(profile="english_fusion")
+   assert fusion.predict("Please send the signed contract by Friday.") is False
+   assert fusion.predict("asdkfj qwpoeiru zxmcnv lkjasdf poiuqwer") is True
+
+   strict = EnsembleDetector(profile="english_fusion", fisher_alpha=0.0001)
 
 Control characters: new in 0.9.0
 --------------------------------
@@ -161,7 +248,7 @@ that retries or rejects a response before it reaches a user.
 Tune on your own data
 ---------------------
 
-All 28 strategies remain individually available. Check both valid English inputs
+All 32 strategies remain individually available. Check both valid English inputs
 and expected corruption, including domain terms, identifiers, and short strings.
 Scores are not calibrated probabilities, and no strategy guarantees zero false
 positives. See :doc:`api` for voting and abstention, and :doc:`migration` for changes

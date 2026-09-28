@@ -100,8 +100,11 @@ verification, supply ``--source /path/to/count_1w.txt``. Curated exclusions live
 ``paper/scripts/data_curation.json``; artifact hashes live in ``pygarble/data/manifest.json``.
 Do not edit generated tables directly. The generator also writes
 language-neutral JSON copies of the tables (``words.json``, ``bigrams.json``,
-``trigrams.json``) for ports to other languages; they are hashed in
-``manifest.json`` and verified by ``--check``.
+``trigrams.json``, ``reference.json``, ``ngram_ranks.json``,
+``calibration.json``) for ports to other languages; they are hashed in
+``manifest.json`` and verified by ``--check``. The ``primed_compression`` rows of
+``calibration.json`` are compressed sizes, so ``--check`` expects a stock zlib
+build; zlib-ng emits different streams and reports those rows as changed.
 
 Keep development and holdout families separate; do not tune thresholds on holdout
 errors. Report confusion counts and limitations rather than treating a small

@@ -118,10 +118,12 @@ def test_weighted_mean_matches_plain_formula():
 
 
 @pytest.mark.parametrize("profile", sorted(PROFILES))
-def test_every_profile_constructs_and_votes_any(profile):
+def test_every_profile_constructs_with_its_default_voting(profile):
     detector = EnsembleDetector(profile=profile)
     assert detector.profile == profile
-    assert detector.voting == "any"
+    assert detector.voting == (
+        "fisher" if profile == "english_fusion" else "any"
+    )
     assert [d.strategy for d in detector._detectors] == list(PROFILES[profile])
 
 

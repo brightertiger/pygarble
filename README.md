@@ -184,8 +184,9 @@ assert detector.predict(["Hello world", "qxzjkwpv"]) == [False, True]
 | `corruption` | Mojibake and control artifacts, independent of English plausibility; scraped or OCR'd corpora |
 | `spoofing` | Unicode script/confusable heuristic; not a complete phishing detector |
 | `llm_output` | Repetition, control characters, mojibake, local anomaly; degenerate model output, quiet on code and technical prose |
+| `english_fusion` | Opt-in. Word lookup, likelihood ratio, and cross parsing combined with `fisher` voting; English plausibility only |
 
-Named profiles default to `any` voting. `pygarble check`, `score` and `analyze` read one text per line (`--field NAME` for JSON lines); `check` exits 1 when any line is garbled. See the [CLI guide](https://brightertiger.github.io/pygarble/cli.html) and [API guide](https://brightertiger.github.io/pygarble/api.html).
+Named profiles default to `any` voting, except `english_fusion`, which defaults to `fisher`. With `voting="fisher"` each applicable member's score is read against that strategy's scores on a synthetic English null built from word frequencies, giving a coarse tail p-value; Fisher's method combines them and `fisher_alpha` (default 0.001) sets where the score crosses 0.5. Members are correlated and the null is synthetic, so `fisher_alpha` is not a guaranteed false-positive rate. Like every English-reference check, `english_fusion` can flag meaningful text in other languages written in Latin letters, and it gives no signal on other scripts: Russian or Chinese text reads as clean, which is not evidence that it is meaningful. `pygarble check`, `score` and `analyze` read one text per line (`--field NAME` for JSON lines); `check` exits 1 when any line is garbled. See the [CLI guide](https://brightertiger.github.io/pygarble/cli.html) and [API guide](https://brightertiger.github.io/pygarble/api.html).
 
 ```console
 $ printf 'hello world\nasdfghjkl\n' | pygarble check
@@ -228,7 +229,7 @@ for span in result.spans:
 payload = json.dumps(asdict(result))
 ```
 
-All 28 strategies are available through `GarbleDetector` and the `Strategy` enum; see the [strategy guide](https://brightertiger.github.io/pygarble/strategy-guide.html). `analyze()` records the decision, score, status, per-strategy signals and spans (Python string offsets, exclusive end). Empty or wholly inapplicable input returns `False` with status `insufficient_evidence`.
+All 32 strategies are available through `GarbleDetector` and the `Strategy` enum; see the [strategy guide](https://brightertiger.github.io/pygarble/strategy-guide.html). `analyze()` records the decision, score, status, per-strategy signals and spans (Python string offsets, exclusive end). Empty or wholly inapplicable input returns `False` with status `insufficient_evidence`.
 
 ```python
 from pygarble.gibberish import EnsembleDetector

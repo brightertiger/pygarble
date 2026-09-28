@@ -7,7 +7,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-from pygarble.gibberish.ensemble import PROFILES
+from pygarble.gibberish.ensemble import PROFILE_VOTING, PROFILES
 from pygarble.gibberish.options import PARAMETERS
 from pygarble.gibberish.registry import STRATEGY_MAP, Strategy
 
@@ -34,9 +34,11 @@ def render() -> str:
         "",
     ]
     for profile, strategies in PROFILES.items():
+        voting = PROFILE_VOTING.get(profile)
         lines.append(
             f"* ``{profile}``: "
             + ", ".join(f"``{s.name}``" for s in strategies)
+            + (f" (``{voting}`` voting)" if voting else "")
         )
     lines.extend(["", "Strategy settings", "-----------------", ""])
     for strategy in Strategy:

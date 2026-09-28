@@ -37,4 +37,4 @@ class TestStrategy:
         assert Strategy.VOWEL_RATIO.value == "vowel_ratio"
 
     def test_strategy_enum_size(self):
-        assert len(Strategy) == 28
+        assert len(Strategy) == 32
