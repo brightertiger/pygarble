@@ -37,6 +37,10 @@ class Strategy(Enum):
     LOG_LIKELIHOOD_RATIO = "log_likelihood_ratio"
     WORD_ANOMALY = "word_anomaly"
     KEYBOARD_ADJACENCY = "keyboard_adjacency"
+    CROSS_PARSING = "cross_parsing"
+    PRIMED_COMPRESSION = "primed_compression"
+    NGRAM_RANK = "ngram_rank"
+    PERMUTATION_TEST = "permutation_test"
 
 
 _IMPLEMENTATIONS = {
@@ -86,6 +90,13 @@ _IMPLEMENTATIONS = {
         "keyboard_adjacency",
         "KeyboardAdjacencyStrategy",
     ),
+    Strategy.CROSS_PARSING: ("cross_parsing", "CrossParsingStrategy"),
+    Strategy.PRIMED_COMPRESSION: (
+        "primed_compression",
+        "PrimedCompressionStrategy",
+    ),
+    Strategy.NGRAM_RANK: ("ngram_rank", "NGramRankStrategy"),
+    Strategy.PERMUTATION_TEST: ("permutation_test", "PermutationTestStrategy"),
 }
 
 

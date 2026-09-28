@@ -17,6 +17,7 @@ if TYPE_CHECKING:
     from .control_characters import (
         ControlCharactersStrategy as ControlCharactersStrategy,
     )
+    from .cross_parsing import CrossParsingStrategy as CrossParsingStrategy
     from .entropy_based import EntropyBasedStrategy as EntropyBasedStrategy
     from .function_word_density import (
         FunctionWordDensityStrategy as FunctionWordDensityStrategy,
@@ -43,8 +44,15 @@ if TYPE_CHECKING:
     from .ngram_frequency import (
         NGramFrequencyStrategy as NGramFrequencyStrategy,
     )
+    from .ngram_rank import NGramRankStrategy as NGramRankStrategy
     from .pattern_matching import (
         PatternMatchingStrategy as PatternMatchingStrategy,
+    )
+    from .permutation_test import (
+        PermutationTestStrategy as PermutationTestStrategy,
+    )
+    from .primed_compression import (
+        PrimedCompressionStrategy as PrimedCompressionStrategy,
     )
     from .pronounceability import (
         PronouncabilityStrategy as PronouncabilityStrategy,
@@ -98,6 +106,10 @@ _EXPORTS = {
     "LogLikelihoodRatioStrategy": "log_likelihood_ratio",
     "WordAnomalyStrategy": "word_anomaly",
     "KeyboardAdjacencyStrategy": "keyboard_adjacency",
+    "CrossParsingStrategy": "cross_parsing",
+    "PrimedCompressionStrategy": "primed_compression",
+    "NGramRankStrategy": "ngram_rank",
+    "PermutationTestStrategy": "permutation_test",
 }
 __all__ = [
     "ControlCharactersStrategy",
@@ -130,6 +142,10 @@ __all__ = [
     "LogLikelihoodRatioStrategy",
     "WordAnomalyStrategy",
     "KeyboardAdjacencyStrategy",
+    "CrossParsingStrategy",
+    "PrimedCompressionStrategy",
+    "NGramRankStrategy",
+    "PermutationTestStrategy",
 ]
 
 

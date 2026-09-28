@@ -148,6 +148,31 @@ PARAMETERS = {
         "min_words",
         "zero_collocation_min_words",
     ],
+    "CrossParsingStrategy": [
+        "max_string_length",
+        "midpoint",
+        "min_length",
+        "scale",
+    ],
+    "PrimedCompressionStrategy": [
+        "max_string_length",
+        "midpoint",
+        "min_length",
+        "scale",
+    ],
+    "NGramRankStrategy": [
+        "max_string_length",
+        "midpoint",
+        "min_length",
+        "scale",
+    ],
+    "PermutationTestStrategy": [
+        "max_string_length",
+        "midpoint",
+        "min_length",
+        "scale",
+        "shuffles",
+    ],
 }
 
 
