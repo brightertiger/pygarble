@@ -6,6 +6,7 @@
     "profanity_mild": 26,
     "profanity_strong": 103,
     "reference_words": 4368,
+    "score_null_texts": 12000,
     "secret_patterns": 20,
     "statistic_null_texts": 7344,
     "trigrams": 2000,
@@ -15,8 +16,8 @@
   "files": {
     "bigrams.json": "b32223d650d57c9a25498f3c44de7ba2a0f892c3c6024abe5dcdb1679db981f9",
     "bigrams.py": "332e3353e1cc72051e844b42cfd3e22fc69331efb0ca22c4325e1350a3a89660",
-    "calibration.json": "1d93b12da337927d6e599518b5448701503788ade61693637c40d6b3b8ec7ae6",
-    "calibration.py": "4a070b7b92ed1b48e3adc6f4a6d7421d407bd8a2e3017229559fd7499372843f",
+    "calibration.json": "b08dd03a339161c74f3bf22d0e34b19c9cd6b13651076d4fd2a0c5f5bd4c98a4",
+    "calibration.py": "549616f77b6f63a2ebe1cb6614f7f51513304fd39bfe126a010fc52ccfebe8cb",
     "ngram_ranks.json": "1492613e42db1bea4348fb12bea2c3a1353018bf45042824ab44aae2087ec104",
     "ngram_ranks.py": "c2c46b089fceb60dad37d76368b53434c4e735bc313d354dcf0176abd3239711",
     "pii.json": "afaa68ea158c53530294f767187034a59f168e4d29e3d291233733123ad65ebb",

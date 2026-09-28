@@ -12,6 +12,7 @@ from pygarble.data import (
     ENGLISH_WORDS,
     NGRAM_RANKS,
     REFERENCE_WORDS,
+    SCORE_NULL_TAILS,
     STATISTIC_NULL,
     TAIL_GRID,
 )
@@ -80,6 +81,9 @@ def test_calibration_json_matches():
         name: [list(pair) for pair in rows]
         for name, rows in STATISTIC_NULL.items()
     }
+    assert table["score_null_tails"] == {
+        name: list(row) for name, row in SCORE_NULL_TAILS.items()
+    }
 
 
 def test_statistic_null_shape():
@@ -114,6 +118,7 @@ def test_manifest_lists_json_files():
     counts = manifest["counts"]
     assert counts["reference_words"] == len(REFERENCE_WORDS)
     assert counts["ngram_ranks"] == len(NGRAM_RANKS)
+    assert counts["score_null_texts"] == 12000
 
 
 def test_rule_tables_match_python_sources():
