@@ -35,7 +35,10 @@ def optional_module(name: str, extra: str) -> ModuleType:
         if missing == root or missing.startswith(root + "."):
             # The package itself is absent; the traceback adds nothing.
             raise ImportError(hint) from None
-        if missing == "pkg_resources":
+        if (
+            isinstance(error, ModuleNotFoundError)
+            and error.name == "pkg_resources"
+        ):
             # python-stdnum imports pkg_resources on Python 3.8.
             raise ImportError(
                 f"{root} is installed but needs pkg_resources: "
