@@ -1,0 +1,8 @@
+{
+ "method": "english_fusion",
+ "point": "fpr1",
+ "floor": 0.7,
+ "A_capture": 0.600057,
+ "passed": false,
+ "override": "2026-10-11 orchestrator decision: continue under the frozen protocol without amendment; see deviations.md"
+}

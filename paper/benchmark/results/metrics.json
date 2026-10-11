@@ -1,0 +1,5396 @@
+{
+ "checkpoint": {
+  "method": "english_fusion",
+  "point": "fpr1",
+  "floor": 0.7,
+  "A_capture": 0.600057,
+  "passed": false
+ },
+ "resamples": 1000,
+ "seed": 20261011,
+ "rows": {
+  "A": 3513,
+  "B_test": 6980
+ },
+ "methods": {
+  "english": {
+   "family": "profile",
+   "auroc": {
+    "value": 0.862291,
+    "ci": [
+     0.854308,
+     0.870694
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.83006,
+      "ci": [
+       0.816674,
+       0.842585
+      ]
+     },
+     "B_precision": {
+      "value": 0.658458,
+      "ci": [
+       0.643495,
+       0.673773
+      ]
+     },
+     "B_recall": {
+      "value": 0.945357,
+      "ci": [
+       0.937046,
+       0.953341
+      ]
+     },
+     "B_fpr": {
+      "value": 0.328469,
+      "ci": [
+       0.313263,
+       0.34279
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 1.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 1.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    }
+   }
+  },
+  "english_extended": {
+   "family": "profile",
+   "auroc": {
+    "value": 0.859983,
+    "ci": [
+     0.851903,
+     0.868497
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.852263,
+      "ci": [
+       0.839446,
+       0.863365
+      ]
+     },
+     "B_precision": {
+      "value": 0.652035,
+      "ci": [
+       0.637218,
+       0.666991
+      ]
+     },
+     "B_recall": {
+      "value": 0.949643,
+      "ci": [
+       0.941749,
+       0.957465
+      ]
+     },
+     "B_fpr": {
+      "value": 0.339474,
+      "ci": [
+       0.324374,
+       0.35313
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 1.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 1.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    }
+   }
+  },
+  "english_fusion": {
+   "family": "profile",
+   "auroc": {
+    "value": 0.993189,
+    "ci": [
+     0.991588,
+     0.994594
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.894962,
+      "ci": [
+       0.88386,
+       0.905494
+      ]
+     },
+     "B_precision": {
+      "value": 0.907426,
+      "ci": [
+       0.896494,
+       0.918099
+      ]
+     },
+     "B_recall": {
+      "value": 0.990714,
+      "ci": [
+       0.986988,
+       0.994139
+      ]
+     },
+     "B_fpr": {
+      "value": 0.067703,
+      "ci": [
+       0.059658,
+       0.075863
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.6660653755,
+     "dev_fpr": 0.005583,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.600057,
+      "ci": [
+       0.583262,
+       0.615428
+      ]
+     },
+     "B_precision": {
+      "value": 0.992353,
+      "ci": [
+       0.988137,
+       0.99594
+      ]
+     },
+     "B_recall": {
+      "value": 0.6025,
+      "ci": [
+       0.584111,
+       0.621459
+      ]
+     },
+     "B_fpr": {
+      "value": 0.00311,
+      "ci": [
+       0.001671,
+       0.004797
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.7106457614,
+     "dev_fpr": 0.0,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.532878,
+      "ci": [
+       0.516083,
+       0.548249
+      ]
+     },
+     "B_precision": {
+      "value": 0.998793,
+      "ci": [
+       0.996892,
+       1.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.591071,
+      "ci": [
+       0.572796,
+       0.609415
+      ]
+     },
+     "B_fpr": {
+      "value": 0.000478,
+      "ci": [
+       0.0,
+       0.001213
+      ]
+     }
+    }
+   }
+  },
+  "legacy": {
+   "family": "profile",
+   "auroc": {
+    "value": 0.945853,
+    "ci": [
+     0.941167,
+     0.950273
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.811557,
+      "ci": [
+       0.798178,
+       0.824943
+      ]
+     },
+     "B_precision": {
+      "value": 0.780071,
+      "ci": [
+       0.76698,
+       0.79332
+      ]
+     },
+     "B_recall": {
+      "value": 0.945,
+      "ci": [
+       0.936444,
+       0.952794
+      ]
+     },
+     "B_fpr": {
+      "value": 0.178469,
+      "ci": [
+       0.167246,
+       0.189447
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.9999747113,
+     "dev_fpr": 0.009492,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.553658,
+      "ci": [
+       0.538564,
+       0.57046
+      ]
+     },
+     "B_precision": {
+      "value": 0.97378,
+      "ci": [
+       0.96573,
+       0.981459
+      ]
+     },
+     "B_recall": {
+      "value": 0.570357,
+      "ci": [
+       0.553281,
+       0.587657
+      ]
+     },
+     "B_fpr": {
+      "value": 0.010287,
+      "ci": [
+       0.007246,
+       0.01339
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.9999977397,
+     "dev_fpr": 0.000558,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.553658,
+      "ci": [
+       0.538564,
+       0.57046
+      ]
+     },
+     "B_precision": {
+      "value": 1.0,
+      "ci": [
+       1.0,
+       1.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.570357,
+      "ci": [
+       0.553281,
+       0.587657
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    }
+   }
+  },
+  "corruption": {
+   "family": "profile",
+   "auroc": {
+    "value": 0.358852,
+    "ci": [
+     0.352457,
+     0.365624
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.282057,
+      "ci": [
+       0.268514,
+       0.294767
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 1.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 1.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    }
+   }
+  },
+  "spoofing": {
+   "family": "profile",
+   "auroc": {
+    "value": 0.5,
+    "ci": [
+     0.5,
+     0.5
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    }
+   }
+  },
+  "llm_output": {
+   "family": "profile",
+   "auroc": {
+    "value": 0.392269,
+    "ci": [
+     0.383521,
+     0.400646
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.28181,
+      "ci": [
+       0.266724,
+       0.296613
+      ]
+     },
+     "B_precision": {
+      "value": 0.195219,
+      "ci": [
+       0.174846,
+       0.214385
+      ]
+     },
+     "B_recall": {
+      "value": 0.105,
+      "ci": [
+       0.093414,
+       0.11597
+      ]
+     },
+     "B_fpr": {
+      "value": 0.289952,
+      "ci": [
+       0.276041,
+       0.30333
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 1.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 1.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    }
+   }
+  },
+  "english_vote_majority": {
+   "family": "voting",
+   "auroc": {
+    "value": 0.874253,
+    "ci": [
+     0.866778,
+     0.882375
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.259607,
+      "ci": [
+       0.243666,
+       0.274986
+      ]
+     },
+     "B_precision": {
+      "value": 0.647059,
+      "ci": [
+       0.388889,
+       0.857381
+      ]
+     },
+     "B_recall": {
+      "value": 0.003929,
+      "ci": [
+       0.001763,
+       0.006226
+      ]
+     },
+     "B_fpr": {
+      "value": 0.001435,
+      "ci": [
+       0.000476,
+       0.002643
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.4931350826,
+     "dev_fpr": 0.009492,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.268432,
+      "ci": [
+       0.252477,
+       0.283241
+      ]
+     },
+     "B_precision": {
+      "value": 0.397059,
+      "ci": [
+       0.28325,
+       0.515638
+      ]
+     },
+     "B_recall": {
+      "value": 0.009643,
+      "ci": [
+       0.006417,
+       0.013358
+      ]
+     },
+     "B_fpr": {
+      "value": 0.009809,
+      "ci": [
+       0.006823,
+       0.01283
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.5349535723,
+     "dev_fpr": 0.000558,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.253629,
+      "ci": [
+       0.238258,
+       0.269286
+      ]
+     },
+     "B_precision": {
+      "value": 0.611111,
+      "ci": [
+       0.363474,
+       0.846154
+      ]
+     },
+     "B_recall": {
+      "value": 0.003929,
+      "ci": [
+       0.001763,
+       0.006226
+      ]
+     },
+     "B_fpr": {
+      "value": 0.001675,
+      "ci": [
+       0.000479,
+       0.003074
+      ]
+     }
+    }
+   }
+  },
+  "english_vote_any": {
+   "family": "voting",
+   "auroc": {
+    "value": 0.862291,
+    "ci": [
+     0.854308,
+     0.870694
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.83006,
+      "ci": [
+       0.816674,
+       0.842585
+      ]
+     },
+     "B_precision": {
+      "value": 0.658458,
+      "ci": [
+       0.643495,
+       0.673773
+      ]
+     },
+     "B_recall": {
+      "value": 0.945357,
+      "ci": [
+       0.937046,
+       0.953341
+      ]
+     },
+     "B_fpr": {
+      "value": 0.328469,
+      "ci": [
+       0.313263,
+       0.34279
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 1.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 1.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    }
+   }
+  },
+  "english_vote_all": {
+   "family": "voting",
+   "auroc": {
+    "value": 0.499522,
+    "ci": [
+     0.49904,
+     0.499882
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.000957,
+      "ci": [
+       0.000236,
+       0.001921
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.000957,
+      "ci": [
+       0.000236,
+       0.001921
+      ]
+     }
+    }
+   }
+  },
+  "english_vote_average": {
+   "family": "voting",
+   "auroc": {
+    "value": 0.874253,
+    "ci": [
+     0.866778,
+     0.882375
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.258469,
+      "ci": [
+       0.242805,
+       0.27384
+      ]
+     },
+     "B_precision": {
+      "value": 0.423077,
+      "ci": [
+       0.217391,
+       0.625
+      ]
+     },
+     "B_recall": {
+      "value": 0.003929,
+      "ci": [
+       0.001763,
+       0.006226
+      ]
+     },
+     "B_fpr": {
+      "value": 0.003589,
+      "ci": [
+       0.001696,
+       0.005498
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.4931350826,
+     "dev_fpr": 0.009492,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.268432,
+      "ci": [
+       0.252477,
+       0.283241
+      ]
+     },
+     "B_precision": {
+      "value": 0.397059,
+      "ci": [
+       0.28325,
+       0.515638
+      ]
+     },
+     "B_recall": {
+      "value": 0.009643,
+      "ci": [
+       0.006417,
+       0.013358
+      ]
+     },
+     "B_fpr": {
+      "value": 0.009809,
+      "ci": [
+       0.006823,
+       0.01283
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.5349535723,
+     "dev_fpr": 0.000558,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.253629,
+      "ci": [
+       0.238258,
+       0.269286
+      ]
+     },
+     "B_precision": {
+      "value": 0.611111,
+      "ci": [
+       0.363474,
+       0.846154
+      ]
+     },
+     "B_recall": {
+      "value": 0.003929,
+      "ci": [
+       0.001763,
+       0.006226
+      ]
+     },
+     "B_fpr": {
+      "value": 0.001675,
+      "ci": [
+       0.000479,
+       0.003074
+      ]
+     }
+    }
+   }
+  },
+  "english_vote_weighted": {
+   "family": "voting",
+   "auroc": {
+    "value": 0.874253,
+    "ci": [
+     0.866778,
+     0.882375
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.258469,
+      "ci": [
+       0.242805,
+       0.27384
+      ]
+     },
+     "B_precision": {
+      "value": 0.423077,
+      "ci": [
+       0.217391,
+       0.625
+      ]
+     },
+     "B_recall": {
+      "value": 0.003929,
+      "ci": [
+       0.001763,
+       0.006226
+      ]
+     },
+     "B_fpr": {
+      "value": 0.003589,
+      "ci": [
+       0.001696,
+       0.005498
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.4931350826,
+     "dev_fpr": 0.009492,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.268432,
+      "ci": [
+       0.252477,
+       0.283241
+      ]
+     },
+     "B_precision": {
+      "value": 0.397059,
+      "ci": [
+       0.28325,
+       0.515638
+      ]
+     },
+     "B_recall": {
+      "value": 0.009643,
+      "ci": [
+       0.006417,
+       0.013358
+      ]
+     },
+     "B_fpr": {
+      "value": 0.009809,
+      "ci": [
+       0.006823,
+       0.01283
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.5349535723,
+     "dev_fpr": 0.000558,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.253629,
+      "ci": [
+       0.238258,
+       0.269286
+      ]
+     },
+     "B_precision": {
+      "value": 0.611111,
+      "ci": [
+       0.363474,
+       0.846154
+      ]
+     },
+     "B_recall": {
+      "value": 0.003929,
+      "ci": [
+       0.001763,
+       0.006226
+      ]
+     },
+     "B_fpr": {
+      "value": 0.001675,
+      "ci": [
+       0.000479,
+       0.003074
+      ]
+     }
+    }
+   }
+  },
+  "english_vote_fisher": {
+   "family": "voting",
+   "auroc": {
+    "value": 0.859053,
+    "ci": [
+     0.85038,
+     0.867913
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.617421,
+      "ci": [
+       0.602327,
+       0.633654
+      ]
+     },
+     "B_precision": {
+      "value": 0.718455,
+      "ci": [
+       0.699591,
+       0.737103
+      ]
+     },
+     "B_recall": {
+      "value": 0.571429,
+      "ci": [
+       0.554268,
+       0.588839
+      ]
+     },
+     "B_fpr": {
+      "value": 0.15,
+      "ci": [
+       0.1392,
+       0.160399
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.7288676315,
+     "dev_fpr": 0.008375,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.265585,
+      "ci": [
+       0.249623,
+       0.281241
+      ]
+     },
+     "B_precision": {
+      "value": 0.297297,
+      "ci": [
+       0.142857,
+       0.444518
+      ]
+     },
+     "B_recall": {
+      "value": 0.003929,
+      "ci": [
+       0.001763,
+       0.006226
+      ]
+     },
+     "B_fpr": {
+      "value": 0.00622,
+      "ci": [
+       0.003865,
+       0.008745
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.8471516124,
+     "dev_fpr": 0.000558,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.001196,
+      "ci": [
+       0.00024,
+       0.002378
+      ]
+     }
+    }
+   }
+  },
+  "strategy_control_characters": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.359569,
+    "ci": [
+     0.353245,
+     0.366336
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.280861,
+      "ci": [
+       0.267328,
+       0.293511
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.9,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.9,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    }
+   }
+  },
+  "strategy_local_anomaly": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.552141,
+    "ci": [
+     0.546312,
+     0.557629
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.206661,
+      "ci": [
+       0.192713,
+       0.219478
+      ]
+     },
+     "B_precision": {
+      "value": 0.989899,
+      "ci": [
+       0.977859,
+       1.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.105,
+      "ci": [
+       0.093414,
+       0.11597
+      ]
+     },
+     "B_fpr": {
+      "value": 0.000718,
+      "ci": [
+       0.0,
+       0.001652
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.0,
+     "dev_fpr": 0.001117,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.206661,
+      "ci": [
+       0.192713,
+       0.219478
+      ]
+     },
+     "B_precision": {
+      "value": 0.989899,
+      "ci": [
+       0.977859,
+       1.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.105,
+      "ci": [
+       0.093414,
+       0.11597
+      ]
+     },
+     "B_fpr": {
+      "value": 0.000718,
+      "ci": [
+       0.0,
+       0.001652
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.8,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    }
+   }
+  },
+  "strategy_pattern_matching": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.624151,
+    "ci": [
+     0.610455,
+     0.637584
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.57273,
+      "ci": [
+       0.55649,
+       0.588101
+      ]
+     },
+     "B_precision": {
+      "value": 0.934415,
+      "ci": [
+       0.919629,
+       0.946666
+      ]
+     },
+     "B_recall": {
+      "value": 0.473214,
+      "ci": [
+       0.454511,
+       0.491029
+      ]
+     },
+     "B_fpr": {
+      "value": 0.022249,
+      "ci": [
+       0.01816,
+       0.027207
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.73,
+     "dev_fpr": 0.00335,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.004839,
+      "ci": [
+       0.002839,
+       0.007401
+      ]
+     },
+     "B_precision": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.001675,
+      "ci": [
+       0.000484,
+       0.003074
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.81,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.000285,
+      "ci": [
+       0.0,
+       0.001139
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    }
+   }
+  },
+  "strategy_entropy_based": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.895872,
+    "ci": [
+     0.886417,
+     0.905356
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.259038,
+      "ci": [
+       0.244805,
+       0.272709
+      ]
+     },
+     "B_precision": {
+      "value": 0.97931,
+      "ci": [
+       0.954019,
+       1.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.050714,
+      "ci": [
+       0.042334,
+       0.058927
+      ]
+     },
+     "B_fpr": {
+      "value": 0.000718,
+      "ci": [
+       0.0,
+       0.00167
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.1013810321,
+     "dev_fpr": 0.009492,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.888984,
+      "ci": [
+       0.877597,
+       0.899231
+      ]
+     },
+     "B_precision": {
+      "value": 0.977413,
+      "ci": [
+       0.97026,
+       0.984071
+      ]
+     },
+     "B_recall": {
+      "value": 0.68,
+      "ci": [
+       0.662309,
+       0.696493
+      ]
+     },
+     "B_fpr": {
+      "value": 0.010526,
+      "ci": [
+       0.007402,
+       0.013856
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.3784244293,
+     "dev_fpr": 0.000558,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.449758,
+      "ci": [
+       0.432672,
+       0.466275
+      ]
+     },
+     "B_precision": {
+      "value": 0.99061,
+      "ci": [
+       0.980641,
+       0.997826
+      ]
+     },
+     "B_recall": {
+      "value": 0.150714,
+      "ci": [
+       0.138799,
+       0.163876
+      ]
+     },
+     "B_fpr": {
+      "value": 0.000957,
+      "ci": [
+       0.000234,
+       0.00195
+      ]
+     }
+    }
+   }
+  },
+  "strategy_vowel_ratio": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.77153,
+    "ci": [
+     0.761645,
+     0.781112
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.592656,
+      "ci": [
+       0.576416,
+       0.608604
+      ]
+     },
+     "B_precision": {
+      "value": 0.954386,
+      "ci": [
+       0.941484,
+       0.966325
+      ]
+     },
+     "B_recall": {
+      "value": 0.388571,
+      "ci": [
+       0.37038,
+       0.407919
+      ]
+     },
+     "B_fpr": {
+      "value": 0.01244,
+      "ci": [
+       0.009077,
+       0.015972
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.5,
+     "dev_fpr": 0.0067,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.544264,
+      "ci": [
+       0.527178,
+       0.559927
+      ]
+     },
+     "B_precision": {
+      "value": 0.976687,
+      "ci": [
+       0.966664,
+       0.985825
+      ]
+     },
+     "B_recall": {
+      "value": 0.284286,
+      "ci": [
+       0.266595,
+       0.301085
+      ]
+     },
+     "B_fpr": {
+      "value": 0.004545,
+      "ci": [
+       0.002815,
+       0.006576
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 1.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    }
+   }
+  },
+  "strategy_keyboard_pattern": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.416197,
+    "ci": [
+     0.409635,
+     0.423116
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.367492,
+      "ci": [
+       0.351267,
+       0.382579
+      ]
+     },
+     "B_precision": {
+      "value": 0.135294,
+      "ci": [
+       0.086088,
+       0.186755
+      ]
+     },
+     "B_recall": {
+      "value": 0.008214,
+      "ci": [
+       0.005106,
+       0.011615
+      ]
+     },
+     "B_fpr": {
+      "value": 0.035167,
+      "ci": [
+       0.029447,
+       0.040797
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.5914728682,
+     "dev_fpr": 0.009492,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.269286,
+      "ci": [
+       0.254761,
+       0.283803
+      ]
+     },
+     "B_precision": {
+      "value": 0.289474,
+      "ci": [
+       0.189189,
+       0.397329
+      ]
+     },
+     "B_recall": {
+      "value": 0.007857,
+      "ci": [
+       0.004751,
+       0.011236
+      ]
+     },
+     "B_fpr": {
+      "value": 0.012919,
+      "ci": [
+       0.0093,
+       0.016433
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.8333333333,
+     "dev_fpr": 0.000558,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.126103,
+      "ci": [
+       0.115564,
+       0.13692
+      ]
+     },
+     "B_precision": {
+      "value": 0.7,
+      "ci": [
+       0.4,
+       1.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0025,
+      "ci": [
+       0.001046,
+       0.004603
+      ]
+     },
+     "B_fpr": {
+      "value": 0.000718,
+      "ci": [
+       0.0,
+       0.001656
+      ]
+     }
+    }
+   }
+  },
+  "strategy_markov_chain": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.912758,
+    "ci": [
+     0.90576,
+     0.920266
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.801309,
+      "ci": [
+       0.787361,
+       0.815827
+      ]
+     },
+     "B_precision": {
+      "value": 0.780301,
+      "ci": [
+       0.767078,
+       0.793557
+      ]
+     },
+     "B_recall": {
+      "value": 0.945,
+      "ci": [
+       0.936444,
+       0.952794
+      ]
+     },
+     "B_fpr": {
+      "value": 0.17823,
+      "ci": [
+       0.166742,
+       0.18924
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.9999706264,
+     "dev_fpr": 0.009492,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.010526,
+      "ci": [
+       0.007485,
+       0.013758
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.9999977397,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    }
+   }
+  },
+  "strategy_ngram_frequency": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.967746,
+    "ci": [
+     0.963552,
+     0.971625
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.768859,
+      "ci": [
+       0.753765,
+       0.782807
+      ]
+     },
+     "B_precision": {
+      "value": 0.923997,
+      "ci": [
+       0.913683,
+       0.933866
+      ]
+     },
+     "B_recall": {
+      "value": 0.855357,
+      "ci": [
+       0.841177,
+       0.867059
+      ]
+     },
+     "B_fpr": {
+      "value": 0.047129,
+      "ci": [
+       0.041152,
+       0.053533
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 1.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 1.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    }
+   }
+  },
+  "strategy_word_lookup": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.999761,
+    "ci": [
+     0.9994,
+     1.0
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.941076,
+      "ci": [
+       0.933106,
+       0.948762
+      ]
+     },
+     "B_precision": {
+      "value": 0.938338,
+      "ci": [
+       0.929257,
+       0.94696
+      ]
+     },
+     "B_recall": {
+      "value": 1.0,
+      "ci": [
+       1.0,
+       1.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.044019,
+      "ci": [
+       0.038323,
+       0.050594
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.625,
+     "dev_fpr": 0.009492,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.848562,
+      "ci": [
+       0.835753,
+       0.859664
+      ]
+     },
+     "B_precision": {
+      "value": 0.981767,
+      "ci": [
+       0.976744,
+       0.986677
+      ]
+     },
+     "B_recall": {
+      "value": 1.0,
+      "ci": [
+       1.0,
+       1.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.01244,
+      "ci": [
+       0.009182,
+       0.015911
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 1.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    }
+   }
+  },
+  "strategy_symbol_ratio": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.01256,
+    "ci": [
+     0.010269,
+     0.014965
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.001708,
+      "ci": [
+       0.000569,
+       0.003416
+      ]
+     },
+     "B_precision": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.001196,
+      "ci": [
+       0.000239,
+       0.002381
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.2985074627,
+     "dev_fpr": 0.007817,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.00427,
+      "ci": [
+       0.002277,
+       0.006832
+      ]
+     },
+     "B_precision": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.00933,
+      "ci": [
+       0.006485,
+       0.012235
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.5503875969,
+     "dev_fpr": 0.000558,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.001423,
+      "ci": [
+       0.000569,
+       0.002847
+      ]
+     },
+     "B_precision": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.000478,
+      "ci": [
+       0.0,
+       0.001204
+      ]
+     }
+    }
+   }
+  },
+  "strategy_repetition": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.490966,
+    "ci": [
+     0.48876,
+     0.493004
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.119271,
+      "ci": [
+       0.108739,
+       0.129519
+      ]
+     },
+     "B_precision": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.013876,
+      "ci": [
+       0.010259,
+       0.017632
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.6,
+     "dev_fpr": 0.005583,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.073157,
+      "ci": [
+       0.064902,
+       0.081981
+      ]
+     },
+     "B_precision": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.005263,
+      "ci": [
+       0.00327,
+       0.007459
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 1.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    }
+   }
+  },
+  "strategy_hex_string": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.496053,
+    "ci": [
+     0.494618,
+     0.497322
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.007686,
+      "ci": [
+       0.004839,
+       0.010532
+      ]
+     },
+     "B_precision": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.007895,
+      "ci": [
+       0.005357,
+       0.010764
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.0,
+     "dev_fpr": 0.0067,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.007686,
+      "ci": [
+       0.004839,
+       0.010532
+      ]
+     },
+     "B_precision": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.007895,
+      "ci": [
+       0.005357,
+       0.010764
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.8518518519,
+     "dev_fpr": 0.000558,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.000854,
+      "ci": [
+       0.0,
+       0.001993
+      ]
+     },
+     "B_precision": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.000239,
+      "ci": [
+       0.0,
+       0.000727
+      ]
+     }
+    }
+   }
+  },
+  "strategy_mojibake": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.414833,
+    "ci": [
+     0.40909,
+     0.420466
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.095455,
+      "ci": [
+       0.087136,
+       0.10428
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 1.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 1.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    }
+   }
+  },
+  "strategy_pronounceability": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.840628,
+    "ci": [
+     0.831353,
+     0.848808
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.649303,
+      "ci": [
+       0.633077,
+       0.664389
+      ]
+     },
+     "B_precision": {
+      "value": 0.91124,
+      "ci": [
+       0.899338,
+       0.922628
+      ]
+     },
+     "B_recall": {
+      "value": 0.729643,
+      "ci": [
+       0.712595,
+       0.744986
+      ]
+     },
+     "B_fpr": {
+      "value": 0.047608,
+      "ci": [
+       0.041443,
+       0.054062
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 1.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 1.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    }
+   }
+  },
+  "strategy_unicode_script": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.5,
+    "ci": [
+     0.5,
+     0.5
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    }
+   }
+  },
+  "strategy_bigram_probability": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.748472,
+    "ci": [
+     0.738749,
+     0.757391
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.091944,
+      "ci": [
+       0.082543,
+       0.102192
+      ]
+     },
+     "B_precision": {
+      "value": 1.0,
+      "ci": [
+       1.0,
+       1.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.148929,
+      "ci": [
+       0.136763,
+       0.16117
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.05405405405,
+     "dev_fpr": 0.009492,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.330771,
+      "ci": [
+       0.315969,
+       0.346428
+      ]
+     },
+     "B_precision": {
+      "value": 0.973684,
+      "ci": [
+       0.96476,
+       0.981918
+      ]
+     },
+     "B_recall": {
+      "value": 0.515357,
+      "ci": [
+       0.496982,
+       0.532852
+      ]
+     },
+     "B_fpr": {
+      "value": 0.00933,
+      "ci": [
+       0.00634,
+       0.012404
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.1714285714,
+     "dev_fpr": 0.000558,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.253914,
+      "ci": [
+       0.239397,
+       0.268439
+      ]
+     },
+     "B_precision": {
+      "value": 0.997925,
+      "ci": [
+       0.995397,
+       1.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.515357,
+      "ci": [
+       0.496982,
+       0.532852
+      ]
+     },
+     "B_fpr": {
+      "value": 0.000718,
+      "ci": [
+       0.0,
+       0.001639
+      ]
+     }
+    }
+   }
+  },
+  "strategy_letter_position": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.728062,
+    "ci": [
+     0.718791,
+     0.738368
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.191005,
+      "ci": [
+       0.178765,
+       0.204384
+      ]
+     },
+     "B_precision": {
+      "value": 0.580357,
+      "ci": [
+       0.489566,
+       0.674359
+      ]
+     },
+     "B_recall": {
+      "value": 0.023214,
+      "ci": [
+       0.01803,
+       0.028833
+      ]
+     },
+     "B_fpr": {
+      "value": 0.011244,
+      "ci": [
+       0.008122,
+       0.014609
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.75,
+     "dev_fpr": 0.002233,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.146314,
+      "ci": [
+       0.134643,
+       0.158269
+      ]
+     },
+     "B_precision": {
+      "value": 0.902778,
+      "ci": [
+       0.828112,
+       0.971025
+      ]
+     },
+     "B_recall": {
+      "value": 0.023214,
+      "ci": [
+       0.01803,
+       0.028833
+      ]
+     },
+     "B_fpr": {
+      "value": 0.001675,
+      "ci": [
+       0.000481,
+       0.003071
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 1.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    }
+   }
+  },
+  "strategy_consonant_sequence": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.591429,
+    "ci": [
+     0.58368,
+     0.598615
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.364646,
+      "ci": [
+       0.347844,
+       0.380309
+      ]
+     },
+     "B_precision": {
+      "value": 0.984762,
+      "ci": [
+       0.973165,
+       0.994199
+      ]
+     },
+     "B_recall": {
+      "value": 0.184643,
+      "ci": [
+       0.169484,
+       0.199074
+      ]
+     },
+     "B_fpr": {
+      "value": 0.001914,
+      "ci": [
+       0.000721,
+       0.003353
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.0,
+     "dev_fpr": 0.002233,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.364646,
+      "ci": [
+       0.347844,
+       0.380309
+      ]
+     },
+     "B_precision": {
+      "value": 0.984762,
+      "ci": [
+       0.973165,
+       0.994199
+      ]
+     },
+     "B_recall": {
+      "value": 0.184643,
+      "ci": [
+       0.169484,
+       0.199074
+      ]
+     },
+     "B_fpr": {
+      "value": 0.001914,
+      "ci": [
+       0.000721,
+       0.003353
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 1.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    }
+   }
+  },
+  "strategy_vowel_pattern": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.497783,
+    "ci": [
+     0.49651,
+     0.499103
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.011671,
+      "ci": [
+       0.008255,
+       0.015371
+      ]
+     },
+     "B_precision": {
+      "value": 0.115385,
+      "ci": [
+       0.0,
+       0.261014
+      ]
+     },
+     "B_recall": {
+      "value": 0.001071,
+      "ci": [
+       0.0,
+       0.002502
+      ]
+     },
+     "B_fpr": {
+      "value": 0.005502,
+      "ci": [
+       0.003318,
+       0.007919
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.0,
+     "dev_fpr": 0.006142,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.011671,
+      "ci": [
+       0.008255,
+       0.015371
+      ]
+     },
+     "B_precision": {
+      "value": 0.115385,
+      "ci": [
+       0.0,
+       0.261014
+      ]
+     },
+     "B_recall": {
+      "value": 0.001071,
+      "ci": [
+       0.0,
+       0.002502
+      ]
+     },
+     "B_fpr": {
+      "value": 0.005502,
+      "ci": [
+       0.003318,
+       0.007919
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.7,
+     "dev_fpr": 0.000558,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.006262,
+      "ci": [
+       0.003701,
+       0.008824
+      ]
+     },
+     "B_precision": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.001435,
+      "ci": [
+       0.000472,
+       0.002636
+      ]
+     }
+    }
+   }
+  },
+  "strategy_letter_frequency": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.379545,
+    "ci": [
+     0.372898,
+     0.386462
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.179049,
+      "ci": [
+       0.16567,
+       0.191005
+      ]
+     },
+     "B_precision": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.010287,
+      "ci": [
+       0.007344,
+       0.013328
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.5040567267,
+     "dev_fpr": 0.009492,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.177911,
+      "ci": [
+       0.164525,
+       0.189866
+      ]
+     },
+     "B_precision": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.00933,
+      "ci": [
+       0.006449,
+       0.012302
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.7,
+     "dev_fpr": 0.000558,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.091375,
+      "ci": [
+       0.081697,
+       0.101338
+      ]
+     },
+     "B_precision": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.000478,
+      "ci": [
+       0.0,
+       0.001208
+      ]
+     }
+    }
+   }
+  },
+  "strategy_rare_trigram": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.529371,
+    "ci": [
+     0.524901,
+     0.533549
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.019641,
+      "ci": [
+       0.015656,
+       0.024481
+      ]
+     },
+     "B_precision": {
+      "value": 1.0,
+      "ci": [
+       1.0,
+       1.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.016429,
+      "ci": [
+       0.011639,
+       0.021128
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.0,
+     "dev_fpr": 0.001675,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.053516,
+      "ci": [
+       0.046107,
+       0.060917
+      ]
+     },
+     "B_precision": {
+      "value": 0.976608,
+      "ci": [
+       0.950609,
+       0.994709
+      ]
+     },
+     "B_recall": {
+      "value": 0.059643,
+      "ci": [
+       0.050907,
+       0.067902
+      ]
+     },
+     "B_fpr": {
+      "value": 0.000957,
+      "ci": [
+       0.000235,
+       0.001934
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.04301075269,
+     "dev_fpr": 0.000558,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.050384,
+      "ci": [
+       0.042699,
+       0.057515
+      ]
+     },
+     "B_precision": {
+      "value": 0.976608,
+      "ci": [
+       0.950609,
+       0.994709
+      ]
+     },
+     "B_recall": {
+      "value": 0.059643,
+      "ci": [
+       0.050907,
+       0.067902
+      ]
+     },
+     "B_fpr": {
+      "value": 0.000957,
+      "ci": [
+       0.000235,
+       0.001934
+      ]
+     }
+    }
+   }
+  },
+  "strategy_function_word_density": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.457177,
+    "ci": [
+     0.452872,
+     0.461309
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.019072,
+      "ci": [
+       0.014795,
+       0.023627
+      ]
+     },
+     "B_precision": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.027751,
+      "ci": [
+       0.022545,
+       0.032979
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.8,
+     "dev_fpr": 0.00335,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.00797,
+      "ci": [
+       0.005124,
+       0.010817
+      ]
+     },
+     "B_precision": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.00311,
+      "ci": [
+       0.001664,
+       0.004847
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.9,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    }
+   }
+  },
+  "strategy_affix_detection": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.348086,
+    "ci": [
+     0.340844,
+     0.354727
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.001708,
+      "ci": [
+       0.000569,
+       0.003131
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.45,
+     "dev_fpr": 0.007259,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.003416,
+      "ci": [
+       0.001708,
+       0.005408
+      ]
+     },
+     "B_precision": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.01244,
+      "ci": [
+       0.009552,
+       0.016005
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.4607142857,
+     "dev_fpr": 0.000558,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.003416,
+      "ci": [
+       0.001708,
+       0.005408
+      ]
+     },
+     "B_precision": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.002871,
+      "ci": [
+       0.001433,
+       0.004564
+      ]
+     }
+    }
+   }
+  },
+  "strategy_zipf_conformity": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.499761,
+    "ci": [
+     0.499401,
+     0.5
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.000478,
+      "ci": [
+       0.0,
+       0.001198
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.000478,
+      "ci": [
+       0.0,
+       0.001198
+      ]
+     }
+    }
+   }
+  },
+  "strategy_word_collocation": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.290191,
+    "ci": [
+     0.282288,
+     0.297295
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.008255,
+      "ci": [
+       0.005124,
+       0.011386
+      ]
+     },
+     "B_precision": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.039713,
+      "ci": [
+       0.03423,
+       0.045586
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.6,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.6,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    }
+   }
+  },
+  "strategy_log_likelihood_ratio": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.997292,
+    "ci": [
+     0.995791,
+     0.998565
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.623968,
+      "ci": [
+       0.608881,
+       0.639631
+      ]
+     },
+     "B_precision": {
+      "value": 0.999504,
+      "ci": [
+       0.998475,
+       1.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.719286,
+      "ci": [
+       0.702769,
+       0.735421
+      ]
+     },
+     "B_fpr": {
+      "value": 0.000239,
+      "ci": [
+       0.0,
+       0.000729
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.1529978246,
+     "dev_fpr": 0.009492,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.868488,
+      "ci": [
+       0.856818,
+       0.880444
+      ]
+     },
+     "B_precision": {
+      "value": 0.988477,
+      "ci": [
+       0.984621,
+       0.992339
+      ]
+     },
+     "B_recall": {
+      "value": 0.980357,
+      "ci": [
+       0.975123,
+       0.985135
+      ]
+     },
+     "B_fpr": {
+      "value": 0.007656,
+      "ci": [
+       0.005032,
+       0.01028
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.3127775706,
+     "dev_fpr": 0.000558,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.75918,
+      "ci": [
+       0.74551,
+       0.774281
+      ]
+     },
+     "B_precision": {
+      "value": 0.998796,
+      "ci": [
+       0.99718,
+       1.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.888571,
+      "ci": [
+       0.876418,
+       0.898977
+      ]
+     },
+     "B_fpr": {
+      "value": 0.000718,
+      "ci": [
+       0.0,
+       0.001687
+      ]
+     }
+    }
+   }
+  },
+  "strategy_word_anomaly": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.783174,
+    "ci": [
+     0.774533,
+     0.791761
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.578708,
+      "ci": [
+       0.563621,
+       0.595787
+      ]
+     },
+     "B_precision": {
+      "value": 0.996879,
+      "ci": [
+       0.994217,
+       0.999365
+      ]
+     },
+     "B_recall": {
+      "value": 0.570357,
+      "ci": [
+       0.553281,
+       0.587657
+      ]
+     },
+     "B_fpr": {
+      "value": 0.001196,
+      "ci": [
+       0.000242,
+       0.002186
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.1538461538,
+     "dev_fpr": 0.009492,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.584401,
+      "ci": [
+       0.569307,
+       0.60148
+      ]
+     },
+     "B_precision": {
+      "value": 0.977955,
+      "ci": [
+       0.97055,
+       0.984686
+      ]
+     },
+     "B_recall": {
+      "value": 0.570357,
+      "ci": [
+       0.553281,
+       0.587657
+      ]
+     },
+     "B_fpr": {
+      "value": 0.008612,
+      "ci": [
+       0.005963,
+       0.011399
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.6666666667,
+     "dev_fpr": 0.000558,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.560205,
+      "ci": [
+       0.544826,
+       0.576715
+      ]
+     },
+     "B_precision": {
+      "value": 1.0,
+      "ci": [
+       1.0,
+       1.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.570357,
+      "ci": [
+       0.553281,
+       0.587657
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    }
+   }
+  },
+  "strategy_keyboard_adjacency": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.499585,
+    "ci": [
+     0.497824,
+     0.501496
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.320239,
+      "ci": [
+       0.303722,
+       0.335333
+      ]
+     },
+     "B_precision": {
+      "value": 0.365854,
+      "ci": [
+       0.214232,
+       0.525033
+      ]
+     },
+     "B_recall": {
+      "value": 0.005357,
+      "ci": [
+       0.002544,
+       0.008265
+      ]
+     },
+     "B_fpr": {
+      "value": 0.00622,
+      "ci": [
+       0.003851,
+       0.008736
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.0,
+     "dev_fpr": 0.008375,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.320239,
+      "ci": [
+       0.303722,
+       0.335333
+      ]
+     },
+     "B_precision": {
+      "value": 0.365854,
+      "ci": [
+       0.214232,
+       0.525033
+      ]
+     },
+     "B_recall": {
+      "value": 0.005357,
+      "ci": [
+       0.002544,
+       0.008265
+      ]
+     },
+     "B_fpr": {
+      "value": 0.00622,
+      "ci": [
+       0.003851,
+       0.008736
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.8,
+     "dev_fpr": 0.0,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.265016,
+      "ci": [
+       0.249922,
+       0.280387
+      ]
+     },
+     "B_precision": {
+      "value": 0.9375,
+      "ci": [
+       0.8,
+       1.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.005357,
+      "ci": [
+       0.002544,
+       0.008265
+      ]
+     },
+     "B_fpr": {
+      "value": 0.000239,
+      "ci": [
+       0.0,
+       0.000725
+      ]
+     }
+    }
+   }
+  },
+  "strategy_cross_parsing": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.608408,
+    "ci": [
+     0.590569,
+     0.626317
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.569029,
+      "ci": [
+       0.552235,
+       0.585255
+      ]
+     },
+     "B_precision": {
+      "value": 0.932537,
+      "ci": [
+       0.919998,
+       0.944914
+      ]
+     },
+     "B_recall": {
+      "value": 0.557857,
+      "ci": [
+       0.539305,
+       0.575151
+      ]
+     },
+     "B_fpr": {
+      "value": 0.027033,
+      "ci": [
+       0.022024,
+       0.03219
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.6870813464,
+     "dev_fpr": 0.009492,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.466268,
+      "ci": [
+       0.450612,
+       0.482209
+      ]
+     },
+     "B_precision": {
+      "value": 0.971936,
+      "ci": [
+       0.961356,
+       0.981928
+      ]
+     },
+     "B_recall": {
+      "value": 0.371071,
+      "ci": [
+       0.353103,
+       0.388465
+      ]
+     },
+     "B_fpr": {
+      "value": 0.007177,
+      "ci": [
+       0.004591,
+       0.01001
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.9582978498,
+     "dev_fpr": 0.000558,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.227726,
+      "ci": [
+       0.214062,
+       0.241104
+      ]
+     },
+     "B_precision": {
+      "value": 0.990099,
+      "ci": [
+       0.969689,
+       1.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.035714,
+      "ci": [
+       0.028867,
+       0.042725
+      ]
+     },
+     "B_fpr": {
+      "value": 0.000239,
+      "ci": [
+       0.0,
+       0.000722
+      ]
+     }
+    }
+   }
+  },
+  "strategy_primed_compression": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.60976,
+    "ci": [
+     0.592064,
+     0.627468
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.269855,
+      "ci": [
+       0.255053,
+       0.284379
+      ]
+     },
+     "B_precision": {
+      "value": 0.967326,
+      "ci": [
+       0.957242,
+       0.977255
+      ]
+     },
+     "B_recall": {
+      "value": 0.401786,
+      "ci": [
+       0.383739,
+       0.420882
+      ]
+     },
+     "B_fpr": {
+      "value": 0.009091,
+      "ci": [
+       0.006236,
+       0.011931
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.4699255245,
+     "dev_fpr": 0.009492,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.283518,
+      "ci": [
+       0.268702,
+       0.298036
+      ]
+     },
+     "B_precision": {
+      "value": 0.958262,
+      "ci": [
+       0.947084,
+       0.969384
+      ]
+     },
+     "B_recall": {
+      "value": 0.401786,
+      "ci": [
+       0.383739,
+       0.420882
+      ]
+     },
+     "B_fpr": {
+      "value": 0.011722,
+      "ci": [
+       0.008563,
+       0.014999
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.7960456417,
+     "dev_fpr": 0.000558,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.044406,
+      "ci": [
+       0.037859,
+       0.051238
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    }
+   }
+  },
+  "strategy_ngram_rank": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.604884,
+    "ci": [
+     0.587281,
+     0.622021
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.564759,
+      "ci": [
+       0.549096,
+       0.580416
+      ]
+     },
+     "B_precision": {
+      "value": 0.936082,
+      "ci": [
+       0.923548,
+       0.948253
+      ]
+     },
+     "B_recall": {
+      "value": 0.486429,
+      "ci": [
+       0.46642,
+       0.504336
+      ]
+     },
+     "B_fpr": {
+      "value": 0.022249,
+      "ci": [
+       0.017903,
+       0.026672
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.6264263954,
+     "dev_fpr": 0.009492,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.51466,
+      "ci": [
+       0.498434,
+       0.530316
+      ]
+     },
+     "B_precision": {
+      "value": 0.954733,
+      "ci": [
+       0.941118,
+       0.96737
+      ]
+     },
+     "B_recall": {
+      "value": 0.331429,
+      "ci": [
+       0.314715,
+       0.348892
+      ]
+     },
+     "B_fpr": {
+      "value": 0.010526,
+      "ci": [
+       0.007599,
+       0.01393
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.8387651548,
+     "dev_fpr": 0.000558,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.336749,
+      "ci": [
+       0.320808,
+       0.352405
+      ]
+     },
+     "B_precision": {
+      "value": 0.979167,
+      "ci": [
+       0.94559,
+       1.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.033571,
+      "ci": [
+       0.027314,
+       0.040376
+      ]
+     },
+     "B_fpr": {
+      "value": 0.000478,
+      "ci": [
+       0.0,
+       0.001198
+      ]
+     }
+    }
+   }
+  },
+  "strategy_permutation_test": {
+   "family": "strategy",
+   "auroc": {
+    "value": 0.558317,
+    "ci": [
+     0.540865,
+     0.57508
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.34472,
+      "ci": [
+       0.329056,
+       0.359244
+      ]
+     },
+     "B_precision": {
+      "value": 0.915414,
+      "ci": [
+       0.891038,
+       0.93797
+      ]
+     },
+     "B_recall": {
+      "value": 0.173929,
+      "ci": [
+       0.162259,
+       0.189546
+      ]
+     },
+     "B_fpr": {
+      "value": 0.010766,
+      "ci": [
+       0.007791,
+       0.014102
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 0.5357194667,
+     "dev_fpr": 0.009492,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.324224,
+      "ci": [
+       0.308561,
+       0.339034
+      ]
+     },
+     "B_precision": {
+      "value": 0.915556,
+      "ci": [
+       0.887195,
+       0.940538
+      ]
+     },
+     "B_recall": {
+      "value": 0.147143,
+      "ci": [
+       0.135676,
+       0.160721
+      ]
+     },
+     "B_fpr": {
+      "value": 0.009091,
+      "ci": [
+       0.006283,
+       0.012158
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 0.8675656817,
+     "dev_fpr": 0.000558,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.115855,
+      "ci": [
+       0.104747,
+       0.126679
+      ]
+     },
+     "B_precision": {
+      "value": 0.92,
+      "ci": [
+       0.8,
+       1.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.008214,
+      "ci": [
+       0.005034,
+       0.011786
+      ]
+     },
+     "B_fpr": {
+      "value": 0.000478,
+      "ci": [
+       0.0,
+       0.0012
+      ]
+     }
+    }
+   }
+  },
+  "nostril": {
+   "family": "baseline",
+   "auroc": {
+    "value": 0.838091,
+    "ci": [
+     0.824978,
+     0.850445
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.639624,
+      "ci": [
+       0.624253,
+       0.654142
+      ]
+     },
+     "B_precision": {
+      "value": 0.977664,
+      "ci": [
+       0.969753,
+       0.984951
+      ]
+     },
+     "B_recall": {
+      "value": 0.547143,
+      "ci": [
+       0.528794,
+       0.564303
+      ]
+     },
+     "B_fpr": {
+      "value": 0.008373,
+      "ci": [
+       0.005533,
+       0.011318
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 1000000.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 1000000.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    }
+   }
+  },
+  "gibberish_detector": {
+   "family": "baseline",
+   "auroc": {
+    "value": 0.986865,
+    "ci": [
+     0.9836,
+     0.989784
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.72189,
+      "ci": [
+       0.707358,
+       0.736408
+      ]
+     },
+     "B_precision": {
+      "value": 0.99434,
+      "ci": [
+       0.991139,
+       0.997058
+      ]
+     },
+     "B_recall": {
+      "value": 0.815714,
+      "ci": [
+       0.800498,
+       0.828308
+      ]
+     },
+     "B_fpr": {
+      "value": 0.00311,
+      "ci": [
+       0.001648,
+       0.004801
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 3.654794711,
+     "dev_fpr": 0.009492,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.799317,
+      "ci": [
+       0.785653,
+       0.812411
+      ]
+     },
+     "B_precision": {
+      "value": 0.979062,
+      "ci": [
+       0.973289,
+       0.98416
+      ]
+     },
+     "B_recall": {
+      "value": 0.901786,
+      "ci": [
+       0.889948,
+       0.912482
+      ]
+     },
+     "B_fpr": {
+      "value": 0.012919,
+      "ci": [
+       0.009877,
+       0.016559
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 4.125207802,
+     "dev_fpr": 0.000558,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.690009,
+      "ci": [
+       0.674338,
+       0.706526
+      ]
+     },
+     "B_precision": {
+      "value": 0.9959,
+      "ci": [
+       0.993058,
+       0.998195
+      ]
+     },
+     "B_recall": {
+      "value": 0.780714,
+      "ci": [
+       0.763858,
+       0.795028
+      ]
+     },
+     "B_fpr": {
+      "value": 0.002153,
+      "ci": [
+       0.000947,
+       0.003595
+      ]
+     }
+    }
+   }
+  },
+  "gibberish_chat_detector": {
+   "family": "baseline",
+   "auroc": {
+    "value": 0.40361,
+    "ci": [
+     0.396845,
+     0.410044
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.333333,
+      "ci": [
+       0.318247,
+       0.348705
+      ]
+     },
+     "B_precision": {
+      "value": 0.027523,
+      "ci": [
+       0.017421,
+       0.038952
+      ]
+     },
+     "B_recall": {
+      "value": 0.008571,
+      "ci": [
+       0.00547,
+       0.012126
+      ]
+     },
+     "B_fpr": {
+      "value": 0.202871,
+      "ci": [
+       0.190521,
+       0.215363
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 1.0,
+     "dev_fpr": 0.0,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.113293,
+      "ci": [
+       0.102754,
+       0.123541
+      ]
+     },
+     "B_precision": {
+      "value": 0.954545,
+      "ci": [
+       0.846053,
+       1.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0075,
+      "ci": [
+       0.004627,
+       0.011021
+      ]
+     },
+     "B_fpr": {
+      "value": 0.000239,
+      "ci": [
+       0.0,
+       0.000727
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 1.0,
+     "dev_fpr": 0.0,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.113293,
+      "ci": [
+       0.102754,
+       0.123541
+      ]
+     },
+     "B_precision": {
+      "value": 0.954545,
+      "ci": [
+       0.846053,
+       1.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0075,
+      "ci": [
+       0.004627,
+       0.011021
+      ]
+     },
+     "B_fpr": {
+      "value": 0.000239,
+      "ci": [
+       0.0,
+       0.000727
+      ]
+     }
+    }
+   }
+  },
+  "lingua": {
+   "family": "baseline",
+   "auroc": {
+    "value": 0.980643,
+    "ci": [
+     0.976854,
+     0.984115
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.988898,
+      "ci": [
+       0.985198,
+       0.992314
+      ]
+     },
+     "B_precision": {
+      "value": 0.879152,
+      "ci": [
+       0.867843,
+       0.890975
+      ]
+     },
+     "B_recall": {
+      "value": 0.9925,
+      "ci": [
+       0.989265,
+       0.995583
+      ]
+     },
+     "B_fpr": {
+      "value": 0.091388,
+      "ci": [
+       0.082561,
+       0.100221
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 1.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 1.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_precision": {
+      "value": null,
+      "ci": null
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     }
+    }
+   }
+  },
+  "gopher_rules": {
+   "family": "baseline",
+   "auroc": {
+    "value": 0.288976,
+    "ci": [
+     0.277204,
+     0.300409
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 1.0,
+      "ci": [
+       1.0,
+       1.0
+      ]
+     },
+     "B_precision": {
+      "value": 0.401146,
+      "ci": [
+       0.389685,
+       0.412754
+      ]
+     },
+     "B_recall": {
+      "value": 1.0,
+      "ci": [
+       1.0,
+       1.0
+      ]
+     },
+     "B_fpr": {
+      "value": 1.0,
+      "ci": [
+       1.0,
+       1.0
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 5.0,
+     "dev_fpr": 0.0067,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.005693,
+      "ci": [
+       0.003416,
+       0.00854
+      ]
+     },
+     "B_precision": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.009809,
+      "ci": [
+       0.006976,
+       0.012862
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 9.0,
+     "dev_fpr": 0.0,
+     "reachable": false,
+     "A_capture": {
+      "value": 0.001423,
+      "ci": [
+       0.000285,
+       0.002847
+      ]
+     },
+     "B_precision": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.000239,
+      "ci": [
+       0.0,
+       0.000723
+      ]
+     }
+    }
+   }
+  },
+  "c4_rules": {
+   "family": "baseline",
+   "auroc": {
+    "value": 0.985287,
+    "ci": [
+     0.982874,
+     0.987903
+    ]
+   },
+   "points": {
+    "native": {
+     "A_capture": {
+      "value": 0.999431,
+      "ci": [
+       0.998577,
+       1.0
+      ]
+     },
+     "B_precision": {
+      "value": 0.401376,
+      "ci": [
+       0.390072,
+       0.412965
+      ]
+     },
+     "B_recall": {
+      "value": 1.0,
+      "ci": [
+       1.0,
+       1.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.999043,
+      "ci": [
+       0.997863,
+       0.999764
+      ]
+     }
+    },
+    "fpr1": {
+     "cut": 3.0,
+     "dev_fpr": 0.000558,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.001423,
+      "ci": [
+       0.000285,
+       0.002847
+      ]
+     },
+     "B_precision": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.000239,
+      "ci": [
+       0.0,
+       0.000726
+      ]
+     }
+    },
+    "fpr0.1": {
+     "cut": 3.0,
+     "dev_fpr": 0.000558,
+     "reachable": true,
+     "A_capture": {
+      "value": 0.001423,
+      "ci": [
+       0.000285,
+       0.002847
+      ]
+     },
+     "B_precision": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_recall": {
+      "value": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ]
+     },
+     "B_fpr": {
+      "value": 0.000239,
+      "ci": [
+       0.0,
+       0.000726
+      ]
+     }
+    }
+   }
+  }
+ }
+}
