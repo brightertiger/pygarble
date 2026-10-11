@@ -1,7 +1,7 @@
 # Benchmark protocol (frozen 2026-10-11)
 
-This protocol governs the preprint benchmark described in
-`paper/PREPRINT-PLAN.md`. It was first committed before any B test row was
+This protocol governs the benchmark reported in the preprint
+(`paper/preprint/main.tex`). It was first committed before any B test row was
 scored. On 2026-10-11 the maintainer narrowed the benchmark to default
 decisions on all of A and all of B; the operating points, split and
 calibration of the first version were removed (see `deviations.md`). This

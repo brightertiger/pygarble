@@ -24,7 +24,7 @@ install:
 	pip install .
 
 install-dev:
-	pip install -r requirements-dev.txt
+	pip install -e ".[dev,docs]"
 
 test:
 	pytest

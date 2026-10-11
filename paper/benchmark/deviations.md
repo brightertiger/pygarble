@@ -1,7 +1,7 @@
 # Deviations from the plan
 
-Departures from `paper/PREPRINT-PLAN.md` (v4) and decisions the plan left
-open. Each is also stated in `protocol.md` where it affects the protocol.
+Departures from the benchmark plan as first written (2026-10-11, since
+superseded by `protocol.md`) and decisions the plan left open. Each is also stated in `protocol.md` where it affects the protocol.
 
 - **nostril source.** PyPI `nostril` 0.1.1 is Pedro Paiva's nose wrapper,
   not Hucka's Nonsense String Evaluator. Hucka's nostril is installed from

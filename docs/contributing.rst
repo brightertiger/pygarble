@@ -18,7 +18,7 @@ Clone your fork, or use the upstream repository if you have write access:
    python -m venv .venv
    source .venv/bin/activate
    python -m pip install -e ".[dev]"
-   python -m pip install -r requirements-dev.txt
+   python -m pip install -e ".[dev,docs]"
    git switch -c docs/my-change
 
 On Windows, activate with ``.venv\Scripts\activate`` instead.

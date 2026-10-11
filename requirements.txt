@@ -1,1 +1,0 @@
-# Core dependencies (none required - zero dependency library)
