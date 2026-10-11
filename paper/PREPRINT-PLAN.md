@@ -1,4 +1,4 @@
-# Preprint plan (v7, 2026-10-11)
+# Preprint plan (v8, 2026-10-11)
 
 Deliverables: benchmark code, frozen results and analysis, LaTeX source and
 PDF of the preprint. Scope: one preprint showing what pygarble captures on two public gibberish
@@ -34,17 +34,19 @@ as given; the mojibake-tweet share is reported as a note, not re-labelled.
 Three methods, both datasets, each at its own default decision:
 pygarble (two rows: the default `english` profile and `english_fusion`),
 gibberish-detector 0.1.1 (rrenaud Markov port, trained on its big.txt,
-pinned), lingua-language-detector 2.2.0 with "not English is junk". Plus one
-post hoc row, "domain-specific tuning": the `english` profile with the
-MOJIBAKE and CONTROL_CHARACTERS strategies removed (the four other members, voting any, threshold
-0.5), constructed after seeing that 26.4 percent of tweets carry mojibake;
-reported in its own subsection as post hoc. Nothing else. Footprint for the same rows: ms per 1,000 texts single-threaded,
+pinned), lingua-language-detector 2.2.0 with "not English is junk". Plus a
+tuning study (v8, replaces the earlier hand-made no-encoding-checks row): a
+weight for each of the 32 strategies and a threshold learned with Optuna
+(TPE, 1,000 trials) on a 20 percent labelled sample of both datasets,
+evaluated on the held-out 80 percent, repeated over five seeds; reported in
+its own subsection against the two default profiles on identical rows, with
+the learned weights in an appendix. Nothing else. Footprint for the same rows: ms per 1,000 texts single-threaded,
 median of 5; install size.
 
 ## Figures and tables
 
 Table 1: four rows (pygarble english, pygarble english_fusion,
-gibberish-detector, lingua) plus the separated tuned row; columns A capture, B precision, B recall, B FPR,
+gibberish-detector, lingua); a separate tuning table on held-out rows; columns A capture, B precision, B recall, B FPR,
 with 95 percent bootstrap intervals. Table 2: footprint for the same rows.
 One optional two-panel figure (A capture; B precision and recall). All
 numbers read from result files.
