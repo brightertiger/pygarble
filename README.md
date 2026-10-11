@@ -291,6 +291,27 @@ CI checks.
 - [Golden corpus](https://github.com/brightertiger/pygarble/blob/main/paper/regression/golden.jsonl) of frozen detector outputs for every profile on that sample and hand-written edge inputs, and a [golden scan corpus](https://github.com/brightertiger/pygarble/blob/main/paper/regression/golden_scan.jsonl) for the scanner, both checked in CI
 - [Data provenance and curation](https://github.com/brightertiger/pygarble/blob/main/paper/scripts/data_curation.json)
 
+## Citation
+
+Cite the preprint for the benchmark results and the software entry for the library. The preprint entry will be updated with a DOI once it is posted.
+
+```bibtex
+@misc{rao2026pygarble,
+  author       = {Rao, Ujjwal Singh and Singh, Ricky},
+  title        = {How Much Junk Do Rules Catch? Evaluating and Tuning pygarble, a Dependency-Free Gibberish Screener, on Survey Responses and Social-Media Text},
+  year         = {2026},
+  howpublished = {Preprint, \url{https://github.com/brightertiger/pygarble/blob/main/paper/preprint/main.pdf}}
+}
+
+@misc{pygarble,
+  author       = {Rao, Ujjwal Singh},
+  title        = {pygarble: local screening of text for secrets, {PII}, profanity and gibberish},
+  year         = {2026},
+  howpublished = {\url{https://github.com/brightertiger/pygarble}},
+  note         = {Version 0.11.0, commit e3135ed}
+}
+```
+
 ## Repository layout and compatibility
 
 Library code is in `pygarble/`, unit tests in `tests/`, and the website in

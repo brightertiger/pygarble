@@ -42,6 +42,12 @@ Verify Google Search Console
 3. In the GitHub repository, set the Actions repository variable
    ``GOOGLE_SITE_VERIFICATION`` to that value. The documentation build reads
    it and adds the tag to the homepage. Keep it configured after verification.
+   To also enable Google Analytics, set the repository variable
+   ``GOOGLE_ANALYTICS_KEY`` to the measurement ID (``G-XXXXXXXXXX``).
+   ``docs/conf.py`` passes it to the theme's built-in Google Analytics
+   integration, which loads gtag.js only after a visitor accepts analytics
+   cookies in the consent banner. Without the variable no analytics code is
+   emitted.
 4. Merge the discovery changes, then let the documentation workflow deploy.
    If setting the variable later, rerun **Build and Deploy Documentation**
    on ``main``. Confirm the exact token is present in the live homepage's
@@ -67,7 +73,9 @@ Documentation hosting
 ~~~~~~~~~~~~~~~~~~~~~
 
 Use **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-The repository's Sphinx workflow builds and deploys the documentation. A
+The repository's Sphinx workflow builds and deploys the documentation with
+the sphinx-immaterial theme, a Sphinx port of Material for MkDocs configured
+in ``docs/conf.py`` to match the sister project's site. A
 parallel legacy Pages build from the raw repository can replace the HTML
 with different content. Verify the live homepage, sitemap and ``llms.txt``
 after a deployment; a green build alone is not proof of what is being served.

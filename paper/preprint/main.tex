@@ -17,6 +17,7 @@
 
 \captionsetup{font=small,labelfont=bf,skip=4pt}
 \setlength{\emergencystretch}{2em}
+\raggedbottom
 \renewcommand{\topfraction}{0.95}
 \renewcommand{\dbltopfraction}{0.95}
 \renewcommand{\dblfloatpagefraction}{0.85}
@@ -34,10 +35,13 @@ Evaluating and Tuning pygarble, a Dependency-Free Gibberish Screener,\\
 on Survey Responses and Social-Media Text}
 
 \author{Ujjwal Singh Rao\\
-\texttt{ujjwalsrao@gmail.com}\\
-\url{https://github.com/brightertiger/pygarble}}
+\texttt{ujjwalsrao@gmail.com}
+\and
+Ricky Singh\\
+\texttt{rickragv@gmail.com}}
 
-\date{October 2026}
+\date{October 2026\\[2pt]
+\url{https://github.com/brightertiger/pygarble}}
 
 \begin{document}
 \maketitle
@@ -85,7 +89,7 @@ downstream: a coder reads it, a model is trained on it, or an analysis
 counts it as an answer. The problem has become more visible with large
 language models (LLMs), where unreadable input wastes tokens, degrades
 retrieval, and in guardrail settings is itself a signal that something
-upstream has gone wrong. The author's own motivation for pygarble is
+upstream has gone wrong. The authors' own motivation for pygarble is
 exactly this guardrail role: a cheap, local check that runs on every
 prompt and every model output before anything more expensive does.
 
@@ -618,7 +622,7 @@ scores are deterministic.
 
 Claude Code agents running Claude Opus 5.5 and Claude Fable 5.1 wrote the
 benchmark code, ran the experiments and drafted this text under the
-author's direction and review. Commit trailers in the repository record
+authors' direction and review. Commit trailers in the repository record
 the model behind each commit.
 
 \bibliographystyle{plainnat}
