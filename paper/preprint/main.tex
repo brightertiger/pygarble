@@ -23,6 +23,14 @@
 \renewcommand{\dblfloatpagefraction}{0.85}
 \renewcommand{\floatpagefraction}{0.85}
 \renewcommand{\textfraction}{0.05}
+% Float pages start at the top rather than centring their floats.
+\makeatletter
+\setlength{\@fptop}{0pt}
+\setlength{\@dblfptop}{0pt}
+\makeatother
+% A compact reference list.
+\setlength{\bibsep}{2pt}
+\renewcommand{\bibfont}{\small}
 \newcommand{\code}[1]{\texttt{#1}}
 \newcommand{\SJ}{Survey Junk}
 \newcommand{\TRS}{Tweets vs.\ Random Strings}
@@ -63,17 +71,18 @@ decision. Out of the box, the \code{english\_fusion} profile captures
 \respct{english_fusion}{B_recall}\,\% of the random strings at a precision
 of \res{english_fusion}{B_precision}, from a \mb{english_fusion}\,MB
 install that processes a thousand short texts in \ms{english_fusion}\,ms;
-neither baseline beats it on both datasets at once. With a small
-labelled sample, pygarble does better still: a weight for every strategy
+neither baseline both captures more survey junk and flags fewer tweets.
+With a small labelled sample, pygarble flags fewer tweets: a weight for every strategy
 and a threshold learned with Optuna from \tuningpct\,\% of the rows, in
 about \tuningseconds{} seconds of search, keeps capture and recall within about a point of the
-profile's on the held-out \heldoutpct\,\% while cutting the
+profile's on average on the held-out \heldoutpct\,\% while cutting the
 false-positive rate on tweets from \tmeanpct{english_fusion}{B_fpr}\,\% to
 \tmeanpct{tuned}{B_fpr}\,\% and raising precision from
 \tmean{english_fusion}{B_precision} to \tmean{tuned}{B_precision} (means
-over \tuningdraws{} samples). The learned weights are interpretable: the
-word-lookup and n-gram strategies get the largest weights, and the
-encoding checks that this dataset labels as clean get almost none. A
+over \tuningdraws{} draws). The learned weights are interpretable: word
+lookup, n-gram frequency and the log-likelihood ratio get the largest mean
+weights, and the two encoding checks, which fire on tweets this dataset
+labels clean, get almost none. A
 dependency-free rule ensemble is therefore competitive on real junk as
 shipped and adapts to a domain in seconds, with every decision
 explainable strategy by strategy. Code, per-row predictions and a
@@ -118,7 +127,7 @@ tuned to it, and what do the learned weights say about which signals
 matter?
 
 The contributions are:
-\begin{itemize}\setlength{\itemsep}{1pt}
+\begin{itemize}\setlength{\itemsep}{1pt}\raggedright
 \item A benchmark on two public datasets of short text, one of real
   human junk from survey research and one of random strings against
   tweets, with a frozen protocol, saved per-row predictions and a script
@@ -129,7 +138,8 @@ The contributions are:
   recall, false-positive rate, speed and install size.
 \item A tuning study showing that a weight per strategy and a threshold,
   learned with Optuna from \tuningpct\,\% of the rows in seconds, keep
-  capture and recall within about a point of the profile's on the held-out \heldoutpct\,\% while
+  capture and recall within about a point of the profile's on average
+  on the held-out \heldoutpct\,\% while
   lowering the false-positive rate and raising precision, with the learned
   weights reported in full; it is evaluated against the two profiles on
   identical rows and reported separately from the main results.
@@ -195,8 +205,9 @@ characters, and mixed or confusable Unicode scripts.
 
 \paragraph{English-reference window statistics} compare a window of the
 text with frequent English rather than applying a hand-written rule:
-cross parsing, primed compression, $n$-gram rank and a permutation test.
-Each statistic is measured against synthetic English of the same length,
+cross parsing~\citep{ziv1993crossparsing}, primed compression, $n$-gram
+rank~\citep{cavnar1994ngram} and a permutation test. Each statistic is
+measured against synthetic English of similar length,
 and a score of 0.5 sits beyond the 99th percentile of that reference.
 
 \subsection{Ensembles, voting and profiles}
@@ -214,7 +225,7 @@ threshold of 0.5 flags a combined $p$-value of 0.001 or less. Named member
 lists are called \emph{profiles}; Appendix~\ref{app:profiles} lists all
 seven. Two are measured here:
 
-\begin{itemize}\setlength{\itemsep}{1pt}
+\begin{itemize}\setlength{\itemsep}{1pt}\raggedright
 \item \code{english}, the default: Markov chain, log-likelihood ratio,
   word anomaly, mojibake, keyboard adjacency and control characters,
   under \code{any} voting. One member firing is enough.
@@ -238,31 +249,32 @@ not calibrated probabilities.
 \subsection{\SJ}
 
 The Kaggle dataset \emph{Gibberish Text Classification}~\citep{dataA}
-was compiled by a market-research practitioner from free-text responses
+(hereafter \SJ{}) was compiled by a market-research practitioner from free-text responses
 of poor-quality survey respondents. Its junk file holds \nArows{} rows,
 every one labelled as junk; despite its \code{.xls} extension it is a
 Windows-1252 CSV. We strip each response, drop empty rows and drop exact
 duplicates, leaving \nA{} rows. Typical rows are keyboard mashes such as
 runs of adjacent keys, repeated letters, and letters mixed with digits.
-The median response is eleven characters long and most are a single token.
+The median response is \Amedianchars{} characters long and
+\Asingletokenpct\,\% are a single token.
 
 Because the file has no clean rows, the only metric on this dataset is
 the \emph{capture rate}: the share of rows a method flags. The licence is
 listed as unknown on Kaggle, so the repository stores row indices and
-hashes, never the text.
+the SHA-256 hash of each file, never the text.
 
 \subsection{\TRS}
 
 The Hugging Face dataset \emph{gibberish\_multilingual}~\citep{dataB}
-(Apache-2.0) pairs random character strings with social-media posts in
-seven languages. We pool its train, validation and test files and keep
+(hereafter \TRS{}; Apache-2.0) pairs random character strings with
+social-media posts in \nBlanguages{} languages. We pool its train, validation and test files and keep
 the \nB{} non-empty rows whose language field is English: \nBpos{}
 random strings, labelled junk, and \nBneg{} tweets, labelled clean.
 Labels are used exactly as given and duplicates are kept (\nBdup{} rows
 repeat an earlier text). The random strings are lower-case letter
 sequences such as \code{edkylxhboa}; the tweets carry hashtags, handles
-and, in \mojibakepct\,\% of cases, mojibake byte signatures from a
-UTF-8 emoji decoded as Latin-1. The dataset labels those tweets clean
+and, in \mojibakepct\,\% of cases, mojibake byte signatures from
+UTF-8 text, mostly emoji and punctuation, decoded as Latin-1. The dataset labels those tweets clean
 because it was built to separate random strings from posts.
 
 On this dataset we report precision, recall and the false-positive rate
@@ -272,12 +284,13 @@ On this dataset we report precision, recall and the false-positive rate
 \label{sec:setup}
 
 \paragraph{Methods.} pygarble 0.11.0 is used with its defaults frozen at
-commit \code{e3135ed}; no default or threshold was changed after any
+commit \code{e3135ed} (results were produced at \code{72b5b2e}, whose
+package code is identical); no default or threshold was changed after any
 result was seen. Two baselines run on CPU with pinned versions:
 \begin{itemize}\setlength{\itemsep}{1pt}
-\item \textbf{gibberish-detector} 0.1.1~\citep{gibberishdetector}, a
-  character Markov model and the most downloaded gibberish detector on
-  PyPI (about 230,000 downloads in the month to October 2026). The package ships no model, so one is trained with its own
+\item \textbf{gibberish-detector} 0.1.1~\citep{gibberishdetector} (the
+  Markov baseline below), a widely used character Markov model on PyPI.
+  The package ships no model, so one is trained with its own
   trainer on the corpus its README uses, and a text is flagged when its
   score exceeds the command-line default of 4.0.
 \item \textbf{lingua} 2.2.0~\citep{lingua}, a language identifier, under
@@ -322,7 +335,7 @@ commit are recorded with the results.
 \centering
 \includegraphics[width=\linewidth]{figures/fig1_results.pdf}
 \caption{Top: capture rate on \SJ{} (\nA{} responses labelled as junk).
-Bottom: precision and recall on \TRS{} (\nBpos{} random strings, \nBneg{}
+Bottom (axis starts at 0.6): precision and recall on \TRS{} (\nBpos{} random strings, \nBneg{}
 tweets). Every method at its default decision, with 95\,\% bootstrap
 intervals.}
 \label{fig:results}
@@ -336,14 +349,15 @@ intervals.}
 \small
 \caption{Capture rate on \SJ{}: the share of \nA{} junk responses each
 method flags at its default decision, with 95\,\% bootstrap intervals.
-The three pygarble rows are the same library run with different
-profiles, written in typewriter. Lingua flags a text when the detected
+The two pygarble rows are the same library run with different profiles,
+whose names are set in typewriter. Lingua flags a text when the detected
 language is not English. * best, ** second best per column.}
 \label{tab:survey}
 \input{tables/table_survey.tex}
 \end{table}
 
-Table~\ref{tab:survey} gives the capture rates. \code{english\_fusion}
+Table~\ref{tab:survey} and Figure~\ref{fig:results} give the capture
+rates. \code{english\_fusion}
 flags \respct{english_fusion}{A_capture}\,\% of the junk responses
 (\resci{english_fusion}{A_capture}), and the default \code{english}
 profile \respct{english}{A_capture}\,\%. The Markov baseline captures
@@ -379,9 +393,9 @@ below one.
 \caption{Precision, recall and false-positive rate on \TRS{} (\nBpos{}
 random strings as junk, \nBneg{} tweets as clean), every method at its
 default decision; each cell shows the value with its 95\,\% bootstrap
-interval beneath. FPR is the share of tweets flagged. The three pygarble
-rows are the same library run with different profiles, written in
-typewriter. Lingua flags a text when the detected language is not
+interval beneath. FPR is the share of tweets flagged. The two pygarble
+rows are the same library run with different profiles, whose names are
+set in typewriter. Lingua flags a text when the detected language is not
 English. * best, ** second best per column.}
 \label{tab:tweets}
 \input{tables/table_tweets.tex}
@@ -425,8 +439,11 @@ strategy and a threshold learned with Optuna on a stratified
 \tuningpct\,\% sample; the two profiles run at their defaults on the same
 held-out rows. Top: the primary draw (\nHeldA{} \SJ{} rows; \nHeldBpos{}
 random strings and \nHeldBneg{} tweets), with 95\,\% bootstrap intervals
-beneath. Bottom: mean and standard deviation over \tuningdraws{} draws.
-FPR is the share of tweets flagged. The tuned rows use labelled data from
+beneath. Bottom: mean and sample standard deviation over \tuningdraws{} draws.
+Intervals for the tuned row hold the learned weights fixed; variation
+between draws is in the bottom block. In the mean block the capture
+ranking is within one sample standard deviation. FPR is the share of
+tweets flagged. The tuned rows use labelled data from
 both datasets and are post hoc in that sense. * best, ** second best per
 column within each block.}
 \label{tab:tuning}
@@ -445,7 +462,7 @@ of 0.01.
 
 The tuning sample is a stratified \tuningpct\,\% of each dataset:
 \nTuneA{} \SJ{} rows and \nTuneB{} \TRS{} rows in proportion to their
-labels. Optuna's~\citep{optuna} tree-structured Parzen estimator
+labels. Optuna~\citep{optuna} with its tree-structured Parzen estimator
 sampler~\citep{bergstra2011tpe}, with a fixed seed, searched
 \tuningtrials{} configurations for the best F1 on that sample, with junk
 as the positive class. The search was still improving when it stopped:
@@ -467,14 +484,16 @@ configuration flags \trespct{tuned}{B_fpr}\,\% of held-out tweets
 survey junk against \trespct{english_fusion}{A_capture}\,\%, and recalls
 \trespct{tuned}{B_recall}\,\% of the random strings against
 \trespct{english_fusion}{B_recall}\,\%. Over the \tuningdraws{} draws its
-false-positive rate is \tmeanpct{tuned}{B_fpr}\,\% (standard deviation
+false-positive rate is \tmeanpct{tuned}{B_fpr}\,\% (sample standard deviation
 \tsdpct{tuned}{B_fpr} points) against \tmeanpct{english_fusion}{B_fpr}\,\%,
 its capture \tmeanpct{tuned}{A_capture}\,\% against
 \tmeanpct{english_fusion}{A_capture}\,\%, and its recall
 \tmeanpct{tuned}{B_recall}\,\% against
 \tmeanpct{english_fusion}{B_recall}\,\%. The gain over
 \code{english\_fusion} is in false positives and precision; capture is
-about equal and recall slightly lower on average. The tuned rows vary more between draws than the
+about equal and recall slightly lower on average. In the worst draw
+recall fell to \tuningworstrecall\,\% and capture to
+\tuningworstcapture\,\%. The tuned rows vary more between draws than the
 profiles, whose only variation is which rows are held out, because a
 \tuningpct\,\% sample is small enough for the learned weights to differ
 from draw to draw.
@@ -484,9 +503,9 @@ Between \tuningmembersmin{} and \tuningmembersmax{} of the
 between \tuningthresholdmin{} and \tuningthresholdmax{}. The largest mean
 weights went to \tuningtop{}. The smallest went to \tuningbottom{};
 \tuningalloff{} was switched off in every draw, and in the primary draw
-\tuningoff{} have weight zero. The search thus gave almost no weight to
-the encoding-damage checks that the labels of \TRS{} penalise, from the
-labels alone. Appendix~\ref{app:weights} lists every weight.
+\tuningoff{} have weight zero. Learning from the labels alone, the search
+thus gave almost no weight to the two encoding-damage checks, which fire
+on tweets that \TRS{} labels clean. Appendix~\ref{app:weights} lists every weight.
 
 A user reproduces this on their own data by scoring a labelled sample
 with each strategy, searching weights and a threshold (the benchmark's
@@ -524,7 +543,8 @@ Table~\ref{tab:footprint} lists time per 1,000 texts, import time and
 install size. pygarble scores a thousand short texts in
 \ms{english_fusion}\,ms with \code{english\_fusion} and installs in
 \mb{english_fusion}\,MB with nothing else. The Markov baseline is the
-fastest at \ms{gibberish_detector}\,ms and \mb{gibberish_detector}\,MB.
+fastest, at \ms{gibberish_detector}\,ms, with a \mb{gibberish_detector}\,MB
+install that includes its training corpus.
 Lingua needs \ms{lingua}\,ms and a \mb{lingua}\,MB install that bundles
 its language models. All
 three run offline once installed. Timings depend on the machine.
@@ -536,22 +556,23 @@ three run offline once installed. Timings depend on the machine.
 pygarble's \code{english\_fusion} profile captures about nine in ten real
 survey junk responses and nearly every random string while flagging about
 one tweet in fifteen, from a one-megabyte install with no dependencies.
-Neither baseline beats it on both datasets at once: the Markov baseline
+Neither baseline both captures more survey junk and flags fewer tweets: the Markov baseline
 flags far fewer tweets but misses more than a quarter of the survey junk,
 and lingua captures almost all junk but flags more tweets and needs a
 three-hundred-megabyte install. Second, the ensemble is tunable from a
 small labelled sample in seconds. The learned weights keep capture
-(\trespct{tuned}{A_capture}\,\% against
-\trespct{english_fusion}{A_capture}\,\% on the primary draw) and recall
-(\trespct{tuned}{B_recall}\,\% against
-\trespct{english_fusion}{B_recall}\,\%) within about a point of the
-profile's, as means, and lower the tweet false-positive rate from
-\tmeanpct{english_fusion}{B_fpr}\,\% to \tmeanpct{tuned}{B_fpr}\,\% on
-average, below the profile's in each of the five draws, although the
-draws vary and the primary-draw intervals nearly touch. The weights also explain the result:
+(\tmeanpct{tuned}{A_capture}\,\% against
+\tmeanpct{english_fusion}{A_capture}\,\%) and recall
+(\tmeanpct{tuned}{B_recall}\,\% against
+\tmeanpct{english_fusion}{B_recall}\,\%) within about a point of the
+profile's on average, and lower the tweet false-positive rate from
+\tmeanpct{english_fusion}{B_fpr}\,\% to \tmeanpct{tuned}{B_fpr}\,\%, below
+the profile's in each of the five draws. The draws vary, and on the
+primary draw the two false-positive intervals overlap. The weights also explain the result:
 \tuningtop{} get the largest mean weights, and \tuningbottom{} get little
 or none; for the two encoding checks that fits the dataset labelling
-encoding damage as clean. A user who disagrees with that
+encoding damage as clean. Individual weights vary widely between draws,
+so only the extremes are stable. A user who disagrees with that
 labelling turns those checks back on; nothing is hidden inside a model.
 
 \paragraph{Where pygarble is beaten.} The Markov baseline has the lowest
@@ -570,7 +591,8 @@ one- and two-character answers count as junk. With a labelled sample of
 the target domain (the study used \nTune{} rows), learn a weight per
 strategy and a threshold as in Section~\ref{sec:tuning}: it takes seconds,
 needs no model, and gave a lower false-positive rate than
-\code{english\_fusion} in every draw. Without labels, start from a profile and remove the
+\code{english\_fusion} in every draw, with capture and recall within about
+a point on average. Without labels, start from a profile and remove the
 strategies whose target the domain does not treat as junk. When false positives are costly,
 prefer the Markov baseline at default settings, or measure a threshold on
 labelled rows of your own data. For multilingual input, route by language
@@ -620,7 +642,8 @@ scores are deterministic.
 
 \section*{AI assistance}
 
-Claude Code agents running Claude Opus 5.5 and Claude Fable 5.1 wrote the
+Claude Code agents running Claude Opus 5.5, Claude Sonnet 5.5 and Claude
+Fable 5.1 wrote the
 benchmark code, ran the experiments and drafted this text under the
 authors' direction and review. Commit trailers in the repository record
 the model behind each commit.
@@ -628,6 +651,8 @@ the model behind each commit.
 \bibliographystyle{plainnat}
 \bibliography{references}
 
+% Start the appendices on a fresh page so no heading is stranded.
+\clearpage
 \appendix
 
 \section{Profiles}
@@ -636,7 +661,7 @@ the model behind each commit.
 Table~\ref{tab:profiles} lists the seven named profiles with their
 members and voting rules.
 
-\begin{table}[h]
+\begin{table}[!t]
 \centering
 \small
 \caption{The seven named profiles, their members and voting rules.}
@@ -652,8 +677,6 @@ measures and which of the two measured profiles it belongs to.
 
 \input{tables/strategies.tex}
 
-% Flush the strategy tables so the weights appendix sits with its table.
-\clearpage
 \section{Learned weights}
 \label{app:weights}
 
@@ -662,12 +685,16 @@ tuning study of Section~\ref{sec:tuning}, as the mean over the
 \tuningdraws{} draws and in the primary draw, whose threshold is
 \tuningthreshold{}. A weight of zero switches the strategy off.
 
-\begin{table}[h]
+% Not a float: a single-column table may not float ahead of the full-width
+% Table~\ref{tab:strategies}, which would push it to a page of its own.
+\par\medskip
+\noindent\begin{minipage}{\columnwidth}
 \centering
 \small
-\caption{Learned weights, sorted by the mean over \tuningdraws{} draws.}
+\captionof{table}{Learned weights, sorted by the mean over \tuningdraws{}
+draws.}
 \label{tab:weights}
 \input{tables/table_weights.tex}
-\end{table}
+\end{minipage}
 
 \end{document}

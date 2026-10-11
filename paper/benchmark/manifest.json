@@ -37,7 +37,10 @@
    "U+00E2 0x80",
    "U+00C3"
   ],
-  "B_duplicate_text_rows": 215
+  "B_duplicate_text_rows": 215,
+  "A_median_chars": 11,
+  "A_single_token_fraction": 0.6951,
+  "B_languages": 7
  },
  "A_ids": [
   "a:0",
