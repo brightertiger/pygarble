@@ -73,10 +73,12 @@ All notable changes to pygarble are documented here. The format follows
   set.
 - NHS/phone overlap filtering now uses a sorted sweep rather than a pairwise
   search, keeping dense PII documents from causing quadratic work.
-- `pygarble check`, `score` and `scan` text and TSV rows print a tab, line
-  feed or carriage return inside the text as `\t`, `\n` or `\r`, so one
-  text is always one row with a fixed column count. JSONL is unchanged and
-  is the lossless format.
+- `pygarble check`, `score` and `scan` text and TSV rows print a tab or
+  any character `str.splitlines()` breaks on inside the text as a Python
+  escape (`\t`, `\n`, `\r`, `\x0b`, `\x0c`, `\x1c`, `\x1d`, `\x1e`,
+  `\x85`, `\u2028`, `\u2029`), so one text is always one row with a fixed
+  column count. Backslashes are not escaped; JSONL is unchanged and is the
+  lossless format.
 - `pygarble-screen scan ... | head` exits 0 when the reader closes the pipe
   instead of reporting a failed scan with exit code 2.
 - The `pronounceability` strategy is linear in the length of a long
@@ -89,9 +91,6 @@ All notable changes to pygarble are documented here. The format follows
   from a cache entry made for `min_confidence=1`; the option is validated
   the same way on every call. A dict-valued option is passed to `Scanner`
   instead of failing with "unhashable type".
-- `control_characters` flags text made only of control characters that
-  `str.strip()` treats as whitespace (VT, FF, U+001C-U+001F, NEL) instead of
-  returning `insufficient_evidence` for empty input.
 - `GarbleDetector.applicable()` raises `ValueError` for text longer than
   `max_input_length`, as `analyze()` and `predict()` already do.
 - `pattern_matching` raises `ValueError` naming the pattern for an invalid
@@ -103,6 +102,12 @@ All notable changes to pygarble are documented here. The format follows
   missing.
 
 ### Changed
+- `control_characters` flags text made only of control characters that
+  `str.strip()` removes (VT, FF, U+001C-U+001F, NEL): it scores 0.9 and
+  `garbled` instead of 0.0 and `insufficient_evidence` with reason
+  `empty_input`. This also changes the default `EnsembleDetector` and any
+  ensemble that includes `control_characters`: such text is now garbled.
+  Text with any other character scores as before.
 - CI tests Python 3.13, pins every action to a commit SHA, and keeps jobs
   that need Python 3.8 or 3.9 on `ubuntu-24.04`, because `ubuntu-latest`
   moves to 26.04, which has no builds for those versions. The generated-data
