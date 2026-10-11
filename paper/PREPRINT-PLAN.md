@@ -1,4 +1,4 @@
-# Preprint plan (v5, 2026-10-11)
+# Preprint plan (v6, 2026-10-11)
 
 Deliverables: benchmark code, frozen results and analysis, LaTeX source and
 PDF of the preprint. Scope: one preprint showing what pygarble captures on two public gibberish
@@ -19,14 +19,10 @@ as given; the mojibake-tweet share is reported as a note, not re-labelled.
 
 ## Protocol
 
-- B is split 30 percent development, 70 percent test by seed 20261011,
-  stratified by label. A is scored whole; it has no thresholds to fit.
-- The paper reports every method at its own default decision only. The
-  fixed-FPR operating points and the calibration run computed in PR 18 stay
-  in the frozen result files but are not headline results; the limitations
-  section states in one sentence, with numbers, that at a matched 1 percent
-  false-positive rate the Markov gibberish-detector captures more survey
-  junk than english_fusion (v5 change, made after seeing those results).
+- Every method at its own default decision only. B is scored whole, no
+  split. The matched-FPR operating points, split and calibration computed in
+  PR 18 were removed at the maintainer's direction (v5/v6) and remain only in
+  git history; the limitations section says so in one sentence.
 - Pilot on 2026-10-11 (defaults, threshold 0.5: fusion recall 0.895 on A;
   precision 0.906 and recall 0.991 on B) is disclosed; nothing changed after.
 - Test scoring runs once from the frozen runner; predictions saved;
@@ -35,21 +31,20 @@ as given; the mojibake-tweet share is reported as a note, not re-labelled.
 
 ## Methods
 
-pygarble: profiles `english`, `english_extended`, `english_fusion`, `legacy`,
-`corruption`, `spoofing`, `llm_output`; six voting modes on `english`; each
-strategy alone (appendix). Baselines, CPU, pinned: nostril, gibberish-detector
-(Markov), gibberish-chat-detector, lingua language ID ("not English is junk"),
-Gopher and C4 rules. No neural baselines.
-
-Footprint for every method: ms per 1,000 texts single-threaded, median of 5;
-import time; install size; offline.
+Three methods, both datasets, each at its own default decision:
+pygarble (two rows: the default `english` profile and `english_fusion`),
+gibberish-detector 0.1.1 (rrenaud Markov port, trained on its big.txt,
+pinned), lingua-language-detector 2.2.0 with "not English is junk". Nothing
+else. Footprint for the same rows: ms per 1,000 texts single-threaded,
+median of 5; install size.
 
 ## Figures and tables
 
-Fig 1 capture rate on A, all methods, default decision. Fig 2 precision
-and recall on B, default decision. Fig 3 speed against capture rate. Table 1
-results table (A capture; B precision, recall, FPR; default decision).
-Table 2 footprint. All numbers read from result files.
+Table 1: four rows (pygarble english, pygarble english_fusion,
+gibberish-detector, lingua); columns A capture, B precision, B recall, B FPR,
+with 95 percent bootstrap intervals. Table 2: footprint for the same rows.
+One optional two-panel figure (A capture; B precision and recall). All
+numbers read from result files.
 
 ## Work packages
 
