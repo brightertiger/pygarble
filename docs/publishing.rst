@@ -42,6 +42,10 @@ Verify Google Search Console
 3. In the GitHub repository, set the Actions repository variable
    ``GOOGLE_SITE_VERIFICATION`` to that value. The documentation build reads
    it and adds the tag to the homepage. Keep it configured after verification.
+   To also enable Google Analytics, set the repository variable
+   ``GOOGLE_ANALYTICS_KEY`` to the measurement ID (``G-XXXXXXXXXX``). The
+   build then adds the gtag.js snippet to indexable pages; without it no
+   analytics code is emitted.
 4. Merge the discovery changes, then let the documentation workflow deploy.
    If setting the variable later, rerun **Build and Deploy Documentation**
    on ``main``. Confirm the exact token is present in the live homepage's

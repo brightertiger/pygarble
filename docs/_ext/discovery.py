@@ -72,6 +72,9 @@ def page_context(
     context["google_site_verification"] = os.environ.get(
         "GOOGLE_SITE_VERIFICATION", ""
     )
+    context["google_analytics_key"] = os.environ.get(
+        "GOOGLE_ANALYTICS_KEY", ""
+    )
     context["pageurl"] = page_url(app, name)
     if name == "index":
         # Describe source code, without promising search-engine rich results

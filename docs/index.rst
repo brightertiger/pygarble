@@ -44,6 +44,31 @@ identifier captures more survey junk, and the default ``english`` profile
 flags 33.2% of tweets. Read :doc:`benchmarks` for every result, the
 limitations and the reproduction commands.
 
+Citing pygarble
+---------------
+
+Cite the preprint for the benchmark results and the software entry for the
+library.
+
+.. code-block:: bibtex
+
+   @misc{rao2026pygarble,
+     author       = {Rao, Ujjwal Singh},
+     title        = {How Much Junk Do Rules Catch? Evaluating and Tuning pygarble, a Dependency-Free Gibberish Screener, on Survey Responses and Social-Media Text},
+     year         = {2026},
+     howpublished = {Preprint, \url{https://github.com/brightertiger/pygarble/blob/main/paper/preprint/main.pdf}}
+   }
+
+   @misc{pygarble,
+     author       = {Rao, Ujjwal Singh},
+     title        = {pygarble: local screening of text for secrets, {PII}, profanity and gibberish},
+     year         = {2026},
+     howpublished = {\url{https://github.com/brightertiger/pygarble}},
+     note         = {Version 0.11.0, commit e3135ed}
+   }
+
+The preprint entry will be updated with a DOI once it is posted.
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:

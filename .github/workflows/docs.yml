@@ -42,6 +42,7 @@ jobs:
     - name: Build documentation
       env:
         GOOGLE_SITE_VERIFICATION: ${{ vars.GOOGLE_SITE_VERIFICATION }}
+        GOOGLE_ANALYTICS_KEY: ${{ vars.GOOGLE_ANALYTICS_KEY }}
       run: |
         cd docs
         make clean
