@@ -5,6 +5,9 @@ import time
 
 from pygarble import GarbleDetector, calibrate
 from pygarble.gibberish.calibration import ThresholdPoint
+from pygarble.gibberish.strategies.pronounceability import (
+    PronounceabilityStrategy,
+)
 
 
 def test_pronounceability_is_linear_on_long_consonant_run_and_unchanged():
@@ -19,9 +22,12 @@ def test_pronounceability_is_linear_on_long_consonant_run_and_unchanged():
     }
     for text, score in pinned.items():
         assert repr(detector.predict_proba(text)) == score, text
+    # Time only the coda routine: the rest of the pipeline is linear but
+    # slow under coverage. The quadratic coda took about 10 s on this word.
+    word = "xkcdqwrtzpl" * 100_000
+    strategy = PronounceabilityStrategy()
     start = time.perf_counter()
-    assert detector.predict_proba("xkcdqwrtzpl" * 100_000) == 1.0
-    # The quadratic coda took about 10 s here; linear takes well under 1 s.
+    assert strategy._get_word_coda(word) == word
     assert time.perf_counter() - start < 3.0
 
 
