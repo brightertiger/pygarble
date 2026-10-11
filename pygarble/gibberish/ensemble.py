@@ -112,15 +112,15 @@ class EnsembleDetector:
             strategies = list(PROFILES[self.profile])
         if not strategies:
             raise ValueError("strategies must contain at least one strategy")
-        members: List[Strategy] = [
-            Strategy(s) if isinstance(s, str) else s for s in strategies
-        ]
-        for given, chosen in zip(strategies, members):
+        members: List[Strategy] = []
+        for given in strategies:
+            chosen = Strategy(given) if isinstance(given, str) else given
             if not isinstance(chosen, Strategy):
                 raise ValueError(
                     "strategies must contain Strategy members or names, "
                     f"got {given!r}"
                 )
+            members.append(chosen)
         self.voting = (
             voting
             if voting is not None

@@ -127,8 +127,9 @@ def test_strategy_map_is_a_dict_again():
 
 
 def test_wrong_strategy_and_name_arguments_say_what_to_pass():
-    with pytest.raises(ValueError, match="None"):
-        EnsembleDetector(strategies=[None])
+    for given in ([None], (s for s in [None])):
+        with pytest.raises(ValueError, match="None"):
+            EnsembleDetector(strategies=given)
     with pytest.raises(TypeError, match="pass a list"):
         EnsembleDetector("markov_chain")
     for build in (
