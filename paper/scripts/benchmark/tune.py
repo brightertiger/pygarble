@@ -4,7 +4,7 @@ Every strategy is scored once on every row of A and B with default
 settings and cached (no text). For each of five seeds a stratified 20
 percent of A and of B is the tuning sample; Optuna's TPE sampler searches
 a weight in [0, 1] per strategy (0 excludes it) and a threshold in
-[0.2, 0.8] for the best F1 on that sample, under pygarble's weighted
+[0.05, 0.8] for the best F1 on that sample, under pygarble's weighted
 voting. The tuned configuration, rebuilt as a real EnsembleDetector, is
 evaluated on the held-out 80 percent next to the english and
 english_fusion profiles on the same rows. Run from the repository root:
@@ -39,9 +39,9 @@ REPORT = TUNING / "tuning.md"
 SEEDS = tuple(data.SEED + k for k in range(5))
 PRIMARY = SEEDS[0]
 FRACTION = 0.2
-TRIALS = 400
+TRIALS = 1000
 WEIGHT_STEP = 0.05
-THRESHOLDS = (0.2, 0.8)
+THRESHOLDS = (0.05, 0.8)
 THRESHOLD_STEP = 0.01
 PROFILES = ("english", "english_fusion")
 METHODS = PROFILES + ("tuned",)

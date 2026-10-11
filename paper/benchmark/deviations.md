@@ -76,8 +76,9 @@ open. Each is also stated in `protocol.md` where it affects the protocol.
 - **2026-10-11: weight tuning study added.** At the maintainer's request
   a tuning study (`paper/scripts/benchmark/tune.py`, results in
   `results/tuning/`) learns a weight in [0, 1] for each of pygarble's 32
-  strategies and a threshold in [0.2, 0.8] under `weighted` voting, with
-  Optuna's TPE sampler (400 trials, F1 objective, junk positive). For each
+  strategies and a threshold in [0.05, 0.8] under `weighted` voting, with
+  Optuna's TPE sampler (1,000 trials per draw, F1 objective, junk
+  positive). For each
   of five seeds (20261011 to 20261015) the tuning sample is a stratified
   20 percent of A and 20 percent of B by label; evaluation is on the
   held-out 80 percent, where the `english` and `english_fusion` profiles
@@ -86,5 +87,15 @@ open. Each is also stated in `protocol.md` where it affects the protocol.
   evaluation row is seen during tuning. It replaces the hand-made
   `english_tuned` variant (the `english` profile without its mojibake and
   control-character members) described in the previous entry.
+- **2026-10-11: tuning search widened.** The first tuning run used a
+  threshold range of [0.2, 0.8] and 400 trials per draw. In every one of
+  the five draws the chosen threshold sat on the 0.2 bound, and the best
+  trial came late (trials 237 to 395 of 400), so the search had not
+  converged. On that evidence from the tuning samples alone, before any
+  further look at held-out results, the maintainer widened the threshold
+  range to [0.05, 0.8] and raised the budget to 1,000 trials per draw.
+  Seeds, the 20 percent sample, the objective and the search grid are
+  unchanged. The widened run is the one reported; the first run's results
+  remain in git history (commit `9f213ef`).
 
 No other method was added or changed.
