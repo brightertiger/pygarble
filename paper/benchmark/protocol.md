@@ -51,26 +51,27 @@ No other breakdowns (by length, script or otherwise) are reported.
 
 ## Methods
 
-pygarble 0.11.0 from this repository, every detector built with
-`threads=1`; score from `predict_proba`, decision from `predict`.
+Five methods are compared (reduced from the first version on 2026-10-11;
+see `deviations.md`).
 
-- Profiles: `EnsembleDetector(profile=p)` for `english`, `english_extended`,
-  `english_fusion`, `legacy`, `corruption`, `spoofing`, `llm_output`.
-- Voting modes on the `english` profile: `majority`, `any`, `all`,
-  `average`, `weighted` (equal weights of 1.0, as no weights are shipped),
-  `fisher`. `any` is the profile default and duplicates `english`.
-- Every strategy alone via `GarbleDetector(strategy)` (appendix).
+pygarble 0.11.0 from this repository, every detector built with
+`threads=1`; score from `predict_proba`, decision from `predict`:
+
+- `english`: `EnsembleDetector(profile="english")`, the package default
+  (Markov chain, log-likelihood ratio, word anomaly, mojibake, keyboard
+  adjacency, control characters; `any` voting; threshold 0.5).
+- `english_fusion`: `EnsembleDetector(profile="english_fusion")`.
+- `english_tuned` (post hoc, not pre-registered): the `english` members
+  without mojibake and control characters, i.e.
+  `EnsembleDetector(strategies=[MARKOV_CHAIN, LOG_LIKELIHOOD_RATIO,
+  WORD_ANOMALY, KEYBOARD_ADJACENCY], voting="any", threshold=0.5)`. It was
+  constructed after seeing that 26.4 percent of B tweets carry mojibake,
+  which B labels clean, and is reported separately as a domain-specific
+  tuning. The package is unchanged.
 
 Baselines (CPU, pinned in `paper/scripts/benchmark/requirements.txt`,
 installed in a Python 3.12 venv outside the repository):
 
-- **nostril**, Hucka's Nonsense String Evaluator, GitHub `casics/nostril`
-  at `fbc0c91`. (PyPI `nostril` 0.1.1 is an unrelated nose wrapper.)
-  Decision: `nostril.nonsense(text)`; texts it refuses as too short (fewer
-  than 6 letters after its sanitising) are not flagged. Score: nostril's
-  own tf-idf string score with its module defaults on the sanitised text;
-  0 when too short or when its simple-real rule accepts; 1,000,000 when its
-  simple-nonsense rule rejects.
 - **gibberish-detector 0.1.1** (Aaron Loo's port of rrenaud's Markov
   detector). The wheel ships no model, so a model is trained with the
   package's own `trainer.train` (default ASCII-letter charset) on the
@@ -78,25 +79,10 @@ installed in a Python 3.12 venv outside the repository):
   `e77a1d4a...71d39d7`); training is count-based and needs no seed. Score:
   `calculate_probability_of_being_gibberish`; decision: score above the CLI
   default limit 4.0.
-- **gibberish-chat-detector 0.1.2**. Decision: the package's `gibberish`
-  output with its default rules. Score: how many of the six default rules
-  fire, evaluated with the package's rule string on the package's own
-  features. Both gibberish packages install a top-level module named
-  `gibberish_detector`; their submodules do not collide and are imported
-  directly.
 - **lingua-language-detector 2.2.0**, policy "not English is junk".
   Detector built from all languages with default settings. Decision: the
   detected language is not English (no detection counts as not English).
   Score: one minus the English confidence.
-- **Gopher rules** and **C4 rules**, implemented in
-  `paper/scripts/benchmark/rules.py` from the RedPajama-V2 quality-signal
-  definitions (`togethercomputer/RedPajama-Data` at `6d2cee9`) with the
-  thresholds of Rae et al. (2021) and Raffel et al. (2020). Score: number
-  of rules failed; decision: any rule failed. The rule lists are in
-  `rules.py`; Gopher's duplicate-line and duplicate-paragraph rules have no
-  RedPajama-V2 signal and are omitted. The C4 bad-word rule uses the
-  LDNOOBW English list at commit `5faf2ba`. C4's line rules are applied at
-  document level: a text fails when any of its lines fails.
 
 ## Footprint
 
@@ -123,6 +109,7 @@ Nothing in the package changed afterwards.
 scores and decisions (row id, score, decision; no text) are saved under
 `results/predictions/A/` and `results/predictions/B/`; `verify.py`
 recomputes `results/metrics.json` from them and the manifest. Scores are
-deterministic: the A predictions are byte for byte those of the first run,
-and the B predictions equal the union of its B dev and B test predictions.
+deterministic: for the four methods kept from the first run, the A
+predictions are byte for byte those of that run, and the B predictions
+equal the union of its B dev and B test predictions.
 Losses are reported as they come.

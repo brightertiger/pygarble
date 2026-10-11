@@ -6,9 +6,8 @@ from typing import Any, Dict, List, Optional
 from .metrics import RESULTS
 
 FAMILIES = (
-    ("Profiles and baselines", ("profile", "baseline")),
-    ("Voting modes on the english profile", ("voting",)),
-    ("Appendix: single strategies", ("strategy",)),
+    ("Methods at their defaults", ("pygarble", "baseline")),
+    ("Post hoc, domain-specific tuning", ("tuned",)),
 )
 METRICS = ("A_capture", "B_precision", "B_recall", "B_fpr")
 

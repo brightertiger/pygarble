@@ -25,13 +25,12 @@ make benchmark-verify PYTHON=/path/to/venv/bin/python
      https://www.kaggle.com/datasets/johnwdata/gibberish-text-classification
    - `DATA/hf-sowmya15/{train,validation,test}.csv` from
      https://huggingface.co/datasets/Sowmya15/gibberish_multilingual
-2. Download the baseline assets. Their sha256 hashes are checked by
-   `run.py`:
+2. Download the gibberish-detector training corpus. Its sha256 hash is
+   checked by `run.py`:
 
    ```
    mkdir -p DATA/baselines
    curl -L -o DATA/baselines/big.txt https://raw.githubusercontent.com/domanchi/gibberish-detector/ecac96918e72fbf702cfee3274dbf280009171ad/examples/big.txt
-   curl -L -o DATA/baselines/ldnoobw_en.txt https://raw.githubusercontent.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words/5faf2ba42d7b1c0977169ec3611df25a3c08eb13/en
    ```
 
 3. Create a venv outside the repository and install the baselines and
@@ -61,10 +60,11 @@ Footprint timings depend on the machine; the recorded machine is in
 ## Files
 
 - `data.py`: the A and B loaders, hash checks and the manifest.
-- `methods.py`: the score and decision wrappers for the pygarble profiles,
-  voting modes and strategies, and for the baselines.
-- `rules.py`: the Gopher and C4 rules on RedPajama-V2 signal definitions.
+- `methods.py`: the score and decision wrappers for the five methods:
+  pygarble `english` and `english_fusion`, gibberish-detector, lingua, and
+  the post hoc tuned `english` variant.
 - `metrics.py`: default-decision metrics and the bootstrap, shared by
   `run.py` and `verify.py`.
 - `report.py`: renders `results.md`.
+- `figures.py`: the preprint figure, tables and number macros (`make preprint`).
 - `test_benchmark.py`: one behaviour test per script.

@@ -5,7 +5,7 @@ import unittest
 
 import numpy as np
 
-from . import data, footprint, metrics, rules, verify
+from . import data, footprint, metrics, verify
 from .methods import specs
 
 
@@ -21,15 +21,31 @@ class DataTests(unittest.TestCase):
 
 
 class MethodTests(unittest.TestCase):
-    def test_rules_and_pygarble_wrapper(self) -> None:
-        tweet = "@user that was the best game of the season, honestly"
-        self.assertIn("word_count", rules.gopher_failures(tweet))
-        prose = " ".join(["The cat sat on the warm mat by the door."] * 5)
-        self.assertEqual(rules.c4_failures(prose, frozenset()), [])
-        self.assertIn(
-            "curly_bracket", rules.c4_failures(prose + " {", frozenset())
+    def test_pygarble_wrappers_and_tuned_members(self) -> None:
+        every = specs()
+        self.assertEqual(
+            list(every),
+            [
+                "english",
+                "english_fusion",
+                "gibberish_detector",
+                "lingua",
+                "english_tuned",
+            ],
         )
-        method = specs()["english_fusion"].build()
+        tuned = every["english_tuned"].build().detector
+        english = every["english"].build().detector
+        self.assertEqual(
+            [s.value for s in tuned.strategies],
+            [
+                s.value
+                for s in english.strategies
+                if s.value not in ("mojibake", "control_characters")
+            ],
+        )
+        self.assertEqual((tuned.voting, tuned.threshold), ("any", 0.5))
+        tweet = "@user that was the best game of the season, honestly"
+        method = every["english_fusion"].build()
         scores, flags = method.run([tweet, "qwkjzx vbnmrt plokij"])
         self.assertEqual(flags, [False, True])
         self.assertGreater(scores[1], scores[0])

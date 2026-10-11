@@ -22,9 +22,7 @@ ENVIRONMENT = metrics.RESULTS / "environment.json"
 DISTRIBUTIONS = (
     "pygarble",
     "numpy",
-    "nostril",
     "gibberish-detector",
-    "gibberish-chat-detector",
     "lingua-language-detector",
 )
 
@@ -84,7 +82,6 @@ def environment() -> Dict:
         "packages": versions,
         "pygarble_commit": git("rev-parse", "HEAD"),
         "pygarble_tree_clean": git("status", "--porcelain", "pygarble") == "",
-        "nostril_commit": "fbc0c91249283a9fbc9036206391ce1138826fd3",
     }
 
 

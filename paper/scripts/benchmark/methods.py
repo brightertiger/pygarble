@@ -12,19 +12,12 @@ Scores = Tuple[List[float], List[bool]]
 BASELINE_FILES = {
     "big.txt": "e77a1d4aeefb1f2c32fe0fc30551478a"
     "7eb59dc093f270c095822290971d39d7",
-    "ldnoobw_en.txt": "af851ecef1d5f212caba17339b12ac39"
-    "cc2fef7d78c74876f67237644fcee8bd",
 }
 BASELINE_URLS = {
     "big.txt": "https://raw.githubusercontent.com/domanchi/"
     "gibberish-detector/ecac96918e72fbf702cfee3274dbf280009171ad/"
     "examples/big.txt",
-    "ldnoobw_en.txt": "https://raw.githubusercontent.com/LDNOOBW/"
-    "List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words/"
-    "5faf2ba42d7b1c0977169ec3611df25a3c08eb13/en",
 }
-NOSTRIL_REJECTED = 1_000_000.0
-NOSTRIL_MIN_SCORE = 8.2
 GIBBERISH_DETECTOR_LIMIT = 4.0
 
 
@@ -62,47 +55,6 @@ class PerText(Method):
         return [s for s, _ in pairs], [d for _, d in pairs]
 
 
-class Nostril(PerText):
-    def __init__(self) -> None:
-        import nostril
-        from nostril import nonsense_detector as nd
-
-        self.nd = nd
-        self.nonsense = nostril.nonsense
-        # Same parameters as nostril's module-level `nonsense` detector.
-        self.score = nd._tfidf_score_function(
-            nd.dataset_from_pickle(
-                str(Path(nd.__file__).with_name("ngram_data.pklz"))
-            ),
-            len_threshold=25,
-            len_penalty_exp=0.9233,
-            repetition_penalty_exp=0.9674,
-        )
-
-    def one(self, text: str) -> Tuple[float, bool]:
-        try:
-            decision = bool(self.nonsense(text))
-        except ValueError:  # "Text is too short to test"
-            return 0.0, False
-        clean = self.nd.sanitize_string(text)
-        if self.nd._simple_real(clean):
-            return 0.0, decision
-        if self.nd._simple_nonsense(clean):
-            return NOSTRIL_REJECTED, decision
-        score = float(self.score(clean))
-        assert decision == (score > NOSTRIL_MIN_SCORE)
-        return score, decision
-
-    def decide(self, texts: Sequence[str]) -> List[bool]:
-        out = []
-        for text in texts:
-            try:
-                out.append(bool(self.nonsense(text)))
-            except ValueError:
-                out.append(False)
-        return out
-
-
 class GibberishDetector(PerText):
     def __init__(self, corpus: Path) -> None:
         from gibberish_detector import detector, trainer
@@ -117,27 +69,6 @@ class GibberishDetector(PerText):
 
     def decide(self, texts: Sequence[str]) -> List[bool]:
         return [self.detector.is_gibberish(text) for text in texts]
-
-
-class GibberishChatDetector(PerText):
-    def __init__(self) -> None:
-        from gibberish_detector import gibberish
-
-        self.module = gibberish
-
-    def one(self, text: str) -> Tuple[float, bool]:
-        features = self.module.gibberish_detector(text)
-        # The package's own rule string on the package's own features.
-        fired = eval(  # noqa: S307 - fixed rule text shipped by the package
-            self.module.default_gibberish_rule, {}, dict(features)
-        )
-        return float(sum(map(bool, fired))), bool(features["gibberish"])
-
-    def decide(self, texts: Sequence[str]) -> List[bool]:
-        return [
-            bool(self.module.gibberish_detector(text)["gibberish"])
-            for text in texts
-        ]
 
 
 class Lingua(PerText):
@@ -161,15 +92,6 @@ class Lingua(PerText):
         ]
 
 
-class Rules(PerText):
-    def __init__(self, check: Callable[[str], List[str]]) -> None:
-        self.check = check
-
-    def one(self, text: str) -> Tuple[float, bool]:
-        failed = len(self.check(text))
-        return float(failed), failed > 0
-
-
 class Spec(NamedTuple):
     name: str
     family: str
@@ -187,131 +109,64 @@ def _ensemble(**kwargs: Any) -> Callable[[], Method]:
     return build
 
 
-def _strategy(name: str) -> Callable[[], Method]:
-    def build() -> Method:
-        from pygarble import GarbleDetector
-
-        return Pygarble(GarbleDetector(name, threads=1))
-
-    return build
+# The english profile without its two encoding-damage members, mojibake
+# and control characters. Post hoc: chosen after seeing that B labels
+# tweets with mojibake as clean (deviations.md). Same voting and threshold.
+TUNED_REMOVED = ("mojibake", "control_characters")
 
 
-def _gopher() -> Method:
-    from . import rules
+def _tuned() -> Method:
+    from pygarble import EnsembleDetector
+    from pygarble.gibberish.ensemble import PROFILES
 
-    return Rules(rules.gopher_failures)
-
-
-def _c4(bad_words: Path) -> Callable[[], Method]:
-    def build() -> Method:
-        from . import rules
-
-        words = rules.load_bad_words(bad_words)
-        return Rules(lambda text: rules.c4_failures(text, words))
-
-    return build
-
-
-PROFILES = (
-    "english",
-    "english_extended",
-    "english_fusion",
-    "legacy",
-    "corruption",
-    "spoofing",
-    "llm_output",
-)
-VOTING = ("majority", "any", "all", "average", "weighted", "fisher")
-ENGLISH_MEMBERS = 6
-BASELINES = (
-    "nostril",
-    "gibberish_detector",
-    "gibberish_chat_detector",
-    "lingua",
-    "gopher_rules",
-    "c4_rules",
-)
+    members = [s for s in PROFILES["english"] if s.value not in TUNED_REMOVED]
+    return Pygarble(
+        EnsembleDetector(
+            strategies=members, voting="any", threshold=0.5, threads=1
+        )
+    )
 
 
 def specs(data_root: Path = DEFAULT_ROOT) -> Dict[str, Spec]:
-    from pygarble.gibberish.registry import Strategy
-
     files = data_root / "baselines"
     ensemble = "from pygarble import EnsembleDetector"
-    out: List[Spec] = []
-    for profile in PROFILES:
-        out.append(
+    return {
+        spec.name: spec
+        for spec in (
             Spec(
-                profile,
-                "profile",
-                _ensemble(profile=profile),
+                "english",
+                "pygarble",
+                _ensemble(profile="english"),
                 ensemble,
                 ("pygarble",),
-            )
-        )
-    for mode in VOTING:
-        weights = [1.0] * ENGLISH_MEMBERS if mode == "weighted" else None
-        out.append(
+            ),
             Spec(
-                f"english_vote_{mode}",
-                "voting",
-                _ensemble(profile="english", voting=mode, weights=weights),
+                "english_fusion",
+                "pygarble",
+                _ensemble(profile="english_fusion"),
                 ensemble,
                 ("pygarble",),
-            )
-        )
-    for strategy in Strategy:
-        out.append(
+            ),
             Spec(
-                f"strategy_{strategy.value}",
-                "strategy",
-                _strategy(strategy.value),
-                "from pygarble import GarbleDetector",
+                "gibberish_detector",
+                "baseline",
+                lambda: GibberishDetector(files / "big.txt"),
+                "from gibberish_detector import detector, trainer",
+                ("gibberish-detector",),
+            ),
+            Spec(
+                "lingua",
+                "baseline",
+                Lingua,
+                "from lingua import Language, LanguageDetectorBuilder",
+                ("lingua-language-detector",),
+            ),
+            Spec(
+                "english_tuned",
+                "tuned",
+                _tuned,
+                ensemble,
                 ("pygarble",),
-            )
+            ),
         )
-    out += [
-        Spec(
-            "nostril",
-            "baseline",
-            Nostril,
-            "import nostril",
-            ("nostril",),
-        ),
-        Spec(
-            "gibberish_detector",
-            "baseline",
-            lambda: GibberishDetector(files / "big.txt"),
-            "from gibberish_detector import detector, trainer",
-            ("gibberish-detector",),
-        ),
-        Spec(
-            "gibberish_chat_detector",
-            "baseline",
-            GibberishChatDetector,
-            "from gibberish_detector import gibberish",
-            ("gibberish-chat-detector",),
-        ),
-        Spec(
-            "lingua",
-            "baseline",
-            Lingua,
-            "from lingua import Language, LanguageDetectorBuilder",
-            ("lingua-language-detector",),
-        ),
-        Spec(
-            "gopher_rules",
-            "baseline",
-            _gopher,
-            "from paper.scripts.benchmark import rules",
-            (),
-        ),
-        Spec(
-            "c4_rules",
-            "baseline",
-            _c4(files / "ldnoobw_en.txt"),
-            "from paper.scripts.benchmark import rules",
-            (),
-        ),
-    ]
-    return {spec.name: spec for spec in out}
+    }

@@ -34,14 +34,10 @@ PYGARBLE_WHEEL_EXCLUDED = {
 # Files the method needs at run time beyond its installed distributions.
 ASSETS = {
     "gibberish_detector": ("baselines/big.txt",),
-    "c4_rules": ("baselines/ldnoobw_en.txt",),
 }
 NOTES = {
     "gibberish_detector": "size includes the training corpus big.txt",
-    "gopher_rules": "implemented in this benchmark (rules.py)",
-    "c4_rules": "implemented in this benchmark; size includes LDNOOBW list",
     "lingua": "language models bundled in the wheel",
-    "nostril": "n-gram table bundled in the package",
 }
 
 
@@ -125,8 +121,6 @@ def install_bytes(
 ) -> Optional[int]:
     total = sum(distribution_bytes(d) for d in closure(distributions))
     total += sum((root / a).stat().st_size for a in ASSETS.get(name, ()))
-    if name in ("gopher_rules", "c4_rules"):
-        total += (Path(__file__).parent / "rules.py").stat().st_size
     return total
 
 
