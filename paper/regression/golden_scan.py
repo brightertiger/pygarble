@@ -5,7 +5,7 @@ inputs, scanned with all four categories at min_confidence 0.5 and
 locales us,uk,in. A vector row's "options" are passed to Scanner as keyword
 arguments and recorded in its golden row. sha256 is over the text encoded
 as UTF-8 with surrogatepass, which equals plain UTF-8 for every valid string
-and keeps the one lone-surrogate challenge text (WTF-8 bytes) hashable.
+and keeps any lone-surrogate input (WTF-8 bytes) hashable.
 Regenerate with --write only for an intended behaviour change; --check runs
 in CI.
 """

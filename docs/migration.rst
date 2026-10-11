@@ -20,8 +20,8 @@ Find what affects you
 
 1. Record 0.8.0 decisions and scores on a sample of your real inputs, upgrade
    in a separate environment, and compare. Review both new flags and lost
-   flags; the repository benchmark is an engineering regression set, not a
-   production accuracy estimate.
+   flags; neither the preprint benchmark nor the repository's regression checks
+   are a production accuracy estimate for your inputs.
 2. Run your tests with deprecation and future warnings as errors. This finds
    the 0.8.0 import paths and the settings that will become errors:
 

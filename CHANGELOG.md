@@ -5,6 +5,18 @@ All notable changes to pygarble are documented here. The format follows
 
 ## [Unreleased]
 
+### Changed
+
+- **The golden regression corpus has new inputs.** They are a seeded
+  600-row sample (seed 20261011) of the English rows of the Apache-2.0
+  Hugging Face `Sowmya15/gibberish_multilingual` dataset, 300 random strings
+  and 300 tweets, followed by the unchanged edge inputs. They replace the
+  authored 132-case challenge set. `paper/regression/golden.jsonl` and
+  `golden_scan.jsonl` were regenerated, and ports must reproduce the new
+  files. `paper/regression/evaluate.py` and the challenge files
+  (`english_challenge.json`, its checksum, `benchmark_data.json` and
+  `label_overrides.json`) were removed.
+
 ## [0.11.0] - Unreleased
 
 0.11.0 is the first release since 0.8.0 and it is a **breaking release**

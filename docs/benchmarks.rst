@@ -325,8 +325,9 @@ revision. Do not overwrite the committed predictions or results.
 Engineering checks have a different purpose
 -------------------------------------------
 
-``paper/regression/`` keeps small authored challenge sets, frozen expected
-outputs, structured-text negatives and screening vectors. They catch
+``paper/regression/`` keeps a golden corpus of frozen expected outputs, whose
+inputs are a 600-row sample of the preprint benchmark's open dataset plus
+hand-written edge cases, and structured-text negatives and screening vectors. They catch
 behaviour and compatibility regressions quickly. They are not research
 benchmarks. CI runs them alongside ``make benchmark-verify``.
 

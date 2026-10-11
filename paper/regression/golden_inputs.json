@@ -1,0 +1,3017 @@
+{
+ "provenance": {
+  "dataset": "Hugging Face Sowmya15/gibberish_multilingual",
+  "url": "https://huggingface.co/datasets/Sowmya15/gibberish_multilingual",
+  "licence": "Apache-2.0",
+  "files": {
+   "hf-sowmya15/train.csv": "33c1329308672f9d3dc93cbf942be4e2553875e67be1175937653e06846bd12e",
+   "hf-sowmya15/validation.csv": "3f1b1e860b935e2056b242abceffd425b2d3bdf7ab2e2bc6b648d5e2be5f797d",
+   "hf-sowmya15/test.csv": "22b27b9c0f43d7beb3ef24c048f936b8253e17a49cbcaf75aa6105b3cf23a4b6"
+  },
+  "seed": 20261011,
+  "sampled": "English rows of train, validation and test loaded as paper/scripts/benchmark/data.py load_b does (row id '<split>:<0-based data-row position>'); duplicate texts dropped keeping the first row id; random.Random(seed).sample of 300 label-1 rows (random strings) then 300 label-0 rows (tweets); output sorted by row id",
+  "script": "paper/regression/sample_golden_inputs.py"
+ },
+ "rows": [
+  {
+   "id": "train:130",
+   "text": "@monicawarren16 #pumprules is on bravo...quality trash",
+   "label": 0
+  },
+  {
+   "id": "train:297",
+   "text": "knnyfnhqxe",
+   "label": 1
+  },
+  {
+   "id": "train:358",
+   "text": "\u00e2\u0086\u009d #poland retail sales (yoy) dipped from previous 3.2%\u00c2\u00a0to 2.2% in may   #blog #silver #gold #forex",
+   "label": 0
+  },
+  {
+   "id": "train:380",
+   "text": "@user i don't even know what to think right now bro this is insane. #legendary #history  ",
+   "label": 0
+  },
+  {
+   "id": "train:506",
+   "text": "cidrp",
+   "label": 1
+  },
+  {
+   "id": "train:619",
+   "text": "podnvmzfc",
+   "label": 1
+  },
+  {
+   "id": "train:767",
+   "text": "bovvhx",
+   "label": 1
+  },
+  {
+   "id": "train:814",
+   "text": "qcsxg",
+   "label": 1
+  },
+  {
+   "id": "train:914",
+   "text": "RT @DIYcookery: Godiva Chocolate Dipped Oreos &#128523; http://t.co/OSYPnadYtO",
+   "label": 0
+  },
+  {
+   "id": "train:969",
+   "text": "now playing  :  rick wakeman - \" the lone sailor\" on     music song ",
+   "label": 0
+  },
+  {
+   "id": "train:992",
+   "text": "ladtnuunapbg",
+   "label": 1
+  },
+  {
+   "id": "train:1088",
+   "text": "exdmbezoymu",
+   "label": 1
+  },
+  {
+   "id": "train:1092",
+   "text": "@CapitolEVAN That's where I saw the leprechaun. He told me to burn things.",
+   "label": 0
+  },
+  {
+   "id": "train:1159",
+   "text": "xwzamltxkid",
+   "label": 1
+  },
+  {
+   "id": "train:1191",
+   "text": "@user happy #weekendhour! we \u00f0\u009f\u0092\u009b rachael's  times design featured on lots of lovely @user gifts! #giftideas  ",
+   "label": 0
+  },
+  {
+   "id": "train:1361",
+   "text": "need these cushions in my life \u00f0\u009f\u0098\u00a9 ",
+   "label": 0
+  },
+  {
+   "id": "train:1451",
+   "text": "@Ish_MallyMal @JayJuice22 all trash to me",
+   "label": 0
+  },
+  {
+   "id": "train:1744",
+   "text": "\"@sleepy_yongguk: \"I saw an ajumma walk out in the beginning saying, 'Wow, this is so trash that I can't even listen to it..'\" &#128514;\" lmaoo",
+   "label": 0
+  },
+  {
+   "id": "train:1757",
+   "text": "@user when you missed all the #finalfreebies during your last year at osu. #dang   #osugrad ",
+   "label": 0
+  },
+  {
+   "id": "train:1760",
+   "text": "rfrrvf",
+   "label": 1
+  },
+  {
+   "id": "train:1764",
+   "text": "i am growing. #i_am #positive #affirmation     ",
+   "label": 0
+  },
+  {
+   "id": "train:1797",
+   "text": "yes we do \u00e2\u009d\u00a4\u00ef\u00b8\u008f #love #ilestcontent #amour #friends   #theatre #fanclubofficiel\u00e2\u0080\u00a6 ",
+   "label": 0
+  },
+  {
+   "id": "train:1807",
+   "text": "i am funny. #i_am #positive #affirmation     ",
+   "label": 0
+  },
+  {
+   "id": "train:1836",
+   "text": "iglgfhmawjpt",
+   "label": 1
+  },
+  {
+   "id": "train:1991",
+   "text": "tnjsohcpur",
+   "label": 1
+  },
+  {
+   "id": "train:2057",
+   "text": "befsgbt",
+   "label": 1
+  },
+  {
+   "id": "train:2107",
+   "text": "hfieue",
+   "label": 1
+  },
+  {
+   "id": "train:2501",
+   "text": "Don't dance, Iggy. It's trash just like your music.",
+   "label": 0
+  },
+  {
+   "id": "train:2516",
+   "text": "fzzkdqbjj",
+   "label": 1
+  },
+  {
+   "id": "train:2538",
+   "text": "i'm quite content with myself \u00f0\u009f\u0098\u0083   #selfacceptance #selflove #inspiration\u00e2\u0080\u00a6 ",
+   "label": 0
+  },
+  {
+   "id": "train:2587",
+   "text": "&#9733;@&#9733;@&#9733;@&#9733;@&#9733; GRAND OPENING ! &#9733;@&#9733;@&#9733;@&#9733;@&#9733; TOP CLASS &#9733; Oriental Massage &#9733; PERFECT !&#9733;/ http://t.co/ydZYr4dVS4",
+   "label": 0
+  },
+  {
+   "id": "train:2677",
+   "text": "kibbwkvn",
+   "label": 1
+  },
+  {
+   "id": "train:2904",
+   "text": " @user if you want to be  , be. l tolstoy #inspiration #wordstoliveby",
+   "label": 0
+  },
+  {
+   "id": "train:2979",
+   "text": "nice looking gorgious ",
+   "label": 0
+  },
+  {
+   "id": "train:3030",
+   "text": "#leadership 101.  this weekend is a good time to happy out &amp; hack your neighborhood w/ the   virus on   #locally",
+   "label": 0
+  },
+  {
+   "id": "train:3165",
+   "text": "@user @user   you sure have been passed over time and again.",
+   "label": 0
+  },
+  {
+   "id": "train:3255",
+   "text": "yoiqcejsdzo",
+   "label": 1
+  },
+  {
+   "id": "train:3271",
+   "text": "oandp",
+   "label": 1
+  },
+  {
+   "id": "train:3442",
+   "text": "#mikesisms upset this is seasonal..   #myfavorite ",
+   "label": 0
+  },
+  {
+   "id": "train:3475",
+   "text": "knossos &amp; akrotiri not included because they aren't unesco world heritage sites.   ",
+   "label": 0
+  },
+  {
+   "id": "train:3602",
+   "text": "makes me both   but also so very #happy.",
+   "label": 0
+  },
+  {
+   "id": "train:3670",
+   "text": "ibqybuxu",
+   "label": 1
+  },
+  {
+   "id": "train:3831",
+   "text": "cweqgznczy",
+   "label": 1
+  },
+  {
+   "id": "train:4219",
+   "text": "what's happened to #haverfordwest. the town really is in a sorry state.   #shouldbesomuchbetter",
+   "label": 0
+  },
+  {
+   "id": "train:4364",
+   "text": "@user dope tune #kilamiti by iam-bars #love #dj #spin #music #media #me #model   #tbt\u00e2\u0080\u00a6 ",
+   "label": 0
+  },
+  {
+   "id": "train:4496",
+   "text": "ggyynmjt",
+   "label": 1
+  },
+  {
+   "id": "train:4523",
+   "text": "Charlie Crist Losing 50,000 Florida Jobs To Raise Minimum Wage Is &#8216;Worth It&#8217; - Conservative Byte http://t.co/y3JYJ2Yf4L via @conservativebyt",
+   "label": 0
+  },
+  {
+   "id": "train:4806",
+   "text": "RT @elcinpoyrazlar: Two Jihadis Arguing Over Stolen M&amp;M's Will Make Your Day http://t.co/uFRcLDiovX @markham @vocativ http://t.co/zukwJ2ve2d",
+   "label": 0
+  },
+  {
+   "id": "train:4809",
+   "text": "qtrrvujdlnqm",
+   "label": 1
+  },
+  {
+   "id": "train:4913",
+   "text": "adgdjexjf",
+   "label": 1
+  },
+  {
+   "id": "train:4968",
+   "text": "kvgmx",
+   "label": 1
+  },
+  {
+   "id": "train:5508",
+   "text": "mjvfnt",
+   "label": 1
+  },
+  {
+   "id": "train:5553",
+   "text": "tired!!!! it's been a long day...tomorrow will be longer but can't wait for #peaklha  ",
+   "label": 0
+  },
+  {
+   "id": "train:6089",
+   "text": "zgmjunctdyv",
+   "label": 1
+  },
+  {
+   "id": "train:6316",
+   "text": "aehpofhvcgym",
+   "label": 1
+  },
+  {
+   "id": "train:6357",
+   "text": "almost done with the work day! got #home late afternoon yesterday. #bittersweet but   to be home. #possible #stream #tonight :)",
+   "label": 0
+  },
+  {
+   "id": "train:6492",
+   "text": "my makeup collection keeps growing nd growing  ",
+   "label": 0
+  },
+  {
+   "id": "train:6517",
+   "text": "@user @user sad - marrying a palin should be automatic forfeiture of a moh.  ",
+   "label": 0
+  },
+  {
+   "id": "train:6600",
+   "text": "my #name in the #sand #trip #beach #ocean #sun #sunset   ",
+   "label": 0
+  },
+  {
+   "id": "train:6657",
+   "text": "bokbpmufs",
+   "label": 1
+  },
+  {
+   "id": "train:6686",
+   "text": "fgxvif",
+   "label": 1
+  },
+  {
+   "id": "train:6899",
+   "text": "vmutvjefee",
+   "label": 1
+  },
+  {
+   "id": "train:7147",
+   "text": "RT @Rene_gadeCowboy: I have to agree with Charlie he's spot on... http://t.co/9lcmVE9i1m",
+   "label": 0
+  },
+  {
+   "id": "train:7151",
+   "text": "keep your face to the sunshine and you cannot see the shadow--helen keller   #outside\u00e2\u0080\u00a6 ",
+   "label": 0
+  },
+  {
+   "id": "train:7529",
+   "text": "#father's #day to all that deserve to be #call a #dad even if it's a #woman. #god #bless\u00e2\u0080\u00a6 ",
+   "label": 0
+  },
+  {
+   "id": "train:7540",
+   "text": "Fake tits? &#8220;@VelvetHoopD: A hoe??&#8220;@Steph_Badd: Can u guess what I was ? &#8220;@DJZeeti: Twitpic your halloween costumes&#8221; http://t.co/ECs7nlEkKa&#8221;&#8221;",
+   "label": 0
+  },
+  {
+   "id": "train:7622",
+   "text": "tsubgzniwccj",
+   "label": 1
+  },
+  {
+   "id": "train:7664",
+   "text": "thanks maroc! ivaromanska  #postcard #maroc #forme   #love #thanks #siater #iloveyou ",
+   "label": 0
+  },
+  {
+   "id": "train:7681",
+   "text": "ioxux",
+   "label": 1
+  },
+  {
+   "id": "train:7789",
+   "text": "good morning\u00f0\u009f\u0092\u0093  #gm   #sunny #day #instadaily #instacool #fashion ",
+   "label": 0
+  },
+  {
+   "id": "train:7972",
+   "text": "49 people were killed and 53 injured in the #attack on a #gay nightclub in #orlando so   #news rip #love #gay j ",
+   "label": 0
+  },
+  {
+   "id": "train:8097",
+   "text": "@user make happy was one of the realest things i've seen. there's so many comedians who would never put something like that out.  ",
+   "label": 0
+  },
+  {
+   "id": "train:8224",
+   "text": "#creativebusinesscup #norway staing up! @user   ",
+   "label": 0
+  },
+  {
+   "id": "train:8353",
+   "text": "huksfaooiaop",
+   "label": 1
+  },
+  {
+   "id": "train:8480",
+   "text": "i am thriving. #i_am #positive #affirmation     ",
+   "label": 0
+  },
+  {
+   "id": "train:8489",
+   "text": "#friday #herbalife #nutrition #healthcoach  hope to see your smiling face today! ",
+   "label": 0
+  },
+  {
+   "id": "train:8517",
+   "text": "ieqzmwhl",
+   "label": 1
+  },
+  {
+   "id": "train:8660",
+   "text": "on top of london. exciting way to spend my last day before my big new adventure. #newjob   ",
+   "label": 0
+  },
+  {
+   "id": "train:8711",
+   "text": "phplqfmq",
+   "label": 1
+  },
+  {
+   "id": "train:9236",
+   "text": "bzpbwkk",
+   "label": 1
+  },
+  {
+   "id": "train:9389",
+   "text": "RT @zachthorpe78: \"the trash generation\"",
+   "label": 0
+  },
+  {
+   "id": "train:9494",
+   "text": "#bihday girl   #thankful and #blessed \u00f0\u009f\u0098\u0098\u00f0\u009f\u0098\u0098\u00f0\u009f\u0098\u0098 #sunshine #sundayfunday \u00f0\u009f\u0092\u009c\u00f0\u009f\u0092\u009c\u00f0\u009f\u0092\u009c ",
+   "label": 0
+  },
+  {
+   "id": "train:9739",
+   "text": "#eid sms   poetry sms #masla_e_bewafa #jaun elia #funey sms on ur mobile type f adnansms and send it to 40404",
+   "label": 0
+  },
+  {
+   "id": "train:10001",
+   "text": "xmyflht",
+   "label": 1
+  },
+  {
+   "id": "train:10022",
+   "text": "jqukjigl",
+   "label": 1
+  },
+  {
+   "id": "train:10251",
+   "text": "ltkmslitxg",
+   "label": 1
+  },
+  {
+   "id": "train:10319",
+   "text": "xaxmmyfq",
+   "label": 1
+  },
+  {
+   "id": "train:10578",
+   "text": "\u00e2\u0080\u009ci first met the two of you strolling the #shore. you both looked so happy.\"  beryl grimaced at the word,  . #1linewed #amwriting #wip",
+   "label": 0
+  },
+  {
+   "id": "train:10613",
+   "text": "#1   #country #sofia #bulgaria - at #mixtape5 tonight w. @user (dj) - @user @user @user \u00e2\u009c\u008c\u00ef\u00b8\u008f ",
+   "label": 0
+  },
+  {
+   "id": "train:10715",
+   "text": "nytjrfl",
+   "label": 1
+  },
+  {
+   "id": "train:10818",
+   "text": "orbzprjcdz",
+   "label": 1
+  },
+  {
+   "id": "train:10920",
+   "text": "change your space-- change your outlook! #newbeginnings #letgo #sayinggoodbye #feelings #breakupcoach #movingon   ",
+   "label": 0
+  },
+  {
+   "id": "train:11425",
+   "text": "sweet pie baby ... gbp 19.00 get here:  #shop #cool   #home #fun ",
+   "label": 0
+  },
+  {
+   "id": "train:11436",
+   "text": "vuwobbflh",
+   "label": 1
+  },
+  {
+   "id": "train:11450",
+   "text": "what happened in orlando was horrific, omar mateen.. (i have no words) but was no way terrorism. what happened today was #ripjocox  ",
+   "label": 0
+  },
+  {
+   "id": "train:11596",
+   "text": "current mood .... 31 days and counting \u00f0\u009f\u0098\u00ac\u00f0\u009f\u0091\u00b0\u00f0\u009f\u008f\u00bc #weddingcountdown #weddingplanning   #ch\u00e2\u0080\u00a6  ",
+   "label": 0
+  },
+  {
+   "id": "train:11718",
+   "text": "nqlgpnuchuae",
+   "label": 1
+  },
+  {
+   "id": "train:11734",
+   "text": "@user i love this pic too &lt;3 :)   #love",
+   "label": 0
+  },
+  {
+   "id": "train:12245",
+   "text": "#ff   of my self and happy for the point i reached of hea purity. also i registered on a yoga directory i inv\u00e2\u0080\u00a6",
+   "label": 0
+  },
+  {
+   "id": "train:12264",
+   "text": "okapaewxpmw",
+   "label": 1
+  },
+  {
+   "id": "train:12296",
+   "text": "nfapevlj",
+   "label": 1
+  },
+  {
+   "id": "train:12316",
+   "text": "bihday to me# loving life ",
+   "label": 0
+  },
+  {
+   "id": "train:12412",
+   "text": "i am thankful for being able to walk.#thankful #positive   ",
+   "label": 0
+  },
+  {
+   "id": "train:12906",
+   "text": "at first i was so hea broken by slaughter of 49 people and the injured people in orlando night club...now i'm   &amp; baffled",
+   "label": 0
+  },
+  {
+   "id": "train:13441",
+   "text": "eawhykzsin",
+   "label": 1
+  },
+  {
+   "id": "train:13459",
+   "text": "when i'm feeling #overwhelmed and   i look down and see a million reasons to be #happy again. i love you craig!! ",
+   "label": 0
+  },
+  {
+   "id": "train:13460",
+   "text": "father's day..!  shout out to all fathers around the world..! we appreciate your love and\u00e2\u0080\u00a6 ",
+   "label": 0
+  },
+  {
+   "id": "train:13538",
+   "text": "mzypibv",
+   "label": 1
+  },
+  {
+   "id": "train:13602",
+   "text": "jlfdpc",
+   "label": 1
+  },
+  {
+   "id": "train:13644",
+   "text": "@user she's a joke!  ",
+   "label": 0
+  },
+  {
+   "id": "train:13767",
+   "text": "6pcs happy smiling kitty cats home butto  #6pcs   #smiling #kitty # ",
+   "label": 0
+  },
+  {
+   "id": "train:14069",
+   "text": "xrhgtwyonqp",
+   "label": 1
+  },
+  {
+   "id": "train:14275",
+   "text": "our @user thought killing ppl a \"good\" thing, @user then we got isil/isis. gee, thanks obama.   @user @user",
+   "label": 0
+  },
+  {
+   "id": "train:14369",
+   "text": "risjxlzshh",
+   "label": 1
+  },
+  {
+   "id": "train:14459",
+   "text": "RT @Anastacia_Cole: I like being Asian and all but it's a struggle having squinty eyes in every picture",
+   "label": 0
+  },
+  {
+   "id": "train:14634",
+   "text": "dhrzoylsekz",
+   "label": 1
+  },
+  {
+   "id": "train:14697",
+   "text": "nibyvxivrvq",
+   "label": 1
+  },
+  {
+   "id": "train:15027",
+   "text": "sqsuuvfuu",
+   "label": 1
+  },
+  {
+   "id": "train:15319",
+   "text": "ejthyk",
+   "label": 1
+  },
+  {
+   "id": "train:15406",
+   "text": "tjseifm",
+   "label": 1
+  },
+  {
+   "id": "train:15407",
+   "text": "#fathersday to all #fathers who are #dad to there #children and #husband to their #wife...",
+   "label": 0
+  },
+  {
+   "id": "train:15464",
+   "text": "so now #prayfororlando becomes a campaign topic huh?    #sick #disgusting #politics",
+   "label": 0
+  },
+  {
+   "id": "train:15533",
+   "text": "zqqwotjhrap",
+   "label": 1
+  },
+  {
+   "id": "train:15680",
+   "text": "lyilqjxzszu",
+   "label": 1
+  },
+  {
+   "id": "train:15772",
+   "text": "uyuoarahcqv",
+   "label": 1
+  },
+  {
+   "id": "train:15918",
+   "text": "it\u00e2\u0080\u0099s amazing how true this is! #healthyeating #eathealthy   ",
+   "label": 0
+  },
+  {
+   "id": "train:15988",
+   "text": "just got a new #gadget and i am super  ! watch me open the box on my #vlog at ",
+   "label": 0
+  },
+  {
+   "id": "train:16018",
+   "text": "heyy, i saw that u are a health lover, so i encourage u to test my new app, it's called mytraining on app store ",
+   "label": 0
+  },
+  {
+   "id": "train:16268",
+   "text": "unacput",
+   "label": 1
+  },
+  {
+   "id": "train:16293",
+   "text": "feel like... \u00f0\u009f\u0098\u009d\u00f0\u009f\u0090\u00b6\u00f0\u009f\u0098\u008e #dog #summer #hot #help #sun #day   #more ",
+   "label": 0
+  },
+  {
+   "id": "train:16304",
+   "text": "that moment when you have to pretend to be   for someone.  #hot",
+   "label": 0
+  },
+  {
+   "id": "train:16504",
+   "text": "#lawofattraction for #healing #loa   be #healthy   #well #idwp ! ",
+   "label": 0
+  },
+  {
+   "id": "train:16630",
+   "text": "bbplaic",
+   "label": 1
+  },
+  {
+   "id": "train:16829",
+   "text": "summer is one of the best and also one of the worst months in my life. i'm okay with it i guess. #eh #ohwell #imhappy   #bleh #goodnight",
+   "label": 0
+  },
+  {
+   "id": "train:16859",
+   "text": "setylbyaa",
+   "label": 1
+  },
+  {
+   "id": "train:16934",
+   "text": "McDonald's is hella trash to me now",
+   "label": 0
+  },
+  {
+   "id": "train:17027",
+   "text": "xfnnbgvf",
+   "label": 1
+  },
+  {
+   "id": "train:17375",
+   "text": "causeway bay spos ground \u00f0\u009f\u0091\u008c\u00f0\u009f\u0091\u008a #run #play #kids   #enjoy #enjoylife #laughter #playmates\u00e2\u0080\u00a6 ",
+   "label": 0
+  },
+  {
+   "id": "train:17428",
+   "text": "hqnlsobam",
+   "label": 1
+  },
+  {
+   "id": "train:17707",
+   "text": "dakvmc",
+   "label": 1
+  },
+  {
+   "id": "train:17909",
+   "text": "fvjonibd",
+   "label": 1
+  },
+  {
+   "id": "train:17999",
+   "text": "iiihjsjnkika",
+   "label": 1
+  },
+  {
+   "id": "train:18049",
+   "text": "so it's a..........\u00f0\u009f\u0092\u0097\u00f0\u009f\u0092\u0097\u00f0\u009f\u0092\u0097\u00f0\u009f\u0092\u0097\u00f0\u009f\u0092\u0097 #girl #baby #pregnancy #princess  \u00e2\u0080\u00a6 ",
+   "label": 0
+  },
+  {
+   "id": "train:18106",
+   "text": "reasons for homelessness among vets   ",
+   "label": 0
+  },
+  {
+   "id": "train:18249",
+   "text": "@user just youtu bed them two and they don't get on now   #friendship",
+   "label": 0
+  },
+  {
+   "id": "train:18324",
+   "text": "btybglhvhn",
+   "label": 1
+  },
+  {
+   "id": "train:18343",
+   "text": "i love being yours  #love #smile   @ las vegas, nevada ",
+   "label": 0
+  },
+  {
+   "id": "train:18346",
+   "text": "\u00f0\u009f\u0098\u00b3\u00f0\u009f\u0098\u00b3\u00f0\u009f\u0098\u00b3\u00f0\u009f\u0098\u00b3\u00f0\u009f\u0098\u00b3\u00f0\u009f\u0098\u00b3\u00f0\u009f\u008d\u0094\u00f0\u009f\u008c\u00b6\u00f0\u009f\u008c\u00b6\u00f0\u009f\u008c\u00b6 nooooo #inandout running out of yellow chilies     \u00e2\u0098\u00b9\u00ef\u00b8\u008f tag ur your #doubledouble\u00e2\u0080\u00a6 ",
+   "label": 0
+  },
+  {
+   "id": "train:18372",
+   "text": "it's habit no. 6 for them. #spiritual   #men ",
+   "label": 0
+  },
+  {
+   "id": "train:18534",
+   "text": "bxkaybuy",
+   "label": 1
+  },
+  {
+   "id": "train:18769",
+   "text": "does #magnettherapy really work?   #altwaystoheal #healing #healthy   !! ",
+   "label": 0
+  },
+  {
+   "id": "train:18922",
+   "text": "ospqvnvq",
+   "label": 1
+  },
+  {
+   "id": "train:18955",
+   "text": "vomos rafa will miss wimbledon with a wrist injury ..    ",
+   "label": 0
+  },
+  {
+   "id": "train:18984",
+   "text": "uiwdc",
+   "label": 1
+  },
+  {
+   "id": "train:19011",
+   "text": "clueless top nyc cop william bratton promises 2 lead the nation in small #marijuana arrests   \u00e2\u0080\u0094&gt; ",
+   "label": 0
+  },
+  {
+   "id": "train:19025",
+   "text": "finished and on their way to a   #customer !! two #extraordinary #pendant #lamps better\u00e2\u0080\u00a6 ",
+   "label": 0
+  },
+  {
+   "id": "train:19040",
+   "text": "i am thankful for warm running water. #thankful #positive     ",
+   "label": 0
+  },
+  {
+   "id": "train:19502",
+   "text": "got a day off, so off to blackpool this aft to watch @user  ",
+   "label": 0
+  },
+  {
+   "id": "train:19522",
+   "text": "luqirqoc",
+   "label": 1
+  },
+  {
+   "id": "train:19824",
+   "text": "\u00f0\u009f\u0091\u008a happy father's day #father   #men #man #mademen #king #kings #cool #dope #hustle #sunday\u00e2\u0080\u00a6 ",
+   "label": 0
+  },
+  {
+   "id": "train:19997",
+   "text": "and said hello to this...   #newride #chevy #chevytrax ",
+   "label": 0
+  },
+  {
+   "id": "train:20014",
+   "text": "wh is enemy deployed google for illegal manip.in eu they fined bastards $3.5 bill for same manipulation.lawlessness ",
+   "label": 0
+  },
+  {
+   "id": "train:20034",
+   "text": "@user retro game theater - sonic the hedgehog  via @user #letsplay #retrogaming #sonicthehedgehog #ran\u00e2\u0080\u00a6",
+   "label": 0
+  },
+  {
+   "id": "train:20060",
+   "text": "be   not because everything is good, but because u can see the good side of everything. #optimists see more truth &amp; solve more probems",
+   "label": 0
+  },
+  {
+   "id": "train:20074",
+   "text": "sheqqkpjl",
+   "label": 1
+  },
+  {
+   "id": "train:20081",
+   "text": "today is the day #euro2016\u00c2\u00a0\u00c2\u00a0finally begins \u00f0\u009f\u0098\u0083 \u00f0\u009f\u0087\u00ab\u00f0\u009f\u0087\u00b7 \u00e2\u009a\u00bd\u00ef\u00b8\u008f   #comeonengland",
+   "label": 0
+  },
+  {
+   "id": "train:20248",
+   "text": "woimtzltswvm",
+   "label": 1
+  },
+  {
+   "id": "train:20454",
+   "text": "kiki felt ignored today @user make kiki dance again #kikidance #miabbook    ",
+   "label": 0
+  },
+  {
+   "id": "train:20476",
+   "text": "sfdykv",
+   "label": 1
+  },
+  {
+   "id": "train:21022",
+   "text": "adfkyxhaguo",
+   "label": 1
+  },
+  {
+   "id": "train:21044",
+   "text": "wubmlfbdu",
+   "label": 1
+  },
+  {
+   "id": "train:21163",
+   "text": "rjbatasi",
+   "label": 1
+  },
+  {
+   "id": "train:21323",
+   "text": "ulznvhdbwov",
+   "label": 1
+  },
+  {
+   "id": "train:21404",
+   "text": "father day the day we celebrate for our father of the nation \u00f0\u009f\u0092\u0090\u00f0\u009f\u008c\u00b9",
+   "label": 0
+  },
+  {
+   "id": "train:21612",
+   "text": "feliz fin de semana para todos! masmusculo fitness team happy weekend to all! #fit #fitness   #victorialomba ",
+   "label": 0
+  },
+  {
+   "id": "train:21641",
+   "text": "lroqeofrlvi",
+   "label": 1
+  },
+  {
+   "id": "train:21679",
+   "text": "nkgmnnniq",
+   "label": 1
+  },
+  {
+   "id": "train:21715",
+   "text": "ritfzpdfliq",
+   "label": 1
+  },
+  {
+   "id": "train:21834",
+   "text": "photoshoot time \u00f0\u009f\u0092\u009a\u00f0\u009f\u0092\u009a           #jealousbody #bodyscrub #fun   #photo #love #jealous ",
+   "label": 0
+  },
+  {
+   "id": "train:21901",
+   "text": "exaidnenjf",
+   "label": 1
+  },
+  {
+   "id": "train:21989",
+   "text": "zfdjjbejsvuo",
+   "label": 1
+  },
+  {
+   "id": "train:22354",
+   "text": "saauycnrxvzv",
+   "label": 1
+  },
+  {
+   "id": "train:22440",
+   "text": "@user kudos for being compliant :) #itaxnirahisi ",
+   "label": 0
+  },
+  {
+   "id": "train:22567",
+   "text": "cmqye",
+   "label": 1
+  },
+  {
+   "id": "train:22682",
+   "text": "ready for b-fest!!!! #bfestbuzz #bnmidwest    ",
+   "label": 0
+  },
+  {
+   "id": "train:22806",
+   "text": "@user wait until you move out and no one tells you any family news. oh, and they sta traditions and watch tv without you.  ",
+   "label": 0
+  },
+  {
+   "id": "train:22837",
+   "text": "ntrxw",
+   "label": 1
+  },
+  {
+   "id": "train:22847",
+   "text": "so   about @user loving our new menu!  thanks for stopping by the shop!  #soinoodlebar #canberra #yum ",
+   "label": 0
+  },
+  {
+   "id": "train:23090",
+   "text": "cskljph",
+   "label": 1
+  },
+  {
+   "id": "train:23200",
+   "text": "prsvgs",
+   "label": 1
+  },
+  {
+   "id": "train:23238",
+   "text": "#day in #afghanistan may we have peace in the region ameen   ",
+   "label": 0
+  },
+  {
+   "id": "train:23253",
+   "text": "@user @user  so proud of our lee county florida sheriff ! #obama handcuffs #police @user control @user @user @user  \u00e2\u0080\u00bc\u00ef\u00b8\u008f",
+   "label": 0
+  },
+  {
+   "id": "train:23347",
+   "text": "igaaoppmi",
+   "label": 1
+  },
+  {
+   "id": "train:23489",
+   "text": "ptffi",
+   "label": 1
+  },
+  {
+   "id": "train:23492",
+   "text": "dxnxajqara",
+   "label": 1
+  },
+  {
+   "id": "train:23547",
+   "text": "iduam",
+   "label": 1
+  },
+  {
+   "id": "train:23748",
+   "text": "happy today   #flawless #crueltyfree #younique #ylife #makeup #makeupjunkie #makeupaddict\u00e2\u0080\u00a6 ",
+   "label": 0
+  },
+  {
+   "id": "train:23781",
+   "text": "nwblqwqtucq",
+   "label": 1
+  },
+  {
+   "id": "train:23881",
+   "text": "ybxjvww",
+   "label": 1
+  },
+  {
+   "id": "train:23959",
+   "text": "racism is still alive!   #huful",
+   "label": 0
+  },
+  {
+   "id": "train:24148",
+   "text": "happ.y at work conference: right mindset leads to culture-of-development organizations    #work #mindset",
+   "label": 0
+  },
+  {
+   "id": "train:24166",
+   "text": "RT @runofplay: I'm confused. Martins Indi just drew a yellow card, but I didn't see him steal a tank from the Brazilian army and open fire &#8230;",
+   "label": 0
+  },
+  {
+   "id": "train:24207",
+   "text": "pnfnfuwd",
+   "label": 1
+  },
+  {
+   "id": "train:24233",
+   "text": "@MeowMariss i thought i was the ghetto word for babe",
+   "label": 0
+  },
+  {
+   "id": "train:24266",
+   "text": "okvzylf",
+   "label": 1
+  },
+  {
+   "id": "train:24289",
+   "text": "uvbsdufcg",
+   "label": 1
+  },
+  {
+   "id": "train:24401",
+   "text": "dbktlsms",
+   "label": 1
+  },
+  {
+   "id": "train:24542",
+   "text": "gngasfhupbtu",
+   "label": 1
+  },
+  {
+   "id": "train:24557",
+   "text": "quojaq",
+   "label": 1
+  },
+  {
+   "id": "train:24724",
+   "text": "xiznieepxo",
+   "label": 1
+  },
+  {
+   "id": "train:24729",
+   "text": "RT @PeteRose_14: On this day 1941 the #Yankees Joe DiMaggio goes 0 for 3 with a walk vs Cleveland #Indians to end his 56 game hitting streak",
+   "label": 0
+  },
+  {
+   "id": "train:24786",
+   "text": "bsboshfulpz",
+   "label": 1
+  },
+  {
+   "id": "train:24801",
+   "text": "back...who missed me?....#greatfultogod #beendoinggreat    #selfie ",
+   "label": 0
+  },
+  {
+   "id": "train:24805",
+   "text": "dstvgkcaog",
+   "label": 1
+  },
+  {
+   "id": "train:24887",
+   "text": "@user have a magnificent monday! #mondaymorning #mondaymotivation #monday   #indraloka ",
+   "label": 0
+  },
+  {
+   "id": "train:24973",
+   "text": "@user @user   gorebihday to the italian godfather of gore #lucio fulci.a trailblazer director.\u00f0\u009f\u0098\u0088\u00f0\u009f\u0094\u00a5\u00f0\u009f\u0091\u008f ",
+   "label": 0
+  },
+  {
+   "id": "train:24989",
+   "text": "gaguev",
+   "label": 1
+  },
+  {
+   "id": "train:25085",
+   "text": "git the prototype for our new usb today! what do you think? #new product #doncasterphotographer   #special ",
+   "label": 0
+  },
+  {
+   "id": "train:25248",
+   "text": "new pic profile \u00f0\u009f\u0093\u00b7  #inshot #girls #cute #summer #blur #sun   #fun #dog #hair #beach #hot\u00e2\u0080\u00a6 ",
+   "label": 0
+  },
+  {
+   "id": "train:25329",
+   "text": "scywwmyupogb",
+   "label": 1
+  },
+  {
+   "id": "train:25372",
+   "text": "Its suppose to be yellow but we dont do yellow &#127821;&#128520;&#128127;&#128127;&#128520;&#128127;&#128127;&#128127; http://t.co/y1hLiBjQmn",
+   "label": 0
+  },
+  {
+   "id": "train:25410",
+   "text": "I went outside and got mad bc this weather is trash",
+   "label": 0
+  },
+  {
+   "id": "train:25473",
+   "text": "siaqlphyitoz",
+   "label": 1
+  },
+  {
+   "id": "train:25478",
+   "text": "diunj",
+   "label": 1
+  },
+  {
+   "id": "train:25533",
+   "text": "fevraekxfez",
+   "label": 1
+  },
+  {
+   "id": "train:25623",
+   "text": "so #thankful for tonight bc finally getting to watch oitnb season 4   #blessed #yes #thankyoulife",
+   "label": 0
+  },
+  {
+   "id": "train:25627",
+   "text": "rhtcainzmg",
+   "label": 1
+  },
+  {
+   "id": "train:25660",
+   "text": "\u00f0\u009f\u0092\u0097 installation day-makes me   kingsley_bates #outdoors #furniture\u00e2\u0080\u00a6 ",
+   "label": 0
+  },
+  {
+   "id": "train:25760",
+   "text": "I don't own any #Onslaught on #Vinyl I may have to get one now. Their new Lp is available in army green coloured vinyl",
+   "label": 0
+  },
+  {
+   "id": "train:25769",
+   "text": "i prefer tap the home button and then swipe more than tap the home button-wait-tap the home button to get into the home screen. oh well  ",
+   "label": 0
+  },
+  {
+   "id": "train:26273",
+   "text": "that stupid thane of cawdor how dare he betray his own country for those nords   #betrayed",
+   "label": 0
+  },
+  {
+   "id": "train:26384",
+   "text": "ogqlcfqmbycn",
+   "label": 1
+  },
+  {
+   "id": "train:26391",
+   "text": "looking forward to afternoon tea tomorrow @user to celebrate my engagement with my lovelies @user &amp; @user  ",
+   "label": 0
+  },
+  {
+   "id": "train:26477",
+   "text": "scqgareig",
+   "label": 1
+  },
+  {
+   "id": "train:26544",
+   "text": "when #dreams you forgot you had sta coming true.   #nervous #dreamscometrue #future  #dreamhardworkharder",
+   "label": 0
+  },
+  {
+   "id": "train:26877",
+   "text": "let them say what they say... let the things happens...  ",
+   "label": 0
+  },
+  {
+   "id": "train:26892",
+   "text": "i so want too :p but according to twitter it costs more than 10 k to be #gentleman per day \u00f0\u009f\u0098\u0082 #clothing   #twitter ",
+   "label": 0
+  },
+  {
+   "id": "train:27467",
+   "text": "uejubsz",
+   "label": 1
+  },
+  {
+   "id": "train:27469",
+   "text": "mzmkz",
+   "label": 1
+  },
+  {
+   "id": "train:27539",
+   "text": "@user only 24 hours away from first #trivia night at the @user in #navyyard !    ",
+   "label": 0
+  },
+  {
+   "id": "train:27635",
+   "text": "jhvyn",
+   "label": 1
+  },
+  {
+   "id": "train:27714",
+   "text": "@user looking at squad no world class players  ",
+   "label": 0
+  },
+  {
+   "id": "train:27756",
+   "text": "xqtnlag",
+   "label": 1
+  },
+  {
+   "id": "train:27992",
+   "text": "shout out to @user 4 following me! can't wait til i get to meet and hangout with ya'll and see ya'll live in conce ;)  ",
+   "label": 0
+  },
+  {
+   "id": "train:28004",
+   "text": "qchkum",
+   "label": 1
+  },
+  {
+   "id": "train:28055",
+   "text": "ffvhlgefuqxt",
+   "label": 1
+  },
+  {
+   "id": "train:28139",
+   "text": "Burnating all Yankees and their thatch roof cottages!!!!!! #Astros http://t.co/j3dZiwBDt0",
+   "label": 0
+  },
+  {
+   "id": "train:28457",
+   "text": "bihday sexy girl nude mens  ",
+   "label": 0
+  },
+  {
+   "id": "train:28660",
+   "text": "I would like to test and see how long your tongue really is, my lady. [eggplant emoji] @Tinashe",
+   "label": 0
+  },
+  {
+   "id": "train:28671",
+   "text": "qsacpmts",
+   "label": 1
+  },
+  {
+   "id": "train:28716",
+   "text": "#ffrelay beginning in 2 minutes   ",
+   "label": 0
+  },
+  {
+   "id": "train:28751",
+   "text": "ziput",
+   "label": 1
+  },
+  {
+   "id": "train:28912",
+   "text": "vfslf",
+   "label": 1
+  },
+  {
+   "id": "train:29212",
+   "text": "who can get the pussy quicker these days   \u00f0\u009f\u0098\u0094",
+   "label": 0
+  },
+  {
+   "id": "train:29554",
+   "text": "oscar must pay 4 wat he did  ",
+   "label": 0
+  },
+  {
+   "id": "train:29644",
+   "text": "A GWB appointee. There goes the ACTIVIST JUDGES slant. Oh wait? It's already been exposed as completely farcical. A GWB appointee.",
+   "label": 0
+  },
+  {
+   "id": "train:29653",
+   "text": "\u00f0\u009f\u0098\u0094\u00f0\u009f\u0098\u0094 thas it right there   ",
+   "label": 0
+  },
+  {
+   "id": "train:29674",
+   "text": "1 week on wednesday @user   #brotherswedding #bridesmaid #zakynthos #cameoisland ",
+   "label": 0
+  },
+  {
+   "id": "train:29792",
+   "text": "finding life inside the illusion. for d lack of any other choice.  ",
+   "label": 0
+  },
+  {
+   "id": "train:29840",
+   "text": "@user @user @user   to go :) been too long!",
+   "label": 0
+  },
+  {
+   "id": "train:29954",
+   "text": "ithcbcvhr",
+   "label": 1
+  },
+  {
+   "id": "train:30073",
+   "text": "finished the gardening.....  !?!?!  ",
+   "label": 0
+  },
+  {
+   "id": "train:30170",
+   "text": "abbaajuyijo",
+   "label": 1
+  },
+  {
+   "id": "train:30258",
+   "text": "#\u00eb\u008b\u00a8\u00ec\u0098\u00a4\u00ec\u00a0\u0088 #\u00e7\u00ab\u00af\u00e5\u008d\u0088\u00e8\u008a\u0082   #\u00ec\u00b6\u0095\u00ed\u0095\u0098\u00ed\u0095\u00b4 #chinesefestival #\u00e7\u00b2\u00bd\u00e5\u00ad\u0090 @ seoul, south korea ",
+   "label": 0
+  },
+  {
+   "id": "train:30486",
+   "text": "jefeo",
+   "label": 1
+  },
+  {
+   "id": "train:30560",
+   "text": "gjotrfebmn",
+   "label": 1
+  },
+  {
+   "id": "train:30595",
+   "text": "@user but you feel obligated to fuck it up because you can't have what you want?    #illpray4u",
+   "label": 0
+  },
+  {
+   "id": "train:30702",
+   "text": "hwrzh",
+   "label": 1
+  },
+  {
+   "id": "train:30724",
+   "text": "rkfkpathay",
+   "label": 1
+  },
+  {
+   "id": "train:30778",
+   "text": "dqbsepzta",
+   "label": 1
+  },
+  {
+   "id": "train:30924",
+   "text": "afenmubcsl",
+   "label": 1
+  },
+  {
+   "id": "train:31033",
+   "text": "shmegguplo",
+   "label": 1
+  },
+  {
+   "id": "train:31074",
+   "text": "flyhdtmidbpk",
+   "label": 1
+  },
+  {
+   "id": "train:31085",
+   "text": "@user who's posting this?  hrc always calls his donald trump. don't post if it's not you or at least be honest &amp; say who does. ",
+   "label": 0
+  },
+  {
+   "id": "train:31406",
+   "text": "thank you! @user for tickets @user   so many things to try with @user #tasteoflondon ",
+   "label": 0
+  },
+  {
+   "id": "train:31441",
+   "text": "@user   #wcw thanks #egl @user and @user for the amazing product review for\u00e2\u0080\u00a6 ",
+   "label": 0
+  },
+  {
+   "id": "train:31447",
+   "text": "screwed by @user again. my driver drove 8 blocks past my destination and laughed it off saying he doesn't use his gps! wtf   #used #wtf",
+   "label": 0
+  },
+  {
+   "id": "train:31478",
+   "text": "hekndnwqpc",
+   "label": 1
+  },
+  {
+   "id": "train:31495",
+   "text": "My nephew albino albinos have astigmatisms eye spasms partial blindness its not their faults",
+   "label": 0
+  },
+  {
+   "id": "train:31826",
+   "text": "what an amazing interview.   #bjmckenzie #born2win #bjmuzic ",
+   "label": 0
+  },
+  {
+   "id": "train:31980",
+   "text": " @user #money can't make you  , but it is better to cry in your own #yacht. #hilarious campaign by @user arg. h\u00e2\u0080\u00a6",
+   "label": 0
+  },
+  {
+   "id": "train:32162",
+   "text": "yrqnnmbrd",
+   "label": 1
+  },
+  {
+   "id": "train:32225",
+   "text": "i am marvelous. #i_am #positive #affirmation     ",
+   "label": 0
+  },
+  {
+   "id": "train:32239",
+   "text": "something is waiting for me\u00f0\u009f\u0098\u0086   #mycanyon #numbersdontlie  @user ",
+   "label": 0
+  },
+  {
+   "id": "train:32290",
+   "text": "ahiawpxqawos",
+   "label": 1
+  },
+  {
+   "id": "train:32358",
+   "text": "when you with he was here for you an understand what's goin on  instead of makeing enemes  #hu#standbymyself#",
+   "label": 0
+  },
+  {
+   "id": "train:32379",
+   "text": " @user it is true, these modeling agencies won't want shit to do with you unless you 20k up on followers on ig and twitter. smh #s\u00e2\u0080\u00a6",
+   "label": 0
+  },
+  {
+   "id": "train:32560",
+   "text": "hxqzladc",
+   "label": 1
+  },
+  {
+   "id": "train:32591",
+   "text": "where's your   place? this is one of the ways i like to recharge. beach, good food and snorkeling. ",
+   "label": 0
+  },
+  {
+   "id": "train:32602",
+   "text": "simple word to tell girl. #love #single #quotes #mood   #funny monday #star #followers need love,  all ",
+   "label": 0
+  },
+  {
+   "id": "train:32649",
+   "text": "emqwe",
+   "label": 1
+  },
+  {
+   "id": "train:32765",
+   "text": "nhcfaqgqlm",
+   "label": 1
+  },
+  {
+   "id": "train:32839",
+   "text": "vugfdsvxklq",
+   "label": 1
+  },
+  {
+   "id": "train:32897",
+   "text": "eovitj",
+   "label": 1
+  },
+  {
+   "id": "train:33355",
+   "text": "gazdcgwr",
+   "label": 1
+  },
+  {
+   "id": "train:33363",
+   "text": "pwdpzw",
+   "label": 1
+  },
+  {
+   "id": "train:33400",
+   "text": "best breakfast ever \u00f0\u009f\u0092\u009c #miam #yummy #love   #happiness #health #healthy #breakfast\u00e2\u0080\u00a6 ",
+   "label": 0
+  },
+  {
+   "id": "train:33557",
+   "text": "zujrb",
+   "label": 1
+  },
+  {
+   "id": "train:33839",
+   "text": "bochgkclnq",
+   "label": 1
+  },
+  {
+   "id": "train:33893",
+   "text": "guwfsvpcqjkr",
+   "label": 1
+  },
+  {
+   "id": "train:34052",
+   "text": "pvhbxvkj",
+   "label": 1
+  },
+  {
+   "id": "train:34162",
+   "text": "just saw the new @user and i\u00e2\u0080\u0099m not a fan. information is buried and the light theme forum is harder to read. #avgeek  ",
+   "label": 0
+  },
+  {
+   "id": "train:34342",
+   "text": "#soalegend&lt;3 our  !:) aka @user ! \"like a lot\"! xd #teambadassofanarchy!&lt;3 @user @user ",
+   "label": 0
+  },
+  {
+   "id": "train:34348",
+   "text": "fdtbsu",
+   "label": 1
+  },
+  {
+   "id": "train:34493",
+   "text": "@StarbucksSanae Are you sure about that, slant? They're plagiarists, and you have no idea who I am.",
+   "label": 0
+  },
+  {
+   "id": "train:34541",
+   "text": "lpbmntu",
+   "label": 1
+  },
+  {
+   "id": "train:34543",
+   "text": "pzzelmucewn",
+   "label": 1
+  },
+  {
+   "id": "train:34621",
+   "text": "i mean, okay. \u00f0\u009f\u0091\u008c\u00f0\u009f\u008f\u00bc #nofilter #snapchat #selfie #safetyfirst #buckleup #cute #gay #gayboy  \u00e2\u0080\u00a6 ",
+   "label": 0
+  },
+  {
+   "id": "train:34693",
+   "text": "ntttsv",
+   "label": 1
+  },
+  {
+   "id": "train:34863",
+   "text": "niuhqvuyv",
+   "label": 1
+  },
+  {
+   "id": "train:34945",
+   "text": "dspclqly",
+   "label": 1
+  },
+  {
+   "id": "train:35013",
+   "text": "oh well that me done for work this week until next tuesday   #beeroclock #longweekend #gettingdrunk ",
+   "label": 0
+  },
+  {
+   "id": "train:35175",
+   "text": "tuqfzdyw",
+   "label": 1
+  },
+  {
+   "id": "train:35219",
+   "text": "ejyavdpkkq",
+   "label": 1
+  },
+  {
+   "id": "train:35332",
+   "text": "druex",
+   "label": 1
+  },
+  {
+   "id": "train:35496",
+   "text": "Cleveland is the best team for manziel honestly the OC can use the offense he had with the redskins &amp; the browns D is nice wit a def HC",
+   "label": 0
+  },
+  {
+   "id": "train:35500",
+   "text": "@k_tempsss lol then they have one more flavor I think it's yellow idk.. But yea there bomb.",
+   "label": 0
+  },
+  {
+   "id": "train:35534",
+   "text": "yvmvujyldg",
+   "label": 1
+  },
+  {
+   "id": "train:35758",
+   "text": "mvfgrkjb",
+   "label": 1
+  },
+  {
+   "id": "train:35965",
+   "text": "ajkntpsvyi",
+   "label": 1
+  },
+  {
+   "id": "train:36040",
+   "text": "how cool is this! i have a own page :d #masks #fashionshow #tb   ",
+   "label": 0
+  },
+  {
+   "id": "train:36098",
+   "text": "mnnuhnhr",
+   "label": 1
+  },
+  {
+   "id": "train:36225",
+   "text": "i love #disney but they better have 24/7 #gatorsquad to constantly eliminate every gator every minute of everyday on their pond!   #dumb",
+   "label": 0
+  },
+  {
+   "id": "train:36283",
+   "text": "qevbuf",
+   "label": 1
+  },
+  {
+   "id": "train:36318",
+   "text": " @user @user @user  unfounately, current #gop only see #reagan like this now...  ! ",
+   "label": 0
+  },
+  {
+   "id": "train:36464",
+   "text": "bihday to me .",
+   "label": 0
+  },
+  {
+   "id": "train:36518",
+   "text": "morning cuppa, summer pjs \u00f0\u009f\u0098\u008d   #writerlife ",
+   "label": 0
+  },
+  {
+   "id": "train:36643",
+   "text": "different style! #style #cap #sunglasses #man  man  #selfie #instalike #picoftheday\u00e2\u0080\u00a6 ",
+   "label": 0
+  },
+  {
+   "id": "train:36823",
+   "text": "lafnu",
+   "label": 1
+  },
+  {
+   "id": "train:36866",
+   "text": "i reblogged them to mock her god bless",
+   "label": 0
+  },
+  {
+   "id": "train:36889",
+   "text": "velneccsndg",
+   "label": 1
+  },
+  {
+   "id": "train:36964",
+   "text": "nlntdgfpclb",
+   "label": 1
+  },
+  {
+   "id": "train:37139",
+   "text": "skdcucp",
+   "label": 1
+  },
+  {
+   "id": "train:37228",
+   "text": "life is better when you're laughing \u00f0\u009f\u0098\u008d\u00f0\u009f\u0098\u008a\u00f0\u009f\u0092\u008b  ",
+   "label": 0
+  },
+  {
+   "id": "train:37301",
+   "text": "#pet   attack bull chase: when you leave the lot despite the fact that you're a strong source of food fo ",
+   "label": 0
+  },
+  {
+   "id": "train:37515",
+   "text": "can #atherapy and #musictherapy heal your life?   #altwaystoheal #healthy   #healing! ",
+   "label": 0
+  },
+  {
+   "id": "train:37766",
+   "text": "pgrzj",
+   "label": 1
+  },
+  {
+   "id": "train:37856",
+   "text": "kdusedsn",
+   "label": 1
+  },
+  {
+   "id": "train:37943",
+   "text": "ciiluczfpiqm",
+   "label": 1
+  },
+  {
+   "id": "train:38000",
+   "text": "okojwxpmkg",
+   "label": 1
+  },
+  {
+   "id": "train:38201",
+   "text": "ievtsopxfm",
+   "label": 1
+  },
+  {
+   "id": "train:38287",
+   "text": "xhixdyxhlou",
+   "label": 1
+  },
+  {
+   "id": "train:38624",
+   "text": "so   and #nervous to find out i i'm in the top 30 #iamfreedom #awards good luck to everyone \u00f0\u009f\u008d\u0080\u00f0\u009f\u0098\u008a",
+   "label": 0
+  },
+  {
+   "id": "train:38625",
+   "text": "let no one who loves be unhappy alchemist gift  #sharethelove4authors   #reader #goodbook #kindle #ebooks",
+   "label": 0
+  },
+  {
+   "id": "train:38797",
+   "text": "@user everyone is talking about armin's death lol   #itshouldbesad #letsseetheoceaneren #butthisisfunny",
+   "label": 0
+  },
+  {
+   "id": "train:39102",
+   "text": "fmztg",
+   "label": 1
+  },
+  {
+   "id": "train:39165",
+   "text": "why the more   #actor will #book the #job from @user ",
+   "label": 0
+  },
+  {
+   "id": "train:39225",
+   "text": "yujldgrflul",
+   "label": 1
+  },
+  {
+   "id": "train:39241",
+   "text": "the renovations are continuing throughout our administration building! #ccbbcrenovate   #calledtothecreek ",
+   "label": 0
+  },
+  {
+   "id": "train:39483",
+   "text": "eqlru",
+   "label": 1
+  },
+  {
+   "id": "train:39490",
+   "text": " @user can't wait to sta college, only a couple of months to go. gotta organised the bmth trip too! \u00f0\u009f\u0098\u0081 #excitingtimes #plans\u00e2\u0080\u00a6",
+   "label": 0
+  },
+  {
+   "id": "train:39619",
+   "text": "hiaxwxjuww",
+   "label": 1
+  },
+  {
+   "id": "train:39990",
+   "text": "no history of an incident like this. 2 yr old boy's father wrestled with #alligator but no luck. boy not found.   ",
+   "label": 0
+  },
+  {
+   "id": "train:40313",
+   "text": "ohwfmaof",
+   "label": 1
+  },
+  {
+   "id": "train:40430",
+   "text": "cipvdm",
+   "label": 1
+  },
+  {
+   "id": "train:40583",
+   "text": "kkgwm",
+   "label": 1
+  },
+  {
+   "id": "train:40803",
+   "text": "jgvwvhke",
+   "label": 1
+  },
+  {
+   "id": "train:40936",
+   "text": "wfnomjrvpf",
+   "label": 1
+  },
+  {
+   "id": "train:41041",
+   "text": "i cannot wait to visit pittsburgh \u00f0\u009f\u0090\u00a7\u00f0\u009f\u0087\u00ba\u00f0\u009f\u0087\u00b8\u00f0\u009f\u008f\u0086\u00e2\u009c\u0088\u00ef\u00b8\u008f\u00e2\u009d\u00a4\u00ef\u00b8\u008f  ",
+   "label": 0
+  },
+  {
+   "id": "train:41161",
+   "text": "bphfyg",
+   "label": 1
+  },
+  {
+   "id": "train:41204",
+   "text": "#babies   puj phillup hangable 7 ounce kid cup, - 4 pack  #bouncingbaby",
+   "label": 0
+  },
+  {
+   "id": "train:41235",
+   "text": "erpzewasysst",
+   "label": 1
+  },
+  {
+   "id": "train:41316",
+   "text": "jeaanztbj",
+   "label": 1
+  },
+  {
+   "id": "train:41466",
+   "text": "cpvrjkcrv",
+   "label": 1
+  },
+  {
+   "id": "train:41474",
+   "text": "ufjcusnrdb",
+   "label": 1
+  },
+  {
+   "id": "train:41500",
+   "text": "this wednesday is killing me. @user #malamia bohemian rhapsody de queen. #music #mood     #bastard  ",
+   "label": 0
+  },
+  {
+   "id": "train:41537",
+   "text": "our first review will be coming sometime before the end of next week   #food #dining #review #watchthisspace",
+   "label": 0
+  },
+  {
+   "id": "train:41721",
+   "text": "@Yankees ugh",
+   "label": 0
+  },
+  {
+   "id": "train:41729",
+   "text": "boom boom #championboi #livingthatlifestyle  \u00e2\u0080\u00a6 ",
+   "label": 0
+  },
+  {
+   "id": "train:41752",
+   "text": "xaavwesr",
+   "label": 1
+  },
+  {
+   "id": "train:41819",
+   "text": "sndfme",
+   "label": 1
+  },
+  {
+   "id": "train:41880",
+   "text": "@HBergHattie @snkscoyote I wonder if the progs didn't relegate young black men to the ghettos to keep them away from harry reid's friends...",
+   "label": 0
+  },
+  {
+   "id": "train:41991",
+   "text": "zeosomrbq",
+   "label": 1
+  },
+  {
+   "id": "train:42022",
+   "text": "iijzaxdgoary",
+   "label": 1
+  },
+  {
+   "id": "train:42162",
+   "text": "today with jay&amp;mikha #funtime #sunday #withkid #nicekid #cute #kesayangan   #likeforlike\u00e2\u0080\u00a6 ",
+   "label": 0
+  },
+  {
+   "id": "train:42284",
+   "text": "qgrzqokjjpt",
+   "label": 1
+  },
+  {
+   "id": "train:42330",
+   "text": "uwgoiaip",
+   "label": 1
+  },
+  {
+   "id": "train:42349",
+   "text": "kgfcjbwtttyr",
+   "label": 1
+  },
+  {
+   "id": "train:42373",
+   "text": "@user these bitches be doing the most.  ",
+   "label": 0
+  },
+  {
+   "id": "train:42564",
+   "text": "yocaholrb",
+   "label": 1
+  },
+  {
+   "id": "train:42939",
+   "text": "guys, maybe he's famous but the most impoant thing is... @user  is human! this is ridiculous #sorrybradley ",
+   "label": 0
+  },
+  {
+   "id": "train:43152",
+   "text": "xtcngyc",
+   "label": 1
+  },
+  {
+   "id": "train:43342",
+   "text": "#fallschurch   gorilla simulator: you need to do to adapt to the environment. the need to tear the city. mat ",
+   "label": 0
+  },
+  {
+   "id": "train:43367",
+   "text": "@user stephen colbe contributes *nothing* to society.  hoping he moves to canada when #trump wins. #loser   #ovehehill #maga",
+   "label": 0
+  },
+  {
+   "id": "train:43459",
+   "text": "xybpw",
+   "label": 1
+  },
+  {
+   "id": "train:43473",
+   "text": "congratulations humans! you are slowly, but surely finding a way to eliminate our species. suicide bombers, riots, mass shootings, etc.  ",
+   "label": 0
+  },
+  {
+   "id": "train:43559",
+   "text": "#loveisland this is why beauty pageants should be banned. just proves how much @user is out of touch! a woman has sex! omg  ",
+   "label": 0
+  },
+  {
+   "id": "train:43635",
+   "text": "aeyrcuo",
+   "label": 1
+  },
+  {
+   "id": "train:43691",
+   "text": "tgwxmvqhndy",
+   "label": 1
+  },
+  {
+   "id": "train:43792",
+   "text": "llapaf",
+   "label": 1
+  },
+  {
+   "id": "train:44033",
+   "text": "the first my experience \u00f0\u009f\u0098\u0084 #kids #painting #color #a #aist #paint #son   #fun #weekend ",
+   "label": 0
+  },
+  {
+   "id": "train:44203",
+   "text": "ptxgztxhqkev",
+   "label": 1
+  },
+  {
+   "id": "train:44328",
+   "text": "#shattered but my boys gt his big op 2moro \u00f0\u009f\u0098\u00a2 #upthepole   #lovemyboy",
+   "label": 0
+  },
+  {
+   "id": "train:44451",
+   "text": "#diversity   polar bear climb racing: angry polar bear climb racing, the polar bear living in cold places lo ",
+   "label": 0
+  },
+  {
+   "id": "train:44664",
+   "text": "jrqttqpq",
+   "label": 1
+  },
+  {
+   "id": "train:44718",
+   "text": "yueajtvs",
+   "label": 1
+  },
+  {
+   "id": "train:44824",
+   "text": "fwmncvqhdmkf",
+   "label": 1
+  },
+  {
+   "id": "train:44926",
+   "text": "@user new plants from @user are here and ready for the garden at gardening know how!    ",
+   "label": 0
+  },
+  {
+   "id": "train:45013",
+   "text": "hrdifhijhypt",
+   "label": 1
+  },
+  {
+   "id": "train:45020",
+   "text": "inkcnzjro",
+   "label": 1
+  },
+  {
+   "id": "train:45054",
+   "text": "\u00e2\u0086\u009d #italy global trade balance dipped from previous \u00e2\u0082\u00ac5.365b\u00c2\u00a0to \u00e2\u0082\u00ac4.52b in april   #blog #silver #gold #forex",
+   "label": 0
+  },
+  {
+   "id": "train:45216",
+   "text": "#gardaland #fun #fomento #rollercoster   @ gardaland ",
+   "label": 0
+  },
+  {
+   "id": "train:45618",
+   "text": "10 tips for controlling anger  #anger #tips #lifestyleblogger   #control #happiness #meditation #bath #lifehack",
+   "label": 0
+  },
+  {
+   "id": "train:45685",
+   "text": "@user when lgbt people become less human  \u00f0\u009f\u0092\u0094",
+   "label": 0
+  },
+  {
+   "id": "train:45690",
+   "text": "mitchellrattle mitchell goodson ",
+   "label": 0
+  },
+  {
+   "id": "train:45814",
+   "text": "ygbrcliqcqg",
+   "label": 1
+  },
+  {
+   "id": "train:45910",
+   "text": "just caught up with #holbycity  my golly gosh \u00f0\u009f\u0098\u00a6 never seen something so beautifully done!  literally broke my hea \u00f0\u009f\u0092\u0094 #heabreaking  ",
+   "label": 0
+  },
+  {
+   "id": "train:45956",
+   "text": "the cincinnati gardens torn down? it is where my hubby and i met. so many great memories.  ",
+   "label": 0
+  },
+  {
+   "id": "train:46380",
+   "text": "vzngrzbqp",
+   "label": 1
+  },
+  {
+   "id": "train:46493",
+   "text": "listen to no love ft. tlc by dr. fresch #np on #soundcloud #purelove #tlc #gymvibe #amazing #bass #music   #yes ",
+   "label": 0
+  },
+  {
+   "id": "train:46610",
+   "text": "most of my family just planned a trip to disney world in december.  but i'll still have class at the time.  . ",
+   "label": 0
+  },
+  {
+   "id": "train:46731",
+   "text": "@user how true! home-food is considered a cheap-meal. impressions are made at restaurants!!!   ",
+   "label": 0
+  },
+  {
+   "id": "train:46763",
+   "text": "kaipxagv",
+   "label": 1
+  },
+  {
+   "id": "train:46770",
+   "text": "@user i'll take that as a no \u00f0\u009f\u0098\u00a2  ",
+   "label": 0
+  },
+  {
+   "id": "train:46774",
+   "text": "glad it worked well for you!!! please let me know what you use and if i can help! ",
+   "label": 0
+  },
+  {
+   "id": "train:46804",
+   "text": ".@user a number of our leaders are coming  ",
+   "label": 0
+  },
+  {
+   "id": "train:46860",
+   "text": "cptrqoeyqqff",
+   "label": 1
+  },
+  {
+   "id": "train:46861",
+   "text": "happy fathers day to all our our zen dads! enjoy your special day!   #fathersday #summer   #healthy #zenlife ",
+   "label": 0
+  },
+  {
+   "id": "train:46908",
+   "text": "those stairs leave me tired asf i sweat smh  ",
+   "label": 0
+  },
+  {
+   "id": "train:46914",
+   "text": "nqyoaq",
+   "label": 1
+  },
+  {
+   "id": "train:46996",
+   "text": "dewcjfg",
+   "label": 1
+  },
+  {
+   "id": "train:47513",
+   "text": "#goodnews to get your  vip tickets + tables to the 6th annual national reality tv awards . go here:   ",
+   "label": 0
+  },
+  {
+   "id": "train:47929",
+   "text": "albtpw",
+   "label": 1
+  },
+  {
+   "id": "train:47945",
+   "text": "btdnugti",
+   "label": 1
+  },
+  {
+   "id": "train:48091",
+   "text": "lyrwv",
+   "label": 1
+  },
+  {
+   "id": "train:48136",
+   "text": "@user blocking someone just because they can run rings around your pathetically empty argument, is a very childish thing to do.  ",
+   "label": 0
+  },
+  {
+   "id": "train:48384",
+   "text": "under my windoowww &#8220;@brettcanfly: Bleaching your teeth, smiling flash, talking trash, under your breath&#8221;",
+   "label": 0
+  },
+  {
+   "id": "train:48385",
+   "text": "@user literally lost any credibility u claimed to have had in one single post. it's obvious u knew where this picture came from  ",
+   "label": 0
+  },
+  {
+   "id": "train:48471",
+   "text": "ztvlaz",
+   "label": 1
+  },
+  {
+   "id": "train:48980",
+   "text": "rraxsyifvy",
+   "label": 1
+  },
+  {
+   "id": "train:49023",
+   "text": "rebhgowpkus",
+   "label": 1
+  },
+  {
+   "id": "train:49061",
+   "text": "wishing #mahoganycouple  #anneandeniola a   #weddinganniversary \u00f0\u009f\u0098\u0098 #eventplanning\u00e2\u0080\u00a6 ",
+   "label": 0
+  },
+  {
+   "id": "train:49116",
+   "text": "it's a beautiful day..... #sun   #fun #beachpark @ beach park ",
+   "label": 0
+  },
+  {
+   "id": "train:49144",
+   "text": "qjpdw",
+   "label": 1
+  },
+  {
+   "id": "train:49182",
+   "text": "cmpspkoqsn",
+   "label": 1
+  },
+  {
+   "id": "train:49279",
+   "text": "@Victoria_Star1 haha..monkey feet,i like it..but 4 real,feet are magical on a back..it smoothes every nook and cranny of tightness ;}",
+   "label": 0
+  },
+  {
+   "id": "train:49297",
+   "text": "ejzyycnsix",
+   "label": 1
+  },
+  {
+   "id": "train:49313",
+   "text": "yvobsx",
+   "label": 1
+  },
+  {
+   "id": "train:49366",
+   "text": "bsmmozxlmsv",
+   "label": 1
+  },
+  {
+   "id": "train:49401",
+   "text": "\u00f0\u009f\u0092\u0093\u00f0\u009f\u0090\u00ad\u00f0\u009f\u0091\u0091 #shuhei#2year#anniversary#tds #enjoy #pairlook#nike#shoes ",
+   "label": 0
+  },
+  {
+   "id": "train:49413",
+   "text": "bloqesp",
+   "label": 1
+  },
+  {
+   "id": "train:49586",
+   "text": "the paperback of future value generation is now available!   #strategy #book  ",
+   "label": 0
+  },
+  {
+   "id": "train:49594",
+   "text": "whatever is prayed for at the time of breaking the fast is granted and never refused.  &amp;blessedramzan.",
+   "label": 0
+  },
+  {
+   "id": "train:49606",
+   "text": "mtmnavc",
+   "label": 1
+  },
+  {
+   "id": "train:49681",
+   "text": "jduazxzsou",
+   "label": 1
+  },
+  {
+   "id": "train:49698",
+   "text": "spoilers for the good dinosaur! but why is this a thing so fucking sad #funny   #thegooddinosaur #thefuck ",
+   "label": 0
+  },
+  {
+   "id": "train:49914",
+   "text": "@user a group of my highlander x ewe lambs. all twins and no creep, just milk and grass. not doing too badly! #sheep365  ",
+   "label": 0
+  },
+  {
+   "id": "train:50007",
+   "text": " @user ramazan hs always bn a month of barkat/blessings n peace,with wahabism hijacking islam it's just bloodshed 24*7*365 #orla\u00e2\u0080\u00a6",
+   "label": 0
+  },
+  {
+   "id": "train:50056",
+   "text": "don't get me a happy friday all!  ",
+   "label": 0
+  },
+  {
+   "id": "train:50076",
+   "text": "pdfiqdzsbq",
+   "label": 1
+  },
+  {
+   "id": "train:50306",
+   "text": "hejoa",
+   "label": 1
+  },
+  {
+   "id": "train:50310",
+   "text": "@user    and the industry is completely able to develope thousands of #recyclable materials. the #change is #always in our #hands",
+   "label": 0
+  },
+  {
+   "id": "train:50422",
+   "text": "just a shame that chester is  losing you  ",
+   "label": 0
+  },
+  {
+   "id": "train:50463",
+   "text": "yijbiikukzi",
+   "label": 1
+  },
+  {
+   "id": "train:50554",
+   "text": "the thing about tragedy is that politicians and ngos will make sure not to let it go to waste #stopbrandingyourselves   #orlando #freedom",
+   "label": 0
+  },
+  {
+   "id": "train:50698",
+   "text": "check out my very own photograph's, want pictures done, let me know!  #devianta   #summer",
+   "label": 0
+  },
+  {
+   "id": "train:50715",
+   "text": "fifylef",
+   "label": 1
+  },
+  {
+   "id": "train:50757",
+   "text": "drpley",
+   "label": 1
+  },
+  {
+   "id": "train:50870",
+   "text": "be   you are #blessed #blessedtoseeanotherday #liveandletlive #prayformycity\u00e2\u0080\u00a6 ",
+   "label": 0
+  },
+  {
+   "id": "train:50888",
+   "text": "ugjgrgjsvlnd",
+   "label": 1
+  },
+  {
+   "id": "train:50973",
+   "text": "the holy #prophet #muhammad (pbuh) said:   is the #man #who avoids #hardship... [ #abudawud ] #hadith #quotes ",
+   "label": 0
+  },
+  {
+   "id": "train:51021",
+   "text": "just make someone  .. @user #wisdom #inspiration #love #happiness #leadership  @user ",
+   "label": 0
+  },
+  {
+   "id": "train:51103",
+   "text": "[1465518559.23] update @  #social #analytics #success #tbt #maialas   #running ",
+   "label": 0
+  },
+  {
+   "id": "train:51169",
+   "text": "@richarddeitsch yeah,but the cripple not getting up clean helped the call out...wouldn't have been fair either way",
+   "label": 0
+  },
+  {
+   "id": "train:51420",
+   "text": "luwrhzxhrq",
+   "label": 1
+  },
+  {
+   "id": "train:51483",
+   "text": "xhmwr",
+   "label": 1
+  },
+  {
+   "id": "train:51523",
+   "text": "mivnf",
+   "label": 1
+  },
+  {
+   "id": "train:51531",
+   "text": "sqclsaq",
+   "label": 1
+  },
+  {
+   "id": "train:51677",
+   "text": "nnbxf",
+   "label": 1
+  },
+  {
+   "id": "train:51690",
+   "text": "eouxw",
+   "label": 1
+  },
+  {
+   "id": "train:51897",
+   "text": "tjborozpez",
+   "label": 1
+  },
+  {
+   "id": "train:51937",
+   "text": "ozhiyrujd",
+   "label": 1
+  },
+  {
+   "id": "train:51965",
+   "text": "@Boazziz He promised to stand with the muzzies, so...",
+   "label": 0
+  },
+  {
+   "id": "train:52015",
+   "text": "bwveigfw",
+   "label": 1
+  },
+  {
+   "id": "train:52055",
+   "text": "gwzljk",
+   "label": 1
+  },
+  {
+   "id": "train:52419",
+   "text": "loving this conference call that i am on with one of my teammates.big things are happening within our team!   ",
+   "label": 0
+  },
+  {
+   "id": "train:52504",
+   "text": "last night is the best hahahahah #wednesdaywisdom #enough   #date #homies ",
+   "label": 0
+  },
+  {
+   "id": "train:52667",
+   "text": "ithdrpvtpaqz",
+   "label": 1
+  },
+  {
+   "id": "validation:123",
+   "text": "Who'd have thought my redneck husband would claim the hipster glasses? http://t.co/Vv6MzpQ4ju",
+   "label": 0
+  },
+  {
+   "id": "validation:241",
+   "text": "your desire for miscegenation genocide is your ultimate violence, hatred and division desire, @user   @user @user @user",
+   "label": 0
+  },
+  {
+   "id": "validation:309",
+   "text": "hi #celpidri!! #yesterday we had our #first #live #show!! it was #amazing!! people were  \u00e2\u0080\u00a6 ",
+   "label": 0
+  },
+  {
+   "id": "validation:351",
+   "text": "claly",
+   "label": 1
+  },
+  {
+   "id": "validation:445",
+   "text": "bihdayjodistamaria go and fly high you kind and beautifull lady  may bless you more ",
+   "label": 0
+  },
+  {
+   "id": "validation:708",
+   "text": "stop comparing and wishing  \u00f0\u009f\u0098\u008abe happy with what you do have and work for what you need and want.#gratitude   ",
+   "label": 0
+  },
+  {
+   "id": "validation:959",
+   "text": "everyday is your day, sparkle always #quote #sparkle   #keepshining #jewellery #jewelmaze ",
+   "label": 0
+  },
+  {
+   "id": "validation:1222",
+   "text": "where to sta...\u00f0\u009f\u0098\u00a2\u00f0\u009f\u0098\u00a2\u00f0\u009f\u0098\u00a2 ",
+   "label": 0
+  },
+  {
+   "id": "validation:1225",
+   "text": "back to school again... :) :* thanks god for another day !! ily :* ^_^    #caloocanhighschool",
+   "label": 0
+  },
+  {
+   "id": "validation:1370",
+   "text": "i am thankful for sunshine.#thankful #positive   ",
+   "label": 0
+  },
+  {
+   "id": "validation:1371",
+   "text": "ramadhan kareem, happy for all... :d  #smile   #ramadhan #child #sharinghappiness #cantik\u00e2\u0080\u00a6 ",
+   "label": 0
+  },
+  {
+   "id": "validation:1508",
+   "text": "vxigrgyqysww",
+   "label": 1
+  },
+  {
+   "id": "validation:1658",
+   "text": "kpfmx",
+   "label": 1
+  },
+  {
+   "id": "validation:1679",
+   "text": "@user i do it everyday  ",
+   "label": 0
+  },
+  {
+   "id": "validation:1912",
+   "text": "xfdxnkbp",
+   "label": 1
+  },
+  {
+   "id": "validation:1923",
+   "text": "#floridanightclub   day for the #world. #pray #love #peace #hugs #smiles #floridashooting is the worse nightmare ",
+   "label": 0
+  },
+  {
+   "id": "validation:1988",
+   "text": "pxxsykgcklhn",
+   "label": 1
+  },
+  {
+   "id": "validation:1990",
+   "text": "znifsykb",
+   "label": 1
+  },
+  {
+   "id": "validation:2091",
+   "text": "every chance i get, i'm in my   place....#wine a #fire and perfect #weather!! @user ",
+   "label": 0
+  },
+  {
+   "id": "validation:2132",
+   "text": "wpsuvfdinbw",
+   "label": 1
+  },
+  {
+   "id": "validation:2193",
+   "text": "kkhfv",
+   "label": 1
+  },
+  {
+   "id": "validation:2200",
+   "text": "csdbbmsatc",
+   "label": 1
+  },
+  {
+   "id": "validation:2523",
+   "text": "acqstfctguej",
+   "label": 1
+  },
+  {
+   "id": "validation:2606",
+   "text": "today in stories that confirm my anxiety disorder -    ",
+   "label": 0
+  },
+  {
+   "id": "validation:2685",
+   "text": "wjfhty",
+   "label": 1
+  },
+  {
+   "id": "validation:2855",
+   "text": "doggies had surgery ",
+   "label": 0
+  },
+  {
+   "id": "validation:2909",
+   "text": "@user i loved the text &amp; can't wait to see it brought to life. it's got such great reviews too, i'm counting the days 2c it!   \u00f0\u009f\u0098\u0080",
+   "label": 0
+  },
+  {
+   "id": "validation:2914",
+   "text": "abweefgd",
+   "label": 1
+  },
+  {
+   "id": "validation:2936",
+   "text": "2 weeks today we shall be travelling down the motorway to gretna to prepare for our wedding day to say ''i do'' :d hehehe ~@user  ",
+   "label": 0
+  },
+  {
+   "id": "validation:3086",
+   "text": "\u00f0\u009f\u0098\u0084   #toptags days top.tags day #smile #fun #instahappy #goodmood #sohappy\u00e2\u0080\u00a6 ",
+   "label": 0
+  },
+  {
+   "id": "validation:3115",
+   "text": "hzldqqoqm",
+   "label": 1
+  },
+  {
+   "id": "validation:3182",
+   "text": "auto tranny",
+   "label": 0
+  },
+  {
+   "id": "validation:3253",
+   "text": "These peanut butter brownies bout to give me life too! &#128523;",
+   "label": 0
+  },
+  {
+   "id": "validation:3471",
+   "text": "@user we really need a to do list, lol forget the races  ",
+   "label": 0
+  },
+  {
+   "id": "validation:3582",
+   "text": "hojqer",
+   "label": 1
+  },
+  {
+   "id": "validation:3586",
+   "text": "@user #i am   i can #see #abstractpainting by @user #aforsale #interiordesign  ",
+   "label": 0
+  },
+  {
+   "id": "validation:3611",
+   "text": "you deserve it!!! thank you for everything you do and just being you! \u00e2\u009d\u00a4\u00ef\u00b8\u008f now gotta keep voting for voty \u00f0\u009f\u0098\u008a\u00f0\u009f\u0098\u008a ",
+   "label": 0
+  },
+  {
+   "id": "validation:3662",
+   "text": "@user @user yepppppp smile and you make yourself  ",
+   "label": 0
+  },
+  {
+   "id": "validation:3690",
+   "text": "jvjql",
+   "label": 1
+  },
+  {
+   "id": "validation:3709",
+   "text": "kqmrfmoyxhv",
+   "label": 1
+  },
+  {
+   "id": "validation:3800",
+   "text": "could not be happier with my grades aaa #exams   #college university here i come \u00f0\u009f\u0093\u009a\u00f0\u009f\u0093\u009a\u00f0\u009f\u0093\u009a\u00f0\u009f\u0093\u009a ",
+   "label": 0
+  },
+  {
+   "id": "validation:3953",
+   "text": "#devestating #super   #restinpeace new #angel \u00f0\u009f\u0098\u009e\u00f0\u009f\u0098\u009e\u00f0\u009f\u0098\u009e\u00f0\u009f\u0098\u009ewe lost a beautiful being today. #rip ",
+   "label": 0
+  },
+  {
+   "id": "validation:4026",
+   "text": "mroyjxjoxthl",
+   "label": 1
+  },
+  {
+   "id": "validation:4081",
+   "text": "the lack of systems thinking creates fragmentation which in turn creates more oppounities for ss to fall through the cracks!  ",
+   "label": 0
+  },
+  {
+   "id": "validation:4189",
+   "text": "so happy my mamas here!   #mamalove #minnesotalife #love @ salut bar americain ",
+   "label": 0
+  },
+  {
+   "id": "validation:4209",
+   "text": "jbabkdkm",
+   "label": 1
+  },
+  {
+   "id": "validation:4238",
+   "text": "RT @DennisssBeauty: @VivaLaZulema looked like Princess Bella in that yellow dress&#128120;&#128120;",
+   "label": 0
+  },
+  {
+   "id": "validation:4265",
+   "text": ", anyways , i'm more #focused on my music than what shows , i'm just handling the #business credentials now...maaaaynneeeeee  ",
+   "label": 0
+  },
+  {
+   "id": "validation:4448",
+   "text": "cases should not be treated lightly, the judge would've given this so called \"man\" a longer sentence, if he cared! ",
+   "label": 0
+  },
+  {
+   "id": "validation:4510",
+   "text": "fchlsqhnr",
+   "label": 1
+  },
+  {
+   "id": "validation:4907",
+   "text": "griqlg",
+   "label": 1
+  },
+  {
+   "id": "validation:5066",
+   "text": "pjztwou",
+   "label": 1
+  },
+  {
+   "id": "validation:5103",
+   "text": "fgvwopnxzqx",
+   "label": 1
+  },
+  {
+   "id": "validation:5105",
+   "text": "bgbmjau",
+   "label": 1
+  },
+  {
+   "id": "validation:5136",
+   "text": "wsseux",
+   "label": 1
+  },
+  {
+   "id": "validation:5143",
+   "text": "bxweq",
+   "label": 1
+  },
+  {
+   "id": "validation:5205",
+   "text": "lxasrbbohr",
+   "label": 1
+  },
+  {
+   "id": "validation:5226",
+   "text": "thanks sue, he's a very happy hound this evening \u00f0\u009f\u0098\u008a ",
+   "label": 0
+  },
+  {
+   "id": "validation:5266",
+   "text": "not in the mood to do anything.. depression strikes again.. #depressed   #broken",
+   "label": 0
+  },
+  {
+   "id": "validation:5536",
+   "text": "uvmbpxlgnkq",
+   "label": 1
+  },
+  {
+   "id": "validation:5791",
+   "text": "taebluqknrr",
+   "label": 1
+  },
+  {
+   "id": "validation:5976",
+   "text": "ukvojkjx",
+   "label": 1
+  },
+  {
+   "id": "validation:6174",
+   "text": "fpajx",
+   "label": 1
+  },
+  {
+   "id": "validation:6285",
+   "text": "peibjciykuvl",
+   "label": 1
+  },
+  {
+   "id": "validation:6323",
+   "text": "vddcqmqbp",
+   "label": 1
+  },
+  {
+   "id": "validation:6332",
+   "text": "@user and me?.... ",
+   "label": 0
+  },
+  {
+   "id": "validation:6416",
+   "text": "tzlmlqcjhvsc",
+   "label": 1
+  },
+  {
+   "id": "validation:6581",
+   "text": "txzikp",
+   "label": 1
+  },
+  {
+   "id": "test:119",
+   "text": "RT @ArcticFox2016: 150 Christians MASSACRED By Jihadi Muslims While They Slept! Including Pastor, His Wife &amp; Kids http://t.co/VnR60MjFo6",
+   "label": 0
+  },
+  {
+   "id": "test:154",
+   "text": "@user did you say @user flies to po blair? wow!   even more now. #gratitude \u00f0\u009f\u0099\u008f\u00f0\u009f\u008f\u00bc",
+   "label": 0
+  },
+  {
+   "id": "test:304",
+   "text": "fiykutuiw",
+   "label": 1
+  },
+  {
+   "id": "test:336",
+   "text": "xtehcqskwkk",
+   "label": 1
+  },
+  {
+   "id": "test:339",
+   "text": "father's day to all you fathers and father-figures! thank you for being awesome! show some love and tag... ",
+   "label": 0
+  },
+  {
+   "id": "test:345",
+   "text": "uuxetoyl",
+   "label": 1
+  },
+  {
+   "id": "test:776",
+   "text": "jzcyvpzflf",
+   "label": 1
+  },
+  {
+   "id": "test:797",
+   "text": "vstikkgyec",
+   "label": 1
+  },
+  {
+   "id": "test:798",
+   "text": "#walk ing #home   because it's #friday ! #selfie #baglady #hot #day #love this #weather\u00e2\u0080\u00a6 ",
+   "label": 0
+  },
+  {
+   "id": "test:901",
+   "text": "#stupidity makes me more   than even #negligence.why put #sachintendulkar a installation if u were going to take it off?",
+   "label": 0
+  },
+  {
+   "id": "test:1084",
+   "text": "it's so funny how when you're happy #newyorkcity is   too",
+   "label": 0
+  },
+  {
+   "id": "test:1313",
+   "text": "atbkfeknla",
+   "label": 1
+  },
+  {
+   "id": "test:1629",
+   "text": "@blackrepublican how long after the name change will al memorabilia w/redskins name be deemed racist and therby illegal?",
+   "label": 0
+  },
+  {
+   "id": "test:1650",
+   "text": "a smile! is woh a thousand words!!!  it's contagious!  #blessed #smile   #gratitude\u00e2\u0080\u00a6 ",
+   "label": 0
+  },
+  {
+   "id": "test:1895",
+   "text": "the fact that @user album is an hour away from dripping has me losing my mind..   #fatkidinacandystore",
+   "label": 0
+  },
+  {
+   "id": "test:1906",
+   "text": "oeetvsym",
+   "label": 1
+  },
+  {
+   "id": "test:2193",
+   "text": "mzpopngibho",
+   "label": 1
+  },
+  {
+   "id": "test:2248",
+   "text": "yutwvzyv",
+   "label": 1
+  },
+  {
+   "id": "test:2306",
+   "text": "thank god it's friday #wakeup and feel    ",
+   "label": 0
+  },
+  {
+   "id": "test:2350",
+   "text": "cmvnkkivb",
+   "label": 1
+  },
+  {
+   "id": "test:2384",
+   "text": "RT @iowahawkblog: Whatta co-inky-dink: IRS cancelled contract with email backup company right after Lerner's computer \"crash\" http://t.co/Z&#8230;",
+   "label": 0
+  },
+  {
+   "id": "test:2477",
+   "text": "uztflbdqwqc",
+   "label": 1
+  },
+  {
+   "id": "test:2598",
+   "text": "zqkhfjb",
+   "label": 1
+  },
+  {
+   "id": "test:3340",
+   "text": "\u00e2\u0086\u009d #turkey budget balance dipped from previous 5.4b\u00c2\u00a0to 3.7b in may   #blog #silver #gold #forex",
+   "label": 0
+  },
+  {
+   "id": "test:3495",
+   "text": "apzliyley",
+   "label": 1
+  },
+  {
+   "id": "test:3732",
+   "text": "bqudlwkir",
+   "label": 1
+  },
+  {
+   "id": "test:3871",
+   "text": "ceo takes every friday off \u00e2\u0080\u0093 world does not end.   #entrepreneur ",
+   "label": 0
+  },
+  {
+   "id": "test:3949",
+   "text": "vabhwlh",
+   "label": 1
+  },
+  {
+   "id": "test:4184",
+   "text": "3 weeks till i'm back in ibiza guaranteed i won't want to come home #ibiza2016 #cantwait #girltime   @user @user \u00e2\u009d\u00a4\u00ef\u00b8\u008f",
+   "label": 0
+  },
+  {
+   "id": "test:4199",
+   "text": "bmzlbh",
+   "label": 1
+  },
+  {
+   "id": "test:4409",
+   "text": "magical sugary spiderwebiness snapped by our elena \u00e2\u009c\u00a8\u00f0\u009f\u0095\u00b7\u00e2\u009c\u00a8  #sunny #day   #jasmine \u00f0\u009f\u0092\u009d #repost @user \u00f0\u009f\u0099\u008f \u00e3\u0083\u00bb\u00e3\u0083\u00bb\u00e3\u0083\u00bb ",
+   "label": 0
+  },
+  {
+   "id": "test:4410",
+   "text": "nxaznayaju",
+   "label": 1
+  },
+  {
+   "id": "test:4421",
+   "text": "uznqgigw",
+   "label": 1
+  },
+  {
+   "id": "test:4435",
+   "text": "@user inability to take responsibility for one's actions seems to be a common theme in #russia -   ",
+   "label": 0
+  },
+  {
+   "id": "test:4458",
+   "text": "@user i love the fact that my husband @user is getting more hands on inspiring my #adoptaletter kids!   ",
+   "label": 0
+  },
+  {
+   "id": "test:4719",
+   "text": "rnqlnzx",
+   "label": 1
+  },
+  {
+   "id": "test:4751",
+   "text": "bnkhcow",
+   "label": 1
+  },
+  {
+   "id": "test:4955",
+   "text": "cmmgwrctquz",
+   "label": 1
+  },
+  {
+   "id": "test:5051",
+   "text": "Jihadis are running a claim that the King of #Saudi Arabia died two days ago. Must be the bombs falling on em that r making em hallucinate.",
+   "label": 0
+  },
+  {
+   "id": "test:5177",
+   "text": "africa is dying just because his youth is leaving to go abroad and go develop other people's country....   what can we do?",
+   "label": 0
+  },
+  {
+   "id": "test:5258",
+   "text": "achahcideqqa",
+   "label": 1
+  },
+  {
+   "id": "test:5267",
+   "text": "RT @chicagotribune: Chicago will not refund $7.7 million made from red light tickets issued after yellow lights were shortened http://t.co/&#8230;",
+   "label": 0
+  },
+  {
+   "id": "test:5463",
+   "text": "dttqfbqj",
+   "label": 1
+  },
+  {
+   "id": "test:5613",
+   "text": "@user me and @user mr. nura were in thesame cds group. i still have his gift given to us by nysc. rest in peace brother.   #\u00e2\u0080\u00a6",
+   "label": 0
+  },
+  {
+   "id": "test:5720",
+   "text": "@user @user @user could someone pleeeease tell me what time i will be able to cross #ournewbridge tomorrow??  ",
+   "label": 0
+  },
+  {
+   "id": "test:5783",
+   "text": "&#8220;@BeautyOfASinner: So they really deleted flappy bird from the App Store cus someone killed themselves over it &#128514;&#8221; foreal foreal ?? &#128561;&#128557;",
+   "label": 0
+  },
+  {
+   "id": "test:5791",
+   "text": "this is what #waiting at 2:30am for the shuttle too show up looks and feels like... so   it\u00e2\u0080\u00a6 ",
+   "label": 0
+  },
+  {
+   "id": "test:6163",
+   "text": "You know I'm not big on the NFL, but I'm so sick of hearing all of this \"Black and yellow\" shit. LOL @ bandwagon fans and hell, GO PACKERS!",
+   "label": 0
+  },
+  {
+   "id": "test:6276",
+   "text": "ukeceofr",
+   "label": 1
+  },
+  {
+   "id": "test:6362",
+   "text": "gmble",
+   "label": 1
+  },
+  {
+   "id": "test:6424",
+   "text": "mkzfucvdiuxi",
+   "label": 1
+  },
+  {
+   "id": "test:6440",
+   "text": " @user the color of wedding, happiness #wedding #indianwedding   #love #couple #photography #hindi\u00e2\u0080\u00a6 ",
+   "label": 0
+  },
+  {
+   "id": "test:6509",
+   "text": "tuckckocfqm",
+   "label": 1
+  },
+  {
+   "id": "test:6528",
+   "text": "ujirombnny",
+   "label": 1
+  }
+ ]
+}

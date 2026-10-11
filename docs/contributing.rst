@@ -94,7 +94,6 @@ Neither replaces the committed results; report a new run as a new version.
 
    make benchmark-verify PYTHON=/path/to/venv/bin/python
    python paper/scripts/generate_data.py --check
-   python paper/regression/evaluate.py --split development
 
 Data generation downloads a pinned source and verifies its checksum. For offline
 verification, supply ``--source /path/to/count_1w.txt``. Curated exclusions live in
@@ -107,14 +106,13 @@ language-neutral JSON copies of the tables (``words.json``, ``bigrams.json``,
 ``calibration.json`` are compressed sizes, so ``--check`` expects a stock zlib
 build; zlib-ng emits different streams and reports those rows as changed.
 
-Keep development and holdout families separate; do not tune thresholds on holdout
-errors. Report confusion counts and limitations rather than treating a small
-benchmark as a production precision estimate. Hindi being flagged by English
-checks is expected; corruption-only checks have a separate contract.
-
 The golden corpus ``paper/regression/golden.jsonl`` freezes the detector output
-(``garbled``, ``score``, ``status`` and spans) for every challenge case and a
-set of edge inputs under every profile. CI runs
+(``garbled``, ``score``, ``status`` and spans) under every profile. Its inputs
+are ``paper/regression/golden_inputs.json``, a seeded sample of 300 random
+strings and 300 tweets from the preprint benchmark's open dataset (Hugging Face
+Sowmya15/gibberish_multilingual, Apache-2.0), followed by hand-written edge
+inputs in ``golden.py``. ``sample_golden_inputs.py`` records how the sample was
+drawn and needs the raw dataset; the golden check does not. CI runs
 ``python paper/regression/golden.py --check``; regenerate with
 ``python paper/regression/golden.py --write`` only when a behaviour change is
 intended, and review the diff. Any port must reproduce it exactly; span offsets

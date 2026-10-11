@@ -1,8 +1,10 @@
 """Frozen detector outputs that every implementation must reproduce.
 
-Rows are JSONL: text, profile, garbled, score (12 decimals), status and
-spans as [start, end, reason] with code-point offsets. Regenerate with
---write only when a behaviour change is intended; --check is run in CI.
+Inputs are golden_inputs.json, a seeded sample of the preprint benchmark's
+open dataset, followed by the hand-written EDGE_INPUTS below. Rows are JSONL:
+text, profile, garbled, score (12 decimals), status and spans as
+[start, end, reason] with code-point offsets. Regenerate with --write only
+when a behaviour change is intended; --check is run in CI.
 """
 
 import argparse
@@ -14,11 +16,11 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-from paper.regression.evaluate import challenge  # noqa: E402
 from pygarble import EnsembleDetector  # noqa: E402
 from pygarble.ensemble import PROFILES  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent
+INPUTS = ROOT / "golden_inputs.json"
 OUTPUT = ROOT / "golden.jsonl"
 CHECKSUM = ROOT / "golden.sha256"
 
@@ -57,11 +59,9 @@ EDGE_INPUTS = [
 
 
 def texts():
-    """Challenge texts then edge inputs, first occurrence wins."""
-    seen = []
-    for split in ("development", "holdout"):
-        for case in challenge(split):
-            seen.append(case["text"])
+    """Sampled dataset texts then edge inputs, first occurrence wins."""
+    data = json.loads(INPUTS.read_text(encoding="utf-8"))
+    seen = [row["text"] for row in data["rows"]]
     seen.extend(EDGE_INPUTS)
     return list(dict.fromkeys(seen))
 
