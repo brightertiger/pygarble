@@ -93,9 +93,12 @@ not automated messages sent by this repository.
 Publish a new package version
 -----------------------------
 
-The existing release workflow runs when a ``v*`` tag is pushed. It tests the
-package, checks that the tag equals ``pygarble.__version__``, builds wheel
-and sdist artifacts, and uploads them to PyPI. The publishing job uses PyPI
+The existing release workflow runs when a ``v*`` tag is pushed. It runs the
+tests on Python 3.8 and 3.12 plus lint and the golden checks, checks that the
+tag equals ``pygarble.__version__``, builds wheel and sdist artifacts,
+smoke-tests the wheel in a fresh environment, and uploads them to PyPI. The
+Docker image is built and pushed by a job in the same workflow, only after
+the tests and build succeed. The publishing job uses PyPI
 Trusted Publishing with GitHub OIDC and the ``pypi`` GitHub environment;
 there is no long-lived API token in the workflow.
 
@@ -146,8 +149,8 @@ Release checklist
    Check the README links as rendered by PyPI, not just GitHub-relative links.
 5. Verify the Trusted Publisher setup. Once the release is approved and the
    version change is merged, tag that exact commit ``v<version>`` and push
-   the tag. **This publishes to PyPI and also triggers the existing Docker
-   image publishing workflow.** A draft GitHub release alone does not trigger
+   the tag. **This publishes to PyPI and also pushes the Docker image to
+   GHCR once the release tests pass.** A draft GitHub release alone does not trigger
    this tag-based package workflow.
 6. Verify the published package version and metadata, create the matching
    GitHub release with changelog notes, and check the live docs. Published
