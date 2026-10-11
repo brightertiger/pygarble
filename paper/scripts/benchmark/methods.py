@@ -109,24 +109,6 @@ def _ensemble(**kwargs: Any) -> Callable[[], Method]:
     return build
 
 
-# The english profile without its two encoding-damage members, mojibake
-# and control characters. Post hoc: chosen after seeing that B labels
-# tweets with mojibake as clean (deviations.md). Same voting and threshold.
-TUNED_REMOVED = ("mojibake", "control_characters")
-
-
-def _tuned() -> Method:
-    from pygarble import EnsembleDetector
-    from pygarble.gibberish.ensemble import PROFILES
-
-    members = [s for s in PROFILES["english"] if s.value not in TUNED_REMOVED]
-    return Pygarble(
-        EnsembleDetector(
-            strategies=members, voting="any", threshold=0.5, threads=1
-        )
-    )
-
-
 def specs(data_root: Path = DEFAULT_ROOT) -> Dict[str, Spec]:
     files = data_root / "baselines"
     ensemble = "from pygarble import EnsembleDetector"
@@ -160,13 +142,6 @@ def specs(data_root: Path = DEFAULT_ROOT) -> Dict[str, Spec]:
                 Lingua,
                 "from lingua import Language, LanguageDetectorBuilder",
                 ("lingua-language-detector",),
-            ),
-            Spec(
-                "english_tuned",
-                "tuned",
-                _tuned,
-                ensemble,
-                ("pygarble",),
             ),
         )
     }

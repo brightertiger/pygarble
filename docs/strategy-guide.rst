@@ -27,30 +27,58 @@ Tweets vs. Random Strings. It supports three choices.
   ``control_characters`` members target encoding damage, and about a quarter
   of the tweets carry mojibake that the dataset labels clean. Keep them when
   encoding damage counts as junk for you. Otherwise remove them.
-* **Remove strategies whose target your domain does not treat as junk.** The
-  ``english`` profile without its two encoding checks lowered the tweet
-  false-positive rate to 18.2% with no loss of recall. This variant was built
-  after seeing the results, so treat it as an example of the mechanism, not
-  a tested default. Its Markov member still flags many informal posts, so
-  ``english_fusion`` remains the lower-FPR choice for tweets.
+* **With a few hundred labelled rows, learn a weight per strategy.** The
+  preprint's tuning study learned a weight for each of the 32 strategies and
+  a threshold under ``weighted`` voting from a 20 percent labelled sample,
+  in about 18 seconds of Optuna search. On the held-out 80 percent it
+  flagged 4.7% of tweets against 6.8% for ``english_fusion``, at
+  about the same survey-junk capture, averaged over five samples. It
+  gave the encoding-damage checks little or no weight. The weights fit these
+  datasets, so learn your own; :doc:`benchmarks` has the full results.
 
 .. code-block:: python
 
-   from pygarble.gibberish import EnsembleDetector, Strategy
+   from pygarble import EnsembleDetector
 
-   # The english profile without its two encoding-damage checks.
-   social = EnsembleDetector(
-       strategies=[
-           Strategy.MARKOV_CHAIN,
-           Strategy.LOG_LIKELIHOOD_RATIO,
-           Strategy.WORD_ANOMALY,
-           Strategy.KEYBOARD_ADJACENCY,
-       ],
-       voting="any",
-       threshold=0.5,
+   # Learned on the preprint's primary tuning sample (seed 20261011).
+   weights = {
+       "local_anomaly": 0.35,
+       "pattern_matching": 0.05,
+       "entropy_based": 0.7,
+       "vowel_ratio": 0.1,
+       "keyboard_pattern": 0.05,
+       "markov_chain": 0.35,
+       "ngram_frequency": 0.9,
+       "word_lookup": 1.0,
+       "symbol_ratio": 0.65,
+       "repetition": 0.1,
+       "hex_string": 0.9,
+       "unicode_script": 0.85,
+       "bigram_probability": 0.25,
+       "letter_position": 0.15,
+       "consonant_sequence": 0.7,
+       "vowel_pattern": 0.85,
+       "letter_frequency": 0.75,
+       "rare_trigram": 0.95,
+       "function_word_density": 0.9,
+       "affix_detection": 0.05,
+       "zipf_conformity": 0.8,
+       "word_collocation": 0.1,
+       "log_likelihood_ratio": 0.95,
+       "word_anomaly": 0.9,
+       "keyboard_adjacency": 0.35,
+       "cross_parsing": 1.0,
+       "primed_compression": 0.4,
+       "permutation_test": 0.15,
+   }
+   tuned = EnsembleDetector(
+       strategies=list(weights),
+       weights=list(weights.values()),
+       voting="weighted",
+       threshold=0.13,
    )
-   assert social.predict("asdfghjkl")
-   assert not social.predict("CafÃ© au lait")
+   assert tuned.predict("asdfghjkl qwpoeiru")
+   assert not tuned.predict("Thanks for the quick reply, see you on Monday!")
 
 When wrongly flagging real text costs much more than missing junk, the
 preprint found a character Markov baseline with a far lower false-positive

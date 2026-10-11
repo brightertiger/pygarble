@@ -48,18 +48,6 @@
 \expandafter\def\csname r@lingua@B_fpr\endcsname{0.094}
 \expandafter\def\csname r@lingua@B_fpr@pct\endcsname{9.4}
 \expandafter\def\csname r@lingua@B_fpr@ci\endcsname{0.087--0.101}
-\expandafter\def\csname r@english_tuned@A_capture\endcsname{0.830}
-\expandafter\def\csname r@english_tuned@A_capture@pct\endcsname{83.0}
-\expandafter\def\csname r@english_tuned@A_capture@ci\endcsname{0.817--0.843}
-\expandafter\def\csname r@english_tuned@B_precision\endcsname{0.777}
-\expandafter\def\csname r@english_tuned@B_precision@pct\endcsname{77.7}
-\expandafter\def\csname r@english_tuned@B_precision@ci\endcsname{0.766--0.789}
-\expandafter\def\csname r@english_tuned@B_recall\endcsname{0.947}
-\expandafter\def\csname r@english_tuned@B_recall@pct\endcsname{94.7}
-\expandafter\def\csname r@english_tuned@B_recall@ci\endcsname{0.940--0.954}
-\expandafter\def\csname r@english_tuned@B_fpr\endcsname{0.182}
-\expandafter\def\csname r@english_tuned@B_fpr@pct\endcsname{18.2}
-\expandafter\def\csname r@english_tuned@B_fpr@ci\endcsname{0.173--0.192}
 \expandafter\def\csname ms@english\endcsname{66.4}
 \expandafter\def\csname mb@english\endcsname{1.05}
 \expandafter\def\csname imp@english\endcsname{0.021}
@@ -72,9 +60,6 @@
 \expandafter\def\csname ms@lingua\endcsname{1039.0}
 \expandafter\def\csname mb@lingua\endcsname{307.47}
 \expandafter\def\csname imp@lingua\endcsname{0.001}
-\expandafter\def\csname ms@english_tuned\endcsname{52.7}
-\expandafter\def\csname mb@english_tuned\endcsname{1.05}
-\expandafter\def\csname imp@english_tuned\endcsname{0.021}
 \newcommand{\res}[2]{\csname r@#1@#2\endcsname}
 \newcommand{\respct}[2]{\csname r@#1@#2@pct\endcsname}
 \newcommand{\resci}[2]{\csname r@#1@#2@ci\endcsname}
@@ -96,3 +81,127 @@
 \newcommand{\shaA}{091d5d3895f035d5}
 \newcommand{\nAmissedfusion}{369}
 \newcommand{\nAmissedall}{15}
+\makeatletter
+\expandafter\def\csname t@english@A_capture\endcsname{0.828}
+\expandafter\def\csname t@english@A_capture@pct\endcsname{82.8}
+\expandafter\def\csname t@english@A_capture@ci\endcsname{0.816--0.841}
+\expandafter\def\csname t@english@A_capture@mean\endcsname{0.830}
+\expandafter\def\csname t@english@A_capture@meanpct\endcsname{83.0}
+\expandafter\def\csname t@english@A_capture@sd\endcsname{0.002}
+\expandafter\def\csname t@english@A_capture@sdpct\endcsname{0.2}
+\expandafter\def\csname t@english@B_precision\endcsname{0.657}
+\expandafter\def\csname t@english@B_precision@pct\endcsname{65.7}
+\expandafter\def\csname t@english@B_precision@ci\endcsname{0.642--0.671}
+\expandafter\def\csname t@english@B_precision@mean\endcsname{0.656}
+\expandafter\def\csname t@english@B_precision@meanpct\endcsname{65.6}
+\expandafter\def\csname t@english@B_precision@sd\endcsname{0.001}
+\expandafter\def\csname t@english@B_precision@sdpct\endcsname{0.1}
+\expandafter\def\csname t@english@B_recall\endcsname{0.949}
+\expandafter\def\csname t@english@B_recall@pct\endcsname{94.9}
+\expandafter\def\csname t@english@B_recall@ci\endcsname{0.942--0.956}
+\expandafter\def\csname t@english@B_recall@mean\endcsname{0.949}
+\expandafter\def\csname t@english@B_recall@meanpct\endcsname{94.9}
+\expandafter\def\csname t@english@B_recall@sd\endcsname{0.002}
+\expandafter\def\csname t@english@B_recall@sdpct\endcsname{0.2}
+\expandafter\def\csname t@english@B_fpr\endcsname{0.332}
+\expandafter\def\csname t@english@B_fpr@pct\endcsname{33.2}
+\expandafter\def\csname t@english@B_fpr@ci\endcsname{0.319--0.345}
+\expandafter\def\csname t@english@B_fpr@mean\endcsname{0.333}
+\expandafter\def\csname t@english@B_fpr@meanpct\endcsname{33.3}
+\expandafter\def\csname t@english@B_fpr@sd\endcsname{0.001}
+\expandafter\def\csname t@english@B_fpr@sdpct\endcsname{0.1}
+\expandafter\def\csname t@english_fusion@A_capture\endcsname{0.893}
+\expandafter\def\csname t@english_fusion@A_capture@pct\endcsname{89.3}
+\expandafter\def\csname t@english_fusion@A_capture@ci\endcsname{0.881--0.904}
+\expandafter\def\csname t@english_fusion@A_capture@mean\endcsname{0.894}
+\expandafter\def\csname t@english_fusion@A_capture@meanpct\endcsname{89.4}
+\expandafter\def\csname t@english_fusion@A_capture@sd\endcsname{0.001}
+\expandafter\def\csname t@english_fusion@A_capture@sdpct\endcsname{0.1}
+\expandafter\def\csname t@english_fusion@B_precision\endcsname{0.907}
+\expandafter\def\csname t@english_fusion@B_precision@pct\endcsname{90.7}
+\expandafter\def\csname t@english_fusion@B_precision@ci\endcsname{0.897--0.916}
+\expandafter\def\csname t@english_fusion@B_precision@mean\endcsname{0.907}
+\expandafter\def\csname t@english_fusion@B_precision@meanpct\endcsname{90.7}
+\expandafter\def\csname t@english_fusion@B_precision@sd\endcsname{0.002}
+\expandafter\def\csname t@english_fusion@B_precision@sdpct\endcsname{0.2}
+\expandafter\def\csname t@english_fusion@B_recall\endcsname{0.992}
+\expandafter\def\csname t@english_fusion@B_recall@pct\endcsname{99.2}
+\expandafter\def\csname t@english_fusion@B_recall@ci\endcsname{0.988--0.994}
+\expandafter\def\csname t@english_fusion@B_recall@mean\endcsname{0.991}
+\expandafter\def\csname t@english_fusion@B_recall@meanpct\endcsname{99.1}
+\expandafter\def\csname t@english_fusion@B_recall@sd\endcsname{0.001}
+\expandafter\def\csname t@english_fusion@B_recall@sdpct\endcsname{0.1}
+\expandafter\def\csname t@english_fusion@B_fpr\endcsname{0.068}
+\expandafter\def\csname t@english_fusion@B_fpr@pct\endcsname{6.8}
+\expandafter\def\csname t@english_fusion@B_fpr@ci\endcsname{0.061--0.075}
+\expandafter\def\csname t@english_fusion@B_fpr@mean\endcsname{0.068}
+\expandafter\def\csname t@english_fusion@B_fpr@meanpct\endcsname{6.8}
+\expandafter\def\csname t@english_fusion@B_fpr@sd\endcsname{0.001}
+\expandafter\def\csname t@english_fusion@B_fpr@sdpct\endcsname{0.1}
+\expandafter\def\csname t@tuned@A_capture\endcsname{0.899}
+\expandafter\def\csname t@tuned@A_capture@pct\endcsname{89.9}
+\expandafter\def\csname t@tuned@A_capture@ci\endcsname{0.889--0.911}
+\expandafter\def\csname t@tuned@A_capture@mean\endcsname{0.895}
+\expandafter\def\csname t@tuned@A_capture@meanpct\endcsname{89.5}
+\expandafter\def\csname t@tuned@A_capture@sd\endcsname{0.022}
+\expandafter\def\csname t@tuned@A_capture@sdpct\endcsname{2.2}
+\expandafter\def\csname t@tuned@B_precision\endcsname{0.923}
+\expandafter\def\csname t@tuned@B_precision@pct\endcsname{92.3}
+\expandafter\def\csname t@tuned@B_precision@ci\endcsname{0.914--0.933}
+\expandafter\def\csname t@tuned@B_precision@mean\endcsname{0.933}
+\expandafter\def\csname t@tuned@B_precision@meanpct\endcsname{93.3}
+\expandafter\def\csname t@tuned@B_precision@sd\endcsname{0.017}
+\expandafter\def\csname t@tuned@B_precision@sdpct\endcsname{1.7}
+\expandafter\def\csname t@tuned@B_recall\endcsname{0.988}
+\expandafter\def\csname t@tuned@B_recall@pct\endcsname{98.8}
+\expandafter\def\csname t@tuned@B_recall@ci\endcsname{0.984--0.991}
+\expandafter\def\csname t@tuned@B_recall@mean\endcsname{0.981}
+\expandafter\def\csname t@tuned@B_recall@meanpct\endcsname{98.1}
+\expandafter\def\csname t@tuned@B_recall@sd\endcsname{0.017}
+\expandafter\def\csname t@tuned@B_recall@sdpct\endcsname{1.7}
+\expandafter\def\csname t@tuned@B_fpr\endcsname{0.055}
+\expandafter\def\csname t@tuned@B_fpr@pct\endcsname{5.5}
+\expandafter\def\csname t@tuned@B_fpr@ci\endcsname{0.049--0.062}
+\expandafter\def\csname t@tuned@B_fpr@mean\endcsname{0.047}
+\expandafter\def\csname t@tuned@B_fpr@meanpct\endcsname{4.7}
+\expandafter\def\csname t@tuned@B_fpr@sd\endcsname{0.012}
+\expandafter\def\csname t@tuned@B_fpr@sdpct\endcsname{1.2}
+\newcommand{\tres}[2]{\csname t@#1@#2\endcsname}
+\newcommand{\trespct}[2]{\csname t@#1@#2@pct\endcsname}
+\newcommand{\tresci}[2]{\csname t@#1@#2@ci\endcsname}
+\newcommand{\tmean}[2]{\csname t@#1@#2@mean\endcsname}
+\newcommand{\tmeanpct}[2]{\csname t@#1@#2@meanpct\endcsname}
+\newcommand{\tsd}[2]{\csname t@#1@#2@sd\endcsname}
+\newcommand{\tsdpct}[2]{\csname t@#1@#2@sdpct\endcsname}
+\makeatother
+\newcommand{\tuningdraws}{five}
+\newcommand{\tuningtrials}{1,000}
+\newcommand{\tuningpct}{20}
+\newcommand{\heldoutpct}{80}
+\newcommand{\tuningseed}{20261011}
+\newcommand{\tuningseedlast}{20261015}
+\newcommand{\tuningweightstep}{0.05}
+\newcommand{\tuninglow}{0.05}
+\newcommand{\tuninghigh}{0.80}
+\newcommand{\tuningthreshold}{0.13}
+\newcommand{\tuningthresholdmin}{0.13}
+\newcommand{\tuningthresholdmax}{0.18}
+\newcommand{\tuningmembers}{28}
+\newcommand{\tuningmembersmin}{25}
+\newcommand{\tuningmembersmax}{29}
+\newcommand{\tuningfonemin}{0.938}
+\newcommand{\tuningfonemax}{0.973}
+\newcommand{\tuningseconds}{18}
+\newcommand{\tuningtotal}{88}
+\newcommand{\tuningscoring}{13}
+\newcommand{\optunaversion}{5.0.0}
+\newcommand{\nTuneA}{703}
+\newcommand{\nTuneB}{1,994}
+\newcommand{\nHeldA}{2,810}
+\newcommand{\nHeldB}{7,977}
+\newcommand{\nHeldBpos}{3,200}
+\newcommand{\nHeldBneg}{4,777}
+\newcommand{\tuningtop}{\texttt{word\_lookup} (1.00), \texttt{ngram\_frequency} (0.74), \texttt{log\_likelihood\_ratio} (0.71) and \texttt{hex\_string} (0.67)}
+\newcommand{\tuningbottom}{\texttt{pronounceability} (0.15), \texttt{mojibake} (0.06) and \texttt{control\_characters} (0.00)}
+\newcommand{\tuningalloff}{\texttt{control\_characters}}
+\newcommand{\tuningoff}{\texttt{control\_characters}, \texttt{mojibake}, \texttt{pronounceability} and \texttt{ngram\_rank}}

@@ -63,21 +63,6 @@
    "install_bytes": 307474633,
    "offline": true,
    "note": "language models bundled in the wheel"
-  },
-  "english_tuned": {
-   "ms_per_1000": 52.703,
-   "run_seconds": [
-    0.5477,
-    0.5255,
-    0.5381,
-    0.5233,
-    0.5165
-   ],
-   "import_s": 0.0215,
-   "import_statement": "from pygarble import EnsembleDetector",
-   "install_bytes": 1049427,
-   "offline": true,
-   "note": ""
   }
  }
 }

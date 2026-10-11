@@ -16,7 +16,9 @@ make benchmark-verify PYTHON=/path/to/venv/bin/python
 ```
 
 `verify.py` recomputes `metrics.json` from `results/predictions/` and
-`manifest.json` and exits non-zero on any mismatch.
+`manifest.json`, and `tuning/tuning.json` from the cached strategy scores,
+the recorded tuning row ids and the learned weights (Optuna is not re-run).
+It exits non-zero on any mismatch.
 
 ## Reproduce from the raw files
 
@@ -49,20 +51,27 @@ make benchmark-verify PYTHON=/path/to/venv/bin/python
    | `paper.scripts.benchmark.data --data-root DATA` | `manifest.json` (checks hashes, lists row ids) |
    | `paper.scripts.benchmark.run --data-root DATA` | predictions for A and B, `metrics.json`, `results.md`, `environment.json` |
    | `paper.scripts.benchmark.footprint --data-root DATA` | `footprint.json` |
+   | `paper.scripts.benchmark.tune --data-root DATA` | `tuning/`: strategy score cache, tuning row ids, learned weights, `tuning.json`, `tuning.md` |
 
 `run --metrics-only` recomputes the metrics and report from saved
 predictions without scoring.
 
 Scores are deterministic, so a rerun reproduces the predictions exactly.
+`tune` reuses the score cache unless given `--rescore`; its Optuna search
+is seeded and reproduces the same weights, and it checks that the real
+`EnsembleDetector` with the learned weights reproduces every held-out
+decision.
 Footprint timings depend on the machine; the recorded machine is in
 `environment.json` and `footprint.json`.
 
 ## Files
 
 - `data.py`: the A and B loaders, hash checks and the manifest.
-- `methods.py`: the score and decision wrappers for the five methods:
-  pygarble `english` and `english_fusion`, gibberish-detector, lingua, and
-  the post hoc tuned `english` variant.
+- `methods.py`: the score and decision wrappers for the four methods:
+  pygarble `english` and `english_fusion`, gibberish-detector and lingua.
+- `tune.py`: the weight tuning study; caches every strategy's score, learns
+  a weight per strategy and a threshold on a 20 percent sample with
+  Optuna, and evaluates on the held-out 80 percent (`results/tuning/`).
 - `metrics.py`: default-decision metrics and the bootstrap, shared by
   `run.py` and `verify.py`.
 - `report.py`: renders `results.md`.

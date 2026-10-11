@@ -5,10 +5,7 @@ from typing import Any, Dict, List, Optional
 
 from .metrics import RESULTS
 
-FAMILIES = (
-    ("Methods at their defaults", ("pygarble", "baseline")),
-    ("Post hoc, domain-specific tuning", ("tuned",)),
-)
+FAMILIES = (("Methods at their defaults", ("pygarble", "baseline")),)
 METRICS = ("A_capture", "B_precision", "B_recall", "B_fpr")
 
 

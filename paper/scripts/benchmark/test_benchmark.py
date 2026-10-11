@@ -21,7 +21,7 @@ class DataTests(unittest.TestCase):
 
 
 class MethodTests(unittest.TestCase):
-    def test_pygarble_wrappers_and_tuned_members(self) -> None:
+    def test_pygarble_wrappers(self) -> None:
         every = specs()
         self.assertEqual(
             list(every),
@@ -30,20 +30,8 @@ class MethodTests(unittest.TestCase):
                 "english_fusion",
                 "gibberish_detector",
                 "lingua",
-                "english_tuned",
             ],
         )
-        tuned = every["english_tuned"].build().detector
-        english = every["english"].build().detector
-        self.assertEqual(
-            [s.value for s in tuned.strategies],
-            [
-                s.value
-                for s in english.strategies
-                if s.value not in ("mojibake", "control_characters")
-            ],
-        )
-        self.assertEqual((tuned.voting, tuned.threshold), ("any", 0.5))
         tweet = "@user that was the best game of the season, honestly"
         method = every["english_fusion"].build()
         scores, flags = method.run([tweet, "qwkjzx vbnmrt plokij"])

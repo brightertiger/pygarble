@@ -86,7 +86,9 @@ open. Each is also stated in `protocol.md` where it affects the protocol.
   datasets, so the tuned rows are post hoc in that sense, but no
   evaluation row is seen during tuning. It replaces the hand-made
   `english_tuned` variant (the `english` profile without its mojibake and
-  control-character members) described in the previous entry.
+  control-character members) described in the previous entry. That
+  variant's predictions, metrics, footprint entry and preprint rows were
+  removed; they remain in git history.
 - **2026-10-11: tuning search widened.** The first tuning run used a
   threshold range of [0.2, 0.8] and 400 trials per draw. In every one of
   the five draws the chosen threshold sat on the 0.2 bound, and the best
