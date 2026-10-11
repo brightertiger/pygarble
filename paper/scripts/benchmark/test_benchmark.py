@@ -5,7 +5,7 @@ import unittest
 
 import numpy as np
 
-from . import data, footprint, metrics, verify
+from . import data, footprint, metrics, tune, verify
 from .methods import specs
 
 
@@ -95,6 +95,37 @@ class FootprintTests(unittest.TestCase):
         self.assertEqual(len(runs), 2)
         size = footprint.install_bytes("english", ("pygarble",), data.OUTPUT)
         self.assertGreater(size, 100_000)
+
+
+class TuneTests(unittest.TestCase):
+    def test_cached_weighted_vote_matches_ensemble_detector(self) -> None:
+        texts = [
+            "@user that was the best game of the season, honestly",
+            "qwkjzx vbnmrt plokij",
+            "asdf asdf asdf",
+            "Ã¢â‚¬Å“helloÃ¢â‚¬",
+            "!!!",
+            "the cat sat on the mat",
+            "x",
+            "Please call me back tomorrow about the invoice.",
+        ]
+        rows = [data.Row(f"t:{i}", t, 0) for i, t in enumerate(texts)]
+        names = tune.strategy_names()
+        records = tune.score_rows(rows, names)
+        scores = np.array([r[2] for r in records]).reshape(len(names), -1).T
+        flags = np.array([r[3] for r in records]).reshape(len(names), -1).T
+        self.assertFalse(flags.all())  # some members are inapplicable
+        rng = np.random.default_rng(1)
+        for _ in range(5):
+            weights = rng.choice(np.arange(0, 1.05, 0.05).round(2), 32)
+            params = {
+                "weights": dict(zip(names, map(float, weights))),
+                "threshold": 0.4,
+            }
+            got, decided = tune.weighted((scores, flags), weights, 0.4)
+            detector = tune.ensemble(params)
+            self.assertEqual(list(got), detector.predict_proba(texts))
+            self.assertEqual(list(decided), detector.predict(texts))
 
 
 if __name__ == "__main__":

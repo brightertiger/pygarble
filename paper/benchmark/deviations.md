@@ -73,4 +73,18 @@ open. Each is also stated in `protocol.md` where it affects the protocol.
   pre-registered result, and is reported separately as such. The
   `english_fusion` profile has no mojibake member, so it has no variant.
 
+- **2026-10-11: weight tuning study added.** At the maintainer's request
+  a tuning study (`paper/scripts/benchmark/tune.py`, results in
+  `results/tuning/`) learns a weight in [0, 1] for each of pygarble's 32
+  strategies and a threshold in [0.2, 0.8] under `weighted` voting, with
+  Optuna's TPE sampler (400 trials, F1 objective, junk positive). For each
+  of five seeds (20261011 to 20261015) the tuning sample is a stratified
+  20 percent of A and 20 percent of B by label; evaluation is on the
+  held-out 80 percent, where the `english` and `english_fusion` profiles
+  are scored on the same rows. The study uses labelled data from both
+  datasets, so the tuned rows are post hoc in that sense, but no
+  evaluation row is seen during tuning. It replaces the hand-made
+  `english_tuned` variant (the `english` profile without its mojibake and
+  control-character members) described in the previous entry.
+
 No other method was added or changed.
