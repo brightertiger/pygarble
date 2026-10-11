@@ -1,4 +1,4 @@
-"""Load benchmark datasets A and B, split B, and write the manifest.
+"""Load benchmark datasets A and B and write the manifest.
 
 Only row ids, hashes and counts are written to the repository; the texts
 stay in the raw files under --data-root.
@@ -9,16 +9,14 @@ import csv
 import hashlib
 import io
 import json
-import random
 from pathlib import Path
-from typing import Dict, List, NamedTuple, Sequence, Tuple
+from typing import Dict, List, NamedTuple, Tuple
 
 DEFAULT_ROOT = Path("/Users/ujjwal/Downloads/solo/pygarble-data")
 REPOSITORY = Path(__file__).resolve().parents[3]
 OUTPUT = REPOSITORY / "paper" / "benchmark"
 MANIFEST = OUTPUT / "manifest.json"
 SEED = 20261011
-DEV_SHARE = 0.3
 A_FILE = "kaggle-gibberish/Gibberish.xls"
 B_SPLITS = ("train", "validation", "test")
 MOJIBAKE = ("ð\x9f", "â\x80", "Ã")
@@ -112,22 +110,6 @@ def load_b(root: Path = DEFAULT_ROOT) -> List[Row]:
     return rows
 
 
-def split_b(
-    rows: Sequence[Row], seed: int = SEED
-) -> Tuple[List[str], List[str]]:
-    """30/70 development/test split, stratified by label, deterministic."""
-    rng = random.Random(seed)
-    dev: List[str] = []
-    test: List[str] = []
-    for label in (0, 1):
-        ids = [row.id for row in rows if row.label == label]
-        rng.shuffle(ids)
-        cut = round(DEV_SHARE * len(ids))
-        dev += ids[:cut]
-        test += ids[cut:]
-    return sorted(dev, key=_order), sorted(test, key=_order)
-
-
 def _order(row_id: str) -> Tuple[int, int]:
     split, position = row_id.split(":")
     return B_SPLITS.index(split), int(position)
@@ -137,11 +119,9 @@ def build_manifest(root: Path = DEFAULT_ROOT) -> Dict:
     check_hashes(root)
     a_rows = load_a(root)
     b_rows = load_b(root)
-    dev, test = split_b(b_rows)
     labels = {row.id: row.label for row in b_rows}
     texts = {row.id: row.text for row in b_rows}
     tweets = [row.text for row in b_rows if row.label == 0]
-    dev_texts = {texts[i] for i in dev}
     sources = json.loads(json.dumps(SOURCES))
     sources["A"]["rows_in_file"] = 3767
     sources["A"]["kept"] = len(a_rows)
@@ -149,16 +129,12 @@ def build_manifest(root: Path = DEFAULT_ROOT) -> Dict:
     return {
         "frozen": "2026-10-11",
         "seed": SEED,
-        "dev_share": DEV_SHARE,
         "sources": sources,
         "counts": {
             "A": len(a_rows),
+            "B": len(b_rows),
             "B_positive": sum(labels.values()),
             "B_negative": len(b_rows) - sum(labels.values()),
-            "B_dev": len(dev),
-            "B_dev_positive": sum(labels[i] for i in dev),
-            "B_test": len(test),
-            "B_test_positive": sum(labels[i] for i in test),
         },
         "notes": {
             "B_tweets_with_mojibake_share": round(
@@ -168,32 +144,26 @@ def build_manifest(root: Path = DEFAULT_ROOT) -> Dict:
             ),
             "B_mojibake_signatures": ["U+00F0 0x9F", "U+00E2 0x80", "U+00C3"],
             "B_duplicate_text_rows": len(b_rows) - len(set(texts.values())),
-            "B_test_rows_whose_text_is_in_dev": sum(
-                texts[i] in dev_texts for i in test
-            ),
         },
         "A_ids": [row.id for row in a_rows],
-        "B_dev_ids": dev,
-        "B_test_ids": test,
+        "B_ids": sorted(labels, key=_order),
         "B_labels": {i: labels[i] for i in sorted(labels, key=_order)},
     }
 
 
 def load(root: Path = DEFAULT_ROOT) -> Dict[str, List[Row]]:
-    """Rows for A, B dev and B test, checked against the saved manifest."""
+    """Rows for A and B in manifest order, checked against the manifest."""
     manifest = json.loads(MANIFEST.read_text())
     check_hashes(root)
     a_rows = load_a(root)
     if [row.id for row in a_rows] != manifest["A_ids"]:
         raise ValueError("dataset A does not match the manifest")
-    b_rows = {row.id: row for row in load_b(root)}
-    if set(b_rows) != set(manifest["B_labels"]):
+    b_rows = load_b(root)
+    if [row.id for row in b_rows] != manifest["B_ids"]:
         raise ValueError("dataset B does not match the manifest")
-    return {
-        "A": a_rows,
-        "B_dev": [b_rows[i] for i in manifest["B_dev_ids"]],
-        "B_test": [b_rows[i] for i in manifest["B_test_ids"]],
-    }
+    if any(manifest["B_labels"][row.id] != row.label for row in b_rows):
+        raise ValueError("dataset B labels do not match the manifest")
+    return {"A": a_rows, "B": b_rows}
 
 
 def main() -> None:

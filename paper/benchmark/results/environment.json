@@ -6,12 +6,9 @@
  "packages": {
   "pygarble": "0.11.0",
   "numpy": "2.5.4",
-  "nostril": "1.2.0",
   "gibberish-detector": "0.1.1",
-  "gibberish-chat-detector": "0.1.2",
   "lingua-language-detector": "2.2.0"
  },
- "pygarble_commit": "54654be08b9b7f364e469f25e7b539da7e8a2138",
- "pygarble_tree_clean": true,
- "nostril_commit": "fbc0c91249283a9fbc9036206391ce1138826fd3"
+ "pygarble_commit": "72b5b2eecf5779d88272b7cfef78485eb528568e",
+ "pygarble_tree_clean": true
 }

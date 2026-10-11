@@ -1,4 +1,4 @@
-"""Score every method on A and B dev, apply the checkpoint, then B test once.
+"""Score every method on all of A and all of B at its default decision.
 
 Writes per-row predictions (row id, score, decision; no text) and the
 metrics computed from them. Run from the repository root:
@@ -15,8 +15,6 @@ from importlib import metadata
 from pathlib import Path
 from typing import Dict, List, Sequence
 
-import numpy as np
-
 from . import data, metrics
 from .methods import BASELINE_FILES, specs
 
@@ -24,9 +22,7 @@ ENVIRONMENT = metrics.RESULTS / "environment.json"
 DISTRIBUTIONS = (
     "pygarble",
     "numpy",
-    "nostril",
     "gibberish-detector",
-    "gibberish-chat-detector",
     "lingua-language-detector",
 )
 
@@ -38,9 +34,7 @@ def check_baseline_files(root: Path) -> None:
             raise ValueError(f"baselines/{name}: sha256 {actual}")
 
 
-def score_set(
-    name: str, method, part: str, rows: Sequence[data.Row]
-) -> np.ndarray:
+def score_set(name: str, method, part: str, rows: Sequence[data.Row]) -> None:
     scores, flags = method.run([row.text for row in rows])
     scores = [metrics.rounded_score(s) for s in scores]
     metrics.write_predictions(
@@ -49,7 +43,6 @@ def score_set(
         scores,
         flags,
     )
-    return np.array(scores)
 
 
 def git(*args: str) -> str:
@@ -89,7 +82,6 @@ def environment() -> Dict:
         "packages": versions,
         "pygarble_commit": git("rev-parse", "HEAD"),
         "pygarble_tree_clean": git("status", "--porcelain", "pygarble") == "",
-        "nostril_commit": "fbc0c91249283a9fbc9036206391ce1138826fd3",
     }
 
 
@@ -102,11 +94,10 @@ def save_metrics(names: List[str]) -> Dict:
     manifest = json.loads(data.MANIFEST.read_text())
     every = specs()
     predictions = metrics.load_all(manifest, names)
-    result, curves = metrics.compute(
+    result = metrics.compute(
         manifest, predictions, {n: every[n].family for n in names}
     )
     write_json(metrics.RESULTS / "metrics.json", result)
-    write_json(metrics.RESULTS / "pr_curves.json", curves)
     from .report import write_report
 
     write_report(result)
@@ -116,11 +107,6 @@ def save_metrics(names: List[str]) -> Dict:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data-root", type=Path, default=data.DEFAULT_ROOT)
-    parser.add_argument(
-        "--override-checkpoint",
-        metavar="REASON",
-        help="score B test even if the checkpoint fails; recorded",
-    )
     parser.add_argument(
         "--metrics-only",
         action="store_true",
@@ -132,36 +118,13 @@ def main() -> int:
     if args.metrics_only:
         save_metrics(names)
         return 0
-    test_dir = metrics.PREDICTIONS / "B_test"
-    if test_dir.exists() and any(test_dir.iterdir()):
-        print("B test was already scored; refusing a second test run.")
-        return 1
     check_baseline_files(args.data_root)
     rows = data.load(args.data_root)
-    manifest = json.loads(data.MANIFEST.read_text())
-    built = {}
-    dev_scores = {}
-    a_scores = {}
     for name in names:
-        print(f"dev: {name}", flush=True)
-        built[name] = every[name].build()
-        a_scores[name] = score_set(name, built[name], "A", rows["A"])
-        dev_scores[name] = (
-            score_set(name, built[name], "B_dev", rows["B_dev"]),
-            None,
-        )
-    cuts = metrics.fit_cuts(manifest, dev_scores)
-    gate = metrics.checkpoint(cuts, a_scores[metrics.CHECKPOINT[0]])
-    if not gate["passed"] and args.override_checkpoint:
-        gate["override"] = args.override_checkpoint
-    write_json(metrics.RESULTS / "checkpoint.json", gate)
-    print(f"checkpoint: {gate}", flush=True)
-    if not gate["passed"] and not args.override_checkpoint:
-        print("Checkpoint failed; B test not scored.")
-        return 2
-    for name in names:
-        print(f"test: {name}", flush=True)
-        score_set(name, built[name], "B_test", rows["B_test"])
+        print(f"score: {name}", flush=True)
+        method = every[name].build()
+        for part in metrics.SETS:
+            score_set(name, method, part, rows[part])
     write_json(ENVIRONMENT, environment())
     save_metrics(names)
     return 0

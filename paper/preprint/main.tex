@@ -1,0 +1,399 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{caption}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+
+\captionsetup{font=small,labelfont=bf}
+\setlength{\emergencystretch}{2em}
+\newcommand{\TODO}[1]{\textbf{\textcolor{red}{[TODO: #1]}}}
+\newcommand{\code}[1]{\texttt{#1}}
+
+% Every result number in this paper comes from these generated files.
+\input{tables/numbers.tex}
+
+\title{How much junk do rules catch?\\
+pygarble on real survey responses and social-media text}
+\author{Ujjwal Singh Rao\\
+\small \TODO{affiliation}\\
+\small \TODO{email}\\
+\small \url{https://github.com/brightertiger/pygarble}}
+\date{October 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Free-text fields collect junk: keyboard mashing, random strings and
+placeholder answers. pygarble is a Python library with no runtime
+dependencies that flags such text with rules and small embedded English
+statistics. We measure it on two public datasets against a Markov-chain
+gibberish detector and a language identifier, with every method at its
+own default decision. On \nA{} survey responses labelled as junk,
+pygarble's \code{english\_fusion} profile flags
+\res{english_fusion}{A_capture}. On \nB{} English rows of random strings
+and tweets, it recalls \res{english_fusion}{B_recall} of the random
+strings with precision \res{english_fusion}{B_precision}, from a
+\mb{english_fusion}\,MB install. A post hoc variant of the default profile
+without its two encoding-damage checks shows that the ensemble can be
+adapted to a domain by removing strategies: its false-positive rate on
+tweets falls from \respct{english}{B_fpr}\,\% to
+\respct{english_tuned}{B_fpr}\,\% with no loss of recall. We report where
+each method is beaten, its cost, and which configuration to use for which
+job.
+\end{abstract}
+
+\section{Introduction}
+
+Text pipelines receive junk. Survey free-text questions get keyboard
+mashing from respondents who want to reach the next page. Sign-up forms get
+random strings from bots. Scraped text carries encoding damage. Each of
+these costs something downstream: a coder reads it, a model is trained on
+it, or an analysis counts it as an answer.
+
+The usual remedies are heavy. A language model or a trained classifier
+needs a model download, a GPU or an API call, and its decisions are hard
+to explain row by row. Simple rules are cheap, local and explainable, and
+are often the first filter a team writes by hand. The question is how much
+junk such rules actually catch, and how much good text they wrongly flag.
+
+pygarble \citep{pygarble} packages rules of this kind: character and
+word statistics computed against embedded English tables, with no runtime
+dependencies. This paper measures it on real data rather than on examples
+written by its author. \TODO{one or two sentences on the maintainer's own
+motivating use case.}
+
+The contributions are:
+\begin{itemize}
+\item A benchmark on two public datasets: \nA{} survey responses labelled
+  as junk, and \nB{} English rows of random strings and tweets. Every
+  method runs at its own default decision. The protocol, a pilot run and
+  every change after it are disclosed, and per-row predictions are saved so
+  every number can be recomputed.
+\item A comparison of pygarble's default profile and its
+  \code{english\_fusion} profile with two CPU baselines: a character
+  Markov-chain gibberish detector and a language identifier.
+\item A post hoc, domain-specific tuning of the default profile, reported
+  separately from the main results.
+\item The cost of each method, a plain account of where pygarble is
+  beaten, and guidance on which configuration to use.
+\end{itemize}
+
+\section{pygarble in one page}
+
+pygarble targets Python 3.8 and later and has no runtime dependencies. The
+installed package, with its embedded English tables, is
+\mb{english_fusion}\,MB. Besides gibberish detection it scans text for
+secrets, personal data and profanity, with redaction; those features are
+not evaluated here.
+
+\paragraph{Strategies.} Gibberish detection is built from
+\nstrategies{} strategies, each a function from text to a score in
+$[0,1]$ and a decision. They fall into a few groups: character statistics
+(vowel ratio, entropy, consonant runs, letter frequency); English
+character models (a Markov chain, bigram and trigram tables, a
+log-likelihood ratio against a uniform reference); word-level checks
+(dictionary lookup, word anomaly, function-word density); structural checks
+(repetition, keyboard rows and adjacency, hex strings); encoding checks
+(mojibake, control characters, Unicode script mixing); and four checks
+that compare a text window with frequent English (cross parsing, primed
+compression, n-gram rank and a permutation test). Each strategy reports
+when it does not apply, for example to text with no Latin letters.
+
+\paragraph{Ensembles and profiles.} \code{EnsembleDetector} combines a
+named set of strategies, a \emph{profile}, under a voting rule, and flags a
+text when the combined score reaches the threshold, 0.5 by default. Two
+profiles are measured here:
+\begin{itemize}
+\item \code{english}, the default: Markov chain, log-likelihood ratio, word
+  anomaly, mojibake, keyboard adjacency and control characters, with
+  \code{any} voting, so one member firing flags the text.
+\item \code{english\_fusion}, opt-in: word lookup, log-likelihood ratio and
+  cross parsing with \code{fisher} voting. Each member's score is read
+  against that member's scores on a synthetic English null built from word
+  frequencies, and the tail probabilities are combined with Fisher's
+  method.
+\end{itemize}
+The other profiles, a larger English set, the 0.8.0 set and profiles for
+encoding damage, Unicode spoofing and degenerate model output, are not
+measured here. A user can also pass any list of
+strategies, which is how the tuned variant in
+Section~\ref{sec:tuning} is built.
+
+\paragraph{What it is not.} The English profiles score English
+plausibility. They are not language identifiers: meaningful text in other
+languages written in Latin letters can be flagged, and text in other
+scripts gives them no signal. Scores are heuristic, not calibrated
+probabilities. A \code{calibrate()} helper picks a threshold from a user's
+own labelled examples; this paper does not use it.
+
+\section{Datasets and protocol}
+
+\paragraph{A: survey junk.} The Kaggle dataset
+\code{johnwdata/\allowbreak gibberish-text-classification} \citep{dataA} has
+\nArows{} survey responses, all labelled as junk. Despite its
+\code{.xls} extension, the file is a Windows-1252 CSV. We strip each
+response, drop empty ones and drop exact duplicates, leaving \nA{} rows.
+A has no clean rows, so the only metric is the \emph{capture rate}: the
+share of rows a method flags. Its licence is listed as unknown, so the
+repository stores row indices and hashes, never the text.
+
+\paragraph{B: random strings and tweets.} We pool the train, validation
+and test files of the Hugging Face dataset
+\code{Sowmya15/gibberish\_multilingual} \citep{dataB} (Apache-2.0) and
+keep the \nB{} non-empty rows whose language is English: \nBpos{} random strings (junk) and \nBneg{} tweets
+(clean). Labels are used as given and duplicates are kept (\nBdup{} rows
+repeat an earlier text). We report precision, recall and the
+false-positive rate (FPR), the share of tweets flagged.
+
+\paragraph{Methods.} pygarble 0.11.0 is used with its defaults frozen at
+commit \code{e3135ed}; no default or threshold was changed after any
+result was seen. The baselines run on CPU with pinned versions:
+\begin{itemize}
+\item \textbf{gibberish-detector} 0.1.1 \citep{gibberishdetector}, a
+  character Markov model. The package ships no model, so we train one with
+  its own trainer on the corpus its README uses, and flag scores above its
+  command-line default of 4.0.
+\item \textbf{lingua} 2.2.0 \citep{lingua}, a language identifier, under
+  the policy ``not detected as English is junk''.
+\end{itemize}
+There are no neural baselines.
+
+\paragraph{Decision and intervals.} Every method is scored at its own
+default decision: the binary output it gives with default settings. No
+threshold is fitted on either dataset. Intervals are 95\,\% percentile
+intervals from \resamples{} bootstrap resamples of rows, drawn with a fixed
+seed and shared by all methods.
+
+\paragraph{Pilot and changes.} Before the protocol was written, all of A
+and all English rows of B were scored once with pygarble's defaults. The
+\code{english\_fusion} numbers from that pilot are the ones reported here,
+because nothing in the package changed afterwards. The first version of
+the protocol also fitted thresholds at fixed false-positive rates on a
+development split of B and compared more baselines and pygarble
+configurations; both were computed and then removed from the paper's
+scope (Section~\ref{sec:limitations}). The tuned variant in
+Section~\ref{sec:tuning} was added after the results were seen.
+
+\section{Results on survey junk}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/fig1_results.pdf}
+\caption{Left: capture rate on A (\nA{} survey responses labelled as
+junk). Right: precision and recall on B (\nBpos{} random strings,
+\nBneg{} tweets). Every method at its default decision, with 95\,\%
+bootstrap intervals. The tuned row below the dotted line is post hoc
+(Section~\ref{sec:tuning}).}
+\label{fig:results}
+\end{figure}
+
+\begin{table}[t]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\caption{Capture rate on A and precision, recall and FPR on B at each
+method's default decision, with 95\,\% bootstrap intervals. The last row
+was constructed after the results were seen and is not a pre-registered
+result.}
+\label{tab:results}
+\resizebox{\linewidth}{!}{\input{tables/table1_results.tex}}
+\end{table}
+
+\code{english\_fusion} flags \res{english_fusion}{A_capture} of the real
+survey junk in A (95\,\% interval \resci{english_fusion}{A_capture}), with
+no dependencies and a \mb{english_fusion}\,MB install
+(Figure~\ref{fig:results}, left; Table~\ref{tab:results}). That is more
+than the Markov-chain gibberish-detector, which flags
+\res{gibberish_detector}{A_capture}. The default \code{english} profile
+flags \res{english}{A_capture}.
+
+lingua flags \res{lingua}{A_capture}, the most of any method. It does so
+by calling anything it cannot identify as English junk, a policy whose
+cost appears on B and in Section~\ref{sec:fails}.
+
+\section{Results on social-media text}
+\label{sec:social}
+
+On B, \code{english\_fusion} recalls \res{english_fusion}{B_recall} of the
+random strings with precision \res{english_fusion}{B_precision}
+(Figure~\ref{fig:results}, right). It flags
+\respct{english_fusion}{B_fpr}\,\% of tweets. lingua has similar recall
+(\res{lingua}{B_recall}) and lower precision
+(\res{lingua}{B_precision}). gibberish-detector has the highest precision,
+\res{gibberish_detector}{B_precision}, and the lowest recall,
+\res{gibberish_detector}{B_recall}. The default \code{english} profile
+recalls \res{english}{B_recall} with precision \res{english}{B_precision}.
+
+A note on what counts as a false positive. \mojibakepct\,\% of the tweets
+in B contain mojibake byte signatures, for example a UTF-8 emoji decoded
+as Latin-1. B labels these tweets clean, because it was built to
+separate random strings from tweets. A pipeline that audits encoding would
+want them flagged.
+
+\subsection{Domain-specific tuning}
+\label{sec:tuning}
+
+The default \code{english} profile includes two strategies that target
+encoding damage: mojibake and control characters. The second fires on the
+C1 control characters inside mojibake. Since this dataset labels encoding
+damage as clean, a user screening social-media text for gibberish would
+drop both. We built that variant: the \code{english} profile without
+mojibake and control characters, with the same \code{any} voting and
+threshold. The package was not changed.
+
+This variant was constructed after seeing that \mojibakepct\,\% of the
+tweets carry mojibake and that these strategies flag them. It is post hoc
+and reported as such, not as a pre-registered result. Its results next to
+the untuned profile:
+
+\begin{center}
+\small
+\begin{tabular}{lllll}
+\toprule
+& A capture & B precision & B recall & B FPR \\
+\midrule
+\code{english} & \res{english}{A_capture} & \res{english}{B_precision}
+  & \res{english}{B_recall} & \res{english}{B_fpr} \\
+\code{english}, tuned & \res{english_tuned}{A_capture}
+  & \res{english_tuned}{B_precision} & \res{english_tuned}{B_recall}
+  & \res{english_tuned}{B_fpr} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Capture on A and recall on B are unchanged, because no junk row in either
+dataset depended on the two encoding checks. Precision rises and the FPR
+on tweets falls. The point is not this particular variant but that the
+ensemble can be adapted to a domain by removing strategies whose target
+the domain does not treat as junk. \code{english\_fusion} has no mojibake
+member, so it has no such variant.
+
+\section{Cost}
+
+\begin{table}[t]
+\centering
+\small
+\caption{Footprint. Time is the default decision over all \nB{} B texts on
+one thread of an \cpuname{} with Python \pyversion{}, median of five runs
+after a warm-up. Install size counts the installed files of the
+distribution and its runtime dependencies, plus the training corpus
+gibberish-detector's model is built from.}
+\label{tab:footprint}
+\input{tables/table2_footprint.tex}
+\end{table}
+
+Table~\ref{tab:footprint} lists time per 1,000 texts and install size.
+pygarble scores 1,000 texts in \ms{english_fusion}\,ms with
+\code{english\_fusion} and installs in \mb{english_fusion}\,MB with nothing
+else. gibberish-detector is faster, \ms{gibberish_detector}\,ms, at
+\mb{gibberish_detector}\,MB. lingua takes \ms{lingua}\,ms and
+\mb{lingua}\,MB. All methods run offline once installed. Timings depend on
+the machine.
+
+\section{Where it fails}
+\label{sec:fails}
+
+\paragraph{False positives.} The Markov baseline,
+gibberish-detector, flags \respct{gibberish_detector}{B_fpr}\,\% of tweets;
+\code{english\_fusion} flags \respct{english_fusion}{B_fpr}\,\%.
+
+\paragraph{The default profile on informal text.} The default
+\code{english} profile flags \respct{english}{B_fpr}\,\% of tweets. Tuning
+lowers this to \respct{english_tuned}{B_fpr}\,\%, still above
+\code{english\_fusion}.
+
+\paragraph{Language identification captures more survey junk.} lingua
+flags \res{lingua}{A_capture} of A against fusion's
+\res{english_fusion}{A_capture}, at an FPR of \respct{lingua}{B_fpr}\,\% on
+tweets and a \mb{lingua}\,MB install.
+
+\paragraph{Short inputs, digits and repetition.} \code{english\_fusion}
+misses \nAmissedfusion{} of the \nA{} rows in A. On inspection, many are
+one to three characters long. Most of the rest mix letters with digits,
+contain no letters at all, or repeat a short syllable or a punctuation
+mark. Some are real words or short phrases, which read as English to
+character and word statistics.
+
+\paragraph{Label noise in A.} A is used as labelled. \nAmissedall{} rows
+are flagged by none of the four untuned methods. On inspection many are
+meaningful but low-effort answers, such as thanks or a short positive
+phrase, so A's capture rates have a ceiling below one.
+
+\paragraph{B is easy.} B's junk is random character strings, which share
+almost nothing with English; fusion and lingua recall
+\res{english_fusion}{B_recall} and \res{lingua}{B_recall} of them. B therefore says little about recall on realistic junk and mostly
+measures false positives on informal English.
+
+\section{Guidance}
+
+\begin{itemize}
+\item \textbf{Screening survey or form free text:} \code{english\_fusion}.
+  It catches \res{english_fusion}{A_capture} of real survey junk and
+  \res{english_fusion}{B_recall} of random strings, at
+  \ms{english_fusion}\,ms per 1,000 texts, from a
+  \mb{english_fusion}\,MB install with no dependencies. Add a
+  minimum-length rule if one- and two-character answers count as junk.
+\item \textbf{Adapting to a domain:} start from a profile and remove the
+  strategies whose target the domain does not treat as junk, as in
+  Section~\ref{sec:tuning}. For social-media text, drop mojibake and
+  control characters unless encoding damage is itself a concern.
+\item \textbf{When false positives cost much more than misses:} at
+  default settings, gibberish-detector flags the fewest tweets.
+\item \textbf{Multilingual input:} route by language first. A language
+  identifier answers that question; it is not a junk detector.
+\end{itemize}
+
+\section{Limitations}
+\label{sec:limitations}
+
+Two public datasets are measured, both English. A has only junk, so it
+measures capture and nothing about false positives; B's junk is random
+strings, which are easier than real junk. Both datasets are short texts;
+pygarble's behaviour on long documents is not measured here. There is no
+neural baseline, and only two baselines. A comparison at a matched
+false-positive rate was computed in PR~18 and removed from the paper's
+scope; in it the Markov baseline captured more survey junk than
+\code{english\_fusion}. It remains in the repository history.
+Each method is run once at its default decision, so the results say how
+the methods behave out of the box, not how well they can be tuned. The one
+tuned variant is post hoc and was chosen with knowledge of B.
+
+\section{Reproducibility}
+
+The benchmark code is in \code{paper/scripts/benchmark/}, the protocol and
+every deviation from it in \code{paper/benchmark/}, and results in
+\code{paper/benchmark/results/}. The manifest records the sha256 hash of
+each raw file (for A, beginning \code{\shaA}) and every row id; no dataset
+text is committed. Per-row scores and decisions for every method are
+committed, so every number in this paper can be recomputed without the
+raw data:
+\begin{verbatim}
+make benchmark-verify PYTHON=<venv>/bin/python
+make preprint PYTHON=<venv>/bin/python
+\end{verbatim}
+The first command recomputes \code{metrics.json} from the saved predictions
+and fails on any difference. The second regenerates the figure, the
+tables and the number macros this paper is typeset from, then builds the
+PDF. Re-scoring from the raw files is described in
+\code{paper/\allowbreak scripts/\allowbreak benchmark/\allowbreak README.md}; scores are deterministic.
+
+\section*{AI assistance}
+
+Claude Code agents running Claude Opus 5.5 and Claude
+Fable 5.1 wrote the benchmark code, ran the experiments and drafted this
+text, under the author's direction and review. Commit trailers in the
+repository record the model behind each commit.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

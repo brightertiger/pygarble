@@ -1,6 +1,6 @@
 """Speed, import time, install size and offline use for every method.
 
-Speed: the native decision call over all B test texts, one warm-up and five
+Speed: the default decision call over all B texts, one warm-up and five
 timed runs in this process on one thread; median, in ms per 1,000 texts.
 """
 
@@ -34,14 +34,10 @@ PYGARBLE_WHEEL_EXCLUDED = {
 # Files the method needs at run time beyond its installed distributions.
 ASSETS = {
     "gibberish_detector": ("baselines/big.txt",),
-    "c4_rules": ("baselines/ldnoobw_en.txt",),
 }
 NOTES = {
     "gibberish_detector": "size includes the training corpus big.txt",
-    "gopher_rules": "implemented in this benchmark (rules.py)",
-    "c4_rules": "implemented in this benchmark; size includes LDNOOBW list",
     "lingua": "language models bundled in the wheel",
-    "nostril": "n-gram table bundled in the package",
 }
 
 
@@ -125,8 +121,6 @@ def install_bytes(
 ) -> Optional[int]:
     total = sum(distribution_bytes(d) for d in closure(distributions))
     total += sum((root / a).stat().st_size for a in ASSETS.get(name, ()))
-    if name in ("gopher_rules", "c4_rules"):
-        total += (Path(__file__).parent / "rules.py").stat().st_size
     return total
 
 
@@ -135,7 +129,7 @@ def main() -> None:
     parser.add_argument("--data-root", type=Path, default=data.DEFAULT_ROOT)
     parser.add_argument("--methods", nargs="*")
     args = parser.parse_args()
-    texts = [row.text for row in data.load(args.data_root)["B_test"]]
+    texts = [row.text for row in data.load(args.data_root)["B"]]
     every = specs(args.data_root)
     imports: Dict[str, float] = {}
     out = {}

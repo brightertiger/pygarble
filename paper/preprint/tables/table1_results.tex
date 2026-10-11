@@ -1,0 +1,13 @@
+\begin{tabular}{p{4.6cm}llll}
+\toprule
+Method & A capture & B precision & B recall & B FPR \\
+\midrule
+pygarble english (default) & 0.830 {\scriptsize [0.817, 0.843]} & 0.656 {\scriptsize [0.645, 0.670]} & 0.947 {\scriptsize [0.940, 0.954]} & 0.332 {\scriptsize [0.320, 0.344]} \\
+pygarble english\_fusion & 0.895 {\scriptsize [0.884, 0.905]} & 0.906 {\scriptsize [0.898, 0.915]} & 0.991 {\scriptsize [0.987, 0.993]} & 0.068 {\scriptsize [0.062, 0.075]} \\
+gibberish-detector & 0.722 {\scriptsize [0.707, 0.736]} & 0.995 {\scriptsize [0.993, 0.997]} & 0.822 {\scriptsize [0.809, 0.833]} & 0.003 {\scriptsize [0.002, 0.004]} \\
+lingua (not English) & 0.989 {\scriptsize [0.985, 0.992]} & 0.876 {\scriptsize [0.867, 0.886]} & 0.994 {\scriptsize [0.991, 0.996]} & 0.094 {\scriptsize [0.087, 0.101]} \\
+\midrule
+\multicolumn{5}{l}{\emph{Post hoc, domain-specific tuning: english without mojibake and control characters}} \\
+pygarble english, tuned & 0.830 {\scriptsize [0.817, 0.843]} & 0.777 {\scriptsize [0.766, 0.789]} & 0.947 {\scriptsize [0.940, 0.954]} & 0.182 {\scriptsize [0.173, 0.192]} \\
+\bottomrule
+\end{tabular}

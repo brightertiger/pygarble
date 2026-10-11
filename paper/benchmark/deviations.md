@@ -46,4 +46,31 @@ open. Each is also stated in `protocol.md` where it affects the protocol.
   at both cuts). Fitted cuts and dev FPR are stored with each operating
   point.
 
-No baseline was dropped.
+- **2026-10-11: benchmark narrowed to default decisions.** At the
+  maintainer's direction, the matched-FPR operating points (cuts at 1 and
+  0.1 percent FPR on B dev tweets), the 30/70 development/test split of B,
+  the checkpoint and its override, the calibration run, AUROC and the
+  precision-recall curves computed in PR 18 were removed from the
+  benchmark. They remain only in git history (merge commit `b968953`). B is
+  now scored whole at each method's default decision. The entries above
+  on the checkpoint, the cut ties and the calibration positives describe
+  that removed machinery and are kept as a record.
+- **2026-10-11: methods reduced to three.** At the maintainer's direction
+  the comparison is pygarble, gibberish-detector and lingua only. nostril,
+  gibberish-chat-detector, the Gopher and C4 rules, the five other
+  pygarble profiles, the six voting modes and the single-strategy appendix
+  were removed from the runner, results and paper, with their wrappers,
+  `rules.py` and their requirements. Their PR 18 results remain in git
+  history. pygarble is reported as two rows: the default `english`
+  profile and `english_fusion`. The entries above on nostril, the shared
+  module name and the Gopher rules describe removed baselines.
+- **2026-10-11: post hoc tuned row added.** At the maintainer's direction
+  a fifth row, `english_tuned`, is the `english` profile without its
+  mojibake and control-character members (same `any` voting, threshold
+  0.5). It was constructed after the results showed that 26.4 percent of B
+  tweets carry mojibake, which B labels clean, and that these two
+  encoding-damage members flag them. It is a domain-specific tuning, not a
+  pre-registered result, and is reported separately as such. The
+  `english_fusion` profile has no mojibake member, so it has no variant.
+
+No other method was added or changed.
