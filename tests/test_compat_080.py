@@ -1,6 +1,7 @@
 """Code written against pygarble 0.8.0 keeps importing and running."""
 
 import os
+import pickle
 import subprocess
 import sys
 from importlib import import_module
@@ -8,7 +9,7 @@ from pathlib import Path
 
 import pytest
 
-from pygarble import EnsembleDetector, Strategy
+from pygarble import EnsembleDetector, GarbleDetector, Strategy
 from pygarble.screening import PIIDetector, ProfanityDetector, SecretsDetector
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -92,6 +93,24 @@ def test_weighted_default_ensemble_error_points_to_the_legacy_profile():
     )
     assert legacy.predict("qxzjkwpv bnmqwer zzxqv") is True
     assert legacy.predict("The weather is lovely today") is False
+
+
+def test_detectors_pickled_by_080_still_predict():
+    path = Path(__file__).parent / "fixtures" / "pickled_080.pkl"
+    with path.open("rb") as handle:
+        detector, ensemble, strategy = pickle.load(handle)
+    assert strategy is Strategy.WORD_LOOKUP
+    fresh_detector = GarbleDetector(Strategy.MARKOV_CHAIN)
+    fresh_ensemble = EnsembleDetector(profile="legacy")
+    texts = ["Hello world", "qxzjkwpv bnmqwer zzxqv", "x" * 50]
+    assert detector.predict(texts) == fresh_detector.predict(texts)
+    assert ensemble.predict(texts) == fresh_ensemble.predict(texts)
+    assert ensemble.predict_proba(texts) == fresh_ensemble.predict_proba(texts)
+    assert ensemble.analyze("Hello world") == fresh_ensemble.analyze(
+        "Hello world"
+    )
+    restored = pickle.loads(pickle.dumps(ensemble))
+    assert restored.predict(texts) == fresh_ensemble.predict(texts)
 
 
 def test_strategy_map_is_a_dict_again():

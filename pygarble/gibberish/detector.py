@@ -1,7 +1,16 @@
 """Single-strategy public API and shared input handling."""
 
 from enum import Enum
-from typing import Any, FrozenSet, Iterable, List, Mapping, Optional, Union
+from typing import (
+    Any,
+    Dict,
+    FrozenSet,
+    Iterable,
+    List,
+    Mapping,
+    Optional,
+    Union,
+)
 
 from ..validation import (
     finite_number,
@@ -69,6 +78,19 @@ class GarbleDetector:
         self.strategy = strategy
         self.kwargs = dict(kwargs, **dict(strategy_kwargs or {}))
         self._strategy_instance = self._create_strategy_instance()
+
+    def __setstate__(self, state: Dict[str, Any]) -> None:
+        # Pickles from 0.8.0 predate these attributes and hold a strategy
+        # object built by 0.8.0, so rebuild it from the saved options.
+        rebuild = "allowlist" not in state
+        defaults: Dict[str, Any] = {
+            "allowlist": frozenset(),
+            "max_input_length": None,
+            "timeout_per_text": None,
+        }
+        self.__dict__.update(defaults, **state)
+        if rebuild:
+            self._strategy_instance = self._create_strategy_instance()
 
     def _create_strategy_instance(self) -> BaseStrategy:
         return strategy_class(self.strategy)(**self.kwargs)

@@ -257,6 +257,21 @@ class EnsembleDetector:
         self.kwargs = dict(kwargs)
         self.strategy_kwargs = options
 
+    def __setstate__(self, state: Dict[str, Any]) -> None:
+        # Pickles from 0.8.0 predate these attributes.
+        legacy = state.get("strategies") == list(LEGACY_STRATEGIES)
+        defaults: Dict[str, Any] = {
+            "profile": "legacy" if legacy else "custom",
+            "fisher_alpha": DEFAULT_FISHER_ALPHA,
+            "_tails": {},
+            "_tail_grid": (),
+            "allowlist": frozenset(),
+            "max_input_length": None,
+            "timeout_per_text": None,
+            "strategy_kwargs": {},
+        }
+        self.__dict__.update(defaults, **state)
+
     def _aggregate(
         self, pairs: List[Tuple[Signal, float]]
     ) -> Tuple[bool, float]:
