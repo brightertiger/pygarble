@@ -24,6 +24,7 @@ import matplotlib.pyplot as plt  # noqa: E402
 
 from pygarble.gibberish.registry import Strategy  # noqa: E402
 
+from . import tune  # noqa: E402
 from .data import MANIFEST, REPOSITORY  # noqa: E402
 from .metrics import PREDICTIONS, RESULTS, read_predictions  # noqa: E402
 
@@ -545,6 +546,36 @@ def listing(items: List[str]) -> str:
     return ", ".join(items[:-1]) + " and " + items[-1]
 
 
+ENGLISH_MEMBERS = {
+    "englishmarkovpct": ("markov_chain",),
+    "englishcontrolpct": ("control_characters",),
+    "englishmojibakepct": ("mojibake",),
+    "englishencodingpct": ("mojibake", "control_characters"),
+    "englishrestpct": (
+        "markov_chain",
+        "log_likelihood_ratio",
+        "word_anomaly",
+        "keyboard_adjacency",
+    ),
+}
+
+
+def member_macros(manifest: Dict) -> Dict[str, str]:
+    """Share of B tweets flagged by members of the english profile, alone
+    or in groups, from the cached strategy scores (a member flags at a
+    score of 0.5, the profile's threshold, when it applies)."""
+    names = tune.strategy_names()
+    scores, applicable = tune.read_scores(manifest, names)["B"]
+    tweets = [manifest["B_labels"][i] == 0 for i in manifest["B_ids"]]
+    flags = (scores >= 0.5) & applicable
+    out = {}
+    for macro, members in ENGLISH_MEMBERS.items():
+        columns = [names.index(m) for m in members]
+        flagged = flags[:, columns].any(axis=1)[tweets]
+        out[macro] = f"{100 * flagged.mean():.1f}"
+    return out
+
+
 def tuning_macros(
     tuning: Dict[str, Any], weights: Dict[str, Any], splits: Dict
 ) -> str:
@@ -612,6 +643,9 @@ def tuning_macros(
         "optunaversion": weights["optuna"],
         "nTuneA": f"{len(sample['A']):,}",
         "nTuneB": f"{len(sample['B']):,}",
+        "nTune": f"{len(sample['A']) + len(sample['B']):,}",
+        "tuningbestmin": f"{min(d['best_trial'] for d in draws):,}",
+        "tuningbestmax": f"{max(d['best_trial'] for d in draws):,}",
         "nHeldA": f"{rows['A']:,}",
         "nHeldB": f"{rows['B']:,}",
         "nHeldBpos": f"{rows['B_positive']:,}",
@@ -658,7 +692,11 @@ def main() -> None:
         "table_tuning.tex": tuning_table(tuning),
         "table_weights.tex": weights_table(weights, tuning["primary_seed"]),
         "numbers.tex": macros(metrics, footprint, manifest, environment)
-        + tuning_macros(tuning, weights, splits),
+        + tuning_macros(tuning, weights, splits)
+        + "".join(
+            rf"\newcommand{{\{k}}}{{{v}}}" + "\n"
+            for k, v in member_macros(manifest).items()
+        ),
     }
     for name, text in outputs.items():
         (TABLES / name).write_text(text)

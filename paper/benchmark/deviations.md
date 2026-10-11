@@ -93,9 +93,14 @@ open. Each is also stated in `protocol.md` where it affects the protocol.
   threshold range of [0.2, 0.8] and 400 trials per draw. In every one of
   the five draws the chosen threshold sat on the 0.2 bound, and the best
   trial came late (trials 237 to 395 of 400), so the search had not
-  converged. On that evidence from the tuning samples alone, before any
-  further look at held-out results, the maintainer widened the threshold
-  range to [0.05, 0.8] and raised the budget to 1,000 trials per draw.
+  converged. On that evidence from the tuning samples, the maintainer
+  widened the threshold range to [0.05, 0.8] and raised the budget to
+  1,000 trials per draw. `tune.py` always evaluates on the held-out rows,
+  so the first run's held-out results had also been computed (tuned
+  weights, mean over five draws: tweet FPR 0.028, survey-junk capture
+  0.833, random-string recall 0.922); the widened run has a higher tweet
+  FPR (0.047) and higher capture and recall. Even with 1,000 trials the
+  best trial came late (930 to 996), so the search was still improving.
   Seeds, the 20 percent sample, the objective and the search grid are
   unchanged. The widened run is the one reported; the first run's results
   remain in git history (commit `9f213ef`).

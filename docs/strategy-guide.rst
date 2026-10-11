@@ -26,10 +26,13 @@ Tweets vs. Random Strings. It supports three choices.
   default ``english`` profile flagged 33.2% of tweets. Its ``mojibake`` and
   ``control_characters`` members target encoding damage, and about a quarter
   of the tweets carry mojibake that the dataset labels clean. Keep them when
-  encoding damage counts as junk for you. Otherwise remove them.
-* **With a few hundred labelled rows, learn a weight per strategy.** The
+  encoding damage counts as junk for you. Removing them is not enough for
+  tweets, though: its ``markov_chain`` member alone flags 17.8% of tweets,
+  and without the two encoding checks the profile still flags 18.2%.
+* **With a labelled sample, learn a weight per strategy.** The
   preprint's tuning study learned a weight for each of the 32 strategies and
-  a threshold under ``weighted`` voting from a 20 percent labelled sample,
+  a threshold under ``weighted`` voting from a 20 percent labelled sample
+  (about 2,700 rows),
   in about 18 seconds of Optuna search. On the held-out 80 percent it
   flagged 4.7% of tweets against 6.8% for ``english_fusion``, at
   about the same survey-junk capture, averaged over five samples. It

@@ -153,17 +153,19 @@ pygarble is beaten on single measures:
   It flags more tweets and needs a 307 MB install. It answers which language
   a text is in, not whether it is junk.
 * **The default** ``english`` **profile is not suited to informal text.**
-  It flags 33.2 percent of tweets as shipped. Its mojibake and
-  control-character members fire on the tweets that carry mojibake, which
-  the dataset labels clean.
+  It flags 33.2 percent of tweets as shipped. Two causes overlap. Its
+  mojibake and control-character members flag 28.5 percent of tweets,
+  almost all through the control codes of mis-decoded text, which the
+  dataset labels clean. Its Markov member alone flags 17.8 percent, so
+  removing the two encoding checks still leaves 18.2 percent flagged.
 
 :doc:`strategy-guide` turns these results into advice.
 
 Tuning to a use case from a small labelled sample
 -------------------------------------------------
 
-The two profiles are fixed member lists. With a few hundred labelled rows you
-can instead learn how much each strategy should count. The tuning study
+The two profiles are fixed member lists. With a labelled sample of your own
+data you can instead learn how much each strategy should count. The tuning study
 learns a weight from 0 to 1 for each of the 32 strategies and a threshold
 from 0.05 to 0.80, under ``weighted`` voting. A text's score is the weighted
 mean of the scores of the members that apply to it. A weight of 0 switches a
@@ -171,7 +173,9 @@ strategy off.
 
 The tuning sample is a stratified 20 percent of each dataset. Optuna's TPE
 sampler searches 1,000 configurations for the best F1 on that sample, with
-junk as the positive class. Each strategy is scored once per row and cached,
+junk as the positive class. The search was still improving when it
+stopped: in every draw the best configuration came after trial 930. Each
+strategy is scored once per row and cached,
 so the search takes about 18 seconds per sample on one core. The study
 repeats this for five seeds. Each result is rebuilt as an
 ``EnsembleDetector`` and evaluated on the held-out 80 percent. Both profiles
@@ -231,11 +235,14 @@ Intervals are 95 percent bootstrap intervals, in parentheses.
 
 The tuned weights flag fewer tweets than ``english_fusion`` at about the same
 capture. Recall is slightly lower on average, and the tuned rows vary more
-between draws because a 20 percent sample is small. The largest mean weights
-went to ``word_lookup`` (1.00), ``ngram_frequency`` (0.74), ``log_likelihood_ratio`` (0.71), ``hex_string`` (0.67). ``control_characters`` was switched off in every draw. In the
-primary draw ``control_characters``, ``mojibake``, ``pronounceability`` and ``ngram_rank`` have weight 0, so
-the search dropped the encoding-damage checks that this dataset's labels
-penalise. Thresholds ranged from 0.13 to 0.18. The learned weights
+between draws because a 20 percent sample is small. The largest mean
+weights went to ``word_lookup`` (1.00), ``ngram_frequency`` (0.74),
+``log_likelihood_ratio`` (0.71) and ``hex_string`` (0.67).
+``control_characters`` was switched off in every draw, and ``mojibake`` has
+a mean weight of 0.06. In the primary draw ``control_characters``,
+``mojibake``, ``pronounceability`` and ``ngram_rank`` have weight 0, so the
+search gave almost no weight to the encoding-damage checks that this
+dataset's labels penalise. Thresholds ranged from 0.13 to 0.18. The learned weights
 describe these two datasets, not junk in general.
 
 The primary draw's configuration, built directly:

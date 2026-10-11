@@ -293,7 +293,9 @@ results were seen. It learns from labelled rows of both datasets and is
 evaluated only on rows it did not see. Its threshold range was widened
 once, from a lower bound of 0.2 to \tuninglow{}, and its budget raised
 from 400 to \tuningtrials{} trials, because every draw of a first run
-chose the bound; that decision used the tuning samples only.
+chose the bound and found its best trial late. That decision rested on
+the tuning samples; the first run's held-out results had also been
+computed, and they are kept in the repository history.
 
 \paragraph{Environment.} All runs are single-threaded on an \cpuname{}
 with Python \pyversion{}. Hardware, package versions and the pygarble
@@ -384,9 +386,14 @@ cost of recalling only \respct{gibberish_detector}{B_recall}\,\% of the
 random strings. Lingua flags \respct{lingua}{B_fpr}\,\% of tweets, the posts it does
 not identify as English. The default \code{english} profile flags
 \respct{english}{B_fpr}\,\% of tweets, the highest rate in the table.
-Two of its members target encoding damage, mojibake and control
-characters, and they fire on the \mojibakepct\,\% of tweets that carry
-mojibake, which the labels treat as clean.
+Two causes overlap. Its two encoding-damage checks, mojibake and control
+characters, flag \englishencodingpct\,\% of tweets between them, almost
+all through the control-character check on the C1 control codes of
+mis-decoded text; \mojibakepct\,\% of tweets carry mojibake, which the
+labels treat as clean. Its Markov-chain member alone flags
+\englishmarkovpct\,\% of tweets, and its four non-encoding members
+together, Markov included, flag \englishrestpct\,\%; removing the two
+encoding checks would still leave that many tweets flagged.
 
 This dataset is a measure of false positives on informal English more
 than of recall on realistic junk: its junk is random strings, which share
@@ -412,8 +419,8 @@ column within each block.}
 \input{tables/table_tuning.tex}
 \end{table*}
 
-The profiles above are fixed member lists. A user with a few hundred
-labelled rows can instead learn how much each strategy should count. We
+The profiles above are fixed member lists. A user with a labelled
+sample of their own data can instead learn how much each strategy should count. We
 learned a weight in $[0,1]$ for each of the \nstrategies{} strategies,
 where 0 switches a strategy off, and a threshold in
 $[\tuninglow,\tuninghigh]$, under pygarble's \code{weighted} voting: a
@@ -427,7 +434,9 @@ The tuning sample is a stratified \tuningpct\,\% of each dataset:
 labels. Optuna's~\citep{optuna} tree-structured Parzen estimator
 sampler~\citep{bergstra2011tpe}, with a fixed seed, searched
 \tuningtrials{} configurations for the best F1 on that sample, with junk
-as the positive class. Every strategy is scored once per row and cached
+as the positive class. The search was still improving when it stopped:
+in every draw the best configuration came after trial \tuningbestmin{}
+of \tuningtrials{}, so a larger budget may fit the tuning sample better. Every strategy is scored once per row and cached
 (\tuningscoring{} seconds for both datasets), so the search takes about
 \tuningseconds{} seconds per sample on one core. The draw is repeated with
 \tuningdraws{} seeds, \tuningseed{} to \tuningseedlast{}, the first being
@@ -461,8 +470,8 @@ Between \tuningmembersmin{} and \tuningmembersmax{} of the
 between \tuningthresholdmin{} and \tuningthresholdmax{}. The largest mean
 weights went to \tuningtop{}. The smallest went to \tuningbottom{};
 \tuningalloff{} was switched off in every draw, and in the primary draw
-\tuningoff{} have weight zero. The search thus dropped the
-encoding-damage checks that the labels of \TRS{} penalise, from the
+\tuningoff{} have weight zero. The search thus gave almost no weight to
+the encoding-damage checks that the labels of \TRS{} penalise, from the
 labels alone. Appendix~\ref{app:weights} lists every weight.
 
 A user reproduces this on their own data by scoring a labelled sample
@@ -527,12 +536,13 @@ post costs much more than missing junk, it is the better default. Lingua
 captures more survey junk, \respct{lingua}{A_capture}\,\% against
 \respct{english_fusion}{A_capture}\,\%, under its aggressive policy. The
 default \code{english} profile is not suitable for informal text as
-shipped: it flags a third of tweets.
+shipped: it flags a third of tweets, its encoding checks
+\englishencodingpct\,\% and its Markov member alone \englishmarkovpct\,\%.
 
 \paragraph{Guidance.} For screening survey or form free text, use
 \code{english\_fusion}; add a minimum-length rule if one- and
-two-character answers count as junk. For a new domain with a few
-hundred labelled rows, learn a weight per strategy and a threshold as in
+two-character answers count as junk. For a new domain with a labelled
+sample (the study used \nTune{} rows), learn a weight per strategy and a threshold as in
 Section~\ref{sec:tuning}; without labels, start from a profile and remove
 the strategies whose target the domain does not treat as junk. When false positives are costly,
 prefer the Markov baseline at default settings, or measure a threshold on
@@ -615,6 +625,8 @@ measures and which of the two measured profiles it belongs to.
 
 \input{tables/strategies.tex}
 
+% Flush the strategy tables so the weights appendix sits with its table.
+\clearpage
 \section{Learned weights}
 \label{app:weights}
 
