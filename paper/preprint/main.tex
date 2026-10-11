@@ -71,8 +71,8 @@ decision. Out of the box, the \code{english\_fusion} profile captures
 \respct{english_fusion}{B_recall}\,\% of the random strings at a precision
 of \res{english_fusion}{B_precision}, from a \mb{english_fusion}\,MB
 install that processes a thousand short texts in \ms{english_fusion}\,ms;
-neither baseline both captures more survey junk and flags fewer tweets.
-With a small labelled sample, pygarble flags fewer tweets: a weight for every strategy
+no baseline captures more survey junk while also flagging fewer tweets.
+A small labelled sample improves it further: a weight for every strategy
 and a threshold learned with Optuna from \tuningpct\,\% of the rows, in
 about \tuningseconds{} seconds of search, keeps capture and recall within about a point of the
 profile's on average on the held-out \heldoutpct\,\% while cutting the

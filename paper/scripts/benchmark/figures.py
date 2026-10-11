@@ -516,7 +516,7 @@ def tuning_table(tuning: Dict[str, Any]) -> str:
     lines += [line + r"[2pt]" for line in body(point)]
     lines += [
         r"\midrule",
-        r"\multicolumn{5}{@{}l}{\emph{Mean $\pm$ standard deviation over "
+        r"\multicolumn{5}{@{}l}{\emph{Mean $\pm$ sample standard deviation over "
         + draws
         + r" draws}} \\",
     ]
