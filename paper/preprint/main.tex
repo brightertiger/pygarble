@@ -22,7 +22,7 @@
 
 \title{How much junk do rules catch?\\
 pygarble on real survey responses and social-media text}
-\author{Ujjwal Rao\\
+\author{Ujjwal Singh Rao\\
 \small \TODO{affiliation}\\
 \small \TODO{email}\\
 \small \url{https://github.com/brightertiger/pygarble}}
@@ -179,8 +179,8 @@ and all English rows of B were scored once with pygarble's defaults. The
 because nothing in the package changed afterwards. The first version of
 the protocol also fitted thresholds at fixed false-positive rates on a
 development split of B and compared more baselines and pygarble
-configurations; both were computed and then removed from scope at the
-maintainer's direction (Section~\ref{sec:limitations}). The tuned variant in
+configurations; both were computed and then removed from the paper's
+scope (Section~\ref{sec:limitations}). The tuned variant in
 Section~\ref{sec:tuning} was added after the results were seen.
 
 \section{Results on survey junk}
@@ -360,8 +360,9 @@ measures capture and nothing about false positives; B's junk is random
 strings, which are easier than real junk. Both datasets are short texts;
 pygarble's behaviour on long documents is not measured here. There is no
 neural baseline, and only two baselines. A comparison at a matched
-false-positive rate was computed in PR~18 and removed from scope at the
-maintainer's direction; it remains available in the repository history.
+false-positive rate was computed in PR~18 and removed from the paper's
+scope; in it the Markov baseline captured more survey junk than
+\code{english\_fusion}. It remains in the repository history.
 Each method is run once at its default decision, so the results say how
 the methods behave out of the box, not how well they can be tuned. The one
 tuned variant is post hoc and was chosen with knowledge of B.
@@ -387,7 +388,7 @@ PDF. Re-scoring from the raw files is described in
 
 \section*{AI assistance}
 
-Claude Code agents running Claude Opus 5.5, Claude Sonnet 5.5 and Claude
+Claude Code agents running Claude Opus 5.5 and Claude
 Fable 5.1 wrote the benchmark code, ran the experiments and drafted this
 text, under the author's direction and review. Commit trailers in the
 repository record the model behind each commit.
