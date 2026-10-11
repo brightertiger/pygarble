@@ -13,9 +13,9 @@
 
 - **Local processing.** Native checks use bundled rules, dictionaries and character statistics. Optional integrations run locally and are enabled explicitly.
 - **Deterministic and explainable.** Every finding has a kind, span, confidence and reason. `Finding` and `ScanReport` objects never carry the matched text, so logging a report from Python cannot leak a secret. `pygarble scan` rows include the input line; use `pygarble redact` when output goes to logs.
-- **Separate APIs.** Screen secrets, PII and profanity together, or check gibberish independently. The original combined scanner still supports all four categories.
+- **Separate APIs.** Screen secrets, PII and profanity together, or check gibberish independently. The combined scanner covers all four categories.
 - **Redaction in three modes.** Placeholders such as `[EMAIL]`, length-preserving masks, or partial masks that keep the last four digits of a card or phone number.
-- **A document CLI.** `pygarble-screen scan` emits findings-only JSON per document; `pygarble-screen redact` preserves document structure, including multiline private keys. The original line-oriented CLI remains available.
+- **A document CLI.** `pygarble-screen scan` emits findings-only JSON per document; `pygarble-screen redact` preserves document structure, including multiline private keys. A line-oriented `pygarble` CLI is also available.
 
 ## Install and choose an API
 
@@ -23,23 +23,27 @@
 python -m pip install pygarble
 ```
 
-This README describes the current source, including **unreleased** module
-separation and optional backends. For those APIs, install a checkout of the
-reviewed branch or commit with `python -m pip install -e .`; see the
-[installation guide](https://brightertiger.github.io/pygarble/installation.html) and [migration notes](https://brightertiger.github.io/pygarble/migration.html).
+**Upgrading from 0.8.0?** This README describes 0.11.0, the first release
+since 0.8.0, and it is a breaking release: gibberish scores and the default
+ensemble's decisions change, and no setting restores 0.8.0 output exactly.
+0.8.0 imports keep working, with a `DeprecationWarning` where a name moved.
+Read the [upgrade guide](https://brightertiger.github.io/pygarble/migration.html)
+before upgrading. While PyPI still serves 0.8.0, which has none of the
+screening, profile or CLI features below, install from source as the
+[installation guide](https://brightertiger.github.io/pygarble/installation.html) describes.
 
 | Use case | Import | Default behavior |
 | --- | --- | --- |
 | Secrets, PII and profanity | `from pygarble.screening import Scanner` | Three native rule categories; optional backends are opt-in |
 | Gibberish detection | `from pygarble.gibberish import EnsembleDetector` | English gibberish profile |
-| Existing combined applications | `from pygarble import Scanner` | All four categories, unchanged |
+| Secrets, PII, profanity and gibberish together | `from pygarble import Scanner` | All four categories |
 
 ## Ten-second start
 
 Use `pygarble.screening` for **secrets, PII and profanity**. Keep gibberish
 detection separate with `pygarble.gibberish.GarbleDetector` /
-`pygarble.gibberish.EnsembleDetector`. The existing
-top-level `Scanner` retains its four-category defaults for compatibility.
+`pygarble.gibberish.EnsembleDetector`. The top-level `pygarble.Scanner`
+runs all four categories.
 
 ```python
 from pygarble.screening import Scanner
@@ -78,9 +82,9 @@ See the [standalone screening guide](https://brightertiger.github.io/pygarble/st
 for individual extras, backend options, custom detectors and coverage limits.
 Reuse a scanner across documents; Gitleaks starts a subprocess per document.
 
-## Existing combined API and line CLI
+## Combined API and line CLI
 
-The original API remains supported. Its line-oriented CLI echoes input text;
+The combined scanner runs all four categories. Its line-oriented CLI echoes input text;
 use the document CLI above for findings-only logs and multiline redaction.
 
 ```bash
@@ -114,7 +118,7 @@ assert redact("mail jane@example.com").text == "mail [EMAIL]"
 | `secrets` | AWS, GitHub, GitLab, Slack, Stripe, Google, OpenAI, Anthropic, Hugging Face, npm, PyPI and SendGrid keys; JWTs; private key blocks; credentials in URLs; bearer tokens; generic secrets | Unique vendor prefixes; JWTs at 1.0 (0.8 when the header does not decode); PEM/PGP private key blocks; credentials in URLs; `Bearer` prefixes; keyword plus entropy for generic secrets |
 | `pii` | email, phone, credit card, IBAN, IPv4/IPv6; US SSN; UK National Insurance and NHS numbers; Indian Aadhaar and PAN | Structure plus checksums (Luhn, mod-97, mod-11, Verhoeff) and locale packs `us`, `uk`, `in` |
 | `profanity` | profanity (strong and mild tiers) | Attributed English word list with leetspeak, elongation, masking, spacing and phrase handling; token-level, so Scunthorpe stays clean |
-| `gibberish` | garbled | The existing English gibberish ensemble, whole text |
+| `gibberish` | garbled | The default English gibberish ensemble, whole text |
 
 Confidence is 1.0 for checksum-verified or vendor-prefixed matches, down to 0.6 for keyword-plus-entropy secrets and ambiguous masking, and 0.5 for standalone high-entropy strings, which are opt-in (`secrets_without_context=True`); see the [screening guide](https://brightertiger.github.io/pygarble/screening.html).
 
@@ -161,7 +165,7 @@ subprocess invocation for each document.
 
 ## Gibberish detection
 
-The `gibberish` category is pygarble's original English gibberish detector, still available on its own. It flags keyboard mashing, mojibake, control artifacts and degenerate model output.
+The `gibberish` category is pygarble's English gibberish detector, also available on its own. It flags keyboard mashing, mojibake, control artifacts and degenerate model output.
 
 ```python
 from pygarble.gibberish import EnsembleDetector
@@ -260,11 +264,11 @@ assert corruption.predict("hello\x00world") is True
 
 ### Upgrading and evaluation
 
-The unreleased module reorganization preserves existing imports, defaults and
-scores. Version 0.11.0 added the combined scanner; it did not introduce the new
-module layout. Review the [upgrade guide](https://brightertiger.github.io/pygarble/migration.html) before changing
-versions. Research benchmark results now come from the
-[paper's complete published-corpus study](paper/README.md). It evaluates 79,969
+Relative to 0.8.0, 0.11.0 changes gibberish scores and the default ensemble;
+`profile="legacy"` selects the 0.8.0 members but does not reproduce their
+scores. Review the [upgrade guide](https://brightertiger.github.io/pygarble/migration.html) before changing
+versions. Research benchmark results come from the
+[paper's complete published-corpus study](https://github.com/brightertiger/pygarble/blob/main/paper/README.md). It evaluates 79,969
 chunks from 109 source files against a pinned local DistilBERT classifier.
 The English comparison uses 173 gibberish and 5,200 meaningful chunks; see the
 [benchmark guide](https://brightertiger.github.io/pygarble/benchmarks.html) for
@@ -277,8 +281,8 @@ and assets; results go to an ignored directory, preserving paper measurements.
 Small authored challenge sets remain engineering regression fixtures.
 
 - [Changelog](https://github.com/brightertiger/pygarble/blob/main/CHANGELOG.md)
-- [Paper, results and reproduction](paper/README.md)
-- [Engineering regression checks](paper/regression/README.md)
+- [Paper, results and reproduction](https://github.com/brightertiger/pygarble/blob/main/paper/README.md)
+- [Engineering regression checks](https://github.com/brightertiger/pygarble/blob/main/paper/regression/README.md)
 - [Golden corpus](https://github.com/brightertiger/pygarble/blob/main/paper/regression/golden.jsonl) of frozen detector outputs for every profile, and a [golden scan corpus](https://github.com/brightertiger/pygarble/blob/main/paper/regression/golden_scan.jsonl) for the scanner, both checked in CI
 - [Data provenance and curation](https://github.com/brightertiger/pygarble/blob/main/paper/scripts/data_curation.json)
 
@@ -308,7 +312,8 @@ pygarble/
 ```
 
 Old paths such as `pygarble.core`, `pygarble.strategies`, `pygarble.pii` and
-`pygarble.profanity` remain compatibility pointers. Old and new imports share
+`pygarble.profanity` are compatibility pointers; 0.8.0 names that moved emit a
+`DeprecationWarning` naming their new home. Old and new imports share
 classes, enums, rule tables and caches. See the [architecture guide](https://brightertiger.github.io/pygarble/architecture.html)
 for the full layout, import mappings and lazy-loading behavior.
 
