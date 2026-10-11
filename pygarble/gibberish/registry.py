@@ -2,7 +2,7 @@
 
 from enum import Enum
 from importlib import import_module
-from typing import TYPE_CHECKING, Any, Dict, Type, cast
+from typing import TYPE_CHECKING, Any, Dict, List, Type, cast
 
 from .strategies.base import BaseStrategy
 
@@ -123,3 +123,7 @@ def __getattr__(name: str) -> Any:
         raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
     built = {key: strategy_class(key) for key in _IMPLEMENTATIONS}
     return globals().setdefault("STRATEGY_MAP", built)
+
+
+def __dir__() -> List[str]:
+    return sorted(set(globals()) | {"STRATEGY_MAP"})

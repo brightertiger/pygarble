@@ -1,6 +1,6 @@
 """Compatibility facade for the public detection API."""
 
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, List
 
 from .._compat import forward_removed
 from .detector import GarbleDetector
@@ -54,3 +54,7 @@ def __getattr__(name: str) -> Any:
 
         return registry.STRATEGY_MAP
     return forward_removed("pygarble.core", name, _MOVED)
+
+
+def __dir__() -> List[str]:
+    return sorted(set(globals()) | {"STRATEGY_MAP"})

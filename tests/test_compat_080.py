@@ -124,6 +124,31 @@ def test_strategy_map_is_a_dict_again():
     )
     copy = dict(STRATEGY_MAP)
     assert copy == STRATEGY_MAP and len(copy) == len(Strategy)
+    for module in (
+        "pygarble.detector",
+        "pygarble.ensemble",
+        "pygarble.gibberish.detector",
+        "pygarble.gibberish.ensemble",
+    ):
+        assert import_module(module).STRATEGY_MAP is STRATEGY_MAP, module
+    for module in ("pygarble.gibberish.registry", "pygarble.gibberish.core"):
+        assert "STRATEGY_MAP" in dir(import_module(module)), module
+
+
+def test_patched_strategy_map_entry_is_used_by_detectors(monkeypatch):
+    from pygarble.core import STRATEGY_MAP
+    from pygarble.gibberish.analysis import Evidence
+
+    class AlwaysGarbled(STRATEGY_MAP[Strategy.VOWEL_RATIO]):
+        def evaluate(self, features):
+            return Evidence(1.0)
+
+    text = "Hello world"
+    assert GarbleDetector(Strategy.VOWEL_RATIO).predict(text) is False
+    monkeypatch.setitem(STRATEGY_MAP, Strategy.VOWEL_RATIO, AlwaysGarbled)
+    assert GarbleDetector(Strategy.VOWEL_RATIO).predict(text) is True
+    ensemble = EnsembleDetector(strategies=[Strategy.VOWEL_RATIO])
+    assert ensemble.predict(text) is True
 
 
 def test_wrong_strategy_and_name_arguments_say_what_to_pass():

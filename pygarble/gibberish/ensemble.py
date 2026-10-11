@@ -395,3 +395,12 @@ class EnsembleDetector:
         )
 
     score = predict_proba
+
+
+def __getattr__(name: str) -> Any:
+    # Earlier releases exported STRATEGY_MAP here; build it only when asked.
+    if name == "STRATEGY_MAP":
+        from . import registry
+
+        return registry.STRATEGY_MAP
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
