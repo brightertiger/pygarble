@@ -1,0 +1,76 @@
+% All pygarble strategies by family, written by hand from the code in
+% pygarble/gibberish/strategies/ and the defaults there. "Fires" means
+% the default-constructed strategy scores at least 0.5. Profile marks:
+% E = english (default), F = english_fusion.
+% Two full-width floats, because longtable does not work in twocolumn mode.
+\newcommand{\stratfamily}[1]{\addlinespace[3pt]\multicolumn{3}{@{}>{\raggedright\arraybackslash}p{\textwidth}@{}}{\textit{#1}}\\[1pt]}
+\newcommand{\stratrow}[3]{\texttt{#1} & #2 & #3 \\}
+\newcommand{\strathead}{%
+  \begin{tabular}{@{}p{3.55cm}@{\hspace{6pt}}c@{\hspace{6pt}}>{\raggedright\arraybackslash}p{\dimexpr\textwidth-5.3cm\relax}@{}}
+  \toprule
+  Strategy & Profile & What it measures and when it fires \\
+  \midrule}
+
+\begin{table*}[p]
+\centering
+\small
+\caption{The \nstrategies{} strategies of pygarble by family. A strategy
+\emph{fires} when its default configuration scores at least 0.5.
+Profile: E, member of \texttt{english} (the default); F, member of
+\texttt{english\_fusion}. Words ``in the dictionary'' are those in the
+embedded list of 49,330 English words; checks restricted to non-dictionary
+words also skip short all-capital acronyms and structured tokens such as
+URLs and numbers.}
+\label{tab:strategies}
+\strathead
+\stratfamily{Character statistics}
+\stratrow{vowel\_ratio}{}{Share of vowels in words of three or more letters and the longest consonant run in a word; fires when vowels are under about 7.5\% or over about 82\% of letters, or a word has six consonants in a row.}
+\stratrow{entropy\_based}{}{Blend of low Shannon entropy of the letters (40\%) and low mean English bigram log-probability (60\%); fires when the blend reaches 0.5, as on repetitive or improbable letter strings.}
+\stratrow{consonant\_sequence}{}{Longest run of consonants inside a word, with \emph{y} counted as a vowel and short all-capital acronyms skipped; fires on a run of seven or more.}
+\stratrow{letter\_frequency}{}{Chi-squared distance of the letters of non-dictionary words from English letter frequencies, plus rare-letter excess, missing common letters and one dominant letter; fires at a per-letter distance of 2 or two extreme signs.}
+\stratrow{vowel\_pattern}{}{Runs of consecutive vowels within words; fires on a run of five or more vowels that is not on a short list of valid English runs such as \emph{ueue}.}
+\stratrow{symbol\_ratio}{}{Share of non-space characters that are neither letters nor digits, after collapsing runs of one repeated symbol such as rulers; fires when symbols are more than half of the text.}
+\stratrow{letter\_position}{}{Non-dictionary, non-capitalised words that end in a letter English words never end in or start with a pair English words never start with; fires when a quarter of these checks fail across two or more violations or words.}
+\stratrow{pronounceability}{}{English phonotactics of non-dictionary, non-capitalised words of four or more letters; fires on two forbidden consonant clusters at word edges, mostly invalid word-initial clusters, or almost no vowels.}
+\stratfamily{English character models}
+\stratrow{markov\_chain}{E}{Mean log-probability per letter transition of the non-dictionary words under an English character bigram model; fires when it falls below $-3.5$.}
+\stratrow{bigram\_probability}{}{Share of within-word letter pairs on a curated list of pairs that English essentially never uses; fires when that share reaches a quarter.}
+\stratrow{ngram\_frequency}{}{Share of the letter trigrams of non-dictionary words that are on a list of common English trigrams; fires when fewer than 30\% are.}
+\stratrow{rare\_trigram}{}{Share of within-word letter trigrams on a curated list of combinations that English essentially never uses; fires when that share reaches 15\%.}
+\stratrow{log\_likelihood\_ratio}{E, F}{Mean log-likelihood ratio per letter pair of all words, English bigram model against uniform letters; fires when the mean falls below $-1$, so the text fits English clearly worse than random letters.}
+\stratfamily{Word-level checks}
+\stratrow{word\_lookup}{F}{Share of words of two or more letters that are not in the dictionary, unknown capitalised words counting half; fires when half or more are unknown.}
+\stratrow{word\_anomaly}{E}{Share of words of four or more letters that are non-dictionary and have mean bigram log-probability below $-4.6$; fires when a quarter of the words are anomalous, so one mashed word in four suffices.}
+\stratrow{function\_word\_density}{}{Share of English function words such as \emph{the}, \emph{of} and \emph{is}; fires only when ten or more words contain none and the text is not mostly Title Case.}
+\stratrow{affix\_detection}{}{Share of words of four or more letters that carry a common English prefix or suffix on a stem with a vowel; fires only on twenty or more such words when fewer than about one in six do.}
+\stratrow{word\_collocation}{}{Adjacent word pairs found in a list of common English pairs such as \emph{of the}; fires when twenty or more words, not mostly Title Case, contain no such pair, or fifteen or more have under 2\% hits.}
+\stratrow{zipf\_conformity}{}{Type-token ratio and share of once-only words in texts of thirty or more words; fires on a flat distribution only when the text also has no function words and mostly non-dictionary words.}
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table*}[p]
+\centering
+\small
+\addtocounter{table}{-1}
+\caption{The \nstrategies{} strategies of pygarble by family (continued).}
+\strathead
+\stratfamily{Structure and pattern checks}
+\stratrow{repetition}{}{Runs of one repeated letter, repeated two- or three-character units, one word dominating the text or a repeating cycle of words, and low character diversity; fires, for example, on a letter repeated five times.}
+\stratrow{keyboard\_pattern}{}{Letter trigrams of non-dictionary words that follow keyboard sequences, a shortage of common English trigrams, and a two-letter unit repeated three times inside one word; fires when keyboard trigrams reach 15\% or on the repeated unit.}
+\stratrow{keyboard\_adjacency}{E}{Chains of physically adjacent QWERTY keys within words; fires when a word of five or more characters is a straight row walk, or a non-dictionary word has a six-key adjacent chain or six same-row keys with at most one vowel.}
+\stratrow{hex\_string}{}{Hexadecimal and encoded data; fires on an MD5 or SHA-256 hash, a base64-like string, a UUID standing alone, a run of sixteen or more hex digits including a letter, or a long token that is mostly hex digits.}
+\stratrow{pattern\_matching}{}{Built-in regular expressions (a letter four or more times in a row, five-key keyboard-row walks, five consonants in a row in a non-dictionary word, alternating letter pairs) plus optional user patterns; fires on any of these, while runs of symbols, capitals or digits only add weight.}
+\stratrow{local\_anomaly}{}{Severely improbable non-dictionary words inside otherwise ordinary text; fires when one such word has eight or more letters or two fall within any four consecutive words.}
+\stratfamily{Encoding and script checks}
+\stratrow{mojibake}{E}{Signatures of text decoded with the wrong encoding; fires on a replacement character U+FFFD, a known sequence such as \~{A}\textcopyright{} or \^{a}\texteuro\texttrademark, double encoding, or a dense run of such byte pairs.}
+\stratrow{control\_characters}{E}{Raw control characters other than tab, carriage return and newline, lone surrogates, U+FFFD, and runs of more than eight combining marks; fires on any one of them.}
+\stratrow{unicode\_script}{}{Mixing of Unicode scripts; fires on any word of three or more letters that mixes Latin, Cyrillic and Greek letters, as homoglyph spoofing does, or on text that uses more than two scripts.}
+\stratfamily{English-reference window statistics (each fires when its median over windows of up to 127 characters lies beyond the 99th percentile of synthetic English of the same length)}
+\stratrow{cross\_parsing}{F}{Number of pieces needed to spell the text from the longest substrings of a reference built from frequent English words (Ziv--Merhav cross parsing); invented or mashed text breaks into many short pieces.}
+\stratrow{primed\_compression}{}{Compressed size per character when deflate is primed with frequent English words as a preset dictionary; English compresses well against it and invented text does not.}
+\stratrow{ngram\_rank}{}{Out-of-place distance between the frequency ranks of the text's one- to three-letter sequences and their ranks in English (Cavnar--Trenkle).}
+\stratrow{permutation\_test}{}{How much likelier the text's letter order is under an English bigram model than eight fixed shuffles of the same letters; catches mash and random letters but often misses pronounceable invented words.}
+\bottomrule
+\end{tabular}
+\end{table*}

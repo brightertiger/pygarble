@@ -1,0 +1,28 @@
+% Named profiles, written by hand from PROFILES and PROFILE_VOTING in
+% pygarble/gibberish/ensemble.py. "any" flags a text when any applicable
+% member scores at least 0.5; "Fisher" combines the members' tail p-values
+% against a synthetic English null and flags at p <= 0.001.
+\begin{tabular}{@{}l@{\hspace{5pt}}>{\raggedright\arraybackslash}p{4.25cm}@{\hspace{5pt}}l@{}}
+\toprule
+Profile & Members & Voting \\
+\midrule
+\texttt{english} (default) & \texttt{markov\_chain}, \texttt{log\_likelihood\_ratio}, \texttt{word\_anomaly}, \texttt{mojibake}, \texttt{keyboard\_adjacency}, \texttt{control\_characters} & any \\
+\addlinespace
+\texttt{english\_extended} & the six \texttt{english} members, \texttt{pattern\_matching}, \texttt{local\_anomaly}, \texttt{repetition} & any \\
+\addlinespace
+\texttt{legacy} & \texttt{markov\_chain}, \texttt{log\_likelihood\_ratio}, \texttt{word\_anomaly} & any \\
+\addlinespace
+\texttt{corruption} & \texttt{mojibake}, \texttt{control\_characters} & any \\
+\addlinespace
+\texttt{spoofing} & \texttt{unicode\_script} & any \\
+\addlinespace
+\texttt{llm\_output} & \texttt{repetition}, \texttt{control\_characters}, \texttt{mojibake}, \texttt{local\_anomaly} & any \\
+\addlinespace
+\texttt{english\_fusion} & \texttt{word\_lookup}, \texttt{log\_likelihood\_ratio}, \texttt{cross\_parsing} & Fisher \\
+\bottomrule
+\multicolumn{3}{@{}>{\raggedright\arraybackslash}p{\linewidth}@{}}{\footnotesize\rule{0pt}{2.5ex}%
+\emph{any}: the text is flagged when any applicable member scores 0.5 or
+more. \emph{Fisher}: each member's score is read as a tail $p$-value
+against synthetic English, the $p$-values are combined by Fisher's method,
+and the text is flagged at a combined $p \le 0.001$.} \\
+\end{tabular}

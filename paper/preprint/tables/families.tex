@@ -1,0 +1,14 @@
+% Strategy families of pygarble, written by hand from
+% pygarble/gibberish/strategies/; counts sum to the 32 strategies.
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.05cm}@{\hspace{4pt}}c@{\hspace{5pt}}>{\raggedright\arraybackslash}p{2.4cm}@{\hspace{5pt}}>{\raggedright\arraybackslash}p{2.45cm}@{}}
+\toprule
+Family & Count & What it detects & Examples \\
+\midrule
+Character statistics & 8 & Letter mixes English rarely produces & \texttt{vowel\_ratio}, \texttt{symbol\_ratio} \\
+English character models & 5 & Unlikely letter sequences & \texttt{markov\_chain}, \texttt{rare\_trigram} \\
+Word-level checks & 6 & Unknown words, missing English word patterns & \texttt{word\_lookup}, \texttt{word\_anomaly} \\
+Structure and pattern checks & 6 & Repeats, keyboard mash, hex, local corruption & \texttt{repetition}, \texttt{hex\_string} \\
+Encoding and script checks & 3 & Mojibake, control characters, spoofing & \texttt{mojibake}, \texttt{unicode\_script} \\
+English-reference window statistics & 4 & Distance from synthetic English & \texttt{cross\_parsing}, \texttt{ngram\_rank} \\
+\bottomrule
+\end{tabular}
