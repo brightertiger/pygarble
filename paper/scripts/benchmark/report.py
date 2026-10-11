@@ -34,41 +34,43 @@ def table(header: List[str], rows: List[List[str]]) -> List[str]:
     return out + [""]
 
 
+METRICS = ("A_capture", "B_precision", "B_recall", "B_fpr")
+NO_CUT = "no cut reaches target"
+
+
+def row(name: str, point: Dict[str, Any], extra: List[str]) -> List[str]:
+    out = [name]
+    if extra:
+        out += [f"{point['cut']:.6g}", f"{point['dev_fpr']:.4f}"]
+        if not point["reachable"]:
+            return out + [NO_CUT] + ["n/a"] * (len(METRICS) - 1)
+    return out + [cell(point[k]) for k in METRICS]
+
+
 def section(methods: Dict[str, Any], families: tuple) -> List[str]:
     chosen = [n for n, m in methods.items() if m["family"] in families]
-    lines = ["AUROC on B test and the fitted cuts:", ""]
+    lines = ["AUROC on B test:", ""]
     lines += table(
-        ["Method", "AUROC", "cut fpr1", "dev FPR", "cut fpr0.1", "dev FPR"],
-        [
-            [
-                n,
-                cell(methods[n]["auroc"]),
-                f"{methods[n]['cut']['fpr1']:.6g}",
-                f"{methods[n]['dev_fpr']['fpr1']:.4f}",
-                f"{methods[n]['cut']['fpr0.1']:.6g}",
-                f"{methods[n]['dev_fpr']['fpr0.1']:.4f}",
-            ]
-            for n in chosen
-        ],
+        ["Method", "AUROC"],
+        [[n, cell(methods[n]["auroc"])] for n in chosen],
     )
     for point in POINTS:
         lines += [f"At the {POINT_TITLES[point]}:", ""]
+        extra = [] if point == "native" else ["cut", "dev FPR"]
         lines += table(
-            ["Method", "A capture", "B precision", "B recall", "B FPR"],
-            [
-                [n]
-                + [
-                    cell(methods[n]["points"][point][k])
-                    for k in ("A_capture", "B_precision", "B_recall", "B_fpr")
-                ]
-                for n in chosen
-            ],
+            ["Method"]
+            + extra
+            + ["A capture", "B precision", "B recall", "B FPR"],
+            [row(n, methods[n]["points"][point], extra) for n in chosen],
         )
     return lines
 
 
 def write_report(metrics: Dict[str, Any]) -> None:
-    gate = metrics["checkpoint"]
+    gate = dict(metrics["checkpoint"])
+    saved = RESULTS / "checkpoint.json"
+    if saved.exists():
+        gate["override"] = json.loads(saved.read_text()).get("override")
     lines = [
         "# Benchmark results",
         "",
@@ -80,7 +82,8 @@ def write_report(metrics: Dict[str, Any]) -> None:
         "",
         f"Checkpoint: {gate['method']} capture on A at {gate['point']} is "
         f"{gate['A_capture']:.3f} (floor {gate['floor']}); "
-        f"{'passed' if gate['passed'] else 'failed'}.",
+        f"{'passed' if gate['passed'] else 'failed'}."
+        + (f" Continued: {gate['override']}" if gate.get("override") else ""),
         "",
     ]
     for title, families in FAMILIES:

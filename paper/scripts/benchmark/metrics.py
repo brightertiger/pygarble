@@ -145,6 +145,12 @@ def fit_cuts(
                 p: round(float(np.mean(negatives > c)), DIGITS)
                 for p, c in cuts.items()
             },
+            # False when more than k dev tweets tie at the top score, so
+            # no cut within the budget flags anything ("no cut reaches
+            # target").
+            "reachable": {
+                p: bool(c < negatives.max()) for p, c in cuts.items()
+            },
         }
     return out
 
@@ -190,8 +196,6 @@ def compute(
         b_scores, b_native = sets["B_test"]
         entry: Dict[str, Any] = {
             "family": families[name],
-            "cut": cuts[name]["cut"],
-            "dev_fpr": cuts[name]["dev_fpr"],
             "auroc": estimate(
                 float(auroc(b_scores, labels, np.ones((1, n_b)))[0]),
                 auroc(b_scores, labels, weights),
@@ -210,25 +214,34 @@ def compute(
             positives = boot_labels.sum(axis=1)
             full_tp = int((b_flag & labels).sum())
             full_fp = int((b_flag & ~labels).sum())
-            entry["points"][point] = {
-                "A_capture": estimate(
-                    float(a_flag.mean()), a_flag[idx_a].mean(axis=1)
-                ),
-                "B_precision": estimate(
-                    (
-                        full_tp / (full_tp + full_fp)
-                        if full_tp + full_fp
-                        else math.nan
+            found: Dict[str, Any] = {}
+            if point != "native":
+                found = {
+                    key: cuts[name][key][point]
+                    for key in ("cut", "dev_fpr", "reachable")
+                }
+            entry["points"][point] = found
+            found.update(
+                {
+                    "A_capture": estimate(
+                        float(a_flag.mean()), a_flag[idx_a].mean(axis=1)
                     ),
-                    ratio(tp, tp + fp),
-                ),
-                "B_recall": estimate(
-                    full_tp / labels.sum(), ratio(tp, positives)
-                ),
-                "B_fpr": estimate(
-                    full_fp / (~labels).sum(), ratio(fp, n_b - positives)
-                ),
-            }
+                    "B_precision": estimate(
+                        (
+                            full_tp / (full_tp + full_fp)
+                            if full_tp + full_fp
+                            else math.nan
+                        ),
+                        ratio(tp, tp + fp),
+                    ),
+                    "B_recall": estimate(
+                        full_tp / labels.sum(), ratio(tp, positives)
+                    ),
+                    "B_fpr": estimate(
+                        full_fp / (~labels).sum(), ratio(fp, n_b - positives)
+                    ),
+                }
+            )
         methods[name] = entry
         curves[name] = pr_curve(b_scores, labels)
     first = next(iter(predictions.values()))

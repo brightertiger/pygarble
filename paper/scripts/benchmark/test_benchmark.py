@@ -74,7 +74,8 @@ class RunTests(unittest.TestCase):
         )
         method = result["methods"]["english_fusion"]
         self.assertEqual(method["auroc"]["value"], 1.0)
-        self.assertEqual(method["dev_fpr"]["fpr1"], 0.01)
+        self.assertEqual(method["points"]["fpr1"]["dev_fpr"], 0.01)
+        self.assertTrue(method["points"]["fpr1"]["reachable"])
         point = method["points"]["fpr0.1"]
         self.assertEqual(point["B_precision"]["value"], 1.0)
         self.assertEqual(point["A_capture"]["value"], 1.0)

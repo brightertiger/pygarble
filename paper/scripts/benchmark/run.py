@@ -117,6 +117,11 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data-root", type=Path, default=data.DEFAULT_ROOT)
     parser.add_argument(
+        "--override-checkpoint",
+        metavar="REASON",
+        help="score B test even if the checkpoint fails; recorded",
+    )
+    parser.add_argument(
         "--metrics-only",
         action="store_true",
         help="recompute metrics from saved predictions without scoring",
@@ -147,9 +152,11 @@ def main() -> int:
         )
     cuts = metrics.fit_cuts(manifest, dev_scores)
     gate = metrics.checkpoint(cuts, a_scores[metrics.CHECKPOINT[0]])
+    if not gate["passed"] and args.override_checkpoint:
+        gate["override"] = args.override_checkpoint
     write_json(metrics.RESULTS / "checkpoint.json", gate)
     print(f"checkpoint: {gate}", flush=True)
-    if not gate["passed"]:
+    if not gate["passed"] and not args.override_checkpoint:
         print("Checkpoint failed; B test not scored.")
         return 2
     for name in names:

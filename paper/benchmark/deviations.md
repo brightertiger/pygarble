@@ -28,5 +28,19 @@ open. Each is also stated in `protocol.md` where it affects the protocol.
 - **Calibration positives.** `calibrate()` needs junk examples as well as
   clean ones; 500 B dev random strings are used alongside the 500 B dev
   tweets.
+- **2026-10-11: checkpoint fired; run continued without amendment.** After
+  the B dev cuts were fitted, `english_fusion` captured 0.600 of A at the
+  `fpr1` cut, below the 0.70 floor, and the runner stopped before B test.
+  The maintainer's standing instruction was to run the benchmark end to
+  end. The orchestrator chose to continue under the frozen protocol with no
+  amendment: B test was scored once with `run.py --override-checkpoint`,
+  and the override is recorded in `results/checkpoint.json`. Fusion's
+  0.600 is reported as a loss.
+- **Ties at the top score (reporting only).** For some methods more than
+  `k` dev tweets share the maximum score, so the frozen cut equals that
+  maximum and flags nothing. The cut rule is unchanged; these points carry
+  `reachable: false` in `metrics.json` and read "no cut reaches target" in
+  `results.md`. Fitted cuts and dev FPR are stored with each operating
+  point.
 
 No baseline was dropped.

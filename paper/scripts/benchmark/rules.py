@@ -119,7 +119,7 @@ def gopher_failures(text: str) -> List[str]:
     alpha = sum(bool(ALPHA.search(w)) for w in raw)
     if not raw or 1 - alpha / len(raw) > 0.2:
         failed.append("no_alpha_words")
-    if len(GOPHER_STOP_WORDS & set(norm)) < 2:
+    if len(GOPHER_STOP_WORDS.intersection(norm)) < 2:
         failed.append("stop_words")
     for n, limit in TOP_NGRAM_LIMITS:
         if top_ngram_fraction(norm, n) > limit:
