@@ -6,68 +6,86 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   test:
-    runs-on: ubuntu-latest
+    # ubuntu-latest moves to 26.04, which has no setup-python 3.8/3.9 builds.
+    # Return to ubuntu-latest once Python 3.8 and 3.9 are dropped.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
     strategy:
       matrix:
-        python-version: [3.8, 3.9, '3.10', '3.11', '3.12']
+        python-version: ['3.8', '3.9', '3.10', '3.11', '3.12', '3.13']
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
       with:
         python-version: ${{ matrix.python-version }}
-
-    - name: Cache pip dependencies
-      uses: actions/cache@v3
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
+        cache: pip
+        cache-dependency-path: pyproject.toml
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
         pip install -r requirements-dev.txt
 
     - name: Run tests
       run: |
         pytest tests/ -v --tb=short --cov=pygarble --cov-report=xml
 
+    - name: Run installed console scripts
+      if: matrix.python-version == '3.12'
+      run: |
+        pygarble --help
+        pygarble check -t "hello world"
+        pygarble-screen --help
+
     - name: Upload coverage to Codecov
       if: matrix.python-version == '3.12'
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
       with:
-        file: ./coverage.xml
+        files: ./coverage.xml
+        disable_search: true
         flags: unittests
         name: codecov-umbrella
+        token: ${{ secrets.CODECOV_TOKEN }}
         fail_ci_if_error: false
 
   study:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-python@v5
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+    - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
       with:
         python-version: '3.12'
     - name: Check study analysis and saved predictions without neural dependencies
       run: make benchmark-check
 
   screening-backends:
-    runs-on: ubuntu-latest
+    # ubuntu-latest moves to 26.04, which has no setup-python 3.8 build.
+    # Return to ubuntu-latest once Python 3.8 is dropped.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
     strategy:
       matrix:
-        python-version: ['3.8', '3.12']
+        python-version: ['3.8', '3.12', '3.13']
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-python@v5
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+    - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
       with:
         python-version: ${{ matrix.python-version }}
+        cache: pip
+        cache-dependency-path: pyproject.toml
     - run: pip install -e ".[screening]" pytest
     - name: Install pinned Gitleaks executable
       env:
@@ -87,19 +105,48 @@ jobs:
 
   quality:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      WORDLIST: ${{ github.workspace }}/.wordlist/count_1w.txt
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-python@v5
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+    - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
       with:
         python-version: '3.12'
+        cache: pip
+        cache-dependency-path: pyproject.toml
     - run: pip install -e ".[dev]"
     - run: black --check pygarble tests paper/scripts paper/regression docs/_ext
     - run: isort --check-only pygarble tests paper/scripts paper/regression docs/_ext
     - run: flake8 pygarble tests paper/scripts paper/regression docs/_ext
     - run: mypy pygarble
     - run: python paper/scripts/update_strategy_docs.py --check
+    - name: Read the pinned word-list source
+      id: wordlist
+      run: |
+        python - >> "$GITHUB_OUTPUT" <<'PY'
+        import json
+        curation = json.load(open("paper/scripts/data_curation.json"))
+        print("url=" + curation["source_url"])
+        print("sha256=" + curation["source_sha256"])
+        PY
+    - name: Restore the pinned word list
+      id: wordlist-cache
+      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: .wordlist/count_1w.txt
+        key: norvig-count_1w-${{ steps.wordlist.outputs.sha256 }}
+    - name: Download the pinned word list
+      if: steps.wordlist-cache.outputs.cache-hit != 'true'
+      env:
+        URL: ${{ steps.wordlist.outputs.url }}
+        SHA256: ${{ steps.wordlist.outputs.sha256 }}
+      run: |
+        mkdir -p "$(dirname "$WORDLIST")"
+        curl -fsSL --retry 3 --retry-all-errors --retry-delay 5 -o "$WORDLIST" "$URL"
+        echo "$SHA256  $WORDLIST" | sha256sum --check
     - name: Verify generated data
-      run: python paper/scripts/generate_data.py --check
+      run: python paper/scripts/generate_data.py --check --source "$WORDLIST"
     - name: Golden corpus reproduces
       run: python paper/regression/golden.py --check
     - name: Golden scan corpus
@@ -107,12 +154,13 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     needs: [test, quality, screening-backends, study]
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
     - name: Set up Python 3.12
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
       with:
         python-version: '3.12'
 

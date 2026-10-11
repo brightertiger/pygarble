@@ -15,12 +15,14 @@ The generated files are committed to the repository.
 import argparse
 import bisect
 import hashlib
+import http.client
 import json
 import math
 import os
 import subprocess
 import sys
 import tempfile
+import time
 import urllib.request
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -28,6 +30,8 @@ from typing import Dict, List, Sequence, Set, Tuple
 
 # URLs for data sources
 NORVIG_WORD_FREQ_URL = "https://norvig.com/ngrams/count_1w.txt"
+DOWNLOAD_ATTEMPTS = 2
+DOWNLOAD_RETRY_SECONDS = 5.0
 
 # Generated header paths are historical; retain them for byte reproducibility.
 # Output paths
@@ -59,6 +63,36 @@ SCORE_NULL_RANGES = STATISTIC_NULL_RANGES + ((128, 255), (256, 480))
 
 # Tables the strategies import; tails must be scored with the fresh ones.
 BASE_TABLES = ("words", "bigrams", "trigrams", "reference", "ngram_ranks")
+
+
+def fetch_source(url: str) -> bytes:
+    """Download the pinned source, retrying once on a network fault.
+
+    A transport error or a body shorter than Content-Length is retried;
+    the checksum is checked by the caller on the complete body.
+    """
+    error = ""
+    for attempt in range(1, DOWNLOAD_ATTEMPTS + 1):
+        try:
+            with urllib.request.urlopen(url, timeout=30) as response:
+                declared = response.headers.get("Content-Length")
+                raw = response.read()
+        except (OSError, http.client.HTTPException) as exc:
+            error = f"{type(exc).__name__}: {exc}"
+        else:
+            if declared is None or len(raw) == int(declared):
+                return bytes(raw)
+            error = f"short read: got {len(raw)} of {declared} bytes"
+        if attempt < DOWNLOAD_ATTEMPTS:
+            print(
+                f"Download attempt {attempt} failed ({error}); retrying",
+                file=sys.stderr,
+            )
+            time.sleep(DOWNLOAD_RETRY_SECONDS)
+    raise RuntimeError(
+        f"network fault downloading {url} after {DOWNLOAD_ATTEMPTS} "
+        f"attempts ({error}); the pinned data was not checked"
+    )
 
 
 def download_word_frequencies(url: str) -> Dict[str, int]:
@@ -621,14 +655,16 @@ def main() -> None:
     curation = json.loads(curation_path.read_text())
     if args.source:
         raw = args.source.read_bytes()
+        origin = str(args.source)
     else:
-        with urllib.request.urlopen(
-            curation["source_url"], timeout=30
-        ) as response:
-            raw = response.read()
-    if hashlib.sha256(raw).hexdigest() != curation["source_sha256"]:
+        raw = fetch_source(curation["source_url"])
+        origin = curation["source_url"]
+    digest = hashlib.sha256(raw).hexdigest()
+    if digest != curation["source_sha256"]:
         raise ValueError(
-            "source checksum mismatch; review provenance before updating"
+            f"{origin} ({len(raw)} bytes, sha256 {digest}) does not match "
+            f"the pinned sha256 {curation['source_sha256']}; the content "
+            "differs from the pinned file, review provenance before updating"
         )
     word_freq = {}
     for line in raw.decode("utf-8").splitlines():

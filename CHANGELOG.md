@@ -75,6 +75,19 @@ All notable changes to pygarble are documented here. The format follows
   search, keeping dense PII documents from causing quadratic work.
 
 ### Changed
+- CI tests Python 3.13, pins every action to a commit SHA, and keeps jobs
+  that need Python 3.8 or 3.9 on `ubuntu-24.04`, because `ubuntu-latest`
+  moves to 26.04, which has no builds for those versions. The generated-data
+  check caches the pinned word list. The data generator retries a failed
+  download once and reports a network fault separately from a checksum
+  mismatch.
+- Before publishing, the release workflow runs the tests on Python 3.8 and
+  3.12, lint, the golden checks and a smoke test of the built wheel. The
+  Docker image is now pushed from that workflow only after the PyPI upload
+  succeeds. The separate Docker workflow, including its manual trigger,
+  is removed.
+- Development installs pin flake8 7.x and isort 9.x, which CI lints with.
+  isort 5.13 is used on Python 3.8 and 3.9.
 - Release uploads use PyPI Trusted Publishing with the `pypi` GitHub
   environment; the project owner must configure that publisher before tagging
   the next release. Existing distribution files are no longer silently skipped.

@@ -46,8 +46,10 @@ dev = [
     "pytest>=6.0",
     "pytest-cov>=2.0",
     "black==24.8.0",
-    "flake8>=3.8",
-    "isort>=5.0",
+    # Majors match CI lint (3.12); isort 9 needs Python 3.10+.
+    "flake8>=7,<8",
+    "isort>=9,<10; python_version >= '3.10'",
+    "isort>=5.13,<6; python_version < '3.10'",
     "pre-commit>=2.0",
     "mypy==1.11.2",
     "build>=1.0",
