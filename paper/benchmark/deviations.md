@@ -37,8 +37,8 @@ open. Each is also stated in `protocol.md` where it affects the protocol.
   and the override is recorded in `results/checkpoint.json`. Fusion's
   0.600 is reported as a loss.
 - **Ties at the top score (reporting only).** For some methods more than
-  `k` dev tweets share the maximum score, so the frozen cut equals that
-  maximum and flags nothing. The cut rule is unchanged; these points carry
+  `k` dev tweets share the top score, so the frozen cut equals the highest
+  score of any B dev row and flags nothing. The cut rule is unchanged; these points carry
   `reachable: false` in `metrics.json` and read "no cut reaches target" in
   `results.md`. Fitted cuts and dev FPR are stored with each operating
   point.

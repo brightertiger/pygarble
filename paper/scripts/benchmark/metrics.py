@@ -145,12 +145,9 @@ def fit_cuts(
                 p: round(float(np.mean(negatives > c)), DIGITS)
                 for p, c in cuts.items()
             },
-            # False when more than k dev tweets tie at the top score, so
-            # no cut within the budget flags anything ("no cut reaches
-            # target").
-            "reachable": {
-                p: bool(c < negatives.max()) for p, c in cuts.items()
-            },
+            # False when ties at the top leave the cut at the highest B dev
+            # score, so it flags nothing: "no cut reaches target".
+            "reachable": {p: bool(c < scores.max()) for p, c in cuts.items()},
         }
     return out
 
