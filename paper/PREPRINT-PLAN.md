@@ -1,4 +1,4 @@
-# Preprint plan (v4, 2026-10-11)
+# Preprint plan (v5, 2026-10-11)
 
 Deliverables: benchmark code, frozen results and analysis, LaTeX source and
 PDF of the preprint. Scope: one preprint showing what pygarble captures on two public gibberish
@@ -21,10 +21,12 @@ as given; the mojibake-tweet share is reported as a note, not re-labelled.
 
 - B is split 30 percent development, 70 percent test by seed 20261011,
   stratified by label. A is scored whole; it has no thresholds to fit.
-- Operating points per method: native decision, plus thresholds giving 1
-  percent and 0.1 percent FPR on B development tweets. The B-derived
-  thresholds are also applied to A so A's capture rate is reported at a
-  known FPR on real short text.
+- The paper reports every method at its own default decision only. The
+  fixed-FPR operating points and the calibration run computed in PR 18 stay
+  in the frozen result files but are not headline results; the limitations
+  section states in one sentence, with numbers, that at a matched 1 percent
+  false-positive rate the Markov gibberish-detector captures more survey
+  junk than english_fusion (v5 change, made after seeing those results).
 - Pilot on 2026-10-11 (defaults, threshold 0.5: fusion recall 0.895 on A;
   precision 0.906 and recall 0.991 on B) is disclosed; nothing changed after.
 - Test scoring runs once from the frozen runner; predictions saved;
@@ -40,17 +42,14 @@ strategy alone (appendix). Baselines, CPU, pinned: nostril, gibberish-detector
 Gopher and C4 rules. No neural baselines.
 
 Footprint for every method: ms per 1,000 texts single-threaded, median of 5;
-import time; install size; offline. Calibration: `calibrate()` on 500 B
-development tweets at target 1 percent FPR; realised FPR on B test, capture
-rate on A.
+import time; install size; offline.
 
 ## Figures and tables
 
-Fig 1 capture rate on A, all methods, native and at the 1 percent
-operating point. Fig 2 precision-recall curves on B. Fig 3 cost against
-capture rate. Table 1 operating-point table (A capture, B precision/recall/FPR,
-native and fixed-FPR). Table 2 footprint. Table 3 calibration. All numbers
-read from result files.
+Fig 1 capture rate on A, all methods, default decision. Fig 2 precision
+and recall on B, default decision. Fig 3 speed against capture rate. Table 1
+results table (A capture; B precision, recall, FPR; default decision).
+Table 2 footprint. All numbers read from result files.
 
 ## Work packages
 
@@ -72,5 +71,6 @@ in A left in; pilot disclosed; no default or threshold changed after scoring.
 
 Title: "How much junk do rules catch? pygarble on real survey responses and
 social-media text". Sections: introduction; pygarble in one page; datasets
-and protocol; results on A; results on B; cost and calibration; where it
-fails; guidance; limitations, reproducibility, AI assistance disclosure.
+and protocol; results on A; results on B; cost; where it fails; guidance;
+limitations (including the matched-FPR sentence), reproducibility, AI
+assistance disclosure.
