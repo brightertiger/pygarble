@@ -9,7 +9,5 @@ __pycache__/
 reproduction/
 reproduction-full/
 
-# Derived previews; retain only the two figures used by the manuscript.
+# Derived figure previews; regenerate with full_figures.py.
 figures/*
-!figures/chunk-confusions.pdf
-!figures/full-languages.pdf

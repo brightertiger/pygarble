@@ -1,5 +1,8 @@
 # Validation record
 
+Note: entries below that mention the manuscript, `make paper` or the build
+script are historical. Those files were removed on 2026-10-11 for a rework.
+
 Measured on an Apple M2, 8 GiB RAM, macOS ARM64, Python 3.12.2.
 The full-corpus scoring protocol and core were frozen in `717ceee` before
 new predictions. Exact source hashes are in `full-results/code-manifest.json`.
@@ -79,7 +82,6 @@ python -m paper.study.full_diagnostics
 python -m paper.study.full_runtime
 python -m paper.study.chunk_metrics
 python -m paper.study.full_figures
-python -m paper.study.build_paper
 python -m black --check paper/study/*.py
 python -m isort --check-only paper/study/*.py
 python -m flake8 paper/study/*.py

@@ -144,16 +144,14 @@ The repository follows that division:
    tests/              # package unit and integration tests
    docs/               # maintained website and user guides
    paper/
-     study/            # research protocols, predictions and manuscript
+     study/            # research protocols, predictions and results
      regression/       # engineering fixtures, golden checks and throughput
      scripts/          # data/docs generation and documentation checks
-       study/          # evaluation, analysis, paper builds and study tests
+       study/          # evaluation, analysis and study tests
 
 Only ``pygarble`` is installed as library code. The optional neural environment
 belongs to ``paper/study/`` and does not add dependencies to the base package.
-The manuscript, measured results and benchmark scope are linked from
-:doc:`benchmarks`. Generated paper build files live in the ignored
-``paper/study/.cache/publication/`` directory.
+Measured results and benchmark scope are linked from :doc:`benchmarks`.
 
 Within gibberish analysis, shared features retain token offsets and lexical
 novelty for the selected strategies. Evidence consists of a score, applicability,

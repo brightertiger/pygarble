@@ -272,8 +272,7 @@ versions. Research benchmark results come from the
 chunks from 109 source files against a pinned local DistilBERT classifier.
 The English comparison uses 173 gibberish and 5,200 meaningful chunks; see the
 [benchmark guide](https://brightertiger.github.io/pygarble/benchmarks.html) for
-confusion counts, accuracy, latency and limitations. The manuscript is not yet
-published or peer reviewed. PII, secrets and profanity are outside that study.
+confusion counts, accuracy, latency and limitations. PII, secrets and profanity are outside that study.
 
 Run `make benchmark-check` for fast offline study checks. `make benchmark`
 executes a new full comparison after preparing the optional research environment
@@ -290,8 +289,8 @@ Small authored challenge sets remain engineering regression fixtures.
 
 Library code is in `pygarble/`, unit tests in `tests/`, and the website in
 `docs/`. Research and tooling are grouped under `paper/`: `study/` contains
-the manuscript, protocols and results, `scripts/study/` contains the evaluation
-and paper-building code, `regression/` contains engineering checks, and the
+the protocols and results, `scripts/study/` contains the evaluation
+and analysis code, `regression/` contains engineering checks, and the
 other files in `scripts/` maintain package data and documentation.
 
 ```text
