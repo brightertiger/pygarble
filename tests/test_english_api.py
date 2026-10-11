@@ -317,13 +317,19 @@ def test_decisions_are_deterministic_across_processes():
     assert results[0] == results[1]
 
 
-def test_frozen_challenge_has_no_family_leakage():
-    evaluate = pytest.importorskip(
-        "paper.regression.evaluate",
-        reason="paper/regression/ is not shipped in sdist",
+def test_golden_inputs_load_with_both_labels():
+    path = (
+        Path(__file__).resolve().parents[1]
+        / "paper"
+        / "regression"
+        / "golden_inputs.json"
     )
-    assert evaluate.challenge("development")
-    assert evaluate.challenge("holdout")
+    if not path.is_file():
+        pytest.skip("paper/regression/ is not shipped in sdist")
+    rows = json.loads(path.read_text(encoding="utf-8"))["rows"]
+    assert len(rows) == 600
+    assert sorted(row["label"] for row in rows) == [0] * 300 + [1] * 300
+    assert len({row["id"] for row in rows}) == 600
 
 
 def test_model_manifest_matches_packaged_data():

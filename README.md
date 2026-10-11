@@ -281,13 +281,14 @@ for every result, interval and limitation. PII, secrets and profanity are
 outside that benchmark.
 
 Run `make benchmark-verify` to recompute every metric from the committed
-per-row predictions; the raw data is never committed. Small authored challenge
-sets remain engineering regression fixtures.
+per-row predictions; the raw data is never committed. A seeded 600-row sample
+of the Apache-2.0 dataset is committed as the input of the golden corpus that
+CI checks.
 
 - [Changelog](https://github.com/brightertiger/pygarble/blob/main/CHANGELOG.md)
 - [Preprint, benchmark and reproduction](https://github.com/brightertiger/pygarble/blob/main/paper/README.md)
 - [Engineering regression checks](https://github.com/brightertiger/pygarble/blob/main/paper/regression/README.md)
-- [Golden corpus](https://github.com/brightertiger/pygarble/blob/main/paper/regression/golden.jsonl) of frozen detector outputs for every profile, and a [golden scan corpus](https://github.com/brightertiger/pygarble/blob/main/paper/regression/golden_scan.jsonl) for the scanner, both checked in CI
+- [Golden corpus](https://github.com/brightertiger/pygarble/blob/main/paper/regression/golden.jsonl) of frozen detector outputs for every profile on that sample and hand-written edge inputs, and a [golden scan corpus](https://github.com/brightertiger/pygarble/blob/main/paper/regression/golden_scan.jsonl) for the scanner, both checked in CI
 - [Data provenance and curation](https://github.com/brightertiger/pygarble/blob/main/paper/scripts/data_curation.json)
 
 ## Repository layout and compatibility

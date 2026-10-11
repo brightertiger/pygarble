@@ -468,142 +468,614 @@
 {"findings": [], "flagged": false, "length": 73, "options": {}, "sha256": "d9864f4a831f02205829949790d2b6a0e8ae95975bc2a3c74cc2cdeb9761b9f4", "source": "prose.txt"}
 {"findings": [], "flagged": false, "length": 73, "options": {}, "sha256": "8cd618e737cca214a17af2c18b099da174cba4d269243726450850d65a05c331", "source": "prose.txt"}
 {"findings": [], "flagged": false, "length": 39, "options": {}, "sha256": "149dd3cb53165d0c1217e7e7f5464b366113102b8630c32d40e1f13123c09871", "source": "prose.txt"}
-{"findings": [], "flagged": false, "length": 46, "options": {}, "sha256": "f86f94884cd07fa7eb2b6686b70ba88e96106c4acc7d10078899737bd7a6b0e2", "source": "golden"}
-{"findings": [], "flagged": false, "length": 45, "options": {}, "sha256": "0914eb97a56cfb7bc069d8ea842c7324311e70038cf29865c85f062f93f0a544", "source": "golden"}
-{"findings": [], "flagged": false, "length": 58, "options": {}, "sha256": "68fef2789e2efb13f6b54ad1374653bd06b1a8fdeb974a1d607722ae334ad49c", "source": "golden"}
-{"findings": [], "flagged": false, "length": 57, "options": {}, "sha256": "cda8b0266ec4407e2128625ba14333d13643bb3ab80658883492de764e7005a3", "source": "golden"}
-{"findings": [], "flagged": false, "length": 53, "options": {}, "sha256": "1eec38f389aad7c684ac7fbf92eec8515e3eb4a8f603390acab5c12a4f8d8fc0", "source": "golden"}
-{"findings": [], "flagged": false, "length": 53, "options": {}, "sha256": "e2f027d386c2e6ad178f5b4d8bb2eb0e1d47df690c09c9d4bb215f15c1a45f35", "source": "golden"}
-{"findings": [], "flagged": false, "length": 43, "options": {}, "sha256": "5194b60ff156c642a0fa24dae4f7dce7c9c088230f0c728a1af38f8b9e693a5f", "source": "golden"}
-{"findings": [], "flagged": false, "length": 44, "options": {}, "sha256": "267f995b4c249758265d2327f86aa334f5d674519c6466f0bf944f54ea26a22b", "source": "golden"}
-{"findings": [], "flagged": false, "length": 62, "options": {}, "sha256": "e110078d9290504d2d9fc05fd05920c00a62b5ccf01321d4229374bfc1bc8be1", "source": "golden"}
-{"findings": [], "flagged": false, "length": 53, "options": {}, "sha256": "c69fa067fc8ceb222b107917170b26dd8642f8400550c5866815faf726d1b6e3", "source": "golden"}
-{"findings": [], "flagged": false, "length": 43, "options": {}, "sha256": "89928b9d597a8ac193b34a6eeccb28c23d99dab2ea4962eaa5f386fa8945f358", "source": "golden"}
-{"findings": [], "flagged": false, "length": 52, "options": {}, "sha256": "6becb3138230f9c6d2cf7971e58dcc9d538c9952a070dc5f86b7d527ad637657", "source": "golden"}
-{"findings": [], "flagged": false, "length": 13, "options": {}, "sha256": "bc25f0786cbf7047c110a7ac53ce898da64558fc6628fea552340e7b3b4b5789", "source": "golden"}
-{"findings": [], "flagged": false, "length": 14, "options": {}, "sha256": "27ec23febc09f3c9c66b9ebba9afbd89a9a68ce6732f5ae58e26d7294db6742b", "source": "golden"}
-{"findings": [], "flagged": false, "length": 10, "options": {}, "sha256": "cc52d03280b7034c8e3653d2748ebd489a873ef4bbc89cb187fbfcabfbbf6873", "source": "golden"}
-{"findings": [], "flagged": false, "length": 5, "options": {}, "sha256": "5be1ecc7935f1dd85635d4feedaf660594030253cc97c9e9ca3819ffeac36b65", "source": "golden"}
-{"findings": [], "flagged": false, "length": 6, "options": {}, "sha256": "ead3e38f4291209091f610982a9f94d0104ceb357afc4c5039ec66e1c285ce2c", "source": "golden"}
-{"findings": [], "flagged": false, "length": 34, "options": {}, "sha256": "30059116c25523954a3c202c1d2bc46d8cd7b9ba4b59795ea54807d1d31cf8ae", "source": "golden"}
-{"findings": [["pii", "email", 0, 16, 0.9, "structure"]], "flagged": true, "length": 16, "options": {}, "sha256": "708351d7f03ac1373791077d398110c70f4bdfa1cb7c1b5df432ee7f760f7f91", "source": "golden"}
-{"findings": [], "flagged": false, "length": 10, "options": {}, "sha256": "1df0dc2fd904aa80eb181ded7a95f003ab78a7056f5a4f7f5aba6e01c2f8bbf6", "source": "golden"}
-{"findings": [], "flagged": false, "length": 10, "options": {}, "sha256": "ed827267b7e2980b2d5f401a8b3976f2ca33f2e31f1cb01fae9edc4501e3abcb", "source": "golden"}
-{"findings": [], "flagged": false, "length": 13, "options": {}, "sha256": "e3c6cc9273ee75c2563d7cd94825033e37ab3fa3a28157ac75673acf9fc4362a", "source": "golden"}
-{"findings": [], "flagged": false, "length": 33, "options": {}, "sha256": "eca12c081df0b78e50e568a8cca97d36f2fed9ec240e1fb4e71a3d86e63ce4c4", "source": "golden"}
-{"findings": [], "flagged": false, "length": 45, "options": {}, "sha256": "b23c15d3429406747fad3b838f891bbdad23940b6f89c180b15dd614d1bd134d", "source": "golden"}
-{"findings": [], "flagged": false, "length": 35, "options": {}, "sha256": "bc51cb565b06abc61dc31b7b67dad5cb59909c206924b73bc3454e0bb60df4bd", "source": "golden"}
-{"findings": [], "flagged": false, "length": 32, "options": {}, "sha256": "10d2a89cad9ada52e70780b3fb1008ac719b092ab6ef213ec21ab01640bfe44a", "source": "golden"}
-{"findings": [], "flagged": false, "length": 23, "options": {}, "sha256": "ca83bb3aa7a7d6a78ac97956a414301bf6ed332fd921069331e9f5cf573618f5", "source": "golden"}
-{"findings": [], "flagged": false, "length": 7, "options": {}, "sha256": "797b1a73b260c639e79f4695af48577697832914d84f96e554de21b45d504ef9", "source": "golden"}
-{"findings": [], "flagged": false, "length": 5, "options": {}, "sha256": "3454f8088d3cd493e2d2e6b509b9a76f479586be911316988938accf4254598c", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 6, 0.81801774648, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "df0c4dd19ae70dc64b7b03ab398e9bf652ae7171072dd8a7d933ff909b26acee", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 8, 0.698919661282, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "d63d9f2678047f082ba496ff94ad3a02147b7930332581c0fd74276f344e25c5", "source": "golden"}
-{"findings": [], "flagged": false, "length": 6, "options": {}, "sha256": "213c4d2db026ed435600846708e0d056658f34fab86071f297925e534d209325", "source": "golden"}
-{"findings": [], "flagged": false, "length": 8, "options": {}, "sha256": "597d0dd6aa15b00d9be09a8f5eb48649e84e12a3c9b671f50efa210e7ff0cbe5", "source": "golden"}
-{"findings": [], "flagged": false, "length": 8, "options": {}, "sha256": "6250fef1f20df13994e26f0561883c2b23979bc4c1a2ada2354703cd0c49f7b5", "source": "golden"}
-{"findings": [], "flagged": false, "length": 16, "options": {}, "sha256": "ac226f1b3595fd7879bfa8d36dd66861324d586fa10e8da2e74b2a1e8c2a1165", "source": "golden"}
-{"findings": [], "flagged": false, "length": 5, "options": {}, "sha256": "df7682099c96e3f66171aed65ba78ae5200ba7200278569327e6cabf16c98b96", "source": "golden"}
-{"findings": [], "flagged": false, "length": 5, "options": {}, "sha256": "fb8a358fd9e654355ae124a120470ac3a74e1cb2c21a09fde76a3775a18840b0", "source": "golden"}
-{"findings": [], "flagged": false, "length": 10, "options": {}, "sha256": "ab6296e2fcab380425471a3009c49fcdb1f2e68bef4daa820bde78506658ffab", "source": "golden"}
-{"findings": [], "flagged": false, "length": 5, "options": {}, "sha256": "07d715edb696fb5f628f7298e5d7217ed4d2bdfc5347a1c55fee30832267f21d", "source": "golden"}
-{"findings": [], "flagged": false, "length": 20, "options": {}, "sha256": "473b3fb858a25787be603efb35c0f48a583999ea6585280bad48d27c06f37686", "source": "golden"}
-{"findings": [], "flagged": false, "length": 45, "options": {}, "sha256": "877a819b49d0dde80924127e9f5376634874124f92d03b77171d91d332ae8635", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "5c80565db6f29da0b01aa12522c37b32f121cbe47a861ef7f006cb22922dffa1", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 6, 1.0, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "65e84be33532fb784c48129675f9eff3a682b27168c0ea744b2cf58ee02337c5", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 10, 1.0, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "9a900403ac313ba27a1bc81f0932652b8020dac92c234d98fa0b06bf0040ecfd", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 7, 1.0, "garbled"]], "flagged": true, "length": 7, "options": {}, "sha256": "1df1854015e31ca286d015345eaff29a6c6073f70984a3a746823d4cac16b075", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 10, 1.0, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "091364025ac80949dbc4413fa467bc2035f094a22ffdc95a64e81b10b144b4e8", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 7, 1.0, "garbled"]], "flagged": true, "length": 7, "options": {}, "sha256": "2e6887c8745b28fce2e729491ab7e4c63b527baf8c76a649f277623af34be211", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 12, 1.0, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "17417ebfe065a26e4fe02b9fe45db1e6905c1b61525b948af94f1cd273d81412", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 11, 1.0, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "f6ee94ecb014f74f887b9dcc52daecf73ab3e3333320cadd98bcb59d895c52f5", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "afd25087b9a776c47c41315fe8d04dbd38f5a33b32b6e2b5f7bc5f0f4e692c8e", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 13, 0.8, "garbled"]], "flagged": true, "length": 13, "options": {}, "sha256": "4c549b97cc23e4339c160a0d2dbd129dcac4c362296410a69f07a913c64cfe64", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 15, 0.666666666667, "garbled"]], "flagged": true, "length": 15, "options": {}, "sha256": "895f6422ad194a95eacf81531ef342a48f2e2c1f36293a57f934d59b8363578a", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 17, 1.0, "garbled"]], "flagged": true, "length": 17, "options": {}, "sha256": "83608bb896e19711944efa13b95b6165c78427cda83c637d3d0c7df02513d643", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 14, 0.8, "garbled"]], "flagged": true, "length": 14, "options": {}, "sha256": "11b3fa057bf89c6cacb4a6a56db7f4fc93126cb8d6bc4efdc2a8619c8641be09", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 13, 0.9, "garbled"]], "flagged": true, "length": 13, "options": {}, "sha256": "a74946c27dc6e254e1a2b60ab539d7a4ff2eb84a78e7d26922a08a01c44dec3f", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 11, 0.9, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "b206899bc103669c8e7b36de29d73f95b46795b508aa87d612b2ce84bfb29df2", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 11, 0.9, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "ddc5f43ce7912de01c6c175972db7e90c5684355156edf9a2e93b128dee60615", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 9, 0.9, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "bd6141fb31ac2573c5c1861d20c16efe129f3556216c2ae1426dc03d3315a58d", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 13, 0.999997739676, "garbled"]], "flagged": true, "length": 13, "options": {}, "sha256": "d7be5996fa562294908ffe50c6aece46c34d6bed34e241dec5d1e8b5e83f7596", "source": "golden"}
+{"findings": [], "flagged": false, "length": 54, "options": {}, "sha256": "a923399d9b25d7868d82325816b6b10fdcaaaad27f47108e0ae36934a38ddebd", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 1.0, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "5b873400c3dc9ed7e1d6e534ea46b3b6dfac40ce544f2b98683b5e54629b3351", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 101, 0.9, "garbled"]], "flagged": true, "length": 101, "options": {}, "sha256": "a9ea2f1d480e0d9911457916ac247fac2f70e92693a63017d091ef60079309ab", "source": "golden"}
+{"findings": [], "flagged": false, "length": 89, "options": {}, "sha256": "a1e92c18dfd5e472724b4a3f284600d12922e68cf86be9ff25e8fd5649ec241a", "source": "golden"}
+{"findings": [], "flagged": false, "length": 5, "options": {}, "sha256": "6ddef67024cd1736cd80e4010e6c71585001d71aa9cd76b7ce8d7901bc26dc4d", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "cea08d265afd2696e93a11d3e8b69f52b6ccaab51b06499f231b14590790750b", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 1.0, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "a864db5a20154417bfa628674fdec750bf51ac22207e2b5ebdeedb11aef367a3", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 1.0, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "430f7d41f8558ac9c798e026a4afa5678223e1bf5290d41ba98c38b69f1d8544", "source": "golden"}
+{"findings": [], "flagged": false, "length": 78, "options": {}, "sha256": "6d82ba95ee0be9c590907876be6850408956e43d136ac430bfd62643b572abd5", "source": "golden"}
+{"findings": [], "flagged": false, "length": 68, "options": {}, "sha256": "bd4f4dd79f6a2dc1977bd21c4d0e51cf5e63f718575a7541ad231a590ab23b71", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 0.878802945647, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "bd0f68d4a5f0c086675273a56c3ea9b4d2c22f13e15771d96603799816c1cd15", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 0.80437371224, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "216a3b7191d8b2c2cb0dd7b0c35ec3a09ce062db1153831a9ed16151811d0d96", "source": "golden"}
+{"findings": [], "flagged": false, "length": 74, "options": {}, "sha256": "526ce7d93460511f34f76cde76216546dd8318741bc689414c25ed00ddd27f54", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 1.0, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "a4179ecea10547f74df2bf083870ee2e195cffdc8be16ff845ad58a0d817739b", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 110, 0.9, "garbled"]], "flagged": true, "length": 110, "options": {}, "sha256": "e591ad052b03625b0ce73fa9eca90822895de41e1a4aeadefa27790a42ccfe84", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 36, 0.9, "garbled"]], "flagged": true, "length": 36, "options": {}, "sha256": "9f83ca4b472b1cd3a9ae86b818a071e1a70131044ded0f571c3f3d71e34aeee0", "source": "golden"}
+{"findings": [], "flagged": false, "length": 41, "options": {}, "sha256": "95109aedfb33c489eaf490312f51c7b4ecbf1a8e8d9584008b1ee297fd85a791", "source": "golden"}
+{"findings": [], "flagged": false, "length": 143, "options": {}, "sha256": "37f830f75cd1a8b4fc84abafa1bdcfe0ab893a6bf1bfe686e82455c88f7975b8", "source": "golden"}
+{"findings": [], "flagged": false, "length": 92, "options": {}, "sha256": "9575bf5d1ec447edf6adb6d38b5272b3535049409cc15c902ccc7016b05e71bc", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 0.790577650433, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "ccf47655fd89633ac71b735c322bf275dbbc053690e56f4e33d6fa4555a552a7", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 47, 0.544115983075, "garbled"]], "flagged": true, "length": 47, "options": {}, "sha256": "38f92ba4fa1ddec5d6200e7205fbb65d31f02cc4c61a1d595abd091bdf97978f", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 84, 0.9, "garbled"]], "flagged": true, "length": 84, "options": {}, "sha256": "07676e156daee0362f4ff48ff4207363fa9c0ace41687386c91eebe69f7d0755", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 45, 0.544115983075, "garbled"]], "flagged": true, "length": 45, "options": {}, "sha256": "757731334499e3db8770643d073cf7a46239578c46a116a1662c5b8dbb856d66", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 1.0, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "c8753f50d1bf2123b8c911261c7a4f17cf1d4d061b26c92d3291948139877d23", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 0.894888980421, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "470e483b8e2421ee67071fe7fbc7310788415ac940063b9db9bb73138b3a6362", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 7, 0.862999052346, "garbled"]], "flagged": true, "length": 7, "options": {}, "sha256": "d299f6d8a60298708e19c198272b8237ab8b900045153ca86c8381485a457efb", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 0.63662149746, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "6ad35ce37ca574efe7500426b8b0d7a23a206a59371ec2cd09eb1b6f2d8d58c9", "source": "golden"}
+{"findings": [], "flagged": false, "length": 51, "options": {}, "sha256": "23b9ba14ba09bb8c2cd3d427b21ba3cfe65e2ebf66d375f2535590b4b2a1c71a", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "f3234ea4e2178353a4c6451a67daa564d64e02902e9089dd14448dc3d64e615a", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 79, 0.9, "garbled"]], "flagged": true, "length": 79, "options": {}, "sha256": "bb4b5996da11aa60adffd0c072763a2e53e4c9296723d573f36c8cb8c774bb4e", "source": "golden"}
+{"findings": [], "flagged": false, "length": 179, "options": {}, "sha256": "d8e9827a02cb622d594bd4a4157126e0c7c1b428842489d74c656d60c6da26e4", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "0c6c72f00b5610203d89dedcbc544c1a8a72e61bff977301faf3866615781a1e", "source": "golden"}
+{"findings": [], "flagged": false, "length": 69, "options": {}, "sha256": "c98a8bafed80812626ff3fee2b30aa0c6d31b0f3224bef69211b00e2c068a554", "source": "golden"}
+{"findings": [], "flagged": false, "length": 22, "options": {}, "sha256": "096b63fe68d5fc7df8ee15342cd95cd2f2d65403257b45c73afe88abb3da9629", "source": "golden"}
+{"findings": [], "flagged": false, "length": 116, "options": {}, "sha256": "beebf9a28490f5229cf526e54f30fb97543e8f81f260d20831fa205c1b8aa98f", "source": "golden"}
+{"findings": [], "flagged": false, "length": 60, "options": {}, "sha256": "83f4ea20a1fe45c39adb572509ab38cd3f28bccd814c2730cc6ad09758a22888", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 1.0, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "62b804f9032ba9c8f79684d338e419543c4ca7551365f41b2347b5686e504bf8", "source": "golden"}
+{"findings": [], "flagged": false, "length": 5, "options": {}, "sha256": "c02e8e352c52c7e86dbb9b4266315314fb3c0ce51a068ab7b782950486e0058e", "source": "golden"}
+{"findings": [], "flagged": false, "length": 50, "options": {}, "sha256": "b1427671453580a50263e904d95deee117c07c841ed2a4aa454ff7df9a84ddd7", "source": "golden"}
+{"findings": [], "flagged": false, "length": 87, "options": {}, "sha256": "03efbe149baa331473a6366c4e6eae25ca2ff5429091c0c404a07fd46fcff59e", "source": "golden"}
+{"findings": [], "flagged": false, "length": 40, "options": {}, "sha256": "2e31aead712a58ad30d330b8a874ff9000348cd5913f51fc89dc9bd403c767fa", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "796473aa7b055e198eba564cf1f04a6f9c8b4941e9c6616dd62d94819436cea7", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 1.0, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "69c4bdd3c87cae16856b567bdf1481895410bf4d0b95fba71687af479aecc0d7", "source": "golden"}
+{"findings": [], "flagged": false, "length": 95, "options": {}, "sha256": "3b09b784df90874b5d696c9936d2d5037258a7fb61c485f2a9aa288f6843f11a", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 89, 0.9, "garbled"]], "flagged": true, "length": 89, "options": {}, "sha256": "334786daad20faec59121b44525670e48667a02be1cded04ffd7c17d5fe9bdc1", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "af9b9c8e9d35d45eb7b81e10b6e44f5e856a19708d67148fffd9768b9064debe", "source": "golden"}
+{"findings": [], "flagged": false, "length": 152, "options": {}, "sha256": "6c67d37c2f21ef04d880d109b25cff2f9f23fe26dc99bc019d1f38edac2d03bc", "source": "golden"}
+{"findings": [], "flagged": false, "length": 144, "options": {}, "sha256": "4fb15d632c72794ccc2e6d8d58e5ab82f9a55ed7d050b7d5458bfad8c2bde62a", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 1.0, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "f40d38d14b0c05c17af43188059c2beea55bdc04e372b4690d82098425f51b2b", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 0.888916447214, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "d81a33a811568e2bd6c04e916851a34849eceb06b749a514cc60350d199ff8c4", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 1.0, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "0811dcd22fa2dab5607bb1705182e1985011957840530752dce964013f42fc72", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 1.0, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "d397abb8e87d5793a330e1982577b20af0930eae2fe4a5cb91ecdbfadac86820", "source": "golden"}
+{"findings": [], "flagged": false, "length": 86, "options": {}, "sha256": "aaeb8c3c8cb61aad0ed3c83713935e4b2945d6d14d1deedd43fd3133cc5945b4", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 1.0, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "e5948b3030564172bdd845485de5396e08e5af398b473a6204e70b0fdabc6f17", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 1.0, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "457f968d1bdf7331255ed38b44b174b255d139c243b560d3a6bf84593e6d0e4f", "source": "golden"}
+{"findings": [], "flagged": false, "length": 127, "options": {}, "sha256": "b3051d1d9b5de44a09c9636e8657d33b1a4ea939459003ba328d41027f3729ab", "source": "golden"}
+{"findings": [], "flagged": false, "length": 47, "options": {}, "sha256": "f83ccd798cd642f57bfee8db6b8c1fd52767bff6489ead2af089078e1699fcd0", "source": "golden"}
+{"findings": [], "flagged": false, "length": 77, "options": {}, "sha256": "36c5c7653a104290e476cd9dc51898426209a798a460cbe6261317838be3c412", "source": "golden"}
+{"findings": [], "flagged": false, "length": 57, "options": {}, "sha256": "375ca613b58a929116feb603701b2cb7fac18e5e5ff840b0c4ff17e435f6b5e7", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 0.749517423333, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "3a0f5135555207706f890a1c63794c2a7f60391ea3678f0d16806f1cb01db664", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 0.898434379339, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "1f8f0d9f9a455c989387b15789e646b2143c8b905a9747bd710d474ebbc7fdb8", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 0.84302082997, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "919aedcd72f3757aafb6f98906d3f26c5593630466eb8a203125436344280c3d", "source": "golden"}
+{"findings": [], "flagged": false, "length": 88, "options": {}, "sha256": "f0b54f88741443d2bfe9294a26d90e345bc741a5f5db10b7b56c5dfaa832d802", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 89, 0.9, "garbled"]], "flagged": true, "length": 89, "options": {}, "sha256": "8eddf0e0868fa510adf6f810159ffd05556fbaee9f8f4e74cd34078edc208396", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 92, 0.9, "garbled"]], "flagged": true, "length": 92, "options": {}, "sha256": "acd0279a6e789830dea68bab15ae53efb0cebd6106062e71a24ace2cc9351377", "source": "golden"}
+{"findings": [["profanity", "profanity", 5, 9, 0.7, "mild"]], "flagged": true, "length": 176, "options": {}, "sha256": "35b4bf0d9c090a4fe0441f17f005bf9e996a89846fbb420f74d9d46be9833aec", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 1.0, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "91c34c9f54193bf8d81d49d6005e48f033e989673fb5255c03cad4262ee36a13", "source": "golden"}
+{"findings": [], "flagged": false, "length": 85, "options": {}, "sha256": "90c298f499326e7b9a2d24326a17bc6bff6ffc84efe652cfeb765a1dcfeb240d", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 0.60510625293, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "ca5a375488969e0efbc9fc6336fdb6fd6c14e8729203f36042898f999fd0aab8", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 68, 0.9, "garbled"]], "flagged": true, "length": 68, "options": {}, "sha256": "f5f3304e32227d69f59426a5b6a0b9acef3f5ee40c030ab99161d8387c402af8", "source": "golden"}
+{"findings": [], "flagged": false, "length": 112, "options": {}, "sha256": "cd114fee7889c78842a3a2a1bf8f9da99bd5f774ab480552bb5a1d7500dac839", "source": "golden"}
+{"findings": [], "flagged": false, "length": 130, "options": {}, "sha256": "8cf16e005ef6e9603c5ab2e588d48ca2184102d4bff74d773b3494a26caabe7b", "source": "golden"}
+{"findings": [], "flagged": false, "length": 48, "options": {}, "sha256": "717af6dfadcdee6df322c0e368932bdac6bfbe3056602f9b988ca2bd33003fcf", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 0.843884401226, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "c234a4cd66f98ea2cd8f5115b4a5b2263eb483e2da398ed3f04eeb62bda49c87", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 48, 0.544115983075, "garbled"]], "flagged": true, "length": 48, "options": {}, "sha256": "3d3f95deb3f1e4fce4e5de6fbed6b3dc52c4e0bc120c114ac1bcad0bf8bef61c", "source": "golden"}
+{"findings": [], "flagged": false, "length": 81, "options": {}, "sha256": "22358d6b594e175c7fef85dc929727b92690ef58c79fa4d841a5529b775bbc87", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "81a25d5de2e7b5895e93aac6ef15fe5f0434ad7a8f458fca923153351891111b", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 91, 0.596977595272, "garbled"]], "flagged": true, "length": 91, "options": {}, "sha256": "1528562b2cdcab94705f2b6516605c2dedf23ef44b3d3e7d7fb51fc0cdad4416", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "fac6ead0b8cc00dda866afeed4cc539a44b668f8705db77183d193070e4d170a", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 7, 1.0, "garbled"]], "flagged": true, "length": 7, "options": {}, "sha256": "f519611d9500c4a25960c5a0a9a25cec8584daedad4eec4ad2377acc830410b0", "source": "golden"}
+{"findings": [], "flagged": false, "length": 40, "options": {}, "sha256": "4812a86b9fb5af257a26b00747511ad255ffb88412be2fc4551bc9d436e50a50", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 88, 1.0, "garbled"]], "flagged": true, "length": 88, "options": {}, "sha256": "5ca338a7dcb77b1344ca59bb5498ded79f3b4ab4798e3514fd5076373e229f19", "source": "golden"}
+{"findings": [], "flagged": false, "length": 109, "options": {}, "sha256": "cc291c56e8bc6f5aa7db47b62eeb0edbabf5ffbafa781cc2e8d9464d74f71f7d", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 7, 1.0, "garbled"]], "flagged": true, "length": 7, "options": {}, "sha256": "355a952ad222f86e40910abc7f89f380fe979f2f1398dc4e4c94b41b69127470", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 0.83353494539, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "20259e7bf24892c336e79b4ed7e9beaf6b2eb785bfbabcecdba0068ecd0d052f", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 0.880982810467, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "c1803e282bdd3f49c6b80357ef4753f4b399097d8ff9058afbe5f1bc6726d475", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "f5698d32d1aa40ddeff8fac2f754fb0a32f129c906bb62eaf0a00e381f5075c5", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 136, 0.9, "garbled"]], "flagged": true, "length": 136, "options": {}, "sha256": "582b6164b84806ed9e3f3e8693057b2df57494606a92d3cd5e3f095f0ba737c3", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 95, 0.9, "garbled"]], "flagged": true, "length": 95, "options": {}, "sha256": "4df2b3422532fc7a5055d8504e906ad2ec9901f74170633da29153b7e294c92e", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 7, 1.0, "garbled"]], "flagged": true, "length": 7, "options": {}, "sha256": "50a9f6f57fcede2dab0ecfbaca68eb4b6f44febec9d58206079767699325d3f6", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 1.0, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "fd6619467cf78028367132f94f02be892db1c62a3bea48d2aea86e49ab67ebaa", "source": "golden"}
+{"findings": [], "flagged": false, "length": 114, "options": {}, "sha256": "a9e65245d865973e7b29d4510a516b14079eb58ac0ff8ea72d2a63b7d488c423", "source": "golden"}
+{"findings": [], "flagged": false, "length": 65, "options": {}, "sha256": "8c64ff07c94bbe68e19aa941c5270cc12239c0a0590f6e8c824f74f36f23ecf0", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "7e6d72a12015729a84c66e33183c16a6476c04662bf510878574c755ce4256e6", "source": "golden"}
+{"findings": [], "flagged": false, "length": 132, "options": {}, "sha256": "8bc77a30d7363a4cde3e99acfce9c750648d527bc013f37b7007948cb49153f3", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 97, 0.9, "garbled"]], "flagged": true, "length": 97, "options": {}, "sha256": "fa3c35df5f357878d0415c999d1c5acbc804c7f499bfc1bc6d206746cec27e35", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 0.898451438818, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "ddb338b47764af783dd40834cd4d5fb5a64e3adcce8ec99e5a31ea1ac850d67b", "source": "golden"}
+{"findings": [], "flagged": false, "length": 42, "options": {}, "sha256": "c0d2963227a38ac76c931ebb7aab7e791285550755cc2abf606aab5e75e22a9d", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 112, 0.9, "garbled"]], "flagged": true, "length": 112, "options": {}, "sha256": "f78a8783d670c96f7d03a1ffd4774ca40f50162c85fb11a22f59a8bc8b071b4a", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 0.790147765207, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "538bbebdbe7515cc7124d57cdf9b2fcf956f5be18bb503c8311544124b677def", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 0.88268069717, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "c75c962c26f81d05060ba84c775e3583af8868253c8848b68d8f95a056b46129", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 26, 0.683926693948, "garbled"]], "flagged": true, "length": 26, "options": {}, "sha256": "7acb68af22c18440fb625874a0b1bc5679521b8255713258075628f67cedb78e", "source": "golden"}
+{"findings": [], "flagged": false, "length": 59, "options": {}, "sha256": "a94dcda1782530ac8714dddc7af08b22f184479b2d7bf167cb12c84ca5199cfe", "source": "golden"}
+{"findings": [], "flagged": false, "length": 125, "options": {}, "sha256": "831221d8170796202b6d8ea7b431f1db6096437a2f8a9f4d80fdc9db977e690a", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 0.785353807943, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "eb74cf735b7b7a19f94997506352f294d3eda87c1a278398d2328963cb03af48", "source": "golden"}
+{"findings": [], "flagged": false, "length": 113, "options": {}, "sha256": "fa9991ec7ec34aaa056fc7b6d02bfafd03329a88e6f13c3e9d3bc507d3065c6f", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 93, 0.9, "garbled"]], "flagged": true, "length": 93, "options": {}, "sha256": "ad365dbe7e002fcac8c885af38cf2fa386772b3f74bbcb23df3d331d0dc08e25", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 7, 1.0, "garbled"]], "flagged": true, "length": 7, "options": {}, "sha256": "776aa19d8623791f7cc203847c7680945a7af137e0a3d19ee16a47cd32b84f7f", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 1.0, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "fb089f87cb875dc2cfe72dd584841aeedca58a8349f176357eecd4b8fb3d2020", "source": "golden"}
+{"findings": [], "flagged": false, "length": 21, "options": {}, "sha256": "119f79ac0283d33d3247095ba888b9ed31dba62bc612caffebbafe6849a4a0e5", "source": "golden"}
+{"findings": [], "flagged": false, "length": 68, "options": {}, "sha256": "a5300b8cd6682a0a0ecfa02e1528c467355d4e3035bd0c17a4e72f8d674cac31", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 1.0, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "d05bc9353d237297669bc19ada1eb01461396d7b0c804b796b4958f866e8aa13", "source": "golden"}
+{"findings": [], "flagged": false, "length": 107, "options": {}, "sha256": "e8f8cfc7a4769512f95c4e8babbeeaf197cf2ecd0e7f6b1885dbad2a6ac64838", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 1.0, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "8fae4fcd84b00b068c37cbf55bb618f9f9c4a0f989bb06f309b77ab7b33a9dbc", "source": "golden"}
+{"findings": [], "flagged": false, "length": 103, "options": {}, "sha256": "a03730614598322910fffd98fa643d3a11d33d3114e9bea5562e4f4d1bd48119", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 1.0, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "d220738049918147384f43f688199c600395689361241fcb9d343fbba3a891f9", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 1.0, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "60fe0d290e63fa61d13694781caea2896f5750bc5abbef5d2c79d5725b18c1db", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "5d29851e44672c0bbea59e5ac9bf4eacddf786499df2667adc83672ff2d217dc", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 1.0, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "5cc89387d9207b2ad36b3a25b610e688fb47be95741ea6b0967819eb50e86905", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 7, 1.0, "garbled"]], "flagged": true, "length": 7, "options": {}, "sha256": "acde298b73dc96e2b0b21195a62b4c27d8d0563c301cccb5854829613a60298d", "source": "golden"}
+{"findings": [], "flagged": false, "length": 90, "options": {}, "sha256": "74fb526a0e7378e51b51e300e98ff73d76bca6f5ab2e25263d062f9b003910c3", "source": "golden"}
+{"findings": [], "flagged": false, "length": 83, "options": {}, "sha256": "bcd6a183fa213e205e22539a1b91e7b39bd21e46a5985f2aa3296d725c1b9a71", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 1.0, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "f510059737b961f67838a4fdc3cd3fe96d3a678ed2384cabc94c8306ede61b1a", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 1.0, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "afdb4c4fa4431dd00223ae5d51f2629189405d4bc0afba5d529942552ebfce85", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 1.0, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "271065e0761b3675a994eec60cbcba514fd2b4e44dae0070b1adfbf0f49d8fcc", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 62, 0.9, "garbled"]], "flagged": true, "length": 62, "options": {}, "sha256": "12c03873313997058e401526f5a6c9cfed4b066529625fc9eb4c5e09ed60bfd0", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 78, 0.521139390953, "garbled"]], "flagged": true, "length": 78, "options": {}, "sha256": "cabf5c53b402710c1949edaf049ae8a56d9410714356e0fa05c270dcc36904da", "source": "golden"}
+{"findings": [], "flagged": false, "length": 112, "options": {}, "sha256": "f85e48328abca0bea9f5bfac42e4103685be41d0d2e8d42f0c78e2b77e46eadf", "source": "golden"}
+{"findings": [], "flagged": false, "length": 7, "options": {}, "sha256": "55cabd8f545d76a50b7db2057c05d330a8b0cc3d9f38c17b6b35f8c84566c067", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 68, 0.999997739676, "garbled"]], "flagged": true, "length": 68, "options": {}, "sha256": "42f1f29f9f135395b77eac9a08785ae3731a74125ec98b8ae6dc3c0a10ab55b6", "source": "golden"}
+{"findings": [], "flagged": false, "length": 63, "options": {}, "sha256": "19834686739770c6e7893a506150cdd859fa9e1249fae033074fedd63045ba05", "source": "golden"}
+{"findings": [], "flagged": false, "length": 65, "options": {}, "sha256": "a0ad00e09eb729204f33ca8c914b71fc07d928a997ba78653d9df850a06a2b52", "source": "golden"}
+{"findings": [], "flagged": false, "length": 7, "options": {}, "sha256": "9b93555ed36ab9832beb0b77f2cd8ceeb233f1835acceca1e954a9f7b53fd602", "source": "golden"}
+{"findings": [], "flagged": false, "length": 136, "options": {}, "sha256": "46add4b00c58640d05d05768fab03655d5003a1bd873adb069965b8b7244e1cb", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 0.696950282224, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "8a4a31b72a71bf00d10642310f1f98a222e1cbf6333dc6160198c4642bba0cfb", "source": "golden"}
+{"findings": [], "flagged": false, "length": 35, "options": {}, "sha256": "e36d1aef6471cfedd4a7a7be72274fba74927162b73004b207b2f3e82a5e10dd", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "20308a940dc149f301a432ed6eebe510686fe6d429794636378020495c915c4a", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 95, 0.9, "garbled"]], "flagged": true, "length": 95, "options": {}, "sha256": "b283e5320a0a3ea929fbfc2296d3e271be1ef1ffb9a92a208aefd66470067ef6", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 0.809888493575, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "9a31dc6c1ec82cfb0f108944065c3788447404c00ee9ae1d4d6ab13b04dd73b7", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 1.0, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "7e088175e1c0371569276d9abccfc9c8c1ac538a53796606e66b128296ffa281", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 0.878232988532, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "b469baf6eba3b2b8a40dce11639c3d8a2bb68142b60e759ddacc89a59418c396", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 1.0, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "6e813c95c9fed80d2c88f0b023c4f487309ee78a74b951af8233bc4d4ffabbd9", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 78, 1.0, "garbled"]], "flagged": true, "length": 78, "options": {}, "sha256": "cc60b93d98d2946833265744ed1d85ff59240d215d213655074afab3bd6d7709", "source": "golden"}
+{"findings": [], "flagged": false, "length": 38, "options": {}, "sha256": "4c46b366db8895bc8ddbe23f7af38669fc0b7c6881dde83553fe80050618fc7c", "source": "golden"}
+{"findings": [], "flagged": false, "length": 69, "options": {}, "sha256": "e53e40fc9f8e38eba12751018dc11035a1fecfacc0578ee15a2e7cfa774c3437", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 1.0, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "460dd87e3883493da1521695847f3bdfe139baf2ce81659116314a3019cc94ea", "source": "golden"}
+{"findings": [], "flagged": false, "length": 55, "options": {}, "sha256": "6dc0b09bcd375c7d4d3dc1fe63a2f83a5223d98b90fa09360200e5b6d3b4667d", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 128, 1.0, "garbled"]], "flagged": true, "length": 128, "options": {}, "sha256": "665b7bf020334c7cc9415c4797871b02f48c83bda346061dc75e2bac26a16b65", "source": "golden"}
+{"findings": [], "flagged": false, "length": 45, "options": {}, "sha256": "cd7529125776391060a5557bceff6bd65dc1dc42bddd81cb2ace775b36fb5d1f", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 0.848001446, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "e682a8f4853742350b5aaf1aef5d327ce0d5549fc5c637a9e7699985d2e9e746", "source": "golden"}
+{"findings": [], "flagged": false, "length": 73, "options": {}, "sha256": "8d1fa9841367b1b037482acb5cd122ee5cd191a2a8300a297562917862c86556", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "b6bd1d6738dd2f7601e425b26ba5995f1406df6a33caeba46b05c38b7dd5ac52", "source": "golden"}
+{"findings": [], "flagged": false, "length": 57, "options": {}, "sha256": "c41c0ab9f30fb2dd0087b0e2da5da31e9c44961bce8aa12b186edd081579c704", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 1.0, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "dcde33add897c6b2a5902ed3b92f66f8b6da1f8c7db404eb5826b0b5dde00e46", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 102, 0.9, "garbled"]], "flagged": true, "length": 102, "options": {}, "sha256": "4c88235c3d29770b68de8e309c28a3e838014d9ecad0e8238a58838b0adb34eb", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 91, 0.9, "garbled"]], "flagged": true, "length": 91, "options": {}, "sha256": "e65e62a3fb1366a74d04e33f0a75629f92c2ed927642e73dd3aac364ace811f0", "source": "golden"}
+{"findings": [], "flagged": false, "length": 62, "options": {}, "sha256": "0dc8acc9354dbcffd7da603aa8feb021277b7e01ae86a30625784a0d3ec8ec74", "source": "golden"}
+{"findings": [], "flagged": false, "length": 60, "options": {}, "sha256": "9c9764e3e10aebe1704a02358638fce473faead15b49e5eb950d847b2595a67c", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "d9fd043a4e7af9b0bd3d056f160c9f946ee62e8ab369feaaeebcd55bf36f9681", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 97, 0.9, "garbled"]], "flagged": true, "length": 97, "options": {}, "sha256": "40b146996236b5aad4e9ac4c42eb7f4476b60aa57cbfaabd7eced5ed9e9e986b", "source": "golden"}
+{"findings": [], "flagged": false, "length": 55, "options": {}, "sha256": "957f21c0439d49339af0086a9854d1de5a9e618a5a96524b29db8e1ab986cb2d", "source": "golden"}
+{"findings": [["profanity", "profanity", 63, 71, 1.0, "strong"]], "flagged": true, "length": 116, "options": {}, "sha256": "2aad51a8f9278433dcae4733b5de0cc63b7dd7cc17a745d9cadcf8afa84350d5", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 105, 0.9, "garbled"]], "flagged": true, "length": 105, "options": {}, "sha256": "061250935a1de1b19d89759c54087fbb5101870edea496096b632068d837c3af", "source": "golden"}
+{"findings": [], "flagged": false, "length": 138, "options": {}, "sha256": "a7c3f2702b3c741806f1f377f88e14acb1007954971450fcce0b1fa43a8252dc", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "d611fff36ad05a9022992e13364f96d1526f6f070434507142da759fbb6f9155", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 82, 0.914634146341, "garbled"]], "flagged": true, "length": 82, "options": {}, "sha256": "364697e8921a294df477434b86b88f9f1cb4a9d67b0f7676e0f1b35da7496004", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 1.0, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "15f13303177da9ab869424c73e04e549cb9a6ea0feceff1d63999624fe40429f", "source": "golden"}
+{"findings": [], "flagged": false, "length": 76, "options": {}, "sha256": "99c8c6433a2ca0ffa2b22f8f73befd04e2a88c98de7aa3700738b693882e13f0", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 1.0, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "fc9717c4b5b19ac896ba317cf15dd0f7203e68146929ea7e92aeab33f70ce6b0", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 0.896204344373, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "c24d918aa71cf7b8db8ea29e4f6d1623505fa25052aafa8a43970bf7dd3c1b2c", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "1ec7b76ff6dfa2ccfea796c176dfd8d6650365135ab08262f3a1b2fba0ad4f7e", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 0.689855106866, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "8f3fa0a288eedd0454d1e03b91ada7ae0003b9d63f6817933072e4a77720999b", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 1.0, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "a8b1503f81b5110a74c7792baa58d7eacd286e2a1b4690a35b8df51b90cc2f4a", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 69, 0.9, "garbled"]], "flagged": true, "length": 69, "options": {}, "sha256": "fd3af21878d777edabc416fa7ce3884cb77497d06390890bb24d56494226e8e3", "source": "golden"}
+{"findings": [], "flagged": false, "length": 109, "options": {}, "sha256": "57df40c4c68296825c53f85cb04b07a37e8fe3027fde3ba320339757b7ba1cc6", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 0.878393277583, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "ce89e6672ab632c8ab5be1903a5cc3687cb24c00e4ca118ceead830c76a2aa03", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "bec8d14b1e9aa98b7e51c34fb676456f514321534e43367f4bdd33afb9631510", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 1.0, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "4479a244530f768e372ef570be0506bfaa5dd0baa37252c86e56f26104ba0e2b", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 88, 0.9, "garbled"]], "flagged": true, "length": 88, "options": {}, "sha256": "654e470d0070462a6afe51ec62701ffde91ce548fd1b765150dc8ee2a08fdc6b", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 0.680380920658, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "d82d15847544491811fbecd47084cc1e229d5ab6b7aac4c203126bbf0df3a2f9", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 1.0, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "52b36d8bfc488cc09cd750039be45bfc1a060f53cf949d8779e5071490cfa8d2", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 1.0, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "6a4563b377a217b6d38b6c4d22d54577f5609e87ce2f445e3a050b4434b92609", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 49, 0.53271837229, "garbled"]], "flagged": true, "length": 49, "options": {}, "sha256": "01281f89c46a6ef38aca5d0dd2eb4332c02477239731467efa828df9af5f68a0", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 1.0, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "5e51af04e64445a31853f5eff6479ab4b257e07d3afdcd5fbe375a38bbd3d84c", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 46, 0.532754230156, "garbled"]], "flagged": true, "length": 46, "options": {}, "sha256": "7ea7a053e8daf9b57e8cfc92ce33230540e16b7cbeffbdfc3a0b2e68c99269d6", "source": "golden"}
+{"findings": [], "flagged": false, "length": 123, "options": {}, "sha256": "635bd4fd94fb12e64ccbc158f6f61b21af2e53894ca0dbf4c5877b18f692083e", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 0.853865967082, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "2f3c469f22244bfc4e5a9cf3b3f3416fd15429decec31e7810c4918b19afbb40", "source": "golden"}
+{"findings": [], "flagged": false, "length": 102, "options": {}, "sha256": "efc928ef31f7433ed9d45ed32362e40e18da68978d330c06e3445a4fd67e2547", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 7, 0.879776617673, "garbled"]], "flagged": true, "length": 7, "options": {}, "sha256": "01c3c6d7974cff36f650ce6dca98424c1e2572ab010a5911fb6fea1c85780a4a", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 0.607893516716, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "a45498d96c1d350b5d99a4b4ccfd4d20f019e75f01396049a61b3bb069bbdd50", "source": "golden"}
+{"findings": [], "flagged": false, "length": 61, "options": {}, "sha256": "a79946908ea971e13a19056c049e25a63db13659805f5aa855271e4f93436a00", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 122, 0.9, "garbled"]], "flagged": true, "length": 122, "options": {}, "sha256": "02bd128c645141811c80ed17f8fd28d4f47871eadf546b7bf24dc9ff1c392d3f", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 0.751659940442, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "6eae040eb84cd0b38fefaac83d64a05b28a8244cb55a8ed1d2181362d9df9727", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 0.622092733801, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "1e4603f2df96363e17e26209919bb7d983275fdf58bd15baa24fb7926f651f30", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 1.0, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "afe20231fad4b2f2e2344d197624b07644eddef652e91c98dfec69c39b514e0c", "source": "golden"}
+{"findings": [], "flagged": false, "length": 5, "options": {}, "sha256": "0bb4c2821590b15a3f681b9b1b14afa00f6790775661ba036c0d5e3cb7309701", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 93, 0.9, "garbled"]], "flagged": true, "length": 93, "options": {}, "sha256": "88c8533801f39974ba104a2b4f7e6acb0946dff925b71ea095a9c941c372f445", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 1.0, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "f286c4d5e375ee2665ad0f6f4131a5fcf9b65b9607cb99e94f3b9f5466bbdb16", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 7, 1.0, "garbled"]], "flagged": true, "length": 7, "options": {}, "sha256": "b97e2f4a2823ebad72c5ea732e64c045d882df691d4762c229af77a1c3da2322", "source": "golden"}
+{"findings": [], "flagged": false, "length": 31, "options": {}, "sha256": "f4ef004a67e1780a12b578e9d54113beb7b08daa30c40533a66caa4f4dc2f5ef", "source": "golden"}
+{"findings": [], "flagged": false, "length": 104, "options": {}, "sha256": "ef55cccd28524f0b56f4f1eb95d0e379bbd4b05d5db8fdd5468a042e122fe7b1", "source": "golden"}
+{"findings": [], "flagged": false, "length": 146, "options": {}, "sha256": "adcbf31818d6dc3b66ca2e763d4f0df75554a28aeebda68f359892e6202a7be7", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "c74065b028804fc1a917b4a7853b80751f3a668690f378aad483f534422e78a0", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 52, 0.544115983075, "garbled"]], "flagged": true, "length": 52, "options": {}, "sha256": "283af5405703b411a70c665b2fd8e382f10a71dd26e77537e8758652476b472a", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 7, 1.0, "garbled"]], "flagged": true, "length": 7, "options": {}, "sha256": "574ccfa624080656993e11e6d4c33078c8c30bc9296dce199935488bbe69a718", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "c5726958780c68e08586bfa753f6ed183bea546400c249b4236ccbd233cf40fd", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 0.862044849944, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "fe033591970180fff86139364bb3b772050f0d160bd4283650b3f49197f083dc", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 0.814366886795, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "64e6af1525085c3fb9e217f6fdb43812321cca808e7754cbb701e46a9315fce6", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 0.75926868652, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "11b67cd80133fdcd07ee40e972a4ff6079e8e13ab9d8dfd40d8a73305374bdb8", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 0.891424917273, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "259b49d7c02d90d053bc7b2eece4bf89321f16ee1c7af4e37a9fb57e37b8fc98", "source": "golden"}
+{"findings": [], "flagged": false, "length": 140, "options": {}, "sha256": "455664749a1fbaed915704550e743121db94fea0be30c24a22d88cbe8ca66f3e", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 0.802259120866, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "bf5beb1e34a78ff5cce2cee7a1791cbfe15be6126c64bc1101aecefb830788bb", "source": "golden"}
+{"findings": [], "flagged": false, "length": 67, "options": {}, "sha256": "d9f7e9501375223d8be337fe2fa72f25a47d9796a8969a3047be03f433e858b2", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 1.0, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "736c064b8b5ac6eecfc99da41f807ce41d69602d72dc4db3784402762d4796d3", "source": "golden"}
+{"findings": [], "flagged": false, "length": 87, "options": {}, "sha256": "6a130b2007da373e8516a48ffa4cfa6d5e82761debcc66e1482526760fdbfc2f", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 107, 0.957310653583, "garbled"]], "flagged": true, "length": 107, "options": {}, "sha256": "050ed5ba53185bf119ae761ac3bfd5fc99aa04ae5689db2d38ffbf964182562f", "source": "golden"}
+{"findings": [], "flagged": false, "length": 6, "options": {}, "sha256": "67478a8166a1faa32b40b5bccfaf085be7b7c8a46fefc7eabb453ada8837cdac", "source": "golden"}
+{"findings": [], "flagged": false, "length": 107, "options": {}, "sha256": "e2b0cda897ed02c70e15102ba9784d131a2a4cc97c09f6495e8a8db3861207b7", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 95, 0.9, "garbled"]], "flagged": true, "length": 95, "options": {}, "sha256": "0fceec72e08cb08af0417d918293bd5628b00380d83cd472852f25736bbd2cf5", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 0.852981320685, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "158d758b357f2a947d57b538a1d1c9d96c93104ad278a55263f52242d08275aa", "source": "golden"}
+{"findings": [], "flagged": false, "length": 142, "options": {}, "sha256": "c354b105c5978fc7b00ac9b29af9d9d0fe85b3742cf43282692aae19d2419d6a", "source": "golden"}
+{"findings": [], "flagged": false, "length": 51, "options": {}, "sha256": "199cad19320b35a68082194328f6da0f999bd1723f11bb0811c15b987e973b12", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 0.677748739882, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "78932094420ea79735324f1d3dc3ec68d5ff69152b44b69081c11d4491affc6d", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 0.744284527437, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "fc013c3aaf71064b70e0e5d84093647217c885294798ccb2ab4708c14d286212", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 1.0, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "914aeb1cf7d3ac49c1368cab435c969ced0cff3fe6d1ac0770b71eb49c58caf8", "source": "golden"}
+{"findings": [], "flagged": false, "length": 97, "options": {}, "sha256": "1dd987f535c71778b65277ae74d43a35a83ae2609c0e4755079a7494511038fa", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 0.812280945504, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "579c58d0c769aed466544814914da9362a26a3ed3f75cda874669349d58bedfc", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 72, 0.9, "garbled"]], "flagged": true, "length": 72, "options": {}, "sha256": "7a6a750640e0dc53ca5bbf287236da2e3d417a4e06f5bcdcde73025805f671c0", "source": "golden"}
+{"findings": [], "flagged": false, "length": 118, "options": {}, "sha256": "ab62beb87dc8779e337d6db79c361944371e517b8047cbbfc8eed5b2db0b43c5", "source": "golden"}
+{"findings": [], "flagged": false, "length": 137, "options": {}, "sha256": "e7ed691cdfab8cb1a4547034af6164c308a1411e5620de7e3bfda5aa9205ba82", "source": "golden"}
+{"findings": [], "flagged": false, "length": 90, "options": {}, "sha256": "4ad9506d12ff16cd430d6879f6c62dba998c5d8fb4ccabfd23289882f541cf60", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 1.0, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "5353e493176e592bd799867c7b670448bc44df243980bc393ec9d5b4028ff857", "source": "golden"}
+{"findings": [], "flagged": false, "length": 111, "options": {}, "sha256": "5cb39564a45a2894dac9936f41ac1ec0d6e8e94cdbc41f82308d387950b840b9", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 0.600338518243, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "0027f4608f8f232081cd2032d6703bb89eba28d440a532cb335a253cfe796f78", "source": "golden"}
+{"findings": [], "flagged": false, "length": 105, "options": {}, "sha256": "9c56f8c41bfc2730211dab8e09a51901678c24cb803ab0f54e88ab534bdfc3f3", "source": "golden"}
+{"findings": [], "flagged": false, "length": 57, "options": {}, "sha256": "14683f9ca5a8bb5a3e216e233dd62b2b34ecdf69b4928de6dfbdde5994da2d08", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 117, 0.9, "garbled"]], "flagged": true, "length": 117, "options": {}, "sha256": "db1f0f0ee55b16bd1a49f53e47de51f0fcfb27cd39407f3d5490ed25ef052601", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 7, 0.863972251035, "garbled"]], "flagged": true, "length": 7, "options": {}, "sha256": "c4ddbc3b68a2c9c21285913ec55b2f63e0f92f1d921ef4cbc7176a3b2521471b", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 1.0, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "ad6d35ba3a736fce33eb5b72f8fd8829e2ee2fbc815658d0739f13cd0e9ceb32", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 81, 0.705143944063, "garbled"]], "flagged": true, "length": 81, "options": {}, "sha256": "29a5c126f4681d642a3c78db4371af644c22a47fa7f951d716942e350125dfdd", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 1.0, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "6108c6f480679c3d8d8231ad13613378945dc6fb1e23abeb60879f025f28c0c9", "source": "golden"}
+{"findings": [], "flagged": false, "length": 47, "options": {}, "sha256": "671fa416052d526dc099f72d1fbbad678c9d278aebedde65915cfde53f7f72f3", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 7, 1.0, "garbled"]], "flagged": true, "length": 7, "options": {}, "sha256": "5ec89ae21d11d8e3d1e0ac2d4814f77f5ce4ad62a7a2b37057539477c775b1f4", "source": "golden"}
+{"findings": [], "flagged": false, "length": 119, "options": {}, "sha256": "3523c69cb68579e3a67489dd66be308bac17dfd3e66d5bee6f61e95ad60f7526", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 1.0, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "4953d8726fc0b431c2e11414fb990a607f4be3adbc18d7cfe0f3a62db183ba43", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 1.0, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "74af5c77df31121c683f9bce32354f7482e4aea89e51688dd5e90f724802e449", "source": "golden"}
+{"findings": [], "flagged": false, "length": 89, "options": {}, "sha256": "c08c4bcbe1c344ddac1183494a68dab628013cb986be5cd85617ec3409636115", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 28, 0.683926693948, "garbled"]], "flagged": true, "length": 28, "options": {}, "sha256": "625c83d6135ddcdfd327753d26a4633cad9c1a038e349406dde57cea7d495b19", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 95, 0.710585357109, "garbled"]], "flagged": true, "length": 95, "options": {}, "sha256": "d60ec9db9b6ff19a3e162975d400c6b95a3488725f22273097ddd1bf340e5dc9", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 0.81849716603, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "f114388462ea81c12743c7a894b33f3b2459a85126491347da3bd9e837df35f0", "source": "golden"}
+{"findings": [], "flagged": false, "length": 34, "options": {}, "sha256": "48f69419f747f9080ad26f0229c60a1af5ecb2bd12f27a07b334c81ea26e5be6", "source": "golden"}
+{"findings": [], "flagged": false, "length": 5, "options": {}, "sha256": "c8ac559eb8416d708d16a58ae81906ff8349039c9ce4d6db05d5b4057e4a143d", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 1.0, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "337fd3f72d8db120c68ee313780a97c30b5c17498f019181f2f425e05722c7a9", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 47, 0.9, "garbled"], ["profanity", "profanity", 16, 21, 1.0, "strong"]], "flagged": true, "length": 47, "options": {}, "sha256": "8f4f72115b6ca74bc76f60e4a68ddd50a0241ef2b6b008911f942ac5eeaef59f", "source": "golden"}
+{"findings": [], "flagged": false, "length": 29, "options": {}, "sha256": "4f3bb823e1ad19d86500d8789cadf8f78ff89f519df12b14cb84197f94942bf4", "source": "golden"}
+{"findings": [], "flagged": false, "length": 130, "options": {}, "sha256": "e2b7fe8ea8e6ca5672dfbbdc8daa4f22e0331a45dd57f121ae9b3aa05136b284", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 31, 0.98105002178, "garbled"]], "flagged": true, "length": 31, "options": {}, "sha256": "0037c9a7fa5721c1b51f2780cdec27c6e4102e79ae8795181629763452eec421", "source": "golden"}
+{"findings": [], "flagged": false, "length": 81, "options": {}, "sha256": "0b7718cf507c9a11066cf03917d9e9f8f48e0c7606accfb4182addc82d0ed2cf", "source": "golden"}
+{"findings": [], "flagged": false, "length": 67, "options": {}, "sha256": "1d317f77ba4b124d20629b3b27534a286012f9f75e0d058686ce4b23e3b50370", "source": "golden"}
+{"findings": [], "flagged": false, "length": 43, "options": {}, "sha256": "ff4a80acbf17da433cbe1863e302325d6f67d523a305971716be981521ec0055", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "06890e916edab09f6493634e3fe58bbf6fb50026244d2840b50460dfa498b4a5", "source": "golden"}
+{"findings": [], "flagged": false, "length": 36, "options": {}, "sha256": "35b0dc127433290a3de13550da4e5e9edaf0f44d23f6c2b48575d140bb4c2dc4", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 0.767336817113, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "9ca7bf908b9c321765e29cab862f60ce8bc2ffb1a64c165d38884c756884df11", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 81, 0.9, "garbled"]], "flagged": true, "length": 81, "options": {}, "sha256": "bd288c651c1cfd692ee189b2aa664718902871f6cf1c17e6caebc1491e3d4a2a", "source": "golden"}
+{"findings": [], "flagged": false, "length": 5, "options": {}, "sha256": "9b09090482cd4cf1b4099df5d36b87d5ea47916a032899b6417a8c8346db7167", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 0.801062544463, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "3aa0287867d4bef93e834dcfd9470e219ceac94561fb4f657fbcd1ad850c1929", "source": "golden"}
+{"findings": [["profanity", "profanity", 32, 36, 1.0, "strong"]], "flagged": true, "length": 94, "options": {}, "sha256": "25a375259a638be1b4dc6d3dbc392b9360266493175db1d4abb3a963dd92ba9d", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 1.0, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "4548130baf17af43d9547830021b143658bafce82f40056228fef48b62346e35", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 0.53110057018, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "a396721171267a3cdc9acc2751d0aa51c6c83046fd387d0ab36734f48986cd35", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "3368a04af6c68b690c21816fbd52cf0c1c49f04dfb77c573b58251263dc55005", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 0.618702522255, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "f478c7bfa533759a0b7a4acc355560b515651a9a962f73d74ee1e7dd9448159a", "source": "golden"}
+{"findings": [], "flagged": false, "length": 10, "options": {}, "sha256": "7c0e6adb3e856e76ae617faf00456b231d4a774c698f0114ce216d69c0d4b0f1", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 1.0, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "44ea2992664da8cd8ca36bc43969ddc003d1d0c8d4339d5cda06fced6b4be6d8", "source": "golden"}
+{"findings": [], "flagged": false, "length": 131, "options": {}, "sha256": "0c4e3633d03f1e43df459acb855a5f3ce6461a18f468f17dbe0b734c0961d2eb", "source": "golden"}
+{"findings": [], "flagged": false, "length": 85, "options": {}, "sha256": "dc919580731306d5244c29d68af6ee7def5b24509d49aa23555193cfe5d224c1", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 79, 0.9, "garbled"]], "flagged": true, "length": 79, "options": {}, "sha256": "25157dec6832ecf5efca1b95c74f1893a6be083e51947caf81d304e618660f82", "source": "golden"}
+{"findings": [], "flagged": false, "length": 135, "options": {}, "sha256": "48369b02392e113108d113d3cbd06b7cff97e9c2075d9dca3fa9753cf59b1e94", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 1.0, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "233c22392c56d308ea596eef9f953a62a606797866c31e974341fd554bd839b4", "source": "golden"}
+{"findings": [], "flagged": false, "length": 92, "options": {}, "sha256": "0eb379eb933ed77a8a50af1d96b6b9582ca6959dfddc07550839a1ad3529934c", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 60, 0.605425708676, "garbled"]], "flagged": true, "length": 60, "options": {}, "sha256": "e0a92ecea7f5e44c0861db45ce3578e0dbff4b7de1856828f573edf17354aa2b", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 114, 0.9, "garbled"]], "flagged": true, "length": 114, "options": {}, "sha256": "fa46fc3237a5c13068a6dad0aebea6c04ed563647444053127ff09969a55e741", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 0.878869101242, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "c3e0696991f2086f89bffb25a85fd75878b284b9eb1e2ec2f06e2421cbe551ed", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 49, 0.544115983075, "garbled"]], "flagged": true, "length": 49, "options": {}, "sha256": "52b6071453ca7d00f72ef53b0b82cc915a88f95ec9ff1a63b30e09a4fd2dc70f", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 67, 0.9, "garbled"]], "flagged": true, "length": 67, "options": {}, "sha256": "bac3d6fd71a165df3a173249d7558c9fb365edea15e846ad344d8bac6aed77e3", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 0.88019778482, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "f0a693a3d7a069729a73b6f424183de19ecd0b4a1c9f22243e5be52e7ca2739e", "source": "golden"}
+{"findings": [], "flagged": false, "length": 109, "options": {}, "sha256": "372ef143bcdb56ec5bf81bbff0edee70651177d6cb4b82654f4f10efff66bfc5", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 133, 0.9, "garbled"], ["profanity", "profanity", 54, 58, 1.0, "strong"]], "flagged": true, "length": 133, "options": {}, "sha256": "071aee4626d5ebad3c2d1cad83065df59903097e5f03ac19efdb97798f84b70a", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "1654283aca983b803463b7ba564c354dfdbedf6b79d54c1e97bf4a56df085c5b", "source": "golden"}
+{"findings": [], "flagged": false, "length": 99, "options": {}, "sha256": "2135296bcd2680f247320e5c7ca5e67e48e0fe0449f3407ea1bd14088c9d678f", "source": "golden"}
+{"findings": [], "flagged": false, "length": 103, "options": {}, "sha256": "c93d2880ab77066b8908d1e451354b8d9f6d2b0de18635af4c96fa65093ce188", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 0.878521028098, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "74d71a7be98d0c458e148dc451bf7da16ad53baec54b6051935c3a96aebea938", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 1.0, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "76fb30e1bf98ff7f178f545644fb725f66213edd0d5140e42bec3a05d8bb9ee4", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 1.0, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "fec0b172c34d37f7987aaaa9caf0fd3678f4f6b7ac59a03901c245e0c50dbeae", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 0.797055213712, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "f62a2a3f118bda8a362fac6d3ec1ebfbb9260279ed58ce37696aada66841fb80", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "b4bdcc462f28d8fddfe35d2a7b3f9db25a799bc084fdef8b735c50ccf48705c4", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 1.0, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "9ca9bd4122e854940a0c136712a1e03d80ff574d4bb7ee7a390ca47a045be499", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 88, 0.9, "garbled"]], "flagged": true, "length": 88, "options": {}, "sha256": "1b6bd27ab13e6e09630a0e4b796b75ed45f86aeec64b66f903cd6dc4afd480f5", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 1.0, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "76385f2eef7f5cded105405d73ee49773d23a58689068fc15b3e1717c04e1146", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 1.0, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "4e788c8e7e0b7aa12d4a516d9b9a0cdb17ee829224ae5c5c6a719c4a06b3fc3d", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 1.0, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "b40fc4426bccb9b57f70e8f316a249cfa8ad5edf162559d9688c635f2f972ccd", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "b8641b7605d878edcc7cb3ab3345b37d32d867c5cfc4be53a5d8842b150d73d7", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 120, 0.9, "garbled"]], "flagged": true, "length": 120, "options": {}, "sha256": "804db3a4ba4f3e2f459b6d9ebae71424c69e8a83b80a9ac227075cf02947718e", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 93, 0.710066615025, "garbled"]], "flagged": true, "length": 93, "options": {}, "sha256": "de247f64b56d1b945f8770d8919c14d68e229cc290947c5e576d5b047a4d84b6", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 1.0, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "17cc67bfc4b1cf55cd4d6c22687e183779dd1f4237be84f921902b5cd02674ce", "source": "golden"}
+{"findings": [], "flagged": false, "length": 99, "options": {}, "sha256": "3937facb584e8ff22a4f3f1afdf50e5a0f35dfae78675273ccd55068e6b9176d", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 7, 0.851526862848, "garbled"]], "flagged": true, "length": 7, "options": {}, "sha256": "1cda029db87b47c3a2cdc61cd15a05ca44d6deed336c26e15a384b7ecde9f4b5", "source": "golden"}
+{"findings": [], "flagged": false, "length": 11, "options": {}, "sha256": "bef35be0c0739e9b208b604c7f31bee9bead440c6a5c962ca88b8aae579dd67a", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 98, 0.9, "garbled"]], "flagged": true, "length": 98, "options": {}, "sha256": "367727ba76143f29de4d2f52803f005ae73c6cc65ae74aba7f2d50e19c85d10a", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 0.747762279824, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "53fddd5f795d4db9f6aba9b80b350cf228f39cbee00dc3bc14bc3d60c6648252", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "ec754443160873442295869e6d1e31362cd493b3d1af5a843be8bbc9cac314ed", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 0.751351915352, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "a6b3d0c4baf5ab6802b4d0505baae13717d3b18d6abd224d42b7d27f527b5a6e", "source": "golden"}
+{"findings": [], "flagged": false, "length": 100, "options": {}, "sha256": "02cb7c2d59464efcc9469af8cce89ff5ec2beb17986647a249aac2a459b827ea", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "dbee14b1b3d12ad4292bb9a2acdb3c67976a2294d0c1ef6a10368e9838e5d02d", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 1.0, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "9e368dc2dc0e8aebb9581b3a8936e3daf435e23311505f991dfaf9a9dbd2f89f", "source": "golden"}
+{"findings": [], "flagged": false, "length": 5, "options": {}, "sha256": "dd1711001cabfd85bd841326891abc51320ccb2d208c03328bd71c178a5cccab", "source": "golden"}
+{"findings": [], "flagged": false, "length": 139, "options": {}, "sha256": "bcde2628259c32fecf9aedfa5a4d319b78c63d34f95c2a72846d7a1d7f216933", "source": "golden"}
+{"findings": [], "flagged": false, "length": 91, "options": {}, "sha256": "b3609347a625567a12c5e30f9fb85836df123f3e8f59d0a8f60e2fb8694eb7cc", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 1.0, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "0403b15f589f0e0852619c945727d954aa9f8955999cf29e2d7ed0243e67ac1e", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "cf4088be90b96f4d2a235b25047aa33ab3f6e69e1ef4474fd87d481e002e5fcd", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 1.0, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "ad6c33c9005e45f950b4e2b28fff98096f9f93602cc757f1fef0d9161d3b3820", "source": "golden"}
+{"findings": [], "flagged": false, "length": 65, "options": {}, "sha256": "c8f8ddfd6370a3524ebc381c0eacbddcd2d79df83bf9e6c7a51d39c293762f97", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "15cd31a6d6eccf9789d52bd55b27c4012d560edc07d0c2cac1bbe9f524814c8d", "source": "golden"}
+{"findings": [], "flagged": false, "length": 136, "options": {}, "sha256": "3b66c8460fc132417e740c461baacb47da97e7f12861b8d46f7cdee6637b73ae", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 1.0, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "b2e839bfd6017d1a74ef2ebd824b036ebb13c5a813ece4d6210b3eead8e5c025", "source": "golden"}
+{"findings": [], "flagged": false, "length": 83, "options": {}, "sha256": "7b79bcddd8b03264f526c174d2dcbd1dd71d81cf9002a16a6b7b201b67811c38", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 14, 0.683926693948, "garbled"]], "flagged": true, "length": 14, "options": {}, "sha256": "7899794f036d9210e564e6fd448cd50baa461a8848cafb703932c339b77a3d4e", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 45, 0.9, "garbled"]], "flagged": true, "length": 45, "options": {}, "sha256": "dde38ace346e130dc777f39650aa03b23ec0926b124ce9128aef19f5d4d98e53", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 87, 0.9, "garbled"]], "flagged": true, "length": 87, "options": {}, "sha256": "595678193a051bc32f41818f9c34f606f1a004dcf696353b715062253517541b", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 0.834134346699, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "9d05e60ce3f137a0d9f3dc6131aa2654f41f1bd450716ce015e20e73ec36a69c", "source": "golden"}
+{"findings": [], "flagged": false, "length": 38, "options": {}, "sha256": "c02aafee3071ff0eba325c5da4c59a4fcdaf07049afaec360aa14e6d39e5ffed", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 0.576070976733, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "0738dbb8b9b6aaeada94107160b0280f6e4b520b3fb122444d17b98d53131608", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 1.0, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "35dfd47f0f1f94794611e432df25541b2d62e3559fd412f46b3cd9962ef5bdb3", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 7, 0.856694080885, "garbled"]], "flagged": true, "length": 7, "options": {}, "sha256": "859f5baf1db6ac036eee78aabfa2f1b679e381e0a2e66271c9ed489a3a3575b8", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 50, 0.999997739676, "garbled"]], "flagged": true, "length": 50, "options": {}, "sha256": "696a362a3db6bd7df0a1e8fbc0784837ac4dca4494b5052032e3c6968319322a", "source": "golden"}
+{"findings": [], "flagged": false, "length": 105, "options": {}, "sha256": "3f95286164792fcc4689c600b8e428347baeafce26e494852bfb5723868bf15c", "source": "golden"}
+{"findings": [], "flagged": false, "length": 86, "options": {}, "sha256": "9cc4b1532f556cba1c8d30f5abf3f671cf6425113ba7d55407d519883822ecb1", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 1.0, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "25023c001de93b337b38d9db2c22795016635155146d0cec95190c0c1e8319fe", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 0.555681753291, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "bc7fda6beb55221dbb6e1c6a9831e7ebcc8123bae07a546da3b09c75ce9240b5", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 1.0, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "27c115d2b28ef0362d29e6b5e7a7147a565e51b53caf139b7321a8842803fdec", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 1.0, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "b4e8b7438eecb12bbfd932c82d747b108e5cd42dc3b40ee90e5cfcd3394842d5", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 0.882631109067, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "c214d30c8c9d2f0af34da58d12b8fd4da68ba898c6ef6d674558b0badecd4862", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 1.0, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "9ade37113653a14f3f8274f254961d390a02371250ba6c91c4bc0c0d2adfac8b", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 100, 0.9, "garbled"]], "flagged": true, "length": 100, "options": {}, "sha256": "cc572906244939fea9baa589194eb13fb1536c2cd84d66bf4cc04fb52e8abbdd", "source": "golden"}
+{"findings": [], "flagged": false, "length": 105, "options": {}, "sha256": "9ad74e60a76430b4ec45bb4fba11be47974aa08bc2756a144066c8c4c9f581cb", "source": "golden"}
+{"findings": [], "flagged": false, "length": 103, "options": {}, "sha256": "6d4906ae4e401275fa7885407c1735268027e2deb31544c73ea8da1ab45c65b1", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 1.0, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "c2a42c6db6470cef50b6307df2c8087687193ff97cb3dd049edd74c41ca0dacf", "source": "golden"}
+{"findings": [], "flagged": false, "length": 53, "options": {}, "sha256": "b330cede320599cbdc6f0df4360eed67f9c47cb3aa7a02efc662f4e1288ec1e4", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 0.865908982784, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "2b11a165e30f70c65ee063aa41af3e87bc30c68a90cbb37ad473789af666181f", "source": "golden"}
+{"findings": [], "flagged": false, "length": 106, "options": {}, "sha256": "267f7ebf254a3b14e90f661d14b9bf7514e9cc88ac4acef1fa38598544d82325", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 0.867473231173, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "8bfa70c98e642c2b202d08383a552b7023fe4f30deec587291a76dd009aadfdb", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 129, 0.9, "garbled"]], "flagged": true, "length": 129, "options": {}, "sha256": "49861b3dd4305267a35936b83aa060abeec7fffc637caee7c8f5f666d9ee2a08", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 1.0, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "e8e7f5aa0e0995acb7d73cf445b51f7f00c6b1a2a8f504a9e5d0eca738d7c030", "source": "golden"}
+{"findings": [], "flagged": false, "length": 114, "options": {}, "sha256": "6b19edaea0d6179786a197fc209b363f6db898dde2764b6874f69e95326db9f4", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "2491c79e2e9a0ae27b353996670d6fba97e8122db75bdd1d4fe54e3a2eebd8a2", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 0.816152579182, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "50b0bff7b7177483391ac3f75026136b9d934b4e2243df532fdf0357733acf0c", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 1.0, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "ff815bf26edf93e4a33189e4e96eb199fe460228d56ee7fa16ca38ab9179b2bf", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "641a9fb848d403c0400ace575ae5af9e3b858729de17914973e795a037a17799", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 1.0, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "7d503972bb4d297a1a50c48ba75f54d1a650c7d192e035835de87d6b79b3cb6d", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 64, 1.0, "garbled"]], "flagged": true, "length": 64, "options": {}, "sha256": "ba130e8b6876dbf46b2ac016c58d49e5aba7d3475196bc6cffc465c39a678b30", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 1.0, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "b5e64bda921c58cdc81b4c7c3f55e489ad0a60737c9b27d1f2761cf2f7b6bc02", "source": "golden"}
+{"findings": [], "flagged": false, "length": 71, "options": {}, "sha256": "91a453c61e3c8a5bbb5950ff1eb980f878fe2e0d5eb784ec5f921b6029c1d539", "source": "golden"}
+{"findings": [], "flagged": false, "length": 12, "options": {}, "sha256": "85af9f7fa66bd324e7962d25922d9e16fdd726721c1544d3687fcdfec23cdfc2", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 0.896283987685, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "2c00b80360d8378ab8a4c9d04e914741f26716f5ffc45c1db889a4107b54a197", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "ecab145f4b8e02da10d472d4576e7d532f5c56d2a319cf26e66316f621c38ad4", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 1.0, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "d142adb1e3d85d31618119fb81b63359057f1c836bfb395a31831019049cb233", "source": "golden"}
+{"findings": [["profanity", "profanity", 90, 98, 1.0, "strong"]], "flagged": true, "length": 100, "options": {}, "sha256": "80550d00701428980385cc6b51e1a7d717bed38c8c1b7323c5e730cc6b539fe6", "source": "golden"}
+{"findings": [], "flagged": false, "length": 108, "options": {}, "sha256": "e716775c281e30c82b02c5bc8a459b4bf9ccd7f5b9206689ee679d6eb10d6aa8", "source": "golden"}
+{"findings": [], "flagged": false, "length": 12, "options": {}, "sha256": "3f8daf91e7a8f1af9b44243ac4612d1a62e7f16629181734f36951f76223bdc3", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 49, 0.9, "garbled"]], "flagged": true, "length": 49, "options": {}, "sha256": "3ac261f7c01d73f4c19054798bb6ab0cc917ba4bb7c6f7a109b0052c20b171c6", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 0.891618172917, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "98af695277c0742541bd953e00f63b9c532255bfa08047772de0df6b1907c8c2", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 0.65411649357, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "be9cd4a7fbfc791b619169507e607e646ed84f5f6517e649cb2b13d89bf20d9d", "source": "golden"}
+{"findings": [], "flagged": false, "length": 140, "options": {}, "sha256": "37a7a8b6d7aff51e91d63743f30d64853c3c60be5dfdc623823d53bef6a5c10b", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 0.898771364155, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "d7af24f05acfd343eaa04e85e9beef24d44f633c84b3deee16b85ac9366ed5b7", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 0.870836105423, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "1c0880ee4fcb2ce50c8b3be55c59486153fc8aa9b53456b8293684e21c3c1f70", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 96, 0.9, "garbled"]], "flagged": true, "length": 96, "options": {}, "sha256": "ee624a50ff314d94bd1a355f95cf925845dce7a256522c4ec3e9e44d227b7bd3", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 1.0, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "53ae17953990c1ed442e0458a8885e06223f9110f43e64e2aaf18be963edd85a", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 0.883771566477, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "48c79c8eaf2be406447bdb15e8b31062091c3361867bb91c9d950d4a312b7402", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 1.0, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "ec6bddf96d4e9ece4d20132742c76592283033857d766edefbc9d5d0efde7e6b", "source": "golden"}
+{"findings": [["profanity", "profanity", 12, 19, 1.0, "strong"]], "flagged": true, "length": 40, "options": {}, "sha256": "694eb9e091fe57f5cea72cdc4665fb4f4b6b7733478709df48bcefde6853930c", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 0.666091756856, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "464c55d3ffac0199c15237846bbc2759bfbe67b066f84528a64112d4b53c8a60", "source": "golden"}
+{"findings": [], "flagged": false, "length": 107, "options": {}, "sha256": "5d9f96c20c3cb6db8fbdc34b5f7073c31fdba3ad53e4a2aa5224acd7ede87834", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 7, 0.864820944704, "garbled"]], "flagged": true, "length": 7, "options": {}, "sha256": "b862a143711a57dc02d47674731212d3b5b8e7d91aefc2b64603c81c78a88e38", "source": "golden"}
+{"findings": [], "flagged": false, "length": 109, "options": {}, "sha256": "8f94d56c31b39212e7e4ec7c152b9c23648d056ae234969b5fb2907419d794ec", "source": "golden"}
+{"findings": [], "flagged": false, "length": 124, "options": {}, "sha256": "bdc49d3572571188de8c6393ac9807cf1ca21fa5a4a233ac795825935659c3f9", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 1.0, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "0cd2378a8e97064dfc64b5670bf443365715c0086f4aacc587c53f9d2e2fa6f4", "source": "golden"}
+{"findings": [], "flagged": false, "length": 137, "options": {}, "sha256": "fa68bd2ad4d5b581f08db6fe1bd6d9333354415fe4fe06fa6542faee4bc5f5b4", "source": "golden"}
+{"findings": [], "flagged": false, "length": 124, "options": {}, "sha256": "408c374d44d571fae01e7ea7929913c77e60eed6507eaae671825abbbc2c0d89", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 7, 0.77653631649, "garbled"]], "flagged": true, "length": 7, "options": {}, "sha256": "d791a27d88a72ae0a4c5779500a1786c45bdcddfb9a9984685e3b13fa77ec31b", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 1.0, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "698265df0aa49909a14ca792ef229b0ad593def1eab4ac6edfcd025923a41de9", "source": "golden"}
+{"findings": [], "flagged": false, "length": 6, "options": {}, "sha256": "848377d4853e1a142936522662510a2e9a1d8817b8514ff57985bc7d39e0f80c", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 89, 0.9, "garbled"]], "flagged": true, "length": 89, "options": {}, "sha256": "4e67ee23dd001cf10d70c2b627647e41b522cb07b17c28319474b05e799c5758", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 1.0, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "0b88e15fb712099b000493e7814ee80f3ad7cbf3350314db2d64410e102f6d8d", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 71, 0.9, "garbled"]], "flagged": true, "length": 71, "options": {}, "sha256": "07c2ede37a793fc633f48baeecf996a798b9cdc7b2a6b1d43a32d71338267e49", "source": "golden"}
+{"findings": [], "flagged": false, "length": 109, "options": {}, "sha256": "fed1572bce0f87ed64868d93ea66af5d26f5add97a88cd593462a665d1b7bb3d", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "c1cd2fa14bbcc70b95dd962199aaad35cb7ca5ca128d2e088a04c15b15edd8bb", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "3eda5e905b38f651bad676485170550bf43872763ce7e835a2849adcd8367258", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 1.0, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "f0ea27ab54e065df8b518aa404f707fddebd9a4a10877981f7201f87a055a334", "source": "golden"}
+{"findings": [], "flagged": false, "length": 88, "options": {}, "sha256": "fc512e07be24bc3ffb7ce085eb710126bd427268fd8b9c2a66362657ede62502", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 0.818867326052, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "c2f8bdfed84b13aa87bf0f7b1a304a22689cb39a38adcd86c1909f926a2b7cd3", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "d7e90344b9ec21549be58893a2a5b6efcba82fc524397314eda2b1013eac3d29", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 113, 0.9, "garbled"]], "flagged": true, "length": 113, "options": {}, "sha256": "599fc09fac1ff28d15a967239400f99b55577a07f4040fe4b6d2051dd3a28af4", "source": "golden"}
+{"findings": [], "flagged": false, "length": 53, "options": {}, "sha256": "3a06176a4835b198c181d14ce9d38cb0f82b4fe9f281e8a4fb6fffaabce12804", "source": "golden"}
+{"findings": [], "flagged": false, "length": 111, "options": {}, "sha256": "a30f95bbc9f57fa8d001b2164e99325086ae815b6f48d18b065f38aab71fb4d2", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 46, 0.9, "garbled"]], "flagged": true, "length": 46, "options": {}, "sha256": "5a2a227e04ca9f7515bec1a5bef5c3059e017f131dc1c21f72311f33e82cfc10", "source": "golden"}
+{"findings": [], "flagged": false, "length": 32, "options": {}, "sha256": "f341a1a2de8df63ef4ef6be0b99b19ba1bd3b0d33c3314b88588e4bb349bcd94", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 1.0, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "46505fa75dea3642802c91e9965ea960c158bd46c7cab004ac6689539398a538", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 136, 0.9, "garbled"]], "flagged": true, "length": 136, "options": {}, "sha256": "7a3b57d8332c942fbe6765beb7d9f6f7db58d3794a69c15595a75e1f3166c807", "source": "golden"}
+{"findings": [], "flagged": false, "length": 91, "options": {}, "sha256": "d5e58842abc1faba38d5ccdbee39c8570b785cfa93c899b9cf89fc394c29e990", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "3e38507210601bc5d04bb1b47ba3e06c9ff47e6aad14fd9310e7d36283d7a7f2", "source": "golden"}
+{"findings": [], "flagged": false, "length": 112, "options": {}, "sha256": "052e6cbe9c20158589d3d77d309bb896838dda13c78ab9037839543a7c654227", "source": "golden"}
+{"findings": [], "flagged": false, "length": 110, "options": {}, "sha256": "16bf4b93ed6b50185665d581f6fd7be201a9d99f04719a19e1496d9db8b1d7f3", "source": "golden"}
+{"findings": [], "flagged": false, "length": 95, "options": {}, "sha256": "dd40e3d3da688607bfc194a42f6fd00212a6f6d09262beeebfa367a493725b37", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "7a9ff907c8aed67da2523c0a15aaefe25281912fa783b5ef01fe37b22aa052cd", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 35, 0.9, "garbled"]], "flagged": true, "length": 35, "options": {}, "sha256": "1b0b9337dab9f7b70b4d4bcd16cea643df8a4764a1d4570a2c4dd0ad00c4911c", "source": "golden"}
+{"findings": [], "flagged": false, "length": 82, "options": {}, "sha256": "0fff9b3bec43a5816132e66dc4f30c508c53a66d5920c23cf4aaf4be603c8f24", "source": "golden"}
+{"findings": [], "flagged": false, "length": 43, "options": {}, "sha256": "85f6655f6f17aecc19b221cf7466120a281d2f934396a1d608ed95493da61d1b", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 1.0, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "2d0ee4abf5b1b9037577dbce9ac7909e6e1c287f17d239191968e5aa65f6f3d2", "source": "golden"}
+{"findings": [], "flagged": false, "length": 109, "options": {}, "sha256": "f744022f5d5cae46d9762473cefbe775a577caeb4922c07f277731347b784187", "source": "golden"}
+{"findings": [], "flagged": false, "length": 45, "options": {}, "sha256": "4d18858fbc45d8357a70eef1e63b8d9329451f683ee0ac559c6f9db0438cd103", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 1.0, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "8ec88564ba96de8c945d63b8b446569aaee5e316828d1e970646fe685d96c9fc", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 7, 1.0, "garbled"]], "flagged": true, "length": 7, "options": {}, "sha256": "487e17212b6377f85369ce1f695784193b9ef5c72b374d5dba5ba3394d16fb37", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 102, 0.539073956121, "garbled"]], "flagged": true, "length": 102, "options": {}, "sha256": "1a0059e8bf6bfad70ef6d1ef92bfa0fdf9aa6d570ea92640002efe0822d9d7af", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 0.89396253846, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "11a611d4a2515b5f37e1ceb547efa9abcf20f7d998e21353cf9a67907c989c3b", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 0.879434839035, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "3f0e3a3feb10aa0894a849a067f70da2dd0fb5768545c90e62903288d3bb6e8b", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 1.0, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "848494df9b67cd37f4cc718011920a80c44cae6650c5535e8221ae57bdd422f8", "source": "golden"}
+{"findings": [], "flagged": false, "length": 129, "options": {}, "sha256": "b5d17d10c2128ac136a3ce0f99e79a17ef0e9e26628d81e67dee54b2d0d9be18", "source": "golden"}
+{"findings": [], "flagged": false, "length": 116, "options": {}, "sha256": "8807ac73a7d3a7b51cf6e2411c7146e0b8cad5af63ddd536b825850f3fd1949f", "source": "golden"}
+{"findings": [], "flagged": false, "length": 129, "options": {}, "sha256": "7798fca54bcccda85071f00213a3def5c57ecd6b63ecc9656c031f15c938c509", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 1.0, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "2390dd8e366c4e02c30308b08e5d7d0414c03fb1669e13a8acfd98f16206cbf3", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 0.899913662202, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "75efcb46ad9342b97fea1e460c3724aed5491465371d575a42cae132d32a987b", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 0.860107065524, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "49255cc6b1eb1db64d6c505ba3c8249540f2983c4319bab2e763a0b36f6d7804", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 87, 0.9, "garbled"]], "flagged": true, "length": 87, "options": {}, "sha256": "ea6d20e7b8c2f720f82e92c1b68289e9feba265a63f1aaaf8e08b90de4d956da", "source": "golden"}
+{"findings": [], "flagged": false, "length": 62, "options": {}, "sha256": "7943c6d9f3d668fd7878f3e27294b308aa6a6b1d36ed9039cbcd6966f6d5eef7", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 1.0, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "bb6995a7c2c4a33315cd9a119da347f70ba7576c87c788f875639d50ed628de7", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 1.0, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "51a58dedbcc51a31f23a3af0ef258b249d420d7842ecc4003c3e25eb2fc2a417", "source": "golden"}
+{"findings": [], "flagged": false, "length": 133, "options": {}, "sha256": "52cadc1f3bdb096c74962698e8decf732c0ab821af0e4d018afeba06b0b25a3c", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 1.0, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "ae2104567f198927da659b3953fc3443d936b46887b5b25352d4ee0a73558631", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 1.0, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "b2d7294368bad9d83bee799d3d115f97c505ba68d6eb849bb473db9974f38f17", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 1.0, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "a9eb2167fc2f3ec7811c7d86ff97f6031c465b774ab49933545eafb143713bc5", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 71, 0.99112454206, "garbled"]], "flagged": true, "length": 71, "options": {}, "sha256": "214362aca4757676e1106839a32035aa1e529aaf8a3e95b1294bf789ad417490", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 7, 0.735719763877, "garbled"]], "flagged": true, "length": 7, "options": {}, "sha256": "eb8f1687a633d8ca43dddaf5cbfe24362d5facdcfcc9394e77fba6cf4a75903b", "source": "golden"}
+{"findings": [], "flagged": false, "length": 78, "options": {}, "sha256": "5010e4f6fb4c2a291a251a9ff0a48638b8a574586973764b600ee7d7a7a16278", "source": "golden"}
+{"findings": [], "flagged": false, "length": 106, "options": {}, "sha256": "61f88267a39329b56ee18fab69dce4e3d4b73398a428ddcf775cd23f2430c968", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 7, 1.0, "garbled"]], "flagged": true, "length": 7, "options": {}, "sha256": "4a0178f5a10d6d014a57361bad210404d1c01214326f7192980f158a637f774a", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 1.0, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "490d1a31f14d2698e12b5c71dc5f86ab5fb454152de733edb00566005c0ab037", "source": "golden"}
+{"findings": [["profanity", "profanity", 59, 66, 1.0, "strong"], ["profanity", "profanity", 97, 105, 0.8, "embedded"]], "flagged": true, "length": 106, "options": {}, "sha256": "6163f287821435643f3101402dfef557ee3d5d353b2ab6a9a031a2b7bdb536ca", "source": "golden"}
+{"findings": [], "flagged": false, "length": 121, "options": {}, "sha256": "cc9b195eb7486e14480b6b0a37a799b420a27c6b307698952780f5e452b2e2b9", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 131, 0.9, "garbled"]], "flagged": true, "length": 131, "options": {}, "sha256": "65068f7b5b69cf363103577af02913b063d549a3deece71b0d97375f8e868182", "source": "golden"}
+{"findings": [], "flagged": false, "length": 34, "options": {}, "sha256": "f7a9c2a74f2bd9f2d675fec33ec171003bae2d639b57e6c429048042a49b574a", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 1.0, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "dbe1a4e8b73b136c3a29af801604ac4ad056f6600a98849d58cbdbb8e9d51335", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 0.559562168775, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "e5bdf025df215bd4c3fe36d4019c82c7e14320185bbda11365bbd151a0b24098", "source": "golden"}
+{"findings": [], "flagged": false, "length": 129, "options": {}, "sha256": "7c7f19f9056cbcc07fed2a8de934f145b2b50558a4358a165fe2143df8a9822b", "source": "golden"}
+{"findings": [], "flagged": false, "length": 42, "options": {}, "sha256": "490885f6df5be73656ed3a527a0d282bf9988044557e5d0ca6ecf31a3772c960", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 1.0, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "96bb2495b5c425acbacb1649f5873bb5cbebb70257d7dc0a746b5e01927e8047", "source": "golden"}
+{"findings": [], "flagged": false, "length": 137, "options": {}, "sha256": "2b4cc30de2cf44c8375cfb958f9f55a1caf7c9d0bfbd48a17578c4ea39029210", "source": "golden"}
+{"findings": [], "flagged": false, "length": 89, "options": {}, "sha256": "4fc88c62aba7b4ea1eabf29048bdaaf106a66fb75c136634dc847a8f623be123", "source": "golden"}
+{"findings": [], "flagged": false, "length": 7, "options": {}, "sha256": "eca4fe3a10e02666ab0c6ac14deb1d3f996a59959edc4222b9a4923ec0f9263e", "source": "golden"}
+{"findings": [], "flagged": false, "length": 6, "options": {}, "sha256": "e325987076e67d9fe06b728c25487e4f0c23945d976d6f9fd93d250ff3978ad5", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 80, 0.9, "garbled"]], "flagged": true, "length": 80, "options": {}, "sha256": "0d82ebbf9571c1eb229ad6e01522afa6cc718586a57fcee46be9e9cf33c33f3a", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 1.0, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "4a02daf0e11c15ba48e9d369e08fc84c6b8918d2f198db012fafcd36940d1a08", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 110, 0.651692765829, "garbled"]], "flagged": true, "length": 110, "options": {}, "sha256": "d38e5e498cd0998ab62f26a0e7a730b28791684412e1cec82748e4d6e08a9f0e", "source": "golden"}
+{"findings": [], "flagged": false, "length": 85, "options": {}, "sha256": "b548b44ed4dafd91455ccd785ca6de5a3350070aa4462e298470e9d444dc0426", "source": "golden"}
+{"findings": [], "flagged": false, "length": 79, "options": {}, "sha256": "ac11e1539f9d8b3fc24b76012b4b93efc3bd41b024e281b95c16c74b162a4162", "source": "golden"}
+{"findings": [], "flagged": false, "length": 114, "options": {}, "sha256": "6cef78e628533c90408ac64751bcaccaf033500309720c6bb7417e3fdab967c9", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 1.0, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "48bf519114bf5ca6881018d3f9acec1dd333b445488eddaada08603e7e8169b1", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 1.0, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "6b16039a1ec083782584aebb638dc883e671a3615b432053ffe9c23ab88ea4a5", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 0.599603508653, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "94900671b3053b1b15dabeb14d029f057a4d5f110df7cd6790b1e7b25ad737c9", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 7, 0.842075917975, "garbled"]], "flagged": true, "length": 7, "options": {}, "sha256": "08a54f6b5be21946a3fcab5f76a73636063b325a9674a0fd6034d97687e78de3", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 1.0, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "548ff6a69195dd7e4026a9c210a2f058cc2cbe697dcfc27c48c5225627897f29", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 0.81928853301, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "19b745cca2c1b42576e160accd2cf48777af3a3dca2ead28d563c17be51863c7", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 0.889589127604, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "099308db7e1a39c20a03b2ac653819006842af02a9e25d4e18c244dba4b27af1", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "da38493720832b944627eae9301ad0402b37c377f1b4976d731630882d46adf5", "source": "golden"}
+{"findings": [], "flagged": false, "length": 53, "options": {}, "sha256": "7483d9a66dde4117ba844c91f13acb6ebb8271dbc2d8a7ce0c8be6b754f8f9f1", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "3c5af393521e549dc0c7da5aacf4a6c219e8fe408d229fb8f55fac8a5ed085f8", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 1.0, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "b9242e34c0f79e82ca1c21f96feded0c42dfde504890a2c8cac06da68b65140e", "source": "golden"}
+{"findings": [], "flagged": false, "length": 110, "options": {}, "sha256": "47e2b150d8cf6cec7cd279a4f7d5d77f052f9cd6519626da789dc904de225df6", "source": "golden"}
+{"findings": [], "flagged": false, "length": 74, "options": {}, "sha256": "8efce66d9c1967b6570ecb9943f42153f6f950091eada7d3b87ed601112b85d4", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 1.0, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "9f143563f60a70f39099242e1911b071c66bdd81f39e6f5ddbc07a42d2d68f92", "source": "golden"}
+{"findings": [], "flagged": false, "length": 93, "options": {}, "sha256": "41666faeb80dee69a502fbda826eb1d87425d9241da148757fd4306462f1430c", "source": "golden"}
+{"findings": [], "flagged": false, "length": 119, "options": {}, "sha256": "800ffe282bec1c377887f768d56c469aa6f1cebfe68554d59088f97e9ab83517", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 93, 0.9, "garbled"]], "flagged": true, "length": 93, "options": {}, "sha256": "2953907e5e18313b52a5fbc60e0527029a74d78ad4caa96c7df9f55690e66e8a", "source": "golden"}
+{"findings": [], "flagged": false, "length": 5, "options": {}, "sha256": "b4b9611d6e2874494191d1bb7b603284d0197a4c393610adf4b3fe000c3c91a7", "source": "golden"}
+{"findings": [], "flagged": false, "length": 84, "options": {}, "sha256": "231ec9b80c1e83369cc9b11e157ef92779074bd93f1d24d94645bd487338d2d6", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 112, 0.9, "garbled"]], "flagged": true, "length": 112, "options": {}, "sha256": "85cf110b7c6bfc50672f33af3ab1d7de7e22c7d38ea22f545a6b62ca844d397f", "source": "golden"}
+{"findings": [], "flagged": false, "length": 90, "options": {}, "sha256": "868260a97f7adc3e5c8c36cf6ef22780705a23d7d5598478adf07d209537fa16", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 28, 1.0, "garbled"]], "flagged": true, "length": 28, "options": {}, "sha256": "7dd976757fbd06006aaef94c94c1f26c6b853bfa8472ab6b9fa7c01397223633", "source": "golden"}
+{"findings": [], "flagged": false, "length": 93, "options": {}, "sha256": "a4e283f1a454b66a928d4528e4336b148dee0a2c5e4d89db01f3d2c22c92dda7", "source": "golden"}
+{"findings": [], "flagged": false, "length": 49, "options": {}, "sha256": "036554c67e37b778476291c63f2e9a032ab11f41aa272af8c8034021314e8f96", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 93, 0.9, "garbled"]], "flagged": true, "length": 93, "options": {}, "sha256": "17402ef75e3d12b0ee7632f097a71a36aed056d2e3b554b83881faa62802445e", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 1.0, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "c5e180fb0bc1c5fb907e5fd1277bbad1a4a1f711509b4a3c596a90edb410ab56", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 1.0, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "fb100e16279c5cc66f4a4cd6a6ad8761939b4176f771323f6e1361243f5dde5c", "source": "golden"}
+{"findings": [], "flagged": false, "length": 24, "options": {}, "sha256": "2dff8ed8155e4a06f070b5c3f0678eeb9a9e0d974dfac38ac251f9a23b78d1ca", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "47346f1ad75dfba19ee2a7c3f5516ee867b89952722c9234adcde7afbeb9e22f", "source": "golden"}
+{"findings": [], "flagged": false, "length": 113, "options": {}, "sha256": "f4061cdcd4bbd3ba40f9d4889f9159a04bba4be3ca996c7456028878ac600c7b", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 1.0, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "eedfdbed9b94a7767860e28e6563e54056e1f6cd255bf486a35c1dc32aad553a", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "d07e278aa96412755aa616a3d0ad37adcd93673db9fa98a90133cf56def32209", "source": "golden"}
+{"findings": [], "flagged": false, "length": 84, "options": {}, "sha256": "d818b512125ca9eabdf046bea00fc7e8dd575f1e74379237ddce2626d5aae842", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 1.0, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "9927bc03233d68b807c9c8af82ab4ba3d79ebb11d39186764abf72ad14bee2d8", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 1.0, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "6164d3499c162d98f3293ada5b84c744fc512a2941e301daf93302ec61ff61c5", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 0.79056137303, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "d384a130b81a9faa5642c117053a175c4cb2da3cb7e670d8922d5d1bf9d0ca38", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 1.0, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "09fc14c313a6d3087ea5eb8a2d6770e7e138699b5e55eb3a7b008db029f2b830", "source": "golden"}
+{"findings": [], "flagged": false, "length": 55, "options": {}, "sha256": "97a39689f2c782dcf0f8af4fc7d57cdab17e8d948e91c581a18c2a1be1cf7fbc", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 0.892903779967, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "50dfaab12699934e303d08547b894822d8d185f2fafcaea03e65d5184a0d3bd9", "source": "golden"}
+{"findings": [], "flagged": false, "length": 20, "options": {}, "sha256": "475feb41d701f7578323bafe0d87e5f5e98228e0c6b2481eb1601396d185b3d3", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 135, 0.9, "garbled"]], "flagged": true, "length": 135, "options": {}, "sha256": "fbbae1e5be167bf3fcf7763897b901974ebbb5651f10d0ffae46b3f1368b9e7c", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 0.783699931254, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "3e65f862866dd40a9257844f18028e1dca05965d7fd8246e96b0773ae3f17e94", "source": "golden"}
+{"findings": [], "flagged": false, "length": 130, "options": {}, "sha256": "e304416bee6f0902bfd09e53ea44180df53bb590c256caaba3b25d726ddb68b3", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 80, 0.9, "garbled"]], "flagged": true, "length": 80, "options": {}, "sha256": "92578996d84f25f649f844f7f5689a7699b1c559264b0e1a165679768faf45a1", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "1e7b88413d2bb5504f1a47ab5af895a97134b8d46839d165d2203f65a782b970", "source": "golden"}
+{"findings": [["profanity", "profanity", 5, 11, 1.0, "strong"]], "flagged": true, "length": 11, "options": {}, "sha256": "1bb0299b0d971fd8a63163d2bda76e56f2a6e0a1cf19b01498e0eb25f2842227", "source": "golden"}
+{"findings": [], "flagged": false, "length": 64, "options": {}, "sha256": "8f90631597fe94a6ae9395d848c3cde7a59559e4ac654e168d856f5ed5a91be5", "source": "golden"}
+{"findings": [], "flagged": false, "length": 57, "options": {}, "sha256": "8faf688be2d3bda255afe3ab541a165e3c7f5d236142aa7cf0b5e2e66caf22b0", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 0.885312245258, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "4f391844929a5e1db80e85e86e27bac0d815882325a51f108cc91fe31c4f8d96", "source": "golden"}
+{"findings": [], "flagged": false, "length": 79, "options": {}, "sha256": "c855a75fae716ac6a87c07ed64172fc2e5d1b3f690abdafacfcd48eb00305f1c", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 117, 0.967256499564, "garbled"]], "flagged": true, "length": 117, "options": {}, "sha256": "46c1bb4f1c81aae6acc48e47965ffa9a0c7a19b668c71545e70b42254dd04772", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 50, 0.733333333333, "garbled"]], "flagged": true, "length": 50, "options": {}, "sha256": "1889d0586daa4c840e6a16ff9b796df2ca2053eaf996bf15af0a1380e345a9b2", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 1.0, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "d0f344d08b9d64a7c8846b46e193bf1bc1ff445673e5d46129798bc80740f552", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 1.0, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "cf3a3c1b3be965d416839b0d84bca83d06c22e1f761b0112fbb5c66ad1c19421", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 98, 0.99972934363, "garbled"]], "flagged": true, "length": 98, "options": {}, "sha256": "22b6b54cce69086741f54c50d7dbf95be70021f87d8e9c7f4dd517c736d9bf79", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 100, 0.9, "garbled"]], "flagged": true, "length": 100, "options": {}, "sha256": "1c13a943cc5ed6e3a5cf01b5f269120543f8dcd4d886ea46b9c7417b25637b9e", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 1.0, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "5e79449548f6d5536cf42e1a2e7357f9619974f9cfcc798811d193bf23320fb7", "source": "golden"}
+{"findings": [], "flagged": false, "length": 126, "options": {}, "sha256": "18171776d202844a75f1ac0f07621b3a125ff634c2ec8de1a8839387e149df81", "source": "golden"}
+{"findings": [], "flagged": false, "length": 79, "options": {}, "sha256": "8bd251366178b34a0c0e42bb7a08ac73f411d0235369b315e1af95520433a045", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "e8436e917db106e934e93cbff6c0e7faaaec4c9914cd7cf28b20421131c2149f", "source": "golden"}
+{"findings": [], "flagged": false, "length": 99, "options": {}, "sha256": "0c2dca093e78f2d0aa2ab81976b98efd4846164002e6760d1f566f8dcc518e0d", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 126, 0.586411525326, "garbled"]], "flagged": true, "length": 126, "options": {}, "sha256": "9fb62d20774ba2e47f8c9e771b8afaaedf9facda05f5b583651a6e03efb670dc", "source": "golden"}
+{"findings": [], "flagged": false, "length": 115, "options": {}, "sha256": "d64b3f213549116b035f817d6d2c5495d54e20b7f57393ad9924c6a570da9605", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "f4ac973df695581538efa146402ba283e13ed3ac724c3005947a9050e634dbf0", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 0.668345106175, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "18bb6bdf0c65bec5a383f4e86cff2273bf63d670dc0593ffc8b656266b4a1e1b", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 7, 1.0, "garbled"]], "flagged": true, "length": 7, "options": {}, "sha256": "e4ed7243e9f89df342e84ee0353997c4ac1c31803f152907f3d8bf766c52fd38", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 1.0, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "8db4ce676b6eabc95fc4f30a152e9180345efc57429c3736987ac54eb098b0aa", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 7, 1.0, "garbled"]], "flagged": true, "length": 7, "options": {}, "sha256": "824d144269c6f8adcaa2c87ebc1e0268d6a24dfe4e476ffb1a9e0b5b8c2ade54", "source": "golden"}
+{"findings": [], "flagged": false, "length": 6, "options": {}, "sha256": "38360e14b3fbaf7da3ff84bbff5359ef31b070fe1767962e0f81f1108c7b1762", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 1.0, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "665512e79089680d5c2e1bf2bf7f3c6e3f89837fff25c2a99827e70bdad57a6c", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 0.868654683843, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "44fd844252d297db96e8b0ab98c7ad132bdfbc83f457980d09ed4a43f572b78b", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 54, 0.933617209255, "garbled"]], "flagged": true, "length": 54, "options": {}, "sha256": "1e42349f5df62fb0325aef5ceaee11fc166b5d317607d806c166a91fabb557dc", "source": "golden"}
+{"findings": [], "flagged": false, "length": 80, "options": {}, "sha256": "71e8f280fd24f87189cb4a694d3c365599d6cea3c3bb7523c1429050da484139", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 1.0, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "4761c62a8e3659d260bfeb8eec36e8fbd3fd9ba3a58d38545eaee11d019d8496", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 0.89375071668, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "80ce54d4a168a815fb6094d5e611346839f1919d0f59b331188578f30f75604c", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "b9a4d5822a42716a5306629085ad631d370ac8021a8c9e44ba53cbd888cc97de", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 5, 1.0, "garbled"]], "flagged": true, "length": 5, "options": {}, "sha256": "1d83a957d01eebf02dd0c184e2ce36b65d296560c70c40a39f1c272db9af9f0a", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 1.0, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "8298def6ac82c08b0d08f132e61c06841e9dbb8ec2cf0f54fe819b4a623ae469", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "543e2d8e7498a66935e85e1dd5f1d2764dd97628903d3cf4c332c1ffedbd8235", "source": "golden"}
+{"findings": [], "flagged": false, "length": 18, "options": {}, "sha256": "4e23f351722b5064a2044e591c0c51580456ef6b0eab63942500d927ec2020e0", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 1.0, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "8cbf4f45c92f9f97400094b5b21ee5473d169ba38570c4a86172193957edb5b6", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 1.0, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "13818ce08b9facaaa4a673f7617582bdd2e8cb8a2106c90feeba485e49611ed1", "source": "golden"}
+{"findings": [], "flagged": false, "length": 140, "options": {}, "sha256": "1aa5065837d12dece3d6ed91a0644d2626e605838a03ba3820734103828e625f", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 84, 0.998481032001, "garbled"]], "flagged": true, "length": 84, "options": {}, "sha256": "3e8cb98a5fec917fbb48bf5577022d285ba03fb2c30c8b496299018eb03eb373", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "ff50ccd0d42550292b4246d0fdae39559e4ed5da96cd75e6346ebca7c30ff16a", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 1.0, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "471205519299ffa37ddb74c4bc6b0c6fdbe34c57903000057f036c2aac0c17de", "source": "golden"}
+{"findings": [], "flagged": false, "length": 107, "options": {}, "sha256": "7b1f4e456fa809bfd49ac60c48dcb942959cb583a68e76296086af2bd736e8d8", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 0.803850506179, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "f6a0e6fc2a9e173e43654a78485a777258f7d87d54f0425d1b7261de97c74b6a", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 1.0, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "e23acd2acd247a891157d262b53763bf267bb2f2ef10c7b1644960fe0c286bc7", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 0.753349364935, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "260b21a90b3e2d8fc8c07732564835a2ce69cfe70a1f0833891015fea92e6663", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 91, 0.9, "garbled"]], "flagged": true, "length": 91, "options": {}, "sha256": "949290af86ab029c770272be4acc6857e0e717a99ae966595fe069923fc94907", "source": "golden"}
+{"findings": [], "flagged": false, "length": 120, "options": {}, "sha256": "4a6c07dc32b7d37bed0a267dcdeeced7ccf90a25365b01fb3d58afee9e3e849d", "source": "golden"}
+{"findings": [], "flagged": false, "length": 57, "options": {}, "sha256": "7794f77c3fb70c832828bc2ba3d3307cae95f49d400df85b40bb07383ae25782", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 0.823640132207, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "69fbe83c416e9ad1a3df215160892ddcf9cbf85849876c2e904832ba84da3d77", "source": "golden"}
+{"findings": [], "flagged": false, "length": 120, "options": {}, "sha256": "24cf938d56ca2dc1ac8e18eab5fc0704b19a9785f57e9e7c8e28b997f9b6760a", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 87, 0.9, "garbled"]], "flagged": true, "length": 87, "options": {}, "sha256": "ce1423e3f931f36dfbc8bf32b1907fc1d6febbc939d9f7df0a917ff9f36227a7", "source": "golden"}
+{"findings": [], "flagged": false, "length": 102, "options": {}, "sha256": "20441959e8e8abd4a58266e09a0a1a316ec7d7f746ac2bd865cbbd9ef5755735", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 0.843087296993, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "2e82dd737dfd26e1365c70a7dbdc10be0b6ed6ceee159dad2b232c29c49b7397", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 0.851045896763, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "4fff73ac2b241568fb36fc7a2ed7591375f96ce864a7567c755b81103839db3c", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "8a293af7efa7edd22ff291171bbda3b41f3af5b5beaf3c52e08ef0e0154f88dc", "source": "golden"}
+{"findings": [], "flagged": false, "length": 42, "options": {}, "sha256": "eb618d2bdc0b3adbbdecc60d218a64f1aee9076336469de390192a1382118d44", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "0bc2306527a619bd17786f82348f6e233b30b3b0b183814db4ef0b0a2854c653", "source": "golden"}
+{"findings": [], "flagged": false, "length": 146, "options": {}, "sha256": "d865f547703fdddc69193d4b73d2c8fdde6dbef8cc34719d5a4222c0610be1e7", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 1.0, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "d1193f532b524cb452004f2216b279b49bc7e5c4abae1f4b482158690beb309e", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 7, 1.0, "garbled"]], "flagged": true, "length": 7, "options": {}, "sha256": "34104f64a1d372ccb037af19ca923ee51748496628a0210e6d4f66b566f9cf48", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 97, 0.9, "garbled"]], "flagged": true, "length": 97, "options": {}, "sha256": "38a540baa6a6e7ddd1b75ea47c2954d622fa9d375d8effef678c1ca2c0993ad1", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 0.783169838724, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "673b2d5e492eaa08ea5dca2973d7427e979b0e3d5eb8bb64923b6de407baa7ba", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 9, 0.760136826209, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "ff26cfc3bbddef99aa3440b695f60a41b667c310aeeca0d00b81c3bf4b0add62", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 67, 0.9, "garbled"]], "flagged": true, "length": 67, "options": {}, "sha256": "12463b312e479ed074f9411912bf3fccdefe7641da982ae42fabb2dd6310a452", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 7, 1.0, "garbled"]], "flagged": true, "length": 7, "options": {}, "sha256": "2b23ec8bc4852ee08452b80c2196c8ee1aa0c77ed0da408043b5ebb02d8427bd", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 119, 0.9, "garbled"]], "flagged": true, "length": 119, "options": {}, "sha256": "a65e979bf2971760ff9c059c39d774d713a241cc2bd93c84b756e218ef2bfaab", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 6, 1.0, "garbled"]], "flagged": true, "length": 6, "options": {}, "sha256": "0dcae2671b229f995a637a98fcd4d00307e9b51ece64e1dd7bf89507cce2cdf5", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 120, 0.9, "garbled"]], "flagged": true, "length": 120, "options": {}, "sha256": "8ff457d4dd7158886b4e9cd7b87fd079fccf5b010655e3111ba9ea4b098a74ea", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 0.865094920373, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "6d83776666173a4eb3575b6c20d86733be81bf37c4f7e97d76c69c54a8a8cedf", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "8a5dc33ca681df4b703eaf88b2a3c212a12b403a2a8ebb735cebd327b7ce7f3f", "source": "golden"}
+{"findings": [], "flagged": false, "length": 99, "options": {}, "sha256": "d583b667f8a9db716a77357e029d67912f99cf492010882956eb2c9758ba8499", "source": "golden"}
+{"findings": [], "flagged": false, "length": 104, "options": {}, "sha256": "f2abb44abb2d1e7668e2f8e1f0c8e8076401de7be29e089483f8e0940d13fdad", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 7, 1.0, "garbled"]], "flagged": true, "length": 7, "options": {}, "sha256": "185a0c5022e851f4563c0f22129d760e1fa2a0d6d963c089a15ab8dc0db3114f", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 7, 0.785571099275, "garbled"]], "flagged": true, "length": 7, "options": {}, "sha256": "6f0e74685332b119277875b987df6226f0a1ad2097468cd89598bc1190cefc7d", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 1.0, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "bab6074404877f6b2a6668d78e5b1764edada860fda927d767c15adf304fb9b4", "source": "golden"}
+{"findings": [], "flagged": false, "length": 139, "options": {}, "sha256": "308d0ef16bbfbb40300eb8a3d5c968bce9cdf115ba07faeeffb678c7810b3e83", "source": "golden"}
+{"findings": [], "flagged": false, "length": 122, "options": {}, "sha256": "5c87283477d6d49d4d4688e4ed248c4c5ee3cbd1d412ff690a6af73aad87c4dd", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 0.703789012148, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "cc99e79b0183f64db6791cd766840eb516517b3a5f0a8c66c0060c4ef07de55c", "source": "golden"}
+{"findings": [], "flagged": false, "length": 146, "options": {}, "sha256": "bd023e23292122ff31c51eca89eedda97118c50e4b34eec3f8fb0768b2a9e13b", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "7b39e433bfb603faf0022e5ca2a238286c64a6274e8cb36d320be96cd0b1f2ea", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 127, 0.9, "garbled"]], "flagged": true, "length": 127, "options": {}, "sha256": "752678e0431b644da70c611e2924dd48e7db2636a7b6646ed0d4096bb6150e15", "source": "golden"}
+{"findings": [], "flagged": false, "length": 110, "options": {}, "sha256": "1f0fe2e87f67852a14965e25fe469fe6c8a6c8d112160f031ad3bf97e6f27e29", "source": "golden"}
+{"findings": [], "flagged": false, "length": 169, "options": {}, "sha256": "5c45219edf04abc0236a8eb6d10642ff4d243fa19ebe452dce27334ccae61454", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 95, 0.9, "garbled"]], "flagged": true, "length": 95, "options": {}, "sha256": "48b3202dea49c6ddda574a761ceeb6b005d10c0bcf0b2402977b19023f91f30b", "source": "golden"}
+{"findings": [["profanity", "profanity", 91, 95, 1.0, "strong"]], "flagged": true, "length": 139, "options": {}, "sha256": "1e7849de0090e0234357c4da626223a42192e9006ce0fcb7ee3b31c151e300de", "source": "golden"}
+{"findings": [], "flagged": false, "length": 8, "options": {}, "sha256": "362f1ab472b49d6d544fdc73098093403e672cbd3422b6c4c9a049aa76fde508", "source": "golden"}
+{"findings": [], "flagged": false, "length": 5, "options": {}, "sha256": "405fd9e58307e601aef4ba7bca8b8779cb946d4ea8a997528c9f3ea7e40939ea", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 12, 1.0, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "43aa37b1a2764115ab61e1cf6086c6252d60a39fbab7aff9572f3edd4379adcc", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 102, 0.9, "garbled"]], "flagged": true, "length": 102, "options": {}, "sha256": "42332cf193e1014808b5685f2c285314adb95d320901812f4374226b760622a4", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 0.898605247779, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "72ff48854a31f123daf8a2be77c0d8ba7faabd962873d0765ab7c61e93502ce2", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 10, 0.685431700065, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "0d352b99c8b14c231f82545098bdc0fd41c53f11c3413001cc9249bda601dc3c", "source": "golden"}
+{"findings": [], "flagged": false, "length": 1, "options": {}, "sha256": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb", "source": "golden"}
+{"findings": [], "flagged": false, "length": 3, "options": {}, "sha256": "d4c963eb87b8230ab944af9bc31202059131336f34b986cca0027a4ec23e09fa", "source": "golden"}
 {"findings": [["gibberish", "garbled", 0, 4, 0.999997739676, "garbled"]], "flagged": true, "length": 4, "options": {}, "sha256": "beca6335b20ff57ccc47403ef4d9e0b8fccb4442b3151c2e7d50050673d43172", "source": "golden"}
 {"findings": [["gibberish", "garbled", 0, 10, 0.999997739676, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "830d1964dc8673182a40f9adebf598960d37fbe200405b249774ecfa5b465748", "source": "golden"}
 {"findings": [["gibberish", "garbled", 0, 13, 0.999997739676, "garbled"]], "flagged": true, "length": 13, "options": {}, "sha256": "9262a0a791605071a500c1a15bef2d5efcc6c8f198567105e9ab364811377e9f", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 8, 0.999997739676, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "3a57bd94b9bcda801052f149337366d3ec00555c67efaf5d355c80d347678061", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 69, 0.997874895401, "garbled"]], "flagged": true, "length": 69, "options": {}, "sha256": "79c838389cf6678eb5c5e2b625f4c471802bb09eb9af206ba1e63c7078eb9f4b", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 67, 0.998025440306, "garbled"]], "flagged": true, "length": 67, "options": {}, "sha256": "df04e6ae8f2343831ba5f2e0e63b37ec660bca889f1daca761e18bbb99997744", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "9c911ab1ba9b5553b767fdf2ec79b0708e7be72834f89904967bcc4e1c70f732", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 8, 1.0, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "83cb9a0bbb399d21a28f2f56736394130648496eed1d69282d8554211ceb960b", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 19, 1.0, "garbled"]], "flagged": true, "length": 19, "options": {}, "sha256": "dc02355fdac08eca9aab4b0070ca40d2df611ed206e650e537746032924690b1", "source": "golden"}
-{"findings": [], "flagged": false, "length": 54, "options": {}, "sha256": "939bd9f2730a539987346dd644860253a52ed433363400eac937c72184c8c759", "source": "golden"}
-{"findings": [], "flagged": false, "length": 58, "options": {}, "sha256": "d27a6bec0da955e5d19cc1043beebb6b26fe94be009916d87642f028facb19ab", "source": "golden"}
-{"findings": [], "flagged": false, "length": 69, "options": {}, "sha256": "e05ec7d4c7965537db397a6aafe2a3ee027b8a767ed48c7f09a86a2260c99954", "source": "golden"}
-{"findings": [], "flagged": false, "length": 49, "options": {}, "sha256": "3c4ce31a1efe9b4ba1827d5b23581eee1e36a4b47c5e064de46b732f2aa5fcdc", "source": "golden"}
-{"findings": [], "flagged": false, "length": 59, "options": {}, "sha256": "0243efa1e0f07653add74c0135002a1222e83c963eaf4554fae8f838a9a79b0f", "source": "golden"}
-{"findings": [], "flagged": false, "length": 59, "options": {}, "sha256": "306b1cdba6697ec840ee7cc268d92710cf1ac7f17a1d61326a0c6582906c0c3d", "source": "golden"}
-{"findings": [], "flagged": false, "length": 57, "options": {}, "sha256": "f73cbe46855e2522581d7e47737086247a903617d7e801f48734c83c49e336f5", "source": "golden"}
-{"findings": [], "flagged": false, "length": 64, "options": {}, "sha256": "ccdeab55b60407176a9f44e70b1e9058f209d5adeac0b02c0e795f9aedf65b09", "source": "golden"}
-{"findings": [], "flagged": false, "length": 57, "options": {}, "sha256": "0a87f1875ff1e75ce96877f4ae9509c4e1def28ed5dc388820916ac1c196a843", "source": "golden"}
-{"findings": [], "flagged": false, "length": 62, "options": {}, "sha256": "c0365ac79afd153b0cb9d013fdbb3f656b23a730851bcb4ef31a67b9d54da125", "source": "golden"}
-{"findings": [], "flagged": false, "length": 51, "options": {}, "sha256": "0528972d98b911e76ec25010284402ad9376670ffab7648e5fb9fd06edefe97c", "source": "golden"}
-{"findings": [], "flagged": false, "length": 63, "options": {}, "sha256": "a58b26be7221928a178e725f37397dffc9fcef581ff09c6e7decefca73125c9c", "source": "golden"}
-{"findings": [], "flagged": false, "length": 22, "options": {}, "sha256": "1788cbf857c4cef38e1385db97249bb54f479bc35c30ec5826e0b964478d1023", "source": "golden"}
-{"findings": [], "flagged": false, "length": 14, "options": {}, "sha256": "97f64d5e88390efc86be5942bfd74fda383450279864731e09d80328b25d4672", "source": "golden"}
-{"findings": [], "flagged": false, "length": 21, "options": {}, "sha256": "fea165b5229e2d765e5943922a18e38785025eaa470ee5239c6adec8e5bc3cf9", "source": "golden"}
-{"findings": [], "flagged": false, "length": 13, "options": {}, "sha256": "a44adeb25adaeb4f7f6048214eebe82fc382d2d5ecf24efcd9ed77d06aec051a", "source": "golden"}
-{"findings": [], "flagged": false, "length": 14, "options": {}, "sha256": "03b896aa39acc8c699d083da829611dc2dedd2012d96fe9d6796c0e520b61294", "source": "golden"}
-{"findings": [], "flagged": false, "length": 7, "options": {}, "sha256": "20fbc6f55da84ad9a88978c7fd8688f8d2da3a5e65d3498b67fd65aa9438fb53", "source": "golden"}
-{"findings": [], "flagged": false, "length": 10, "options": {}, "sha256": "17407120d83814df8c12401d951e724934f3de4676db927fa621bb8bd1ddcbb2", "source": "golden"}
-{"findings": [], "flagged": false, "length": 12, "options": {}, "sha256": "acb208d3ac02ab6d5a45120b4187f12bc41a132011fe1c64ec0bfb89c40a4f67", "source": "golden"}
-{"findings": [], "flagged": false, "length": 61, "options": {}, "sha256": "58f552cd0e0849f32091c4976f6ecf61c9059abdf4a57f848777ac07ee0aed2b", "source": "golden"}
-{"findings": [], "flagged": false, "length": 59, "options": {}, "sha256": "b7d62ee0ead51489d8c681302c9fd6af9373509df6bdedefba2a9dcf00514f62", "source": "golden"}
-{"findings": [], "flagged": false, "length": 60, "options": {}, "sha256": "3263214a99e827dde5546d361a74c60bc86a5a37b36fad91b0868b6b4114f690", "source": "golden"}
-{"findings": [], "flagged": false, "length": 48, "options": {}, "sha256": "ac669b995d24f1a793ca461ff37778b7e8f7b7f150fa5384528818a946cdfaf3", "source": "golden"}
-{"findings": [], "flagged": false, "length": 46, "options": {}, "sha256": "38295eb7bef619ef81426ebc33b8de01a6033d0116eb0c840bd963301a8598c9", "source": "golden"}
-{"findings": [["pii", "email", 0, 17, 0.9, "structure"]], "flagged": true, "length": 17, "options": {}, "sha256": "3b6b8e9fe6c5a2bf6d50af13e7e754f87253a2d88f43342c21d5aea7ebab0fb6", "source": "golden"}
-{"findings": [], "flagged": false, "length": 33, "options": {}, "sha256": "1ce792b8d621b4c36008c046effe234f3f987f9fd8f0d19bef606e171a779371", "source": "golden"}
-{"findings": [], "flagged": false, "length": 8, "options": {}, "sha256": "481c9d1c28aaa92ea278ee1b3c6bb3097ac0663d8ac1ae049886ef64c8910145", "source": "golden"}
-{"findings": [], "flagged": false, "length": 6, "options": {}, "sha256": "0429b82ebc9e1cb909b544f520b0a183e9191cebba0aaaaee992df5ad4fa5ace", "source": "golden"}
-{"findings": [], "flagged": false, "length": 7, "options": {}, "sha256": "4441c82450c7514fdb77d962ad99a47b53fa276f5ef691fbc5b04cab7d7a5899", "source": "golden"}
-{"findings": [], "flagged": false, "length": 32, "options": {}, "sha256": "1d887eaeee721d8270785778179620245d8bca3ab8b6b79b2fbfdeeb1837da22", "source": "golden"}
-{"findings": [], "flagged": false, "length": 35, "options": {}, "sha256": "a147c95014ce23d46d30ec33677921310d7040e74019acd6236c9adb7513dac2", "source": "golden"}
-{"findings": [], "flagged": false, "length": 27, "options": {}, "sha256": "84f8e4de0613bfa9db0ba03c591f1ea9d34dda53691566944621f825ce303a20", "source": "golden"}
-{"findings": [], "flagged": false, "length": 34, "options": {}, "sha256": "eebdcabc9b4f5c9e7c34cbfa3a5206909523706a904bb9f815d3e4e23b95c97f", "source": "golden"}
-{"findings": [], "flagged": false, "length": 56, "options": {}, "sha256": "79d29586c0d87c15710dc29223d3f727d6d631c3ed6091ff5cd9937afeb8f4ee", "source": "golden"}
-{"findings": [], "flagged": false, "length": 54, "options": {}, "sha256": "54aa4c98532076793042cf57c2e477a1576fd9a2b274654900868dc6ac5ca271", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "80d41c54a8ce6d26ae0bdd509db6b187140cae39b4b771269a0d006b0620e2d2", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "c470c4f648536ad787f54cbb062988bb0495ce8f4db3c86431588be88ac4a6c4", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 8, 0.718940098384, "garbled"]], "flagged": true, "length": 8, "options": {}, "sha256": "3f35b24ee2c9a074eaaebeede9481583d5aadc2ec7701f73ec2eb1639bebd7a3", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "281c1da06c46a8fbbf4c7a551515929079c3ce12ae2e31882d3f3e31b7600dbd", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 15, 1.0, "garbled"]], "flagged": true, "length": 15, "options": {}, "sha256": "6265db0c8c5db1619e5733481eed6464f8b2c6e4fa0d9f05cf100566965b6c1b", "source": "golden"}
-{"findings": [], "flagged": false, "length": 12, "options": {}, "sha256": "7fd06f0e2a61fec4b93fcf78df8759e5e4e2a2da2f5a627cfad24b801416ebbb", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 9, 1.0, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "166e8b931d9037c6e260fb5a88197e728804f8a19a8232ce531e8387faa896e0", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 24, 0.8, "garbled"]], "flagged": true, "length": 24, "options": {}, "sha256": "0cf545772da1c628214f73936aeafea771d1aa2351fa9e720a2a98981839e61b", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 40, 0.9, "garbled"]], "flagged": true, "length": 40, "options": {}, "sha256": "d5256ede17878d805a242d6d6cf4cc10cab4586419f7e93a5713abfaaa997896", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 17, 0.588235294118, "garbled"]], "flagged": true, "length": 17, "options": {}, "sha256": "c3772eb462f4f500b45c3b1c08d1d4a2f6bc089b3ee4220bc0a972b51d863b8d", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 27, 0.8, "garbled"]], "flagged": true, "length": 27, "options": {}, "sha256": "c9efffecda6926163f9a7f428ba999b6ff6ccf5c5480f71351df83e598b59374", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 13, 1.0, "garbled"]], "flagged": true, "length": 13, "options": {}, "sha256": "707fe96df490b9f468228419e5c19f3c41ba20e29a22761a5acbb813aee20cca", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 13, 0.9, "garbled"]], "flagged": true, "length": 13, "options": {}, "sha256": "3b28d597a73e39933cc0f87bda034be18a228470755556f814ab6a090b96d57f", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 10, 0.9, "garbled"]], "flagged": true, "length": 10, "options": {}, "sha256": "00b0a63e0d2d3ac74f2e5de6664ef1e204cdfdc466ffc5125b2e268bbc57edb7", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 15, 0.9, "garbled"]], "flagged": true, "length": 15, "options": {}, "sha256": "d57a878495ce5ea31e403d7bd98d727a12b8a25b5ec97ba224bb26ebda1f1d95", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 217, 0.990820645667, "garbled"]], "flagged": true, "length": 217, "options": {}, "sha256": "cebbd4a3ba18c60d38a9b98ea14f3d6e18cff016f35b1fc03b6321b70952e957", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 219, 0.991445918241, "garbled"]], "flagged": true, "length": 219, "options": {}, "sha256": "39768e57ad38fc1d60dbc2d5ace9c8144f0993d6d8b56d84319672763c63cd94", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 62, 0.986542388742, "garbled"]], "flagged": true, "length": 62, "options": {}, "sha256": "f4d5ce298bf8f5dd3f2719a8ddc36c6804ddd9ecea123d735e0a65f766b87d8d", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 74, 0.995930511615, "garbled"]], "flagged": true, "length": 74, "options": {}, "sha256": "30ebf9332ac17062b5341785cf36a6ca206b49c156ee074f2192693eea69fccf", "source": "golden"}
-{"findings": [], "flagged": false, "length": 59, "options": {}, "sha256": "5d0f2a85936dbe7497c79033d929f0fa5c46e422bca9cd170b5f24671a8011b7", "source": "golden"}
-{"findings": [], "flagged": false, "length": 68, "options": {}, "sha256": "bdf1ad5771cd8a71acebcd1d10ea93a54f57e35427767440232fbfe81e4c36f5", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 25, 0.635563787476, "garbled"]], "flagged": true, "length": 25, "options": {}, "sha256": "8bc6f24e83493a2335c74745a0dd2e5ba625dd3f8999ea3fd257079fb595e7c7", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 16, 1.0, "garbled"]], "flagged": true, "length": 16, "options": {}, "sha256": "a0d139df7200d6d3412f6240f3486bbece5f88f137d449a65be14a18db801847", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 24, 0.999997739676, "garbled"]], "flagged": true, "length": 24, "options": {}, "sha256": "7a947aa9c610c00325c6834a1d201361e004a4ebf65d6258e0b4267c4aff2995", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 7, 0.999997739676, "garbled"]], "flagged": true, "length": 7, "options": {}, "sha256": "de9d2be77bf5c258bbc3705b209aa1b0e729897b1dfd6387c066e26b97f449b5", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 16, 0.999997739676, "garbled"]], "flagged": true, "length": 16, "options": {}, "sha256": "345ce287f82b5d3cfa9dac1f02615257fbb2b8c26b87000791dba7702613b26f", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 17, 0.999997739676, "garbled"]], "flagged": true, "length": 17, "options": {}, "sha256": "097b63721ae64cb980143628101fcc99f7b2b34b7e20382a748ecc2677d9a760", "source": "golden"}
-{"findings": [["gibberish", "garbled", 0, 9, 0.999997739676, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "3d78192e44da7f38fc873f6599867109a667c94cd77bfd35faf4d8aba5ebcacc", "source": "golden"}
-{"findings": [], "flagged": false, "length": 1, "options": {}, "sha256": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb", "source": "golden"}
-{"findings": [], "flagged": false, "length": 3, "options": {}, "sha256": "d4c963eb87b8230ab944af9bc31202059131336f34b986cca0027a4ec23e09fa", "source": "golden"}
 {"findings": [["gibberish", "garbled", 0, 12, 1.0, "garbled"]], "flagged": true, "length": 12, "options": {}, "sha256": "4a406a667661884daf9b4538f225676c8ce748c683b7602146d6cd7abe9e940d", "source": "golden"}
 {"findings": [["gibberish", "garbled", 0, 9, 0.9, "garbled"]], "flagged": true, "length": 9, "options": {}, "sha256": "e2a7e423d0f1fc53012eecd6adaeb5c519112eefff3a724ce366883da1a3e554", "source": "golden"}
+{"findings": [["gibberish", "garbled", 0, 11, 0.9, "garbled"]], "flagged": true, "length": 11, "options": {}, "sha256": "b206899bc103669c8e7b36de29d73f95b46795b508aa87d612b2ce84bfb29df2", "source": "golden"}
 {"findings": [], "flagged": false, "length": 5000, "options": {}, "sha256": "af3cfb4dc1dd2268114ddd91833a6afcd8f8e6c2ba19cdc16eda27b90bdd6455", "source": "golden"}
 {"findings": [], "flagged": false, "length": 28, "options": {}, "sha256": "83a0d374c8ac3a9ac2aa54cd2a3d8794e428048d44a3869d29785f6d64fabba7", "source": "golden"}
 {"findings": [], "flagged": false, "length": 22, "options": {}, "sha256": "aee8b7b246df8f9039afb4144a1f6fd8d2ca17a180786b69acc140d282b71a49", "source": "golden"}

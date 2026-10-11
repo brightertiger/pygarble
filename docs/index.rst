@@ -89,6 +89,6 @@ Evaluation
 ----------
 
 The :doc:`benchmarks` guide reports the preprint benchmark and explains its
-limitations. Fast authored regression fixtures remain separate from research
+limitations. Fast engineering regression checks remain separate from research
 results. Run ``make benchmark-verify`` to recompute the preprint metrics from
 the committed predictions.
