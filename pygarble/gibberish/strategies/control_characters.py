@@ -9,6 +9,15 @@ from ..preprocessing import TextFeatures
 from .base import BaseStrategy
 
 
+def _is_artifact(char: str) -> bool:
+    category = unicodedata.category(char)
+    return (
+        (category == "Cc" and char not in "\t\r\n")
+        or category == "Cs"
+        or char == "\ufffd"
+    )
+
+
 class ControlCharactersStrategy(BaseStrategy):
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
@@ -16,16 +25,22 @@ class ControlCharactersStrategy(BaseStrategy):
             "max_combining_run", kwargs.get("max_combining_run", 8)
         )
 
+    def evaluate(self, features: TextFeatures) -> Evidence:
+        # str.strip() removes VT, FF, U+001C-U+001F and NEL, so the base
+        # empty-input shortcut would hide text made only of them.
+        text = features.text
+        self._validate_input(text)
+        if text.strip() or not any(_is_artifact(char) for char in text):
+            return super().evaluate(features)
+        if self._is_extremely_long_string(text):
+            return Evidence(1.0, True, "explicit_length_policy")
+        return self._evaluate_features(features)
+
     def _evaluate_features(self, features: TextFeatures) -> Evidence:
         spans: List[Span] = []
         run = 0
         for index, char in enumerate(features.text):
-            category = unicodedata.category(char)
-            if (
-                (category == "Cc" and char not in "\t\r\n")
-                or category == "Cs"
-                or char == "\ufffd"
-            ):
+            if _is_artifact(char):
                 spans.append(
                     Span(index, index + 1, "control_or_decoding_artifact")
                 )

@@ -5,6 +5,7 @@ import json
 import sys
 from typing import Any, Dict, List, Optional, Sequence, TextIO
 
+from ..cli import silence_stdout
 from .base import BackendError
 from .scanner import CATEGORIES, Scanner
 
@@ -95,7 +96,14 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 if args.include_text:
                     row["text"] = text
                 print(json.dumps(row, ensure_ascii=True))
+        # Surface a closed pipe here rather than at interpreter exit.
+        sys.stdout.flush()
         return int(flagged)
+    except BrokenPipeError:
+        # The reader went away (e.g. `| head`); that is not a failed scan.
+        # Point stdout at devnull so the final flush cannot raise again.
+        silence_stdout()
+        return 0
     except (ValueError, TypeError, OSError, ImportError, BackendError):
         # File paths, dependency exceptions and subprocess output can contain
         # credentials. Do not echo them to stderr in a log-facing command.

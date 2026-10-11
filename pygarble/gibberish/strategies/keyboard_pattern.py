@@ -72,9 +72,6 @@ _REPEATED_BIGRAM = re.compile(r"(..)\1{2,}")
 
 
 class KeyboardPatternStrategy(BaseStrategy):
-    def _get_trigrams(self, text: str) -> List[str]:
-        return self._trigrams(self._novel_words(text))
-
     @staticmethod
     def _trigrams(words: List[str]) -> List[str]:
         # Per word so trigrams never span word boundaries.
@@ -82,9 +79,6 @@ class KeyboardPatternStrategy(BaseStrategy):
         for word in words:
             trigrams.extend(word[i : i + 3] for i in range(len(word) - 2))
         return trigrams
-
-    def _get_keyboard_pattern_ratio(self, text: str) -> float:
-        return self._keyboard_ratio(self._get_trigrams(text))
 
     @staticmethod
     def _keyboard_ratio(trigrams: List[str]) -> float:
@@ -94,9 +88,6 @@ class KeyboardPatternStrategy(BaseStrategy):
             trigrams
         )
 
-    def _get_common_trigram_ratio(self, text: str) -> float:
-        return self._common_ratio(self._get_trigrams(text))
-
     @staticmethod
     def _common_ratio(trigrams: List[str]) -> float:
         if not trigrams:
@@ -104,9 +95,6 @@ class KeyboardPatternStrategy(BaseStrategy):
         return sum(1 for tg in trigrams if tg in COMMON_TRIGRAMS) / len(
             trigrams
         )
-
-    def _has_repeated_bigram_pattern(self, text: str) -> bool:
-        return self._repeated_bigram(self._novel_words(text))
 
     @staticmethod
     def _repeated_bigram(words: List[str]) -> bool:

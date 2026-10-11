@@ -556,15 +556,17 @@ class PronouncabilityStrategy(BaseStrategy):
 
     def _get_word_coda(self, word: str) -> str:
         """Get consonant cluster at end of word."""
-        coda = ""
         lowered = word.lower()
-        for i in range(len(lowered) - 1, -1, -1):
-            char = lowered[i]
-            if char in CONSONANTS and not self._is_vowel(char, i):
-                coda = char + coda
+        # Find where the trailing consonant run starts, then slice once;
+        # prepending one character at a time is quadratic in its length.
+        start = len(lowered)
+        while start > 0:
+            char = lowered[start - 1]
+            if char in CONSONANTS and not self._is_vowel(char, start - 1):
+                start -= 1
             else:
                 break
-        return coda
+        return lowered[start:]
 
     def _count_forbidden_clusters(self, text: str) -> int:
         """Count forbidden consonant clusters at word boundaries."""

@@ -147,8 +147,6 @@ class Scanner(ScanEngine):
                 f"unknown kind: {', '.join(bad)}; "
                 f"valid: {', '.join(sorted(universe))}"
             )
-        self._kinds = wanted
-        self._exclude = excluded
         self._detectors: List[Detector] = []
         from .screening.pii import locale_kinds
 
@@ -200,9 +198,11 @@ def _secrets(selected: FrozenSet[str], without_context: bool) -> Detector:
 
 
 def _freeze(value: Any) -> Any:
+    # The type is part of the key: True == 1 and 1 == 1.0, but Scanner
+    # validates them differently.
     if isinstance(value, (list, tuple, set, frozenset)):
-        return tuple(_freeze(v) for v in value)
-    return value
+        return (type(value), tuple(_freeze(v) for v in value))
+    return (type(value), value)
 
 
 _CACHE: Dict[Tuple[Tuple[str, Any], ...], Scanner] = {}
@@ -211,6 +211,11 @@ _CACHE_LIMIT = 32
 
 def _cached(kwargs: Dict[str, Any]) -> Scanner:
     key = tuple(sorted((k, _freeze(v)) for k, v in kwargs.items()))
+    try:
+        hash(key)
+    except TypeError:
+        # An unhashable option (e.g. a dict) is passed to Scanner as is.
+        return Scanner(**kwargs)
     scanner = _CACHE.get(key)
     if scanner is None:
         if len(_CACHE) >= _CACHE_LIMIT:

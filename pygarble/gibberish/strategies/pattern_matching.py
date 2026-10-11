@@ -1,6 +1,7 @@
 import re
 from typing import Any, Dict, Pattern
 
+from ...validation import parameter_value
 from .base import BaseStrategy
 
 
@@ -37,14 +38,26 @@ class PatternMatchingStrategy(BaseStrategy):
 
     def _compile_patterns(self) -> Dict[str, Pattern]:
         custom_patterns = self.kwargs.get("patterns", {})
-        override_defaults = self.kwargs.get("override_defaults", False)
+        override_defaults = parameter_value(
+            "override_defaults",
+            self.kwargs.get("override_defaults", False),
+            False,
+        )
 
         if override_defaults:
             patterns = custom_patterns
         else:
             patterns = {**self.DEFAULT_PATTERNS, **custom_patterns}
 
-        return {name: re.compile(regex) for name, regex in patterns.items()}
+        compiled = {}
+        for name, regex in patterns.items():
+            try:
+                compiled[name] = re.compile(regex)
+            except re.error as error:
+                raise ValueError(
+                    f"invalid pattern {name!r} ({regex!r}): {error}"
+                ) from error
+        return compiled
 
     # consonant_cluster only judges words the dictionary cannot vouch for;
     # "strengths", "catchphrase" and "worthwhile" are real English.

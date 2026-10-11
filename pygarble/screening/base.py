@@ -28,10 +28,25 @@ class BackendError(RuntimeError):
 def optional_module(name: str, extra: str) -> ModuleType:
     try:
         return import_module(name)
-    except ImportError:
+    except ImportError as error:
+        missing = getattr(error, "name", None) or ""
+        root = name.split(".")[0]
+        hint = f"this backend requires pip install 'pygarble[{extra}]'"
+        if missing == root or missing.startswith(root + "."):
+            # The package itself is absent; the traceback adds nothing.
+            raise ImportError(hint) from None
+        if (
+            isinstance(error, ModuleNotFoundError)
+            and error.name == "pkg_resources"
+        ):
+            # python-stdnum imports pkg_resources on Python 3.8.
+            raise ImportError(
+                f"{root} is installed but needs pkg_resources: "
+                "pip install setuptools"
+            ) from error
         raise ImportError(
-            f"this backend requires pip install 'pygarble[{extra}]'"
-        ) from None
+            f"{root} is installed but failed to import ({error}); {hint}"
+        ) from error
 
 
 def check_text(text: str) -> None:
