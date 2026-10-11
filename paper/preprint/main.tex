@@ -46,7 +46,7 @@ on Survey Responses and Social-Media Text}
 Text that reaches a language model, a survey database or a training corpus
 is not always text. Keyboard mashing, random strings and placeholder
 answers are common, and the usual detectors for them are either trained
-classifiers with model downloads or hand-written rules that nobody has
+classifiers with model downloads or hand-written rules that are rarely
 measured. pygarble is a Python library with no runtime dependencies that
 screens text with \nstrategies{} rule-based and statistical strategies
 combined into named profiles. We evaluate it on two public datasets: a
@@ -76,7 +76,7 @@ next page of a survey, bots submit random strings to sign-up forms, and
 scraped text carries encoding damage. Each of these costs something
 downstream: a coder reads it, a model is trained on it, or an analysis
 counts it as an answer. The problem has become more visible with large
-language models, where unreadable input wastes tokens, degrades
+language models (LLMs), where unreadable input wastes tokens, degrades
 retrieval, and in guardrail settings is itself a signal that something
 upstream has gone wrong. The author's own motivation for pygarble is
 exactly this guardrail role: a cheap, local check that runs on every
@@ -98,8 +98,8 @@ This paper measures one such library. pygarble~\citep{pygarble} packages
 \nstrategies{} strategies, each a function from a string to a score in
 $[0,1]$, together with voting rules that combine them into profiles. It
 has no runtime dependencies and ships its English reference tables inside
-the wheel. We ask a plain question: at default settings, on data its
-author never saw, how much junk does it capture, how much legitimate text
+the wheel. We ask a plain question: at default settings, on data that
+played no part in setting its defaults, how much junk does it capture, how much legitimate text
 does it flag, and what does it cost compared with two common
 alternatives?
 
@@ -133,10 +133,11 @@ are outside this paper.
 
 A \emph{strategy} is a function from a string to a score in $[0,1]$ and a
 binary decision, with a flag that says whether the strategy applies to
-the input at all. A strategy that finds no Latin letters, or too few
-characters to measure, reports that it does not apply rather than
-returning a score, so that absence of evidence is not counted as evidence
-of junk. The \nstrategies{} strategies fall into six families
+the input at all. A strategy that needs letters or a minimum amount of
+text, such as the Markov chain or cross parsing, reports that it does not
+apply when the input has too little of either, rather than returning a
+low score, so that absence of evidence is not counted as evidence that
+the text is clean. The \nstrategies{} strategies fall into six families
 (Table~\ref{tab:families}; the full list with one-line descriptions is in
 Appendix~\ref{app:strategies}).
 
@@ -189,10 +190,10 @@ firing flags the text; \code{all}, \code{majority}, \code{average} and
 \code{weighted} voting behave as their names say. \code{fisher} voting
 treats each member's score as a test statistic: a table shipped with the
 package records what that member scores on synthetic English word salads
-of matched length, the member's $p$-value is the smallest tail
+of 8 to 480 characters, the member's $p$-value is the smallest tail
 probability whose threshold the score exceeds, and the $p$-values are
-combined with Fisher's method~\citep{fisher1925}. A text is flagged when
-the combined score reaches the threshold, 0.5 by default. Named member
+combined with Fisher's method~\citep{fisher1925}. The combined $p$-value is mapped to a score so that the default
+threshold of 0.5 flags a combined $p$-value of 0.001 or less. Named member
 lists are called \emph{profiles}; Appendix~\ref{app:profiles} lists all
 seven. Two are measured here:
 
@@ -201,10 +202,10 @@ seven. Two are measured here:
   word anomaly, mojibake, keyboard adjacency and control characters,
   under \code{any} voting. One member firing is enough.
 \item \code{english\_fusion}, opt-in: word lookup, log-likelihood ratio
-  and cross parsing under \code{fisher} voting. Because each member's
-  $p$-value is floored at 0.001, at least two members must exceed their
-  null thresholds before a text is flagged, which is what gives this
-  profile its lower false-positive rate.
+  and cross parsing under \code{fisher} voting. Each member's $p$-value is
+  floored at 0.001, so when two or more members apply, at least two must
+  score beyond their null thresholds before a text is flagged; one member
+  decides alone only when it is the only one that applies.
 \end{itemize}
 
 A user can also pass any list of strategies, which is how the tuned
@@ -225,7 +226,7 @@ every one labelled as junk; despite its \code{.xls} extension it is a
 Windows-1252 CSV. We strip each response, drop empty rows and drop exact
 duplicates, leaving \nA{} rows. Typical rows are keyboard mashes such as
 runs of adjacent keys, repeated letters, and letters mixed with digits.
-The median response is ten characters long and most are a single token.
+The median response is eleven characters long and most are a single token.
 
 Because the file has no clean rows, the only metric on this dataset is
 the \emph{capture rate}: the share of rows a method flags. The licence is
@@ -277,7 +278,7 @@ fixed seed and shared by all methods.
 
 \paragraph{Pilot and protocol changes.} Before the protocol was written,
 both datasets were scored once with pygarble's defaults to judge
-feasibility. The \code{english\_fusion} numbers from that pilot are the
+feasibility. The \code{english\_fusion} numbers from that pilot equal the
 ones reported here, because nothing in the package changed afterwards.
 The first version of the protocol also fitted thresholds at fixed
 false-positive rates on a development split of the tweets dataset and
@@ -331,13 +332,13 @@ The ordering follows what each method can see. Keyboard mashes and
 random letters have improbable character transitions and no dictionary
 words, so every method catches most of them. Lingua's near-complete
 capture comes from the policy rather than from junk detection: a
-ten-character mash is not confidently English, so it is flagged, and
+short mash is not confidently English, so it is flagged, and
 Section~\ref{sec:tweets} shows what that policy costs on real text. The
 Markov baseline misses the rows whose transitions happen to be plausible,
 such as repeated syllables. The \nAmissedfusion{} rows that
 \code{english\_fusion} misses are mostly one to three characters long,
 letters mixed with digits, strings with no letters at all, or a short
-syllable or punctuation mark repeated; a few are real words or short
+syllable or punctuation mark repeated; some are real words or short
 phrases, which read as English to character and word statistics.
 
 The dataset is used as labelled, and it has some label noise:
@@ -373,9 +374,8 @@ tweets they flag. \code{english\_fusion} flags
 \respct{gibberish_detector}{B_fpr}\,\%, the lowest of any method, and
 reaches a precision of \res{gibberish_detector}{B_precision}, but at the
 cost of recalling only \respct{gibberish_detector}{B_recall}\,\% of the
-random strings. Lingua flags \respct{lingua}{B_fpr}\,\% of tweets, since
-short informal posts with hashtags and handles are often not confidently
-English. The default \code{english} profile flags
+random strings. Lingua flags \respct{lingua}{B_fpr}\,\% of tweets, the posts it does
+not identify as English. The default \code{english} profile flags
 \respct{english}{B_fpr}\,\% of tweets, the highest rate in the table;
 the next subsection explains why and what a user does about it.
 
@@ -421,9 +421,9 @@ check, so it has no such variant.
 \TRS{} on one thread of an \cpuname{}, median of five runs after a
 warm-up. Install size counts the installed files of the distribution and
 its runtime dependencies, plus the training corpus gibberish-detector's
-model is built from. Import time covers the import statement only;
-lingua loads its models when the detector is built, which is counted in
-the per-text time.}
+model is built from. Import time covers the import statement only.
+Building each detector and the warm-up run, in which lingua loads its
+language models, are not timed.}
 \label{tab:footprint}
 \input{tables/table_footprint.tex}
 \end{table}
@@ -433,7 +433,8 @@ install size. pygarble scores a thousand short texts in
 \ms{english_fusion}\,ms with \code{english\_fusion} and installs in
 \mb{english_fusion}\,MB with nothing else. The Markov baseline is the
 fastest at \ms{gibberish_detector}\,ms and \mb{gibberish_detector}\,MB.
-Lingua needs \ms{lingua}\,ms and \mb{lingua}\,MB of language models. All
+Lingua needs \ms{lingua}\,ms and a \mb{lingua}\,MB install that bundles
+its language models. All
 three run offline once installed. Timings depend on the machine.
 
 \section{Discussion}
@@ -442,11 +443,11 @@ three run offline once installed. Timings depend on the machine.
 \paragraph{What the results support.} At default settings pygarble's
 \code{english\_fusion} profile captures about nine in ten real survey junk
 responses and nearly every random string, while flagging about one tweet
-in fifteen, from a one-megabyte install with no dependencies. Among the
-three tools it is the only one that is strong on both datasets: the
-Markov baseline flags far fewer tweets but misses more than a quarter of
-the survey junk, and lingua captures almost all junk but flags more
-tweets and needs three hundred megabytes of language models.
+in fifteen, from a one-megabyte install with no dependencies. Neither
+baseline matches it on both datasets at once: the Markov baseline flags
+far fewer tweets but misses more than a quarter of the survey junk, and
+lingua captures almost all junk but flags more tweets and needs a
+three-hundred-megabyte install.
 
 \paragraph{Where pygarble is beaten.} The Markov baseline has the lowest
 false-positive rate on tweets, \respct{gibberish_detector}{B_fpr}\,\%
@@ -457,7 +458,7 @@ captures more survey junk, \respct{lingua}{A_capture}\,\% against
 default \code{english} profile is not suitable for informal text as
 shipped: it flags a third of tweets, and still \respct{english_tuned}{B_fpr}\,\%
 after the tuning in Section~\ref{sec:tuning}, because its Markov member
-alone flags many posts with handles and hashtags.
+alone flags many informal posts.
 
 \paragraph{Guidance.} For screening survey or form free text, use
 \code{english\_fusion}; add a minimum-length rule if one- and
@@ -518,24 +519,26 @@ the model behind each commit.
 
 \appendix
 
-\section{Strategies}
-\label{app:strategies}
-
-Table~\ref{tab:strategies} lists every strategy by family with what it
-measures and which of the two measured profiles it belongs to;
-Table~\ref{tab:profiles} lists the seven named profiles.
-
-\input{tables/strategies.tex}
-
 \section{Profiles}
 \label{app:profiles}
 
-\begin{table*}[t]
+Table~\ref{tab:profiles} lists the seven named profiles with their
+members and voting rules.
+
+\begin{table}[h]
 \centering
 \small
 \caption{The seven named profiles, their members and voting rules.}
 \label{tab:profiles}
 \input{tables/profiles.tex}
-\end{table*}
+\end{table}
+
+\section{Strategies}
+\label{app:strategies}
+
+Table~\ref{tab:strategies} lists every strategy by family with what it
+measures and which of the two measured profiles it belongs to.
+
+\input{tables/strategies.tex}
 
 \end{document}
