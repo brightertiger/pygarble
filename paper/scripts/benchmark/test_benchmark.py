@@ -3,7 +3,10 @@
 import json
 import unittest
 
-from . import data
+import numpy as np
+
+from . import data, metrics, rules
+from .methods import specs
 
 
 class DataTests(unittest.TestCase):
@@ -26,6 +29,57 @@ class DataTests(unittest.TestCase):
             data.split_b(saved),
             (manifest["B_dev_ids"], manifest["B_test_ids"]),
         )
+
+
+class MethodTests(unittest.TestCase):
+    def test_rules_and_pygarble_wrapper(self) -> None:
+        tweet = "@user that was the best game of the season, honestly"
+        self.assertIn("word_count", rules.gopher_failures(tweet))
+        prose = " ".join(["The cat sat on the warm mat by the door."] * 5)
+        self.assertEqual(rules.c4_failures(prose, frozenset()), [])
+        self.assertIn(
+            "curly_bracket", rules.c4_failures(prose + " {", frozenset())
+        )
+        method = specs()["english_fusion"].build()
+        scores, flags = method.run([tweet, "qwkjzx vbnmrt plokij"])
+        self.assertEqual(flags, [False, True])
+        self.assertGreater(scores[1], scores[0])
+
+
+class RunTests(unittest.TestCase):
+    def test_metrics_on_a_perfect_separator(self) -> None:
+        dev = [f"train:{i}" for i in range(200)]
+        test = [f"test:{i}" for i in range(100)]
+        labels = {i: int(n % 2) for n, i in enumerate(dev + test)}
+        manifest = {
+            "A_ids": ["a:0", "a:1"],
+            "B_dev_ids": dev,
+            "B_test_ids": test,
+            "B_labels": labels,
+        }
+
+        def part(ids: list) -> tuple:
+            y = np.array([labels.get(i, 1) for i in ids])
+            return y + 0.001 * np.arange(len(ids)), y == 1
+
+        predictions = {
+            "english_fusion": {
+                "A": part(manifest["A_ids"]),
+                "B_dev": part(dev),
+                "B_test": part(test),
+            }
+        }
+        result, curves = metrics.compute(
+            manifest, predictions, {"english_fusion": "profile"}
+        )
+        method = result["methods"]["english_fusion"]
+        self.assertEqual(method["auroc"]["value"], 1.0)
+        self.assertEqual(method["dev_fpr"]["fpr1"], 0.01)
+        point = method["points"]["fpr0.1"]
+        self.assertEqual(point["B_precision"]["value"], 1.0)
+        self.assertEqual(point["A_capture"]["value"], 1.0)
+        self.assertTrue(result["checkpoint"]["passed"])
+        self.assertEqual(curves["english_fusion"][-1][2], 1.0)
 
 
 if __name__ == "__main__":
