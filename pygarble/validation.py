@@ -8,6 +8,22 @@ from typing import Any, Callable, List, Optional, TypeVar, Union
 T = TypeVar("T")
 
 
+class NamesError(TypeError, ValueError):
+    """A single string was passed where a list of names belongs.
+
+    It is both a TypeError and a ValueError so callers that caught either
+    of the types raised before 0.11.0 keep working.
+    """
+
+
+def reject_string(label: str, value: object, what: str = "names") -> None:
+    if isinstance(value, str):
+        raise NamesError(
+            f"{label} must be an iterable of {what}, not a string; "
+            f"pass a list of {what}"
+        )
+
+
 def finite_number(name: str, value: object) -> float:
     if isinstance(value, bool) or not isinstance(value, Real):
         raise ValueError(f"{name} must be a finite number")

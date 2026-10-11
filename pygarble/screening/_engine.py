@@ -4,12 +4,12 @@ from typing import Iterable, Iterator, List, Optional, Sequence, Tuple
 
 from ..findings import CATEGORIES, Finding, Redaction, ScanReport, sort_key
 from ..redaction import render
+from ..validation import reject_string
 from .base import Detector
 
 
 def _names(label: str, value: Iterable[str]) -> Iterable[str]:
-    if isinstance(value, str):
-        raise ValueError(f"{label} must be an iterable of names, not a string")
+    reject_string(label, value)
     return value
 
 

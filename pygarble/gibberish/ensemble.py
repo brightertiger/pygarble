@@ -13,7 +13,7 @@ from typing import (
     Union,
 )
 
-from ..validation import finite_number, process_input
+from ..validation import finite_number, process_input, reject_string
 from .analysis import Analysis, Signal
 from .detector import GarbleDetector
 from .fisher import combined_p_value, fisher_score, tail_p_value
@@ -101,6 +101,8 @@ class EnsembleDetector:
     ) -> None:
         if profile is not None and strategies is not None:
             raise ValueError("use either profile or strategies")
+        default_set = profile is None and strategies is None
+        reject_string("strategies", strategies, "strategy names")
         self.profile = profile or (
             "english" if strategies is None else "custom"
         )
@@ -113,6 +115,12 @@ class EnsembleDetector:
         members: List[Strategy] = [
             Strategy(s) if isinstance(s, str) else s for s in strategies
         ]
+        for given, chosen in zip(strategies, members):
+            if not isinstance(chosen, Strategy):
+                raise ValueError(
+                    "strategies must contain Strategy members or names, "
+                    f"got {given!r}"
+                )
         self.voting = (
             voting
             if voting is not None
@@ -163,7 +171,17 @@ class EnsembleDetector:
             self._tail_grid = TAIL_GRID
         self.strategies = list(members)
         if weights is not None and len(weights) != len(members):
-            raise ValueError("weights must have same length as strategies")
+            hint = (
+                "; the default ensemble grew in 0.9.0, use profile='legacy' "
+                "for the 0.8.0 set"
+                if default_set
+                else ""
+            )
+            raise ValueError(
+                "weights must have same length as strategies "
+                f"(got {len(weights)} weights for {len(members)} "
+                f"strategies{hint})"
+            )
         self.weights = [
             finite_number("weights", weight)
             for weight in (

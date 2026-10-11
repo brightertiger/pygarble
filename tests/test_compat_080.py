@@ -8,7 +8,8 @@ from pathlib import Path
 
 import pytest
 
-from pygarble import Strategy
+from pygarble import EnsembleDetector, Strategy
+from pygarble.screening import PIIDetector, ProfanityDetector, SecretsDetector
 
 ROOT = Path(__file__).resolve().parent.parent
 # Every strategy class pygarble.core exported in 0.8.0.
@@ -79,6 +80,20 @@ def test_080_import_paths_resolve_with_a_deprecation_warning():
     assert result.stderr == ""
 
 
+def test_weighted_default_ensemble_error_points_to_the_legacy_profile():
+    with pytest.raises(ValueError) as error:
+        EnsembleDetector(voting="weighted", weights=[1, 1, 1])
+    message = str(error.value)
+    assert message.startswith("weights must have same length as strategies")
+    assert "got 3 weights for 6 strategies" in message
+    assert "profile='legacy'" in message
+    legacy = EnsembleDetector(
+        profile="legacy", voting="weighted", weights=[1, 1, 1]
+    )
+    assert legacy.predict("qxzjkwpv bnmqwer zzxqv") is True
+    assert legacy.predict("The weather is lovely today") is False
+
+
 def test_strategy_map_is_a_dict_again():
     from pygarble.core import STRATEGY_MAP
 
@@ -90,3 +105,20 @@ def test_strategy_map_is_a_dict_again():
     )
     copy = dict(STRATEGY_MAP)
     assert copy == STRATEGY_MAP and len(copy) == len(Strategy)
+
+
+def test_wrong_strategy_and_name_arguments_say_what_to_pass():
+    with pytest.raises(ValueError, match="None"):
+        EnsembleDetector(strategies=[None])
+    with pytest.raises(TypeError, match="pass a list"):
+        EnsembleDetector("markov_chain")
+    for build in (
+        lambda: SecretsDetector(kinds="jwt"),
+        lambda: SecretsDetector(exclude_kinds="jwt"),
+        lambda: ProfanityDetector(allowlist="damn"),
+        lambda: PIIDetector(kinds="email"),
+    ):
+        with pytest.raises(TypeError, match="pass a list") as error:
+            build()
+        # Callers that caught the former ValueError keep working.
+        assert isinstance(error.value, ValueError)

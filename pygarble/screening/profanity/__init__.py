@@ -15,6 +15,7 @@ from typing import (
 )
 
 from ...findings import Finding, sort_key
+from ...validation import reject_string
 from .normalize import TOKEN_RE, collapse_runs, has_long_run, normalize_token
 from .wordlist import EMBEDDED, PHRASES, PROFANITY_MILD, PROFANITY_STRONG
 
@@ -116,10 +117,7 @@ class ProfanityDetector:
             )
         self.strong = _STRONG if "strong" in chosen else frozenset()
         self.mild = _MILD if "mild" in chosen else frozenset()
-        if isinstance(allowlist, str):
-            raise ValueError(
-                "allowlist must be an iterable of names, not a string"
-            )
+        reject_string("allowlist", allowlist)
         self.allowlist = frozenset(
             " ".join(normalize_token(word) for word in entry.split())
             for entry in (allowlist or ())

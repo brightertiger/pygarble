@@ -8,6 +8,7 @@ from functools import lru_cache
 from typing import Any, Dict, FrozenSet, Iterable, List, Optional, Tuple
 
 from ...findings import Finding, sort_key
+from ...validation import reject_string
 from .entropy import (
     BASE64_LIMIT,
     HEX_LIMIT,
@@ -200,10 +201,7 @@ def _validate_kinds(
     kinds: Optional[Iterable[str]], exclude: Iterable[str]
 ) -> FrozenSet[str]:
     for value in (kinds, exclude):
-        if isinstance(value, str):
-            raise ValueError(
-                "kinds must be an iterable of kind names, not a string"
-            )
+        reject_string("kinds", value, "kind names")
     chosen = frozenset(ALL_KINDS if kinds is None else kinds)
     excluded = frozenset(exclude)
     unknown = sorted((chosen | excluded) - ALL_KINDS)

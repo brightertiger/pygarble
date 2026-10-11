@@ -7,6 +7,7 @@ from ..validation import (
     finite_number,
     positive_int,
     process_input,
+    reject_string,
     unit_interval,
     validate_batch,
 )
@@ -59,8 +60,7 @@ class GarbleDetector:
                     f"Strategy {strategy} is not implemented"
                 )
             raise TypeError("strategy must be a Strategy enum member or name")
-        if isinstance(allowlist, str):
-            raise TypeError("allowlist must be an iterable of words")
+        reject_string("allowlist", allowlist, "words")
         words = list(allowlist) if allowlist is not None else []
         validate_batch(words)
         self.allowlist: FrozenSet[str] = frozenset(
