@@ -12,7 +12,7 @@ scoring. ``spoofing`` is a Unicode script/confusable heuristic, not a full phish
 or Unicode security implementation. Profile membership is listed in :doc:`strategies`.
 
 What the preprint tells us about strategy choice
------------------------------------------------
+------------------------------------------------
 
 The preprint in :doc:`benchmarks` runs two profiles at their defaults on two
 English datasets: Survey Junk, which holds only junk survey answers, and
