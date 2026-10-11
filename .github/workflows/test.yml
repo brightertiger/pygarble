@@ -60,16 +60,18 @@ jobs:
         token: ${{ secrets.CODECOV_TOKEN }}
         fail_ci_if_error: false
 
-  study:
+  benchmark:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 15
     steps:
     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
     - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
       with:
         python-version: '3.12'
-    - name: Check study analysis and saved predictions without neural dependencies
-      run: make benchmark-check
+    - name: Install numpy
+      run: python -m pip install numpy==2.5.4
+    - name: Recompute the preprint metrics from the saved predictions
+      run: make benchmark-verify
 
   screening-backends:
     # ubuntu-latest moves to 26.04, which has no setup-python 3.8 build.
@@ -155,7 +157,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 20
-    needs: [test, quality, screening-backends, study]
+    needs: [test, quality, screening-backends, benchmark]
     steps:
     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 

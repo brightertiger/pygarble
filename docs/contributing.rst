@@ -85,13 +85,14 @@ those examples separately with their dependencies installed.
 Data and evaluation
 -------------------
 
-Use :doc:`benchmarks` for the paper-based research benchmark.
-``make benchmark-check`` runs its fast offline checks; full inference is
-optional and writes new outputs rather than replacing paper results.
-
+Use :doc:`benchmarks` for the preprint benchmark. ``make benchmark-verify``
+recomputes its metrics from the committed predictions and needs only numpy.
+``make preprint`` rebuilds the preprint and needs matplotlib and tectonic.
+Neither replaces the committed results; report a new run as a new version.
 
 .. code-block:: bash
 
+   make benchmark-verify PYTHON=/path/to/venv/bin/python
    python paper/scripts/generate_data.py --check
    python paper/regression/evaluate.py --split development
 

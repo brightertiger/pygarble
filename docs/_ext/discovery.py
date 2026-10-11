@@ -14,8 +14,8 @@ DESCRIPTION = (
 )
 DESCRIPTIONS = {
     "index": DESCRIPTION,
-    "benchmarks": "Reproduce pygarble's published-corpus comparison with "
-    "local DistilBERT. Accuracy, confusion counts, CPU cost and limitations.",
+    "benchmarks": "pygarble's preprint benchmark on survey junk and tweets "
+    "against two CPU baselines. Results, intervals, cost and reproduction.",
     "installation": "Install pygarble and optional local screening backends. "
     "Understand released versions, source installs and dependencies.",
     "quickstart": "Screen secrets, PII and profanity with pygarble, "
