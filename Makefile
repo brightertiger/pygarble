@@ -32,14 +32,14 @@ test:
 	pytest
 
 lint:
-	black --check pygarble tests paper/scripts paper/regression
-	isort --check-only pygarble tests paper/scripts paper/regression
-	flake8 pygarble tests paper/scripts paper/regression
+	black --check pygarble tests paper/scripts paper/regression docs/_ext
+	isort --check-only pygarble tests paper/scripts paper/regression docs/_ext
+	flake8 pygarble tests paper/scripts paper/regression docs/_ext
 	mypy pygarble
 
 format:
-	isort pygarble tests paper/scripts paper/regression
-	black pygarble tests paper/scripts paper/regression
+	isort pygarble tests paper/scripts paper/regression docs/_ext
+	black pygarble tests paper/scripts paper/regression docs/_ext
 
 clean:
 	rm -rf build/
