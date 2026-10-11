@@ -13,6 +13,7 @@
 \usepackage{url}
 
 \captionsetup{font=small,labelfont=bf}
+\setlength{\emergencystretch}{2em}
 \newcommand{\TODO}[1]{\textbf{\textcolor{red}{[TODO: #1]}}}
 \newcommand{\code}[1]{\texttt{#1}}
 
@@ -81,7 +82,7 @@ The contributions are:
   \code{english\_fusion} profile with two CPU baselines: a character
   Markov-chain gibberish detector and a language identifier.
 \item A post hoc, domain-specific tuning of the default profile, reported
-  separately from the pre-registered results.
+  separately from the main results.
 \item The cost of each method, a plain account of where pygarble is
   beaten, and guidance on which configuration to use.
 \end{itemize}
@@ -121,8 +122,9 @@ profiles are measured here:
   frequencies, and the tail probabilities are combined with Fisher's
   method.
 \end{itemize}
-Other profiles target encoding damage, Unicode spoofing and degenerate
-model output; they are not measured here. A user can also pass any list of
+The other profiles, a larger English set, the 0.8.0 set and profiles for
+encoding damage, Unicode spoofing and degenerate model output, are not
+measured here. A user can also pass any list of
 strategies, which is how the tuned variant in
 Section~\ref{sec:tuning} is built.
 
@@ -136,7 +138,7 @@ own labelled examples; this paper does not use it.
 \section{Datasets and protocol}
 
 \paragraph{A: survey junk.} The Kaggle dataset
-\code{johnwdata/gibberish-text-classification} \citep{dataA} has
+\code{johnwdata/\allowbreak gibberish-text-classification} \citep{dataA} has
 \nArows{} survey responses, all labelled as junk. Despite its
 \code{.xls} extension, the file is a Windows-1252 CSV. We strip each
 response, drop empty ones and drop exact duplicates, leaving \nA{} rows.
@@ -144,10 +146,10 @@ A has no clean rows, so the only metric is the \emph{capture rate}: the
 share of rows a method flags. Its licence is listed as unknown, so the
 repository stores row indices and hashes, never the text.
 
-\paragraph{B: random strings and tweets.} The Hugging Face dataset
-\code{Sowmya15/gibberish\_multilingual} \citep{dataB} (Apache-2.0) pools
-train, validation and test files. We keep the \nB{} non-empty rows whose
-language is English: \nBpos{} random strings (junk) and \nBneg{} tweets
+\paragraph{B: random strings and tweets.} We pool the train, validation
+and test files of the Hugging Face dataset
+\code{Sowmya15/gibberish\_multilingual} \citep{dataB} (Apache-2.0) and
+keep the \nB{} non-empty rows whose language is English: \nBpos{} random strings (junk) and \nBneg{} tweets
 (clean). Labels are used as given and duplicates are kept (\nBdup{} rows
 repeat an earlier text). We report precision, recall and the
 false-positive rate (FPR), the share of tweets flagged.
@@ -177,8 +179,8 @@ and all English rows of B were scored once with pygarble's defaults. The
 because nothing in the package changed afterwards. The first version of
 the protocol also fitted thresholds at fixed false-positive rates on a
 development split of B and compared more baselines and pygarble
-configurations; both were removed from scope before this paper was
-written (Section~\ref{sec:limitations}). The tuned variant in
+configurations; both were computed and then removed from scope at the
+maintainer's direction (Section~\ref{sec:limitations}). The tuned variant in
 Section~\ref{sec:tuning} was added after the results were seen.
 
 \section{Results on survey junk}
@@ -233,7 +235,7 @@ recalls \res{english}{B_recall} with precision \res{english}{B_precision}.
 
 A note on what counts as a false positive. \mojibakepct\,\% of the tweets
 in B contain mojibake byte signatures, for example a UTF-8 emoji decoded
-as Windows-1252. B labels these tweets clean, because it was built to
+as Latin-1. B labels these tweets clean, because it was built to
 separate random strings from tweets. A pipeline that audits encoding would
 want them flagged.
 
@@ -295,7 +297,7 @@ pygarble scores 1,000 texts in \ms{english_fusion}\,ms with
 else. gibberish-detector is faster, \ms{gibberish_detector}\,ms, at
 \mb{gibberish_detector}\,MB. lingua takes \ms{lingua}\,ms and
 \mb{lingua}\,MB. All methods run offline once installed. Timings depend on
-the machine; the ordering is what carries over.
+the machine.
 
 \section{Where it fails}
 \label{sec:fails}
@@ -314,12 +316,12 @@ flags \res{lingua}{A_capture} of A against fusion's
 \res{english_fusion}{A_capture}, at an FPR of \respct{lingua}{B_fpr}\,\% on
 tweets and a \mb{lingua}\,MB install.
 
-\paragraph{Short inputs and word-like mashes.} \code{english\_fusion}
+\paragraph{Short inputs, digits and repetition.} \code{english\_fusion}
 misses \nAmissedfusion{} of the \nA{} rows in A. On inspection, many are
-very short: single letters, digits, punctuation or a few repeated
-letters. The rest are longer strings built from real words or
-pronounceable fragments, which read as English to character and word
-statistics.
+one to three characters long. Most of the rest mix letters with digits,
+contain no letters at all, or repeat a short syllable or a punctuation
+mark. Some are real words or short phrases, which read as English to
+character and word statistics.
 
 \paragraph{Label noise in A.} A is used as labelled. \nAmissedall{} rows
 are flagged by none of the four untuned methods. On inspection many are
@@ -346,9 +348,6 @@ measures false positives on informal English.
   control characters unless encoding damage is itself a concern.
 \item \textbf{When false positives cost much more than misses:} at
   default settings, gibberish-detector flags the fewest tweets.
-  Alternatively, choose an \code{english\_fusion} threshold with
-  \code{calibrate()} on a few hundred labelled rows of your own data; this
-  paper does not measure that option.
 \item \textbf{Multilingual input:} route by language first. A language
   identifier answers that question; it is not a junk detector.
 \end{itemize}
@@ -384,14 +383,14 @@ The first command recomputes \code{metrics.json} from the saved predictions
 and fails on any difference. The second regenerates the figure, the
 tables and the number macros this paper is typeset from, then builds the
 PDF. Re-scoring from the raw files is described in
-\code{paper/scripts/benchmark/README.md}; scores are deterministic.
+\code{paper/\allowbreak scripts/\allowbreak benchmark/\allowbreak README.md}; scores are deterministic.
 
 \section*{AI assistance}
 
 Claude Code agents running Claude Opus 5.5, Claude Sonnet 5.5 and Claude
 Fable 5.1 wrote the benchmark code, ran the experiments and drafted this
 text, under the author's direction and review. Commit trailers in the
-repository record the models used.
+repository record the model behind each commit.
 
 \bibliographystyle{plainnat}
 \bibliography{references}
