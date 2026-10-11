@@ -46,37 +46,41 @@ At the cut at 1 percent FPR on B dev tweets:
 
 | Method | cut | dev FPR | A capture | B precision | B recall | B FPR |
 | --- | --- | --- | --- | --- | --- | --- |
-| english | 1 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
-| english_extended | 1 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
+| english | 1 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
+| english_extended | 1 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
 | english_fusion | 0.666065 | 0.0056 | 0.600 [0.583, 0.615] | 0.992 [0.988, 0.996] | 0.603 [0.584, 0.621] | 0.003 [0.002, 0.005] |
 | legacy | 0.999975 | 0.0095 | 0.554 [0.539, 0.570] | 0.974 [0.966, 0.981] | 0.570 [0.553, 0.588] | 0.010 [0.007, 0.013] |
-| corruption | 1 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
-| spoofing | 0 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
-| llm_output | 1 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
-| nostril | 1e+06 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
+| corruption | 1 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
+| spoofing | 0 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
+| llm_output | 1 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
+| nostril | 1e+06 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
 | gibberish_detector | 3.65479 | 0.0095 | 0.799 [0.786, 0.812] | 0.979 [0.973, 0.984] | 0.902 [0.890, 0.912] | 0.013 [0.010, 0.017] |
 | gibberish_chat_detector | 1 | 0.0000 | 0.113 [0.103, 0.124] | 0.955 [0.846, 1.000] | 0.007 [0.005, 0.011] | 0.000 [0.000, 0.001] |
-| lingua | 1 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
+| lingua | 1 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
 | gopher_rules | 5 | 0.0067 | 0.006 [0.003, 0.009] | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] | 0.010 [0.007, 0.013] |
 | c4_rules | 3 | 0.0006 | 0.001 [0.000, 0.003] | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.001] |
+
+† No cut reaches the target on B dev: more tweets than the target allows share the top score, so the cut equals the highest B dev score and flags no B dev row. A and B test rows above the cut are still counted.
 
 At the cut at 0.1 percent FPR on B dev tweets:
 
 | Method | cut | dev FPR | A capture | B precision | B recall | B FPR |
 | --- | --- | --- | --- | --- | --- | --- |
-| english | 1 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
-| english_extended | 1 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
+| english | 1 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
+| english_extended | 1 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
 | english_fusion | 0.710646 | 0.0000 | 0.533 [0.516, 0.548] | 0.999 [0.997, 1.000] | 0.591 [0.573, 0.609] | 0.000 [0.000, 0.001] |
 | legacy | 0.999998 | 0.0006 | 0.554 [0.539, 0.570] | 1.000 [1.000, 1.000] | 0.570 [0.553, 0.588] | 0.000 [0.000, 0.000] |
-| corruption | 1 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
-| spoofing | 0 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
-| llm_output | 1 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
-| nostril | 1e+06 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
+| corruption | 1 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
+| spoofing | 0 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
+| llm_output | 1 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
+| nostril | 1e+06 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
 | gibberish_detector | 4.12521 | 0.0006 | 0.690 [0.674, 0.707] | 0.996 [0.993, 0.998] | 0.781 [0.764, 0.795] | 0.002 [0.001, 0.004] |
 | gibberish_chat_detector | 1 | 0.0000 | 0.113 [0.103, 0.124] | 0.955 [0.846, 1.000] | 0.007 [0.005, 0.011] | 0.000 [0.000, 0.001] |
-| lingua | 1 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
-| gopher_rules | 9 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
+| lingua | 1 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
+| gopher_rules | 9 † | 0.0000 | 0.001 [0.000, 0.003] | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.001] |
 | c4_rules | 3 | 0.0006 | 0.001 [0.000, 0.003] | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.001] |
+
+† No cut reaches the target on B dev: more tweets than the target allows share the top score, so the cut equals the highest B dev score and flags no B dev row. A and B test rows above the cut are still counted.
 
 ## Voting modes on the english profile
 
@@ -107,22 +111,26 @@ At the cut at 1 percent FPR on B dev tweets:
 | Method | cut | dev FPR | A capture | B precision | B recall | B FPR |
 | --- | --- | --- | --- | --- | --- | --- |
 | english_vote_majority | 0.493135 | 0.0095 | 0.268 [0.252, 0.283] | 0.397 [0.283, 0.516] | 0.010 [0.006, 0.013] | 0.010 [0.007, 0.013] |
-| english_vote_any | 1 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
-| english_vote_all | 0 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
+| english_vote_any | 1 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
+| english_vote_all | 0 † | 0.0000 | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] | 0.001 [0.000, 0.002] |
 | english_vote_average | 0.493135 | 0.0095 | 0.268 [0.252, 0.283] | 0.397 [0.283, 0.516] | 0.010 [0.006, 0.013] | 0.010 [0.007, 0.013] |
 | english_vote_weighted | 0.493135 | 0.0095 | 0.268 [0.252, 0.283] | 0.397 [0.283, 0.516] | 0.010 [0.006, 0.013] | 0.010 [0.007, 0.013] |
 | english_vote_fisher | 0.728868 | 0.0084 | 0.266 [0.250, 0.281] | 0.297 [0.143, 0.445] | 0.004 [0.002, 0.006] | 0.006 [0.004, 0.009] |
+
+† No cut reaches the target on B dev: more tweets than the target allows share the top score, so the cut equals the highest B dev score and flags no B dev row. A and B test rows above the cut are still counted.
 
 At the cut at 0.1 percent FPR on B dev tweets:
 
 | Method | cut | dev FPR | A capture | B precision | B recall | B FPR |
 | --- | --- | --- | --- | --- | --- | --- |
 | english_vote_majority | 0.534954 | 0.0006 | 0.254 [0.238, 0.269] | 0.611 [0.363, 0.846] | 0.004 [0.002, 0.006] | 0.002 [0.000, 0.003] |
-| english_vote_any | 1 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
-| english_vote_all | 0 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
+| english_vote_any | 1 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
+| english_vote_all | 0 † | 0.0000 | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] | 0.001 [0.000, 0.002] |
 | english_vote_average | 0.534954 | 0.0006 | 0.254 [0.238, 0.269] | 0.611 [0.363, 0.846] | 0.004 [0.002, 0.006] | 0.002 [0.000, 0.003] |
 | english_vote_weighted | 0.534954 | 0.0006 | 0.254 [0.238, 0.269] | 0.611 [0.363, 0.846] | 0.004 [0.002, 0.006] | 0.002 [0.000, 0.003] |
 | english_vote_fisher | 0.847152 | 0.0006 | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] | 0.001 [0.000, 0.002] |
+
+† No cut reaches the target on B dev: more tweets than the target allows share the top score, so the cut equals the highest B dev score and flags no B dev row. A and B test rows above the cut are still counted.
 
 ## Appendix: single strategies
 
@@ -204,21 +212,21 @@ At the cut at 1 percent FPR on B dev tweets:
 
 | Method | cut | dev FPR | A capture | B precision | B recall | B FPR |
 | --- | --- | --- | --- | --- | --- | --- |
-| strategy_control_characters | 0.9 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
+| strategy_control_characters | 0.9 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
 | strategy_local_anomaly | 0 | 0.0011 | 0.207 [0.193, 0.219] | 0.990 [0.978, 1.000] | 0.105 [0.093, 0.116] | 0.001 [0.000, 0.002] |
 | strategy_pattern_matching | 0.73 | 0.0034 | 0.005 [0.003, 0.007] | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] | 0.002 [0.000, 0.003] |
 | strategy_entropy_based | 0.101381 | 0.0095 | 0.889 [0.878, 0.899] | 0.977 [0.970, 0.984] | 0.680 [0.662, 0.696] | 0.011 [0.007, 0.014] |
 | strategy_vowel_ratio | 0.5 | 0.0067 | 0.544 [0.527, 0.560] | 0.977 [0.967, 0.986] | 0.284 [0.267, 0.301] | 0.005 [0.003, 0.007] |
 | strategy_keyboard_pattern | 0.591473 | 0.0095 | 0.269 [0.255, 0.284] | 0.289 [0.189, 0.397] | 0.008 [0.005, 0.011] | 0.013 [0.009, 0.016] |
 | strategy_markov_chain | 0.999971 | 0.0095 | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] | 0.011 [0.007, 0.014] |
-| strategy_ngram_frequency | 1 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
+| strategy_ngram_frequency | 1 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
 | strategy_word_lookup | 0.625 | 0.0095 | 0.849 [0.836, 0.860] | 0.982 [0.977, 0.987] | 1.000 [1.000, 1.000] | 0.012 [0.009, 0.016] |
 | strategy_symbol_ratio | 0.298507 | 0.0078 | 0.004 [0.002, 0.007] | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] | 0.009 [0.006, 0.012] |
 | strategy_repetition | 0.6 | 0.0056 | 0.073 [0.065, 0.082] | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] | 0.005 [0.003, 0.007] |
 | strategy_hex_string | 0 | 0.0067 | 0.008 [0.005, 0.011] | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] | 0.008 [0.005, 0.011] |
-| strategy_mojibake | 1 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
-| strategy_pronounceability | 1 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
-| strategy_unicode_script | 0 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
+| strategy_mojibake | 1 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
+| strategy_pronounceability | 1 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
+| strategy_unicode_script | 0 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
 | strategy_bigram_probability | 0.0540541 | 0.0095 | 0.331 [0.316, 0.346] | 0.974 [0.965, 0.982] | 0.515 [0.497, 0.533] | 0.009 [0.006, 0.012] |
 | strategy_letter_position | 0.75 | 0.0022 | 0.146 [0.135, 0.158] | 0.903 [0.828, 0.971] | 0.023 [0.018, 0.029] | 0.002 [0.000, 0.003] |
 | strategy_consonant_sequence | 0 | 0.0022 | 0.365 [0.348, 0.380] | 0.985 [0.973, 0.994] | 0.185 [0.169, 0.199] | 0.002 [0.001, 0.003] |
@@ -227,8 +235,8 @@ At the cut at 1 percent FPR on B dev tweets:
 | strategy_rare_trigram | 0 | 0.0017 | 0.054 [0.046, 0.061] | 0.977 [0.951, 0.995] | 0.060 [0.051, 0.068] | 0.001 [0.000, 0.002] |
 | strategy_function_word_density | 0.8 | 0.0034 | 0.008 [0.005, 0.011] | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] | 0.003 [0.002, 0.005] |
 | strategy_affix_detection | 0.45 | 0.0073 | 0.003 [0.002, 0.005] | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] | 0.012 [0.010, 0.016] |
-| strategy_zipf_conformity | 0 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
-| strategy_word_collocation | 0.6 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
+| strategy_zipf_conformity | 0 † | 0.0000 | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.001] |
+| strategy_word_collocation | 0.6 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
 | strategy_log_likelihood_ratio | 0.152998 | 0.0095 | 0.868 [0.857, 0.880] | 0.988 [0.985, 0.992] | 0.980 [0.975, 0.985] | 0.008 [0.005, 0.010] |
 | strategy_word_anomaly | 0.153846 | 0.0095 | 0.584 [0.569, 0.601] | 0.978 [0.971, 0.985] | 0.570 [0.553, 0.588] | 0.009 [0.006, 0.011] |
 | strategy_keyboard_adjacency | 0 | 0.0084 | 0.320 [0.304, 0.335] | 0.366 [0.214, 0.525] | 0.005 [0.003, 0.008] | 0.006 [0.004, 0.009] |
@@ -237,35 +245,37 @@ At the cut at 1 percent FPR on B dev tweets:
 | strategy_ngram_rank | 0.626426 | 0.0095 | 0.515 [0.498, 0.530] | 0.955 [0.941, 0.967] | 0.331 [0.315, 0.349] | 0.011 [0.008, 0.014] |
 | strategy_permutation_test | 0.535719 | 0.0095 | 0.324 [0.309, 0.339] | 0.916 [0.887, 0.941] | 0.147 [0.136, 0.161] | 0.009 [0.006, 0.012] |
 
+† No cut reaches the target on B dev: more tweets than the target allows share the top score, so the cut equals the highest B dev score and flags no B dev row. A and B test rows above the cut are still counted.
+
 At the cut at 0.1 percent FPR on B dev tweets:
 
 | Method | cut | dev FPR | A capture | B precision | B recall | B FPR |
 | --- | --- | --- | --- | --- | --- | --- |
-| strategy_control_characters | 0.9 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
-| strategy_local_anomaly | 0.8 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
-| strategy_pattern_matching | 0.81 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
+| strategy_control_characters | 0.9 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
+| strategy_local_anomaly | 0.8 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
+| strategy_pattern_matching | 0.81 † | 0.0000 | 0.000 [0.000, 0.001] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
 | strategy_entropy_based | 0.378424 | 0.0006 | 0.450 [0.433, 0.466] | 0.991 [0.981, 0.998] | 0.151 [0.139, 0.164] | 0.001 [0.000, 0.002] |
-| strategy_vowel_ratio | 1 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
+| strategy_vowel_ratio | 1 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
 | strategy_keyboard_pattern | 0.833333 | 0.0006 | 0.126 [0.116, 0.137] | 0.700 [0.400, 1.000] | 0.003 [0.001, 0.005] | 0.001 [0.000, 0.002] |
-| strategy_markov_chain | 0.999998 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
-| strategy_ngram_frequency | 1 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
-| strategy_word_lookup | 1 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
+| strategy_markov_chain | 0.999998 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
+| strategy_ngram_frequency | 1 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
+| strategy_word_lookup | 1 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
 | strategy_symbol_ratio | 0.550388 | 0.0006 | 0.001 [0.001, 0.003] | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.001] |
-| strategy_repetition | 1 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
+| strategy_repetition | 1 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
 | strategy_hex_string | 0.851852 | 0.0006 | 0.001 [0.000, 0.002] | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.001] |
-| strategy_mojibake | 1 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
-| strategy_pronounceability | 1 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
-| strategy_unicode_script | 0 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
+| strategy_mojibake | 1 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
+| strategy_pronounceability | 1 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
+| strategy_unicode_script | 0 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
 | strategy_bigram_probability | 0.171429 | 0.0006 | 0.254 [0.239, 0.268] | 0.998 [0.995, 1.000] | 0.515 [0.497, 0.533] | 0.001 [0.000, 0.002] |
-| strategy_letter_position | 1 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
-| strategy_consonant_sequence | 1 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
+| strategy_letter_position | 1 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
+| strategy_consonant_sequence | 1 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
 | strategy_vowel_pattern | 0.7 | 0.0006 | 0.006 [0.004, 0.009] | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] | 0.001 [0.000, 0.003] |
 | strategy_letter_frequency | 0.7 | 0.0006 | 0.091 [0.082, 0.101] | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.001] |
 | strategy_rare_trigram | 0.0430108 | 0.0006 | 0.050 [0.043, 0.058] | 0.977 [0.951, 0.995] | 0.060 [0.051, 0.068] | 0.001 [0.000, 0.002] |
-| strategy_function_word_density | 0.9 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
+| strategy_function_word_density | 0.9 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
 | strategy_affix_detection | 0.460714 | 0.0006 | 0.003 [0.002, 0.005] | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] | 0.003 [0.001, 0.005] |
-| strategy_zipf_conformity | 0 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
-| strategy_word_collocation | 0.6 | 0.0000 | no cut reaches target | n/a | n/a | n/a |
+| strategy_zipf_conformity | 0 † | 0.0000 | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.001] |
+| strategy_word_collocation | 0.6 † | 0.0000 | 0.000 [0.000, 0.000] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
 | strategy_log_likelihood_ratio | 0.312778 | 0.0006 | 0.759 [0.746, 0.774] | 0.999 [0.997, 1.000] | 0.889 [0.876, 0.899] | 0.001 [0.000, 0.002] |
 | strategy_word_anomaly | 0.666667 | 0.0006 | 0.560 [0.545, 0.577] | 1.000 [1.000, 1.000] | 0.570 [0.553, 0.588] | 0.000 [0.000, 0.000] |
 | strategy_keyboard_adjacency | 0.8 | 0.0000 | 0.265 [0.250, 0.280] | 0.938 [0.800, 1.000] | 0.005 [0.003, 0.008] | 0.000 [0.000, 0.001] |
@@ -273,6 +283,8 @@ At the cut at 0.1 percent FPR on B dev tweets:
 | strategy_primed_compression | 0.796046 | 0.0006 | 0.044 [0.038, 0.051] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
 | strategy_ngram_rank | 0.838765 | 0.0006 | 0.337 [0.321, 0.352] | 0.979 [0.946, 1.000] | 0.034 [0.027, 0.040] | 0.000 [0.000, 0.001] |
 | strategy_permutation_test | 0.867566 | 0.0006 | 0.116 [0.105, 0.127] | 0.920 [0.800, 1.000] | 0.008 [0.005, 0.012] | 0.000 [0.000, 0.001] |
+
+† No cut reaches the target on B dev: more tweets than the target allows share the top score, so the cut equals the highest B dev score and flags no B dev row. A and B test rows above the cut are still counted.
 
 ## Footprint
 

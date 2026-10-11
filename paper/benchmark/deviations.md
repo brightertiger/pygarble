@@ -38,9 +38,12 @@ open. Each is also stated in `protocol.md` where it affects the protocol.
   0.600 is reported as a loss.
 - **Ties at the top score (reporting only).** For some methods more than
   `k` dev tweets share the top score, so the frozen cut equals the highest
-  score of any B dev row and flags nothing. The cut rule is unchanged; these points carry
-  `reachable: false` in `metrics.json` and read "no cut reaches target" in
-  `results.md`. Fitted cuts and dev FPR are stored with each operating
+  score of any B dev row and flags no B dev row. The cut rule is
+  unchanged; these points carry `reachable: false` in `metrics.json` and
+  a dagger on the cut in `results.md`. Their A and B test numbers are
+  still reported, because a few A or B test rows can score above the
+  highest B dev score (for example `english_vote_all` flags 4 B test rows
+  at both cuts). Fitted cuts and dev FPR are stored with each operating
   point.
 
 No baseline was dropped.

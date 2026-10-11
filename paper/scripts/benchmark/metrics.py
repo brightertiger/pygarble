@@ -146,7 +146,8 @@ def fit_cuts(
                 for p, c in cuts.items()
             },
             # False when ties at the top leave the cut at the highest B dev
-            # score, so it flags nothing: "no cut reaches target".
+            # score, so it flags no B dev row; A or B test rows above the
+            # cut are still flagged and counted.
             "reachable": {p: bool(c < scores.max()) for p, c in cuts.items()},
         }
     return out

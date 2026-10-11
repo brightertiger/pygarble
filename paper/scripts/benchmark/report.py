@@ -35,15 +35,20 @@ def table(header: List[str], rows: List[List[str]]) -> List[str]:
 
 
 METRICS = ("A_capture", "B_precision", "B_recall", "B_fpr")
-NO_CUT = "no cut reaches target"
+NO_CUT = "†"
+NO_CUT_NOTE = (
+    "† No cut reaches the target on B dev: more tweets than the target "
+    "allows share the top score, so the cut equals the highest B dev score "
+    "and flags no B dev row. A and B test rows above the cut are still "
+    "counted."
+)
 
 
 def row(name: str, point: Dict[str, Any], extra: List[str]) -> List[str]:
     out = [name]
     if extra:
-        out += [f"{point['cut']:.6g}", f"{point['dev_fpr']:.4f}"]
-        if not point["reachable"]:
-            return out + [NO_CUT] + ["n/a"] * (len(METRICS) - 1)
+        mark = "" if point["reachable"] else f" {NO_CUT}"
+        out += [f"{point['cut']:.6g}{mark}", f"{point['dev_fpr']:.4f}"]
     return out + [cell(point[k]) for k in METRICS]
 
 
@@ -63,6 +68,10 @@ def section(methods: Dict[str, Any], families: tuple) -> List[str]:
             + ["A capture", "B precision", "B recall", "B FPR"],
             [row(n, methods[n]["points"][point], extra) for n in chosen],
         )
+        if extra and not all(
+            methods[n]["points"][point]["reachable"] for n in chosen
+        ):
+            lines += [NO_CUT_NOTE, ""]
     return lines
 
 
