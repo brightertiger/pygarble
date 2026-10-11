@@ -1,9 +1,10 @@
 """Figure, LaTeX tables and number macros for the preprint.
 
 Reads `results/metrics.json`, `results/footprint.json`, the A predictions
-and the manifest; writes the results figure (PDF, and a 300 dpi PNG for
-checking) to `paper/preprint/figures/` and the LaTeX fragments
-`table_survey.tex`, `table_tweets.tex`, `table_footprint.tex` and
+the manifest and the tuning study in `results/tuning/`; writes the results
+figure (PDF, and a 300 dpi PNG for checking) to `paper/preprint/figures/`
+and the LaTeX fragments `table_survey.tex`, `table_tweets.tex`,
+`table_footprint.tex`, `table_tuning.tex`, `table_weights.tex` and
 `numbers.tex` to `paper/preprint/tables/`. Nothing in the paper is typed by
 hand. Run from the repository root:
 
@@ -12,7 +13,7 @@ hand. Run from the repository root:
 
 import json
 import logging
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Sequence
 
 import matplotlib
 
@@ -23,6 +24,7 @@ import matplotlib.pyplot as plt  # noqa: E402
 
 from pygarble.gibberish.registry import Strategy  # noqa: E402
 
+from . import tune  # noqa: E402
 from .data import MANIFEST, REPOSITORY  # noqa: E402
 from .metrics import PREDICTIONS, RESULTS, read_predictions  # noqa: E402
 
@@ -30,15 +32,13 @@ PREPRINT = REPOSITORY / "paper" / "preprint"
 FIGURES = PREPRINT / "figures"
 TABLES = PREPRINT / "tables"
 
-# Table and figure rows, top to bottom; the tuned row is set apart.
-UNTUNED = ("english", "english_fusion", "gibberish_detector", "lingua")
-TUNED = ("english_tuned",)
+# Table and figure rows, top to bottom.
+METHODS = ("english", "english_fusion", "gibberish_detector", "lingua")
 LABELS = {
     "english": r"pygarble (\texttt{english})",
     "english_fusion": r"pygarble (\texttt{english\_fusion})",
     "gibberish_detector": "gibberish-detector",
     "lingua": "lingua",
-    "english_tuned": r"pygarble (\texttt{english}, tuned)",
 }
 # Typewriter marks the pygarble profiles, as in the tables.
 PLAIN = {
@@ -46,7 +46,6 @@ PLAIN = {
     "english_fusion": r"pygarble ($\mathtt{english\_fusion}$)",
     "gibberish_detector": "gibberish-detector",
     "lingua": "lingua",
-    "english_tuned": r"pygarble ($\mathtt{english}$, tuned)",
 }
 # Runtime dependencies, read from the installed distributions: none of the
 # three declares a requirement. gibberish-detector ships no model and the
@@ -56,7 +55,6 @@ DEPENDENCIES = {
     "english_fusion": "none",
     "gibberish_detector": r"none$^a$",
     "lingua": r"none$^b$",
-    "english_tuned": "none",
 }
 DEPENDENCY_NOTES = (
     r"$^a$\,Ships no model; trains one from a text corpus at start-up "
@@ -73,7 +71,7 @@ MUTED = "#52514e"
 GRID = "#d9d8d4"
 METRICS = ("A_capture", "B_precision", "B_recall", "B_fpr")
 # Methods whose joint misses on A are counted for the label-noise note.
-NOISE_PANEL = UNTUNED
+NOISE_PANEL = METHODS
 # One column of the two-column article, in inches (8.4 cm by 6 cm).
 COLUMN = (8.4 / 2.54, 6.0 / 2.54)
 
@@ -112,12 +110,8 @@ def style() -> None:
 
 
 def positions() -> List[float]:
-    """y positions, top to bottom, with a gap before the tuned row."""
-    return [0.0, -1.0, -2.0, -3.0, -4.6]
-
-
-# The dashed rule between the untuned rows and the tuned row.
-RULE = -3.8
+    """y positions, top to bottom."""
+    return [0.0, -1.0, -2.0, -3.0]
 
 
 def interval(ax: Any, value: float, ci: List[float], y: float, colour: str):
@@ -134,7 +128,7 @@ def interval(ax: Any, value: float, ci: List[float], y: float, colour: str):
 
 def figure_results(methods: Dict[str, Any]) -> None:
     """Survey Junk capture above, Tweets precision and recall below."""
-    names = UNTUNED + TUNED
+    names = METHODS
     ys = positions()
     fig, (top, bottom) = plt.subplots(2, 1, figsize=COLUMN)
     for y, name in zip(ys, names):
@@ -161,13 +155,12 @@ def figure_results(methods: Dict[str, Any]) -> None:
     bottom.set_xlim(0.6, 1.0)
     bottom.set_xticks([0.6, 0.7, 0.8, 0.9, 1.0], [".6", ".7", ".8", ".9", "1"])
     for ax in (top, bottom):
-        ax.set_ylim(-5.1, 0.5)
+        ax.set_ylim(-3.5, 0.5)
         ax.set_yticks(ys, [PLAIN[n] for n in names])
         ax.tick_params(axis="y", length=0, pad=3)
         ax.tick_params(axis="x", pad=1.5)
         ax.xaxis.grid(True, color=GRID, linewidth=0.5)
         ax.set_axisbelow(True)
-        ax.axhline(RULE, color=MUTED, linewidth=0.6, linestyle="--")
     handles = [
         plt.Line2D(
             [],
@@ -188,7 +181,7 @@ def figure_results(methods: Dict[str, Any]) -> None:
             label="recall",
         ),
     ]
-    # Sits in the empty band left of the untuned points, clear of the data.
+    # Sits in the empty band left of the points, clear of the data.
     bottom.legend(
         handles=handles,
         loc="center left",
@@ -210,9 +203,13 @@ def number(value: Optional[float]) -> str:
 
 def ranks(methods: Dict[str, Any], key: str) -> Dict[str, str]:
     """'*' for the best and '**' for the second best value of one metric
-    among the four main rows (ties share a rank); the tuned row is skipped.
-    Lowest is best for FPR, highest for everything else."""
-    shown = {n: round(methods[n][key]["value"], 3) for n in UNTUNED}
+    among the rows (ties share a rank). Lowest is best for FPR, highest
+    for everything else."""
+    shown = {n: round(methods[n][key]["value"], 3) for n in METHODS}
+    return marks_for(shown, key)
+
+
+def marks_for(shown: Dict[str, float], key: str) -> Dict[str, str]:
     distinct = sorted(set(shown.values()), reverse=key != "B_fpr")
     marks = {distinct[0]: "*"}
     if len(distinct) > 1:
@@ -232,12 +229,10 @@ def stack(lines: List[str], align: str = "c", pos: str = "t") -> str:
     return rf"\begin{{tabular}}{spec}{body}\end{{tabular}}"
 
 
-def rows(cells: Any) -> List[str]:
-    """Body rows in table order, a rule before the tuned row."""
+def rows(cells: Any, names: Sequence[str] = METHODS) -> List[str]:
+    """Body rows in table order."""
     lines: List[str] = []
-    for name in UNTUNED + TUNED:
-        if name in TUNED:
-            lines.append(r"\midrule")
+    for name in names:
         lines.append(LABELS[name] + " & " + " & ".join(cells(name)) + r" \\")
     return lines
 
@@ -292,9 +287,7 @@ def tweets_table(methods: Dict[str, Any]) -> str:
     ]
     body = rows(cells)
     # A little air between the two-line rows.
-    lines += [
-        line if line == r"\midrule" else line + r"[2pt]" for line in body
-    ]
+    lines += [line + r"[2pt]" for line in body]
     lines += [r"\bottomrule", r"\end{tabular}", ""]
     return "\n".join(lines)
 
@@ -426,12 +419,268 @@ def macros(
     return "\n".join(lines) + "\n"
 
 
+TUNING_ROWS = ("english", "english_fusion", "tuned")
+TUNING_LABELS = {
+    "english": r"pygarble (\texttt{english})",
+    "english_fusion": r"pygarble (\texttt{english\_fusion})",
+    "tuned": "pygarble (tuned weights)",
+}
+
+
+WORDS = ("zero", "one", "two", "three", "four", "five", "six", "seven")
+
+
+def spelled(count: int) -> str:
+    return WORDS[count] if count < len(WORDS) else str(count)
+
+
+def tex_name(name: str) -> str:
+    return r"\texttt{" + name.replace("_", r"\_") + "}"
+
+
+def tuning_table(tuning: Dict[str, Any]) -> str:
+    """Held-out metrics: the primary draw with intervals, then the mean
+    and standard deviation over all draws."""
+    primary = tuning["primary"]["methods"]
+    spread = tuning["mean_sd"]
+    seed = tuning["primary_seed"]
+    draws = spelled(len(tuning["seeds"]))
+
+    def block_marks(values: Dict[str, Dict[str, float]]) -> Dict:
+        return {
+            key: marks_for(
+                {n: round(values[n][key], 3) for n in TUNING_ROWS}, key
+            )
+            for key in METRICS
+        }
+
+    first = block_marks(
+        {n: {k: primary[n][k]["value"] for k in METRICS} for n in primary}
+    )
+    second = block_marks(
+        {n: {k: spread[n][k]["mean"] for k in METRICS} for n in spread}
+    )
+
+    def point(name: str) -> List[str]:
+        return [
+            stack(
+                [
+                    number(primary[name][key]["value"]) + first[key][name],
+                    r"{\scriptsize " + bracket(primary[name][key]) + "}",
+                ]
+            )
+            for key in METRICS
+        ]
+
+    def mean_sd(name: str) -> List[str]:
+        return [
+            f"{spread[name][key]['mean']:.3f}{second[key][name]} $\\pm$ "
+            f"{spread[name][key]['sd']:.3f}"
+            for key in METRICS
+        ]
+
+    def body(cells: Any) -> List[str]:
+        return [
+            TUNING_LABELS[n] + " & " + " & ".join(cells(n)) + r" \\"
+            for n in TUNING_ROWS
+        ]
+
+    lines = [
+        "% Generated by paper/scripts/benchmark/figures.py; do not edit.",
+        r"\begin{tabular}{@{}lcccc@{}}",
+        r"\toprule",
+        r" & Survey Junk & \multicolumn{3}{c}{Tweets vs.\ Random Strings} \\",
+        r"\cmidrule(lr){2-2}\cmidrule(l){3-5}",
+        r"Method & Capture & Precision & Recall & FPR \\",
+        r"\midrule",
+        r"\multicolumn{5}{@{}l}{\emph{Primary draw (seed "
+        + str(seed)
+        + r"), with 95\,\% bootstrap interval}} \\",
+    ]
+    lines += [line + r"[2pt]" for line in body(point)]
+    lines += [
+        r"\midrule",
+        r"\multicolumn{5}{@{}l}{\emph{Mean $\pm$ standard deviation over "
+        + draws
+        + r" draws}} \\",
+    ]
+    lines += body(mean_sd)
+    lines += [r"\bottomrule", r"\end{tabular}", ""]
+    return "\n".join(lines)
+
+
+def by_mean_weight(weights: Dict[str, Any]) -> List[str]:
+    return sorted(
+        weights["mean_weight"],
+        key=lambda n: (-weights["mean_weight"][n], n),
+    )
+
+
+def primary_draw(weights: Dict[str, Any], seed: int) -> Dict[str, Any]:
+    return next(d for d in weights["draws"] if d["seed"] == seed)
+
+
+def weights_table(weights: Dict[str, Any], seed: int) -> str:
+    """Every strategy's mean weight over the draws and its weight in the
+    primary draw, sorted by mean weight."""
+    primary = primary_draw(weights, seed)["weights"]
+    lines = [
+        "% Generated by paper/scripts/benchmark/figures.py; do not edit.",
+        r"\begin{tabular}{@{}lrr@{}}",
+        r"\toprule",
+        r"Strategy & Mean weight & Seed " + str(seed) + r" \\",
+        r"\midrule",
+    ]
+    lines += [
+        f"{tex_name(n)} & {weights['mean_weight'][n]:.2f} & "
+        f"{primary[n]:.2f} \\\\"
+        for n in by_mean_weight(weights)
+    ]
+    lines += [r"\bottomrule", r"\end{tabular}", ""]
+    return "\n".join(lines)
+
+
+def listing(items: List[str]) -> str:
+    if len(items) < 3:
+        return " and ".join(items)
+    return ", ".join(items[:-1]) + " and " + items[-1]
+
+
+ENGLISH_MEMBERS = {
+    "englishmarkovpct": ("markov_chain",),
+    "englishcontrolpct": ("control_characters",),
+    "englishmojibakepct": ("mojibake",),
+    "englishencodingpct": ("mojibake", "control_characters"),
+    "englishrestpct": (
+        "markov_chain",
+        "log_likelihood_ratio",
+        "word_anomaly",
+        "keyboard_adjacency",
+    ),
+}
+
+
+def member_macros(manifest: Dict) -> Dict[str, str]:
+    """Share of B tweets flagged by members of the english profile, alone
+    or in groups, from the cached strategy scores (a member flags at a
+    score of 0.5, the profile's threshold, when it applies)."""
+    names = tune.strategy_names()
+    scores, applicable = tune.read_scores(manifest, names)["B"]
+    tweets = [manifest["B_labels"][i] == 0 for i in manifest["B_ids"]]
+    flags = (scores >= 0.5) & applicable
+    out = {}
+    for macro, members in ENGLISH_MEMBERS.items():
+        columns = [names.index(m) for m in members]
+        flagged = flags[:, columns].any(axis=1)[tweets]
+        out[macro] = f"{100 * flagged.mean():.1f}"
+    return out
+
+
+def tuning_macros(
+    tuning: Dict[str, Any], weights: Dict[str, Any], splits: Dict
+) -> str:
+    """\\tres{method}{metric} (primary draw), \\trespct, \\tresci,
+    \\tmean, \\tmeanpct, \\tsd, \\tsdpct and the tuning setup."""
+    lines = [r"\makeatletter"]
+
+    def define(name: str, value: str) -> None:
+        lines.append(rf"\expandafter\def\csname {name}\endcsname{{{value}}}")
+
+    for name in TUNING_ROWS:
+        for key in METRICS:
+            point = tuning["primary"]["methods"][name][key]
+            spread = tuning["mean_sd"][name][key]
+            base = f"t@{name}@{key}"
+            define(base, number(point["value"]))
+            define(f"{base}@pct", f"{100 * point['value']:.1f}")
+            low, high = point["ci"]
+            define(f"{base}@ci", f"{low:.3f}--{high:.3f}")
+            define(f"{base}@mean", f"{spread['mean']:.3f}")
+            define(f"{base}@meanpct", f"{100 * spread['mean']:.1f}")
+            define(f"{base}@sd", f"{spread['sd']:.3f}")
+            define(f"{base}@sdpct", f"{100 * spread['sd']:.1f}")
+    lines += [
+        r"\newcommand{\tres}[2]{\csname t@#1@#2\endcsname}",
+        r"\newcommand{\trespct}[2]{\csname t@#1@#2@pct\endcsname}",
+        r"\newcommand{\tresci}[2]{\csname t@#1@#2@ci\endcsname}",
+        r"\newcommand{\tmean}[2]{\csname t@#1@#2@mean\endcsname}",
+        r"\newcommand{\tmeanpct}[2]{\csname t@#1@#2@meanpct\endcsname}",
+        r"\newcommand{\tsd}[2]{\csname t@#1@#2@sd\endcsname}",
+        r"\newcommand{\tsdpct}[2]{\csname t@#1@#2@sdpct\endcsname}",
+        r"\makeatother",
+    ]
+    seed = tuning["primary_seed"]
+    primary = primary_draw(weights, seed)
+    draws = weights["draws"]
+    members = [sum(w > 0 for w in d["weights"].values()) for d in draws]
+    thresholds = [d["threshold"] for d in draws]
+    f1s = [d["tuning_f1"] for d in tuning["per_seed"]]
+    order = by_mean_weight(weights)
+    mean = weights["mean_weight"]
+    sample = splits["tuning_ids"][str(seed)]
+    rows = tuning["primary"]["rows"]
+    values = {
+        "tuningdraws": spelled(len(draws)),
+        "tuningtrials": f"{weights['trials']:,}",
+        "tuningpct": f"{100 * tuning['fraction_tuning']:.0f}",
+        "heldoutpct": f"{100 * (1 - tuning['fraction_tuning']):.0f}",
+        "tuningseed": str(seed),
+        "tuningseedlast": str(draws[-1]["seed"]),
+        "tuningweightstep": f"{weights['weight_step']:.2f}",
+        "tuninglow": f"{weights['threshold_range'][0]:.2f}",
+        "tuninghigh": f"{weights['threshold_range'][1]:.2f}",
+        "tuningthreshold": f"{primary['threshold']:.2f}",
+        "tuningthresholdmin": f"{min(thresholds):.2f}",
+        "tuningthresholdmax": f"{max(thresholds):.2f}",
+        "tuningmembers": str(sum(w > 0 for w in primary["weights"].values())),
+        "tuningmembersmin": str(min(members)),
+        "tuningmembersmax": str(max(members)),
+        "tuningfonemin": f"{min(f1s):.3f}",
+        "tuningfonemax": f"{max(f1s):.3f}",
+        "tuningseconds": f"{weights['seconds_total'] / len(draws):.0f}",
+        "tuningtotal": f"{weights['seconds_total']:.0f}",
+        "tuningscoring": f"{weights['scoring_seconds']:.0f}",
+        "optunaversion": weights["optuna"],
+        "nTuneA": f"{len(sample['A']):,}",
+        "nTuneB": f"{len(sample['B']):,}",
+        "nTune": f"{len(sample['A']) + len(sample['B']):,}",
+        "tuningbestmin": f"{min(d['best_trial'] for d in draws):,}",
+        "tuningbestmax": f"{max(d['best_trial'] for d in draws):,}",
+        "nHeldA": f"{rows['A']:,}",
+        "nHeldB": f"{rows['B']:,}",
+        "nHeldBpos": f"{rows['B_positive']:,}",
+        "nHeldBneg": f"{rows['B_negative']:,}",
+        "tuningtop": listing(
+            [f"{tex_name(n)} ({mean[n]:.2f})" for n in order[:4]]
+        ),
+        "tuningbottom": listing(
+            [f"{tex_name(n)} ({mean[n]:.2f})" for n in order[-3:]]
+        ),
+        "tuningalloff": listing(
+            [
+                tex_name(n)
+                for n in order
+                if all(d["weights"][n] == 0 for d in draws)
+            ]
+        ),
+        "tuningoff": listing(
+            [tex_name(n) for n, w in primary["weights"].items() if w == 0]
+        ),
+    }
+    lines += [rf"\newcommand{{\{k}}}{{{v}}}" for k, v in values.items()]
+    return "\n".join(lines) + "\n"
+
+
 def main() -> None:
     metrics = json.loads((RESULTS / "metrics.json").read_text())
     footprint = json.loads((RESULTS / "footprint.json").read_text())["methods"]
     manifest = json.loads(MANIFEST.read_text())
     environment = json.loads((RESULTS / "environment.json").read_text())
     methods = metrics["methods"]
+    tuning_dir = RESULTS / "tuning"
+    tuning = json.loads((tuning_dir / "tuning.json").read_text())
+    weights = json.loads((tuning_dir / "weights.json").read_text())
+    splits = json.loads((tuning_dir / "splits.json").read_text())
     FIGURES.mkdir(parents=True, exist_ok=True)
     TABLES.mkdir(parents=True, exist_ok=True)
     style()
@@ -440,7 +689,14 @@ def main() -> None:
         "table_survey.tex": survey_table(methods),
         "table_tweets.tex": tweets_table(methods),
         "table_footprint.tex": footprint_table(footprint),
-        "numbers.tex": macros(metrics, footprint, manifest, environment),
+        "table_tuning.tex": tuning_table(tuning),
+        "table_weights.tex": weights_table(weights, tuning["primary_seed"]),
+        "numbers.tex": macros(metrics, footprint, manifest, environment)
+        + tuning_macros(tuning, weights, splits)
+        + "".join(
+            rf"\newcommand{{\{k}}}{{{v}}}" + "\n"
+            for k, v in member_macros(manifest).items()
+        ),
     }
     for name, text in outputs.items():
         (TABLES / name).write_text(text)

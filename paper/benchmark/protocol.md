@@ -61,13 +61,12 @@ pygarble 0.11.0 from this repository, every detector built with
   (Markov chain, log-likelihood ratio, word anomaly, mojibake, keyboard
   adjacency, control characters; `any` voting; threshold 0.5).
 - `english_fusion`: `EnsembleDetector(profile="english_fusion")`.
-- `english_tuned` (post hoc, not pre-registered): the `english` members
-  without mojibake and control characters, i.e.
-  `EnsembleDetector(strategies=[MARKOV_CHAIN, LOG_LIKELIHOOD_RATIO,
-  WORD_ANOMALY, KEYBOARD_ADJACENCY], voting="any", threshold=0.5)`. It was
-  constructed after seeing that 26.4 percent of B tweets carry mojibake,
-  which B labels clean, and is reported separately as a domain-specific
-  tuning. The package is unchanged.
+- Tuned weights (post hoc in its use of labels, evaluated on held-out
+  rows): `tune.py` learns a weight per strategy and a threshold under
+  `weighted` voting from a stratified 20 percent of A and of B, for five
+  seeds, and evaluates on the other 80 percent next to `english` and
+  `english_fusion` on the same rows. Results are in `results/tuning/`; see
+  `deviations.md`. The package is unchanged.
 
 Baselines (CPU, pinned in `paper/scripts/benchmark/requirements.txt`,
 installed in a Python 3.12 venv outside the repository):

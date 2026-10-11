@@ -73,4 +73,36 @@ open. Each is also stated in `protocol.md` where it affects the protocol.
   pre-registered result, and is reported separately as such. The
   `english_fusion` profile has no mojibake member, so it has no variant.
 
+- **2026-10-11: weight tuning study added.** At the maintainer's request
+  a tuning study (`paper/scripts/benchmark/tune.py`, results in
+  `results/tuning/`) learns a weight in [0, 1] for each of pygarble's 32
+  strategies and a threshold in [0.05, 0.8] under `weighted` voting, with
+  Optuna's TPE sampler (1,000 trials per draw, F1 objective, junk
+  positive). For each
+  of five seeds (20261011 to 20261015) the tuning sample is a stratified
+  20 percent of A and 20 percent of B by label; evaluation is on the
+  held-out 80 percent, where the `english` and `english_fusion` profiles
+  are scored on the same rows. The study uses labelled data from both
+  datasets, so the tuned rows are post hoc in that sense, but no
+  evaluation row is seen during tuning. It replaces the hand-made
+  `english_tuned` variant (the `english` profile without its mojibake and
+  control-character members) described in the previous entry. That
+  variant's predictions, metrics, footprint entry and preprint rows were
+  removed; they remain in git history.
+- **2026-10-11: tuning search widened.** The first tuning run used a
+  threshold range of [0.2, 0.8] and 400 trials per draw. In every one of
+  the five draws the chosen threshold sat on the 0.2 bound, and the best
+  trial came late (trials 237 to 395 of 400), so the search had not
+  converged. On that evidence from the tuning samples, the maintainer
+  widened the threshold range to [0.05, 0.8] and raised the budget to
+  1,000 trials per draw. `tune.py` always evaluates on the held-out rows,
+  so the first run's held-out results had also been computed (tuned
+  weights, mean over five draws: tweet FPR 0.028, survey-junk capture
+  0.833, random-string recall 0.922); the widened run has a higher tweet
+  FPR (0.047) and higher capture and recall. Even with 1,000 trials the
+  best trial came late (930 to 996), so the search was still improving.
+  Seeds, the 20 percent sample, the objective and the search grid are
+  unchanged. The widened run is the one reported; the first run's results
+  remain in git history (commit `9f213ef`).
+
 No other method was added or changed.

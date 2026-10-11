@@ -58,10 +58,6 @@ either dataset.
   flagged when its score is above the command-line default of 4.0.
 * **lingua 2.2.0**: a language identifier, with the policy that any text not
   detected as English is junk.
-* **pygarble** ``english``, **tuned** (post hoc): the ``english`` members
-  without mojibake and control characters, with the same voting and
-  threshold. It was built after seeing the tweet results, so it is not part
-  of the pre-registered comparison. The package is unchanged.
 
 The 95 percent intervals come from 1,000 bootstrap resamples of the rows.
 
@@ -86,9 +82,6 @@ Results
    * - lingua
      - 0.989
      - 0.985 to 0.992
-   * - ``english``, tuned (post hoc)
-     - 0.830
-     - 0.817 to 0.843
 
 .. list-table:: Tweets vs. Random Strings: 4,000 random strings and 5,971 tweets
    :header-rows: 1
@@ -113,10 +106,6 @@ Results
      - 0.876 (0.867 to 0.886)
      - 0.994 (0.991 to 0.996)
      - 0.094 (0.087 to 0.101)
-   * - ``english``, tuned (post hoc)
-     - 0.777 (0.766 to 0.789)
-     - 0.947 (0.940 to 0.954)
-     - 0.182 (0.173 to 0.192)
 
 Intervals are in parentheses.
 
@@ -138,9 +127,6 @@ Intervals are in parentheses.
    * - lingua
      - 1039.0
      - 307.47
-   * - ``english``, tuned (post hoc)
-     - 52.7
-     - 1.05
 
 Time is the default decision over all 9,971 Tweets vs. Random Strings texts
 on one thread of an Apple M2 with Python 3.12.2, the median of five runs
@@ -167,15 +153,148 @@ pygarble is beaten on single measures:
   It flags more tweets and needs a 307 MB install. It answers which language
   a text is in, not whether it is junk.
 * **The default** ``english`` **profile is not suited to informal text.**
-  It flags 33.2 percent of tweets as shipped. The post hoc tuned variant
-  lowers that to 18.2 percent with no loss of capture or recall. The
-  preprint attributes the rest to its Markov member, which alone flags many
-  informal posts.
+  It flags 33.2 percent of tweets as shipped. Two causes overlap. Its
+  mojibake and control-character members flag 28.5 percent of tweets,
+  almost all through the control codes of mis-decoded text, which the
+  dataset labels clean. Its Markov member alone flags 17.8 percent, so
+  removing the two encoding checks still leaves 18.2 percent flagged.
 
-The tuned variant shows the general mechanism: a profile is a list of
-strategies, and a domain that does not count some kind of damage as junk
-removes the strategies that target it. :doc:`strategy-guide` turns these
-results into advice.
+:doc:`strategy-guide` turns these results into advice.
+
+Tuning to a use case from a small labelled sample
+-------------------------------------------------
+
+The two profiles are fixed member lists. With a labelled sample of your own
+data you can instead learn how much each strategy should count. The tuning study
+learns a weight from 0 to 1 for each of the 32 strategies and a threshold
+from 0.05 to 0.80, under ``weighted`` voting. A text's score is the weighted
+mean of the scores of the members that apply to it. A weight of 0 switches a
+strategy off.
+
+The tuning sample is a stratified 20 percent of each dataset. Optuna's TPE
+sampler searches 1,000 configurations for the best F1 on that sample, with
+junk as the positive class. The search was still improving when it
+stopped: in every draw the best configuration came after trial 930. Each
+strategy is scored once per row and cached,
+so the search takes about 18 seconds per sample on one core. The study
+repeats this for five seeds. Each result is rebuilt as an
+``EnsembleDetector`` and evaluated on the held-out 80 percent. Both profiles
+are scored on the same rows. The study was added after the main results and
+uses labelled rows from both datasets, so it is post hoc in that sense, but
+no evaluation row is seen during tuning.
+
+.. list-table:: Held-out 80 percent, primary draw (seed 20261011): 2,810 Survey Junk rows, 3,200 random strings, 4,777 tweets
+   :header-rows: 1
+
+   * - Method
+     - Survey Junk capture
+     - Precision
+     - Recall
+     - FPR
+   * - ``english`` (default)
+     - 0.828 (0.816 to 0.841)
+     - 0.657 (0.642 to 0.671)
+     - 0.949 (0.942 to 0.956)
+     - 0.332 (0.319 to 0.345)
+   * - ``english_fusion``
+     - 0.893 (0.881 to 0.904)
+     - 0.907 (0.897 to 0.916)
+     - 0.992 (0.988 to 0.994)
+     - 0.068 (0.061 to 0.075)
+   * - tuned weights
+     - 0.899 (0.889 to 0.911)
+     - 0.923 (0.914 to 0.933)
+     - 0.988 (0.984 to 0.991)
+     - 0.055 (0.049 to 0.062)
+
+Intervals are 95 percent bootstrap intervals, in parentheses.
+
+.. list-table:: Held-out 80 percent, mean ± standard deviation over five draws
+   :header-rows: 1
+
+   * - Method
+     - Survey Junk capture
+     - Precision
+     - Recall
+     - FPR
+   * - ``english`` (default)
+     - 0.830 ± 0.002
+     - 0.656 ± 0.001
+     - 0.949 ± 0.002
+     - 0.333 ± 0.001
+   * - ``english_fusion``
+     - 0.894 ± 0.001
+     - 0.907 ± 0.002
+     - 0.991 ± 0.001
+     - 0.068 ± 0.001
+   * - tuned weights
+     - 0.895 ± 0.022
+     - 0.933 ± 0.017
+     - 0.981 ± 0.017
+     - 0.047 ± 0.012
+
+The tuned weights flag fewer tweets than ``english_fusion`` at about the same
+capture. Recall is slightly lower on average, and the tuned rows vary more
+between draws because a 20 percent sample is small. The largest mean
+weights went to ``word_lookup`` (1.00), ``ngram_frequency`` (0.74),
+``log_likelihood_ratio`` (0.71) and ``hex_string`` (0.67).
+``control_characters`` was switched off in every draw, and ``mojibake`` has
+a mean weight of 0.06. In the primary draw ``control_characters``,
+``mojibake``, ``pronounceability`` and ``ngram_rank`` have weight 0, so the
+search gave almost no weight to the encoding-damage checks that this
+dataset's labels penalise. Thresholds ranged from 0.13 to 0.18. The learned weights
+describe these two datasets, not junk in general.
+
+The primary draw's configuration, built directly:
+
+.. code-block:: python
+
+   from pygarble import EnsembleDetector
+
+   # Learned on the preprint's primary tuning sample (seed 20261011).
+   weights = {
+       "local_anomaly": 0.35,
+       "pattern_matching": 0.05,
+       "entropy_based": 0.7,
+       "vowel_ratio": 0.1,
+       "keyboard_pattern": 0.05,
+       "markov_chain": 0.35,
+       "ngram_frequency": 0.9,
+       "word_lookup": 1.0,
+       "symbol_ratio": 0.65,
+       "repetition": 0.1,
+       "hex_string": 0.9,
+       "unicode_script": 0.85,
+       "bigram_probability": 0.25,
+       "letter_position": 0.15,
+       "consonant_sequence": 0.7,
+       "vowel_pattern": 0.85,
+       "letter_frequency": 0.75,
+       "rare_trigram": 0.95,
+       "function_word_density": 0.9,
+       "affix_detection": 0.05,
+       "zipf_conformity": 0.8,
+       "word_collocation": 0.1,
+       "log_likelihood_ratio": 0.95,
+       "word_anomaly": 0.9,
+       "keyboard_adjacency": 0.35,
+       "cross_parsing": 1.0,
+       "primed_compression": 0.4,
+       "permutation_test": 0.15,
+   }
+   tuned = EnsembleDetector(
+       strategies=list(weights),
+       weights=list(weights.values()),
+       voting="weighted",
+       threshold=0.13,
+   )
+   assert tuned.predict("asdfghjkl qwpoeiru")
+   assert not tuned.predict("Thanks for the quick reply, see you on Monday!")
+
+To tune for your own data, score a labelled sample with each strategy and
+search the weights and threshold. The benchmark's ``tune.py`` does this with
+Optuna; all learned weights are in ``paper/benchmark/results/tuning/``.
+
 
 Reproduction
 ------------
@@ -185,7 +304,8 @@ never committed. From the repository root:
 
 .. code-block:: bash
 
-   # Recompute every metric from the saved predictions; needs numpy only.
+   # Recompute every metric from the saved predictions, and the tuning
+   # results from the cached strategy scores; needs numpy only.
    make benchmark-verify PYTHON=/path/to/venv/bin/python
 
    # Regenerate the figure, tables and number macros, then build the PDF.

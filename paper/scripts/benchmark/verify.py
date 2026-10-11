@@ -1,4 +1,8 @@
-"""Recompute metrics.json from the saved predictions and the manifest.
+"""Recompute metrics.json and tuning/tuning.json from saved files.
+
+metrics.json comes from the saved predictions and the manifest;
+tuning.json from the cached strategy scores, the recorded tuning row ids
+and the learned weights (Optuna is not re-run).
 
 Exits non-zero on any mismatch. Needs numpy but neither the raw data nor
 the baselines.
@@ -8,7 +12,7 @@ import json
 import sys
 from typing import Any, List
 
-from . import data, metrics
+from . import data, metrics, tune
 
 
 def differences(saved: Any, fresh: Any, path: str = "") -> List[str]:
@@ -46,6 +50,9 @@ def check() -> List[str]:
         manifest, metrics.load_all(manifest, list(families)), families
     )
     problems += differences(saved, json.loads(json.dumps(fresh)), "metrics")
+    tuned = json.loads(tune.RESULT.read_text())
+    fresh_tuned = json.loads(json.dumps(tune.recompute()))
+    problems += differences(tuned, fresh_tuned, "tuning")
     return problems
 
 
@@ -56,7 +63,7 @@ def main() -> int:
     if problems:
         print(f"verify: {len(problems)} mismatches")
         return 1
-    print("verify: metrics.json matches the predictions")
+    print("verify: metrics.json and tuning.json match the saved files")
     return 0
 
 
