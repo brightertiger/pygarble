@@ -61,7 +61,9 @@ inputs before upgrading.
   `insufficient_evidence`.
 - **Some invalid arguments raise different exceptions.** A wrongly typed
   `threshold`, `threads`, `threshold_per_char` or weight raises `ValueError`
-  where 0.8.0 raised `TypeError`. An unknown strategy name raises
+  where 0.8.0 raised `TypeError`. A huge integer weight such as `10**400`
+  raises `ValueError` where 0.8.0 raised `OverflowError`. An unknown
+  strategy name raises
   `ValueError` instead of `AttributeError`, and `None` or a number as the
   strategy raises `TypeError` instead of `AttributeError`.
   `EnsembleDetector(strategies=[None])` raises `ValueError` naming the bad
@@ -69,7 +71,9 @@ inputs before upgrading.
   naming the pattern, chained from `re.error`, instead of `re.error`.
 - **Some values that 0.8.0 accepted now raise.** `threshold=True`,
   `threads=2.5`, NaN weights and a non-bool `override_defaults` raise
-  `ValueError`. `applicable(None)` and a batch with a non-string entry, such
+  `ValueError`. So does a huge integer such as `10**400` for any numeric
+  option: in 0.8.0 `threads`, `timeout_per_text`, `max_string_length` and
+  `min_length` accepted it, as did settings 0.8.0 ignored, such as `n`. `applicable(None)` and a batch with a non-string entry, such
   as `predict([None])`, raise `TypeError`; batches are validated before any
   work starts.
 - **New `FutureWarning`s.** Unknown strategy settings, and `weights` passed
@@ -158,7 +162,8 @@ Screening:
   redact.
 - `pygarble.screening`: a dedicated secrets, PII and profanity API that does
   not load the gibberish engine, with per-instance custom detectors, kind
-  filtering and shared span validation and redaction.
+  filtering, source-free backend errors and shared span validation and
+  redaction.
 - Optional local screening backends, each enabled explicitly: phonenumberslite
   (`pygarble[phones]`), python-stdnum (`pygarble[stdnum]`), detect-secrets
   (`pygarble[secrets]`), all three (`pygarble[screening]`), and a separately
@@ -166,7 +171,7 @@ Screening:
   fails to import says why. On Python 3.8 the `stdnum` and `screening`
   extras also install setuptools, which python-stdnum needs.
 - Throughput work on the rule detectors: literal prefilters, an ASCII fast
-  path, a token cache and linear-time overlap filtering, so dense PII
+  path, a token cache and sorted-sweep overlap filtering, so dense PII
   documents do not cause quadratic work.
 
 Command line:
@@ -178,7 +183,7 @@ Command line:
   `--kinds` and `--locales` are rejected. Text and TSV rows print a tab or
   any character `str.splitlines()` breaks on inside the text as a Python
   escape (`\t`, `\n`, `\r`, `\x0b`, `\x0c`, `\x1c`, `\x1d`, `\x1e`,
-  `\x85`, ` `, ` `), so one text is always one row. Backslashes
+  `\x85`, `\u2028`, `\u2029`), so one text is always one row. Backslashes
   are not escaped; JSONL is the lossless format.
 - `pygarble-screen` (also `python -m pygarble.screening`): whole-document
   scanning and redaction, findings-only scan output and a configurable input
@@ -250,6 +255,11 @@ Data, regression checks and documentation:
   `FutureWarning` (they were silently ignored); this will become an error
   in a future release.
 
+### Removed
+- `pygarble.core` no longer re-exports incidental names that 0.8.0 exposed
+  through its own imports, such as the `typing` helpers `Callable` and
+  `Dict` and the `concurrent` module. Import them from the standard library.
+
 ### Fixed
 - `GarbleDetector` and `EnsembleDetector` objects pickled by 0.8.0 load and
   predict. A 0.8.0 default ensemble reports profile `legacy`.
@@ -259,8 +269,6 @@ Data, regression checks and documentation:
   that is both a `TypeError` and a `ValueError`, with a message saying to
   pass a list. `EnsembleDetector("markov_chain")` no longer reports `'m' is
   not a valid Strategy`.
-- Huge integers for numeric options raise `ValueError` instead of
-  `OverflowError`.
 - `WORD_ANOMALY` no longer flags dictionary acronyms such as DHCP, KPMG and
   HGTV; ALL-CAPS tokens of six letters or fewer are treated as acronyms and
   never flagged by this strategy.
@@ -293,11 +301,6 @@ Data, regression checks and documentation:
   shorter than three letters; only Latin/Cyrillic/Greek mixing inside one
   word of three or more letters counts. Greek letters attached to three or
   more Latin letters (e.g. "μmol") are still flagged.
-
-### Removed
-- `pygarble.core` no longer re-exports incidental names that 0.8.0 exposed
-  through its own imports, such as the `typing` helpers `Callable` and
-  `Dict` and the `concurrent` module. Import them from the standard library.
 
 ## [0.8.0] - 2026-07-04
 - Previous release; see git history.

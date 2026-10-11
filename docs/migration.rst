@@ -139,6 +139,9 @@ Check any ``except`` clause around detector construction:
    * - Wrongly typed ``threshold``, ``threads``, ``threshold_per_char`` or weight
      - ``TypeError``
      - ``ValueError``
+   * - Huge integer weight such as ``10**400``
+     - ``OverflowError``
+     - ``ValueError``
    * - Unknown strategy name
      - ``AttributeError``
      - ``ValueError``
@@ -157,7 +160,9 @@ Check any ``except`` clause around detector construction:
 
 Some values that 0.8.0 accepted now raise. ``threshold=True``,
 ``threads=2.5``, NaN weights and a non-bool ``override_defaults`` raise
-``ValueError``. ``applicable(None)`` and a batch with a non-string entry, such
+``ValueError``. So does a huge integer such as ``10**400`` for any numeric
+option: in 0.8.0 ``threads``, ``timeout_per_text``, ``max_string_length`` and
+``min_length`` accepted it, as did settings 0.8.0 ignored, such as ``n``. ``applicable(None)`` and a batch with a non-string entry, such
 as ``predict([None])``, raise ``TypeError``; batches are validated before any
 work starts. Worker errors and timeouts propagate. ``timeout_per_text`` bounds
 the wait for threaded results; it is not a hard execution deadline.
