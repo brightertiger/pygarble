@@ -63,8 +63,8 @@ All notable changes to pygarble are documented here. The format follows
   mismatch.
 - Before publishing, the release workflow runs the tests on Python 3.8 and
   3.12, lint, the golden checks and a smoke test of the built wheel. The
-  Docker image is now pushed from that workflow only after the tests and
-  build pass. The separate Docker workflow, including its manual trigger,
+  Docker image is now pushed from that workflow only after the PyPI upload
+  succeeds. The separate Docker workflow, including its manual trigger,
   is removed.
 - Development installs pin flake8 7.x and isort 9.x, which CI lints with.
   isort 5.13 is used on Python 3.8 and 3.9.

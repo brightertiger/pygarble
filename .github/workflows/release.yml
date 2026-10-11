@@ -116,11 +116,12 @@ jobs:
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33 # v1.14.2
 
-  # Runs only after the release tests pass and the distributions build.
+  # Runs only after the distributions reach PyPI, so no image or `latest`
+  # tag ships for a version that failed to publish.
   docker:
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    needs: build
+    needs: [build, publish]
     permissions:
       contents: read
       packages: write
