@@ -138,26 +138,36 @@ release notes; 0.9.0 and 0.10.0 were never published and must not be tagged.
 1. **Maintainer only, before tagging:** in **Settings → Environments**, create
    the ``pypi`` environment and add required reviewers, so a pushed tag cannot
    publish without approval. Add the Trusted Publisher described above.
-2. **Maintainer only:** add the ``CODECOV_TOKEN`` repository secret from the
+2. **Maintainer only, once Trusted Publishing is set up:** delete the
+   ``PYPI_API_TOKEN`` repository secret, and revoke the token on PyPI after
+   checking that nothing outside this repository uses it. The
+   ``TEST_PYPI_API_TOKEN`` and ``PAT_TOKEN`` secrets are not used by any
+   workflow either; delete them too unless something outside the workflows
+   needs them.
+3. **Maintainer only:** add the ``CODECOV_TOKEN`` repository secret from the
    Codecov project settings. Without it the coverage upload is rejected; the
    step is non-fatal, so CI stays green but no coverage is reported.
-3. On a release branch, replace ``Unreleased`` in the ``[0.11.0]`` changelog
+4. On a release branch, replace ``Unreleased`` in the ``[0.11.0]`` changelog
    heading with the release date and leave an empty ``[Unreleased]`` section
-   above it. Replace source-only installation notices in the README,
-   :doc:`installation` and :doc:`migration` with the released version.
-4. Run the full tests, optional backend tests, ``make lint``, the
+   above it. Replace every source-only notice with the released version: the
+   "while PyPI still serves 0.8.0" and "until 0.11.0 is on PyPI" sentences in
+   the README's upgrade paragraph, :doc:`installation` and :doc:`migration`,
+   and the "unreleased source changes" notices near the top of :doc:`index`,
+   :doc:`api`, :doc:`cli`, :doc:`examples` and :doc:`standalone-screening`
+   (two in the last).
+5. Run the full tests, optional backend tests, ``make lint``, the
    generated-data and golden checks, and the strict documentation build. Open a
    PR and resolve CI failures before merging.
-5. Build with ``python -m build`` and validate with
+6. Build with ``python -m build`` and validate with
    ``python -m twine check dist/*``. Install the wheel in a fresh environment
    without runtime dependencies and exercise both canonical and 0.8.0 imports.
    Check the README links as rendered by PyPI, not just on GitHub.
-6. Once the release PR is merged, tag that exact commit ``v0.11.0`` and push
+7. Once the release PR is merged, tag that exact commit ``v0.11.0`` and push
    the tag. The workflow refuses a tag that differs from
    ``pygarble.__version__``. **After the** ``pypi`` **environment approval, this
    publishes to PyPI and then pushes the Docker image to GHCR.** A draft GitHub
    release alone does not trigger this tag-based workflow.
-7. Verify the published package version and metadata, create the matching
+8. Verify the published package version and metadata, create the matching
    GitHub release with the changelog notes, and check the live docs. Published
    files cannot be replaced with different content under the same version;
    use a new version for a correction.
