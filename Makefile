@@ -1,12 +1,9 @@
 PYTHON ?= python
 
-.PHONY: benchmark benchmark-check benchmark-prepare benchmark-verify preprint help install install-dev test lint format clean build upload-test upload docs docs-clean docs-serve docs-deploy
+.PHONY: benchmark-verify preprint help install install-dev test lint format clean build upload-test upload docs docs-clean docs-serve docs-deploy
 
 help:
 	@echo "Available commands:"
-	@echo "  benchmark-check   Verify study analysis and saved predictions (offline)"
-	@echo "  benchmark-prepare Download pinned research corpus/model assets"
-	@echo "  benchmark         Run the full paper comparison to reproduction-full/"
 	@echo "  benchmark-verify  Recompute preprint benchmark metrics from saved predictions"
 	@echo "  preprint          Regenerate preprint figures and tables, build main.pdf"
 	@echo "  install      Install the package"
@@ -74,16 +71,6 @@ docs-deploy: docs
 	@echo "3. GitHub Actions will automatically deploy the docs"
 	@echo ""
 	@echo "Current documentation build is ready in docs/_build/html/"
-
-# Use a Python 3.12 research environment; the full run is optional and local.
-benchmark-check:
-	$(PYTHON) -m unittest paper.scripts.study.test_study paper.scripts.study.test_full_corpus paper.scripts.study.test_chunk_metrics
-
-benchmark-prepare:
-	$(PYTHON) -m paper.scripts.study.full_corpus --download-model
-
-benchmark:
-	$(PYTHON) -m paper.scripts.study.full_corpus --output paper/study/reproduction-full
 
 # Preprint benchmark (paper/scripts/benchmark); needs numpy, not the raw data.
 benchmark-verify:

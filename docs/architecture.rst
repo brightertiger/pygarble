@@ -135,8 +135,8 @@ import example and :doc:`contributing` for the compatibility checks.
 Research and maintenance layout
 -------------------------------
 
-The paper describes the software separately from its empirical validation.
-The repository follows that division:
+The preprint describes the software and measures it on public data. The
+repository keeps that evidence apart from the library:
 
 .. code-block:: text
 
@@ -144,19 +144,19 @@ The repository follows that division:
    tests/              # package unit and integration tests
    docs/               # maintained website and user guides
    paper/
-     study/            # research protocols, predictions and results
+     preprint/         # preprint LaTeX source, generated tables and PDF
+     benchmark/        # frozen protocol, deviations, manifest and results
      regression/       # engineering fixtures, golden checks and throughput
      scripts/          # data/docs generation and documentation checks
-       study/          # evaluation, analysis and study tests
+       benchmark/      # benchmark scoring, verification and preprint tables
 
-Only ``pygarble`` is installed as library code. The optional neural environment
-belongs to ``paper/study/`` and does not add dependencies to the base package.
+Only ``pygarble`` is installed as library code. The benchmark's baselines and
+plotting packages are installed in a separate environment and add no
+dependencies to the base package.
 Measured results and benchmark scope are linked from :doc:`benchmarks`.
 
 Within gibberish analysis, shared features retain token offsets and lexical
 novelty for the selected strategies. Evidence consists of a score, applicability,
 reason and optional spans; the ensemble combines only applicable signals.
 ``analyze()`` records all signals, while ``predict()`` can short-circuit ``any``
-and ``all`` decisions. The paper's CPU comparison measures the full score and
-applicability path, so it should not be presented as a timing guarantee for
-every API call.
+and ``all`` decisions.

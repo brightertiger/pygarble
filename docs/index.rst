@@ -35,16 +35,14 @@ See :doc:`installation` to install the package.
 Research and measured results
 -----------------------------
 
-The pygarble paper describes the modular scoring strategy and compares five
-configurations with a local DistilBERT classifier on a complete published corpus.
-On 5,373 English-comparison chunks, word lookup made no errors and the strict
-neural policy made seven; the default English profile recalled only 28.32% of
-gibberish. These are collection-specific findings, with significant language
-and source-diversity limitations. PII, secret and profanity performance was
-not evaluated by this study.
-
-Read :doc:`benchmarks` for every configuration's accuracy and confusion counts,
-CPU measurements, reproduction commands and sources.
+A preprint measures the gibberish detector on two public English datasets,
+Survey Junk and Tweets vs. Random Strings, against two CPU baselines at
+default settings. The ``english_fusion`` profile captures 89.5% of the survey
+junk and recalls 99.1% of the random strings at a precision of 0.906, from a
+1.05 MB install. A Markov-chain baseline flags fewer tweets, a language
+identifier captures more survey junk, and the default ``english`` profile
+flags 33.2% of tweets. Read :doc:`benchmarks` for every result, the
+limitations and the reproduction commands.
 
 .. toctree::
    :maxdepth: 2
@@ -90,8 +88,7 @@ per-strategy configuration, and abstention behavior.
 Evaluation
 ----------
 
-The :doc:`benchmarks` guide reports the paper's complete published-corpus
-comparison with local DistilBERT and explains its limitations. Fast authored
-regression fixtures remain separate from research results. Run
-``make benchmark-check`` for offline study checks; the full optional neural
-run is documented in the guide.
+The :doc:`benchmarks` guide reports the preprint benchmark and explains its
+limitations. Fast authored regression fixtures remain separate from research
+results. Run ``make benchmark-verify`` to recompute the preprint metrics from
+the committed predictions.
