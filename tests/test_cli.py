@@ -371,7 +371,8 @@ def test_bare_carriage_return_stays_on_one_line(capsys, tmp_path):
     code, out, _ = run(capsys, ["score", str(path)])
     assert code == 0
     assert out.count("\n") == 1
-    assert out.rstrip("\n").split("\t", 1)[1] == "hello\rworld"
+    # Not split into two texts; printed escaped so the row stays one line.
+    assert out.rstrip("\n").split("\t", 1)[1] == "hello\\rworld"
 
 
 def test_field_line_numbers_ignore_bare_carriage_return(capsys, tmp_path):

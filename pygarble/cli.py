@@ -95,6 +95,7 @@ def build_parser() -> argparse.ArgumentParser:
             "--format",
             choices=["text", "tsv", "jsonl"],
             default=default_format,
+            help=_FORMAT_HELP,
         )
         sub.add_argument(
             "--field",
@@ -175,7 +176,10 @@ def build_parser() -> argparse.ArgumentParser:
     )
     add_scan_common(scan_parser)
     scan_parser.add_argument(
-        "--format", choices=["text", "tsv", "jsonl"], default="text"
+        "--format",
+        choices=["text", "tsv", "jsonl"],
+        default="text",
+        help=_FORMAT_HELP,
     )
     scan_parser.add_argument(
         "--show-matches", action="store_true", help="include matched text"
@@ -265,9 +269,26 @@ def analysis_row(text: str, analysis: Any) -> Dict[str, Any]:
     }
 
 
+_FORMAT_HELP = (
+    "text and tsv print a tab, LF or CR inside the text as \\t, \\n or \\r; "
+    "jsonl is lossless"
+)
+_ROW_ESCAPES = str.maketrans({"\t": "\\t", "\n": "\\n", "\r": "\\r"})
+
+
+def escape_text(text: str) -> str:
+    """Keep one text on one row: tab, LF and CR become \\t, \\n and \\r.
+
+    Backslashes are left alone, so the text column of text and TSV output
+    is not reversible; JSONL is the lossless format.
+    """
+    return text.translate(_ROW_ESCAPES)
+
+
 def format_row(command: str, fmt: str, text: str, analysis: Any) -> str:
     if fmt == "jsonl":
         return json.dumps(analysis_row(text, analysis), ensure_ascii=False)
+    text = escape_text(text)
     if fmt == "tsv":
         return "\t".join(
             [
@@ -448,6 +469,7 @@ def format_scan(
         if f.confidence >= min_confidence or f.category == "gibberish"
     ]
     kinds = ",".join(sorted({f.kind for f in shown}))
+    text = escape_text(text)
     if fmt == "text":
         label = "flagged" if report.flagged else "clean"
         return f"{label}\t{kinds}\t{text}"

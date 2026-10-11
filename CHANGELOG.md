@@ -73,6 +73,12 @@ All notable changes to pygarble are documented here. The format follows
   set.
 - NHS/phone overlap filtering now uses a sorted sweep rather than a pairwise
   search, keeping dense PII documents from causing quadratic work.
+- `pygarble check`, `score` and `scan` text and TSV rows print a tab, line
+  feed or carriage return inside the text as `\t`, `\n` or `\r`, so one
+  text is always one row with a fixed column count. JSONL is unchanged and
+  is the lossless format.
+- `pygarble-screen scan ... | head` exits 0 when the reader closes the pipe
+  instead of reporting a failed scan with exit code 2.
 
 ### Changed
 - CI tests Python 3.13, pins every action to a commit SHA, and keeps jobs
