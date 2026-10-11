@@ -46,4 +46,14 @@ open. Each is also stated in `protocol.md` where it affects the protocol.
   at both cuts). Fitted cuts and dev FPR are stored with each operating
   point.
 
+- **2026-10-11: benchmark narrowed to default decisions.** At the
+  maintainer's direction, the matched-FPR operating points (cuts at 1 and
+  0.1 percent FPR on B dev tweets), the 30/70 development/test split of B,
+  the checkpoint and its override, the calibration run, AUROC and the
+  precision-recall curves computed in PR 18 were removed from the
+  benchmark. They remain only in git history (merge commit `b968953`). B is
+  now scored whole at each method's default decision. The entries above
+  on the checkpoint, the cut ties and the calibration positives describe
+  that removed machinery and are kept as a record.
+
 No baseline was dropped.

@@ -5,30 +5,19 @@ import unittest
 
 import numpy as np
 
-from . import calibrate, data, footprint, metrics, rules, verify
+from . import data, footprint, metrics, rules, verify
 from .methods import specs
 
 
 class DataTests(unittest.TestCase):
-    def test_split_is_deterministic_stratified_and_matches_manifest(
-        self,
-    ) -> None:
-        rows = [
-            data.Row(f"train:{i}", "x", int(i % 5 < 2)) for i in range(100)
-        ]
-        dev, test = data.split_b(rows)
-        self.assertEqual((dev, test), data.split_b(rows))
-        self.assertNotEqual(dev, data.split_b(rows, seed=1)[0])
-        self.assertEqual(len(dev), 30)
-        self.assertEqual(sum(int(i.split(":")[1]) % 5 < 2 for i in dev), 12)
-        self.assertFalse(set(dev) & set(test))
+    def test_manifest_lists_all_of_b_in_file_order(self) -> None:
         manifest = json.loads(data.MANIFEST.read_text())
-        labels = manifest["B_labels"]
-        saved = [data.Row(i, "", labels[i]) for i in labels]
-        self.assertEqual(
-            data.split_b(saved),
-            (manifest["B_dev_ids"], manifest["B_test_ids"]),
-        )
+        ids = manifest["B_ids"]
+        self.assertEqual(ids, list(manifest["B_labels"]))
+        self.assertEqual(ids, sorted(ids, key=data._order))
+        counts = manifest["counts"]
+        self.assertEqual((counts["A"], counts["B"]), (3513, 9971))
+        self.assertEqual(sum(manifest["B_labels"].values()), 4000)
 
 
 class MethodTests(unittest.TestCase):
@@ -47,40 +36,29 @@ class MethodTests(unittest.TestCase):
 
 
 class RunTests(unittest.TestCase):
-    def test_metrics_on_a_perfect_separator(self) -> None:
-        dev = [f"train:{i}" for i in range(200)]
-        test = [f"test:{i}" for i in range(100)]
-        labels = {i: int(n % 2) for n, i in enumerate(dev + test)}
-        manifest = {
-            "A_ids": ["a:0", "a:1"],
-            "B_dev_ids": dev,
-            "B_test_ids": test,
-            "B_labels": labels,
-        }
-
-        def part(ids: list) -> tuple:
-            y = np.array([labels.get(i, 1) for i in ids])
-            return y + 0.001 * np.arange(len(ids)), y == 1
-
+    def test_metrics_at_the_default_decision(self) -> None:
+        ids = [f"train:{i}" for i in range(100)]
+        labels = {i: int(n % 2) for n, i in enumerate(ids)}
+        manifest = {"A_ids": ["a:0", "a:1"], "B_ids": ids, "B_labels": labels}
+        flags = np.array([labels[i] == 1 for i in ids])
+        flags[0] = True  # one false positive among 50 tweets
         predictions = {
             "english_fusion": {
-                "A": part(manifest["A_ids"]),
-                "B_dev": part(dev),
-                "B_test": part(test),
+                "A": (np.zeros(2), np.array([True, False])),
+                "B": (flags.astype(float), flags),
             }
         }
-        result, curves = metrics.compute(
+        result = metrics.compute(
             manifest, predictions, {"english_fusion": "profile"}
         )
         method = result["methods"]["english_fusion"]
-        self.assertEqual(method["auroc"]["value"], 1.0)
-        self.assertEqual(method["points"]["fpr1"]["dev_fpr"], 0.01)
-        self.assertTrue(method["points"]["fpr1"]["reachable"])
-        point = method["points"]["fpr0.1"]
-        self.assertEqual(point["B_precision"]["value"], 1.0)
-        self.assertEqual(point["A_capture"]["value"], 1.0)
-        self.assertTrue(result["checkpoint"]["passed"])
-        self.assertEqual(curves["english_fusion"][-1][2], 1.0)
+        self.assertEqual(method["A_capture"]["value"], 0.5)
+        self.assertEqual(method["B_recall"]["value"], 1.0)
+        self.assertEqual(method["B_fpr"]["value"], 0.02)
+        self.assertEqual(method["B_precision"]["value"], round(50 / 51, 6))
+        low, high = method["B_fpr"]["ci"]
+        self.assertLessEqual(low, 0.02)
+        self.assertGreaterEqual(high, 0.02)
 
 
 class VerifyTests(unittest.TestCase):
@@ -101,19 +79,6 @@ class FootprintTests(unittest.TestCase):
         self.assertEqual(len(runs), 2)
         size = footprint.install_bytes("english", ("pygarble",), data.OUTPUT)
         self.assertGreater(size, 100_000)
-
-
-class CalibrateTests(unittest.TestCase):
-    def test_threshold_meets_target_on_calibration_sample(self) -> None:
-        sample = {
-            "clean": ["the meeting moved to friday afternoon"] * 50,
-            "garbled": ["qwkjzx vbnmrt plokij"] * 50,
-        }
-        result = calibrate.calibrate_profile("english_fusion", sample)
-        self.assertTrue(result["constraint_met"])
-        self.assertEqual(result["dev_recall"], 1.0)
-        detector = result["detector"]
-        self.assertEqual(detector.predict(sample["garbled"][:1]), [True])
 
 
 if __name__ == "__main__":

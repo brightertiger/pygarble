@@ -1,6 +1,6 @@
 """Speed, import time, install size and offline use for every method.
 
-Speed: the native decision call over all B test texts, one warm-up and five
+Speed: the default decision call over all B texts, one warm-up and five
 timed runs in this process on one thread; median, in ms per 1,000 texts.
 """
 
@@ -135,7 +135,7 @@ def main() -> None:
     parser.add_argument("--data-root", type=Path, default=data.DEFAULT_ROOT)
     parser.add_argument("--methods", nargs="*")
     args = parser.parse_args()
-    texts = [row.text for row in data.load(args.data_root)["B_test"]]
+    texts = [row.text for row in data.load(args.data_root)["B"]]
     every = specs(args.data_root)
     imports: Dict[str, float] = {}
     out = {}

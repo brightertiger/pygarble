@@ -1,4 +1,4 @@
-"""Recompute metrics.json and pr_curves.json from predictions and manifest.
+"""Recompute metrics.json from the saved predictions and the manifest.
 
 Exits non-zero on any mismatch. Needs numpy but neither the raw data nor
 the baselines.
@@ -33,27 +33,19 @@ def differences(saved: Any, fresh: Any, path: str = "") -> List[str]:
 def check() -> List[str]:
     manifest = json.loads(data.MANIFEST.read_text())
     saved = json.loads((metrics.RESULTS / "metrics.json").read_text())
-    curves = json.loads((metrics.RESULTS / "pr_curves.json").read_text())
-    gate = json.loads((metrics.RESULTS / "checkpoint.json").read_text())
     families = {n: m["family"] for n, m in saved["methods"].items()}
-    files = {
-        path.stem
-        for part in metrics.SETS
-        for path in (metrics.PREDICTIONS / part).glob("*.csv")
-    }
     problems = []
-    if files != set(families):
-        problems.append("prediction files and metrics.json methods differ")
-    fresh, fresh_curves = metrics.compute(
+    for part in metrics.SETS:
+        files = {p.stem for p in (metrics.PREDICTIONS / part).glob("*.csv")}
+        if files != set(families):
+            problems.append(f"{part} prediction files and methods differ")
+    stray = {p.name for p in metrics.PREDICTIONS.iterdir()} - set(metrics.SETS)
+    if stray:
+        problems.append(f"unexpected prediction folders: {sorted(stray)}")
+    fresh = metrics.compute(
         manifest, metrics.load_all(manifest, list(families)), families
     )
-    fresh, fresh_curves = json.loads(json.dumps(fresh)), json.loads(
-        json.dumps(fresh_curves)
-    )
-    problems += differences(saved, fresh, "metrics")
-    problems += differences(curves, fresh_curves, "pr_curves")
-    gate.pop("override", None)
-    problems += differences(gate, fresh["checkpoint"], "checkpoint")
+    problems += differences(saved, json.loads(json.dumps(fresh)), "metrics")
     return problems
 
 
@@ -64,7 +56,7 @@ def main() -> int:
     if problems:
         print(f"verify: {len(problems)} mismatches")
         return 1
-    print("verify: metrics.json and pr_curves.json match the predictions")
+    print("verify: metrics.json matches the predictions")
     return 0
 
 
