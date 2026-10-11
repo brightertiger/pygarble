@@ -516,7 +516,8 @@ def tuning_table(tuning: Dict[str, Any]) -> str:
     lines += [line + r"[2pt]" for line in body(point)]
     lines += [
         r"\midrule",
-        r"\multicolumn{5}{@{}l}{\emph{Mean $\pm$ sample standard deviation over "
+        r"\multicolumn{5}{@{}l}{\emph{Mean $\pm$ sample standard "
+        + r"deviation over "
         + draws
         + r" draws}} \\",
     ]
@@ -663,9 +664,9 @@ def tuning_macros(
     )["methods"]["tuned"]
     # The bottom groups are found from the smallest weight up, then listed
     # from the larger weight down like the top ones.
-    bottom = weight_groups(
-        sorted(order, key=lambda n: (mean[n], n)), mean, 3
-    )[::-1]
+    bottom = weight_groups(sorted(order, key=lambda n: (mean[n], n)), mean, 3)[
+        ::-1
+    ]
     values = {
         "tuningdraws": spelled(len(draws)),
         "tuningtrials": f"{weights['trials']:,}",
