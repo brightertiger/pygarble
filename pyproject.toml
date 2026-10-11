@@ -13,6 +13,7 @@ requires-python = ">=3.8"
 license = {text = "MIT"}
 authors = [
     {name = "Ujjwal Singh Rao", email = "ujjwalsrao@gmail.com"},
+    {name = "Ricky Singh", email = "rickragv@gmail.com"},
 ]
 keywords = ["garble", "text", "detection", "nlp", "english", "gibberish", "text-validation", "pii", "secrets", "profanity", "redaction", "guardrails", "llm"]
 classifiers = [
