@@ -1,7 +1,9 @@
 """Discovery metadata and indexes for the published HTML documentation."""
 
+import datetime
 import json
 import os
+import subprocess
 from pathlib import Path
 from typing import Any, Dict, Optional
 from urllib.parse import urljoin
@@ -72,9 +74,6 @@ def page_context(
     context["google_site_verification"] = os.environ.get(
         "GOOGLE_SITE_VERIFICATION", ""
     )
-    context["google_analytics_key"] = os.environ.get(
-        "GOOGLE_ANALYTICS_KEY", ""
-    )
     context["pageurl"] = page_url(app, name)
     if name == "index":
         # Describe source code, without promising search-engine rich results
@@ -93,6 +92,25 @@ def page_context(
                 "sameAs": ["https://pypi.org/project/pygarble/"],
             }
         ).replace("<", "\\u003c")
+
+
+def last_modified(app: Any, name: str) -> str:
+    """Return the source file's last commit date, else today's date."""
+    source = Path(app.env.doc2path(name))
+    try:
+        result = subprocess.run(
+            ["git", "log", "-1", "--format=%cs", "--", source.name],
+            cwd=str(source.parent),
+            capture_output=True,
+            text=True,
+            timeout=30,
+            check=True,
+        )
+        stamp = result.stdout.strip()
+    except (OSError, subprocess.SubprocessError):
+        stamp = ""
+    # Uncommitted pages and builds outside a git checkout use the build date.
+    return stamp or datetime.date.today().isoformat()
 
 
 def build_indexes(app: Any, exception: Optional[Exception]) -> None:
@@ -120,6 +138,9 @@ def build_indexes(app: Any, exception: Optional[Exception]) -> None:
         url = page_url(app, name)
         entry = ET.SubElement(root, "{" + namespace + "}url")
         ET.SubElement(entry, "{" + namespace + "}loc").text = url
+        ET.SubElement(entry, "{" + namespace + "}lastmod").text = (
+            last_modified(app, name)
+        )
         title = app.env.titles[name].astext()
         links.append(f"- [{title}]({url}): {DESCRIPTIONS.get(name, title)}")
     links.extend(
@@ -147,11 +168,24 @@ def build_indexes(app: Any, exception: Optional[Exception]) -> None:
         str(output / "sitemap.xml"), encoding="utf-8", xml_declaration=True
     )
     (output / "llms.txt").write_text("\n".join(links) + "\n", encoding="utf-8")
+    # Served at /pygarble/robots.txt. Crawlers only honour the host-root
+    # file, so this is advisory; it mirrors the thereabouts site.
+    robots = [
+        "User-agent: *",
+        "Allow: /",
+        "Sitemap: " + urljoin(app.config.html_baseurl, "sitemap.xml"),
+    ]
+    (output / "robots.txt").write_text(
+        "\n".join(robots) + "\n", encoding="utf-8"
+    )
 
 
 def setup(app: Any) -> Dict[str, Any]:
     app.connect("html-page-context", page_context)
-    app.connect("build-finished", build_indexes)
+    # Run after the theme (default priority 500): sphinx-immaterial writes its
+    # own sitemap.xml when site_url is set, listing generated pages such as
+    # genindex and search; this one lists authored pages only and must win.
+    app.connect("build-finished", build_indexes, priority=900)
     return {
         "version": "1",
         "parallel_read_safe": True,

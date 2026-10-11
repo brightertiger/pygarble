@@ -73,6 +73,9 @@ report those skips rather than treating them as executed checks. CI tests
 all backends on Python 3.8 and 3.12, including a pinned Gitleaks executable.
 Keep backend imports optional and do not add inference-time network calls.
 
+The documentation uses the sphinx-immaterial theme, so build it on Python
+3.10 or newer (CI uses 3.12). Its captioned toctrees in ``docs/index.rst``
+become the navigation tabs.
 For documentation changes, build with Sphinx warnings treated as errors,
 check local links, and execute the affected Python examples. Optional-backend
 examples need their dependencies installed. Mark unreleased features clearly

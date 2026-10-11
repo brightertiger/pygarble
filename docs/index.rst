@@ -69,9 +69,16 @@ library.
 
 The preprint entry will be updated with a DOI once it is posted.
 
+.. The captions below become the navigation tabs of the Material theme.
+
+.. toctree::
+   :hidden:
+
+   Home <self>
+
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Screening
 
    installation
    quickstart
@@ -81,14 +88,29 @@ The preprint entry will be updated with a DOI once it is posted.
    profanity
    cli
    screening
+   examples
+   migration
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Gibberish
+
    strategy-guide
    strategies
    calibration
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Reference
+
    api
-   examples
-   migration
    architecture
    benchmarks
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Maintainers
+
    contributing
    publishing
 

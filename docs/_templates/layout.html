@@ -1,6 +1,10 @@
 {% extends "!layout.html" %}
 {% block extrahead %}
   {{ super() }}
+  {#- sphinx-immaterial never fills page.canonical_url, so emit it here. #}
+  {% if pageurl %}
+  <link rel="canonical" href="{{ pageurl|e }}" />
+  {% endif %}
   {% if discovery_indexable %}
   <meta name="description" content="{{ discovery_description|e }}" />
   <meta property="og:type" content="website" />
@@ -14,15 +18,6 @@
   {% endif %}
   {% if pagename == 'index' and google_site_verification %}
   <meta name="google-site-verification" content="{{ google_site_verification|e }}" />
-  {% endif %}
-  {% if google_analytics_key and discovery_indexable %}
-  <script async src="https://www.googletagmanager.com/gtag/js?id={{ google_analytics_key|urlencode }}"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', '{{ google_analytics_key|e }}');
-  </script>
   {% endif %}
   {% if discovery_schema %}
   <script type="application/ld+json">{{ discovery_schema|safe }}</script>

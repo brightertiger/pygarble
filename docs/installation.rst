@@ -83,7 +83,8 @@ Development tools
 -----------------
 
 The ``dev`` extra installs test, formatting, lint, and typing tools. The
-``docs`` extra installs Sphinx and the documentation theme.
+``docs`` extra installs Sphinx and the sphinx-immaterial theme. The theme
+needs Python 3.10 or newer; the documentation is built on Python 3.12.
 Neither is required to use the package. ``requirements-dev.txt`` also
 includes documentation dependencies for the repository's full CI setup.
 
