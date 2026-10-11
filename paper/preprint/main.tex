@@ -59,17 +59,17 @@ decision. Out of the box, the \code{english\_fusion} profile captures
 \respct{english_fusion}{B_recall}\,\% of the random strings at a precision
 of \res{english_fusion}{B_precision}, from a \mb{english_fusion}\,MB
 install that processes a thousand short texts in \ms{english_fusion}\,ms;
-neither baseline matches it on both datasets at once. With a small
+neither baseline beats it on both datasets at once. With a small
 labelled sample, pygarble does better still: a weight for every strategy
 and a threshold learned with Optuna from \tuningpct\,\% of the rows, in
-about \tuningseconds{} seconds of search, holds capture and recall at the
-profile's level on the held-out \heldoutpct\,\% while cutting the
+about \tuningseconds{} seconds of search, keeps capture and recall within about a point of the
+profile's on the held-out \heldoutpct\,\% while cutting the
 false-positive rate on tweets from \tmeanpct{english_fusion}{B_fpr}\,\% to
 \tmeanpct{tuned}{B_fpr}\,\% and raising precision from
 \tmean{english_fusion}{B_precision} to \tmean{tuned}{B_precision} (means
 over \tuningdraws{} samples). The learned weights are interpretable: the
-dictionary and character-model strategies carry the ensemble, and the
-encoding checks that this dataset labels as clean are switched off. A
+word-lookup and n-gram strategies get the largest weights, and the
+encoding checks that this dataset labels as clean get almost none. A
 dependency-free rule ensemble is therefore competitive on real junk as
 shipped and adapts to a domain in seconds, with every decision
 explainable strategy by strategy. Code, per-row predictions and a
@@ -125,7 +125,7 @@ The contributions are:
   recall, false-positive rate, speed and install size.
 \item A tuning study showing that a weight per strategy and a threshold,
   learned with Optuna from \tuningpct\,\% of the rows in seconds, keep
-  the profile's capture and recall on the held-out \heldoutpct\,\% while
+  capture and recall within about a point of the profile's on the held-out \heldoutpct\,\% while
   lowering the false-positive rate and raising precision, with the learned
   weights reported in full; it is evaluated against the two profiles on
   identical rows and reported separately from the main results.
@@ -532,7 +532,7 @@ three run offline once installed. Timings depend on the machine.
 pygarble's \code{english\_fusion} profile captures about nine in ten real
 survey junk responses and nearly every random string while flagging about
 one tweet in fifteen, from a one-megabyte install with no dependencies.
-Neither baseline matches it on both datasets at once: the Markov baseline
+Neither baseline beats it on both datasets at once: the Markov baseline
 flags far fewer tweets but misses more than a quarter of the survey junk,
 and lingua captures almost all junk but flags more tweets and needs a
 three-hundred-megabyte install. Second, the ensemble is tunable from a
@@ -540,12 +540,14 @@ small labelled sample in seconds. The learned weights keep capture
 (\trespct{tuned}{A_capture}\,\% against
 \trespct{english_fusion}{A_capture}\,\% on the primary draw) and recall
 (\trespct{tuned}{B_recall}\,\% against
-\trespct{english_fusion}{B_recall}\,\%) at the profile's level and lower
-the tweet false-positive rate from \tmeanpct{english_fusion}{B_fpr}\,\% to
-\tmeanpct{tuned}{B_fpr}\,\% on average, the lowest of any pygarble
-configuration in this paper. The weights also explain the result:
-\tuningtop{} do the work, and \tuningbottom{} are switched off because the
-dataset labels encoding damage as clean. A user who disagrees with that
+\trespct{english_fusion}{B_recall}\,\%) within about a point of the
+profile's, as means, and lower the tweet false-positive rate from
+\tmeanpct{english_fusion}{B_fpr}\,\% to \tmeanpct{tuned}{B_fpr}\,\% on
+average, below the profile's in each of the five draws, although the
+draws vary and the primary-draw intervals nearly touch. The weights also explain the result:
+\tuningtop{} get the largest mean weights, and \tuningbottom{} get little
+or none; for the two encoding checks that fits the dataset labelling
+encoding damage as clean. A user who disagrees with that
 labelling turns those checks back on; nothing is hidden inside a model.
 
 \paragraph{Where pygarble is beaten.} The Markov baseline has the lowest
@@ -563,8 +565,8 @@ labelled data, use \code{english\_fusion}; add a minimum-length rule if
 one- and two-character answers count as junk. With a labelled sample of
 the target domain (the study used \nTune{} rows), learn a weight per
 strategy and a threshold as in Section~\ref{sec:tuning}: it takes seconds,
-needs no model, and gave the lowest false-positive rate of any pygarble
-configuration here. Without labels, start from a profile and remove the
+needs no model, and gave a lower false-positive rate than
+\code{english\_fusion} in every draw. Without labels, start from a profile and remove the
 strategies whose target the domain does not treat as junk. When false positives are costly,
 prefer the Markov baseline at default settings, or measure a threshold on
 labelled rows of your own data. For multilingual input, route by language
