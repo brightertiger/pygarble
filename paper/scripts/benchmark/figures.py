@@ -33,8 +33,7 @@ LABELS = {
     "english_fusion": r"pygarble english\_fusion",
     "gibberish_detector": "gibberish-detector",
     "lingua": "lingua (not English)",
-    "english_tuned": "pygarble english, tuned "
-    "(no mojibake, no control characters)",
+    "english_tuned": "pygarble english, tuned",
 }
 PLAIN = {
     "english": "pygarble english (default)",
@@ -172,7 +171,8 @@ def results_table(methods: Dict[str, Any]) -> str:
         lines.append(LABELS[name] + " & " + " & ".join(cells) + r" \\")
     lines += [
         r"\midrule",
-        r"\multicolumn{5}{l}{\emph{Post hoc, domain-specific tuning}} \\",
+        r"\multicolumn{5}{l}{\emph{Post hoc, domain-specific tuning: "
+        r"english without mojibake and control characters}} \\",
     ]
     for name in TUNED:
         cells = [with_ci(methods[name][k]) for k in METRICS]
