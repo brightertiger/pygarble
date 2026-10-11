@@ -177,10 +177,13 @@ class EnsembleDetector:
                 if default_set
                 else ""
             )
+            counted = (
+                f"{len(weights)} weight{'s' * (len(weights) != 1)} for "
+                f"{len(members)} strateg{'ies' if len(members) != 1 else 'y'}"
+            )
             raise ValueError(
                 "weights must have same length as strategies "
-                f"(got {len(weights)} weights for {len(members)} "
-                f"strategies{hint})"
+                f"(got {counted}{hint})"
             )
         self.weights = [
             finite_number("weights", weight)
