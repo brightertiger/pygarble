@@ -1,0 +1,38 @@
+\begin{tabular}{lrrrrr}
+\toprule
+Strategy & A capture & B precision & B recall & B FPR & ms per 1,000 \\
+\midrule
+word\_lookup & 0.941 & 0.940 & 1.000 & 0.043 & 7.4 \\
+markov\_chain & 0.801 & 0.781 & 0.947 & 0.178 & 30.9 \\
+ngram\_frequency & 0.769 & 0.925 & 0.861 & 0.047 & 32.4 \\
+pronounceability & 0.649 & 0.912 & 0.745 & 0.048 & 32.9 \\
+log\_likelihood\_ratio & 0.624 & 0.999 & 0.725 & 0.000 & 36.4 \\
+vowel\_ratio & 0.593 & 0.952 & 0.388 & 0.013 & 27.8 \\
+word\_anomaly & 0.579 & 0.995 & 0.580 & 0.002 & 30.7 \\
+pattern\_matching & 0.573 & 0.930 & 0.476 & 0.024 & 45.3 \\
+cross\_parsing & 0.569 & 0.933 & 0.560 & 0.027 & 37.5 \\
+ngram\_rank & 0.565 & 0.938 & 0.490 & 0.022 & 90.8 \\
+keyboard\_pattern & 0.367 & 0.131 & 0.008 & 0.036 & 32.8 \\
+consonant\_sequence & 0.365 & 0.984 & 0.190 & 0.002 & 7.9 \\
+permutation\_test & 0.345 & 0.914 & 0.178 & 0.011 & 152.3 \\
+keyboard\_adjacency & 0.320 & 0.388 & 0.006 & 0.007 & 12.9 \\
+primed\_compression & 0.270 & 0.970 & 0.404 & 0.008 & 65.5 \\
+entropy\_based & 0.259 & 0.986 & 0.054 & 0.001 & 24.2 \\
+local\_anomaly & 0.207 & 0.989 & 0.110 & 0.001 & 31.6 \\
+letter\_position & 0.191 & 0.544 & 0.022 & 0.012 & 29.1 \\
+letter\_frequency & 0.179 & 0.000 & 0.000 & 0.010 & 29.6 \\
+repetition & 0.119 & 0.000 & 0.000 & 0.015 & 17.1 \\
+bigram\_probability & 0.092 & 1.000 & 0.153 & 0.000 & 13.5 \\
+rare\_trigram & 0.020 & 1.000 & 0.019 & 0.000 & 9.5 \\
+function\_word\_density & 0.019 & 0.000 & 0.000 & 0.029 & 6.1 \\
+vowel\_pattern & 0.012 & 0.105 & 0.001 & 0.006 & 7.1 \\
+word\_collocation & 0.008 & 0.000 & 0.000 & 0.039 & 8.2 \\
+hex\_string & 0.008 & 0.000 & 0.000 & 0.008 & 6.8 \\
+symbol\_ratio & 0.002 & 0.000 & 0.000 & 0.002 & 4.6 \\
+affix\_detection & 0.002 & n/a & 0.000 & 0.000 & 22.5 \\
+control\_characters & 0.000 & 0.000 & 0.000 & 0.284 & 8.3 \\
+mojibake & 0.000 & 0.000 & 0.000 & 0.094 & 7.3 \\
+unicode\_script & 0.000 & n/a & 0.000 & 0.000 & 34.2 \\
+zipf\_conformity & 0.000 & n/a & 0.000 & 0.000 & 3.2 \\
+\bottomrule
+\end{tabular}

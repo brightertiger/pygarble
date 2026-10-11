@@ -6,3 +6,5 @@ nostril @ git+https://github.com/casics/nostril.git@fbc0c91249283a9fbc9036206391
 gibberish-detector==0.1.1
 gibberish-chat-detector==0.1.2
 lingua-language-detector==2.2.0
+# Figures for the preprint (make preprint).
+matplotlib==3.10.8

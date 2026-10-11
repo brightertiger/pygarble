@@ -1,6 +1,6 @@
 PYTHON ?= python
 
-.PHONY: benchmark benchmark-check benchmark-prepare benchmark-verify help install install-dev test lint format clean build upload-test upload docs docs-clean docs-serve docs-deploy
+.PHONY: benchmark benchmark-check benchmark-prepare benchmark-verify preprint help install install-dev test lint format clean build upload-test upload docs docs-clean docs-serve docs-deploy
 
 help:
 	@echo "Available commands:"
@@ -8,6 +8,7 @@ help:
 	@echo "  benchmark-prepare Download pinned research corpus/model assets"
 	@echo "  benchmark         Run the full paper comparison to reproduction-full/"
 	@echo "  benchmark-verify  Recompute preprint benchmark metrics from saved predictions"
+	@echo "  preprint          Regenerate preprint figures and tables, build main.pdf"
 	@echo "  install      Install the package"
 	@echo "  install-dev  Install development dependencies"
 	@echo "  test         Run tests"
@@ -88,3 +89,9 @@ benchmark:
 benchmark-verify:
 	$(PYTHON) -m paper.scripts.benchmark.verify
 	$(PYTHON) -m unittest paper.scripts.benchmark.test_benchmark
+
+# Needs matplotlib (paper/scripts/benchmark/requirements.txt) and tectonic.
+TECTONIC ?= tectonic
+preprint:
+	$(PYTHON) -m paper.scripts.benchmark.figures
+	cd paper/preprint && $(TECTONIC) main.tex
