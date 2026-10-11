@@ -147,8 +147,6 @@ class Scanner(ScanEngine):
                 f"unknown kind: {', '.join(bad)}; "
                 f"valid: {', '.join(sorted(universe))}"
             )
-        self._kinds = wanted
-        self._exclude = excluded
         self._detectors: List[Detector] = []
         from .screening.pii import locale_kinds
 
