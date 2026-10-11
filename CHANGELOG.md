@@ -79,6 +79,12 @@ All notable changes to pygarble are documented here. The format follows
   is the lossless format.
 - `pygarble-screen scan ... | head` exits 0 when the reader closes the pipe
   instead of reporting a failed scan with exit code 2.
+- The `pronounceability` strategy is linear in the length of a long
+  consonant run (it was quadratic: about 10 s for one 1M-character token).
+  Scores are unchanged.
+- `calibrate` sorts the scores once and counts each candidate threshold by
+  bisection, so it is O(N log N) instead of O(N^2) in the sample size.
+  Reports are unchanged.
 
 ### Changed
 - CI tests Python 3.13, pins every action to a commit SHA, and keeps jobs

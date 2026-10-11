@@ -1,5 +1,6 @@
 """Pick a decision threshold from labeled examples."""
 
+from bisect import bisect_left
 from dataclasses import dataclass, replace
 from typing import Any, Iterable, List, Optional, Sequence, Tuple
 
@@ -28,8 +29,9 @@ class CalibrationReport:
 def _point(
     threshold: float, garbled: Sequence[float], clean: Sequence[float]
 ) -> ThresholdPoint:
-    tp = sum(1 for s in garbled if s >= threshold)
-    fp = sum(1 for s in clean if s >= threshold)
+    """Metrics at one cut; garbled and clean must be sorted ascending."""
+    tp = len(garbled) - bisect_left(garbled, threshold)
+    fp = len(clean) - bisect_left(clean, threshold)
     precision = tp / (tp + fp) if tp + fp else 1.0
     recall = tp / len(garbled)
     f1 = (
@@ -91,8 +93,9 @@ def calibrate(
         limit = unit_interval(
             "max_false_positive_rate", max_false_positive_rate
         )
-    garbled_scores: List[float] = list(detector.score(garbled_texts))
-    clean_scores: List[float] = list(detector.score(clean_texts))
+    # Sorted once so each candidate cut is counted by bisection.
+    garbled_scores: List[float] = sorted(detector.score(garbled_texts))
+    clean_scores: List[float] = sorted(detector.score(clean_texts))
     if thresholds is None:
         candidates = sorted(
             set(garbled_scores) | set(clean_scores) | {0.0, 1.0}
