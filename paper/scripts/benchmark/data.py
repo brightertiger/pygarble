@@ -9,6 +9,7 @@ import csv
 import hashlib
 import io
 import json
+import statistics
 from pathlib import Path
 from typing import Dict, List, NamedTuple, Tuple
 
@@ -122,6 +123,14 @@ def build_manifest(root: Path = DEFAULT_ROOT) -> Dict:
     labels = {row.id: row.label for row in b_rows}
     texts = {row.id: row.text for row in b_rows}
     tweets = [row.text for row in b_rows if row.label == 0]
+    languages = set()
+    for split in B_SPLITS:
+        path = root / "hf-sowmya15" / f"{split}.csv"
+        with path.open(newline="", encoding="utf-8") as handle:
+            languages.update(
+                record["language"].strip().lower()
+                for record in csv.DictReader(handle)
+            )
     sources = json.loads(json.dumps(SOURCES))
     sources["A"]["rows_in_file"] = 3767
     sources["A"]["kept"] = len(a_rows)
@@ -144,6 +153,11 @@ def build_manifest(root: Path = DEFAULT_ROOT) -> Dict:
             ),
             "B_mojibake_signatures": ["U+00F0 0x9F", "U+00E2 0x80", "U+00C3"],
             "B_duplicate_text_rows": len(b_rows) - len(set(texts.values())),
+            "A_median_chars": statistics.median(len(r.text) for r in a_rows),
+            "A_single_token_fraction": round(
+                sum(len(r.text.split()) == 1 for r in a_rows) / len(a_rows), 4
+            ),
+            "B_languages": len(languages),
         },
         "A_ids": [row.id for row in a_rows],
         "B_ids": sorted(labels, key=_order),

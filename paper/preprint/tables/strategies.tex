@@ -28,7 +28,7 @@ URLs and numbers.}
 \stratrow{entropy\_based}{}{Blend of low Shannon entropy of the letters (40\%) and low mean English bigram log-probability (60\%); fires when the blend reaches 0.5, as on repetitive or improbable letter strings.}
 \stratrow{consonant\_sequence}{}{Longest run of consonants inside a word, with \emph{y} counted as a vowel and short all-capital acronyms skipped; fires on a run of seven or more.}
 \stratrow{letter\_frequency}{}{Chi-squared distance of the letters of non-dictionary words from English letter frequencies, plus rare-letter excess, missing common letters and one dominant letter; fires at a per-letter distance of 2 or two extreme signs.}
-\stratrow{vowel\_pattern}{}{Runs of consecutive vowels within words; fires on a run of five or more vowels that is not on a short list of valid English runs such as \emph{ueue}.}
+\stratrow{vowel\_pattern}{}{Runs of consecutive vowels within words; fires on a run of five or more vowels that is not on a short list of valid long runs such as \emph{ueuei}.}
 \stratrow{symbol\_ratio}{}{Share of non-space characters that are neither letters nor digits, after collapsing runs of one repeated symbol such as rulers; fires when symbols are more than half of the text.}
 \stratrow{letter\_position}{}{Non-dictionary, non-capitalised words that end in a letter English words never end in or start with a pair English words never start with; fires when a quarter of these checks fail across two or more violations or words.}
 \stratrow{pronounceability}{}{English phonotactics of non-dictionary, non-capitalised words of four or more letters; fires on two forbidden consonant clusters at word edges, mostly invalid word-initial clusters, or almost no vowels.}
@@ -57,7 +57,7 @@ URLs and numbers.}
 \strathead
 \stratfamily{Structure and pattern checks}
 \stratrow{repetition}{}{Runs of one repeated letter, repeated two- or three-character units, one word dominating the text or a repeating cycle of words, and low character diversity; fires, for example, on a letter repeated five times.}
-\stratrow{keyboard\_pattern}{}{Letter trigrams of non-dictionary words that follow keyboard sequences, a shortage of common English trigrams, and a two-letter unit repeated three times inside one word; fires when keyboard trigrams reach 15\% or on the repeated unit.}
+\stratrow{keyboard\_pattern}{}{Letter trigrams of non-dictionary words that follow keyboard sequences, a shortage of common English trigrams, and a two-letter unit repeated three times inside one word; fires when keyboard trigrams reach 15\%, on the repeated unit, or when a text of twenty or more trigrams has almost none of the common English trigrams.}
 \stratrow{keyboard\_adjacency}{E}{Chains of physically adjacent QWERTY keys within words; fires when a word of five or more characters is a straight row walk, or a non-dictionary word has a six-key adjacent chain covering at least 60\% of it, or six same-row keys with at most one vowel.}
 \stratrow{hex\_string}{}{Hexadecimal and encoded data; fires when the whole text is an MD5 or SHA-256 hash, a base64-like string or a UUID, on a run of sixteen or more hex digits including a letter, or on a long token that is mostly hex digits.}
 \stratrow{pattern\_matching}{}{Built-in regular expressions (a letter four or more times in a row, five-key keyboard-row walks, five consonants in a row in a non-dictionary word, alternating letter pairs) plus optional user patterns; fires on any of these, while runs of symbols, capitals or digits only add weight.}
@@ -66,10 +66,10 @@ URLs and numbers.}
 \stratrow{mojibake}{E}{Signatures of text decoded with the wrong encoding; fires on a replacement character U+FFFD, a known sequence such as \~{A}\textcopyright{} or \^{a}\texteuro\texttrademark, double encoding, or a dense run of such byte pairs.}
 \stratrow{control\_characters}{E}{Raw control characters other than tab, carriage return and newline, lone surrogates, U+FFFD, and runs of more than eight combining marks; fires on any one of them.}
 \stratrow{unicode\_script}{}{Mixing of Unicode scripts; fires on any word of three or more letters that mixes two of the Latin, Cyrillic and Greek scripts, as homoglyph spoofing does, or on text that uses more than two scripts.}
-\stratfamily{English-reference window statistics (each fires only when its median over windows of up to 127 characters lies well beyond the 99th percentile of synthetic English of the same length)}
-\stratrow{cross\_parsing}{F}{Number of pieces needed to spell the text from the longest substrings of a reference built from frequent English words (Ziv--Merhav cross parsing); invented or mashed text breaks into many short pieces.}
+\stratfamily{English-reference window statistics (each fires only when its median over windows of up to 127 characters lies well beyond the 99th percentile of synthetic English of similar length)}
+\stratrow{cross\_parsing}{F}{Number of pieces needed to spell the text from the longest substrings of a reference built from frequent English words (Ziv--Merhav cross parsing~\citep{ziv1993crossparsing}); invented or mashed text breaks into many short pieces.}
 \stratrow{primed\_compression}{}{Compressed size per character when deflate is primed with frequent English words as a preset dictionary; English compresses well against it and invented text does not.}
-\stratrow{ngram\_rank}{}{Out-of-place distance between the frequency ranks of the text's one- to three-letter sequences and their ranks in English (Cavnar--Trenkle).}
+\stratrow{ngram\_rank}{}{Out-of-place distance between the frequency ranks of the text's one- to three-letter sequences and their ranks in English (Cavnar--Trenkle~\citep{cavnar1994ngram}).}
 \stratrow{permutation\_test}{}{How much likelier the text's letter order is under an English bigram model than eight fixed shuffles of the same letters; catches mash and random letters but often misses pronounceable invented words.}
 \bottomrule
 \end{tabular}

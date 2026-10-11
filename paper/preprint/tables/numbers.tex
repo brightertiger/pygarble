@@ -79,6 +79,9 @@
 \newcommand{\cpuname}{Apple M2}
 \newcommand{\pyversion}{3.12.2}
 \newcommand{\shaA}{091d5d3895f035d5}
+\newcommand{\Amedianchars}{11}
+\newcommand{\Asingletokenpct}{69.5}
+\newcommand{\nBlanguages}{seven}
 \newcommand{\nAmissedfusion}{369}
 \newcommand{\nAmissedall}{15}
 \makeatletter
@@ -204,10 +207,12 @@
 \newcommand{\nHeldB}{7,977}
 \newcommand{\nHeldBpos}{3,200}
 \newcommand{\nHeldBneg}{4,777}
-\newcommand{\tuningtop}{\texttt{word\_lookup} (1.00), \texttt{ngram\_frequency} (0.74), \texttt{log\_likelihood\_ratio} (0.71) and \texttt{hex\_string} (0.67)}
-\newcommand{\tuningbottom}{\texttt{pronounceability} (0.15), \texttt{mojibake} (0.06) and \texttt{control\_characters} (0.00)}
-\newcommand{\tuningalloff}{\texttt{control\_characters}}
-\newcommand{\tuningoff}{\texttt{control\_characters}, \texttt{mojibake}, \texttt{pronounceability} and \texttt{ngram\_rank}}
+\newcommand{\tuningtop}{\texttt{word\_\allowbreak{}lookup} (1.00), \texttt{ngram\_\allowbreak{}frequency} (0.74), \texttt{log\_\allowbreak{}likelihood\_\allowbreak{}ratio} (0.71), and \texttt{hex\_\allowbreak{}string} and \texttt{permutation\_\allowbreak{}test} (0.67 each)}
+\newcommand{\tuningbottom}{\texttt{bigram\_\allowbreak{}probability} and \texttt{pronounceability} (0.15 each), \texttt{mojibake} (0.06) and \texttt{control\_\allowbreak{}characters} (0.00)}
+\newcommand{\tuningworstrecall}{95.2}
+\newcommand{\tuningworstcapture}{87.1}
+\newcommand{\tuningalloff}{\texttt{control\_\allowbreak{}characters}}
+\newcommand{\tuningoff}{\texttt{control\_\allowbreak{}characters}, \texttt{mojibake}, \texttt{pronounceability} and \texttt{ngram\_\allowbreak{}rank}}
 \newcommand{\englishmarkovpct}{17.8}
 \newcommand{\englishcontrolpct}{28.4}
 \newcommand{\englishmojibakepct}{9.4}
