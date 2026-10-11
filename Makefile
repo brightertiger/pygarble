@@ -1,13 +1,12 @@
 PYTHON ?= python
 
-.PHONY: benchmark benchmark-check benchmark-prepare paper help install install-dev test lint format clean build upload-test upload docs docs-clean docs-serve docs-deploy
+.PHONY: benchmark benchmark-check benchmark-prepare help install install-dev test lint format clean build upload-test upload docs docs-clean docs-serve docs-deploy
 
 help:
 	@echo "Available commands:"
 	@echo "  benchmark-check   Verify study analysis and saved predictions (offline)"
 	@echo "  benchmark-prepare Download pinned research corpus/model assets"
 	@echo "  benchmark         Run the full paper comparison to reproduction-full/"
-	@echo "  paper             Build the paper PDF and ignored upload bundle"
 	@echo "  install      Install the package"
 	@echo "  install-dev  Install development dependencies"
 	@echo "  test         Run tests"
@@ -83,6 +82,3 @@ benchmark-prepare:
 
 benchmark:
 	$(PYTHON) -m paper.scripts.study.full_corpus --output paper/study/reproduction-full
-
-paper:
-	$(PYTHON) -m paper.scripts.study.build_paper
