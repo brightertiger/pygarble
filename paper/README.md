@@ -18,5 +18,5 @@ offline checks.
 ## Status
 
 The earlier JOSS draft and preprint manuscript were removed on 2026-10-11 for
-a rework. They remain in git history, in the commit that removed them. The
+a rework. They remain in git history, in c4603eb. The
 study protocols and frozen results here are unchanged.
