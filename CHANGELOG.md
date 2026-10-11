@@ -51,6 +51,26 @@ All notable changes to pygarble are documented here. The format follows
   checks and subprocess error/timeout tests.
 
 ### Fixed
+- 0.8.0 imports work again with a `DeprecationWarning` naming the current
+  home: `BaseStrategy` and the 26 0.8.0 strategy classes from
+  `pygarble.core`, `BIGRAM_LOG_PROBS` and `DEFAULT_LOG_PROB` from the
+  `markov_chain`, `word_anomaly` and `log_likelihood_ratio` strategy modules,
+  and `FunctionWordDensityStrategy` from `zipf_conformity`.
+- `STRATEGY_MAP` is a plain `dict` again, built on first access; its
+  contents are unchanged and, as in 0.8.0, detectors use its entries.
+- `GarbleDetector` and `EnsembleDetector` objects pickled by 0.8.0 load and
+  predict instead of raising `AttributeError` on `timeout_per_text`.
+- `EnsembleDetector(strategies=[None])` raises `ValueError` naming the bad
+  member instead of a bare `KeyError`.
+- A bare string passed as a list of names (`EnsembleDetector` strategies,
+  allowlists, PII and secret kinds, locales, and `Scanner` `categories`,
+  `backends`, `kinds` and `exclude_kinds`) raises an error that is both a
+  `TypeError` and a `ValueError`, with a message saying to pass a list.
+  `EnsembleDetector("markov_chain")` no longer reports `'m' is not a valid
+  Strategy`.
+- A `weights` list whose length does not match the default ensemble reports
+  both lengths and points to `profile="legacy"` for the 0.8.0 three-member
+  set.
 - NHS/phone overlap filtering now uses a sorted sweep rather than a pairwise
   search, keeping dense PII documents from causing quadratic work.
 

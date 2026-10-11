@@ -1,18 +1,28 @@
 """Single-strategy public API and shared input handling."""
 
 from enum import Enum
-from typing import Any, FrozenSet, Iterable, List, Mapping, Optional, Union
+from typing import (
+    Any,
+    Dict,
+    FrozenSet,
+    Iterable,
+    List,
+    Mapping,
+    Optional,
+    Union,
+)
 
 from ..validation import (
     finite_number,
     positive_int,
     process_input,
+    reject_string,
     unit_interval,
     validate_batch,
 )
 from .analysis import Analysis, Signal
 from .preprocessing import TextFeatures, fold_diacritics
-from .registry import STRATEGY_MAP, Strategy
+from .registry import Strategy, strategy_class
 from .strategies.base import BaseStrategy
 
 
@@ -59,8 +69,7 @@ class GarbleDetector:
                     f"Strategy {strategy} is not implemented"
                 )
             raise TypeError("strategy must be a Strategy enum member or name")
-        if isinstance(allowlist, str):
-            raise TypeError("allowlist must be an iterable of words")
+        reject_string("allowlist", allowlist, "words")
         words = list(allowlist) if allowlist is not None else []
         validate_batch(words)
         self.allowlist: FrozenSet[str] = frozenset(
@@ -70,8 +79,21 @@ class GarbleDetector:
         self.kwargs = dict(kwargs, **dict(strategy_kwargs or {}))
         self._strategy_instance = self._create_strategy_instance()
 
+    def __setstate__(self, state: Dict[str, Any]) -> None:
+        # Pickles from 0.8.0 predate these attributes and hold a strategy
+        # object built by 0.8.0, so rebuild it from the saved options.
+        rebuild = "allowlist" not in state
+        defaults: Dict[str, Any] = {
+            "allowlist": frozenset(),
+            "max_input_length": None,
+            "timeout_per_text": None,
+        }
+        self.__dict__.update(defaults, **state)
+        if rebuild:
+            self._strategy_instance = self._create_strategy_instance()
+
     def _create_strategy_instance(self) -> BaseStrategy:
-        return STRATEGY_MAP[self.strategy](**self.kwargs)
+        return strategy_class(self.strategy)(**self.kwargs)
 
     def applicable(self, text: str) -> bool:
         BaseStrategy._validate_input(text)
@@ -150,3 +172,12 @@ class GarbleDetector:
         )
 
     score = predict_proba
+
+
+def __getattr__(name: str) -> Any:
+    # Earlier releases exported STRATEGY_MAP here; build it only when asked.
+    if name == "STRATEGY_MAP":
+        from . import registry
+
+        return registry.STRATEGY_MAP
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

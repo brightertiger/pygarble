@@ -7,6 +7,7 @@ Garbled text will have low probability under the English language model.
 
 from typing import Any, Optional
 
+from ..._compat import forward_removed
 from ...validation import finite_number, parameter_value
 from ..analysis import Evidence
 from ..preprocessing import TextFeatures
@@ -87,3 +88,14 @@ class MarkovChainStrategy(BaseStrategy):
 
     def _predict_proba_impl(self, text: str) -> float:
         return self._evaluate_features(TextFeatures(text)).score
+
+
+# Names this module exported in 0.8.0.
+_MOVED = {
+    "BIGRAM_LOG_PROBS": "pygarble.data",
+    "DEFAULT_LOG_PROB": "pygarble.data",
+}
+
+
+def __getattr__(name: str) -> Any:
+    return forward_removed("pygarble.strategies.markov_chain", name, _MOVED)

@@ -4,6 +4,7 @@ import re
 from typing import Any, Dict, FrozenSet, Iterable, List, Optional, Tuple
 
 from ...findings import Finding, sort_key
+from ...validation import reject_string
 from .checksums import iban_mod97, luhn, nhs_mod11, verhoeff
 from .patterns import (
     EMAIL_EXCLUDED_TLDS,
@@ -186,8 +187,7 @@ def locale_kinds(locales: Iterable[str]) -> FrozenSet[str]:
 
 
 def _names(label: str, value: Iterable[str]) -> Iterable[str]:
-    if isinstance(value, str):
-        raise ValueError(f"{label} must be an iterable of names, not a string")
+    reject_string(label, value)
     return value
 
 

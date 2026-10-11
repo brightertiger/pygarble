@@ -1,9 +1,8 @@
 """Public strategy names and lazy factories; no model data loads here."""
 
-from collections.abc import Mapping
 from enum import Enum
 from importlib import import_module
-from typing import Iterator, Type, cast
+from typing import TYPE_CHECKING, Any, Dict, List, Type, cast
 
 from .strategies.base import BaseStrategy
 
@@ -100,19 +99,31 @@ _IMPLEMENTATIONS = {
 }
 
 
-class _StrategyMap(Mapping):
-    def __getitem__(self, key: Strategy) -> Type[BaseStrategy]:
-        module, name = _IMPLEMENTATIONS[key]
-        return cast(
-            Type[BaseStrategy],
-            getattr(import_module(".strategies." + module, __package__), name),
-        )
-
-    def __iter__(self) -> Iterator[Strategy]:
-        return iter(_IMPLEMENTATIONS)
-
-    def __len__(self) -> int:
-        return len(_IMPLEMENTATIONS)
+if TYPE_CHECKING:
+    STRATEGY_MAP: Dict[Strategy, Type[BaseStrategy]]
 
 
-STRATEGY_MAP = _StrategyMap()
+def strategy_class(strategy: Strategy) -> Type[BaseStrategy]:
+    """Import one strategy class; the rest stay unloaded."""
+    built = globals().get("STRATEGY_MAP")
+    if built is not None:
+        # Once built, the public dict is authoritative, as in 0.8.0.
+        return cast(Type[BaseStrategy], built[strategy])
+    module, name = _IMPLEMENTATIONS[strategy]
+    return cast(
+        Type[BaseStrategy],
+        getattr(import_module(".strategies." + module, __package__), name),
+    )
+
+
+def __getattr__(name: str) -> Any:
+    # STRATEGY_MAP is a plain dict, built on first access because building
+    # it imports every strategy module.
+    if name != "STRATEGY_MAP":
+        raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+    built = {key: strategy_class(key) for key in _IMPLEMENTATIONS}
+    return globals().setdefault("STRATEGY_MAP", built)
+
+
+def __dir__() -> List[str]:
+    return sorted(set(globals()) | {"STRATEGY_MAP"})

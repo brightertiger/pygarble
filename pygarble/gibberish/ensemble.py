@@ -13,13 +13,13 @@ from typing import (
     Union,
 )
 
-from ..validation import finite_number, process_input
+from ..validation import finite_number, process_input, reject_string
 from .analysis import Analysis, Signal
 from .detector import GarbleDetector
 from .fisher import combined_p_value, fisher_score, tail_p_value
 from .options import accepted_options, unknown_options, warn_unknown_options
 from .preprocessing import TextFeatures
-from .registry import STRATEGY_MAP, Strategy
+from .registry import Strategy, strategy_class
 
 LEGACY_STRATEGIES = (
     Strategy.MARKOV_CHAIN,
@@ -101,6 +101,8 @@ class EnsembleDetector:
     ) -> None:
         if profile is not None and strategies is not None:
             raise ValueError("use either profile or strategies")
+        default_set = profile is None and strategies is None
+        reject_string("strategies", strategies, "strategy names")
         self.profile = profile or (
             "english" if strategies is None else "custom"
         )
@@ -110,9 +112,15 @@ class EnsembleDetector:
             strategies = list(PROFILES[self.profile])
         if not strategies:
             raise ValueError("strategies must contain at least one strategy")
-        members: List[Strategy] = [
-            Strategy(s) if isinstance(s, str) else s for s in strategies
-        ]
+        members: List[Strategy] = []
+        for given in strategies:
+            chosen = Strategy(given) if isinstance(given, str) else given
+            if not isinstance(chosen, Strategy):
+                raise ValueError(
+                    "strategies must contain Strategy members or names, "
+                    f"got {given!r}"
+                )
+            members.append(chosen)
         self.voting = (
             voting
             if voting is not None
@@ -163,7 +171,20 @@ class EnsembleDetector:
             self._tail_grid = TAIL_GRID
         self.strategies = list(members)
         if weights is not None and len(weights) != len(members):
-            raise ValueError("weights must have same length as strategies")
+            hint = (
+                "; the default ensemble grew in 0.9.0, use profile='legacy' "
+                "for the 0.8.0 set"
+                if default_set
+                else ""
+            )
+            counted = (
+                f"{len(weights)} weight{'s' * (len(weights) != 1)} for "
+                f"{len(members)} strateg{'ies' if len(members) != 1 else 'y'}"
+            )
+            raise ValueError(
+                "weights must have same length as strategies "
+                f"(got {counted}{hint})"
+            )
         self.weights = [
             finite_number("weights", weight)
             for weight in (
@@ -183,7 +204,7 @@ class EnsembleDetector:
                 "strategy_kwargs contains a strategy not selected"
             )
         class_names = {
-            strategy: STRATEGY_MAP[strategy].__name__ for strategy in members
+            strategy: strategy_class(strategy).__name__ for strategy in members
         }
         accepted_by_any = set()
         for name in class_names.values():
@@ -238,6 +259,21 @@ class EnsembleDetector:
         self.allowlist = first.allowlist
         self.kwargs = dict(kwargs)
         self.strategy_kwargs = options
+
+    def __setstate__(self, state: Dict[str, Any]) -> None:
+        # Pickles from 0.8.0 predate these attributes.
+        legacy = state.get("strategies") == list(LEGACY_STRATEGIES)
+        defaults: Dict[str, Any] = {
+            "profile": "legacy" if legacy else "custom",
+            "fisher_alpha": DEFAULT_FISHER_ALPHA,
+            "_tails": {},
+            "_tail_grid": (),
+            "allowlist": frozenset(),
+            "max_input_length": None,
+            "timeout_per_text": None,
+            "strategy_kwargs": {},
+        }
+        self.__dict__.update(defaults, **state)
 
     def _aggregate(
         self, pairs: List[Tuple[Signal, float]]
@@ -359,3 +395,12 @@ class EnsembleDetector:
         )
 
     score = predict_proba
+
+
+def __getattr__(name: str) -> Any:
+    # Earlier releases exported STRATEGY_MAP here; build it only when asked.
+    if name == "STRATEGY_MAP":
+        from . import registry
+
+        return registry.STRATEGY_MAP
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
