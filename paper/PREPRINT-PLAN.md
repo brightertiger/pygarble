@@ -36,7 +36,7 @@ pygarble (two rows: the default `english` profile and `english_fusion`),
 gibberish-detector 0.1.1 (rrenaud Markov port, trained on its big.txt,
 pinned), lingua-language-detector 2.2.0 with "not English is junk". Plus one
 post hoc row, "domain-specific tuning": the `english` profile with the
-MOJIBAKE strategy removed (same five other members, voting any, threshold
+MOJIBAKE and CONTROL_CHARACTERS strategies removed (the four other members, voting any, threshold
 0.5), constructed after seeing that 26.4 percent of tweets carry mojibake;
 reported in its own subsection as post hoc. Nothing else. Footprint for the same rows: ms per 1,000 texts single-threaded,
 median of 5; install size.
