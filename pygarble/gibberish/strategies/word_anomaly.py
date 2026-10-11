@@ -1,5 +1,6 @@
 from typing import Any, List
 
+from ..._compat import forward_removed
 from ...validation import finite_number, positive_int
 from ..analysis import Evidence, Span
 from ..preprocessing import TextFeatures, Token
@@ -89,3 +90,14 @@ class WordAnomalyStrategy(BaseStrategy):
 
     def _predict_proba_impl(self, text: str) -> float:
         return self._evaluate_features(TextFeatures(text)).score
+
+
+# Names this module exported in 0.8.0.
+_MOVED = {
+    "BIGRAM_LOG_PROBS": "pygarble.data",
+    "DEFAULT_LOG_PROB": "pygarble.data",
+}
+
+
+def __getattr__(name: str) -> Any:
+    return forward_removed("pygarble.strategies.word_anomaly", name, _MOVED)

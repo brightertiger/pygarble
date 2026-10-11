@@ -12,7 +12,7 @@ from ..validation import (
 )
 from .analysis import Analysis, Signal
 from .preprocessing import TextFeatures, fold_diacritics
-from .registry import STRATEGY_MAP, Strategy
+from .registry import Strategy, strategy_class
 from .strategies.base import BaseStrategy
 
 
@@ -71,7 +71,7 @@ class GarbleDetector:
         self._strategy_instance = self._create_strategy_instance()
 
     def _create_strategy_instance(self) -> BaseStrategy:
-        return STRATEGY_MAP[self.strategy](**self.kwargs)
+        return strategy_class(self.strategy)(**self.kwargs)
 
     def applicable(self, text: str) -> bool:
         BaseStrategy._validate_input(text)

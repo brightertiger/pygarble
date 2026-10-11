@@ -19,7 +19,7 @@ from .detector import GarbleDetector
 from .fisher import combined_p_value, fisher_score, tail_p_value
 from .options import accepted_options, unknown_options, warn_unknown_options
 from .preprocessing import TextFeatures
-from .registry import STRATEGY_MAP, Strategy
+from .registry import Strategy, strategy_class
 
 LEGACY_STRATEGIES = (
     Strategy.MARKOV_CHAIN,
@@ -183,7 +183,7 @@ class EnsembleDetector:
                 "strategy_kwargs contains a strategy not selected"
             )
         class_names = {
-            strategy: STRATEGY_MAP[strategy].__name__ for strategy in members
+            strategy: strategy_class(strategy).__name__ for strategy in members
         }
         accepted_by_any = set()
         for name in class_names.values():

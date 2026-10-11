@@ -9,6 +9,7 @@ Uses Type-Token Ratio and hapax legomena ratio as primary signals.
 from collections import Counter
 from typing import Any, List
 
+from ..._compat import forward_removed
 from ...data import ENGLISH_WORDS, FUNCTION_WORDS
 from ...validation import parameter_value
 from ..preprocessing import ascii_alpha_words
@@ -139,3 +140,11 @@ class ZipfConformityStrategy(BaseStrategy):
             return self.UNCORROBORATED_CAP
 
         return score
+
+
+# Names this module exported in 0.8.0.
+_MOVED = {"FunctionWordDensityStrategy": "pygarble.gibberish.strategies"}
+
+
+def __getattr__(name: str) -> Any:
+    return forward_removed("pygarble.strategies.zipf_conformity", name, _MOVED)
