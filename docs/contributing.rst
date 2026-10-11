@@ -26,14 +26,14 @@ On Windows, activate with ``.venv\Scripts\activate`` instead.
 Validation
 ----------
 
-Run the checks relevant to your change. The CI test matrix covers Python 3.8–3.12.
+Run the checks relevant to your change. The CI test matrix covers Python 3.8–3.13.
 
 .. code-block:: bash
 
    python -m pytest -q
-   black --check pygarble tests paper/scripts paper/regression
-   isort --check-only pygarble tests paper/scripts paper/regression
-   flake8 pygarble tests paper/scripts paper/regression
+   black --check pygarble tests paper/scripts paper/regression docs/_ext
+   isort --check-only pygarble tests paper/scripts paper/regression docs/_ext
+   flake8 pygarble tests paper/scripts paper/regression docs/_ext
    mypy pygarble
    pre-commit run --all-files
    python paper/scripts/update_strategy_docs.py --check

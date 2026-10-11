@@ -5,11 +5,11 @@ pygarble requires Python 3.8 or later. The base install has no runtime
 dependencies; its bundled character statistics and dictionary require no
 inference-time downloads. Optional screening backends have separate extras.
 
-This documentation includes unreleased changes: ``pygarble.screening``,
-``pygarble.gibberish``, optional backends and the document CLI. They are
-listed under Unreleased in the repository changelog. Install a checkout of
-the reviewed branch or commit to use them; do not assume an existing PyPI
-release includes these APIs. See :doc:`migration` for the version boundary.
+This documentation describes 0.11.0, including ``pygarble.screening``,
+``pygarble.gibberish``, optional backends and both command lines. They are
+listed under 0.11.0 in the repository changelog. Until 0.11.0 is on PyPI,
+``pip install pygarble`` installs 0.8.0, which has none of these APIs; install
+from source to use them. See :doc:`migration` for the version boundary.
 
 Install a release
 -----------------

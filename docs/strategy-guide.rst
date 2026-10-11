@@ -138,8 +138,8 @@ own data before relying on it.
 
    strict = EnsembleDetector(profile="english_fusion", fisher_alpha=0.0001)
 
-Control characters: new in 0.9.0
---------------------------------
+Control characters: new in 0.11.0
+---------------------------------
 
 ``Strategy.CONTROL_CHARACTERS`` examines raw Unicode characters before English
 normalization. It detects unexpected control characters, U+FFFD replacement
@@ -164,8 +164,8 @@ flagged. This strategy belongs to ``english``, ``english_extended``,
 artifact scores 0.9; otherwise the score is 0.0. A detector threshold above 0.9
 therefore suppresses these detections. These are fixed heuristic scores.
 
-Localized anomalies: new in 0.9.0
----------------------------------
+Localized anomalies: new in 0.11.0
+----------------------------------
 
 ``Strategy.LOCAL_ANOMALY`` finds severe unfamiliar tokens or clusters of suspicious
 tokens in otherwise readable English. It uses the bundled English dictionary,
@@ -221,7 +221,7 @@ bounded phrase repetition; intentional repetition can also be flagged.
    repetition = GarbleDetector(Strategy.REPETITION)
    assert repetition.predict("hello " * 10) is True
 
-LLM output: new in 0.10.0
+LLM output: new in 0.11.0
 -------------------------
 
 The ``llm_output`` profile is a cheap deterministic pre-check for degenerate
@@ -253,4 +253,4 @@ and expected corruption, including domain terms, identifiers, and short strings.
 Scores are not calibrated probabilities, and no strategy guarantees zero false
 positives. See :doc:`api` for voting and abstention, and :doc:`migration` for changes
 from the previous default. The earlier conditional-trigram experiment is retained in Git history;
-no additional trigram model is shipped by 0.10.0.
+no additional trigram model is shipped by 0.11.0.

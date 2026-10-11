@@ -8,6 +8,8 @@ dynamic = ["version"]
 description = "Deterministic, zero-dependency text screening: secrets, PII, profanity and gibberish, with redaction"
 readme = "README.md"
 requires-python = ">=3.8"
+# PEP 639 (license = "MIT" plus license-files) needs setuptools>=77, which
+# needs Python 3.9; keep the table until Python 3.8 support is dropped.
 license = {text = "MIT"}
 authors = [
     {name = "Ujjwal Singh Rao", email = "ujjwalsrao@gmail.com"},
@@ -35,11 +37,16 @@ dependencies = []
 
 [project.optional-dependencies]
 phones = ["phonenumberslite>=8.13,<10"]
-stdnum = ["python-stdnum>=1.20,<3"]
+# python-stdnum imports pkg_resources, which Python 3.8 venvs may lack.
+stdnum = [
+    "python-stdnum>=1.20,<3",
+    "setuptools; python_version < '3.9'",
+]
 secrets = ["detect-secrets>=1.5,<2"]
 screening = [
     "phonenumberslite>=8.13,<10",
     "python-stdnum>=1.20,<3",
+    "setuptools; python_version < '3.9'",
     "detect-secrets>=1.5,<2",
 ]
 dev = [

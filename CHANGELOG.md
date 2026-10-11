@@ -5,16 +5,118 @@ All notable changes to pygarble are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.11.0] - Unreleased
+
+0.11.0 is the first release since 0.8.0 and it is a **breaking release**
+relative to 0.8.0. Versions 0.9.0 and 0.10.0 were development milestones
+that were never published to PyPI; their notes are merged into this entry.
+Earlier drafts of this file listed `WORD_ANOMALY`, `LOG_LIKELIHOOD_RATIO` and
+`KEYBOARD_ADJACENCY` as 0.9.0 additions and the removal of five legacy
+strategies as a 0.9.0 change; all of that shipped in 0.8.0. The upgrade
+guide (`docs/migration.rst`, "Upgrading from 0.8.0 to 0.11.0") explains how
+to find and handle each change below.
+
+### Breaking changes since 0.8.0
+
+Gibberish scores are not reproducible across the 0.8.0 boundary. No setting
+restores 0.8.0 output exactly; compare old and new decisions on your own
+inputs before upgrading.
+
+- **Scores changed in every 0.8.0 strategy.** Strategies share one
+  tokeniser. A whitespace-separated chunk that contains a digit, `://`, `@`
+  or a backslash, starts with `www.`, `data:` or a path prefix, or has a
+  lowercase-to-uppercase step (camelCase) is treated as structured, and its
+  letters are not scored as words. Most JWTs, base64 blobs, GitHub-style
+  tokens, PEM private key blocks, URLs, email addresses, paths and code
+  identifiers are therefore no longer flagged as gibberish; screen them with
+  the new `secrets` and `pii` detectors instead. Affected strategies include
+  `MARKOV_CHAIN`, `LOG_LIKELIHOOD_RATIO`, `NGRAM_FREQUENCY`, `WORD_ANOMALY`,
+  `KEYBOARD_ADJACENCY`, `KEYBOARD_PATTERN` and `LETTER_FREQUENCY`. Some
+  inputs move the other way: zero-width-joined letters and homoglyph domains
+  such as `pаypal.com` (Cyrillic `а`) can now be flagged. The per-strategy
+  fixes under Fixed change further scores. `LOG_LIKELIHOOD_RATIO`, and every
+  ensemble containing it, also differs from 0.8.0 in the last one or two
+  floating-point digits, which breaks exact-equality golden files. There is
+  no escape hatch.
+- **The default `EnsembleDetector()` has six members instead of three.**
+  `MOJIBAKE`, `KEYBOARD_ADJACENCY` and `CONTROL_CHARACTERS` joined
+  `MARKOV_CHAIN`, `LOG_LIKELIHOOD_RATIO` and `WORD_ANOMALY`, still with `any`
+  voting. Keyboard runs such as `qwerty`, mojibake, control characters and
+  some long URLs can now be flagged, and `.strategies` and `.weights` have
+  six entries. Escape hatch: `EnsembleDetector(profile="legacy")` selects the
+  0.8.0 members; its scores still follow the tokeniser change above.
+- **Weighted voting with three weights on the default set raises
+  `ValueError`.** `EnsembleDetector(voting="weighted", weights=[a, b, c])`
+  worked in 0.8.0. The message gives both lengths and points to the legacy
+  profile. Escape hatch:
+  `EnsembleDetector(profile="legacy", voting="weighted", weights=[a, b, c])`.
+- **Length alone no longer makes text garbled.** In 0.8.0 every strategy
+  scored text with a single token over 1,000 characters as 1.0 and garbled.
+  That rule is now opt-in. Escape hatch: pass `max_string_length=1000`,
+  which classifies long non-URL tokens as garbled. To reject oversized input
+  instead, set `max_input_length`.
+- **`threshold=0.0` no longer flags every non-empty text,** and
+  `applicable("")` and `applicable("!!!")` return `False`. Empty or wholly
+  inapplicable input predicts `False`; `analyze()` reports
+  `insufficient_evidence`.
+- **Some invalid arguments raise different exceptions.** A wrongly typed
+  `threshold`, `threads`, `threshold_per_char` or weight raises `ValueError`
+  where 0.8.0 raised `TypeError`. A huge integer weight such as `10**400`
+  raises `ValueError` where 0.8.0 raised `OverflowError`. An unknown
+  strategy name raises
+  `ValueError` instead of `AttributeError`, and `None` or a number as the
+  strategy raises `TypeError` instead of `AttributeError`.
+  `EnsembleDetector(strategies=[None])` raises `ValueError` naming the bad
+  member. An invalid custom regex for `pattern_matching` raises `ValueError`
+  naming the pattern, chained from `re.error`, instead of `re.error`.
+- **Some values that 0.8.0 accepted now raise.** `threshold=True`,
+  `threads=2.5`, NaN weights and a non-bool `override_defaults` raise
+  `ValueError`. So does a huge integer such as `10**400` for any numeric
+  option: in 0.8.0 `threads`, `timeout_per_text`, `max_string_length` and
+  `min_length` accepted it, as did settings 0.8.0 ignored, such as `n`. `applicable(None)` and a batch with a non-string entry, such
+  as `predict([None])`, raise `TypeError`; batches are validated before any
+  work starts.
+- **New `FutureWarning`s.** Unknown strategy settings, and `weights` passed
+  with a voting mode other than `weighted`, warn at the call site. Test
+  suites run with `-W error` or `filterwarnings = error` fail on them. Escape
+  hatch: remove the setting, or filter `FutureWarning` from `pygarble`.
+- **`Strategy` and `STRATEGY_MAP` have 32 entries instead of 26.** Code
+  that iterates either to build "all strategies" also gets the six new ones.
+  `STRATEGY_MAP` is still a plain `dict` and, as in 0.8.0, detectors use its
+  entries.
+
+0.8.0 import paths keep working with a `DeprecationWarning` (see
+Deprecated), and detectors pickled by 0.8.0 load and predict.
+
 ### Added
+
+Gibberish detection:
+- `EnsembleDetector` profiles: `english` (the default set), `english_extended`,
+  `legacy`, `corruption`, `spoofing`, `llm_output` and the opt-in
+  `english_fusion`. `llm_output` (repetition, control characters, mojibake,
+  local anomaly) is a deterministic pre-check for degenerate model output
+  that stays quiet on code and technical prose.
+- `analyze()` with spans, status and per-strategy signals, and `score()` as
+  an alias of `predict_proba`.
+- `allowlist`, honoured by every strategy; `strategy_kwargs`;
+  `max_input_length`, enforced by `analyze()`, `predict()` and
+  `applicable()`. `timeout_per_text`, which 0.8.0 read from `**kwargs`, is a
+  named, validated keyword.
+- `GarbleDetector`, `EnsembleDetector` and `strategy_kwargs` accept strategy
+  names as strings.
+- Strategies `CONTROL_CHARACTERS` and `LOCAL_ANOMALY`. `CONTROL_CHARACTERS`
+  also flags text made only of controls that `str.strip()` removes (VT, FF,
+  U+001C-U+001F, NEL), scoring it 0.9. `LOCAL_ANOMALY` emits
+  `corrupt_token_window` spans, including for a one-word window.
 - Four English-reference strategies, `CROSS_PARSING`,
   `PRIMED_COMPRESSION`, `NGRAM_RANK` and `PERMUTATION_TEST`, which compare
   the lowercase ASCII words of a text with frequent English (cross parsing,
   preset-dictionary deflate, character n-gram ranks and a letter-shuffle
   permutation test). Each is standardised against a synthetic English null
   and scored as the median over 127-character windows; they need at least
-  8 letters and are not members of any existing profile.
-  `PRIMED_COMPRESSION` sizes come from the platform's zlib, so its scores
-  can differ slightly between zlib builds.
+  8 letters and are not members of any profile except `english_fusion`
+  (`CROSS_PARSING`). `PRIMED_COMPRESSION` sizes come from the platform's
+  zlib, so its scores can differ slightly between zlib builds.
 - `EnsembleDetector(voting="fisher")` with keyword-only `fisher_alpha`
   (default 0.001). Each applicable member's score is read against that
   strategy's scores on a synthetic English null to give a tail p-value, and
@@ -31,119 +133,24 @@ All notable changes to pygarble are documented here. The format follows
   English-reference methods, so meaningful text in other languages written
   in Latin letters can be flagged, and text in other scripts gets no signal
   (it reads as clean, which is not evidence that it is meaningful).
-  Existing profiles, their voting and the `EnsembleDetector()` default are
-  unchanged; the golden corpus gains `english_fusion` rows only.
-- Documentation discovery metadata, a generated sitemap and `llms.txt`,
-  optional Search Console verification, and a publishing/discoverability guide.
-- Root contributor and security guides, issue templates, and package metadata
-  links for open-source contributors.
-- `pygarble.screening`: a dedicated secrets, PII and profanity API, with
-  explicit optional backends for phonenumberslite, python-stdnum,
-  detect-secrets and a separately installed Gitleaks executable.
-- Per-instance custom detectors, kind filtering, source-free backend errors,
-  and shared span validation/redaction. Existing top-level APIs retain their
-  defaults; importing screening does not load the gibberish engine.
-- `pygarble-screen` / `python -m pygarble.screening`: whole-document scanning
-  and redaction, findings-only scan output, and a configurable input limit.
-  This avoids the legacy line CLI's exposed multiline key bodies and echoed
-  source text. The legacy CLI is retained unchanged.
-- Optional-backend CI, offline Python integration tests, Unicode/CRLF offset
-  checks and subprocess error/timeout tests.
+- The correctly spelled `PronounceabilityStrategy` alias.
+- `pygarble.calibrate(detector, garbled, clean)` sweeps thresholds over
+  labeled samples and recommends one by F1 or by a maximum false-positive
+  rate, in O(N log N). `pygarble calibrate` does the same from files.
 
-### Fixed
-- 0.8.0 imports work again with a `DeprecationWarning` naming the current
-  home: `BaseStrategy` and the 26 0.8.0 strategy classes from
-  `pygarble.core`, `BIGRAM_LOG_PROBS` and `DEFAULT_LOG_PROB` from the
-  `markov_chain`, `word_anomaly` and `log_likelihood_ratio` strategy modules,
-  and `FunctionWordDensityStrategy` from `zipf_conformity`.
-- `STRATEGY_MAP` is a plain `dict` again, built on first access; its
-  contents are unchanged and, as in 0.8.0, detectors use its entries.
-- `GarbleDetector` and `EnsembleDetector` objects pickled by 0.8.0 load and
-  predict instead of raising `AttributeError` on `timeout_per_text`.
-- `EnsembleDetector(strategies=[None])` raises `ValueError` naming the bad
-  member instead of a bare `KeyError`.
-- A bare string passed as a list of names (`EnsembleDetector` strategies,
-  allowlists, PII and secret kinds, locales, and `Scanner` `categories`,
-  `backends`, `kinds` and `exclude_kinds`) raises an error that is both a
-  `TypeError` and a `ValueError`, with a message saying to pass a list.
-  `EnsembleDetector("markov_chain")` no longer reports `'m' is not a valid
-  Strategy`.
-- A `weights` list whose length does not match the default ensemble reports
-  both lengths and points to `profile="legacy"` for the 0.8.0 three-member
-  set.
-- NHS/phone overlap filtering now uses a sorted sweep rather than a pairwise
-  search, keeping dense PII documents from causing quadratic work.
-- `pygarble check`, `score` and `scan` text and TSV rows print a tab or
-  any character `str.splitlines()` breaks on inside the text as a Python
-  escape (`\t`, `\n`, `\r`, `\x0b`, `\x0c`, `\x1c`, `\x1d`, `\x1e`,
-  `\x85`, `\u2028`, `\u2029`), so one text is always one row with a fixed
-  column count. Backslashes are not escaped; JSONL is unchanged and is the
-  lossless format.
-- `pygarble-screen scan ... | head` exits 0 when the reader closes the pipe
-  instead of reporting a failed scan with exit code 2.
-- The `pronounceability` strategy is linear in the length of a long
-  consonant run (it was quadratic: about 10 s for one 1M-character token).
-  Scores are unchanged.
-- `calibrate` sorts the scores once and counts each candidate threshold by
-  bisection, so it is O(N log N) instead of O(N^2) in the sample size.
-  Reports are unchanged.
-- `pygarble.scan()` and `redact()` no longer serve `min_confidence=True`
-  from a cache entry made for `min_confidence=1`; the option is validated
-  the same way on every call. A dict-valued option is passed to `Scanner`
-  instead of failing with "unhashable type".
-- `GarbleDetector.applicable()` raises `ValueError` for text longer than
-  `max_input_length`, as `analyze()` and `predict()` already do.
-- `pattern_matching` raises `ValueError` naming the pattern for an invalid
-  custom regex (it raised `re.error`) and rejects a non-bool
-  `override_defaults`.
-- An optional screening backend whose package is installed but fails to
-  import says why. On Python 3.8, python-stdnum without setuptools now asks
-  for `pip install setuptools` instead of claiming `pygarble[stdnum]` is
-  missing.
-
-### Changed
-- `control_characters` flags text made only of control characters that
-  `str.strip()` removes (VT, FF, U+001C-U+001F, NEL): it scores 0.9 and
-  `garbled` instead of 0.0 and `insufficient_evidence` with reason
-  `empty_input`. This also changes the default `EnsembleDetector` and any
-  ensemble that includes `control_characters`: such text is now garbled.
-  Text with any other character scores as before.
-- CI tests Python 3.13, pins every action to a commit SHA, and keeps jobs
-  that need Python 3.8 or 3.9 on `ubuntu-24.04`, because `ubuntu-latest`
-  moves to 26.04, which has no builds for those versions. The generated-data
-  check caches the pinned word list. The data generator retries a failed
-  download once and reports a network fault separately from a checksum
-  mismatch.
-- Before publishing, the release workflow runs the tests on Python 3.8 and
-  3.12, lint, the golden checks and a smoke test of the built wheel. The
-  Docker image is now pushed from that workflow only after the PyPI upload
-  succeeds. The separate Docker workflow, including its manual trigger,
-  is removed.
-- Development installs pin flake8 7.x and isort 9.x, which CI lints with.
-  isort 5.13 is used on Python 3.8 and 3.9.
-- Release uploads use PyPI Trusted Publishing with the `pypi` GitHub
-  environment; the project owner must configure that publisher before tagging
-  the next release. Existing distribution files are no longer silently skipped.
-- Updated the README, quick start, API reference, CLI and installation
-  guides for the separate modules and optional backends. Added architecture
-  and migration guidance covering compatibility pointers and unreleased APIs.
-- Gibberish implementations now live under `pygarble.gibberish`; native
-  PII, profanity and secret detectors and their rules live under
-  `pygarble.screening`. Old module paths and top-level exports remain
-  compatibility pointers to the same implementations. Scanner defaults,
-  lazy strategy loading and CLI behavior are unchanged.
-
-## [0.11.0] - 2026-09-26
-
-### Added
+Screening:
 - `Scanner`, `scan()` and `redact()`: one call that screens text for
   secrets, PII, profanity and gibberish and returns findings with kind,
   span, confidence and reason. Findings never carry the matched text.
+  `scan()` and `redact()` validate their options on every call, and pass a
+  dict-valued option to `Scanner` uncached.
 - Secrets detector: known vendor prefixes (AWS, GitHub, GitLab, Slack,
   Stripe, Google, OpenAI, Anthropic, Hugging Face, npm, PyPI, SendGrid),
   JWTs, private key blocks, credentials in URLs, bearer tokens,
   keyword-plus-entropy generic secrets, and an opt-in
-  `high_entropy_string` rule (`secrets_without_context=True`).
+  `high_entropy_string` rule (`secrets_without_context=True`). A vendor
+  token or JWT inside a bearer token or URL credentials is also reported as
+  its own nested finding; selecting kinds only filters the default output.
 - PII detector: email, phone, credit card (Luhn), IBAN (mod-97), IPv4/IPv6,
   plus locale packs for the US (SSN), UK (National Insurance and NHS
   numbers) and India (Aadhaar with Verhoeff, PAN), each with its national
@@ -151,113 +158,149 @@ All notable changes to pygarble are documented here. The format follows
 - Profanity detector: an attributed word list with leetspeak, elongation,
   embedded, masked and spaced obfuscation handling and an allowlist.
 - Redaction in placeholder, mask and partial modes.
-- `pygarble scan` and `pygarble redact` commands.
-- JSON copies of the rule tables for ports, a golden scan corpus with a CI
-  check, a clean-corpus false-positive gate and a throughput script.
-- Throughput work on the rule detectors: literal prefilters, an ASCII fast
-  path and a token cache. `regression/throughput.py` reports MB/s per
-  category, with `--chunk-bytes` for document-sized inputs.
-- Documentation pages for screening and redaction, secrets, PII and
-  profanity; the README now leads with screening.
-- A vendor token or JWT inside a bearer token or URL credentials is also
-  reported as its own nested finding; selecting kinds only filters the
-  default output.
 - `Scanner` raises `ValueError` when a selection leaves nothing to scan or
-  redact; the CLI rejects empty `--categories`, `--kinds` and `--locales`.
+  redact.
+- `pygarble.screening`: a dedicated secrets, PII and profanity API that does
+  not load the gibberish engine, with per-instance custom detectors, kind
+  filtering, source-free backend errors and shared span validation and
+  redaction.
+- Optional local screening backends, each enabled explicitly: phonenumberslite
+  (`pygarble[phones]`), python-stdnum (`pygarble[stdnum]`), detect-secrets
+  (`pygarble[secrets]`), all three (`pygarble[screening]`), and a separately
+  installed Gitleaks executable. A backend whose package is installed but
+  fails to import says why. On Python 3.8 the `stdnum` and `screening`
+  extras also install setuptools, which python-stdnum needs.
+- Throughput work on the rule detectors: literal prefilters, an ASCII fast
+  path, a token cache and sorted-sweep overlap filtering, so dense PII
+  documents do not cause quadratic work.
 
-### Notes
-- The gibberish API is unchanged. This release is additive.
+Command line:
+- `pygarble check|score|analyze` (also `python -m pygarble`) reads files or
+  stdin, supports `--profile`, `--strategy`, `--threshold` and
+  `--allowlist`, text/TSV/JSONL output and JSON `--field` mode, and exits 1
+  when any input is garbled. `pygarble calibrate`, `pygarble scan` and
+  `pygarble redact` complete the line-oriented CLI; empty `--categories`,
+  `--kinds` and `--locales` are rejected. Text and TSV rows print a tab or
+  any character `str.splitlines()` breaks on inside the text as a Python
+  escape (`\t`, `\n`, `\r`, `\x0b`, `\x0c`, `\x1c`, `\x1d`, `\x1e`,
+  `\x85`, `\u2028`, `\u2029`), so one text is always one row. Backslashes
+  are not escaped; JSONL is the lossless format.
+- `pygarble-screen` (also `python -m pygarble.screening`): whole-document
+  scanning and redaction, findings-only scan output and a configurable input
+  limit, so multiline key bodies are redacted and source text is not echoed.
+  It exits 0 when a reader such as `head` closes the pipe.
 
-## [0.10.0] - 2026-09-26
-
-### Added
-- Command-line interface: `pygarble check|score|analyze` reads files or
-  stdin, supports --profile/--strategy/--threshold/--allowlist,
-  text/TSV/JSONL output, JSON --field mode, and exit code 1 when any input
-  is garbled.
-- `llm_output` profile (repetition, control characters, mojibake, local
-  anomaly): a deterministic pre-check for degenerate model output that
-  stays quiet on code and technical prose.
-- `pygarble.calibrate(detector, garbled, clean)` sweeps thresholds over
-  labeled samples and recommends one by F1 or by a maximum
-  false-positive rate; `pygarble calibrate` does the same from files.
-- Language-neutral JSON copies of the word, bigram and trigram tables under
-  `pygarble/data/` (repo and sdist only), hashed in the manifest, as the
-  shared source for ports.
-- Golden corpus `regression/golden.jsonl` (challenge cases and edge inputs
-  x every profile) with a CI check; ports in other languages are held to
-  it.
-- README rewritten around use cases, plus new documentation pages for the
-  command line and threshold calibration.
-
-### Notes
-- 0.9.0 was prepared but never published to PyPI; users upgrading from 0.8.0 should read both entries.
-
-## [0.9.0] - 2026-09-26
-
-### Added
-- `EnsembleDetector` profiles (`english`, `english_extended`, `legacy`,
-  `corruption`, `spoofing`), `analyze()` with spans, `allowlist`,
-  `strategy_kwargs`, `max_input_length`, `timeout_per_text`.
-- Strategies: `CONTROL_CHARACTERS`, `LOCAL_ANOMALY`, `WORD_ANOMALY`,
-  `LOG_LIKELIHOOD_RATIO`, `KEYBOARD_ADJACENCY`.
-- Correctly spelled `PronounceabilityStrategy` alias.
-- `GarbleDetector` and `EnsembleDetector.strategy_kwargs` accept strategy
-  names as strings.
+Data, regression checks and documentation:
+- Language-neutral JSON copies of the word, bigram, trigram, secrets, PII
+  and profanity tables under `pygarble/data/` (repository and sdist only),
+  hashed in the manifest, as the shared source for ports.
+- A golden corpus of frozen detector outputs for every profile and a golden
+  scan corpus, both checked in CI, plus a clean-corpus false-positive gate
+  and a throughput script (`paper/regression/`).
+- Documentation for the command line, calibration, screening and
+  redaction, secrets, PII, profanity, standalone screening, architecture and
+  upgrading; discovery metadata, a generated sitemap and `llms.txt`, and
+  optional Search Console verification; root contributor and security
+  guides, issue templates and package metadata links.
+- Optional-backend CI, offline Python integration tests, Unicode/CRLF offset
+  checks and subprocess error and timeout tests.
 
 ### Changed
-- Unknown strategy settings now raise a visible `FutureWarning` at the call
-  site instead of a hidden `DeprecationWarning`.
+- Gibberish implementations live under `pygarble.gibberish`; native PII,
+  profanity and secret detectors and their rules live under
+  `pygarble.screening`. `pygarble`, `pygarble.core`, `pygarble.strategies`
+  and the other old module paths point to the same classes, enums and
+  caches. New pickles use the canonical paths and may not load in 0.8.0.
 - Ensemble-level `**kwargs` are forwarded only to member strategies that
-  accept them.
-- weights passed with a non-weighted voting mode now emit a FutureWarning
-  (they were silently ignored); this will become an error in a future
-  release.
-- Regression baseline regenerated; ensemble holdout F1 0.943 -> 0.943
-  (`english` profile, unchanged; `english_extended` 0.982 -> 0.982).
-  Benchmark (1644-case legacy dataset) ensemble F1 0.919 -> 0.932.
+  accept them, with one warning for a key that no selected member accepts.
+- Calling a strategy's `predict`/`predict_proba` directly goes through
+  `evaluate()`, so text the strategy deems not applicable scores 0.0.
+- `WORD_LOOKUP`'s `unknown_threshold` now affects the score. The default
+  0.5 keeps the 0.8.0 mapping; other values change results.
+- At the 0.9.0 milestone the regression baseline was regenerated: ensemble
+  holdout F1 0.943 (`english`) and 0.982 (`english_extended`); benchmark
+  (1644-case legacy dataset) ensemble F1 0.919 -> 0.932 against 0.8.0.
+- CI tests Python 3.8 to 3.13, pins every action to a commit SHA, and keeps
+  jobs that need Python 3.8 or 3.9 on `ubuntu-24.04`, because
+  `ubuntu-latest` moves to 26.04, which has no builds for those versions.
+  The generated-data check caches the pinned word list. The data generator
+  retries a failed download once and reports a network fault separately
+  from a checksum mismatch.
+- Releases are published from a `v*` tag by one workflow. Before uploading
+  it runs the tests on Python 3.8 and 3.12, lint, the golden checks and a
+  smoke test of the built wheel. Uploads use PyPI Trusted Publishing with
+  the `pypi` GitHub environment, so the project owner must configure that
+  publisher before tagging; existing distribution files are no longer
+  silently skipped. The Docker image is pushed to GHCR only after the PyPI
+  upload succeeds. The separate Docker workflow, including its manual
+  trigger, is removed.
+- Development installs pin flake8 7.x and isort 9.x, which CI lints with;
+  isort 5.13 is used on Python 3.8 and 3.9. `make lint` and `make format`
+  cover `docs/_ext`, as CI does.
+- Generated data tables cite `paper/scripts/generate_data.py` and
+  `paper/scripts/data_curation.json` in their headers.
+
+### Deprecated
+- 0.8.0 import paths work with a `DeprecationWarning` naming the current
+  home, and will be removed in a future release: `BaseStrategy` and the 26
+  0.8.0 strategy classes from `pygarble.core` (use
+  `pygarble.gibberish.strategies`), `BIGRAM_LOG_PROBS` and
+  `DEFAULT_LOG_PROB` from the `markov_chain`, `word_anomaly` and
+  `log_likelihood_ratio` strategy modules (use `pygarble.data`), and
+  `FunctionWordDensityStrategy` from `zipf_conformity` (use
+  `pygarble.gibberish.strategies`).
+- Unknown strategy settings emit a `FutureWarning` at the call site and will
+  become errors in a future release.
+- `weights` passed with a voting mode other than `weighted` emit a
+  `FutureWarning` (they were silently ignored); this will become an error
+  in a future release.
+
+### Removed
+- `pygarble.core` no longer re-exports incidental names that 0.8.0 exposed
+  through its own imports, such as the `typing` helpers `Callable` and
+  `Dict` and the `concurrent` module. Import them from the standard library.
 
 ### Fixed
-- allowlist is now honoured by every strategy, not only the four that
-  override feature evaluation.
-- huge integers for numeric options raise ValueError instead of
-  OverflowError.
-- calling a strategy's `predict`/`predict_proba` directly now goes through
-  `evaluate()`, so text the strategy deems not applicable scores 0.0.
-- WordAnomaly (default profile) no longer flags dictionary acronyms such as
-  DHCP, KPMG, HGTV; ALL-CAPS tokens of six letters or fewer are treated as
-  acronyms and never flagged by this strategy.
-- Mojibake detects U+FFFD in inputs shorter than three characters.
-- PatternMatching (english_extended) no longer flags real words with
-  five-consonant runs or round numbers like 10000; repeated-character and
-  alternating patterns are letters-only.
-- Repetition ignores digit runs and 3-4 word emphasis ("very very very
+- `GarbleDetector` and `EnsembleDetector` objects pickled by 0.8.0 load and
+  predict. A 0.8.0 default ensemble reports profile `legacy`.
+- A bare string passed where a list of names belongs (`EnsembleDetector`
+  strategies, allowlists, PII and secret kinds, locales, and `Scanner`
+  `categories`, `backends`, `kinds` and `exclude_kinds`) raises an error
+  that is both a `TypeError` and a `ValueError`, with a message saying to
+  pass a list. `EnsembleDetector("markov_chain")` no longer reports `'m' is
+  not a valid Strategy`.
+- `WORD_ANOMALY` no longer flags dictionary acronyms such as DHCP, KPMG and
+  HGTV; ALL-CAPS tokens of six letters or fewer are treated as acronyms and
+  never flagged by this strategy.
+- `MOJIBAKE` detects U+FFFD in inputs shorter than three characters.
+- `PATTERN_MATCHING` no longer flags real words with five-consonant runs or
+  round numbers like 10000; repeated-character and alternating patterns are
+  letters-only.
+- `REPETITION` ignores digit runs and 3-4 word emphasis ("very very very
   good"). A text that is one repeated word ("No, no, no!") is still flagged
   by design.
-- LocalAnomaly: a one-word window now emits corrupt_token_window spans
-  (previously only severe_local_anomaly).
-- KeyboardPattern judges repeated bigrams per novel word, so "go go go" is
-  clean.
-- LetterPosition scores only novel words and rejects threshold=0 (previously
-  ZeroDivisionError); Title-Case and ALL-CAPS tokens are exempt as likely
-  proper nouns and acronyms.
-- Pronounceability accepts sq-, sph-, chl-, scl-, phl-, schl-, gh- onsets and
-  honours min_word_length (default now 4, the previous effective value).
-- FunctionWordDensity counts "a" and "I"; Title Case exemption no longer
-  covers ALL-CAPS; WordCollocation needs 20+ words with no collocation to
-  cross 0.5 and handles curly apostrophes. Lists of ALL-CAPS acronyms no
-  longer receive the Title-Case exemption.
-- HexString no longer classifies file paths or camelCase identifiers as base64.
-- VowelRatio validates its parameters, abstains below 4 letters (new
-  min_length option), and ignores 1-2 letter abbreviations.
-- UnicodeScript no longer flags CJK text with embedded Latin words,
+- `KEYBOARD_PATTERN` judges repeated bigrams per novel word, so "go go go"
+  is clean.
+- `LETTER_POSITION` scores only novel words and rejects `threshold=0`
+  (previously `ZeroDivisionError`); Title-Case and ALL-CAPS tokens are
+  exempt as likely proper nouns and acronyms.
+- `PRONOUNCEABILITY` accepts sq-, sph-, chl-, scl-, phl-, schl- and gh-
+  onsets and honours `min_word_length` (default 4, the previous effective
+  value). It is linear in the length of a long consonant run; it was
+  quadratic, about 10 s for one 1M-character token.
+- `FUNCTION_WORD_DENSITY` counts "a" and "I"; its Title Case exemption no
+  longer covers ALL-CAPS, so lists of ALL-CAPS acronyms are not exempt.
+  `WORD_COLLOCATION` needs 20+ words with no collocation to cross 0.5 and
+  handles curly apostrophes.
+- `HEX_STRING` no longer classifies file paths or camelCase identifiers as
+  base64.
+- `VOWEL_RATIO` validates its parameters, abstains below 4 letters (new
+  `min_length` option), and ignores 1-2 letter abbreviations.
+- `UNICODE_SCRIPT` no longer flags CJK text with embedded Latin words,
   hyphen/digit-separated symbols such as "α-helix" or "μm", or any word
   shorter than three letters; only Latin/Cyrillic/Greek mixing inside one
   word of three or more letters counts. Greek letters attached to three or
   more Latin letters (e.g. "μmol") are still flagged.
-
-### Removed
-- Five legacy strategies (see docs/migration.rst).
 
 ## [0.8.0] - 2026-07-04
 - Previous release; see git history.

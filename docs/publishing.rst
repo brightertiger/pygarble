@@ -122,40 +122,59 @@ settings and add a GitHub Trusted Publisher with these exact fields:
    * - Environment
      - ``pypi``
 
-Configure the GitHub ``pypi`` environment before the next release. A required
-reviewer can make uploading an explicit final maintainer action. The PyPI
-publisher record and the workflow's environment must match. Configure this
-before replacing the token-based release workflow; merging the change does
-not configure PyPI for you. Remove the old API token only after checking
-that no other publishing process still needs it.
+The workflow names the ``pypi`` environment, and the PyPI publisher record
+must name the same one. GitHub creates the environment without protection the
+first time a job uses it, so configure it before the first tag. Merging the
+workflow does not configure PyPI or GitHub for you. Remove any old PyPI API
+token only after checking that no other publishing process still needs it.
 
 Release checklist
 ~~~~~~~~~~~~~~~~~
 
-1. Choose the next unused version. The module separation and optional
-   backends are additive changes suitable for a new minor release; the
-   maintainer chooses the final version. Do not tag the existing version
-   merely to make the source and PyPI appear synchronized.
-2. On a release branch, update ``pygarble.__version__``, turn the changelog's
-   Unreleased entries into dated release notes, and replace source-only
-   installation notices with the actual release version. Update README,
-   installation and migration guidance together.
-3. Run the full tests, optional backend tests, formatting/type checks,
-   generated-data and golden checks, and strict documentation build. Open a
+The next release is 0.11.0, the first since 0.8.0. ``pygarble.__version__`` is
+already 0.11.0, and the changelog's ``[0.11.0] - Unreleased`` entry is its
+release notes; 0.9.0 and 0.10.0 were never published and must not be tagged.
+
+1. **Maintainer only, before tagging:** in **Settings → Environments**, create
+   the ``pypi`` environment and add required reviewers, so a pushed tag cannot
+   publish without approval. Add the Trusted Publisher described above.
+2. **Maintainer only, once Trusted Publishing is set up:** delete the
+   ``PYPI_API_TOKEN`` repository secret, and revoke the token on PyPI after
+   checking that nothing outside this repository uses it. The
+   ``TEST_PYPI_API_TOKEN`` and ``PAT_TOKEN`` secrets are not used by any
+   workflow either; delete them too unless something outside the workflows
+   needs them.
+3. **Maintainer only:** add the ``CODECOV_TOKEN`` repository secret from the
+   Codecov project settings. Without it the coverage upload is rejected; the
+   step is non-fatal, so CI stays green but no coverage is reported.
+4. On a release branch, replace ``Unreleased`` in the ``[0.11.0]`` changelog
+   heading with the release date and leave an empty ``[Unreleased]`` section
+   above it. Replace every source-only notice with the released version: the
+   "while PyPI still serves 0.8.0" and "until 0.11.0 is on PyPI" sentences in
+   the README's upgrade paragraph, :doc:`installation` and :doc:`migration`,
+   and the "unreleased source changes" notices near the top of :doc:`index`,
+   :doc:`api`, :doc:`cli`, :doc:`examples` and :doc:`standalone-screening`
+   (two in the last).
+5. Run the full tests, optional backend tests, ``make lint``, the
+   generated-data and golden checks, and the strict documentation build. Open a
    PR and resolve CI failures before merging.
-4. Build with ``python -m build`` and validate with
+6. Build with ``python -m build`` and validate with
    ``python -m twine check dist/*``. Install the wheel in a fresh environment
-   without runtime dependencies and exercise both canonical and old imports.
-   Check the README links as rendered by PyPI, not just GitHub-relative links.
-5. Verify the Trusted Publisher setup. Once the release is approved and the
-   version change is merged, tag that exact commit ``v<version>`` and push
-   the tag. **This publishes to PyPI and then pushes the Docker image to
-   GHCR once the PyPI upload succeeds.** A draft GitHub release alone does not trigger
-   this tag-based package workflow.
-6. Verify the published package version and metadata, create the matching
-   GitHub release with changelog notes, and check the live docs. Published
+   without runtime dependencies and exercise both canonical and 0.8.0 imports.
+   Check the README links as rendered by PyPI, not just on GitHub.
+7. Once the release PR is merged, tag that exact commit ``v0.11.0`` and push
+   the tag. The workflow refuses a tag that differs from
+   ``pygarble.__version__``. **After the** ``pypi`` **environment approval, this
+   publishes to PyPI and then pushes the Docker image to GHCR.** A draft GitHub
+   release alone does not trigger this tag-based workflow.
+8. Verify the published package version and metadata, create the matching
+   GitHub release with the changelog notes, and check the live docs. Published
    files cannot be replaced with different content under the same version;
    use a new version for a correction.
+
+For later releases, choose the next version according to the changelog's
+``[Unreleased]`` entries and update ``pygarble.__version__`` in the release
+branch.
 
 Do not treat a built artifact, passing CI or a pushed branch as a completed
 release. Confirm the actual PyPI project and download/install the release.

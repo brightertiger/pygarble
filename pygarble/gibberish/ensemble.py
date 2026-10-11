@@ -172,8 +172,8 @@ class EnsembleDetector:
         self.strategies = list(members)
         if weights is not None and len(weights) != len(members):
             hint = (
-                "; the default ensemble grew in 0.9.0, use profile='legacy' "
-                "for the 0.8.0 set"
+                "; the default ensemble grew since 0.8.0, use "
+                "profile='legacy' for the 0.8.0 set"
                 if default_set
                 else ""
             )
