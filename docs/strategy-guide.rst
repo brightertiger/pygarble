@@ -11,8 +11,8 @@ Use ``corruption`` for encoding/control artifacts without English plausibility
 scoring. ``spoofing`` is a Unicode script/confusable heuristic, not a full phishing
 or Unicode security implementation. Profile membership is listed in :doc:`strategies`.
 
-What the paper tells us about strategy choice
----------------------------------------------
+What the preprint tells us about strategy choice
+-----------------------------------------------
 
 The preprint in :doc:`benchmarks` runs two profiles at their defaults on two
 English datasets: Survey Junk, which holds only junk survey answers, and
@@ -20,8 +20,8 @@ Tweets vs. Random Strings. It supports three choices.
 
 * **Survey and form free text: use** ``english_fusion``. It captured 89.5% of
   the survey junk and flagged 6.8% of tweets. Neither baseline matched it on
-  both datasets at once. Add a minimum-length rule if one- and two-character answers count
-  as junk.
+  both datasets at once. Add a minimum-length rule if one- and two-character
+  answers count as junk.
 * **Social-media text: do not use the default profile as shipped.** The
   default ``english`` profile flagged 33.2% of tweets. Its ``mojibake`` and
   ``control_characters`` members target encoding damage, and about a quarter

@@ -281,7 +281,8 @@ for every result, interval and limitation. PII, secrets and profanity are
 outside that benchmark.
 
 Run `make benchmark-verify` to recompute every metric from the committed
-per-row predictions; the raw data is never committed. Small authored challenge sets remain engineering regression fixtures.
+per-row predictions; the raw data is never committed. Small authored challenge
+sets remain engineering regression fixtures.
 
 - [Changelog](https://github.com/brightertiger/pygarble/blob/main/CHANGELOG.md)
 - [Preprint, benchmark and reproduction](https://github.com/brightertiger/pygarble/blob/main/paper/README.md)

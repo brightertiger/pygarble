@@ -146,8 +146,8 @@ Time is the default decision over all 9,971 Tweets vs. Random Strings texts
 on one thread of an Apple M2 with Python 3.12.2, the median of five runs
 after a warm-up. Timings depend on the machine. Install size counts the
 installed files and runtime dependencies. For gibberish-detector it includes
-the training corpus. lingua bundles its language models in its wheel. All methods run offline once installed, and pygarble has no runtime
-dependencies.
+the training corpus. lingua bundles its language models in its wheel. All
+methods run offline once installed, and pygarble has no runtime dependencies.
 
 What this shows
 ---------------
@@ -193,7 +193,8 @@ never committed. From the repository root:
    make preprint PYTHON=/path/to/venv/bin/python
 
 The first command fails on any difference from the committed metrics. CI
-runs it on pull requests and pushes to main. To re-score from the raw files, follow the
+runs it on pull requests and pushes to main. To re-score from the raw files,
+follow the
 `benchmark README
 <https://github.com/brightertiger/pygarble/blob/main/paper/scripts/benchmark/README.md>`_.
 Scores are deterministic, so a rerun reproduces the predictions exactly.
