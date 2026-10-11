@@ -313,9 +313,11 @@ intervals. The tuned row below the dashed rule is post hoc
 \small
 \caption{Capture rate on \SJ{}: the share of \nA{} junk responses each
 method flags at its default decision, with 95\,\% bootstrap intervals.
-Typewriter names are pygarble profiles. Lingua flags a text when the
-detected language is not English. The last row is post hoc
-(Section~\ref{sec:tuning}).}
+The three pygarble rows are the same library run with different
+profiles, written in typewriter. Lingua flags a text when the detected
+language is not English. The last row is post hoc
+(Section~\ref{sec:tuning}). * best, ** second best per column among the
+four main rows; the post hoc row is not ranked.}
 \label{tab:survey}
 \input{tables/table_survey.tex}
 \end{table}
@@ -352,14 +354,16 @@ below one.
 
 \begin{table}[t]
 \centering
-\small
+\footnotesize
 \caption{Precision, recall and false-positive rate on \TRS{} (\nBpos{}
 random strings as junk, \nBneg{} tweets as clean), every method at its
 default decision; each cell shows the value with its 95\,\% bootstrap
-interval beneath. FPR is the share of tweets flagged. Typewriter names
-are pygarble profiles. Lingua flags a text when the detected language is
-not English. The last row is post hoc
-(Section~\ref{sec:tuning}).}
+interval beneath. FPR is the share of tweets flagged. The three pygarble
+rows are the same library run with different profiles, written in
+typewriter. Lingua flags a text when the detected language is not
+English. The last row is post hoc (Section~\ref{sec:tuning}). * best,
+** second best per column among the four main rows; the post hoc row is
+not ranked.}
 \label{tab:tweets}
 \input{tables/table_tweets.tex}
 \end{table}
@@ -416,7 +420,7 @@ check, so it has no such variant.
 
 \begin{table}[t]
 \centering
-\small
+\footnotesize
 \caption{Footprint. Time is the default decision over all \nB{} texts of
 \TRS{} on one thread of an \cpuname{}, median of five runs after a
 warm-up. Install size counts the installed files of the distribution and
