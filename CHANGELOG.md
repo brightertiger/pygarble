@@ -63,7 +63,8 @@ All notable changes to pygarble are documented here. The format follows
 - `EnsembleDetector(strategies=[None])` raises `ValueError` naming the bad
   member instead of a bare `KeyError`.
 - A bare string passed as a list of names (`EnsembleDetector` strategies,
-  allowlists, PII and secret kinds, locales) raises an error that is both a
+  allowlists, PII and secret kinds, locales, and `Scanner` `categories`,
+  `backends`, `kinds` and `exclude_kinds`) raises an error that is both a
   `TypeError` and a `ValueError`, with a message saying to pass a list.
   `EnsembleDetector("markov_chain")` no longer reports `'m' is not a valid
   Strategy`.
