@@ -148,7 +148,10 @@ def build_indexes(app: Any, exception: Optional[Exception]) -> None:
 
 def setup(app: Any) -> Dict[str, Any]:
     app.connect("html-page-context", page_context)
-    app.connect("build-finished", build_indexes)
+    # Run after the theme (default priority 500): sphinx-immaterial writes its
+    # own sitemap.xml when site_url is set, listing generated pages such as
+    # genindex and search; this one lists authored pages only and must win.
+    app.connect("build-finished", build_indexes, priority=900)
     return {
         "version": "1",
         "parallel_read_safe": True,

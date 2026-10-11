@@ -1,6 +1,10 @@
 {% extends "!layout.html" %}
 {% block extrahead %}
   {{ super() }}
+  {#- sphinx-immaterial never fills page.canonical_url, so emit it here. #}
+  {% if pageurl %}
+  <link rel="canonical" href="{{ pageurl|e }}" />
+  {% endif %}
   {% if discovery_indexable %}
   <meta name="description" content="{{ discovery_description|e }}" />
   <meta property="og:type" content="website" />

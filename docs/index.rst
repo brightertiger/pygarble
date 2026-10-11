@@ -44,9 +44,16 @@ identifier captures more survey junk, and the default ``english`` profile
 flags 33.2% of tweets. Read :doc:`benchmarks` for every result, the
 limitations and the reproduction commands.
 
+.. The captions below become the navigation tabs of the Material theme.
+
+.. toctree::
+   :hidden:
+
+   Home <self>
+
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Screening
 
    installation
    quickstart
@@ -56,14 +63,29 @@ limitations and the reproduction commands.
    profanity
    cli
    screening
+   examples
+   migration
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Gibberish
+
    strategy-guide
    strategies
    calibration
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Reference
+
    api
-   examples
-   migration
    architecture
    benchmarks
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Maintainers
+
    contributing
    publishing
 
