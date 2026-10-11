@@ -97,6 +97,11 @@ class GarbleDetector:
 
     def applicable(self, text: str) -> bool:
         BaseStrategy._validate_input(text)
+        if (
+            self.max_input_length is not None
+            and len(text) > self.max_input_length
+        ):
+            raise ValueError("text exceeds max_input_length")
         return self._strategy_instance.evaluate(
             TextFeatures(text, self.allowlist)
         ).applicable

@@ -85,6 +85,22 @@ All notable changes to pygarble are documented here. The format follows
 - `calibrate` sorts the scores once and counts each candidate threshold by
   bisection, so it is O(N log N) instead of O(N^2) in the sample size.
   Reports are unchanged.
+- `pygarble.scan()` and `redact()` no longer serve `min_confidence=True`
+  from a cache entry made for `min_confidence=1`; the option is validated
+  the same way on every call. A dict-valued option is passed to `Scanner`
+  instead of failing with "unhashable type".
+- `control_characters` flags text made only of control characters that
+  `str.strip()` treats as whitespace (VT, FF, U+001C-U+001F, NEL) instead of
+  returning `insufficient_evidence` for empty input.
+- `GarbleDetector.applicable()` raises `ValueError` for text longer than
+  `max_input_length`, as `analyze()` and `predict()` already do.
+- `pattern_matching` raises `ValueError` naming the pattern for an invalid
+  custom regex (it raised `re.error`) and rejects a non-bool
+  `override_defaults`.
+- An optional screening backend whose package is installed but fails to
+  import says why. On Python 3.8, python-stdnum without setuptools now asks
+  for `pip install setuptools` instead of claiming `pygarble[stdnum]` is
+  missing.
 
 ### Changed
 - CI tests Python 3.13, pins every action to a commit SHA, and keeps jobs
