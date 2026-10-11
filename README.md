@@ -304,7 +304,7 @@ Cite the preprint for the benchmark results and the software entry for the libra
 }
 
 @misc{pygarble,
-  author       = {Rao, Ujjwal Singh},
+  author       = {Rao, Ujjwal Singh and Singh, Ricky},
   title        = {pygarble: local screening of text for secrets, {PII}, profanity and gibberish},
   year         = {2026},
   howpublished = {\url{https://github.com/brightertiger/pygarble}},
