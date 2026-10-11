@@ -273,3 +273,66 @@ At the cut at 0.1 percent FPR on B dev tweets:
 | strategy_primed_compression | 0.796046 | 0.0006 | 0.044 [0.038, 0.051] | n/a | 0.000 [0.000, 0.000] | 0.000 [0.000, 0.000] |
 | strategy_ngram_rank | 0.838765 | 0.0006 | 0.337 [0.321, 0.352] | 0.979 [0.946, 1.000] | 0.034 [0.027, 0.040] | 0.000 [0.000, 0.001] |
 | strategy_permutation_test | 0.867566 | 0.0006 | 0.116 [0.105, 0.127] | 0.920 [0.800, 1.000] | 0.008 [0.005, 0.012] | 0.000 [0.000, 0.001] |
+
+## Footprint
+
+| Method | ms per 1,000 texts | import s | install MB | offline |
+| --- | --- | --- | --- | --- |
+| english | 62.8 | 0.019 | 1.05 | yes |
+| english_extended | 108.3 | 0.019 | 1.05 | yes |
+| english_fusion | 61.9 | 0.019 | 1.05 | yes |
+| legacy | 44.4 | 0.019 | 1.05 | yes |
+| corruption | 14.7 | 0.019 | 1.05 | yes |
+| spoofing | 35.0 | 0.019 | 1.05 | yes |
+| llm_output | 55.8 | 0.019 | 1.05 | yes |
+| english_vote_majority | 88.4 | 0.019 | 1.05 | yes |
+| english_vote_any | 62.4 | 0.019 | 1.05 | yes |
+| english_vote_all | 36.7 | 0.019 | 1.05 | yes |
+| english_vote_average | 87.7 | 0.019 | 1.05 | yes |
+| english_vote_weighted | 88.8 | 0.019 | 1.05 | yes |
+| english_vote_fisher | 95.8 | 0.019 | 1.05 | yes |
+| strategy_control_characters | 8.4 | 0.027 | 1.05 | yes |
+| strategy_local_anomaly | 34.8 | 0.027 | 1.05 | yes |
+| strategy_pattern_matching | 46.9 | 0.027 | 1.05 | yes |
+| strategy_entropy_based | 25.7 | 0.027 | 1.05 | yes |
+| strategy_vowel_ratio | 28.6 | 0.027 | 1.05 | yes |
+| strategy_keyboard_pattern | 31.0 | 0.027 | 1.05 | yes |
+| strategy_markov_chain | 30.2 | 0.027 | 1.05 | yes |
+| strategy_ngram_frequency | 31.4 | 0.027 | 1.05 | yes |
+| strategy_word_lookup | 7.2 | 0.027 | 1.05 | yes |
+| strategy_symbol_ratio | 4.6 | 0.027 | 1.05 | yes |
+| strategy_repetition | 17.0 | 0.027 | 1.05 | yes |
+| strategy_hex_string | 6.8 | 0.027 | 1.05 | yes |
+| strategy_mojibake | 7.2 | 0.027 | 1.05 | yes |
+| strategy_pronounceability | 33.2 | 0.027 | 1.05 | yes |
+| strategy_unicode_script | 34.2 | 0.027 | 1.05 | yes |
+| strategy_bigram_probability | 13.4 | 0.027 | 1.05 | yes |
+| strategy_letter_position | 28.2 | 0.027 | 1.05 | yes |
+| strategy_consonant_sequence | 8.0 | 0.027 | 1.05 | yes |
+| strategy_vowel_pattern | 7.1 | 0.027 | 1.05 | yes |
+| strategy_letter_frequency | 28.8 | 0.027 | 1.05 | yes |
+| strategy_rare_trigram | 9.6 | 0.027 | 1.05 | yes |
+| strategy_function_word_density | 5.9 | 0.027 | 1.05 | yes |
+| strategy_affix_detection | 23.5 | 0.027 | 1.05 | yes |
+| strategy_zipf_conformity | 3.1 | 0.027 | 1.05 | yes |
+| strategy_word_collocation | 8.5 | 0.027 | 1.05 | yes |
+| strategy_log_likelihood_ratio | 36.5 | 0.027 | 1.05 | yes |
+| strategy_word_anomaly | 31.1 | 0.027 | 1.05 | yes |
+| strategy_keyboard_adjacency | 12.4 | 0.027 | 1.05 | yes |
+| strategy_cross_parsing | 37.2 | 0.027 | 1.05 | yes |
+| strategy_primed_compression | 64.4 | 0.027 | 1.05 | yes |
+| strategy_ngram_rank | 90.0 | 0.027 | 1.05 | yes |
+| strategy_permutation_test | 149.5 | 0.027 | 1.05 | yes |
+| nostril | 31.9 | 0.400 | 13.25 | yes |
+| gibberish_detector | 6.8 | 0.038 | 6.51 | yes |
+| gibberish_chat_detector | 74.5 | 0.036 | 20.63 | yes |
+| lingua | 981.0 | 0.001 | 307.47 | yes |
+| gopher_rules | 34.6 | 0.004 | 0.01 | yes |
+| c4_rules | 63.3 | 0.004 | 0.01 | yes |
+
+## Calibration at target FPR 0.01
+
+| Profile | threshold | dev FPR | target met | B test FPR | B test recall | A capture |
+| --- | --- | --- | --- | --- | --- | --- |
+| english | 1 | 0.0360 | no | 0.028 [0.023, 0.033] | 0.572 [0.555, 0.589] | 0.601 [0.585, 0.618] |
+| english_fusion | 0.676026 | 0.0100 | yes | 0.003 [0.002, 0.005] | 0.603 [0.584, 0.621] | 0.600 [0.583, 0.615] |

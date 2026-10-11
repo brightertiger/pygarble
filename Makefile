@@ -1,12 +1,13 @@
 PYTHON ?= python
 
-.PHONY: benchmark benchmark-check benchmark-prepare help install install-dev test lint format clean build upload-test upload docs docs-clean docs-serve docs-deploy
+.PHONY: benchmark benchmark-check benchmark-prepare benchmark-verify help install install-dev test lint format clean build upload-test upload docs docs-clean docs-serve docs-deploy
 
 help:
 	@echo "Available commands:"
 	@echo "  benchmark-check   Verify study analysis and saved predictions (offline)"
 	@echo "  benchmark-prepare Download pinned research corpus/model assets"
 	@echo "  benchmark         Run the full paper comparison to reproduction-full/"
+	@echo "  benchmark-verify  Recompute preprint benchmark metrics from saved predictions"
 	@echo "  install      Install the package"
 	@echo "  install-dev  Install development dependencies"
 	@echo "  test         Run tests"
@@ -82,3 +83,8 @@ benchmark-prepare:
 
 benchmark:
 	$(PYTHON) -m paper.scripts.study.full_corpus --output paper/study/reproduction-full
+
+# Preprint benchmark (paper/scripts/benchmark); needs numpy, not the raw data.
+benchmark-verify:
+	$(PYTHON) -m paper.scripts.benchmark.verify
+	$(PYTHON) -m unittest paper.scripts.benchmark.test_benchmark

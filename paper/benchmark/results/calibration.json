@@ -1,0 +1,64 @@
+{
+ "target_fpr": 0.01,
+ "sample": {
+  "clean": 500,
+  "garbled": 500,
+  "seed": 20261011
+ },
+ "profiles": {
+  "english": {
+   "threshold": 1.0,
+   "dev_fpr": 0.036,
+   "dev_recall": 0.618,
+   "constraint_met": false,
+   "B_test_fpr": {
+    "value": 0.02799,
+    "ci": [
+     0.023118,
+     0.032761
+    ]
+   },
+   "B_test_recall": {
+    "value": 0.571786,
+    "ci": [
+     0.554629,
+     0.588934
+    ]
+   },
+   "A_capture": {
+    "value": 0.600626,
+    "ci": [
+     0.584685,
+     0.61799
+    ]
+   }
+  },
+  "english_fusion": {
+   "threshold": 0.6760261540076514,
+   "dev_fpr": 0.01,
+   "dev_recall": 0.598,
+   "constraint_met": true,
+   "B_test_fpr": {
+    "value": 0.00311,
+    "ci": [
+     0.001671,
+     0.004797
+    ]
+   },
+   "B_test_recall": {
+    "value": 0.6025,
+    "ci": [
+     0.584111,
+     0.621459
+    ]
+   },
+   "A_capture": {
+    "value": 0.600057,
+    "ci": [
+     0.583262,
+     0.615428
+    ]
+   }
+  }
+ }
+}

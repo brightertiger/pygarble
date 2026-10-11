@@ -5,7 +5,7 @@ import unittest
 
 import numpy as np
 
-from . import data, metrics, rules
+from . import calibrate, data, footprint, metrics, rules, verify
 from .methods import specs
 
 
@@ -81,6 +81,39 @@ class RunTests(unittest.TestCase):
         self.assertEqual(point["A_capture"]["value"], 1.0)
         self.assertTrue(result["checkpoint"]["passed"])
         self.assertEqual(curves["english_fusion"][-1][2], 1.0)
+
+
+class VerifyTests(unittest.TestCase):
+    def test_differences_reports_a_changed_number(self) -> None:
+        saved = {"m": {"auroc": {"value": 0.9, "ci": [0.8, 1.0]}}}
+        fresh = {"m": {"auroc": {"value": 0.9, "ci": [0.8, 0.99]}}}
+        self.assertEqual(verify.differences(saved, saved), [])
+        self.assertEqual(
+            verify.differences(saved, fresh), ["/m/auroc/ci[1]: 1.0 != 0.99"]
+        )
+
+
+class FootprintTests(unittest.TestCase):
+    def test_timing_and_install_size(self) -> None:
+        method = specs()["english"].build()
+        ms, runs = footprint.time_method(method, ["hello there"] * 20, runs=2)
+        self.assertGreater(ms, 0)
+        self.assertEqual(len(runs), 2)
+        size = footprint.install_bytes("english", ("pygarble",), data.OUTPUT)
+        self.assertGreater(size, 100_000)
+
+
+class CalibrateTests(unittest.TestCase):
+    def test_threshold_meets_target_on_calibration_sample(self) -> None:
+        sample = {
+            "clean": ["the meeting moved to friday afternoon"] * 50,
+            "garbled": ["qwkjzx vbnmrt plokij"] * 50,
+        }
+        result = calibrate.calibrate_profile("english_fusion", sample)
+        self.assertTrue(result["constraint_met"])
+        self.assertEqual(result["dev_recall"], 1.0)
+        detector = result["detector"]
+        self.assertEqual(detector.predict(sample["garbled"][:1]), [True])
 
 
 if __name__ == "__main__":
