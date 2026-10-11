@@ -8,8 +8,8 @@ from pygarble.cli import main
 
 def test_cli_text_and_tsv_rows_escape_tabs_and_newlines(capsys):
     # F3: one input text is one output row with a fixed number of columns.
-    text = "fine\tline\r\nasdkjh qwpoeiru zmxncbv"
-    escaped = "fine\\tline\\r\\nasdkjh qwpoeiru zmxncbv"
+    text = "fine\tline\r\nasdkjh\x0b\x1cqwpoeiru\x85zmxncbv\u2028end"
+    escaped = "fine\\tline\\r\\nasdkjh\\x0b\\x1cqwpoeiru\\x85zmxncbv\\u2028end"
     for argv, columns in (
         (["check", "-t", text], 2),
         (["score", "-t", text], 2),
@@ -19,7 +19,7 @@ def test_cli_text_and_tsv_rows_escape_tabs_and_newlines(capsys):
     ):
         main(argv)
         out = capsys.readouterr().out
-        assert out.count("\n") == 1, argv
+        assert len(out.splitlines()) == 1, argv
         fields = out.rstrip("\n").split("\t")
         assert len(fields) == columns, argv
         assert fields[-1] == escaped, argv

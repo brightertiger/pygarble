@@ -289,7 +289,8 @@ def test_file_lines_split_on_newline_only(capsys, tmp_path):
         capsys, ["check", "--strategy", "control_characters", str(path)]
     )
     assert code == 1
-    assert out == "garbled\thello\x1cworld\n"
+    # One text, not split at U+001C; printed escaped so it stays one row.
+    assert out == "garbled\thello\\x1cworld\n"
 
 
 def test_nel_and_separators_stay_on_one_line(capsys, tmp_path):
@@ -299,7 +300,11 @@ def test_nel_and_separators_stay_on_one_line(capsys, tmp_path):
     code, out, _ = run(capsys, ["score", str(path)])
     assert code == 0
     assert out.count("\n") == 1
-    assert out.rstrip("\n").split("\t", 1)[1] == text
+    # Not split into several texts; printed escaped so the row stays one line.
+    assert (
+        out.rstrip("\n").split("\t", 1)[1]
+        == "caf\\x85e\\u2028x\\u2029y\\x0b\\x0cz"
+    )
 
 
 def test_crlf_lines_drop_carriage_return(capsys, tmp_path):
@@ -344,7 +349,8 @@ def test_stdin_splits_on_newline_only(capsys, monkeypatch):
         monkeypatch=monkeypatch,
     )
     assert code == 1
-    assert out == "garbled\thello\x1cworld\n"
+    # One text, not split at U+001C; printed escaped so it stays one row.
+    assert out == "garbled\thello\\x1cworld\n"
 
 
 def test_broken_pipe_is_quiet(tmp_path):

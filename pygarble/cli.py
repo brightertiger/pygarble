@@ -270,17 +270,33 @@ def analysis_row(text: str, analysis: Any) -> Dict[str, Any]:
 
 
 _FORMAT_HELP = (
-    "text and tsv print a tab, LF or CR inside the text as \\t, \\n or \\r; "
-    "jsonl is lossless"
+    "text and tsv print tabs and line breaks inside the text as escapes "
+    "(\\t, \\n, \\r, \\x0b, \\u2028, ...); jsonl is lossless"
 )
-_ROW_ESCAPES = str.maketrans({"\t": "\\t", "\n": "\\n", "\r": "\\r"})
+# Tab plus every character str.splitlines() breaks on, as Python escapes.
+_ROW_ESCAPES = str.maketrans(
+    {
+        "\t": "\\t",
+        "\n": "\\n",
+        "\r": "\\r",
+        "\x0b": "\\x0b",
+        "\x0c": "\\x0c",
+        "\x1c": "\\x1c",
+        "\x1d": "\\x1d",
+        "\x1e": "\\x1e",
+        "\x85": "\\x85",
+        "\u2028": "\\u2028",
+        "\u2029": "\\u2029",
+    }
+)
 
 
 def escape_text(text: str) -> str:
-    """Keep one text on one row: tab, LF and CR become \\t, \\n and \\r.
+    """Keep one text on one row for any line reader, even splitlines().
 
-    Backslashes are left alone, so the text column of text and TSV output
-    is not reversible; JSONL is the lossless format.
+    Tabs and line breaks become Python escapes. Backslashes are left alone,
+    so the text column of text and TSV output is not reversible; JSONL is
+    the lossless format.
     """
     return text.translate(_ROW_ESCAPES)
 

@@ -114,11 +114,13 @@ each object with a ``pygarble`` key added.
 The TSV columns are the decision as ``1`` or ``0``, the score, the status
 and the text.
 
-Text and TSV rows keep one input text on one line: a tab, line feed or
-carriage return inside the text is printed as the two characters ``\t``,
-``\n`` or ``\r``. Backslashes are not escaped, so that column cannot be
-decoded back exactly; use ``--format jsonl`` when the text must round-trip.
-This applies to ``scan`` rows too.
+Text and TSV rows keep one input text on one line, even for readers that
+split like ``str.splitlines()``: a tab or line break inside the text is
+printed as a Python escape (``\t``, ``\n``, ``\r``, ``\x0b``, ``\x0c``,
+``\x1c``, ``\x1d``, ``\x1e``, ``\x85``, ``\u2028``, ``\u2029``).
+Backslashes are not escaped, so that column cannot be decoded back exactly;
+use ``--format jsonl`` when the text must round-trip. This applies to
+``scan`` rows too.
 
 Calibrate a threshold
 ---------------------
