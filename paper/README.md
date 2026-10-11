@@ -1,6 +1,6 @@
 # pygarble paper and benchmark
 
-Author: Ujjwal Singh Rao
+Authors: Ujjwal Singh Rao and Ricky Singh
 
 This directory holds the preprint and the evidence behind it.
 

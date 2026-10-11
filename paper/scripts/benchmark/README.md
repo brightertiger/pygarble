@@ -1,6 +1,6 @@
 # Preprint benchmark
 
-Code for the benchmark in `paper/PREPRINT-PLAN.md`. The frozen protocol is
+Code for the preprint benchmark. The frozen protocol is
 `paper/benchmark/protocol.md`, departures are in
 `paper/benchmark/deviations.md`, and results are in
 `paper/benchmark/results/`. No dataset text is committed: the manifest and
