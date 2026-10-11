@@ -1,4 +1,4 @@
-# Preprint plan (v6, 2026-10-11)
+# Preprint plan (v7, 2026-10-11)
 
 Deliverables: benchmark code, frozen results and analysis, LaTeX source and
 PDF of the preprint. Scope: one preprint showing what pygarble captures on two public gibberish
@@ -34,14 +34,17 @@ as given; the mojibake-tweet share is reported as a note, not re-labelled.
 Three methods, both datasets, each at its own default decision:
 pygarble (two rows: the default `english` profile and `english_fusion`),
 gibberish-detector 0.1.1 (rrenaud Markov port, trained on its big.txt,
-pinned), lingua-language-detector 2.2.0 with "not English is junk". Nothing
-else. Footprint for the same rows: ms per 1,000 texts single-threaded,
+pinned), lingua-language-detector 2.2.0 with "not English is junk". Plus one
+post hoc row, "domain-specific tuning": the `english` profile with the
+MOJIBAKE strategy removed (same five other members, voting any, threshold
+0.5), constructed after seeing that 26.4 percent of tweets carry mojibake;
+reported in its own subsection as post hoc. Nothing else. Footprint for the same rows: ms per 1,000 texts single-threaded,
 median of 5; install size.
 
 ## Figures and tables
 
 Table 1: four rows (pygarble english, pygarble english_fusion,
-gibberish-detector, lingua); columns A capture, B precision, B recall, B FPR,
+gibberish-detector, lingua) plus the separated tuned row; columns A capture, B precision, B recall, B FPR,
 with 95 percent bootstrap intervals. Table 2: footprint for the same rows.
 One optional two-panel figure (A capture; B precision and recall). All
 numbers read from result files.
