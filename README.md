@@ -296,7 +296,7 @@ Cite the preprint for the benchmark results and the software entry for the libra
 
 ```bibtex
 @misc{rao2026pygarble,
-  author       = {Rao, Ujjwal Singh},
+  author       = {Rao, Ujjwal Singh and Singh, Ricky},
   title        = {How Much Junk Do Rules Catch? Evaluating and Tuning pygarble, a Dependency-Free Gibberish Screener, on Survey Responses and Social-Media Text},
   year         = {2026},
   howpublished = {Preprint, \url{https://github.com/brightertiger/pygarble/blob/main/paper/preprint/main.pdf}}
