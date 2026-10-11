@@ -1,30 +1,13 @@
-\begin{tabular}{lllll}
+\begin{tabular}{p{4.6cm}llll}
 \toprule
 Method & A capture & B precision & B recall & B FPR \\
 \midrule
-\multicolumn{5}{l}{\emph{pygarble profiles}} \\
-english\_fusion & 0.895 {\scriptsize [0.884, 0.905]} & 0.906 {\scriptsize [0.898, 0.915]} & 0.991 {\scriptsize [0.987, 0.993]} & 0.068 {\scriptsize [0.062, 0.075]} \\
-english & 0.830 {\scriptsize [0.817, 0.843]} & 0.656 {\scriptsize [0.645, 0.670]} & 0.947 {\scriptsize [0.940, 0.954]} & 0.332 {\scriptsize [0.320, 0.344]} \\
-english\_extended & 0.852 {\scriptsize [0.839, 0.863]} & 0.649 {\scriptsize [0.638, 0.663]} & 0.951 {\scriptsize [0.944, 0.958]} & 0.344 {\scriptsize [0.331, 0.356]} \\
-legacy & 0.812 {\scriptsize [0.798, 0.825]} & 0.781 {\scriptsize [0.770, 0.793]} & 0.947 {\scriptsize [0.940, 0.954]} & 0.178 {\scriptsize [0.169, 0.188]} \\
-llm\_output & 0.282 {\scriptsize [0.267, 0.297]} & 0.200 {\scriptsize [0.184, 0.217]} & 0.110 {\scriptsize [0.100, 0.120]} & 0.294 {\scriptsize [0.282, 0.306]} \\
-corruption & 0.000 {\scriptsize [0.000, 0.000]} & 0.000 {\scriptsize [0.000, 0.000]} & 0.000 {\scriptsize [0.000, 0.000]} & 0.285 {\scriptsize [0.274, 0.296]} \\
-spoofing & 0.000 {\scriptsize [0.000, 0.000]} & n/a & 0.000 {\scriptsize [0.000, 0.000]} & 0.000 {\scriptsize [0.000, 0.000]} \\
-\midrule
-\multicolumn{5}{l}{\emph{Voting modes on english}} \\
-english, any (default) & 0.830 {\scriptsize [0.817, 0.843]} & 0.656 {\scriptsize [0.645, 0.670]} & 0.947 {\scriptsize [0.940, 0.954]} & 0.332 {\scriptsize [0.320, 0.344]} \\
-english, majority & 0.260 {\scriptsize [0.244, 0.275]} & 0.724 {\scriptsize [0.552, 0.880]} & 0.005 {\scriptsize [0.003, 0.008]} & 0.001 {\scriptsize [0.001, 0.002]} \\
-english, all & 0.000 {\scriptsize [0.000, 0.000]} & n/a & 0.000 {\scriptsize [0.000, 0.000]} & 0.000 {\scriptsize [0.000, 0.000]} \\
-english, average & 0.258 {\scriptsize [0.243, 0.274]} & 0.477 {\scriptsize [0.333, 0.630]} & 0.005 {\scriptsize [0.003, 0.008]} & 0.004 {\scriptsize [0.002, 0.005]} \\
-english, weighted & 0.258 {\scriptsize [0.243, 0.274]} & 0.477 {\scriptsize [0.333, 0.630]} & 0.005 {\scriptsize [0.003, 0.008]} & 0.004 {\scriptsize [0.002, 0.005]} \\
-english, fisher & 0.617 {\scriptsize [0.602, 0.634]} & 0.725 {\scriptsize [0.710, 0.741]} & 0.581 {\scriptsize [0.565, 0.595]} & 0.147 {\scriptsize [0.139, 0.156]} \\
-\midrule
-\multicolumn{5}{l}{\emph{Baselines}} \\
+pygarble english (default) & 0.830 {\scriptsize [0.817, 0.843]} & 0.656 {\scriptsize [0.645, 0.670]} & 0.947 {\scriptsize [0.940, 0.954]} & 0.332 {\scriptsize [0.320, 0.344]} \\
+pygarble english\_fusion & 0.895 {\scriptsize [0.884, 0.905]} & 0.906 {\scriptsize [0.898, 0.915]} & 0.991 {\scriptsize [0.987, 0.993]} & 0.068 {\scriptsize [0.062, 0.075]} \\
 gibberish-detector & 0.722 {\scriptsize [0.707, 0.736]} & 0.995 {\scriptsize [0.993, 0.997]} & 0.822 {\scriptsize [0.809, 0.833]} & 0.003 {\scriptsize [0.002, 0.004]} \\
-nostril & 0.640 {\scriptsize [0.624, 0.654]} & 0.975 {\scriptsize [0.968, 0.981]} & 0.550 {\scriptsize [0.534, 0.566]} & 0.010 {\scriptsize [0.007, 0.012]} \\
-gibberish-chat-detector & 0.333 {\scriptsize [0.318, 0.349]} & 0.030 {\scriptsize [0.021, 0.040]} & 0.009 {\scriptsize [0.007, 0.013]} & 0.203 {\scriptsize [0.194, 0.214]} \\
 lingua (not English) & 0.989 {\scriptsize [0.985, 0.992]} & 0.876 {\scriptsize [0.867, 0.886]} & 0.994 {\scriptsize [0.991, 0.996]} & 0.094 {\scriptsize [0.087, 0.101]} \\
-Gopher rules & 1.000 {\scriptsize [1.000, 1.000]} & 0.401 {\scriptsize [0.392, 0.412]} & 1.000 {\scriptsize [1.000, 1.000]} & 1.000 {\scriptsize [1.000, 1.000]} \\
-C4 rules & 0.999 {\scriptsize [0.999, 1.000]} & 0.402 {\scriptsize [0.392, 0.412]} & 1.000 {\scriptsize [1.000, 1.000]} & 0.998 {\scriptsize [0.997, 0.999]} \\
+\midrule
+\multicolumn{5}{l}{\emph{Post hoc, domain-specific tuning}} \\
+pygarble english, tuned (no mojibake, no control characters) & 0.830 {\scriptsize [0.817, 0.843]} & 0.777 {\scriptsize [0.766, 0.789]} & 0.947 {\scriptsize [0.940, 0.954]} & 0.182 {\scriptsize [0.173, 0.192]} \\
 \bottomrule
 \end{tabular}
