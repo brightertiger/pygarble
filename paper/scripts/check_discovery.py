@@ -3,6 +3,7 @@
 import argparse
 import json
 import os
+import re
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Dict, List, Tuple
@@ -59,6 +60,18 @@ def check(directory: Path) -> None:
     assert (
         set(urls) == expected
     ), "sitemap must contain all authored pages only"
+    for entry in sitemap.findall(".//{*}url"):
+        lastmod = entry.findtext("{*}lastmod", "")
+        assert re.fullmatch(
+            r"\d{4}-\d{2}-\d{2}", lastmod
+        ), "sitemap url needs a YYYY-MM-DD lastmod: " + entry.findtext(
+            "{*}loc", ""
+        )
+    robots_path = directory / "robots.txt"
+    assert robots_path.is_file(), "robots.txt missing"
+    robots = robots_path.read_text(encoding="utf-8").splitlines()
+    assert "User-agent: *" in robots and "Allow: /" in robots, "robots.txt"
+    assert "Sitemap: " + BASE + "sitemap.xml" in robots, "robots sitemap"
     descriptions = set()
     for name in names:
         url = BASE if name == "index" else BASE + name + ".html"
@@ -92,8 +105,6 @@ def check(directory: Path) -> None:
     for url in expected:
         assert "](" + url + ")" in index, url
     # Verify every local link in the text index, including raw RST sources.
-    import re
-
     for target in re.findall(r"\]\(([^)]+)\)", index):
         if target.startswith(BASE):
             relative = unquote(urlsplit(target).path[len("/pygarble/") :])

@@ -13,6 +13,10 @@ All notable changes to pygarble are documented here. The format follows
   consent banner. Optional Google Analytics now uses the theme's native
   integration and loads only after consent. The `docs` extra installs
   `sphinx-immaterial==0.13.9` on Python 3.10+ in place of `sphinx-rtd-theme`.
+- **Docs: the sitemap has `lastmod` dates and the build writes a
+  `robots.txt`.** Dates come from each source file's last commit. The robots
+  file is served under `/pygarble/`, which Google does not read; it mirrors
+  the sister project's site.
 - **The golden regression corpus has new inputs.** They are a seeded
   600-row sample (seed 20261011) of the English rows of the Apache-2.0
   Hugging Face `Sowmya15/gibberish_multilingual` dataset, 300 random strings

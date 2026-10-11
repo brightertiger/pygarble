@@ -62,11 +62,13 @@ Verify Google Search Console
    search as the authoritative account-level status check.
 
 ``robots.txt`` is scoped to the host root,
-``https://brightertiger.github.io/robots.txt``. A file at
-``/pygarble/robots.txt`` would not control Google crawling. This project does
-not publish a misleading project-path robots file. A missing root robots
+``https://brightertiger.github.io/robots.txt``. The build also writes
+``/pygarble/robots.txt`` (allow all, plus the sitemap URL) to match the
+sister project's site, but Google does not read a robots file below the host
+root, so it neither blocks nor announces anything. A missing root robots
 file does not itself block crawling; submit this project's sitemap directly
-in Search Console. A host-root robots policy must be managed separately and
+in Search Console. Each sitemap entry carries a ``lastmod`` date from the
+source file's last commit. A host-root robots policy must be managed separately and
 must account for other projects on the host.
 
 Documentation hosting
@@ -197,7 +199,8 @@ Validation and maintenance
    python -m sphinx -n -W --keep-going -b html docs /tmp/pygarble-docs
    python paper/scripts/check_discovery.py /tmp/pygarble-docs
 
-The discovery check validates sitemap coverage, canonical URLs, descriptions,
+The discovery check validates sitemap coverage and ``lastmod`` dates, the
+project-path ``robots.txt``, canonical URLs, descriptions,
 structured data, index links and optional verification metadata in actual
 built HTML. Add a description in ``docs/_ext/discovery.py`` when adding a
 new guide. These are build-time features; they add no package dependencies
