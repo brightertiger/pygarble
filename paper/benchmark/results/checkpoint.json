@@ -1,0 +1,7 @@
+{
+ "method": "english_fusion",
+ "point": "fpr1",
+ "floor": 0.7,
+ "A_capture": 0.600057,
+ "passed": false
+}
