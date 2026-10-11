@@ -1,19 +1,24 @@
 """Figure, LaTeX tables and number macros for the preprint.
 
 Reads `results/metrics.json`, `results/footprint.json`, the A predictions
-and the manifest; writes a PDF to `paper/preprint/figures/` and LaTeX
-fragments to `paper/preprint/tables/`. Nothing in the paper is typed by
+and the manifest; writes the results figure (PDF, and a 300 dpi PNG for
+checking) to `paper/preprint/figures/` and the LaTeX fragments
+`table_survey.tex`, `table_tweets.tex`, `table_footprint.tex` and
+`numbers.tex` to `paper/preprint/tables/`. Nothing in the paper is typed by
 hand. Run from the repository root:
 
     python -m paper.scripts.benchmark.figures
 """
 
 import json
+import logging
 from typing import Any, Dict, List, Optional
 
 import matplotlib
 
 matplotlib.use("Agg")
+# fontTools reports cmr10's 1990s timestamps as suspicious; they are fine.
+logging.getLogger("fontTools").setLevel(logging.ERROR)
 import matplotlib.pyplot as plt  # noqa: E402
 
 from pygarble.gibberish.registry import Strategy  # noqa: E402
@@ -29,21 +34,38 @@ TABLES = PREPRINT / "tables"
 UNTUNED = ("english", "english_fusion", "gibberish_detector", "lingua")
 TUNED = ("english_tuned",)
 LABELS = {
-    "english": "pygarble english (default)",
-    "english_fusion": r"pygarble english\_fusion",
-    "gibberish_detector": "gibberish-detector",
-    "lingua": "lingua (not English)",
-    "english_tuned": "pygarble english, tuned",
+    "english": r"pygarble \texttt{english} (default)",
+    "english_fusion": r"pygarble \texttt{english\_fusion}",
+    "gibberish_detector": r"\texttt{gibberish-\allowbreak detector}",
+    "lingua": r"\texttt{lingua}",
+    "english_tuned": r"pygarble \texttt{english}, tuned (post hoc)",
 }
 PLAIN = {
     "english": "pygarble english (default)",
-    "english_fusion": "pygarble english_fusion",
+    # cmr10 has no underscore glyph; mathtext draws one.
+    "english_fusion": r"pygarble english$\_$fusion",
     "gibberish_detector": "gibberish-detector",
-    "lingua": "lingua (not English)",
+    "lingua": "lingua",
     "english_tuned": "pygarble english, tuned\n(post hoc)",
 }
+# Runtime dependencies, read from the installed distributions: none of the
+# three declares a requirement. gibberish-detector ships no model and the
+# benchmark trains one from big.txt; lingua's models sit inside its wheel.
+DEPENDENCIES = {
+    "english": "none",
+    "english_fusion": "none",
+    "gibberish_detector": r"none$^a$",
+    "lingua": r"none$^b$",
+    "english_tuned": "none",
+}
+DEPENDENCY_NOTES = (
+    r"$^a$\,Ships no model; trains one from a text corpus at start-up "
+    r"(the benchmark uses the project's \texttt{big.txt}, counted in its "
+    r"install size). "
+    r"$^b$\,Bundles its language models in the wheel."
+)
 # Categorical slots 1 and 2 of the validated default palette, for the two
-# B metrics; the A panel uses ink so colour is not needed to read it.
+# Tweets metrics; the Survey Junk panel uses ink so colour is not needed.
 PRECISION = "#2a78d6"
 RECALL = "#eb6834"
 INK = "#0b0b0b"
@@ -52,19 +74,32 @@ GRID = "#d9d8d4"
 METRICS = ("A_capture", "B_precision", "B_recall", "B_fpr")
 # Methods whose joint misses on A are counted for the label-noise note.
 NOISE_PANEL = UNTUNED
+# One column of the two-column article, in inches (8.4 cm by 6 cm).
+COLUMN = (8.4 / 2.54, 6.0 / 2.54)
 
 
 def save(fig: Any, name: str) -> None:
-    """No creation date, so a rebuild gives the same bytes."""
-    fig.savefig(FIGURES / name, metadata={"CreationDate": None})
+    """No creation date or software stamp, so a rebuild gives the same
+    bytes. The PNG copy is for checking the figure by eye."""
+    fig.savefig(FIGURES / f"{name}.pdf", metadata={"CreationDate": None})
+    fig.savefig(FIGURES / f"{name}.png", dpi=300, metadata={"Software": None})
     plt.close(fig)
 
 
 def style() -> None:
     plt.rcParams.update(
         {
+            # Computer Modern, shipped with matplotlib, to match the paper
+            # and keep the row labels narrow enough for one column.
             "font.family": "serif",
+            "font.serif": ["cmr10"],
+            "mathtext.fontset": "cm",
+            "axes.formatter.use_mathtext": True,
             "font.size": 8,
+            "axes.labelsize": 8,
+            "xtick.labelsize": 8,
+            "ytick.labelsize": 8,
+            "legend.fontsize": 8,
             "axes.edgecolor": MUTED,
             "axes.labelcolor": INK,
             "xtick.color": MUTED,
@@ -81,6 +116,10 @@ def positions() -> List[float]:
     return [0.0, -1.0, -2.0, -3.0, -4.6]
 
 
+# The dashed rule between the untuned rows and the tuned row.
+RULE = -3.8
+
+
 def interval(ax: Any, value: float, ci: List[float], y: float, colour: str):
     ax.errorbar(
         value,
@@ -94,34 +133,41 @@ def interval(ax: Any, value: float, ci: List[float], y: float, colour: str):
 
 
 def figure_results(methods: Dict[str, Any]) -> None:
+    """Survey Junk capture above, Tweets precision and recall below."""
     names = UNTUNED + TUNED
     ys = positions()
-    fig, (left, right) = plt.subplots(1, 2, figsize=(6.3, 2.5), sharey=True)
+    fig, (top, bottom) = plt.subplots(2, 1, figsize=COLUMN)
     for y, name in zip(ys, names):
         point = methods[name]["A_capture"]
-        left.barh(y, point["value"], height=0.6, color="#86b6ef")
-        interval(left, point["value"], point["ci"], y, INK)
+        top.barh(y, point["value"], height=0.6, color="#86b6ef")
+        interval(top, point["value"], point["ci"], y, INK)
         for key, colour, marker, dy in (
-            ("B_precision", PRECISION, "o", 0.14),
-            ("B_recall", RECALL, "s", -0.14),
+            ("B_precision", PRECISION, "o", 0.17),
+            ("B_recall", RECALL, "s", -0.17),
         ):
             p = methods[name][key]
-            right.scatter(
-                p["value"], y + dy, s=20, marker=marker, color=colour, zorder=3
+            bottom.scatter(
+                p["value"], y + dy, s=12, marker=marker, color=colour, zorder=3
             )
-            interval(right, p["value"], p["ci"], y + dy, colour)
-    left.set_xlabel("A: capture rate on survey junk")
-    right.set_xlabel("B: precision and recall")
-    for ax in (left, right):
-        ax.set_xlim(0, 1.0)
+            interval(bottom, p["value"], p["ci"], y + dy, colour)
+    top.set_xlabel("Capture rate on Survey Junk", labelpad=2, loc="right")
+    bottom.set_xlabel(
+        "Precision and recall on Tweets vs. Random Strings",
+        labelpad=2,
+        loc="right",
+    )
+    top.set_xlim(0, 1.0)
+    top.set_xticks([0, 0.25, 0.5, 0.75, 1.0], ["0", ".25", ".5", ".75", "1"])
+    bottom.set_xlim(0.6, 1.0)
+    bottom.set_xticks([0.6, 0.7, 0.8, 0.9, 1.0], [".6", ".7", ".8", ".9", "1"])
+    for ax in (top, bottom):
+        ax.set_ylim(-5.1, 0.5)
+        ax.set_yticks(ys, [PLAIN[n] for n in names])
+        ax.tick_params(axis="y", length=0, pad=3)
+        ax.tick_params(axis="x", pad=1.5)
         ax.xaxis.grid(True, color=GRID, linewidth=0.5)
         ax.set_axisbelow(True)
-    left.set_xticks([0, 0.25, 0.5, 0.75, 1.0], ["0", ".25", ".5", ".75", "1"])
-    right.set_xlim(0.6, 1.0)
-    right.set_xticks([0.6, 0.7, 0.8, 0.9, 1.0], [".6", ".7", ".8", ".9", "1"])
-    left.set_yticks(ys, [PLAIN[n] for n in names])
-    left.axhline(-3.8, color=MUTED, linewidth=0.5, linestyle=":")
-    right.axhline(-3.8, color=MUTED, linewidth=0.5, linestyle=":")
+        ax.axhline(RULE, color=MUTED, linewidth=0.6, linestyle="--")
     handles = [
         plt.Line2D(
             [],
@@ -129,74 +175,153 @@ def figure_results(methods: Dict[str, Any]) -> None:
             marker="o",
             linestyle="",
             color=PRECISION,
+            markersize=4,
             label="precision",
         ),
         plt.Line2D(
-            [], [], marker="s", linestyle="", color=RECALL, label="recall"
+            [],
+            [],
+            marker="s",
+            linestyle="",
+            color=RECALL,
+            markersize=4,
+            label="recall",
         ),
     ]
-    right.legend(
+    # Sits in the empty band left of the untuned points, clear of the data.
+    bottom.legend(
         handles=handles,
-        loc="lower left",
-        bbox_to_anchor=(0.0, 1.0),
-        ncol=2,
+        loc="center left",
+        bbox_to_anchor=(0.0, 0.55),
         frameon=False,
+        handletextpad=0.2,
+        borderaxespad=0.2,
+        labelspacing=0.2,
     )
     fig.subplots_adjust(
-        left=0.29, right=0.98, top=0.9, bottom=0.18, wspace=0.12
+        left=0.4, right=0.97, top=0.985, bottom=0.13, hspace=0.5
     )
-    save(fig, "fig1_results.pdf")
+    save(fig, "fig1_results")
 
 
 def number(value: Optional[float]) -> str:
     return "n/a" if value is None else f"{value:.3f}"
 
 
-def with_ci(point: Dict[str, Any]) -> str:
-    if point["value"] is None:
-        return "n/a"
+def bracket(point: Dict[str, Any]) -> str:
     low, high = point["ci"]
-    return f"{point['value']:.3f} {{\\scriptsize [{low:.3f}, {high:.3f}]}}"
+    return f"[{low:.3f}, {high:.3f}]"
 
 
-def results_table(methods: Dict[str, Any]) -> str:
+def stack(lines: List[str], align: str = "c", pos: str = "t") -> str:
+    """Several lines in one cell, with only the packages already loaded."""
+    body = r" \\ ".join(lines)
+    spec = f"[{pos}]{{@{{}}{align}@{{}}}}"
+    return rf"\begin{{tabular}}{spec}{body}\end{{tabular}}"
+
+
+def rows(cells: Any) -> List[str]:
+    """Body rows in table order, a rule before the tuned row."""
+    lines: List[str] = []
+    for name in UNTUNED + TUNED:
+        if name in TUNED:
+            lines.append(r"\midrule")
+        lines.append(LABELS[name] + " & " + " & ".join(cells(name)) + r" \\")
+    return lines
+
+
+def survey_table(methods: Dict[str, Any]) -> str:
+    """Capture rate on Survey Junk, every row of which is junk."""
     lines = [
-        r"\begin{tabular}{p{4.6cm}llll}",
+        "% Generated by paper/scripts/benchmark/figures.py; do not edit.",
+        r"\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.7cm}cc@{}}",
         r"\toprule",
-        r"Method & A capture & B precision & B recall & B FPR \\",
+        r"Method & Capture rate & 95\% CI \\",
         r"\midrule",
     ]
-    for name in UNTUNED:
-        cells = [with_ci(methods[name][k]) for k in METRICS]
-        lines.append(LABELS[name] + " & " + " & ".join(cells) + r" \\")
+    lines += rows(
+        lambda name: [
+            number(methods[name]["A_capture"]["value"]),
+            bracket(methods[name]["A_capture"]),
+        ]
+    )
+    lines += [r"\bottomrule", r"\end{tabular}", ""]
+    return "\n".join(lines)
+
+
+def tweets_table(methods: Dict[str, Any]) -> str:
+    """Precision, recall and FPR on Tweets vs. Random Strings, each with its
+    95% CI on a second, smaller line."""
+
+    def cells(name: str) -> List[str]:
+        return [
+            stack(
+                [
+                    number(methods[name][key]["value"]),
+                    r"{\scriptsize " + bracket(methods[name][key]) + "}",
+                ]
+            )
+            for key in ("B_precision", "B_recall", "B_fpr")
+        ]
+
+    lines = [
+        "% Generated by paper/scripts/benchmark/figures.py; do not edit.",
+        r"\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.4cm}"
+        r"@{\hspace{4pt}}c@{\hspace{4pt}}c@{\hspace{4pt}}c@{}}",
+        r"\toprule",
+        r"Method & Precision & Recall & FPR \\",
+        r"\midrule",
+    ]
+    body = rows(cells)
+    # A little air between the two-line rows.
     lines += [
-        r"\midrule",
-        r"\multicolumn{5}{l}{\emph{Post hoc, domain-specific tuning: "
-        r"english without mojibake and control characters}} \\",
+        line if line == r"\midrule" else line + r"[2pt]" for line in body
     ]
-    for name in TUNED:
-        cells = [with_ci(methods[name][k]) for k in METRICS]
-        lines.append(LABELS[name] + " & " + " & ".join(cells) + r" \\")
     lines += [r"\bottomrule", r"\end{tabular}", ""]
     return "\n".join(lines)
 
 
 def footprint_table(footprint: Dict[str, Any]) -> str:
+    """Speed, import time, install size and dependencies per method."""
+
+    def head(*text: str) -> str:
+        return stack(list(text), "c", "b")
+
+    def cells(name: str) -> List[str]:
+        row = footprint[name]
+        return [
+            f"{row['ms_per_1000']:.1f}",
+            f"{row['import_s']:.3f}",
+            f"{row['install_bytes'] / 1e6:.2f}",
+            DEPENDENCIES[name],
+        ]
+
     lines = [
-        r"\begin{tabular}{lrr}",
+        "% Generated by paper/scripts/benchmark/figures.py; do not edit.",
+        r"\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.4cm}"
+        r"@{\hspace{4pt}}r@{\hspace{4pt}}r@{\hspace{4pt}}r"
+        r"@{\hspace{4pt}}l@{}}",
         r"\toprule",
-        r"Method & ms per 1,000 texts & Install (MB) \\",
+        "Method & "
+        + " & ".join(
+            [
+                head("ms per", "1,000 texts"),
+                head("Import", "time (s)"),
+                head("Install", "size (MB)"),
+                head("Runtime", "deps."),
+            ]
+        )
+        + r" \\",
         r"\midrule",
     ]
-    for name in UNTUNED + TUNED:
-        if name in TUNED:
-            lines.append(r"\midrule")
-        row = footprint[name]
-        lines.append(
-            f"{LABELS[name]} & {row['ms_per_1000']:.1f} & "
-            f"{row['install_bytes'] / 1e6:.2f}" + r" \\"
-        )
-    lines += [r"\bottomrule", r"\end{tabular}", ""]
+    lines += rows(cells)
+    lines += [
+        r"\bottomrule",
+        r"\multicolumn{5}{@{}>{\raggedright\arraybackslash}p{\linewidth}@{}}"
+        r"{\footnotesize\rule{0pt}{2.5ex}" + DEPENDENCY_NOTES + r"} \\",
+        r"\end{tabular}",
+        "",
+    ]
     return "\n".join(lines)
 
 
@@ -297,8 +422,9 @@ def main() -> None:
     style()
     figure_results(methods)
     outputs = {
-        "table1_results.tex": results_table(methods),
-        "table2_footprint.tex": footprint_table(footprint),
+        "table_survey.tex": survey_table(methods),
+        "table_tweets.tex": tweets_table(methods),
+        "table_footprint.tex": footprint_table(footprint),
         "numbers.tex": macros(metrics, footprint, manifest, environment),
     }
     for name, text in outputs.items():
