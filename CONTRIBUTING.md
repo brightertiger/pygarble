@@ -22,10 +22,11 @@ must be explicitly selected and run locally. Add regression cases for
 behavior changes; document coverage limits and false positives. See the
 contributor guide for formatting, typing, golden data and backend checks.
 
-The [benchmark guide](docs/benchmarks.rst) separates the paper's reproducible
-comparison from fast engineering regression checks. Run `make benchmark-check`
-for the study tests; CI runs them without neural dependencies. Full model
-inference is optional and must preserve the paper's frozen results.
+The [benchmark guide](docs/benchmarks.rst) separates the preprint benchmark
+from fast engineering regression checks. Run `make benchmark-verify` (it needs
+numpy) to recompute the preprint metrics from the committed predictions; CI
+runs it too. Do not overwrite the committed predictions or results; report a
+new run as a new version.
 
 Open a pull request explaining the problem, resulting behavior and checks
 you ran. Use synthetic examples; do not include real credentials or personal

@@ -14,14 +14,49 @@ or Unicode security implementation. Profile membership is listed in :doc:`strate
 What the paper tells us about strategy choice
 ---------------------------------------------
 
-The published-corpus evaluation in :doc:`benchmarks` compares the three English
-profiles, word lookup and entropy with two fixed DistilBERT label policies.
-Word lookup made no errors on the 173 gibberish and 5,200 English-control chunks,
-while the default English profile caught only 49 gibberish chunks. This is
-specific to the invented-text collection; it does not justify replacing all
-other strategies or claiming universal 100% accuracy. The profiles also target
-encoding, keyboard and structural defects that this collection does not
-comprehensively represent.
+The preprint in :doc:`benchmarks` runs two profiles at their defaults on two
+English datasets: Survey Junk, which holds only junk survey answers, and
+Tweets vs. Random Strings. It supports three choices.
+
+* **Survey and form free text: use** ``english_fusion``. It captured 89.5% of
+  the survey junk and flagged 6.8% of tweets. Neither baseline matched it on
+  both datasets at once. Add a minimum-length rule if one- and two-character answers count
+  as junk.
+* **Social-media text: do not use the default profile as shipped.** The
+  default ``english`` profile flagged 33.2% of tweets. Its ``mojibake`` and
+  ``control_characters`` members target encoding damage, and about a quarter
+  of the tweets carry mojibake that the dataset labels clean. Keep them when
+  encoding damage counts as junk for you. Otherwise remove them.
+* **Remove strategies whose target your domain does not treat as junk.** The
+  ``english`` profile without its two encoding checks lowered the tweet
+  false-positive rate to 18.2% with no loss of recall. This variant was built
+  after seeing the results, so treat it as an example of the mechanism, not
+  a tested default. Its Markov member still flags many informal posts, so
+  ``english_fusion`` remains the lower-FPR choice for tweets.
+
+.. code-block:: python
+
+   from pygarble.gibberish import EnsembleDetector, Strategy
+
+   # The english profile without its two encoding-damage checks.
+   social = EnsembleDetector(
+       strategies=[
+           Strategy.MARKOV_CHAIN,
+           Strategy.LOG_LIKELIHOOD_RATIO,
+           Strategy.WORD_ANOMALY,
+           Strategy.KEYBOARD_ADJACENCY,
+       ],
+       voting="any",
+       threshold=0.5,
+   )
+   assert social.predict("asdfghjkl")
+   assert not social.predict("CafÃ© au lait")
+
+When wrongly flagging real text costs much more than missing junk, the
+preprint found a character Markov baseline with a far lower false-positive
+rate. Otherwise, measure a threshold on labelled rows of your own data with
+:doc:`calibration`. The datasets are English and short; results on long
+documents and other languages are not measured.
 
 Lexical and statistical strategies
 ----------------------------------
@@ -42,7 +77,6 @@ Lexical and statistical strategies
 * ``word_anomaly`` scores suspicious eligible tokens individually and reports
   their fraction, limiting dilution by surrounding ordinary prose.
 * ``entropy_based`` combines character entropy and bigram improbability.
-  It detected no positive chunks at its default threshold in this study.
 
 Scores are strategy-specific evidence. Named English ensembles use ``any``
 voting across applicable strategies, except ``english_fusion``, which uses

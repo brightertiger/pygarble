@@ -267,20 +267,24 @@ assert corruption.predict("hello\x00world") is True
 Relative to 0.8.0, 0.11.0 changes gibberish scores and the default ensemble;
 `profile="legacy"` selects the 0.8.0 members but does not reproduce their
 scores. Review the [upgrade guide](https://brightertiger.github.io/pygarble/migration.html) before changing
-versions. Research benchmark results come from the
-[paper's complete published-corpus study](https://github.com/brightertiger/pygarble/blob/main/paper/README.md). It evaluates 79,969
-chunks from 109 source files against a pinned local DistilBERT classifier.
-The English comparison uses 173 gibberish and 5,200 meaningful chunks; see the
-[benchmark guide](https://brightertiger.github.io/pygarble/benchmarks.html) for
-confusion counts, accuracy, latency and limitations. PII, secrets and profanity are outside that study.
+versions.
 
-Run `make benchmark-check` for fast offline study checks. `make benchmark`
-executes a new full comparison after preparing the optional research environment
-and assets; results go to an ignored directory, preserving paper measurements.
-Small authored challenge sets remain engineering regression fixtures.
+The [preprint](https://github.com/brightertiger/pygarble/blob/main/paper/preprint/main.pdf)
+measures the gibberish detector on two public English datasets, Survey Junk and
+Tweets vs. Random Strings, against two CPU baselines, with every method at its
+default decision. The `english_fusion` profile captures 89.5% of the survey junk
+and recalls 99.1% of the random strings at a precision of 0.906, from a 1.05 MB
+install. A Markov-chain baseline flags fewer tweets, a language identifier
+captures more survey junk, and the default `english` profile flags 33.2% of
+tweets. See the [benchmark guide](https://brightertiger.github.io/pygarble/benchmarks.html)
+for every result, interval and limitation. PII, secrets and profanity are
+outside that benchmark.
+
+Run `make benchmark-verify` to recompute every metric from the committed
+per-row predictions; the raw data is never committed. Small authored challenge sets remain engineering regression fixtures.
 
 - [Changelog](https://github.com/brightertiger/pygarble/blob/main/CHANGELOG.md)
-- [Paper, results and reproduction](https://github.com/brightertiger/pygarble/blob/main/paper/README.md)
+- [Preprint, benchmark and reproduction](https://github.com/brightertiger/pygarble/blob/main/paper/README.md)
 - [Engineering regression checks](https://github.com/brightertiger/pygarble/blob/main/paper/regression/README.md)
 - [Golden corpus](https://github.com/brightertiger/pygarble/blob/main/paper/regression/golden.jsonl) of frozen detector outputs for every profile, and a [golden scan corpus](https://github.com/brightertiger/pygarble/blob/main/paper/regression/golden_scan.jsonl) for the scanner, both checked in CI
 - [Data provenance and curation](https://github.com/brightertiger/pygarble/blob/main/paper/scripts/data_curation.json)
@@ -288,10 +292,10 @@ Small authored challenge sets remain engineering regression fixtures.
 ## Repository layout and compatibility
 
 Library code is in `pygarble/`, unit tests in `tests/`, and the website in
-`docs/`. Research and tooling are grouped under `paper/`: `study/` contains
-the protocols and results, `scripts/study/` contains the evaluation
-and analysis code, `regression/` contains engineering checks, and the
-other files in `scripts/` maintain package data and documentation.
+`docs/`. Research and tooling are grouped under `paper/`: `preprint/` contains
+the preprint, `benchmark/` its protocol and results, `scripts/benchmark/` the
+benchmark code, `regression/` engineering checks, and the other files in
+`scripts/` maintain package data and documentation.
 
 ```text
 pygarble/

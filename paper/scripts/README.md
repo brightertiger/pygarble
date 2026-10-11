@@ -12,12 +12,11 @@ python paper/scripts/check_discovery.py docs/_build/html
 `data_curation.json` pins the word-frequency source, its checksum and curated
 changes. `generate_data.py --source PATH --check` supports an offline source.
 The generated package tables retain their historical header paths so their
-bytes and the paper's recorded source hashes remain unchanged. The current
+bytes and recorded source hashes remain unchanged. The current
 script and provenance locations are here in `paper/scripts/`.
 
-`study/` contains the research runners, analysis and study tests.
-Use `make benchmark-check`, `make benchmark-prepare` and `make benchmark`
-from the repository root. Pinned assets, results
-and cache remain in `paper/study/`; see the
-[study instructions](../study/README.md) for individual module commands and
-historical reproduction.
+`benchmark/` contains the preprint benchmark: data loaders, scoring, metrics,
+verification and the preprint figure and tables. From the repository root,
+`make benchmark-verify` recomputes the metrics from the saved predictions and
+`make preprint` rebuilds the preprint. See the
+[benchmark README](benchmark/README.md) for re-scoring from the raw data.

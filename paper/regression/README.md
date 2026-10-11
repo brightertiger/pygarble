@@ -1,6 +1,6 @@
 # Engineering regression checks
 
-The canonical research benchmark is [the paper's published-corpus study](../study/README.md).
+The research benchmark is [the preprint benchmark](../benchmark/protocol.md).
 This directory keeps fast development fixtures and behavior checks; its authored
 examples do not measure general-world accuracy.
 
