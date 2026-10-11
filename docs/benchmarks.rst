@@ -8,11 +8,9 @@ Gaskell--Bowern corpus. See the `paper and study guide
 <https://github.com/brightertiger/pygarble/tree/main/paper>`_ and
 `recorded results
 <https://github.com/brightertiger/pygarble/tree/main/paper/study/full-results>`_.
-The manuscript, **pygarble: Modular, Low-Cost Gibberish Detection and Text
-Screening in Python**, is authored by **Ujjwal Singh Rao**.
-:download:`Download the paper PDF <../paper/study/manuscript.pdf>`.
-The manuscript is not peer reviewed or published on arXiv; submission is
-currently blocked by category endorsement.
+The study's protocols, frozen results and predictions live under
+``paper/study``. A benchmark manuscript is being reworked and is not currently
+published.
 
 What was measured
 -----------------

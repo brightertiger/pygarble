@@ -44,9 +44,7 @@ and source-diversity limitations. PII, secret and profanity performance was
 not evaluated by this study.
 
 Read :doc:`benchmarks` for every configuration's accuracy and confusion counts,
-CPU measurements, reproduction commands and sources, or
-:download:`download the paper <../paper/study/manuscript.pdf>`.
-The manuscript is not yet published on arXiv or peer reviewed.
+CPU measurements, reproduction commands and sources.
 
 .. toctree::
    :maxdepth: 2

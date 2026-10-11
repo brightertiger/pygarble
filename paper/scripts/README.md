@@ -15,9 +15,9 @@ The generated package tables retain their historical header paths so their
 bytes and the paper's recorded source hashes remain unchanged. The current
 script and provenance locations are here in `paper/scripts/`.
 
-`study/` contains the research runners, analysis, study tests and paper builder.
-Use `make benchmark-check`, `make benchmark-prepare`, `make benchmark` and
-`make paper` from the repository root. The manuscript, pinned assets, results
+`study/` contains the research runners, analysis and study tests.
+Use `make benchmark-check`, `make benchmark-prepare` and `make benchmark`
+from the repository root. Pinned assets, results
 and cache remain in `paper/study/`; see the
 [study instructions](../study/README.md) for individual module commands and
 historical reproduction.

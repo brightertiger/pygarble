@@ -1,7 +1,7 @@
 # Complete published-corpus comparison
 
-Start with [the revised software-and-evaluation PDF](manuscript.pdf),
-[full results](full-results/report.md) and [publication status](../README.md#publication-status).
+Start with the [full results](full-results/report.md) and the
+[paper status](../README.md#status).
 The main experiment evaluates every released labelled document from the
 published GitHub collection: **109 documents, 31,964,664 normalized characters,
 79,969 chunks**, with identical inputs for pygarble and a pinned local
@@ -17,7 +17,7 @@ as independent research samples. See the [fixed extension protocol](full_corpus_
 ## Quick checks
 
 Python tools and study tests live in [`../scripts/study/`](../scripts/study/).
-This directory holds the manuscript, protocols, provenance and measured results.
+This directory holds the protocols, provenance and measured results.
 The commands below run from the repository root; caches and outputs still
 live here, independently of where the scripts are located.
 
@@ -97,35 +97,21 @@ isolated timing and memory workers, using one thread, batch size one and the
 same fixed 76 inputs. It writes `full-results/runtime.json`. Local costs include
 CPU time, memory and disk; no external inference/compute fee is incurred.
 
-## Paper and figures
+## Figures
 
 ```bash
 python -m pip install -r paper/study/requirements-figures.txt
 python -m paper.scripts.study.chunk_metrics
 python -m paper.scripts.study.full_figures
-# Requires Pandoc and Tectonic on PATH:
-python -m paper.scripts.study.build_paper
 ```
 
-Edit `manuscript.template.md`; `full_paper.py` inserts measured tables and
-numerical placeholders. `build_paper.py` generates Markdown, TeX and the review
-source archive under ignored `.cache/publication/`, and updates the tracked
-`manuscript.pdf` for review. Only the two referenced figure PDFs are retained
-in Git; optional figure previews can be regenerated. See [validation](validation.md) for executed checks.
-`article.tex` supplies the two-column article layout; `tables.lua` renders
-numbered table floats. The title and body foreground pygarble's architecture
-and detection strategies before presenting the comparison. Wide appendix
-material uses the full page. The byline contains only Ujjwal Singh Rao.
+See [validation](validation.md) for executed checks.
 
 Chunk accuracy, precision, recall, F1 and confusion matrices are additional
 post hoc summaries of saved predictions. The original source-level endpoints
 remain in Appendix A; no scoring settings changed. `chunk_metrics.py` writes
 `full-results/chunk-metrics.json`, and `test_chunk_metrics.py` independently
 recounts all target-comparison predictions.
-
-The separate JOSS-format software draft is `../paper.md`. Funding, conflicts,
-Claude's assistance and the arXiv license choice have been confirmed. The
-arXiv workflow awaits category endorsement; see the publication status.
 
 ## Artifact map
 
@@ -147,7 +133,7 @@ this directory.
   abstention coverage and descriptive paired chunk counts.
 - `full_verify.py`, `test_full_corpus.py`: artifact/replay verification and tests.
 - `full_runtime.py`: isolated CPU/RSS measurement.
-- `full_figures.py`, `full_paper.py`, `build_paper.py`: publication artifacts.
+- `full_figures.py`, `full_paper.py`: figures and display names.
 
 Raw comparison text and model weights remain in ignored `.cache/`; their
 separate licenses still apply. No package runtime code or dependency changes
