@@ -2,12 +2,14 @@
 
 Every strategy is scored once on every row of A and B with default
 settings and cached (no text). For each of five seeds a stratified 20
-percent of A and of B is the tuning sample; Optuna's TPE sampler searches
-a weight in [0, 1] per strategy (0 excludes it) and a threshold in
-[0.05, 0.8] for the best F1 on that sample, under pygarble's weighted
-voting. The tuned configuration, rebuilt as a real EnsembleDetector, is
-evaluated on the held-out 80 percent next to the english and
-english_fusion profiles on the same rows. Run from the repository root:
+percent of A and of B is the tuning sample, drawn by unit so that rows
+with identical text stay on the same side of the split; Optuna's TPE
+sampler searches a weight in [0, 1] per strategy (0 excludes it) and a
+threshold in [0.05, 0.8] for the best F1 on that sample, under pygarble's
+weighted voting. The tuned configuration, rebuilt as a real
+EnsembleDetector, is evaluated on the held-out 80 percent next to the
+english and english_fusion profiles on the same rows. Run from the
+repository root:
 
     python -m paper.scripts.benchmark.tune --data-root <pygarble-data>
 
@@ -178,27 +180,56 @@ def f1(flags: np.ndarray, labels: np.ndarray) -> float:
 # --- tuning samples ---------------------------------------------------
 
 
+def units(manifest: Dict, part: str, label: int) -> List[List[int]]:
+    """Positions of `part` rows with `label`, grouped so that rows with
+    identical text form one unit; other rows are singletons. Units are in
+    manifest order of their first row."""
+    ids = manifest[f"{part}_ids"]
+    position = {row_id: i for i, row_id in enumerate(ids)}
+    group_of = {}
+    for group in manifest["duplicates"][part]["duplicate_groups"]:
+        for row_id in group:
+            group_of[row_id] = group
+    out, seen = [], set()
+    for i, row_id in enumerate(ids):
+        if part == "B" and manifest["B_labels"][row_id] != label:
+            continue
+        group = group_of.get(row_id, [row_id])
+        if group[0] in seen:
+            continue
+        seen.add(group[0])
+        out.append([position[g] for g in group])
+    return out
+
+
+def pick(rng: np.random.Generator, pool: List[List[int]]) -> List[int]:
+    """Units in random order, taking the prefix whose row count is closest
+    to FRACTION of the pool's rows (the shorter prefix on a tie)."""
+    target = round(FRACTION * sum(len(unit) for unit in pool))
+    order = rng.permutation(len(pool))
+    counts = np.concatenate([[0], np.cumsum([len(pool[k]) for k in order])])
+    stop = int(np.argmin(np.abs(counts - target)))
+    return [i for k in order[:stop] for i in pool[k]]
+
+
 def draw(manifest: Dict, seed: int) -> Dict[str, List[str]]:
-    """Stratified 20 percent of A and of B (by label), in manifest order."""
+    """Stratified 20 percent of A and of B (by label), in manifest order.
+
+    Sampling is by unit: rows whose stripped text is identical (the
+    manifest's duplicate groups) form one unit, so every copy of a text
+    falls on the same side of the split. Per stratum (A; B tweets; B
+    random strings) the units are shuffled and the prefix whose row count
+    is closest to 20 percent of the stratum's rows is the tuning sample.
+    """
     rng = np.random.default_rng(seed)
-    a_ids = manifest["A_ids"]
-    chosen_a = rng.choice(
-        len(a_ids), round(FRACTION * len(a_ids)), replace=False
-    )
-    b_ids = manifest["B_ids"]
-    chosen_b: List[int] = []
-    for label in (0, 1):
-        pool = [
-            i
-            for i, row_id in enumerate(b_ids)
-            if manifest["B_labels"][row_id] == label
-        ]
-        picked = rng.choice(len(pool), round(FRACTION * len(pool)), False)
-        chosen_b += [pool[i] for i in picked]
-    return {
-        "A": [a_ids[i] for i in sorted(chosen_a)],
-        "B": [b_ids[i] for i in sorted(chosen_b)],
-    }
+    out = {}
+    for part, labels in (("A", (1,)), ("B", (0, 1))):
+        chosen: List[int] = []
+        for label in labels:
+            chosen += pick(rng, units(manifest, part, label))
+        ids = manifest[f"{part}_ids"]
+        out[part] = [ids[i] for i in sorted(chosen)]
+    return out
 
 
 def masks(manifest: Dict, sample: Dict[str, List[str]]) -> Dict:
@@ -442,8 +473,10 @@ def write_report(result: Dict[str, Any], weights: Dict[str, Any]) -> None:
     lines = [
         "# Weight tuning study",
         "",
-        f"Tuning sample: a stratified {FRACTION:.0%} of A and of B per seed;"
-        f" Optuna {weights['optuna']} TPE, {TRIALS} trials, objective F1.",
+        f"Tuning sample: a stratified {FRACTION:.0%} of A and of B per seed,"
+        " drawn by unit so that rows with identical text stay on the same"
+        f" side of the split; Optuna {weights['optuna']} TPE, {TRIALS}"
+        " trials, objective F1.",
         f"Held-out rows (primary seed {PRIMARY}): A {rows['A']}, B "
         f"{rows['B']} ({rows['B_positive']} random strings, "
         f"{rows['B_negative']} tweets).",
@@ -573,7 +606,10 @@ def main() -> int:
         },
     }
     write_json(WEIGHTS, weights)
-    write_json(SPLITS, {"fraction": FRACTION, "tuning_ids": samples})
+    write_json(
+        SPLITS,
+        {"fraction": FRACTION, "grouped": True, "tuning_ids": samples},
+    )
     profiles = metrics.load_all(manifest, PROFILES)
     result = compute(manifest, matrices, profiles, draws, samples)
     write_json(RESULT, result)

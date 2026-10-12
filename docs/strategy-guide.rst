@@ -33,10 +33,11 @@ Tweets vs. Random Strings. It supports three choices.
   preprint's tuning study learned a weight for each of the 32 strategies and
   a threshold under ``weighted`` voting from a 20 percent labelled sample
   (about 2,700 rows),
-  in about 18 seconds of Optuna search. On the held-out 80 percent it
-  flagged 4.7% of tweets against 6.8% for ``english_fusion``, at
-  about the same survey-junk capture, averaged over five samples. It
-  gave the encoding-damage checks little or no weight. The weights fit these
+  in about 17 seconds of Optuna search. On the held-out 80 percent it
+  flagged 4.9% of tweets against 6.9% for ``english_fusion``, at about
+  the same survey-junk capture but lower random-string recall (97.6%
+  against 99.1%), averaged over five samples. It gave the encoding-damage
+  checks little or no weight. The weights fit these
   datasets, so learn your own; :doc:`benchmarks` has the full results.
 
 .. code-block:: python
@@ -45,40 +46,41 @@ Tweets vs. Random Strings. It supports three choices.
 
    # Learned on the preprint's primary tuning sample (seed 20261011).
    weights = {
-       "local_anomaly": 0.35,
-       "pattern_matching": 0.05,
-       "entropy_based": 0.7,
-       "vowel_ratio": 0.1,
-       "keyboard_pattern": 0.05,
-       "markov_chain": 0.35,
-       "ngram_frequency": 0.9,
+       "local_anomaly": 0.05,
+       "entropy_based": 1.0,
+       "vowel_ratio": 0.05,
+       "keyboard_pattern": 0.35,
+       "markov_chain": 0.8,
+       "ngram_frequency": 0.65,
        "word_lookup": 1.0,
-       "symbol_ratio": 0.65,
-       "repetition": 0.1,
-       "hex_string": 0.9,
-       "unicode_script": 0.85,
-       "bigram_probability": 0.25,
-       "letter_position": 0.15,
-       "consonant_sequence": 0.7,
-       "vowel_pattern": 0.85,
+       "symbol_ratio": 0.85,
+       "repetition": 0.3,
+       "hex_string": 0.85,
+       "pronounceability": 0.65,
+       "unicode_script": 0.45,
+       "bigram_probability": 0.55,
+       "letter_position": 0.25,
+       "consonant_sequence": 0.5,
+       "vowel_pattern": 0.65,
        "letter_frequency": 0.75,
-       "rare_trigram": 0.95,
-       "function_word_density": 0.9,
-       "affix_detection": 0.05,
-       "zipf_conformity": 0.8,
-       "word_collocation": 0.1,
-       "log_likelihood_ratio": 0.95,
-       "word_anomaly": 0.9,
-       "keyboard_adjacency": 0.35,
-       "cross_parsing": 1.0,
-       "primed_compression": 0.4,
-       "permutation_test": 0.15,
+       "rare_trigram": 0.7,
+       "function_word_density": 0.45,
+       "affix_detection": 0.15,
+       "zipf_conformity": 0.25,
+       "word_collocation": 0.05,
+       "log_likelihood_ratio": 0.9,
+       "word_anomaly": 1.0,
+       "keyboard_adjacency": 0.6,
+       "cross_parsing": 0.6,
+       "primed_compression": 0.95,
+       "ngram_rank": 0.05,
+       "permutation_test": 0.25,
    }
    tuned = EnsembleDetector(
        strategies=list(weights),
        weights=list(weights.values()),
        voting="weighted",
-       threshold=0.13,
+       threshold=0.16,
    )
    assert tuned.predict("asdfghjkl qwpoeiru")
    assert not tuned.predict("Thanks for the quick reply, see you on Monday!")

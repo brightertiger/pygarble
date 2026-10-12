@@ -659,9 +659,13 @@ def tuning_macros(
     mean = weights["mean_weight"]
     sample = splits["tuning_ids"][str(seed)]
     rows = tuning["primary"]["rows"]
-    worst = min(
-        tuning["per_seed"], key=lambda d: d["methods"]["tuned"]["B_recall"]
-    )["methods"]["tuned"]
+    tuned = [d["methods"]["tuned"] for d in tuning["per_seed"]]
+    fusion = [d["methods"]["english_fusion"] for d in tuning["per_seed"]]
+
+    def lower(key: str) -> str:
+        """Draws in which the tuned value is below english_fusion's."""
+        return spelled(sum(t[key] < f[key] for t, f in zip(tuned, fusion)))
+
     # The bottom groups are found from the smallest weight up, then listed
     # from the larger weight down like the top ones.
     bottom = weight_groups(sorted(order, key=lambda n: (mean[n], n)), mean, 3)[
@@ -700,15 +704,13 @@ def tuning_macros(
         "nHeldBneg": f"{rows['B_negative']:,}",
         "tuningtop": listing(weight_groups(order, mean, 4)),
         "tuningbottom": listing(bottom),
-        "tuningworstrecall": f"{100 * worst['B_recall']:.1f}",
-        "tuningworstcapture": f"{100 * worst['A_capture']:.1f}",
-        "tuningalloff": listing(
-            [
-                tex_name(n)
-                for n in order
-                if all(d["weights"][n] == 0 for d in draws)
-            ]
+        "tuningworstrecall": f"{100 * min(t['B_recall'] for t in tuned):.1f}",
+        "tuningworstcapture": (
+            f"{100 * min(t['A_capture'] for t in tuned):.1f}"
         ),
+        "tuningcapturelower": lower("A_capture"),
+        "tuningrecalllower": lower("B_recall"),
+        "tuningfprlower": lower("B_fpr"),
         "tuningoff": listing(
             [tex_name(n) for n, w in primary["weights"].items() if w == 0]
         ),
