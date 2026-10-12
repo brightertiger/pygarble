@@ -21,15 +21,16 @@ and collection/redaction logic are shared between the two APIs.
 
 See :doc:`architecture` for source layout and compatibility pointers, and
 :doc:`api` for the scanner, detector and backend signatures. These APIs are
-part of the unreleased source changes described in :doc:`migration`.
+new in 0.11.0; see :doc:`migration`.
 
 Installation and explicit selection
 ------------------------------------
 
 The base install remains dependency-free. Optional backends supplement
 native rules only when selected; installing an extra alone changes nothing.
-For these unreleased features, install from the source checkout described in
-:doc:`installation`:
+Install the extras from PyPI, for example
+``python -m pip install 'pygarble[screening]'``, or from a source checkout as
+described in :doc:`installation`:
 
 .. code-block:: console
 
