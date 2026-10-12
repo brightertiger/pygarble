@@ -1,0 +1,42 @@
+cff-version: 1.2.0
+message: >-
+  If you use pygarble, please cite the software. For the benchmark results,
+  cite the preprint given under preferred-citation.
+type: software
+title: pygarble
+abstract: >-
+  Deterministic, zero-dependency text screening for secrets, PII, profanity
+  and gibberish, with redaction.
+authors:
+  - given-names: Ujjwal Singh
+    family-names: Rao
+  - given-names: Ricky
+    family-names: Singh
+version: 0.11.0
+date-released: '2026-10-12'
+license: MIT
+repository-code: 'https://github.com/brightertiger/pygarble'
+url: 'https://brightertiger.github.io/pygarble/'
+keywords:
+  - gibberish detection
+  - text screening
+  - secrets
+  - PII
+  - profanity
+  - redaction
+preferred-citation:
+  type: report
+  title: >-
+    How Much Junk Do Rules Catch? Evaluating and Tuning pygarble, a
+    Dependency-Free Gibberish Screener, on Survey Responses and Social-Media
+    Text
+  authors:
+    - given-names: Ujjwal Singh
+      family-names: Rao
+    - given-names: Ricky
+      family-names: Singh
+  year: 2026
+  publisher:
+    name: Zenodo
+  doi: 10.5281/zenodo.23312785
+  url: 'https://doi.org/10.5281/zenodo.23312785'

@@ -1,5 +1,6 @@
 include README.md
 include CHANGELOG.md
+include CITATION.cff
 include LICENSE
 include CONTRIBUTING.md
 include SECURITY.md

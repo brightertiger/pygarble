@@ -1,9 +1,12 @@
 name: Publish Package
 
+# A tag push (vX.Y.Z) publishes to PyPI and creates the GitHub Release.
+# A manual run (workflow_dispatch) is a dry run: it builds X.Y.Z.devN and
+# publishes that to TestPyPI only. Both use Trusted Publishing; no API tokens.
 on:
   push:
-    tags:
-      - 'v*'
+    tags: ['v*']
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -22,133 +25,120 @@ jobs:
         include:
           # ubuntu-latest moves to 26.04, which has no setup-python 3.8 build.
           # Return to ubuntu-latest once Python 3.8 is dropped.
-          - python-version: '3.8'
-            os: ubuntu-24.04
-          - python-version: '3.12'
-            os: ubuntu-latest
+          - {python-version: '3.8', os: ubuntu-24.04}
+          - {python-version: '3.12', os: ubuntu-latest}
     steps:
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-
-      - name: Setup Python
-        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: {persist-credentials: false}
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: ${{ matrix.python-version }}
           cache: pip
           cache-dependency-path: pyproject.toml
-
-      - name: Install package with dev dependencies
-        run: pip install -e ".[dev]"
-
-      - name: Lint
-        if: matrix.python-version == '3.12'
+      - run: pip install -e ".[dev]"
+      - if: matrix.python-version == '3.12'
         run: make lint
-
-      - name: Run tests
-        run: pytest -q
-
-      - name: Golden corpora reproduce
-        if: matrix.python-version == '3.12'
+      - run: pytest -q
+      - if: matrix.python-version == '3.12'
+        name: Golden corpora reproduce
         run: |
           python paper/regression/golden.py --check
           python paper/regression/golden_scan.py --check
 
+  # Build once; every later job publishes these exact files.
   build:
+    needs: test
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    needs: test
+    permissions:
+      contents: read
+      id-token: write
+      attestations: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-
-      - name: Setup Python
-        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
-        with:
-          python-version: '3.12'
-
-      - name: Check tag matches package version
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: {persist-credentials: false}
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with: {python-version: '3.12'}
+      - name: Tag must equal __version__; dry runs get .devN
         run: |
-          tag="${GITHUB_REF_NAME#v}"
-          version=$(PYTHONPATH=. python -c "import pygarble; print(pygarble.__version__)")
-          if [ "$tag" != "$version" ]; then
-            echo "Tag v$tag does not match pygarble.__version__ $version" >&2
-            exit 1
+          v=$(PYTHONPATH=. python -c "import pygarble; print(pygarble.__version__)")
+          if [ "$GITHUB_EVENT_NAME" = push ]; then
+            [ "${GITHUB_REF_NAME#v}" = "$v" ] || { echo "tag $GITHUB_REF_NAME != $v" >&2; exit 1; }
+          else
+            sed -i "s/^__version__ = .*/__version__ = \"$v.dev$GITHUB_RUN_NUMBER\"/" pygarble/__init__.py
           fi
-
       - name: Build sdist and wheel
         run: |
           pip install build twine
           python -m build
-          twine check dist/*
+          twine check --strict dist/*
+      - uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+        with: {subject-path: 'dist/*'}
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with: {name: dist, path: dist/, if-no-files-found: error}
 
-      - name: Smoke-test the built wheel in a fresh venv
-        run: |
-          python -m venv "$RUNNER_TEMP/wheel-smoke"
-          "$RUNNER_TEMP/wheel-smoke/bin/pip" install dist/*.whl
-          cd "$RUNNER_TEMP"
-          "$RUNNER_TEMP/wheel-smoke/bin/python" -c "import pygarble; from pygarble import EnsembleDetector; assert EnsembleDetector().predict('qxzjkwpv bnmqwer'); print('pygarble', pygarble.__version__, 'wheel OK')"
-
-      - name: Upload distributions
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
-        with:
-          name: dist
-          path: dist/
-
-  publish:
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
+  # The wheel alone, outside the checkout, on the oldest supported Python.
+  smoke:
     needs: build
-    # Recommended: give the `pypi` environment required reviewers in the
-    # repository settings so a tag cannot publish without approval. It is
-    # auto-created without protection on first use.
-    environment:
-      name: pypi
-      url: https://pypi.org/project/pygarble/
-    permissions:
-      id-token: write
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
     steps:
-      - name: Download distributions
-        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
-        with:
-          name: dist
-          path: dist/
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with: {python-version: '3.8'}
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with: {name: dist, path: dist/}
+      - run: |
+          python -m venv "$RUNNER_TEMP/v"
+          "$RUNNER_TEMP/v/bin/pip" install dist/*.whl
+          cd "$RUNNER_TEMP"
+          "$RUNNER_TEMP/v/bin/python" -c "from pygarble import EnsembleDetector as E; assert E().predict('qxzjkwpv bnmqwer')"
+          "$RUNNER_TEMP/v/bin/pygarble" --version
+          "$RUNNER_TEMP/v/bin/pygarble-screen" --help > /dev/null
 
-      - name: Publish to PyPI
-        uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33 # v1.14.2
-
-  # Runs only after the distributions reach PyPI, so no image or `latest`
-  # tag ships for a version that failed to publish.
-  docker:
+  publish-testpypi:
+    if: github.event_name == 'workflow_dispatch'
+    needs: smoke
     runs-on: ubuntu-latest
-    timeout-minutes: 30
-    needs: [build, publish]
-    permissions:
-      contents: read
-      packages: write
+    timeout-minutes: 15
+    environment: {name: testpypi, url: 'https://test.pypi.org/p/pygarble'}
+    permissions: {id-token: write}
     steps:
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with: {name: dist, path: dist/}
+      - uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33 # v1.14.2
+        with: {repository-url: 'https://test.pypi.org/legacy/'}
 
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+  # Give the `pypi` environment required reviewers so a tag cannot publish
+  # without approval.
+  publish:
+    if: github.event_name == 'push'
+    needs: smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: {name: pypi, url: 'https://pypi.org/p/pygarble'}
+    permissions: {id-token: write}
+    steps:
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with: {name: dist, path: dist/}
+      - uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33 # v1.14.2
 
-      - name: Extract image metadata
-        id: meta
-        uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0
-        with:
-          images: ghcr.io/${{ github.repository }}
-          tags: |
-            type=semver,pattern={{version}}
-            type=raw,value=latest
-
-      - name: Build and push
-        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
-        with:
-          context: .
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+  # Runs only after PyPI accepted the files. Publishing the Release is what
+  # triggers the Zenodo archive.
+  github-release:
+    needs: publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions: {contents: write}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: {persist-credentials: false}
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with: {name: dist, path: dist/}
+      - env: {GH_TOKEN: '${{ github.token }}'}
+        run: |
+          v="${GITHUB_REF_NAME#v}"
+          awk -v h="## [$v]" 'index($0,h)==1{f=1;next} /^## \[/{f=0} /^\[[^]]+\]: http/{f=0} f' CHANGELOG.md > notes.md
+          [ -s notes.md ] || { echo "no CHANGELOG section for $v" >&2; exit 1; }
+          # shellcheck disable=SC2016 # the backticks are Markdown, not a command
+          printf '\n---\n**Install:** `pip install pygarble==%s`\n\n**Upgrade guide:** https://brightertiger.github.io/pygarble/migration.html\n\n**Benchmark preprint:** https://doi.org/10.5281/zenodo.23312785\n' "$v" >> notes.md
+          gh release create "$GITHUB_REF_NAME" dist/* --verify-tag --title "pygarble $v" --notes-file notes.md

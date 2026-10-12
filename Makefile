@@ -1,6 +1,6 @@
 PYTHON ?= python
 
-.PHONY: benchmark-verify preprint help install install-dev test lint format clean build upload-test upload docs docs-clean docs-serve docs-deploy
+.PHONY: benchmark-verify preprint help install install-dev test lint format clean build docs docs-clean docs-serve docs-deploy
 
 help:
 	@echo "Available commands:"
@@ -13,8 +13,6 @@ help:
 	@echo "  format       Format code"
 	@echo "  clean        Clean build artifacts"
 	@echo "  build        Build package"
-	@echo "  upload-test  Upload to test PyPI"
-	@echo "  upload       Upload to PyPI"
 	@echo "  docs         Build documentation"
 	@echo "  docs-clean   Clean documentation build"
 	@echo "  docs-serve   Serve documentation locally"
@@ -46,12 +44,6 @@ clean:
 
 build: clean
 	python -m build
-
-upload-test: build
-	python -m twine upload --repository testpypi dist/*
-
-upload: build
-	python -m twine upload dist/*
 
 docs:
 	cd docs && make html

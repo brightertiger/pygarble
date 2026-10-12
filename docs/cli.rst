@@ -13,8 +13,8 @@ The package provides two command-line entry points:
    * - ``pygarble`` / ``python -m pygarble``
      - One text per line; gibberish commands and the compatible combined scanner
 
-The document CLI is part of the unreleased source changes; see
-:doc:`installation`. The existing line-oriented commands keep their behavior.
+The document CLI ``pygarble-screen`` is new in 0.11.0. The existing
+line-oriented commands keep their behavior.
 
 Screen or redact a document
 ---------------------------

@@ -28,9 +28,7 @@ since 0.8.0, and it is a breaking release: gibberish scores and the default
 ensemble's decisions change, and no setting restores 0.8.0 output exactly.
 0.8.0 imports keep working, with a `DeprecationWarning` where a name moved.
 Read the [upgrade guide](https://brightertiger.github.io/pygarble/migration.html)
-before upgrading. While PyPI still serves 0.8.0, which has none of the
-screening, profile or CLI features below, install from source as the
-[installation guide](https://brightertiger.github.io/pygarble/installation.html) describes.
+before upgrading, then install it with `pip install --upgrade pygarble`.
 
 | Use case | Import | Default behavior |
 | --- | --- | --- |
@@ -62,7 +60,7 @@ python -m pygarble.screening redact document.txt
 ```
 
 Optional local backends are explicitly enabled, and do not change the base
-installation. In a source checkout, `pip install -e '.[screening]'` adds `phonenumberslite`,
+installation. `pip install 'pygarble[screening]'` adds `phonenumberslite`,
 `python-stdnum` and `detect-secrets`. Gitleaks requires a separately installed
 executable. None requires LLM calls or model downloads.
 
@@ -310,7 +308,9 @@ Cite the preprint for the benchmark results and the software entry for the libra
   title        = {pygarble: local screening of text for secrets, {PII}, profanity and gibberish},
   year         = {2026},
   howpublished = {\url{https://github.com/brightertiger/pygarble}},
-  note         = {Version 0.11.0, commit e3135ed}
+  version      = {0.11.0},
+  url          = {https://github.com/brightertiger/pygarble/releases/tag/v0.11.0},
+  note         = {Version 0.11.0}
 }
 ```
 

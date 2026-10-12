@@ -14,6 +14,14 @@ and its `dated deviations
 define what was done. Every number on this page comes from the committed
 results and can be recomputed.
 
+The ``english`` and ``english_fusion`` rows in the main tables are the
+untuned shipped defaults. The tuned numbers further down come from weights
+learned on a labelled 20 percent sample of each dataset with group-aware
+splitting (identical texts stay on one side) and are scored on the held-out 80
+percent. The baselines, gibberish-detector 0.1.1 and lingua 2.2.0, were run as
+installed with their default settings, so the comparison measures
+out-of-the-box behaviour, not the best each tool could do after tuning.
+
 What was measured
 -----------------
 
