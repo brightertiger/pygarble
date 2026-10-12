@@ -1,8 +1,8 @@
 Python examples
 ===============
 
-These examples use the current source APIs, including unreleased module
-paths; see :doc:`installation`. Each example
+These examples use the 0.11.0 APIs, including the ``pygarble.gibberish`` and
+``pygarble.screening`` modules; see :doc:`installation`. Each example
 includes its own imports and data. Reuse a configured detector across calls.
 
 Redact a batch without gibberish checks

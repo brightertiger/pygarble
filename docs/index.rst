@@ -8,8 +8,8 @@ pygarble screens text with fixed rules, checksums, a word list, character
 statistics and encoding checks. The base install has no runtime dependencies;
 optional local backends extend coverage when explicitly selected. Every
 finding has a kind, span, confidence and reason, without the matched text.
-This documentation includes unreleased source changes; see :doc:`installation`
-for installing them and :doc:`migration` for compatibility.
+This documentation describes 0.11.0; see :doc:`installation` for installing it
+and :doc:`migration` when upgrading from 0.8.0.
 
 .. code-block:: python
 
@@ -67,10 +67,8 @@ library. The preprint is archived on Zenodo under DOI
      title        = {pygarble: local screening of text for secrets, {PII}, profanity and gibberish},
      year         = {2026},
      howpublished = {\url{https://github.com/brightertiger/pygarble}},
-     note         = {Version 0.11.0, commit e3135ed}
+     note         = {Version 0.11.0, https://github.com/brightertiger/pygarble/releases/tag/v0.11.0}
    }
-
-The preprint entry will be updated with a DOI once it is posted.
 
 .. The captions below become the navigation tabs of the Material theme.
 
@@ -139,6 +137,13 @@ Evaluation
 ----------
 
 The :doc:`benchmarks` guide reports the preprint benchmark and explains its
-limitations. Fast engineering regression checks remain separate from research
-results. Run ``make benchmark-verify`` to recompute the preprint metrics from
-the committed predictions.
+limitations. It uses two public English datasets: *Survey Junk* (Kaggle, 3,513
+junk-only rows, measuring the capture rate of junk) and *Tweets vs. Random
+Strings* (Hugging Face, 9,971 rows, measuring precision, recall and
+false-positive rate). The baselines, gibberish-detector 0.1.1 and lingua
+2.2.0, were run as installed with default settings, so the comparison measures
+out-of-the-box behaviour. Fast engineering regression checks remain separate
+from research results. Run ``make benchmark-verify`` to recompute the preprint
+metrics from the committed predictions (see ``paper/scripts/benchmark/README.md``
+to re-score from raw data); the full write-up is at
+`doi:10.5281/zenodo.23312785 <https://doi.org/10.5281/zenodo.23312785>`_.

@@ -3,8 +3,8 @@ API Reference
 
 Use ``pygarble.screening`` for secrets, PII and profanity, and
 ``pygarble.gibberish`` for gibberish detection. The original ``pygarble``
-exports remain supported. This reference includes unreleased source changes;
-see :doc:`installation` and :doc:`migration` for version guidance.
+exports remain supported. This reference describes 0.11.0; see
+:doc:`migration` when upgrading from 0.8.0.
 
 Standalone screening
 --------------------

@@ -7,9 +7,9 @@ inference-time downloads. Optional screening backends have separate extras.
 
 This documentation describes 0.11.0, including ``pygarble.screening``,
 ``pygarble.gibberish``, optional backends and both command lines. They are
-listed under 0.11.0 in the repository changelog. Until 0.11.0 is on PyPI,
-``pip install pygarble`` installs 0.8.0, which has none of these APIs; install
-from source to use them. See :doc:`migration` for the version boundary.
+listed under 0.11.0 in the repository changelog. ``pip install pygarble``
+installs 0.11.0; 0.8.0 was the previous PyPI release and has none of these
+APIs. See :doc:`migration` for the version boundary.
 
 Install a release
 -----------------
@@ -22,7 +22,7 @@ Install a release
 Install from source
 -------------------
 
-With Git installed:
+To use unreleased changes from ``main``, with Git installed:
 
 .. code-block:: bash
 
@@ -38,12 +38,12 @@ For an editable checkout:
    python -m pip install -e .
 
 When evaluating an unmerged change, check out its reviewed branch or commit
-before the install command. Once it is merged, ``main`` includes it.
+before the install command.
 
 Optional screening backends
 ---------------------------
 
-From a checkout containing the screening changes:
+From a source checkout:
 
 .. code-block:: bash
 
@@ -52,8 +52,8 @@ From a checkout containing the screening changes:
    python -m pip install -e ".[secrets]"    # detect-secrets
    python -m pip install -e ".[screening]"  # all three Python extras
 
-For a released version containing these changes, the corresponding package
-form is ``python -m pip install 'pygarble[screening]'``. Installing an extra
+From PyPI, the corresponding form is
+``python -m pip install 'pygarble[screening]'``. Installing an extra
 does not enable it; pass backend names to the standalone ``Scanner``.
 Native profanity detection uses the bundled English word list and needs no
 extra package.
@@ -64,7 +64,7 @@ on PATH or configure its path through ``backend_options``. The adapter
 does not install it. See :doc:`standalone-screening` for supported options
 and coverage, and :doc:`cli` for command-line selection.
 
-Verify the source installation
+Verify the installation
 ------------------------------
 
 .. code-block:: python

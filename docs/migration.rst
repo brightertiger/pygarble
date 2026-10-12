@@ -6,14 +6,23 @@ Upgrading from 0.8.0 to 0.11.0
 
 0.11.0 is the first release after 0.8.0. Versions 0.9.0 and 0.10.0 were
 development milestones and were never published to PyPI, so everything below
-reaches 0.8.0 users at once. Until 0.11.0 is on PyPI, ``pip install pygarble``
-installs 0.8.0; see :doc:`installation` to install from source.
+reaches 0.8.0 users at once. ``pip install --upgrade pygarble`` installs
+0.11.0; see :doc:`installation`. Python 3.8 support ends in 0.12.0.
 
 **0.11.0 is a breaking release relative to 0.8.0.** Imports, constructor
 signatures and ``Strategy`` members from 0.8.0 keep working, but gibberish
 scores and decisions change, and no setting reproduces 0.8.0 output exactly.
 The `changelog <https://github.com/brightertiger/pygarble/blob/main/CHANGELOG.md>`_
 lists every change.
+
+For how the new defaults perform, see :doc:`benchmarks`. It reports two public
+English datasets: Survey Junk (Kaggle, 3,513 junk-only rows, so it measures the
+capture rate) and Tweets vs. Random Strings (Hugging Face, 9,971 rows, so it
+measures precision, recall and false-positive rate). The default
+``english_fusion`` figures are untuned; tuned figures use a 20 percent labelled
+sample with group-aware splitting. Baselines ran as installed with default
+settings. Reproduce with ``make benchmark-verify``; the full write-up is
+`doi:10.5281/zenodo.23312785 <https://doi.org/10.5281/zenodo.23312785>`_.
 
 Find what affects you
 ~~~~~~~~~~~~~~~~~~~~~
@@ -214,8 +223,10 @@ canonical home. They will be removed in a future release.
      - ``from pygarble.gibberish.strategies import FunctionWordDensityStrategy``
 
 ``pygarble.core`` no longer re-exports incidental names that 0.8.0 exposed
-through its own imports, such as the ``typing`` helpers ``Callable`` and
-``Dict`` and the ``concurrent`` module. Import them from the standard library.
+through its own imports, such as the ``typing`` helpers ``Callable``,
+``Dict``, ``Optional``, ``Type`` and ``Union`` and the ``concurrent`` module.
+The typing names still import from ``pygarble.core`` in 0.11.0 but emit a
+``FutureWarning``; import them from the standard library.
 ``from pygarble import GarbleDetector, EnsembleDetector, Strategy`` works
 without warnings.
 
