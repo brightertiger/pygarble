@@ -103,93 +103,162 @@ not automated messages sent by this repository.
 Publish a new package version
 -----------------------------
 
-The existing release workflow runs when a ``v*`` tag is pushed. It runs the
-tests on Python 3.8 and 3.12 plus lint and the golden checks, checks that the
-tag equals ``pygarble.__version__``, builds wheel and sdist artifacts,
-smoke-tests the wheel in a fresh environment, and uploads them to PyPI. The
-Docker image is built and pushed by a job in the same workflow, only after
-the PyPI upload succeeds. The publishing job uses PyPI
-Trusted Publishing with GitHub OIDC and the ``pypi`` GitHub environment;
-there is no long-lived API token in the workflow.
+``.github/workflows/release.yml`` publishes releases. It has two triggers:
 
-One-time PyPI setup
-~~~~~~~~~~~~~~~~~~~
+* **A pushed** ``vX.Y.Z`` **tag** publishes to PyPI and then creates the
+  GitHub Release.
+* **A manual run** (``workflow_dispatch``) is a dry run. It builds
+  ``X.Y.Z.devN``, where ``N`` is the run number, and publishes that to
+  TestPyPI only.
 
-As an owner of the existing ``pygarble`` project, open its **Publishing**
-settings and add a GitHub Trusted Publisher with these exact fields:
+Both paths run the tests on Python 3.8 and 3.12, lint and the golden checks.
+They build the sdist and wheel once, check them with ``twine check
+--strict``, record GitHub build provenance for them and smoke-test the wheel
+alone on Python 3.8. Every later job publishes those same files. Uploads use
+PyPI Trusted Publishing through GitHub OIDC, so no API token is stored
+anywhere. The PyPI upload also carries PEP 740 attestations, which
+``pypa/gh-action-pypi-publish`` produces by default.
 
-.. list-table::
-   :header-rows: 1
+One-time maintainer setup
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   * - Field
-     - Value
-   * - GitHub owner
-     - ``brightertiger``
-   * - Repository
-     - ``pygarble``
-   * - Workflow filename
-     - ``release.yml``
-   * - Environment
-     - ``pypi``
+These settings live outside the repository, so merging the workflow does not
+configure them. Do them before the first dry run.
 
-The workflow names the ``pypi`` environment, and the PyPI publisher record
-must name the same one. GitHub creates the environment without protection the
-first time a job uses it, so configure it before the first tag. Merging the
-workflow does not configure PyPI or GitHub for you. Remove any old PyPI API
-token only after checking that no other publishing process still needs it.
+1. **GitHub environments.** In **Settings → Environments**, create ``pypi``
+   with yourself as a required reviewer and a deployment rule for tags
+   matching ``v*``. Create ``testpypi`` with a deployment rule for the
+   ``main`` branch. GitHub creates an environment without protection the
+   first time a job uses it, so create both first.
+2. **PyPI Trusted Publisher.** As an owner of the ``pygarble`` project on
+   pypi.org, open **Manage → Publishing** and add a GitHub publisher with
+   these fields:
+
+   .. list-table::
+      :header-rows: 1
+
+      * - Field
+        - Value
+      * - Owner
+        - ``brightertiger``
+      * - Repository
+        - ``pygarble``
+      * - Workflow filename
+        - ``release.yml``
+      * - Environment
+        - ``pypi``
+
+3. **TestPyPI Trusted Publisher.** Add the same fields on test.pypi.org with
+   the environment ``testpypi``. If the project does not exist on TestPyPI,
+   add it as a pending publisher.
+4. **Secrets.** Delete the ``PYPI_API_TOKEN``, ``TEST_PYPI_API_TOKEN`` and
+   ``PAT_TOKEN`` repository secrets, which no workflow uses, and revoke the
+   PyPI token. Add ``CODECOV_TOKEN`` from the Codecov project settings;
+   without it the coverage upload is rejected, although CI stays green.
+5. **Zenodo.** Sign in to zenodo.org with GitHub, open **GitHub** in the
+   account menu, press **Sync** and switch the repository on. Zenodo then
+   archives every published GitHub Release and mints a version DOI, taking
+   the authors and title from ``CITATION.cff``. It must be on before the
+   release is published, because Zenodo does not archive earlier releases.
+
+Trusted Publishers are not visible through the GitHub API. Check the other
+settings with:
+
+.. code-block:: bash
+
+   R=repos/brightertiger/pygarble
+   gh api $R/environments --jq '.environments[] | {name, rules: [.protection_rules[].type]}'
+   gh api $R/actions/secrets --jq '.secrets[].name'   # CODECOV_TOKEN only
+   gh api $R/hooks --jq '.[].config.url'              # includes a zenodo.org hook
 
 Release checklist
 ~~~~~~~~~~~~~~~~~
 
-The next release is 0.11.0, the first since 0.8.0. ``pygarble.__version__`` is
-already 0.11.0, and the changelog's ``[0.11.0] - Unreleased`` entry is its
-release notes; 0.9.0 and 0.10.0 were never published and must not be tagged.
+1. **Prepare a release branch.** Set ``pygarble.__version__``. Rename the
+   changelog's ``[Unreleased]`` entries to ``## [X.Y.Z] - YYYY-MM-DD``,
+   leave an empty ``## [Unreleased]`` above it and update the compare links
+   at the bottom. The GitHub Release notes are that section, so it must
+   exist under exactly that heading. Update ``version`` and
+   ``date-released`` in ``CITATION.cff`` and the version in the README's
+   software citation.
+2. **Check and merge.** Run ``make lint``, ``pytest``, the golden checks and
+   the strict documentation build below. Open a PR, resolve CI failures and
+   merge it.
+3. **Dry run.** Run the workflow from ``main`` and install the result from
+   TestPyPI:
 
-1. **Maintainer only, before tagging:** in **Settings → Environments**, create
-   the ``pypi`` environment and add required reviewers, so a pushed tag cannot
-   publish without approval. Add the Trusted Publisher described above.
-2. **Maintainer only, once Trusted Publishing is set up:** delete the
-   ``PYPI_API_TOKEN`` repository secret, and revoke the token on PyPI after
-   checking that nothing outside this repository uses it. The
-   ``TEST_PYPI_API_TOKEN`` and ``PAT_TOKEN`` secrets are not used by any
-   workflow either; delete them too unless something outside the workflows
-   needs them.
-3. **Maintainer only:** add the ``CODECOV_TOKEN`` repository secret from the
-   Codecov project settings. Without it the coverage upload is rejected; the
-   step is non-fatal, so CI stays green but no coverage is reported.
-4. On a release branch, replace ``Unreleased`` in the ``[0.11.0]`` changelog
-   heading with the release date and leave an empty ``[Unreleased]`` section
-   above it. Replace every source-only notice with the released version: the
-   "while PyPI still serves 0.8.0" and "until 0.11.0 is on PyPI" sentences in
-   the README's upgrade paragraph, :doc:`installation` and :doc:`migration`,
-   and the "unreleased source changes" notices near the top of :doc:`index`,
-   :doc:`api`, :doc:`cli`, :doc:`examples` and :doc:`standalone-screening`
-   (two in the last).
-5. Run the full tests, optional backend tests, ``make lint``, the
-   generated-data and golden checks, and the strict documentation build. Open a
-   PR and resolve CI failures before merging.
-6. Build with ``python -m build`` and validate with
-   ``python -m twine check dist/*``. Install the wheel in a fresh environment
-   without runtime dependencies and exercise both canonical and 0.8.0 imports.
-   Check the README links as rendered by PyPI, not just on GitHub.
-7. Once the release PR is merged, tag that exact commit ``v0.11.0`` and push
-   the tag. The workflow refuses a tag that differs from
-   ``pygarble.__version__``. **After the** ``pypi`` **environment approval, this
-   publishes to PyPI and then pushes the Docker image to GHCR.** A draft GitHub
-   release alone does not trigger this tag-based workflow.
-8. Verify the published package version and metadata, create the matching
-   GitHub release with the changelog notes, and check the live docs. Published
-   files cannot be replaced with different content under the same version;
-   use a new version for a correction.
+   .. code-block:: bash
 
-For later releases, choose the next version according to the changelog's
-``[Unreleased]`` entries and update ``pygarble.__version__`` in the release
-branch.
+      gh workflow run release.yml --ref main
+      gh run watch "$(gh run list -w release.yml -L1 --json databaseId -q '.[0].databaseId')" --exit-status
+      pip install -i https://test.pypi.org/simple/ --no-deps "pygarble==X.Y.Z.devN"
 
-Do not treat a built artifact, passing CI or a pushed branch as a completed
-release. Confirm the actual PyPI project and download/install the release.
-If using TestPyPI for a rehearsal, configure its publisher separately; its
-credentials and project are distinct from production PyPI.
+4. **Tag the merge commit.** Use an annotated tag whose name is ``v`` plus
+   ``pygarble.__version__``. The build job stops before anything is
+   published if the two differ.
+
+   .. code-block:: bash
+
+      git switch main && git pull --ff-only && git log -1 --oneline
+      git tag -a vX.Y.Z -m "pygarble X.Y.Z"
+      git push origin vX.Y.Z
+
+5. **Approve.** Open the run and approve the ``pypi`` deployment under
+   **Review deployments**. The GitHub Release follows automatically after
+   the PyPI upload succeeds.
+
+0.9.0 and 0.10.0 were development milestones that were never published, and
+must never be tagged.
+
+What a release produces
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* The sdist and wheel on PyPI, with PEP 740 attestations shown as provenance
+  on the project page.
+* GitHub build provenance attestations for both files, checkable with
+  ``gh attestation verify``.
+* A GitHub Release named ``pygarble X.Y.Z`` on the tag, with both files
+  attached. Its notes are the changelog section plus install, upgrade-guide
+  and preprint links.
+* A Zenodo record with a DOI for that version, created from the GitHub
+  Release.
+
+No container image is built.
+
+Verify the release
+~~~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+
+   python3.12 -m venv /tmp/pg && /tmp/pg/bin/pip install --no-cache-dir pygarble==X.Y.Z
+   /tmp/pg/bin/pygarble --version && /tmp/pg/bin/pygarble check -t "qxzjkwpv bnmqwer"
+   gh release download vX.Y.Z -D /tmp/pg-dl
+   gh attestation verify /tmp/pg-dl/*.whl -R brightertiger/pygarble
+
+Then check these by hand:
+
+* The PyPI page renders the README and shows the documentation link, both
+  authors and provenance.
+* The documentation site describes the released version.
+* Zenodo shows the new record. Add its DOI to the README, the documentation
+  and ``CITATION.cff`` in a follow-up PR.
+
+Do not treat a built artifact, passing CI or a pushed tag as a completed
+release. Confirm the PyPI project and install from it.
+
+Roll back
+~~~~~~~~~
+
+* **A job before** ``publish`` **fails.** Nothing was published. Delete the
+  tag with ``git push origin :refs/tags/vX.Y.Z``, fix the problem by PR and
+  tag again.
+* **The** ``publish`` **or** ``github-release`` **job fails.** Rerun it with
+  ``gh run rerun <run-id> --failed``, which reuses the files already built.
+  Never rebuild a version that may have partly reached PyPI.
+* **Bad files reached PyPI.** Yank the release on PyPI with a reason, keep
+  the tag and the GitHub Release, and ship ``X.Y.Z+1``. PyPI never accepts
+  a filename again, even after deletion, and a Zenodo record cannot be
+  withdrawn. Say in the next release's notes why the version was yanked.
 
 Validation and maintenance
 --------------------------
@@ -217,3 +286,6 @@ References
 * `The llms.txt proposal <https://llmstxt.org/>`_
 * `PyPI: add a Trusted Publisher <https://docs.pypi.org/trusted-publishers/adding-a-publisher/>`_
 * `PyPI: publish using GitHub OIDC <https://docs.pypi.org/trusted-publishers/using-a-publisher/>`_
+* `PyPA: publishing with GitHub Actions <https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows/>`_
+* `GitHub: artifact attestations <https://docs.github.com/en/actions/security-for-github-actions/using-artifact-attestations/using-artifact-attestations-to-establish-provenance-for-builds>`_
+* `Zenodo: GitHub integration <https://help.zenodo.org/docs/github/>`_
