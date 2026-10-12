@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 from collections import Counter
 from typing import Any, Dict
 
+from ..._compat import forward_removed
 from ...validation import finite_number, positive_int
 from ..analysis import Evidence
 from ..options import validate_options
@@ -112,3 +113,10 @@ class BaseStrategy(ABC):
     @abstractmethod
     def _predict_proba_impl(self, text: str) -> float:
         pass
+
+
+def __getattr__(name: str) -> Any:
+    # 0.8.0 leaked unicodedata through this module's imports.
+    return forward_removed(
+        "pygarble.strategies.base", name, {"unicodedata": "unicodedata"}
+    )

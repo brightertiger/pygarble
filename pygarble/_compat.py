@@ -24,10 +24,15 @@ def forward_removed(old: str, name: str, homes: Mapping[str, str]) -> Any:
     home = homes.get(name)
     if home is None:
         raise AttributeError(f"module {old!r} has no attribute {name!r}")
+    # A home that is the name itself, or one of its submodules, marks a
+    # standard-library module that 0.8.0 leaked through its own imports.
+    is_module = home == name or home.startswith(name + ".")
+    hint = f"import {home}" if is_module else f"import {name} from {home}"
     warnings.warn(
         f"{old}.{name} is deprecated and will be removed in a future "
-        f"release; import {name} from {home} instead",
+        f"release; {hint} instead",
         DeprecationWarning,
         stacklevel=3,
     )
-    return getattr(import_module(home), name)
+    module = import_module(home)
+    return import_module(name) if is_module else getattr(module, name)

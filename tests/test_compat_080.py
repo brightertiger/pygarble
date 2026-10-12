@@ -62,9 +62,6 @@ def test_080_import_paths_resolve_with_a_deprecation_warning():
             namespace = {}
             exec(f"from {module} import {name} as value", namespace)
         assert namespace["value"] is expected, (module, name)
-    # Incidental 0.8.0 names stay gone.
-    with pytest.raises(AttributeError):
-        import_module("pygarble.core").Callable
     # Importing never warns; only touching an old name does.
     code = (
         "import pygarble, pygarble.core, pygarble.strategies.markov_chain\n"
@@ -79,6 +76,29 @@ def test_080_import_paths_resolve_with_a_deprecation_warning():
     )
     assert result.returncode == 0, result.stderr
     assert result.stderr == ""
+
+
+def test_names_leaked_by_080_imports_still_resolve():
+    import concurrent.futures
+    import typing
+    import unicodedata
+
+    cases = [
+        ("pygarble.core", name, getattr(typing, name))
+        for name in ("Callable", "Dict", "Optional", "Type", "Union")
+    ]
+    cases.append(("pygarble.core", "concurrent", concurrent))
+    cases.append(("pygarble.strategies.base", "unicodedata", unicodedata))
+    for module, name, expected in cases:
+        with pytest.warns(DeprecationWarning, match=f"{module}.{name}"):
+            namespace = {}
+            exec(f"from {module} import {name} as value", namespace)
+        assert namespace["value"] is expected, (module, name)
+    with pytest.warns(DeprecationWarning):
+        pool = import_module("pygarble.core").concurrent.futures
+    assert pool.ThreadPoolExecutor is concurrent.futures.ThreadPoolExecutor
+    with pytest.raises(AttributeError):
+        import_module("pygarble.core").NoSuchName
 
 
 def test_weighted_default_ensemble_error_points_to_the_legacy_profile():

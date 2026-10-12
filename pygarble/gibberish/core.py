@@ -45,6 +45,11 @@ _MOVED = dict.fromkeys(
     ),
     "pygarble.gibberish.strategies",
 )
+# Names 0.8.0 leaked through its own imports, kept for compatibility.
+_MOVED.update(
+    dict.fromkeys(("Callable", "Dict", "Optional", "Type", "Union"), "typing")
+)
+_MOVED["concurrent"] = "concurrent.futures"
 
 
 def __getattr__(name: str) -> Any:
