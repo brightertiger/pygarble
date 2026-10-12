@@ -105,4 +105,40 @@ superseded by `protocol.md`) and decisions the plan left open. Each is also stat
   unchanged. The widened run is the one reported; the first run's results
   remain in git history (commit `9f213ef`).
 
+- **2026-10-12: grouped split.** B keeps 215 rows that repeat an
+  earlier text (86 groups, all tweets, the largest with 48 copies), and
+  the tuning sample was drawn row by row, so copies of one tweet could sit
+  in both the tuning sample and the held-out set. `draw()` in `tune.py`
+  now samples by unit, a unit being a duplicate group from the manifest
+  or a single row, stratified by label, with the same seeds; no group is
+  split and the sample sizes (703 A rows, 800 random strings, 1,194
+  tweets) are unchanged. No rows were deleted and the main
+  default-decision results are untouched. The full tuning was re-run (five
+  draws, 1,000 trials, same search space). Held-out results before and
+  after:
+
+  | method | numbers | capture A | precision B | recall B | FPR B |
+  |---|---|---|---|---|---|
+  | tuned | primary, row split | 0.899 | 0.923 | 0.988 | 0.055 |
+  | tuned | primary, grouped | 0.868 | 0.941 | 0.967 | 0.040 |
+  | tuned | mean, row split | 0.895 | 0.933 | 0.981 | 0.047 |
+  | tuned | mean, grouped | 0.897 | 0.930 | 0.976 | 0.049 |
+  | english_fusion | primary, row split | 0.893 | 0.907 | 0.992 | 0.068 |
+  | english_fusion | primary, grouped | 0.891 | 0.904 | 0.990 | 0.071 |
+  | english_fusion | mean, row split | 0.894 | 0.907 | 0.991 | 0.068 |
+  | english_fusion | mean, grouped | 0.896 | 0.906 | 0.991 | 0.069 |
+  | english | primary, row split | 0.828 | 0.657 | 0.949 | 0.332 |
+  | english | primary, grouped | 0.826 | 0.653 | 0.949 | 0.338 |
+  | english | mean, row split | 0.830 | 0.656 | 0.949 | 0.333 |
+  | english | mean, grouped | 0.830 | 0.653 | 0.946 | 0.337 |
+
+  The tuned configuration still has a lower tweet FPR and higher precision
+  than `english_fusion` in every draw, but one conclusion changed: recall
+  is now 1.5 points lower on average (it was 1.0) and lower in four of five
+  draws, and on the primary draw the tuned capture and recall are now
+  below the profile's, so the paper no longer says tuning keeps capture
+  and recall within about a point and describes it as a trade of recall
+  for precision. The row-split results remain in git history (main at
+  `7047096`).
+
 No other method was added or changed.

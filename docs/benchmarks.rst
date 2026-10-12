@@ -171,12 +171,14 @@ from 0.05 to 0.80, under ``weighted`` voting. A text's score is the weighted
 mean of the scores of the members that apply to it. A weight of 0 switches a
 strategy off.
 
-The tuning sample is a stratified 20 percent of each dataset. Optuna's TPE
+The tuning sample is a stratified 20 percent of each dataset. Rows with
+identical text are kept on the same side of the split, so no tweet in the
+held-out set also appears in the tuning sample. Optuna's TPE
 sampler searches 1,000 configurations for the best F1 on that sample, with
 junk as the positive class. The search was still improving when it
-stopped: in every draw the best configuration came after trial 930. Each
+stopped: in every draw the best configuration came after trial 832. Each
 strategy is scored once per row and cached,
-so the search takes about 18 seconds per sample on one core. The study
+so the search takes about 17 seconds per sample on one core. The study
 repeats this for five seeds. Each result is rebuilt as an
 ``EnsembleDetector`` and evaluated on the held-out 80 percent. Both profiles
 are scored on the same rows. The study was added after the main results and
@@ -192,20 +194,20 @@ no evaluation row is seen during tuning.
      - Recall
      - FPR
    * - ``english`` (default)
-     - 0.828 (0.816 to 0.841)
-     - 0.657 (0.642 to 0.671)
-     - 0.949 (0.942 to 0.956)
-     - 0.332 (0.319 to 0.345)
+     - 0.826 (0.811 to 0.840)
+     - 0.653 (0.639 to 0.666)
+     - 0.949 (0.941 to 0.956)
+     - 0.338 (0.324 to 0.351)
    * - ``english_fusion``
-     - 0.893 (0.881 to 0.904)
-     - 0.907 (0.897 to 0.916)
-     - 0.992 (0.988 to 0.994)
-     - 0.068 (0.061 to 0.075)
+     - 0.891 (0.879 to 0.903)
+     - 0.904 (0.894 to 0.913)
+     - 0.990 (0.987 to 0.994)
+     - 0.071 (0.064 to 0.078)
    * - tuned weights
-     - 0.899 (0.889 to 0.911)
-     - 0.923 (0.914 to 0.933)
-     - 0.988 (0.984 to 0.991)
-     - 0.055 (0.049 to 0.062)
+     - 0.868 (0.856 to 0.882)
+     - 0.941 (0.934 to 0.949)
+     - 0.967 (0.960 to 0.973)
+     - 0.040 (0.035 to 0.046)
 
 Intervals are 95 percent bootstrap intervals, in parentheses.
 
@@ -218,32 +220,35 @@ Intervals are 95 percent bootstrap intervals, in parentheses.
      - Recall
      - FPR
    * - ``english`` (default)
-     - 0.830 ± 0.002
-     - 0.656 ± 0.001
-     - 0.949 ± 0.002
-     - 0.333 ± 0.001
+     - 0.830 ± 0.005
+     - 0.653 ± 0.002
+     - 0.946 ± 0.002
+     - 0.337 ± 0.003
    * - ``english_fusion``
-     - 0.894 ± 0.001
-     - 0.907 ± 0.002
+     - 0.896 ± 0.004
+     - 0.906 ± 0.002
      - 0.991 ± 0.001
-     - 0.068 ± 0.001
+     - 0.069 ± 0.002
    * - tuned weights
-     - 0.895 ± 0.022
-     - 0.933 ± 0.017
-     - 0.981 ± 0.017
-     - 0.047 ± 0.012
+     - 0.897 ± 0.027
+     - 0.930 ± 0.016
+     - 0.976 ± 0.023
+     - 0.049 ± 0.012
 
-The tuned weights flag fewer tweets than ``english_fusion`` at about the same
-capture. Recall is slightly lower on average, and the tuned rows vary more
-between draws because a 20 percent sample is small. The largest mean
-weights went to ``word_lookup`` (1.00), ``ngram_frequency`` (0.74),
-``log_likelihood_ratio`` (0.71) and ``hex_string`` (0.67).
-``control_characters`` was switched off in every draw, and ``mojibake`` has
-a mean weight of 0.06. In the primary draw ``control_characters``,
-``mojibake``, ``pronounceability`` and ``ngram_rank`` have weight 0, so the
-search gave almost no weight to the encoding-damage checks that this
-dataset's labels penalise. Thresholds ranged from 0.13 to 0.18. The learned weights
-describe these two datasets, not junk in general.
+The tuned weights flag fewer tweets than ``english_fusion`` and have higher
+precision in every draw, at about the same capture on average. They trade
+away some recall: it is lower on average and in four of the five draws, and
+on the primary draw both capture and recall are below ``english_fusion``'s.
+The tuned rows vary more between draws because a 20 percent sample is
+small. The largest mean weights went to ``word_lookup`` (1.00, full weight
+in every draw), ``zipf_conformity`` (0.81), ``entropy_based`` (0.78) and
+``hex_string`` (0.76); below ``word_lookup`` the ranking moves between
+draws. ``control_characters`` and ``mojibake`` have mean weights of 0.04
+and 0.03. In the primary draw ``control_characters``, ``pattern_matching``
+and ``mojibake`` have weight 0, so the search gave almost no weight to the
+encoding-damage checks that this dataset's labels penalise. Thresholds
+ranged from 0.13 to 0.16. The learned weights describe these two datasets,
+not junk in general.
 
 The primary draw's configuration, built directly:
 
@@ -253,40 +258,41 @@ The primary draw's configuration, built directly:
 
    # Learned on the preprint's primary tuning sample (seed 20261011).
    weights = {
-       "local_anomaly": 0.35,
-       "pattern_matching": 0.05,
-       "entropy_based": 0.7,
-       "vowel_ratio": 0.1,
-       "keyboard_pattern": 0.05,
-       "markov_chain": 0.35,
-       "ngram_frequency": 0.9,
+       "local_anomaly": 0.05,
+       "entropy_based": 1.0,
+       "vowel_ratio": 0.05,
+       "keyboard_pattern": 0.35,
+       "markov_chain": 0.8,
+       "ngram_frequency": 0.65,
        "word_lookup": 1.0,
-       "symbol_ratio": 0.65,
-       "repetition": 0.1,
-       "hex_string": 0.9,
-       "unicode_script": 0.85,
-       "bigram_probability": 0.25,
-       "letter_position": 0.15,
-       "consonant_sequence": 0.7,
-       "vowel_pattern": 0.85,
+       "symbol_ratio": 0.85,
+       "repetition": 0.3,
+       "hex_string": 0.85,
+       "pronounceability": 0.65,
+       "unicode_script": 0.45,
+       "bigram_probability": 0.55,
+       "letter_position": 0.25,
+       "consonant_sequence": 0.5,
+       "vowel_pattern": 0.65,
        "letter_frequency": 0.75,
-       "rare_trigram": 0.95,
-       "function_word_density": 0.9,
-       "affix_detection": 0.05,
-       "zipf_conformity": 0.8,
-       "word_collocation": 0.1,
-       "log_likelihood_ratio": 0.95,
-       "word_anomaly": 0.9,
-       "keyboard_adjacency": 0.35,
-       "cross_parsing": 1.0,
-       "primed_compression": 0.4,
-       "permutation_test": 0.15,
+       "rare_trigram": 0.7,
+       "function_word_density": 0.45,
+       "affix_detection": 0.15,
+       "zipf_conformity": 0.25,
+       "word_collocation": 0.05,
+       "log_likelihood_ratio": 0.9,
+       "word_anomaly": 1.0,
+       "keyboard_adjacency": 0.6,
+       "cross_parsing": 0.6,
+       "primed_compression": 0.95,
+       "ngram_rank": 0.05,
+       "permutation_test": 0.25,
    }
    tuned = EnsembleDetector(
        strategies=list(weights),
        weights=list(weights.values()),
        voting="weighted",
-       threshold=0.13,
+       threshold=0.16,
    )
    assert tuned.predict("asdfghjkl qwpoeiru")
    assert not tuned.predict("Thanks for the quick reply, see you on Monday!")

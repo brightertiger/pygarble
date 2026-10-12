@@ -11,7 +11,7 @@ import io
 import json
 import statistics
 from pathlib import Path
-from typing import Dict, List, NamedTuple, Tuple
+from typing import Dict, List, NamedTuple, Sequence, Tuple
 
 DEFAULT_ROOT = Path("/Users/ujjwal/Downloads/solo/pygarble-data")
 REPOSITORY = Path(__file__).resolve().parents[3]
@@ -116,6 +116,22 @@ def _order(row_id: str) -> Tuple[int, int]:
     return B_SPLITS.index(split), int(position)
 
 
+def duplicates(rows: Sequence[Row]) -> Dict:
+    """Groups of row ids whose stripped text is identical (size >= 2).
+
+    Ids within a group and the groups themselves are in manifest order.
+    `duplicate_rows` counts the rows that repeat an earlier text.
+    """
+    groups: Dict[str, List[str]] = {}
+    for row in rows:
+        groups.setdefault(row.text.strip(), []).append(row.id)
+    found = [ids for ids in groups.values() if len(ids) > 1]
+    return {
+        "duplicate_rows": sum(len(ids) - 1 for ids in found),
+        "duplicate_groups": found,
+    }
+
+
 def build_manifest(root: Path = DEFAULT_ROOT) -> Dict:
     check_hashes(root)
     a_rows = load_a(root)
@@ -162,6 +178,7 @@ def build_manifest(root: Path = DEFAULT_ROOT) -> Dict:
         "A_ids": [row.id for row in a_rows],
         "B_ids": sorted(labels, key=_order),
         "B_labels": {i: labels[i] for i in sorted(labels, key=_order)},
+        "duplicates": {"A": duplicates(a_rows), "B": duplicates(b_rows)},
     }
 
 

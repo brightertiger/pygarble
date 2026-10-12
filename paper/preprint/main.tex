@@ -61,7 +61,7 @@ answers are common, and the usual detectors for them are either trained
 classifiers with model downloads or hand-written rules that are rarely
 measured. pygarble is a Python library with no runtime dependencies that
 screens text with \nstrategies{} rule-based and statistical strategies
-combined into named profiles. We evaluate it on two public datasets, a
+combined into named profiles. We evaluate it on two public English short-text datasets, a
 Kaggle collection of \nA{} free-text survey responses labelled as junk and
 a Hugging Face collection of \nB{} English rows that pairs \nBpos{} random
 strings with \nBneg{} tweets, against a character Markov-chain gibberish
@@ -72,17 +72,20 @@ decision. Out of the box, the \code{english\_fusion} profile captures
 of \res{english_fusion}{B_precision}, from a \mb{english_fusion}\,MB
 install that processes a thousand short texts in \ms{english_fusion}\,ms;
 no baseline captures more survey junk while also flagging fewer tweets.
-A small labelled sample improves it further: a weight for every strategy
+A small labelled sample shifts the trade-off: a weight for every strategy
 and a threshold learned with Optuna from \tuningpct\,\% of the rows, in
-about \tuningseconds{} seconds of search, keeps capture and recall within about a point of the
-profile's on average on the held-out \heldoutpct\,\% while cutting the
-false-positive rate on tweets from \tmeanpct{english_fusion}{B_fpr}\,\% to
-\tmeanpct{tuned}{B_fpr}\,\% and raising precision from
-\tmean{english_fusion}{B_precision} to \tmean{tuned}{B_precision} (means
-over \tuningdraws{} draws). The learned weights are interpretable: word
-lookup, n-gram frequency and the log-likelihood ratio get the largest mean
-weights, and the two encoding checks, which fire on tweets this dataset
-labels clean, get almost none. A
+about \tuningseconds{} seconds of search, cuts the false-positive rate on
+tweets from \tmeanpct{english_fusion}{B_fpr}\,\% to
+\tmeanpct{tuned}{B_fpr}\,\% and raises precision from
+\tmean{english_fusion}{B_precision} to \tmean{tuned}{B_precision} on the
+held-out \heldoutpct\,\%, with capture about level
+(\tmeanpct{tuned}{A_capture}\,\% against
+\tmeanpct{english_fusion}{A_capture}\,\%) and recall lower
+(\tmeanpct{tuned}{B_recall}\,\% against
+\tmeanpct{english_fusion}{B_recall}\,\%; means over \tuningdraws{} draws).
+The learned weights are interpretable at the extremes: word lookup gets
+full weight in every draw, and the two encoding checks, which fire on
+tweets this dataset labels clean, get almost none. A
 dependency-free rule ensemble is therefore competitive on real junk as
 shipped and adapts to a domain in seconds, with every decision
 explainable strategy by strategy. Code, per-row predictions and a
@@ -137,12 +140,12 @@ The contributions are:
   identifier, all at their default decisions, on capture rate, precision,
   recall, false-positive rate, speed and install size.
 \item A tuning study showing that a weight per strategy and a threshold,
-  learned with Optuna from \tuningpct\,\% of the rows in seconds, keep
-  capture and recall within about a point of the profile's on average
-  on the held-out \heldoutpct\,\% while
-  lowering the false-positive rate and raising precision, with the learned
-  weights reported in full; it is evaluated against the two profiles on
-  identical rows and reported separately from the main results.
+  learned with Optuna from \tuningpct\,\% of the rows in seconds, lower
+  the false-positive rate and raise precision on the held-out
+  \heldoutpct\,\% in every draw, at the cost of some recall and with
+  capture about level on average; the learned weights are reported in
+  full, and the study is evaluated against the two profiles on identical
+  rows and reported separately from the main results.
 \item A description of pygarble's strategy families and profiles, with
   the full strategy list in the appendix.
 \end{itemize}
@@ -300,8 +303,12 @@ There are no neural baselines; the DistilBERT gibberish model was
 excluded to keep the comparison to tools that run with no model download.
 
 \paragraph{Decisions.} Every method is scored at its own default
-decision, the binary output it gives with default settings. No threshold
-is fitted on either dataset.
+decision, the binary output it gives with default settings. The
+question is what each tool does as installed. The baselines expose no
+tuning step short of retraining the Markov model, and the tuning study in
+Section~\ref{sec:tuning} measures how far pygarble can be adapted with a
+small sample, not whether it beats a re-tuned alternative. In the main
+comparison no threshold is fitted on either dataset.
 
 \paragraph{Intervals.} Uncertainty is given as 95\,\% percentile
 intervals from \resamples{} bootstrap resamples of rows, drawn with a
@@ -317,12 +324,18 @@ compared more baselines and pygarble configurations; both were computed
 and then removed from the paper's scope (Section~\ref{sec:limitations}).
 The tuning study in Section~\ref{sec:tuning} was added after the main
 results were seen. It learns from labelled rows of both datasets and is
-evaluated only on rows it did not see. Its threshold range was widened
+evaluated only on rows it did not see. Rows with identical text are kept
+on the same side of the split, so no tweet in the held-out set also
+appears in the tuning sample. Its threshold range was widened
 once, from a lower bound of 0.2 to \tuninglow{}, and its budget raised
 from 400 to \tuningtrials{} trials, because every draw of a first run
 chose the bound and found its best trial late. That decision rested on
 the tuning samples; the first run's held-out results had also been
-computed, and they are kept in the repository history.
+computed, and they are kept in the repository history. The tuning sample
+was at first drawn row by row, which let copies of a repeated tweet fall
+on both sides of the split; the study was re-run with the grouped split,
+and the earlier results, which were slightly more favourable to the tuned
+configuration, are recorded in the deviations log.
 
 \paragraph{Environment.} All runs are single-threaded on an \cpuname{}
 with Python \pyversion{}. Hardware, package versions and the pygarble
@@ -462,7 +475,9 @@ of 0.01.
 
 The tuning sample is a stratified \tuningpct\,\% of each dataset:
 \nTuneA{} \SJ{} rows and \nTuneB{} \TRS{} rows in proportion to their
-labels. Optuna~\citep{optuna} with its tree-structured Parzen estimator
+labels. Rows with identical text are kept on the same side of the split,
+so no tweet in the held-out set also appears in the tuning sample.
+Optuna~\citep{optuna} with its tree-structured Parzen estimator
 sampler~\citep{bergstra2011tpe}, with a fixed seed, searched
 \tuningtrials{} configurations for the best F1 on that sample, with junk
 as the positive class. The search was still improving when it stopped:
@@ -490,9 +505,13 @@ its capture \tmeanpct{tuned}{A_capture}\,\% against
 \tmeanpct{english_fusion}{A_capture}\,\%, and its recall
 \tmeanpct{tuned}{B_recall}\,\% against
 \tmeanpct{english_fusion}{B_recall}\,\%. The gain over
-\code{english\_fusion} is in false positives and precision; capture is
-about equal and recall slightly lower on average. In the worst draw
-recall fell to \tuningworstrecall\,\% and capture to
+\code{english\_fusion} is in false positives and precision, which are
+better in every draw; capture is about equal on average and recall is
+lower. The tuned capture is below the profile's in
+\tuningcapturelower{} of the \tuningdraws{} draws and the tuned recall in
+\tuningrecalllower{}, and the primary draw is one where both are lower:
+its recall interval lies wholly below the profile's. Across the draws,
+recall was as low as \tuningworstrecall\,\% and capture as low as
 \tuningworstcapture\,\%. The tuned rows vary more between draws than the
 profiles, whose only variation is which rows are held out, because a
 \tuningpct\,\% sample is small enough for the learned weights to differ
@@ -501,9 +520,10 @@ from draw to draw.
 Between \tuningmembersmin{} and \tuningmembersmax{} of the
 \nstrategies{} strategies kept a non-zero weight, and the thresholds lie
 between \tuningthresholdmin{} and \tuningthresholdmax{}. The largest mean
-weights went to \tuningtop{}. The smallest went to \tuningbottom{};
-\tuningalloff{} was switched off in every draw, and in the primary draw
-\tuningoff{} have weight zero. Learning from the labels alone, the search
+weights went to \tuningtop{}; the first had full weight in every draw,
+while the others moved between draws. The smallest went to
+\tuningbottom{}; no strategy was switched off in every draw, and in the
+primary draw \tuningoff{} have weight zero. Learning from the labels alone, the search
 thus gave almost no weight to the two encoding-damage checks, which fire
 on tweets that \TRS{} labels clean. Appendix~\ref{app:weights} lists every weight.
 
@@ -560,15 +580,17 @@ Neither baseline both captures more survey junk and flags fewer tweets: the Mark
 flags far fewer tweets but misses more than a quarter of the survey junk,
 and lingua captures almost all junk but flags more tweets and needs a
 three-hundred-megabyte install. Second, the ensemble is tunable from a
-small labelled sample in seconds. The learned weights keep capture
+small labelled sample in seconds, though tuning trades recall for
+precision rather than improving every endpoint. The learned weights lower
+the tweet false-positive rate from \tmeanpct{english_fusion}{B_fpr}\,\%
+to \tmeanpct{tuned}{B_fpr}\,\%, below the profile's in each of the
+\tuningdraws{} draws, and keep capture about level on average
 (\tmeanpct{tuned}{A_capture}\,\% against
-\tmeanpct{english_fusion}{A_capture}\,\%) and recall
+\tmeanpct{english_fusion}{A_capture}\,\%), but recall falls
 (\tmeanpct{tuned}{B_recall}\,\% against
-\tmeanpct{english_fusion}{B_recall}\,\%) within about a point of the
-profile's on average, and lower the tweet false-positive rate from
-\tmeanpct{english_fusion}{B_fpr}\,\% to \tmeanpct{tuned}{B_fpr}\,\%, below
-the profile's in each of the five draws. The draws vary, and on the
-primary draw the two false-positive intervals overlap. The weights also explain the result:
+\tmeanpct{english_fusion}{B_recall}\,\%). The draws vary: on the primary
+draw both capture and recall are below the profile's. The weights explain
+the result at the extremes:
 \tuningtop{} get the largest mean weights, and \tuningbottom{} get little
 or none; for the two encoding checks that fits the dataset labelling
 encoding damage as clean. Individual weights vary widely between draws,
@@ -590,9 +612,10 @@ labelled data, use \code{english\_fusion}; add a minimum-length rule if
 one- and two-character answers count as junk. With a labelled sample of
 the target domain (the study used \nTune{} rows), learn a weight per
 strategy and a threshold as in Section~\ref{sec:tuning}: it takes seconds,
-needs no model, and gave a lower false-positive rate than
-\code{english\_fusion} in every draw, with capture and recall within about
-a point on average. Without labels, start from a profile and remove the
+needs no model, and gave a lower false-positive rate and higher precision
+than \code{english\_fusion} in every draw, but lower recall in
+\tuningrecalllower{} of \tuningdraws{}, so check recall on held-out
+labelled rows before adopting the learned weights. Without labels, start from a profile and remove the
 strategies whose target the domain does not treat as junk. When false positives are costly,
 prefer the Markov baseline at default settings, or measure a threshold on
 labelled rows of your own data. For multilingual input, route by language
@@ -602,8 +625,10 @@ detector.
 \section{Limitations}
 \label{sec:limitations}
 
-Two public datasets are measured, both English and both short text; the
-behaviour on long documents is not measured. \SJ{} has only junk, so it
+Both datasets are English and short. We measure how much labelled junk
+is caught and how many real tweets are wrongly flagged; we do not measure
+behaviour on clean survey answers, bot spam, other languages or long
+documents, and the results should not be read beyond that scope. \SJ{} has only junk, so it
 measures capture and nothing about false positives; \TRS{} has random
 strings as its only junk, which are easier than real junk. There are two
 baselines and no neural one. The main comparison runs every method at its
@@ -642,11 +667,17 @@ scores are deterministic.
 
 \section*{AI assistance}
 
-Claude Code agents running Claude Opus 5.5, Claude Sonnet 5.5 and Claude
-Fable 5.1 wrote the
-benchmark code, ran the experiments and drafted this text under the
-authors' direction and review. Commit trailers in the repository record
-the model behind each commit.
+The authors designed the study: they chose the datasets, the baselines,
+the endpoints, the default-decision protocol and the tuning design, and
+made every decision recorded in the deviations log. Claude Code agents
+running Claude Opus 5.5, Claude Sonnet 5.5 and Claude Fable 5.1
+implemented the benchmark and tuning scripts, executed them, generated the
+tables and figure from the saved results, and drafted and copy-edited the
+text under the authors' direction. The authors reviewed the code, re-ran
+the verification script, checked the reported numbers against the saved
+predictions and revised the manuscript, and they are responsible for the
+methods, results and conclusions. Commit trailers in the repository
+record the model behind each commit.
 
 \bibliographystyle{plainnat}
 \bibliography{references}

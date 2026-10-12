@@ -64,7 +64,12 @@ pygarble 0.11.0 from this repository, every detector built with
 - Tuned weights (post hoc in its use of labels, evaluated on held-out
   rows): `tune.py` learns a weight per strategy and a threshold under
   `weighted` voting from a stratified 20 percent of A and of B, for five
-  seeds, and evaluates on the other 80 percent next to `english` and
+  seeds. The sample is drawn by unit: rows whose stripped text is
+  identical (the manifest's `duplicates` groups; 86 groups covering 215
+  repeated rows in B, none in A) form one unit, so every copy of a text
+  falls on the same side of the split. Per stratum (A, B tweets, B random
+  strings) the units are shuffled and the prefix whose row count is
+  closest to 20 percent of the stratum is taken. It evaluates on the other 80 percent next to `english` and
   `english_fusion` on the same rows. Results are in `results/tuning/`; see
   `deviations.md`. The package is unchanged.
 
