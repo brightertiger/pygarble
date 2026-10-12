@@ -48,7 +48,8 @@ Citing pygarble
 ---------------
 
 Cite the preprint for the benchmark results and the software entry for the
-library.
+library. The preprint is archived on Zenodo under DOI
+`10.5281/zenodo.23312785 <https://doi.org/10.5281/zenodo.23312785>`_, which always resolves to the latest version.
 
 .. code-block:: bibtex
 
@@ -56,7 +57,9 @@ library.
      author       = {Rao, Ujjwal Singh and Singh, Ricky},
      title        = {How Much Junk Do Rules Catch? Evaluating and Tuning pygarble, a Dependency-Free Gibberish Screener, on Survey Responses and Social-Media Text},
      year         = {2026},
-     howpublished = {Preprint, \url{https://github.com/brightertiger/pygarble/blob/main/paper/preprint/main.pdf}}
+     howpublished = {Preprint, Zenodo},
+     doi          = {10.5281/zenodo.23312785},
+     url          = {https://doi.org/10.5281/zenodo.23312785}
    }
 
    @misc{pygarble,

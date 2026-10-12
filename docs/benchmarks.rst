@@ -4,7 +4,7 @@ Benchmark and preprint
 The preprint *How Much Junk Do Rules Catch?* measures pygarble's gibberish
 detector on two public English datasets. It compares pygarble with two CPU
 baselines, with every method at its own default decision. Read the
-`preprint PDF <https://github.com/brightertiger/pygarble/blob/main/paper/preprint/main.pdf>`_
+`preprint <https://doi.org/10.5281/zenodo.23312785>`_ (DOI 10.5281/zenodo.23312785; the PDF is also in the repository under ``paper/preprint/``)
 or its `LaTeX source
 <https://github.com/brightertiger/pygarble/blob/main/paper/preprint/main.tex>`_.
 The `frozen protocol

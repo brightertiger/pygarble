@@ -2,7 +2,8 @@
 
 Authors: Ujjwal Singh Rao and Ricky Singh
 
-This directory holds the preprint and the evidence behind it.
+This directory holds the preprint and the evidence behind it. The preprint
+is archived on Zenodo under DOI [10.5281/zenodo.23312785](https://doi.org/10.5281/zenodo.23312785).
 
 - `preprint/`: the preprint, *How Much Junk Do Rules Catch?*, as LaTeX source
   (`main.tex`) and a built PDF (`main.pdf`). Its tables and number macros are

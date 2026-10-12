@@ -269,7 +269,7 @@ Relative to 0.8.0, 0.11.0 changes gibberish scores and the default ensemble;
 scores. Review the [upgrade guide](https://brightertiger.github.io/pygarble/migration.html) before changing
 versions.
 
-The [preprint](https://github.com/brightertiger/pygarble/blob/main/paper/preprint/main.pdf)
+The [preprint](https://doi.org/10.5281/zenodo.23312785) (PDF also in `paper/preprint/`)
 measures the gibberish detector on two public English datasets, Survey Junk and
 Tweets vs. Random Strings, against two CPU baselines, with every method at its
 default decision. The `english_fusion` profile captures 89.5% of the survey junk
@@ -293,14 +293,16 @@ CI checks.
 
 ## Citation
 
-Cite the preprint for the benchmark results and the software entry for the library. The preprint entry will be updated with a DOI once it is posted.
+Cite the preprint for the benchmark results and the software entry for the library. The preprint is archived on Zenodo under DOI [10.5281/zenodo.23312785](https://doi.org/10.5281/zenodo.23312785), which always resolves to the latest version.
 
 ```bibtex
 @misc{rao2026pygarble,
   author       = {Rao, Ujjwal Singh and Singh, Ricky},
   title        = {How Much Junk Do Rules Catch? Evaluating and Tuning pygarble, a Dependency-Free Gibberish Screener, on Survey Responses and Social-Media Text},
   year         = {2026},
-  howpublished = {Preprint, \url{https://github.com/brightertiger/pygarble/blob/main/paper/preprint/main.pdf}}
+  howpublished = {Preprint, Zenodo},
+  doi          = {10.5281/zenodo.23312785},
+  url          = {https://doi.org/10.5281/zenodo.23312785}
 }
 
 @misc{pygarble,
