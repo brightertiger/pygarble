@@ -5,40 +5,19 @@ All notable changes to pygarble are documented here. The format follows
 
 ## [Unreleased]
 
-### Changed
+## [0.11.0] - 2026-10-12
 
-- **Docs: switched to the sphinx-immaterial theme.** The site now matches the
-  Material for MkDocs look of the sister project: navigation tabs, a light
-  and dark palette toggle, search suggestions, code copy buttons and a cookie
-  consent banner. Optional Google Analytics now uses the theme's native
-  integration and loads only after consent. The `docs` extra installs
-  `sphinx-immaterial==0.13.9` on Python 3.10+ in place of `sphinx-rtd-theme`.
-- **Docs: the sitemap has `lastmod` dates and the build writes a
-  `robots.txt`.** Dates come from each source file's last commit. The robots
-  file is served under `/pygarble/`, which Google does not read; it mirrors
-  the sister project's site.
-- **The golden regression corpus has new inputs.** They are a seeded
-  600-row sample (seed 20261011) of the English rows of the Apache-2.0
-  Hugging Face `Sowmya15/gibberish_multilingual` dataset, 300 random strings
-  and 300 tweets, followed by the unchanged edge inputs. They replace the
-  authored 132-case challenge set. `paper/regression/golden.jsonl` and
-  `golden_scan.jsonl` were regenerated, and ports must reproduce the new
-  files. `paper/regression/evaluate.py` and the challenge files
-  (`english_challenge.json`, its checksum, `benchmark_data.json` and
-  `label_overrides.json`) were removed.
-
-## [0.11.0] - Unreleased
-
-0.11.0 is the first release since 0.8.0 and it is a **breaking release**
-relative to 0.8.0. Versions 0.9.0 and 0.10.0 were development milestones
-that were never published to PyPI; their notes are merged into this entry.
-Earlier drafts of this file listed `WORD_ANOMALY`, `LOG_LIKELIHOOD_RATIO` and
-`KEYBOARD_ADJACENCY` as 0.9.0 additions and the removal of five legacy
-strategies as a 0.9.0 change; all of that shipped in 0.8.0. The upgrade
-guide (`docs/migration.rst`, "Upgrading from 0.8.0 to 0.11.0") explains how
-to find and handle each change below.
+0.11.0 is the first release since 0.8.0 and breaks gibberish scores. Read
+the [upgrade guide](https://brightertiger.github.io/pygarble/migration.html)
+first; it explains how to find and handle each change below.
 
 ### Breaking changes since 0.8.0
+
+Every 0.8.0 import, class, signature, enum member and strategy setting
+still works, and every 0.8.0 README example runs unchanged. Three things
+break: gibberish scores and the default ensemble's decisions change,
+invalid argument values that 0.8.0 accepted silently now raise, and some
+names moved (they still import, with a `DeprecationWarning`).
 
 Gibberish scores are not reproducible across the 0.8.0 boundary. No setting
 restores 0.8.0 output exactly; compare old and new decisions on your own
@@ -95,9 +74,10 @@ inputs before upgrading.
   `threads=2.5`, NaN weights and a non-bool `override_defaults` raise
   `ValueError`. So does a huge integer such as `10**400` for any numeric
   option: in 0.8.0 `threads`, `timeout_per_text`, `max_string_length` and
-  `min_length` accepted it, as did settings 0.8.0 ignored, such as `n`. `applicable(None)` and a batch with a non-string entry, such
-  as `predict([None])`, raise `TypeError`; batches are validated before any
-  work starts.
+  `min_length` accepted it, as did settings 0.8.0 ignored, such as `n`.
+  `applicable(None)` and a batch with a non-string entry, such as
+  `predict([None])`, raise `TypeError`; batches are validated before any
+  work starts. These inputs gave silently wrong results in 0.8.0.
 - **New `FutureWarning`s.** Unknown strategy settings, and `weights` passed
   with a voting mode other than `weighted`, warn at the call site. Test
   suites run with `-W error` or `filterwarnings = error` fail on them. Escape
@@ -108,7 +88,8 @@ inputs before upgrading.
   entries.
 
 0.8.0 import paths keep working with a `DeprecationWarning` (see
-Deprecated), and detectors pickled by 0.8.0 load and predict.
+Deprecated), and detectors pickled by 0.8.0 load and predict. 0.11.0 is the
+last release to support Python 3.8.
 
 ### Added
 
@@ -226,6 +207,8 @@ Data, regression checks and documentation:
   guides, issue templates and package metadata links.
 - Optional-backend CI, offline Python integration tests, Unicode/CRLF offset
   checks and subprocess error and timeout tests.
+- A `py.typed` marker (PEP 561), so type checkers read pygarble's inline
+  annotations.
 
 ### Changed
 - Gibberish implementations live under `pygarble.gibberish`; native PII,
@@ -248,19 +231,42 @@ Data, regression checks and documentation:
   The generated-data check caches the pinned word list. The data generator
   retries a failed download once and reports a network fault separately
   from a checksum mismatch.
-- Releases are published from a `v*` tag by one workflow. Before uploading
-  it runs the tests on Python 3.8 and 3.12, lint, the golden checks and a
-  smoke test of the built wheel. Uploads use PyPI Trusted Publishing with
-  the `pypi` GitHub environment, so the project owner must configure that
-  publisher before tagging; existing distribution files are no longer
-  silently skipped. The Docker image is pushed to GHCR only after the PyPI
-  upload succeeds. The separate Docker workflow, including its manual
-  trigger, is removed.
+- Releases are published from a `v*` tag by one workflow. It runs the
+  tests on Python 3.8 and 3.12, lint and the golden checks, builds the sdist
+  and wheel once, smoke-tests the wheel on Python 3.8 and attests the build
+  provenance. It publishes with PyPI Trusted Publishing, so no API token is
+  stored, and then creates the GitHub Release with the distributions
+  attached and this changelog's section as its notes. A manual run
+  publishes a `.devN` build to TestPyPI as a dry run. No container image is
+  built.
 - Development installs pin flake8 7.x and isort 9.x, which CI lints with;
   isort 5.13 is used on Python 3.8 and 3.9. `make lint` and `make format`
   cover `docs/_ext`, as CI does.
 - Generated data tables cite `paper/scripts/generate_data.py` and
   `paper/scripts/data_curation.json` in their headers.
+- Package metadata lists both authors, a new description and keywords,
+  the Python 3.13 classifier, and links to the documentation site,
+  changelog, contributing guide and security policy. The version is
+  single-sourced from `pygarble.__version__`.
+- **Docs: switched to the sphinx-immaterial theme.** The site now matches the
+  Material for MkDocs look of the sister project: navigation tabs, a light
+  and dark palette toggle, search suggestions, code copy buttons and a cookie
+  consent banner. Optional Google Analytics now uses the theme's native
+  integration and loads only after consent. The `docs` extra installs
+  `sphinx-immaterial==0.13.9` on Python 3.10+ in place of `sphinx-rtd-theme`.
+- **Docs: the sitemap has `lastmod` dates and the build writes a
+  `robots.txt`.** Dates come from each source file's last commit. The robots
+  file is served under `/pygarble/`, which Google does not read; it mirrors
+  the sister project's site.
+- **The golden regression corpus has new inputs.** They are a seeded
+  600-row sample (seed 20261011) of the English rows of the Apache-2.0
+  Hugging Face `Sowmya15/gibberish_multilingual` dataset, 300 random strings
+  and 300 tweets, followed by the unchanged edge inputs. They replace the
+  authored 132-case challenge set. `paper/regression/golden.jsonl` and
+  `golden_scan.jsonl` were regenerated, and ports must reproduce the new
+  files. `paper/regression/evaluate.py` and the challenge files
+  (`english_challenge.json`, its checksum, `benchmark_data.json` and
+  `label_overrides.json`) were removed.
 
 ### Deprecated
 - 0.8.0 import paths work with a `DeprecationWarning` naming the current
@@ -271,16 +277,22 @@ Data, regression checks and documentation:
   `log_likelihood_ratio` strategy modules (use `pygarble.data`), and
   `FunctionWordDensityStrategy` from `zipf_conformity` (use
   `pygarble.gibberish.strategies`).
+- Names that 0.8.0 exposed only through its own imports remain as
+  compatibility attributes with a `DeprecationWarning`: the `typing`
+  helpers `Callable`, `Dict`, `Optional`, `Type` and `Union` and the
+  `concurrent` module on `pygarble.core`, and the `unicodedata` module on
+  `pygarble.strategies.base`. Import them from the standard library.
 - Unknown strategy settings emit a `FutureWarning` at the call site and will
   become errors in a future release.
 - `weights` passed with a voting mode other than `weighted` emit a
   `FutureWarning` (they were silently ignored); this will become an error
   in a future release.
+- **Python 3.8 support ends in 0.12.0.** 0.11.0 is the last release that
+  installs on Python 3.8, which reached end of life in October 2024.
 
 ### Removed
-- `pygarble.core` no longer re-exports incidental names that 0.8.0 exposed
-  through its own imports, such as the `typing` helpers `Callable` and
-  `Dict` and the `concurrent` module. Import them from the standard library.
+- The `requirements.txt` and `requirements-dev.txt` files, which were in
+  the 0.8.0 sdist. Install the `dev` and `docs` extras instead.
 
 ### Fixed
 - `GarbleDetector` and `EnsembleDetector` objects pickled by 0.8.0 load and
@@ -324,5 +336,15 @@ Data, regression checks and documentation:
   word of three or more letters counts. Greek letters attached to three or
   more Latin letters (e.g. "μmol") are still flagged.
 
+Versions 0.9.0 and 0.10.0 were development milestones that were never
+published to PyPI; their notes are merged into this entry. Earlier drafts of
+this file listed `WORD_ANOMALY`, `LOG_LIKELIHOOD_RATIO` and
+`KEYBOARD_ADJACENCY` as 0.9.0 additions and the removal of five legacy
+strategies as a 0.9.0 change; all of that shipped in 0.8.0.
+
 ## [0.8.0] - 2026-07-04
 - Previous release; see git history.
+
+[Unreleased]: https://github.com/brightertiger/pygarble/compare/v0.11.0...HEAD
+[0.11.0]: https://github.com/brightertiger/pygarble/compare/v0.8.0...v0.11.0
+[0.8.0]: https://github.com/brightertiger/pygarble/compare/v0.7.0...v0.8.0
