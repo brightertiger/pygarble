@@ -224,9 +224,11 @@ canonical home. They will be removed in a future release.
 
 ``pygarble.core`` no longer re-exports incidental names that 0.8.0 exposed
 through its own imports, such as the ``typing`` helpers ``Callable``,
-``Dict``, ``Optional``, ``Type`` and ``Union`` and the ``concurrent`` module.
-The typing names still import from ``pygarble.core`` in 0.11.0 but emit a
-``FutureWarning``; import them from the standard library.
+``Dict``, ``Optional``, ``Type`` and ``Union``. In 0.11.0 these names, and
+the ``pygarble.core.concurrent`` and ``pygarble.strategies.base.unicodedata``
+module attributes, still resolve for compatibility; the typing names emit the
+same ``DeprecationWarning`` as the other moved names. Import them from the
+standard library.
 ``from pygarble import GarbleDetector, EnsembleDetector, Strategy`` works
 without warnings.
 
